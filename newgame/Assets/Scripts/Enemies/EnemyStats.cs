@@ -9,7 +9,7 @@ public class EnemyStats : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
-        //enemyColor = Random.Range(0, 3);
+        //GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<CharacterStats>().vulnerableEnemies.Add(this.gameObject);
 	}
 	
 	// Update is called once per frame

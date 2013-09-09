@@ -7,8 +7,10 @@ public class HUD : MonoBehaviour
          greenBar,    blueBar,    redBar,    purpleBar,
          trebleClef;
 	// Use this for initialization
+    CharacterStats playerStats;
 	void Start () 
     {
+        playerStats = this.GetComponent<CharacterStats>();
         float xx = Screen.width / 10;
         float yy = Screen.height / 10;
 
@@ -41,18 +43,30 @@ public class HUD : MonoBehaviour
 
         if (GUI.Button(greenButton, "Green"))
         {
+            foreach(GameObject enemy in playerStats.vulnerableEnemies)
+                if (enemy.GetComponent<EnemyMovementBasic>().color == "green")
+                    playerStats.GetComponent<CharacterStats>().Attack(enemy);
             Debug.Log("Green pressed");
         }
         if (GUI.Button(blueButton, "Blue"))
         {
+            foreach (GameObject enemy in playerStats.vulnerableEnemies)
+                if (enemy.GetComponent<EnemyMovementBasic>().color == "blue")
+                    playerStats.GetComponent<CharacterStats>().Attack(enemy);
             Debug.Log("Blue pressed");
         }
         if (GUI.Button(redButton, "Red"))
         {
+            foreach (GameObject enemy in playerStats.vulnerableEnemies)
+                if (enemy.GetComponent<EnemyMovementBasic>().color == "red")
+                    playerStats.GetComponent<CharacterStats>().Attack(enemy);
             Debug.Log("Red pressed");
         }
         if (GUI.Button(purpleButton, "Purple"))
         {
+            foreach (GameObject enemy in playerStats.vulnerableEnemies)
+                if (enemy.GetComponent<EnemyMovementBasic>().color == "purple")
+                    playerStats.GetComponent<CharacterStats>().Attack(enemy);
             Debug.Log("Purple pressed");
         }
     }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// Stats for the character (currently just the player)
@@ -7,6 +8,7 @@ using System.Collections;
 public class CharacterStats : MonoBehaviour
 {
     public int notes; //health
+    public List<GameObject> vulnerableEnemies;
 
     private bool attacking;
     public AudioClip deathClip;
@@ -19,6 +21,7 @@ public class CharacterStats : MonoBehaviour
     {
         notes = 0;
         mainCam = Camera.main;
+        vulnerableEnemies = new List<GameObject>();
     }
     void Update()
     {
@@ -27,6 +30,6 @@ public class CharacterStats : MonoBehaviour
 
     public void Attack(GameObject target)
     {
-
+        target.GetComponent<EnemyMovementBasic>().TakeDamage();
     }
 }

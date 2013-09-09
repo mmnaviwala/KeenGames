@@ -31,7 +31,7 @@ public class CameraShake : MonoBehaviour
         }
     }
 
-    void Shake()
+    public void Shake()
     {
         originPosition = transform.position;
         originRotation = transform.rotation;
