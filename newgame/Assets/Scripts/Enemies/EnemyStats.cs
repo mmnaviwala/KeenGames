@@ -9,6 +9,7 @@ public class EnemyStats : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
+        
         //GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<CharacterStats>().vulnerableEnemies.Add(this.gameObject);
 	}
 	

@@ -8,15 +8,6 @@ public class CameraShake : MonoBehaviour
     public float shakeDecay;
     public float shakeIntensity;
 
-    void OnGUI()
-    {
-        if (GUI.Button(new Rect(20, 40, 80, 20), "Shake"))
-        {
-            //Mathf.PerlinNoise(
-            Shake();
-        }
-    }
-
     void Update()
     {
         if (shakeIntensity > 0)

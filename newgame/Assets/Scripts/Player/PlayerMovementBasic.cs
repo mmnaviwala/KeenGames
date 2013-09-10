@@ -25,4 +25,13 @@ public class PlayerMovementBasic : MonoBehaviour
             mainCam.transform.position = new Vector3(this.transform.position.x + 5f, mainCam.transform.position.y, mainCam.transform.position.z);
         }
 	}
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == Tags.ENEMY)
+        {
+            this.GetComponent<CharacterStats>().notes--;
+            Camera.main.GetComponent<CameraShake>().Shake();
+        }
+    }
 }

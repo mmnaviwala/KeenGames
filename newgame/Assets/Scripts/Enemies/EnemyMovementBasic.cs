@@ -6,29 +6,32 @@ public class EnemyMovementBasic : MonoBehaviour
     private Camera mainCam;
     private EnemyStats stats;
 
-    public enum EnemyColor { Green = 0, Blue = 1, Red = 2, Purple = 3 }
     private float[] barCache = new float[4];
     private bool isVulnerable = false;
 
     private bool isDead = false;
 
     public string color = "";
+
 	// Use this for initialization
-	void Start () 
+	void Start ()
     {
+        this.tag = Tags.ENEMY;
+        stats = this.GetComponent<EnemyStats>();
+        mainCam = Camera.main;
+
         float xx = Screen.width / 10;
 
-        mainCam = Camera.main;
-        stats = this.GetComponent<EnemyStats>();
         barCache[0] = xx * 3f + xx / 8f;    //green bar center
         barCache[1] = xx * 4.25f + xx / 8f; //blue bar center
         barCache[2] = xx * 5.5f + xx / 8f;  //red bar center
         barCache[3] = xx * 6.75f + xx / 8f; //purple bar center
 
-
         switch (stats.enemyColor)
         {
-            case 0: color = "green";    break;
+            case 0: color = "green";  
+                    
+                break;
             case 1: color = "blue";     break;
             case 2: color = "red";      break;
             case 3: color = "purple";   break;
@@ -71,14 +74,7 @@ public class EnemyMovementBasic : MonoBehaviour
         }
 	}
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == Tags.PLAYER)
-        {
-            other.GetComponent<CharacterStats>().notes--;
-            Camera.main.GetComponent<CameraShake>().Shake();
-        }
-    }
+    
 
     public void TakeDamage()
     {

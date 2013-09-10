@@ -23,6 +23,7 @@ public class GameController : MonoBehaviour
         Debug.Log("Playing audio");
         mainCam = Camera.main;
         Debug.Log(mainCam.WorldToScreenPoint(new Vector3(8, 1, 0)));
+        SpawnEnemy();
 	}
 	
 	// Update is called once per frame
@@ -33,10 +34,19 @@ public class GameController : MonoBehaviour
 
     void SpawnEnemy()
     {
-        
+        GameObject spawn = (GameObject)Resources.LoadAssetAtPath("Assets/Prefabs/Enemy.prefab", typeof(GameObject));
+        Instantiate(spawn, new Vector3(10, 10, 0), new Quaternion(0, 0, 0, 0));
     }
     void SpawnEnemy(int color) 
     {
         
+    }
+    void SpawnEnemy(int color, Vector3 coords, Quaternion rotation)
+    {
+ 
+    }
+    void SpawnEnemy(string type, Vector3 coords, Quaternion rotation)
+    {
+ 
     }
 }
