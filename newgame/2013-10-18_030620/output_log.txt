@@ -1,0 +1,190 @@
+Initialize engine version: 4.2.1f4 (4d30acc925c2)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 9.0c [nvd3dumx.dll 9.18.13.1106]
+    Renderer: NVIDIA GeForce GTX 660 Ti
+    Vendor:   NVIDIA
+    VRAM:     1986 MB (via DXGI)
+    Caps:     Shader=30 DepthRT=1 NativeDepth=1 NativeShadow=1 DF16=0 DF24=0 INTZ=1 RAWZ=0 NULL=1 RESZ=0 SlowINTZ=0
+Begin MonoManager ReloadAssembly
+Platform assembly: F:\Media\newgame\game_test_2_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading F:\Media\newgame\game_test_2_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: F:\Media\newgame\game_test_2_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading F:\Media\newgame\game_test_2_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+- Completed reload, in  0.056 seconds
+desktop: 1920x1080 60Hz; virtual: 5760x1080 at -1920,0
+<RI> Initializing input.
+<RI> Input initialized.
+Platform assembly: F:\Media\newgame\game_test_2_Data\Managed\System.dll (this message is harmless)
+Crash!!!
+SymInit: Symbol-SearchPath: '.;F:\Media\newgame;F:\Media\newgame;C:\Windows;C:\Windows\system32;SRV*C:\websymbols*http://msdl.microsoft.com/download/symbols;', symOptions: 530, UserName: 'Joseph'
+OS-Version: 6.2.9200 () 0x300-0x1
+F:\Media\newgame\game_test_2.exe:game_test_2.exe (000007F7273F0000), size: 14114816 (result: 0), SymType: '-exported-', PDB: 'F:\Media\newgame\game_test_2.exe', fileVersion: 4.2.1.11687
+C:\Windows\SYSTEM32\ntdll.dll:ntdll.dll (000007F9E1CA0000), size: 1835008 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\ntdll.dll', fileVersion: 6.2.9200.16579
+C:\Windows\system32\KERNEL32.DLL:KERNEL32.DLL (000007F9E0F90000), size: 1269760 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\system32\KERNEL32.DLL', fileVersion: 6.2.9200.16627
+C:\Windows\system32\KERNELBASE.dll:KERNELBASE.dll (000007F9DEF90000), size: 995328 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\system32\KERNELBASE.dll', fileVersion: 6.2.9200.16451
+C:\Windows\system32\apphelp.dll:apphelp.dll (000007F9D83D0000), size: 651264 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\system32\apphelp.dll', fileVersion: 6.2.9200.16420
+C:\Windows\system32\USER32.dll:USER32.dll (000007F9E12E0000), size: 1359872 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\system32\USER32.dll', fileVersion: 6.2.9200.16420
+C:\Windows\SYSTEM32\VERSION.dll:VERSION.dll (000007F9DBCF0000), size: 36864 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\VERSION.dll', fileVersion: 6.2.9200.16384
+C:\Windows\system32\ole32.dll:ole32.dll (000007F9E07A0000), size: 1564672 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\system32\ole32.dll', fileVersion: 6.2.9200.16451
+C:\Windows\system32\SHLWAPI.dll:SHLWAPI.dll (000007F9E0670000), size: 327680 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\system32\SHLWAPI.dll', fileVersion: 6.2.9200.16384
+C:\Windows\system32\ADVAPI32.dll:ADVAPI32.dll (000007F9E06C0000), size: 909312 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\system32\ADVAPI32.dll', fileVersion: 6.2.9200.16384
+C:\Windows\system32\GDI32.dll:GDI32.dll (000007F9E03D0000), size: 1314816 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\system32\GDI32.dll', fileVersion: 6.2.9200.16654
+C:\Windows\system32\SHELL32.dll:SHELL32.dll (000007F9DF0F0000), size: 19791872 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\system32\SHELL32.dll', fileVersion: 6.2.9200.16680
+C:\Windows\SYSTEM32\OPENGL32.dll:OPENGL32.dll (000007F9CBB90000), size: 1175552 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\OPENGL32.dll', fileVersion: 6.2.9200.16384
+C:\Windows\SYSTEM32\WINMM.dll:WINMM.dll (000007F9DBCD0000), size: 131072 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\WINMM.dll', fileVersion: 6.2.9200.16645
+C:\Windows\system32\WS2_32.dll:WS2_32.dll (000007F9DF090000), size: 360448 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\system32\WS2_32.dll', fileVersion: 6.2.9200.16384
+C:\Windows\system32\OLEAUT32.dll:OLEAUT32.dll (000007F9E1490000), size: 798720 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\system32\OLEAUT32.dll', fileVersion: 6.2.9200.16657
+C:\Windows\system32\IMM32.dll:IMM32.dll (000007F9E1770000), size: 233472 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\system32\IMM32.dll', fileVersion: 6.2.9200.16384
+C:\Windows\SYSTEM32\DNSAPI.dll:DNSAPI.dll (000007F9DE230000), size: 622592 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\DNSAPI.dll', fileVersion: 6.2.9200.16420
+C:\Windows\SYSTEM32\IPHLPAPI.DLL:IPHLPAPI.DLL (000007F9DAE90000), size: 172032 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\IPHLPAPI.DLL', fileVersion: 6.2.9200.16420
+C:\Windows\SYSTEM32\WINHTTP.dll:WINHTTP.dll (000007F9D7480000), size: 724992 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\WINHTTP.dll', fileVersion: 6.2.9200.16451
+C:\Windows\SYSTEM32\HID.DLL:HID.DLL (000007F9DE060000), size: 49152 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\HID.DLL', fileVersion: 6.2.9200.16384
+C:\Windows\SYSTEM32\MSACM32.dll:MSACM32.dll (000007F9CB9E0000), size: 102400 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\MSACM32.dll', fileVersion: 6.2.9200.16384
+C:\Windows\system32\msvcrt.dll:msvcrt.dll (000007F9E1230000), size: 675840 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\system32\msvcrt.dll', fileVersion: 7.0.9200.16384
+C:\Windows\SYSTEM32\combase.dll:combase.dll (000007F9E0B50000), size: 1769472 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\combase.dll', fileVersion: 6.2.9200.16420
+C:\Windows\system32\RPCRT4.dll:RPCRT4.dll (000007F9E1B50000), size: 1331200 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\system32\RPCRT4.dll', fileVersion: 6.2.9200.16622
+C:\Windows\SYSTEM32\sechost.dll:sechost.dll (000007F9E1430000), size: 294912 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\sechost.dll', fileVersion: 6.2.9200.16384
+C:\Windows\SYSTEM32\GLU32.dll:GLU32.dll (000007F9CBB60000), size: 180224 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\GLU32.dll', fileVersion: 6.2.9200.16384
+C:\Windows\SYSTEM32\DDRAW.dll:DDRAW.dll (000007F9CBA70000), size: 958464 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\DDRAW.dll', fileVersion: 6.2.9200.16384
+C:\Windows\SYSTEM32\WINMMBASE.dll:WINMMBASE.dll (000007F9DBA90000), size: 208896 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\WINMMBASE.dll', fileVersion: 6.2.9200.16645
+C:\Windows\system32\NSI.dll:NSI.dll (000007F9E0650000), size: 36864 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\system32\NSI.dll', fileVersion: 6.2.9200.16384
+C:\Windows\system32\MSCTF.dll:MSCTF.dll (000007F9E17B0000), size: 1138688 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\system32\MSCTF.dll', fileVersion: 6.2.9200.16579
+C:\Windows\SYSTEM32\WINNSI.DLL:WINNSI.DLL (000007F9DAE70000), size: 40960 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\WINNSI.DLL', fileVersion: 6.2.9200.16384
+C:\Windows\SYSTEM32\DCIMAN32.dll:DCIMAN32.dll (000007F9CBA60000), size: 32768 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\DCIMAN32.dll', fileVersion: 6.2.9200.16453
+C:\Windows\SYSTEM32\cfgmgr32.dll:cfgmgr32.dll (000007F9DEF10000), size: 323584 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\cfgmgr32.dll', fileVersion: 6.2.9200.16384
+C:\Windows\system32\DEVOBJ.dll:DEVOBJ.dll (000007F9DEF60000), size: 139264 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\system32\DEVOBJ.dll', fileVersion: 6.2.9200.16384
+C:\Windows\SYSTEM32\shcore.dll:shcore.dll (000007F9DDD30000), size: 614400 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\shcore.dll', fileVersion: 6.2.9200.16433
+F:\Media\newgame\game_test_2_Data\Mono\mono.dll:mono.dll (000007F9CC870000), size: 2723840 (result: 0), SymType: '-exported-', PDB: 'F:\Media\newgame\game_test_2_Data\Mono\mono.dll'
+C:\Windows\system32\PSAPI.DLL:PSAPI.DLL (000007F9E0520000), size: 28672 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\system32\PSAPI.DLL', fileVersion: 6.2.9200.16384
+C:\Windows\SYSTEM32\MSWSOCK.dll:MSWSOCK.dll (000007F9DE440000), size: 376832 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\MSWSOCK.dll', fileVersion: 6.2.9200.16433
+C:\Windows\SYSTEM32\MSVCR100.dll:MSVCR100.dll (0000000076240000), size: 860160 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\MSVCR100.dll', fileVersion: 10.0.40219.325
+C:\Windows\SYSTEM32\CRYPTBASE.dll:CRYPTBASE.dll (000007F9DEA70000), size: 40960 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\CRYPTBASE.dll', fileVersion: 6.2.9200.16384
+C:\Windows\SYSTEM32\bcryptPrimitives.dll:bcryptPrimitives.dll (000007F9DEA10000), size: 376832 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\bcryptPrimitives.dll', fileVersion: 6.2.9200.16384
+C:\Windows\system32\uxtheme.dll:uxtheme.dll (000007F9DD940000), size: 942080 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\system32\uxtheme.dll', fileVersion: 6.2.9200.16598
+C:\Windows\SYSTEM32\dwmapi.dll:dwmapi.dll (000007F9DCDB0000), size: 135168 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\dwmapi.dll', fileVersion: 6.2.9200.16384
+C:\Windows\SYSTEM32\d3d9.dll:d3d9.dll (000007F9D4630000), size: 2097152 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\d3d9.dll', fileVersion: 6.2.9200.16384
+C:\Windows\SYSTEM32\nvd3dumx.dll:nvd3dumx.dll (000007F9C6B60000), size: 18051072 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\nvd3dumx.dll', fileVersion: 9.18.13.1106
+C:\Windows\SYSTEM32\DXGIDebug.dll:DXGIDebug.dll (000007F9DC0D0000), size: 126976 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\DXGIDebug.dll', fileVersion: 9.30.960.9200
+C:\Windows\SYSTEM32\powrprof.dll:powrprof.dll (000007F9DE1E0000), size: 274432 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\powrprof.dll', fileVersion: 6.2.9200.16384
+C:\Program Files (x86)\NVIDIA Corporation\3D Vision\nvSCPAPI64.dll:nvSCPAPI64.dll (0000000180000000), size: 1282048 (result: 0), SymType: '-exported-', PDB: 'C:\Program Files (x86)\NVIDIA Corporation\3D Vision\nvSCPAPI64.dll', fileVersion: 7.17.13.1106
+C:\Windows\system32\SETUPAPI.dll:SETUPAPI.dll (000007F9E1980000), size: 1900544 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\system32\SETUPAPI.dll', fileVersion: 6.2.9200.16496
+C:\Windows\SYSTEM32\MMDevAPI.DLL:MMDevAPI.DLL (000007F9DC220000), size: 401408 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\MMDevAPI.DLL', fileVersion: 6.2.9200.16420
+C:\Windows\SYSTEM32\wdmaud.drv:wdmaud.drv (000007F9CBA20000), size: 233472 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\wdmaud.drv', fileVersion: 6.2.9200.16384
+C:\Windows\SYSTEM32\ksuser.dll:ksuser.dll (000007F9CBA10000), size: 28672 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\ksuser.dll', fileVersion: 6.2.9200.16384
+C:\Windows\SYSTEM32\AVRT.dll:AVRT.dll (000007F9DC130000), size: 36864 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\AVRT.dll', fileVersion: 6.2.9200.16420
+C:\Windows\SYSTEM32\AUDIOSES.DLL:AUDIOSES.DLL (000007F9D14B0000), size: 466944 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\AUDIOSES.DLL', fileVersion: 6.2.9200.16579
+C:\Windows\SYSTEM32\msacm32.drv:msacm32.drv (000007F9CBA00000), size: 45056 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\msacm32.drv', fileVersion: 6.2.9200.16384
+C:\Windows\SYSTEM32\midimap.dll:midimap.dll (000007F9CB9D0000), size: 36864 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\midimap.dll', fileVersion: 6.2.9200.16384
+C:\Windows\SYSTEM32\dsound.dll:dsound.dll (000007F9CAE20000), size: 569344 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\dsound.dll', fileVersion: 6.2.9200.16384
+C:\Windows\SYSTEM32\clbcatq.dll:clbcatq.dll (000007F9E05B0000), size: 614400 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\clbcatq.dll', fileVersion: 2001.12.10130.16384
+C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.9200.16579_none_418ab7ef718b27ef\comctl32.dll:comctl32.dll (000007F9DC8F0000), size: 2531328 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.9200.16579_none_418ab7ef718b27ef\comctl32.dll', fileVersion: 6.10.9200.16579
+C:\Windows\SYSTEM32\xinput1_3.dll:xinput1_3.dll (0000000000400000), size: 122880 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\xinput1_3.dll', fileVersion: 9.18.944.0
+C:\Windows\SYSTEM32\dbghelp.dll:dbghelp.dll (000007F9D7620000), size: 1454080 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\dbghelp.dll', fileVersion: 6.2.9200.16384
+C:\Windows\SYSTEM32\SspiCli.dll:SspiCli.dll (000007F9DE9E0000), size: 180224 (result: 0), SymType: '-exported-', PDB: 'C:\Windows\SYSTEM32\SspiCli.dll', fileVersion: 6.2.9200.16420
+
+========== OUTPUTING STACK TRACE ==================
+
+(0x000007F7277B14E6) (game_test_2): (filename not available): RegisterModule_Navigation + 0x21706
+(0x1000000000000001) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+(0x0000000003C77E40) ((module-name not available)): (filename not available): (function-name not available) + 0x0
+
+========== END OF STACKTRACE ===========
+
+**** Crash! ****

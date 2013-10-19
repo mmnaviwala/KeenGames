@@ -1,0 +1,47 @@
+Unity Player [version: Unity 4.2.1f4_4d30acc925c2]
+
+game_test_2.exe caused an Access Violation (0xc0000005)
+  in module game_test_2.exe at 0033:277b14e6.
+
+Error occurred at 2013-10-18_030632.
+F:\Media\newgame\game_test_2.exe, run by Joseph.
+17% memory in use.
+16354 MB physical memory [13562 MB free].
+18658 MB paging file [15252 MB free].
+8388608 MB user address space [8388305 MB free].
+Read from location 00000008 caused an access violation.
+
+Context:
+RDI:    0x00000000  RSI: 0x00000000  RAX:   0x00b6f3a0
+RBX:    0x02c16468  RCX: 0x00b6f3a0  RDX:   0x020a71a8
+RIP:    0x277b14e6  RBP: 0x09725a00  SegCs: 0x00000033
+EFlags: 0x00010246  RSP: 0x00b6f380  SegSs: 0x0000002b
+R8:    0x00000001  R9: 0x00000007  R10:   0x0000000e
+R11:    0x00b6f370  R12: 0x03d2e700  R13:   0x0000001b
+R14:    0x039ee5c0  R15: 0x0000001c
+
+Bytes at CS:EIP:
+8b 7e 08 e8 62 62 ec ff 8b d7 48 8b c8 e8 88 79 Module 1
+C:\Windows\SYSTEM32\xinput1_3.dll
+Image Base: 0x00400000  Image Size: 0x0001e000
+File Size:  107368      File Time:  2007-04-04_195422
+Version:
+   Company:    Microsoft Corporation
+   Product:    Microsoft® DirectX for Windows®
+   FileDesc:   Microsoft Common Controller API
+   FileVer:    9.18.944.0
+   ProdVer:    9.18.944.0
+
+Module 2
+C:\Windows\SYSTEM32\MSVCR100.dll
+Image Base: 0x76240000  Image Size: 0x000d2000
+File Size:  829264      File Time:  2011-06-11_021538
+Version:
+   Company:    Microsoft Corporation
+   Product:    Microsoft® Visual Studio® 2010
+   FileDesc:   Microsoft® C Runtime Library
+   FileVer:    10.0.40219.325
+   ProdVer:    10.0.40219.325
+
+
+== [end of error.log] ==
