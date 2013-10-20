@@ -16,7 +16,6 @@ public class BigPapaAI : MonoBehaviour
     {
         //keeping eye orientation stable
         eye.rotation = new Quaternion(0.0f, -0.7f, 0.7f, 0.0f);
-        Debug.Log(eye.localRotation);
         if (hp <= 0)
             Destroy(this.gameObject);
 	}

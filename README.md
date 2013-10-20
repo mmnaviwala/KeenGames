@@ -11,7 +11,6 @@ left for level 1 - 10/20/2013
 	6) Fix tutorial screens - Zack
 	7) Finish buttons/conditions for title screen - Zack
 	8) Implement the end level designed by Faysal - tentative Zack but must be commit by Faysal
-	9) Walk animation - Joseph
 	10) Fix gui button/score board - Zack
 	11) Fix first trampoline bug - Joseph aka according to Joseph z switch bug
 	12) Add enemies to bottom half pre Big Papa - Zack
@@ -21,3 +20,7 @@ left for level 1 - 10/20/2013
 	16) Create intro cut scene to Techno Era - Thi
 	17) Possible new music for level 1 - Daniel
 	18) Create cool background texture for pause menu - Thi
+
+Finished Tasks
+	9) Walk animation - Joseph 
+	
