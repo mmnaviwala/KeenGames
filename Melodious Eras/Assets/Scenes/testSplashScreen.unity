@@ -236,7 +236,7 @@ GUITexture:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1110761264}
   m_Enabled: 1
-  m_Texture: {fileID: 2800000, guid: 1d779e4950ee8ef478124609620f1b7b, type: 3}
+  m_Texture: {fileID: 2800000, guid: 935789489443f294693e1d5d3977191b, type: 3}
   m_Color: {r: .5, g: .5, b: .5, a: .5}
   m_PixelInset:
     serializedVersion: 2
@@ -255,8 +255,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1110761264}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .5, y: .5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: .409999996, y: .5, z: 0}
+  m_LocalScale: {x: .75, y: .75, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!114 &1110761267
@@ -270,4 +270,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1e6bcd178f52eb40b22057fd3e2d69e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  logoFrames: []

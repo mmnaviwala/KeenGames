@@ -3,7 +3,6 @@ using System.Collections;
  
 public class PauseMenu : MonoBehaviour {
  
-    public Rect windowRect = new Rect(295,175,0,0);
 	public Texture2D[] pictures;
 	public Texture2D btnTexture;
 	public Font headingFont;
@@ -22,9 +21,12 @@ public class PauseMenu : MonoBehaviour {
 		//btnTexture = Resources.Load("white_dot") as Texture2D;
 		playerHUD = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<HUD>();
 		
+		//Color headingColor = new Color(0.5F, 0.34F, 0.31F);	// light brown
+		Color headingColor = new Color(0.35F, 0.24F, 0.22F);		// a little dark brown
+		
 		headingStyle.fontSize = (int)Screen.width/13;
         headingStyle.fontStyle = FontStyle.Bold;
-        headingStyle.normal.textColor = Color.blue;
+        headingStyle.normal.textColor = headingColor;
         headingStyle.font = headingFont;
         headingStyle.alignment = TextAnchor.MiddleCenter;
         gamePaused = false;
@@ -65,9 +67,12 @@ public class PauseMenu : MonoBehaviour {
 		// -------------------------------------------------------
 		// Setting the button style	
 		GUIStyle buttonStyle = new GUIStyle();
+		Color buttonStyleColor = new Color(0.69F, 0.26F, 0.3F);		// reddish brown color
+		//Color buttonStyleColor = new Color(0.09F, 0.87F, 1F);		// teal green bluish color
 		buttonStyle.normal.background = btnTexture;
-		buttonStyle.normal.textColor = Color.blue;		
+		buttonStyle.normal.textColor = buttonStyleColor;		
 		buttonStyle.fontStyle = FontStyle.Bold;
+		buttonStyle.fontSize = 16;
 		buttonStyle.alignment = TextAnchor.MiddleCenter;
 		// -------------------------------------------------------
 		
@@ -79,7 +84,7 @@ public class PauseMenu : MonoBehaviour {
 			float buttonWidth = Screen.width*0.2F;
 			float buttonHeight = Screen.height*0.1F;
 			
-			GUI.Label(new Rect(Screen.width/2, Screen.height/2 - Screen.height/4, 0, 0), "Game Paused", headingStyle);
+			GUI.Label(new Rect(Screen.width/2 + Screen.width/20, Screen.height/2 - Screen.height/4, 0, 0), "Game Paused", headingStyle);
 			
 			if (GUI.Button(new Rect(Screen.width/2 - Screen.width/12, Screen.height/2 - Screen.height*0.12F, buttonWidth, buttonHeight), "Resume", buttonStyle))
 			{
@@ -94,7 +99,7 @@ public class PauseMenu : MonoBehaviour {
 			if (GUI.Button(new Rect(Screen.width/2 - Screen.width/12, Screen.height/2 + Screen.height*0.001F, buttonWidth, buttonHeight), "Restart", buttonStyle))
 			{
 				Debug.Log("Clicked the restart button");
-				Application.LoadLevel(Application.loadedLevelName);
+				Application.LoadLevel("scene2");
 			}
 			
 			if (GUI.Button(new Rect(Screen.width/2 - Screen.width/12, Screen.height/2 + Screen.height*0.125F, buttonWidth, buttonHeight), "Options", buttonStyle))

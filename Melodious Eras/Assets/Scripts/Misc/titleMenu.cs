@@ -7,12 +7,12 @@ public class titleMenu : MonoBehaviour
     bool firstUpdate = true,
          musicSwitch = false;
     AudioSource[] music;
-	public float increaseYInset = 0;	// Pixel Inset for the picture
+	public Texture2D btnTexture;
+	public Font btnFont;
 	
 	// Use this for initialization
     void Awake()
     {
-        guiTexture.pixelInset = new Rect(0f, 0f, Screen.width, Screen.height);
         music = Camera.main.GetComponents<AudioSource>();
     }
 	void Start ()
@@ -49,48 +49,34 @@ public class titleMenu : MonoBehaviour
                 }
                 break;
         }
-		
-		// set the Pixel Inset of the picture here
-		if(guiTexture.pixelInset.y <= 210)
-		{
-			guiTexture.pixelInset = new Rect(00,increaseYInset,Screen.height,Screen.width);
-			increaseYInset += 0.05F;
-		}
 	}
+	
 
     void OnGUI()
-    {
-		GUIStyle headingStyle = new GUIStyle();
-		Font headingFont = (Font)Resources.Load("fonts/KaushanScript-Regular", typeof(Font));
-		headingStyle.fontSize = 60;
-		headingStyle.fontStyle = FontStyle.Bold;
-		headingStyle.normal.textColor = Color.red;
-    	headingStyle.font = headingFont;
-		headingStyle.alignment = TextAnchor.MiddleCenter;
+    {		
+		// -------------------------------------------------------
+		// Setting the button style	
+		GUIStyle buttonStyle = new GUIStyle();
+		buttonStyle.normal.background = btnTexture;
+		buttonStyle.normal.textColor = Color.blue;		
+		buttonStyle.fontStyle = FontStyle.Bold;
+		buttonStyle.alignment = TextAnchor.MiddleCenter;
+		buttonStyle.fontSize = 40;
+		buttonStyle.font = btnFont;
+		// -------------------------------------------------------
 		
-		GUIStyle otherStyle = new GUIStyle();
-		Font otherHeading = (Font)Resources.Load("fonts/DroidSans", typeof(Font));
-		otherStyle.fontSize = 36;
-		otherStyle.normal.textColor = Color.blue;
-    	otherStyle.font = otherHeading;
-		otherStyle.alignment = TextAnchor.MiddleCenter;
+		float buttonWidth = Screen.width*0.35F;
+		float buttonHeight = Screen.height*0.12F;
 		
-        if (firstUpdate)
-        {			
-            float xx = Screen.width / 10;
-            float yy = Screen.height / 10;
-            startButton = new Rect(xx * 3f, yy * 4.5f, xx * 4f, yy);
-            exitButton = new Rect(xx * 3f, yy * 7f, xx * 4f, yy);
-            titleBar = new Rect(xx * 3f, yy * 2, xx * 4f, yy * 2f);
-            firstUpdate = false;
-        }
-        GUI.Box(titleBar, "Melodious Eras", headingStyle);
-        if (GUI.Button(startButton, "Start Game", otherStyle)) 
-        {
-            Application.LoadLevel("scene2");
-        }
-        if (GUI.Button(exitButton, "Exit Game", otherStyle))
-            Application.Quit();
+		if (GUI.Button(new Rect(Screen.width/2 - Screen.width/6, Screen.height/2 + Screen.height*0.15F, buttonWidth, buttonHeight), "Start Game", buttonStyle))
+		{
+			Application.LoadLevel("scene2");
+		}
+		
+		if (GUI.Button(new Rect(Screen.width/2 - Screen.width/6, Screen.height/2 + Screen.height*0.3F, buttonWidth, buttonHeight), "Exit Game", buttonStyle))
+		{
+        	Application.Quit();;
+		}
 		
     }
 }
