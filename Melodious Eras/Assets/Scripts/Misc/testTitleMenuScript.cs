@@ -39,8 +39,8 @@ public class testTitleMenuScript : MonoBehaviour
 
         float xx = Screen.width / 10;
         float yy = Screen.height / 10;
-        startButton = new Rect(xx * 3f, yy * 4.5f, xx * 4f, yy);
-        exitButton = new Rect(xx * 3f, yy * 7f, xx * 4f, yy);
+        startButton = new Rect(xx * 3f, yy * 5.5f, xx * 4f, yy);
+        exitButton = new Rect(xx * 3f, yy * 8f, xx * 4f, yy);
         titleBar = new Rect(xx * 3f, yy * 2, xx * 4f, yy * 2f);
 
         music[1].Stop();
@@ -87,7 +87,7 @@ public class testTitleMenuScript : MonoBehaviour
 
     void OnGUI()
     {
-        GUI.Box(titleBar, "Melodious Eras", headingStyle);
+        //GUI.Box(titleBar, "Melodious Eras", headingStyle);
         if (GUI.Button(startButton, "Start Game", otherStyle))
         {
             Application.LoadLevel("scene2");
