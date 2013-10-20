@@ -14,7 +14,6 @@ public class CameraShake : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag(Tags.PLAYER).transform;
         cameraOffset = this.transform.position - player.position - new Vector3(0f, 0f, 0f);
-        Debug.Log(cameraOffset);
         this.audio.Play();
     }
 

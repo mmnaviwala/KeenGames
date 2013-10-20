@@ -6,7 +6,7 @@ public class EnemyMovementBasic : MonoBehaviour
     private Camera mainCam;
     private EnemyStats stats;
     private HUD hud;
-    private GameObject player;
+    private CharacterStats player;
 
     //private float[] barCache = new float[4];
     public bool isFlying = false;
@@ -16,7 +16,7 @@ public class EnemyMovementBasic : MonoBehaviour
     {
         this.tag = Tags.ENEMY;
         stats = this.GetComponent<EnemyStats>();
-        player = GameObject.FindGameObjectWithTag(Tags.PLAYER);
+        player = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<CharacterStats>();
         hud = player.GetComponent<HUD>();
         mainCam = Camera.main;
 
@@ -27,7 +27,7 @@ public class EnemyMovementBasic : MonoBehaviour
     {
         if (stats.isDead)
         {
-            GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<CharacterStats>().vulnerableEnemies.Remove(this.gameObject);
+            player.vulnerableEnemies.Remove(this.stats);
             Destroy(this.gameObject);
         }
         else
@@ -48,7 +48,7 @@ public class EnemyMovementBasic : MonoBehaviour
                     {
                         stats.isVulnerable = true;
                         this.light.enabled = true;
-                        player.GetComponent<CharacterStats>().vulnerableEnemies.Add(this.gameObject);
+                        player.vulnerableEnemies.Add(this.stats);
                     }
                 }
                 //when they leave

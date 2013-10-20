@@ -2,6 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
+/// <summary>
+/// Not yet implemented.
+/// </summary>
 public class HUDScramble : MonoBehaviour 
 {
     public HUD playerHUD;

@@ -4,22 +4,22 @@ using System.Collections;
 public class PauseMenu : MonoBehaviour {
  
     public Rect windowRect = new Rect(295,175,0,0);
-    public bool gamePaused = false;
-	public bool firstTime = true;
-	public AudioSource music;
 	public Texture2D[] pictures;
 	public Texture2D btnTexture;
-	public HUD playerHUD;
 	public Font headingFont;
-	GUIStyle headingStyle = new GUIStyle();
-	
+    public GUIStyle headingStyle = new GUIStyle();
+
+    private bool gamePaused = false;
+    private bool firstTime = true;
+    private AudioSource music;
+    private HUD playerHUD;
 	void Start()
 	{
 		// Loading all the resources in the start() method
 		music = Camera.main.audio;
 		pictures = new Texture2D[2];
-        pictures[0] = Resources.Load("canon_clef_doodle") as Texture2D;
-		btnTexture = Resources.Load("white_dot") as Texture2D;
+        //pictures[0] = Resources.Load("canon_clef_doodle") as Texture2D;
+		//btnTexture = Resources.Load("white_dot") as Texture2D;
 		playerHUD = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<HUD>();
 		
 		headingStyle.fontSize = (int)Screen.width/13;

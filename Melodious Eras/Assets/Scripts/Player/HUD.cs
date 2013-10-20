@@ -3,23 +3,26 @@ using System.Collections;
 
 public class HUD : MonoBehaviour
 {
-    public Texture greenPressed, greenUnpressed, bluePressed, blueUnpressed,
-                   redPressed, redUnpressed, purplePressed, purpleUnpressed,
+    public Texture greenPressed,    greenUnpressed, bluePressed,   blueUnpressed,
+                   redPressed,      redUnpressed,   purplePressed, purpleUnpressed,
                    greenBarTexture, blueBarTexture, redBarTexture, purpleBarTexture;
-    private Rect greenButtonRect, blueButtonRect, redButtonRect, purpleButtonRect,
-                 greenBar,        blueBar,        redBar,        purpleBar,
-                 trebleClef,      notesCount;
+
+    private Rect   greenButtonRect, blueButtonRect, redButtonRect, purpleButtonRect,
+                   greenBar,        blueBar,        redBar,        purpleBar,
+                   trebleClef,      notesCount;
 
     bool slowedTime = false;
 
     public float[] barCache;
-    bool firstUpdate = true;
     PlayerMovementBasic player;
     CharacterStats playerStats;
 	// Use this for initialization
-	void Start () 
+    void Awake()
     {
         Screen.orientation = ScreenOrientation.LandscapeLeft;
+    }
+	void Start () 
+    {
         player = this.GetComponent<PlayerMovementBasic>();
         playerStats = this.GetComponent<CharacterStats>();
         barCache = new float[4];
@@ -46,16 +49,12 @@ public class HUD : MonoBehaviour
                                 xx * 4.25f + xx / 8f, //blue bar center
                                 xx * 5.5f + xx / 8f,  //red bar center
                                 xx * 6.75f + xx / 8f  /*purple bar center*/ };
-        firstUpdate = false;
 	}
 	
 	// Update is called once per frame
 	void Update () 
     {
-        if (firstUpdate)
-        {
-
-        } 
+        //Alternative inputs for jumping/attacking
         if (Input.GetKeyDown(KeyCode.Space))
         {
             player.Jump();
@@ -63,29 +62,30 @@ public class HUD : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A))
         {
-            foreach (GameObject enemy in playerStats.vulnerableEnemies)
-                if (enemy.GetComponent<EnemyStats>().enemyColor == EnemyColor.Green)
-                    playerStats.GetComponent<CharacterStats>().Attack(enemy);
+            foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
+                if (enemy.enemyColor == EnemyColor.Green)
+                    playerStats.Attack(enemy);
         }
         if (Input.GetKey(KeyCode.S))
         {
-            foreach (GameObject enemy in playerStats.vulnerableEnemies)
-                if (enemy.GetComponent<EnemyStats>().enemyColor == EnemyColor.Blue)
-                    playerStats.GetComponent<CharacterStats>().Attack(enemy);
+            foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
+                if (enemy.enemyColor == EnemyColor.Blue)
+                    playerStats.Attack(enemy);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            foreach (GameObject enemy in playerStats.vulnerableEnemies)
-                if (enemy.GetComponent<EnemyStats>().enemyColor == EnemyColor.Red)
-                    playerStats.GetComponent<CharacterStats>().Attack(enemy);
+            foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
+                if (enemy.enemyColor == EnemyColor.Red)
+                    playerStats.Attack(enemy);
         }
         if (Input.GetKey(KeyCode.F))
         {
-            foreach (GameObject enemy in playerStats.vulnerableEnemies)
-                if (enemy.GetComponent<EnemyStats>().enemyColor == EnemyColor.Purple)
-                    playerStats.GetComponent<CharacterStats>().Attack(enemy);
+            foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
+                if (enemy.enemyColor == EnemyColor.Purple)
+                    playerStats.Attack(enemy);
         }
 
+        //Toggles slow-motion
         if(Input.GetKey(KeyCode.T))
         {
             Time.timeScale = slowedTime ? 1f : .25f;
@@ -105,29 +105,32 @@ public class HUD : MonoBehaviour
                             "\nRed:    " + playerStats.redNotes +
                             "\nPurple: " + playerStats.purpleNotes);
 
+        //If green button is pressed, searches through all vulnerable enemies and attacks all that are green
+        //(i.e. all green enemies in the green bar at the time)
+        //Same logic for other colors
         if (GUI.Button(greenButtonRect, greenUnpressed))
         {
-            foreach(GameObject enemy in playerStats.vulnerableEnemies)
-                if (enemy.GetComponent<EnemyStats>().enemyColor == EnemyColor.Green)
-                    playerStats.GetComponent<CharacterStats>().Attack(enemy);
+            foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
+                if (enemy.enemyColor == EnemyColor.Green)
+                    playerStats.Attack(enemy);
         }
         if (GUI.Button(blueButtonRect, blueUnpressed))
         {
-            foreach (GameObject enemy in playerStats.vulnerableEnemies)
-                if (enemy.GetComponent<EnemyStats>().enemyColor == EnemyColor.Blue)
-                    playerStats.GetComponent<CharacterStats>().Attack(enemy);
+            foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
+                if (enemy.enemyColor == EnemyColor.Blue)
+                    playerStats.Attack(enemy);
         }
         if (GUI.Button(redButtonRect, redUnpressed))
         {
-            foreach (GameObject enemy in playerStats.vulnerableEnemies)
-                if (enemy.GetComponent<EnemyStats>().enemyColor == EnemyColor.Red)
-                    playerStats.GetComponent<CharacterStats>().Attack(enemy);
+            foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
+                if (enemy.enemyColor == EnemyColor.Red)
+                    playerStats.Attack(enemy);
         }
         if (GUI.Button(purpleButtonRect, purpleUnpressed))
         {
-            foreach (GameObject enemy in playerStats.vulnerableEnemies)
-                if (enemy.GetComponent<EnemyStats>().enemyColor == EnemyColor.Purple)
-                    playerStats.GetComponent<CharacterStats>().Attack(enemy);
+            foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
+                if (enemy.enemyColor == EnemyColor.Purple)
+                    playerStats.Attack(enemy);
         }
         if (GUI.Button(trebleClef, "Jump"))
         {

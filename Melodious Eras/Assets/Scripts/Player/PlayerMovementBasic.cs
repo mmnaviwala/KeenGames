@@ -3,27 +3,26 @@ using System.Collections;
 
 public class PlayerMovementBasic : MonoBehaviour 
 {
-    Camera mainCam;
-    CharacterStats stats;
     enum CharacterState {   Idle = 0,
                             Walking = 1,
                             Trotting = 2,
                             Running = 3,
                             Jumping = 4 }
     public float jumpForce = 20f;
-    //public float cameraSmoothness = 6f;
-    //public float cameraOffsetX = 9f;
     public float speed = 7f;
-
-    private float gravity;
-
     public bool jumping = false;
+
+    private Camera mainCam;
+    private CharacterStats stats;
+    private Renderer[] meshRenderers;
+    private float gravity;
 	// Use this for initialization
 	void Start () 
     {
         stats = this.GetComponent<CharacterStats>();
         mainCam = Camera.main;
         gravity = Mathf.Abs(Physics.gravity.y);
+        meshRenderers = this.transform.GetComponentsInChildren<Renderer>();
 	}
 	
 	// Update is called once per frame
@@ -34,15 +33,14 @@ public class PlayerMovementBasic : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.tag);
         if (other.gameObject.tag == Tags.ENEMY)
         {
             stats.notes = stats.notes == 0 ? 0 : stats.notes - 1;
             stats.notes--;
             if (stats.notes < 0) 
                 stats.notes = 0;
-            //StartCoroutine(Blink());
-            Camera.main.GetComponent<CameraShake>().Shake();
+            StartCoroutine(Blink());
+            mainCam.GetComponent<CameraShake>().Shake();
         }
     }
     void OnCollisionEnter(Collision collision)
@@ -73,16 +71,21 @@ public class PlayerMovementBasic : MonoBehaviour
         jumping = true;
     }
 
+    /// <summary>
+    /// Goes through each of the player's renderers (3 total) and flashes them on and off.
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator Blink()
     {
-        Debug.Log("Blinking");
-
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 5; i++)
         {
-            this.transform.renderer.enabled = false;
-            yield return new WaitForSeconds(.5f);
-            this.transform.renderer.enabled = true;
-            yield return new WaitForSeconds(.5f);
+            for (int r = 0; r < 3; r++)
+                meshRenderers[r].enabled = false;
+            yield return new WaitForSeconds(.1f);
+
+            for (int r = 0; r < 3; r++)
+                meshRenderers[r].enabled = true;
+            yield return new WaitForSeconds(.25f);
         }
     }
 }

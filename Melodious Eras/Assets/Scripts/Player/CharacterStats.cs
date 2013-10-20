@@ -8,7 +8,7 @@ using System.Collections.Generic;
 public class CharacterStats : MonoBehaviour
 {
     public int notes, greenNotes, blueNotes, redNotes, purpleNotes; //points
-    public List<GameObject> vulnerableEnemies;
+    public List<EnemyStats> vulnerableEnemies;
     public int threshold = 5;
 
     private bool attacking;
@@ -16,7 +16,6 @@ public class CharacterStats : MonoBehaviour
     private Animator anim;
     private PlayerMovement playerMovement;
     private HashIDs hash;
-    Camera mainCam;
 
     enum InstantKill { NONE = 0, GREEN = 1, BLUE = 2, RED = 3, PURPLE = 4 };
     //int specialAttack = 0;
@@ -30,20 +29,18 @@ public class CharacterStats : MonoBehaviour
         blueNotes = 0;
         redNotes = 0;
         purpleNotes = 0;
-        mainCam = Camera.main;
-        vulnerableEnemies = new List<GameObject>();
 
+        vulnerableEnemies = new List<EnemyStats>();
         specialAttacks = new EnemyColor[5];
-        
-    }
-    void Update()
-    {
-
     }
 
-    public void Attack(GameObject target)
+    /// <summary>
+    /// Instantly kills the target
+    /// </summary>
+    /// <param name="target"></param>
+    public void Attack(EnemyStats target)
     {
-        target.GetComponent<EnemyStats>().TakeDamage();
+        target.TakeDamage();
     }
     /// <summary>
     /// Used when picking up a note.
@@ -91,10 +88,7 @@ public class CharacterStats : MonoBehaviour
                 break;
         }
     }
-    public void RewardNotes(int value)
-    {
-        this.notes += value;
-    }
+
     /// <summary>
     /// Rewards player for killing an enemy.
     /// </summary>
@@ -140,5 +134,9 @@ public class CharacterStats : MonoBehaviour
                 break;
         }
         notes += whiteValue;
+    }
+    public void RewardNotes(int value)
+    {
+        this.notes += value;
     }
 }

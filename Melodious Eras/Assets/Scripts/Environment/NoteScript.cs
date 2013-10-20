@@ -17,7 +17,6 @@ public class NoteScript : MonoBehaviour
 	}
     public void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Collision with " + other.gameObject.tag);
         if (other.gameObject.tag == Tags.PLAYER)
         {
             other.GetComponent<CharacterStats>().AddNotes(noteColor, value);
