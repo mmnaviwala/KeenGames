@@ -16,6 +16,7 @@ public class PlayerMovementBasic : MonoBehaviour
     private CharacterStats stats;
     private Renderer[] meshRenderers;
     private float gravity;
+    private Animator anim;
 	// Use this for initialization
 	void Start () 
     {
@@ -23,6 +24,9 @@ public class PlayerMovementBasic : MonoBehaviour
         mainCam = Camera.main;
         gravity = Mathf.Abs(Physics.gravity.y);
         meshRenderers = this.transform.GetComponentsInChildren<Renderer>();
+        anim = this.GetComponent<Animator>();
+        anim.SetFloat("Speed", 7.0f);
+        anim.SetBool("IsShooting", true);
 	}
 	
 	// Update is called once per frame
@@ -45,9 +49,18 @@ public class PlayerMovementBasic : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.contacts[0].normal.y > .9f)
+        if (collision.contacts[0].normal.y > .7f)
             jumping = false;
+
+        anim.SetBool("IsGrinding", collision.collider.tag == Tags.SLIDE);
     }
+
+    //void OnCollisionExit(Collision collision)
+    //{
+    //    Debug.Log("Player leaving contact with " + collision.collider.tag);
+    //    if (collision.collider.tag == Tags.SLIDE)
+    //        anim.SetBool("IsGrinding", false);
+    //}
 
     public void Jump()
     {
@@ -55,6 +68,7 @@ public class PlayerMovementBasic : MonoBehaviour
         {
             this.rigidbody.AddForce(Vector3.up * gravity * jumpForce);
             jumping = true;
+            anim.SetBool("IsGrinding", false);
         }
     }
     public void Jump(float force)
@@ -63,11 +77,15 @@ public class PlayerMovementBasic : MonoBehaviour
         {
             this.rigidbody.AddForce(Vector3.up * gravity * force);
             jumping = true;
+            anim.SetBool("IsGrinding", false);
         }
     }
-    public void JumpRegardless(float force)
+    public IEnumerator Launch(float force)
     {
+        anim.SetBool("IsGrinding", false);
         this.rigidbody.AddForce(Vector3.up * gravity * force);
+
+        yield return new WaitForSeconds(0.1f); //Giving the player time to add more force to the jump
         jumping = true;
     }
 

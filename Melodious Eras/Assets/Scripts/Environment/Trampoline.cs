@@ -8,7 +8,7 @@ public class Trampoline : MonoBehaviour
     {
         //if landing on the top
         if (collision.contacts[0].normal.y < -.9f) 
-            collision.gameObject.GetComponent<PlayerMovementBasic>().JumpRegardless(intensity);
+            StartCoroutine(collision.gameObject.GetComponent<PlayerMovementBasic>().Launch(intensity));
 
         Debug.Log("Trampoline " + collision.contacts[0].normal.y);
         Debug.Log(collision.contacts.Length + " - " + collision.contacts[0].normal.y);

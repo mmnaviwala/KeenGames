@@ -15,4 +15,5 @@ public class Tags : MonoBehaviour
     public const string FINISH = "Finish";
     public const string EDITOR_ONLY = "EditorOnly";
     public const string MAIN_CAMERA = "MainCamera";
+    public const string SLIDE = "Slide";
 }
