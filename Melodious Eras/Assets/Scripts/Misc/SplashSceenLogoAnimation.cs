@@ -1,16 +1,24 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class SplashSceenLogoAnimation : MonoBehaviour {
 	
+	public float yTransform = 0.55F;
+	
 	void Start () 
 	{
-        StartCoroutine(waitAndGoToNextLevel());
+		guiTexture.enabled = true;
+		
+		StartCoroutine(animateAndGoToNextLevel());
 	}
 	
-	IEnumerator waitAndGoToNextLevel()
-	{
-		yield return new WaitForSeconds(2.0F);
-		Application.LoadLevel("testTitleMenuQuads");
+	IEnumerator animateAndGoToNextLevel()
+	{		
+		if(yTransform == 0.788F)
+		{
+			Application.LoadLevel("testTitleMenuQuads");
+		}
+		
+		yield return null;
 	}
 }

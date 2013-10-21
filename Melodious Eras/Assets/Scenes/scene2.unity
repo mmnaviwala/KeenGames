@@ -2324,6 +2324,10 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 13100000, guid: e57f7e726fef06145bba524956d3e6c6, type: 2}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: c9868c55204dbef4da14b92eb3da3310, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e57f7e726fef06145bba524956d3e6c6, type: 2}
   m_RootGameObject: {fileID: 1228021638}
@@ -12278,7 +12282,7 @@ GUITexture:
   m_PrefabInternal: {fileID: 174478400}
   m_GameObject: {fileID: 1228021638}
   m_Enabled: 0
-  m_Texture: {fileID: 2800000, guid: 90ff7726ce7229946a7d70032f3d858f, type: 3}
+  m_Texture: {fileID: 2800000, guid: c9868c55204dbef4da14b92eb3da3310, type: 3}
   m_Color: {r: .5, g: .5, b: .5, a: .5}
   m_PixelInset:
     serializedVersion: 2
@@ -12408,7 +12412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pictures: []
   btnTexture: {fileID: 2800000, guid: 4aa64b33597676641817f409121c04a7, type: 3}
-  headingFont: {fileID: 0}
+  headingFont: {fileID: 12800000, guid: fd4002b4e11200d4ba95e5b4d8a58627, type: 3}
   headingStyle:
     m_Name: 
     m_Normal:
