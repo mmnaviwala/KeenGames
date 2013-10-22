@@ -95,10 +95,10 @@ public class HUD : MonoBehaviour
 
     void OnGUI()
     {
-        GUI.DrawTexture(greenBar, greenBarTexture);
-        GUI.DrawTexture(blueBar, blueBarTexture);
-        GUI.DrawTexture(redBar, redBarTexture);
-        GUI.DrawTexture(purpleBar, purpleBarTexture);
+        GUI.Box(greenBar, greenBarTexture);
+        GUI.Box(blueBar, blueBarTexture);
+        GUI.Box(redBar, redBarTexture);
+        GUI.Box(purpleBar, purpleBarTexture);
         GUI.Box(notesCount,  "Notes:   " + playerStats.notes +
                             "\nGreen:  " + playerStats.greenNotes +
                             "\nBlue:   " + playerStats.blueNotes +

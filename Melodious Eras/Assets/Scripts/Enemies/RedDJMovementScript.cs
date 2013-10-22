@@ -6,14 +6,11 @@ public class RedDJMovementScript : MonoBehaviour {
 	bool movedAlready = false;
 	bool isClose = false;
 	float playerPositionX = 0;
-    Transform player;
 	
 	void Start()
 	{
 		// just for demo purposes
 		iTween.MoveTo(gameObject, iTween.Hash("path", iTweenPath.GetPath("RedDJPath"), "time", 5));
-        player = GameObject.FindGameObjectWithTag(Tags.PLAYER).transform;
-        
 	}
 	
 	/*
