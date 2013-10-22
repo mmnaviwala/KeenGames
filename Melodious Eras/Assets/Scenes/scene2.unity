@@ -9576,7 +9576,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 845957653}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+<<<<<<< HEAD
   m_LocalPosition: {x: 429.51001, y: 54.3794785, z: 0}
+=======
+  m_LocalPosition: {x: 567.783203, y: 5.01124763, z: 0}
+>>>>>>> 5f66b62a9a673526afdf6381ba4c777991f519b7
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1144980374}
@@ -9592,8 +9596,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   headingFont: {fileID: 0}
-  endScreen: {fileID: 0}
-  btnTexture: {fileID: 0}
+  endScreen: {fileID: 2800000, guid: 3eb1372ca63803948bfd6a0d5af6a245, type: 3}
+  btnTexture: {fileID: 2800000, guid: 4aa64b33597676641817f409121c04a7, type: 3}
 --- !u!65 &845957656
 BoxCollider:
   m_ObjectHideFlags: 0
