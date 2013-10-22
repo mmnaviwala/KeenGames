@@ -17,6 +17,14 @@ public class PlayerMovementBasic : MonoBehaviour
     private Renderer[] meshRenderers;
     private float gravity;
     private Animator anim;
+	
+	public static GameObject game;
+	
+	/*public static float getPositionX()
+	{
+		return this.transform.localPosition.x;;
+	}*/
+	
 	// Use this for initialization
 	void Start () 
     {
