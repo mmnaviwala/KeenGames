@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Runtime.CompilerServices;
 
 public class PlayerMovementBasic : MonoBehaviour 
 {
@@ -33,6 +34,11 @@ public class PlayerMovementBasic : MonoBehaviour
 	void Update () 
     {
         this.transform.position = new Vector3(transform.position.x + (speed * Time.deltaTime), transform.position.y, transform.position.z);
+
+        RaycastHit hit;
+        Physics.Raycast(this.transform.position, Vector3.down, out hit, 0.25f);
+        if (hit.point != Vector3.zero)
+            this.transform.position = new Vector3(this.transform.position.x, hit.point.y, this.transform.position.z);
 	}
 
     void OnTriggerEnter(Collider other)
@@ -105,5 +111,14 @@ public class PlayerMovementBasic : MonoBehaviour
                 meshRenderers[r].enabled = true;
             yield return new WaitForSeconds(.25f);
         }
+    }
+
+    /// <summary>
+    /// Determines if the transform is grounded (less than 0.25f off the ground).
+    /// </summary>
+    /// <returns></returns>
+    public bool IsGrounded()
+    {
+        return Physics.Raycast(this.transform.position, Vector3.down, 0.25f);
     }
 }
