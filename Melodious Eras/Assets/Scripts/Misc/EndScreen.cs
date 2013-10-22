@@ -16,6 +16,8 @@ public class EndScreen : MonoBehaviour {
     {
         music = Camera.main.audio;
         playerHUD = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<HUD>();
+        endScreen = Resources.Load("End") as Texture2D;
+        btnTexture = Resources.Load("white_dot") as Texture2D;
         playerStats = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<CharacterStats>();
     }
 
@@ -45,18 +47,18 @@ public class EndScreen : MonoBehaviour {
     {
 
         // -------------------------------------------------------
-        // Setting the button style	
-        GUIStyle buttonStyle = new GUIStyle();
-        buttonStyle.normal.background = btnTexture;
-        buttonStyle.normal.textColor = Color.blue;
-        buttonStyle.fontStyle = FontStyle.Bold;
-        buttonStyle.alignment = TextAnchor.MiddleCenter;
-        // -------------------------------------------------------
+		// Setting the button style	
+		GUIStyle buttonStyle = new GUIStyle();
+		buttonStyle.normal.background = btnTexture;
+		buttonStyle.normal.textColor = Color.blue;		
+		buttonStyle.fontStyle = FontStyle.Bold;
+		buttonStyle.alignment = TextAnchor.MiddleCenter;
+		// -------------------------------------------------------
 
         if (completeLevel)
         {
-            float buttonWidth = Screen.width * 0.1F;
-            float buttonHeight = Screen.height * 0.05F;
+            float buttonWidth = Screen.width*0.1F;
+		    float buttonHeight = Screen.height*0.05F;
             int totalNotes = playerStats.blueNotes + playerStats.greenNotes + playerStats.redNotes + playerStats.purpleNotes + playerStats.notes;
 
             GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), endScreen);
@@ -72,12 +74,6 @@ public class EndScreen : MonoBehaviour {
             GUI.Label(new Rect(Screen.width / 2 - Screen.width / 25, Screen.height - Screen.height * 0.345F, buttonWidth, buttonHeight), playerStats.notes.ToString(), buttonStyle);
 
             GUI.Label(new Rect(Screen.width / 2 - Screen.width / 25, Screen.height - Screen.height * 0.27F, buttonWidth, buttonHeight), totalNotes.ToString(), buttonStyle);
-
-            if (GUI.Button(new Rect(Screen.width * .8f, Screen.height * 0.8F, Screen.width / 6, Screen.height / 8), "Exit Game", buttonStyle))
-            {
-                //Debug.Log("Clicked the exit button");
-                Application.Quit();
-            }
         }
     }
 

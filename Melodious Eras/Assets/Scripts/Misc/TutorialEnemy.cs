@@ -17,21 +17,17 @@ public class TutorialEnemy : MonoBehaviour
         music = Camera.main.audio;
         playerHUD = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<HUD>();
         pictures = new Texture2D[3];
-        pictures[0] = Resources.Load("picture_seen") as Texture2D;
-        pictures[1] = Resources.Load("picture_attack") as Texture2D;
-        pictures[2] = Resources.Load("picture_miss") as Texture2D;
+        pictures[0] = Resources.Load("picture_attack") as Texture2D;
+        pictures[1] = Resources.Load("picture_miss") as Texture2D;
 
         text_top = new string[3];
         text_bottom = new string[3];
 
-        text_top[0] = "Enemies with different colors will appear";
-        text_bottom[0] = " on the right side of the screen.";
+        text_top[0] = "Once the enemy cross the same color bar";
+        text_bottom[0] = "hit the corresponding button to attack!";
 
-        text_top[1] = "Once the enemy cross the same color bar";
-        text_bottom[1] = "hit the corresponding button to attack!";
-
-        text_top[2] = "If the enemy slips by";
-        text_bottom[2] = "you will lose some notes!";
+        text_top[1] = "If the enemy slips by";
+        text_bottom[1] = "you will lose some notes!";
     }
 
     // Update is called once per frame
@@ -66,7 +62,7 @@ public class TutorialEnemy : MonoBehaviour
     {
         if (onTutorial)
         {
-            GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), pictures[numClicks]);
+            GUI.Box(new Rect(0, 0, Screen.width, Screen.height), pictures[numClicks]);
             GUI.Label(new Rect(Screen.width / 10, Screen.height / 40, Screen.width * .8f, Screen.height * .2f), text_top[numClicks], myStyle);
             GUI.Label(new Rect(Screen.width / 10, Screen.height / 2, Screen.width * .8f, Screen.height * .2f), text_bottom[numClicks], myStyle);
 
