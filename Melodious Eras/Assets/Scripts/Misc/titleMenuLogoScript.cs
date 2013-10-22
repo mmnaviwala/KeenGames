@@ -78,7 +78,7 @@ public class titleMenuLogoScript : MonoBehaviour {
 	{
 		if(textBlinking)
 		{
-			Debug.Log("3");
+            Debug.Log(Time.timeScale);
 			if (GUI.Button(new Rect(Screen.width/2 - Screen.width/6, Screen.height/2 + Screen.height*0.20F, buttonWidth, buttonHeight), "Click here to start game", buttonStyle))
 			{
 				Application.LoadLevel("scene2");
