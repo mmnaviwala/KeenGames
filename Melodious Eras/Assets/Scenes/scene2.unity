@@ -19230,7 +19230,7 @@ MonoBehaviour:
   greenBarTexture: {fileID: 2800000, guid: 9a4edc63a00639749a944818a56ae630, type: 3}
   blueBarTexture: {fileID: 2800000, guid: 180330c42bca7f84bb46d780be536cb7, type: 3}
   redBarTexture: {fileID: 2800000, guid: 92632052931e0f54ea9cfd42b4ee12b0, type: 3}
-  purpleBarTexture: {fileID: 0}
+  purpleBarTexture: {fileID: 2800000, guid: 6f0fbe5c046d99e489116321c6ab8e84, type: 3}
   barCache: []
 --- !u!114 &1804859603
 MonoBehaviour:
@@ -20790,6 +20790,10 @@ Prefab:
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 71866b5dca507394c9f3b32a24b206be, type: 2}
+      propertyPath: purpleBarTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: 6f0fbe5c046d99e489116321c6ab8e84, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 71866b5dca507394c9f3b32a24b206be, type: 2}
   m_RootGameObject: {fileID: 1804859599}
