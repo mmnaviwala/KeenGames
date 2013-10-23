@@ -17,7 +17,7 @@ public class RedDJ2MovementScript : MonoBehaviour {
 	void Update()
 	{
 		playerPositionX = player.transform.localPosition.x;
-		if(playerPositionX+7 > transform.localPosition.x)
+		if(playerPositionX+13 > transform.localPosition.x)
 			isClose = true;
 		
 		if(isClose && !movedAlready)
