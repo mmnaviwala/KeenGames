@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RedDJMovementScript : MonoBehaviour {
-	
+public class PurpleDJMovementScript : MonoBehaviour {
+
 	bool movedAlready = false;
 	bool isClose = false;
 	float playerPositionX = 0;
@@ -22,7 +22,7 @@ public class RedDJMovementScript : MonoBehaviour {
 		
 		if(isClose && !movedAlready)
 		{
-			iTween.MoveTo(gameObject, iTween.Hash("path", iTweenPath.GetPath("RedDJPath"), "time", 5));
+			iTween.MoveTo(gameObject, iTween.Hash("path", iTweenPath.GetPath("PurpleDJPath"), "time", 5));
 			movedAlready = true;
 		}
 	}
