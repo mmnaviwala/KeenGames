@@ -12,19 +12,14 @@ public class PlayerMovementBasic : MonoBehaviour
     public float jumpForce = 20f;
     public float speed = 7f;
     public bool jumping = false;
+    public float snapDownThreshold = .25f;
+    public bool isShooting = true;
 
     private Camera mainCam;
     private CharacterStats stats;
     private Renderer[] meshRenderers;
     private float gravity;
     private Animator anim;
-	
-	public static GameObject game;
-	
-	/*public static float getPositionX()
-	{
-		return this.transform.localPosition.x;;
-	}*/
 	
 	// Use this for initialization
 	void Start () 
@@ -35,7 +30,7 @@ public class PlayerMovementBasic : MonoBehaviour
         meshRenderers = this.transform.GetComponentsInChildren<Renderer>();
         anim = this.GetComponent<Animator>();
         anim.SetFloat("Speed", 7.0f);
-        anim.SetBool("IsShooting", true);
+        anim.SetBool("IsShooting", isShooting);
 	}
 	
 	// Update is called once per frame
@@ -43,20 +38,26 @@ public class PlayerMovementBasic : MonoBehaviour
     {
         this.transform.position = new Vector3(transform.position.x + (speed * Time.deltaTime), transform.position.y, transform.position.z);
 
-        RaycastHit hit;
-        Physics.Raycast(this.transform.position, Vector3.down, out hit, 0.25f);
-        if (hit.point != Vector3.zero)
-            this.transform.position = new Vector3(this.transform.position.x, hit.point.y, this.transform.position.z);
+        //snapping the character down to the ground for smooth descent
+        if (!jumping)
+        {
+            RaycastHit hit;
+            Physics.Raycast(this.transform.position, Vector3.down, out hit, snapDownThreshold);
+            if (hit.point != Vector3.zero)
+            {
+                this.transform.position = new Vector3(this.transform.position.x, hit.point.y, this.transform.position.z);
+            }
+        }
 	}
 
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == Tags.ENEMY)
         {
-            stats.notes = stats.notes == 0 ? 0 : stats.notes - 1;
-            stats.notes--;
+            stats.notes -= other.GetComponent<EnemyStats>().damageValue;
             if (stats.notes < 0) 
                 stats.notes = 0;
+
             StartCoroutine(Blink());
             mainCam.GetComponent<CameraShake>().Shake();
         }
@@ -69,12 +70,11 @@ public class PlayerMovementBasic : MonoBehaviour
         anim.SetBool("IsGrinding", collision.collider.tag == Tags.SLIDE);
     }
 
-    //void OnCollisionExit(Collision collision)
-    //{
-    //    Debug.Log("Player leaving contact with " + collision.collider.tag);
-    //    if (collision.collider.tag == Tags.SLIDE)
-    //        anim.SetBool("IsGrinding", false);
-    //}
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.collider.tag == Tags.SLIDE)
+            anim.SetBool("IsGrinding", false);
+    }
 
     public void Jump()
     {
