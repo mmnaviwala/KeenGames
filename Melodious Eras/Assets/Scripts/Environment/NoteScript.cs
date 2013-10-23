@@ -5,6 +5,7 @@ public class NoteScript : MonoBehaviour
 {
     public EnemyColor noteColor = EnemyColor.White;
     public int value = 1;
+    //private CharacterStats player;
 	// Use this for initialization
 	void Start () {
 	
@@ -19,8 +20,12 @@ public class NoteScript : MonoBehaviour
     {
         if (other.gameObject.tag == Tags.PLAYER)
         {
-            other.GetComponent<CharacterStats>().AddNotes(noteColor, value);
-            GameObject.Destroy(this.gameObject);
+            AddNotes(other.GetComponent<CharacterStats>());
         }
+    }
+    public void AddNotes(CharacterStats player)
+    {
+        player.AddNotes(this.noteColor, value);
+        Destroy(this.gameObject);
     }
 }

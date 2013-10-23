@@ -10,6 +10,7 @@ public class EnemyMovementBasic : MonoBehaviour
 
     //private float[] barCache = new float[4];
     public bool isFlying = false;
+    public bool aggro = false;
 
 	// Use this for initialization
 	void Start()
@@ -32,8 +33,6 @@ public class EnemyMovementBasic : MonoBehaviour
         }
         else
         {
-            //this.transform.position = new Vector3(transform.position.x - 2f * Time.deltaTime, transform.position.y, transform.position.z);
-
             float myScreenXPos = mainCam.WorldToScreenPoint(this.transform.position).x;
             float myScreenYPos = mainCam.WorldToScreenPoint(this.transform.position).y;
             //if target is (approx) touching corresponding bar
@@ -54,24 +53,34 @@ public class EnemyMovementBasic : MonoBehaviour
                 //when they leave
                 else if (stats.isVulnerable == true)
                 {
-                    //if difficulty is on Easy (yes for now)
-                    this.light.color = new Color(1, 1, 1);
-                    this.renderer.materials[0] = Resources.LoadAssetAtPath("Assets/Materials/mat_white.mat", typeof(Material)) as Material;
-                    stats.enemyColor = EnemyColor.White;
-                    //stats._color = this.color = "white";
+                    ///On non-easy difficulties
+                    stats.isVulnerable = false;
+                    this.light.enabled = false;
+                    player.GetComponent<CharacterStats>().vulnerableEnemies.Remove(this.stats);
 
-                    ///On other difficulties
-                    //isVulnerable = false;
-                    //this.light.enabled = false;
-                    //player.GetComponent<CharacterStats>().vulnerableEnemies.Remove(this.gameObject);
                     if (isFlying)
-                    {
-                        Debug.Log("Flying enemy aggro'd");
-                        //swoop towards player
-                    }
+                        aggro = true;
                 }
+            }
+
+            //swoops down at the player
+            if (aggro  /*&& myScreenXPos < hud.barCache[0]*/)
+            {
+                SmoothLook();
+                this.transform.position = Vector3.Lerp(this.transform.position, player.transform.position + player.transform.forward, 5 * Time.deltaTime);
+
             }
         }
 	}
 
+    void OnTriggerEnter(Collider other)
+    {
+        aggro = false;
+    }
+    void SmoothLook()
+    {
+        Vector3 relPlayerPosition = player.transform.position - this.transform.position;
+        Quaternion lookRotation = Quaternion.LookRotation(relPlayerPosition, Vector3.up);
+        transform.rotation = Quaternion.Lerp(this.transform.rotation, lookRotation, 10 * Time.deltaTime);
+    }
 }
