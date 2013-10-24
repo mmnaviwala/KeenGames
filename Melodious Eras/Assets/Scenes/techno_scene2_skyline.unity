@@ -218,6 +218,7 @@ GameObject:
   - 114: {fileID: 65020762}
   - 82: {fileID: 65020761}
   - 114: {fileID: 65020760}
+  - 114: {fileID: 65020768}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -376,6 +377,21 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!114 &65020768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 65020759}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78e9ac1bc7cd741478f9f04deda1b866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offsetX: 0
+  offsetY: 0
+  offsetZ: 0
+  smoothness: 5
 --- !u!1 &73204758
 GameObject:
   m_ObjectHideFlags: 0
@@ -4065,6 +4081,10 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: -.707106829
       objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 44da505801fbd8847a6af89c97854379, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 44da505801fbd8847a6af89c97854379, type: 2}
   m_RootGameObject: {fileID: 2111415250}
@@ -5414,8 +5434,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   newPerspective: 1
-  newOffset: {x: 0, y: 0, z: 0}
-  smoothness: -1
+  newOffset: {x: .5, y: 1.5, z: -1}
+  smoothness: 1
   stopPlayer: 1
 --- !u!1 &1270461745
 GameObject:
