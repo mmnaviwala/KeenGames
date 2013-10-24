@@ -14,6 +14,7 @@ public class HUD : MonoBehaviour
     bool slowedTime = false;
 
     public float[] barCache;
+    public GUIStyle myStyle;
     PlayerMovementBasic player;
     CharacterStats playerStats;
 	// Use this for initialization
@@ -108,25 +109,25 @@ public class HUD : MonoBehaviour
         //If green button is pressed, searches through all vulnerable enemies and attacks all that are green
         //(i.e. all green enemies in the green bar at the time)
         //Same logic for other colors
-        if (GUI.Button(greenButtonRect, greenUnpressed))
+        if (GUI.Button(greenButtonRect, greenUnpressed,myStyle))
         {
             foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
                 if (enemy.enemyColor == EnemyColor.Green)
                     playerStats.Attack(enemy);
         }
-        if (GUI.Button(blueButtonRect, blueUnpressed))
+        if (GUI.Button(blueButtonRect, blueUnpressed,myStyle))
         {
             foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
                 if (enemy.enemyColor == EnemyColor.Blue)
                     playerStats.Attack(enemy);
         }
-        if (GUI.Button(redButtonRect, redUnpressed))
+        if (GUI.Button(redButtonRect, redUnpressed,myStyle))
         {
             foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
                 if (enemy.enemyColor == EnemyColor.Red)
                     playerStats.Attack(enemy);
         }
-        if (GUI.Button(purpleButtonRect, purpleUnpressed))
+        if (GUI.Button(purpleButtonRect, purpleUnpressed,myStyle))
         {
             foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
                 if (enemy.enemyColor == EnemyColor.Purple)

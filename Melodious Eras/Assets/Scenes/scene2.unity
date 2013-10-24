@@ -11453,6 +11453,7 @@ MonoBehaviour:
   newPerspective: 0
   newOffset: {x: -10, y: 5, z: -30}
   smoothness: 1
+  stopPlayer: 0
 --- !u!114 &1022469755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15687,6 +15688,7 @@ MonoBehaviour:
   newPerspective: 0
   newOffset: {x: 9, y: 1, z: -10}
   smoothness: 5
+  stopPlayer: 0
 --- !u!1 &1432148031
 GameObject:
   m_ObjectHideFlags: 0
@@ -20081,6 +20083,65 @@ MonoBehaviour:
   redBarTexture: {fileID: 2800000, guid: 92632052931e0f54ea9cfd42b4ee12b0, type: 3}
   purpleBarTexture: {fileID: 2800000, guid: 6f0fbe5c046d99e489116321c6ab8e84, type: 3}
   barCache: []
+  myStyle:
+    m_Name: 
+    m_Normal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Hover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Active:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 0}
+    m_FontSize: 0
+    m_FontStyle: 0
+    m_Alignment: 0
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
 --- !u!114 &1804859603
 MonoBehaviour:
   m_ObjectHideFlags: 0
