@@ -5,6 +5,7 @@ public class SwitchPerspectives : MonoBehaviour
 {
     public enum NewPerspective { Sidescroller, ThirdPerson};
     public NewPerspective newPerspective;
+    public bool useDefaultOffset = false;
     public Vector3 newOffset;
     public float smoothness = -1;
     public bool stopPlayer = false;
@@ -26,15 +27,17 @@ public class SwitchPerspectives : MonoBehaviour
                         CameraMovement[] perspectives = Camera.main.GetComponents<CameraMovement>();
                         for (int p = 0; p < perspectives.Length; p++)
                             perspectives[p].enabled = false;
+
                         perspective2d.enabled = true;
                     }
-                    perspective2d.SetOffset(newOffset);
+                    perspective2d.SetOffset(useDefaultOffset ? CameraMovement2D.defaultOffset : newOffset);
                     if(smoothness != -1)
                         perspective2d.smoothness = this.smoothness;
                     break;
 
                 case NewPerspective.ThirdPerson:
                     CameraMovement3D perspective3d = Camera.main.GetComponent<CameraMovement3D>();
+                    //Disabling other camera scripts if not already on the current one
                     if (!perspective3d.enabled)
                     {
                         CameraMovement[] perspectives = Camera.main.GetComponents<CameraMovement>();
@@ -42,13 +45,12 @@ public class SwitchPerspectives : MonoBehaviour
                             perspectives[p].enabled = false;
                         perspective3d.enabled = true;
                     }
-                    perspective3d.SetOffset(newOffset);
+                    perspective3d.SetOffset(useDefaultOffset ? CameraMovement3D.defaultOffset : newOffset);
                     if(smoothness != -1)
                         perspective3d.smoothness = this.smoothness;
                     break;
             }
-            if (disableHUD)
-                other.GetComponent<HUD>().enabled = false;
+            other.GetComponent<HUD>().enabled = !disableHUD;
         }
     }
 

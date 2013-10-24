@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraMovement3D : MonoBehaviour 
+public class CameraMovement3D : CameraMovement 
 {
     public float offsetX = 0, offsetY = 0, offsetZ = 0;
     public float smoothness = 5;
+    public static Vector3 defaultOffset = new Vector3(-0.5f, 1.5f, -1f);
     Transform player;
 	// Use this for initialization
 	void Start () 
@@ -15,10 +16,8 @@ public class CameraMovement3D : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-        //if (this.enabled)
-        //    player.GetComponent<HUD>().enabled = false;
         SmoothLook();
-        this.transform.position = Vector3.Lerp( this.transform.position, //third-person camera offset
+        this.transform.position = Vector3.Lerp( this.transform.position, //third-person camera over-the-shoulder offset
                                                 player.transform.position + player.transform.forward * offsetZ + player.transform.right * offsetX + player.transform.up * offsetY , 
                                                 smoothness * Time.deltaTime);
 	}
