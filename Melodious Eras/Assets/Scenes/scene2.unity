@@ -9876,8 +9876,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   headingFont: {fileID: 0}
-  endScreen: {fileID: 0}
-  btnTexture: {fileID: 0}
+  endScreen: {fileID: 2800000, guid: 3eb1372ca63803948bfd6a0d5af6a245, type: 3}
+  btnTexture: {fileID: 2800000, guid: 4aa64b33597676641817f409121c04a7, type: 3}
 --- !u!65 &845957656
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20036,7 +20036,7 @@ Transform:
   m_PrefabInternal: {fileID: 2108474361}
   m_GameObject: {fileID: 1804859599}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
-  m_LocalPosition: {x: -10.8200388, y: .587985098, z: 0}
+  m_LocalPosition: {x: -22.3999996, y: .5, z: 0}
   m_LocalScale: {x: 7, y: 7, z: 7}
   m_Children:
   - {fileID: 1639383263}
@@ -23622,11 +23622,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400110, guid: 71866b5dca507394c9f3b32a24b206be, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -10.8200388
+      value: -22.3999996
       objectReference: {fileID: 0}
     - target: {fileID: 400110, guid: 71866b5dca507394c9f3b32a24b206be, type: 2}
       propertyPath: m_LocalPosition.y
-      value: .587985098
+      value: .5
       objectReference: {fileID: 0}
     - target: {fileID: 400110, guid: 71866b5dca507394c9f3b32a24b206be, type: 2}
       propertyPath: m_LocalPosition.z
