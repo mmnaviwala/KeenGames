@@ -129,4 +129,11 @@ public class PlayerMovementBasic : MonoBehaviour
     {
         return Physics.Raycast(this.transform.position, Vector3.down, 0.25f);
     }
+
+    public void Stop(bool stopShooting)
+    {
+        this.speed = 0;
+        this.anim.SetFloat("Speed", 0);
+        this.anim.SetBool("IsShooting", !stopShooting);
+    }
 }
