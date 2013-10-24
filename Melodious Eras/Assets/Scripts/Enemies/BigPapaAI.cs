@@ -37,7 +37,6 @@ public class BigPapaAI : MonoBehaviour
         if (hp <= 0)
         {
             StartCoroutine(this.Die());
-            jumping = true;
         }
 	}
 
@@ -62,6 +61,7 @@ public class BigPapaAI : MonoBehaviour
 
     IEnumerator Die()
     {
+        jumping = true;
         this.anim.SetBool("IsDead", true);
         yield return new WaitForSeconds(.958f);
         Destroy(this.gameObject);

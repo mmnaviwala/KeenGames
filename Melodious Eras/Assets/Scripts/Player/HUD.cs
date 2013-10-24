@@ -61,25 +61,25 @@ public class HUD : MonoBehaviour
             player.Jump();
         }
 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
                 if (enemy.enemyColor == EnemyColor.Green)
                     playerStats.Attack(enemy);
         }
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S))
         {
             foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
                 if (enemy.enemyColor == EnemyColor.Blue)
                     playerStats.Attack(enemy);
         }
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.D))
         {
             foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
                 if (enemy.enemyColor == EnemyColor.Red)
                     playerStats.Attack(enemy);
         }
-        if (Input.GetKey(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
                 if (enemy.enemyColor == EnemyColor.Purple)

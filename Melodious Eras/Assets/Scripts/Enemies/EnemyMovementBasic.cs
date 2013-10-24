@@ -76,6 +76,7 @@ public class EnemyMovementBasic : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         aggro = false;
+        isFlying = false;
     }
     void SmoothLook()
     {

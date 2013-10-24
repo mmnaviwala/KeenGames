@@ -58,25 +58,25 @@ public class PlayerMovementBasic : MonoBehaviour
                 this.Jump();
             }
 
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.A))
             {
                 foreach (EnemyStats enemy in stats.vulnerableEnemies)
                     if (enemy.enemyColor == EnemyColor.Green)
                         stats.Attack(enemy);
             }
-            if (Input.GetKey(KeyCode.S))
+            if (Input.GetKeyDown(KeyCode.S))
             {
                 foreach (EnemyStats enemy in stats.vulnerableEnemies)
                     if (enemy.enemyColor == EnemyColor.Blue)
                         stats.Attack(enemy);
             }
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKeyDown(KeyCode.D))
             {
                 foreach (EnemyStats enemy in stats.vulnerableEnemies)
                     if (enemy.enemyColor == EnemyColor.Red)
                         stats.Attack(enemy);
             }
-            if (Input.GetKey(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 foreach (EnemyStats enemy in stats.vulnerableEnemies)
                     if (enemy.enemyColor == EnemyColor.Purple)
