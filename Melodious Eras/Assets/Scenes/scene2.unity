@@ -5987,6 +5987,7 @@ GameObject:
   - 4: {fileID: 477307833}
   - 65: {fileID: 477307834}
   - 114: {fileID: 477307835}
+  - 114: {fileID: 477307836}
   m_Layer: 0
   m_Name: trigger_boss_view
   m_TagString: Untagged
@@ -6036,6 +6037,17 @@ MonoBehaviour:
   smoothness: -1
   stopPlayer: 1
   disableHUD: 1
+--- !u!114 &477307836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 477307832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ea2bd94560838142a10184a820d4e4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &479597492
 GameObject:
   m_ObjectHideFlags: 0
@@ -6698,6 +6710,7 @@ Transform:
   - {fileID: 796846775}
   - {fileID: 742421189}
   - {fileID: 1298608455}
+  - {fileID: 1187700399}
   m_Father: {fileID: 0}
 --- !u!1 &549348471
 GameObject:
@@ -10703,6 +10716,22 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 8dd09449941766c4fa06a993fa7ed41e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 8dd09449941766c4fa06a993fa7ed41e, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 8dd09449941766c4fa06a993fa7ed41e, type: 3}
+    - target: {fileID: 9500000, guid: 8dd09449941766c4fa06a993fa7ed41e, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 8dd09449941766c4fa06a993fa7ed41e, type: 3}
+      propertyPath: m_TagString
+      value: Boss
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8dd09449941766c4fa06a993fa7ed41e, type: 3}
   m_RootGameObject: {fileID: 1940849093}
@@ -14389,7 +14418,7 @@ Transform:
   m_LocalPosition: {x: -15, y: .558147788, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 542966968}
 --- !u!114 &1187700400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21503,7 +21532,7 @@ Transform:
   m_PrefabInternal: {fileID: 2108474361}
   m_GameObject: {fileID: 1804859599}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
-  m_LocalPosition: {x: 251.021606, y: 15.4365501, z: 3.78279924}
+  m_LocalPosition: {x: -22, y: 0, z: .284814596}
   m_LocalScale: {x: 7, y: 7, z: 7}
   m_Children:
   - {fileID: 1639383263}
@@ -22758,7 +22787,7 @@ GameObject:
   - 95: {fileID: 1940849095}
   m_Layer: 0
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22792,11 +22821,11 @@ Animator:
     type: 3}
   m_PrefabInternal: {fileID: 809618026}
   m_GameObject: {fileID: 1940849093}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: 8dd09449941766c4fa06a993fa7ed41e, type: 3}
   m_Controller: {fileID: 0}
   m_CullingMode: 1
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_AnimatePhysics: 0
 --- !u!1 &1952581935
 GameObject:
@@ -24902,7 +24931,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 542966968}
     m_Modifications:
     - target: {fileID: 400000, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
       propertyPath: m_LocalPosition.x
@@ -25353,15 +25382,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400110, guid: 71866b5dca507394c9f3b32a24b206be, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 251.021606
+      value: -22
       objectReference: {fileID: 0}
     - target: {fileID: 400110, guid: 71866b5dca507394c9f3b32a24b206be, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 15.4365501
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400110, guid: 71866b5dca507394c9f3b32a24b206be, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 3.78279924
+      value: .284814596
       objectReference: {fileID: 0}
     - target: {fileID: 400110, guid: 71866b5dca507394c9f3b32a24b206be, type: 2}
       propertyPath: m_LocalRotation.x
