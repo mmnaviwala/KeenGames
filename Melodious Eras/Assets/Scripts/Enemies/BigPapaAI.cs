@@ -7,11 +7,13 @@ public class BigPapaAI : MonoBehaviour
     public int hp = 6;
     public bool jumping = true;
     public float speed = 7;
+    private Animator anim;
 	// Use this for initialization
 	void Start () 
     {
         eye = this.transform.FindChild("Diskmen1:Giant_Disk_Droup").FindChild("Diskmen1:Giant_Eye");
         jumping = true;
+        anim = this.GetComponent<Animator>();
 	}
 	
 	// Update is called once per frame
@@ -33,7 +35,10 @@ public class BigPapaAI : MonoBehaviour
             }
         }
         if (hp <= 0)
-            Destroy(this.gameObject);
+        {
+            StartCoroutine(this.Die());
+            jumping = true;
+        }
 	}
 
     void OnCollisionEnter(Collision col)
@@ -53,5 +58,12 @@ public class BigPapaAI : MonoBehaviour
             Destroy(other.gameObject);
             hp--;
         }
+    }
+
+    IEnumerator Die()
+    {
+        this.anim.SetBool("IsDead", true);
+        yield return new WaitForSeconds(.958f);
+        Destroy(this.gameObject);
     }
 }

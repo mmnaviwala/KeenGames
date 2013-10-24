@@ -28,6 +28,13 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
+          name: _Illum
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
           name: _Detail
         second:
           m_Texture: {fileID: 0}
@@ -35,7 +42,7 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _Illum
+          name: _ParallaxMap
         second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
@@ -49,8 +56,12 @@ Material:
         first:
           name: _EmissionLM
         second: 0
+      data:
+        first:
+          name: _Parallax
+        second: .0199999996
     m_Colors:
       data:
         first:
           name: _Color
-        second: {r: 1, g: 0, b: 1, a: .545098066}
+        second: {r: 1, g: 0, b: 1, a: .725490212}

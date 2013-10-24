@@ -1164,8 +1164,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 192492971}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 92.5, y: 50, z: 7.5}
-  m_LocalScale: {x: 5, y: 1, z: 5}
+  m_LocalPosition: {x: 91.25, y: 50, z: 7.5}
+  m_LocalScale: {x: 7.5, y: 1, z: 5}
   m_Children: []
   m_Father: {fileID: 189237553}
 --- !u!1 &213842215
@@ -4396,7 +4396,7 @@ InteractiveCloth:
   m_BendingStiffness: 0
   m_StretchingStiffness: 1
   m_Damping: 0
-  m_Thickness: .200000003
+  m_Thickness: 1
   m_UseGravity: 1
   m_SelfCollision: 0
   m_ExternalAcceleration: {x: 0, y: 0, z: -10}
@@ -5030,6 +5030,65 @@ MonoBehaviour:
   redBarTexture: {fileID: 2800000, guid: 92632052931e0f54ea9cfd42b4ee12b0, type: 3}
   purpleBarTexture: {fileID: 2800000, guid: 6f0fbe5c046d99e489116321c6ab8e84, type: 3}
   barCache: []
+  myStyle:
+    m_Name: 
+    m_Normal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Hover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Active:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 0}
+    m_FontSize: 0
+    m_FontStyle: 0
+    m_Alignment: 0
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
 --- !u!114 &1200819457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5437,7 +5496,7 @@ MonoBehaviour:
   newOffset: {x: .5, y: 1.5, z: -1}
   smoothness: 5
   stopPlayer: 0
-  disableHUD: 0
+  disableHUD: 1
 --- !u!1 &1270461745
 GameObject:
   m_ObjectHideFlags: 0

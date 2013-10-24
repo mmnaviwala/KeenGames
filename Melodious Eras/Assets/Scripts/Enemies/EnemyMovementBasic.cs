@@ -31,7 +31,7 @@ public class EnemyMovementBasic : MonoBehaviour
             player.vulnerableEnemies.Remove(this.stats);
             Destroy(this.gameObject);
         }
-        else
+        else if(hud.enabled)
         {
             float myScreenXPos = mainCam.WorldToScreenPoint(this.transform.position).x;
             float myScreenYPos = mainCam.WorldToScreenPoint(this.transform.position).y;
