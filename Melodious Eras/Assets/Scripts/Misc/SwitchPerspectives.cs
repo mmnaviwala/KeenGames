@@ -8,6 +8,7 @@ public class SwitchPerspectives : MonoBehaviour
     public Vector3 newOffset;
     public float smoothness = -1;
     public bool stopPlayer = false;
+    public bool disableHUD = false;
     
     void OnTriggerEnter(Collider other)
     {
@@ -46,6 +47,8 @@ public class SwitchPerspectives : MonoBehaviour
                         perspective3d.smoothness = this.smoothness;
                     break;
             }
+            if (disableHUD)
+                other.GetComponent<HUD>().enabled = false;
         }
     }
 

@@ -4,7 +4,7 @@ using System.Collections;
 public class BigPapaAI : MonoBehaviour 
 {
     Transform eye;
-    private int hp = 3;
+    public int hp = 6;
     public bool jumping = true;
     public float speed = 7;
 	// Use this for initialization
@@ -40,7 +40,7 @@ public class BigPapaAI : MonoBehaviour
     {
         Debug.Log("Big Papa Collision with " + col.gameObject.tag);
         jumping = false;
-        if (col.gameObject.tag == Tags.ENEMY)
+        if (col.gameObject.tag == Tags.OBSTACLE || col.gameObject.tag == Tags.ENEMY)
         {
             Destroy(col.gameObject);
             hp--;
@@ -48,7 +48,7 @@ public class BigPapaAI : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == Tags.ENEMY)
+        if (other.tag == Tags.OBSTACLE || other.tag == Tags.ENEMY)
         {
             Destroy(other.gameObject);
             hp--;

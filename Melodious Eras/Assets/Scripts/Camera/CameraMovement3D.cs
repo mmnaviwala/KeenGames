@@ -15,10 +15,12 @@ public class CameraMovement3D : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
+        //if (this.enabled)
+        //    player.GetComponent<HUD>().enabled = false;
         SmoothLook();
-        this.transform.position = Vector3.Lerp( this.transform.position, 
+        this.transform.position = Vector3.Lerp( this.transform.position, //third-person camera offset
                                                 player.transform.position + player.transform.forward * offsetZ + player.transform.right * offsetX + player.transform.up * offsetY , 
-                                                2 * Time.deltaTime);
+                                                smoothness * Time.deltaTime);
 	}
 
     public void SetOffset(Vector3 newOffset)
@@ -29,8 +31,9 @@ public class CameraMovement3D : MonoBehaviour
     }
     void SmoothLook()
     {
-        Vector3 relPlayerPosition = player.transform.position + player.transform.forward * 10 + player.transform.up * offsetY - this.transform.position;
+        //looking ahead of the player
+        Vector3 relPlayerPosition = player.transform.position + player.transform.forward * 100 + player.transform.up * offsetY - this.transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(relPlayerPosition, Vector3.up);
-        transform.rotation = Quaternion.Lerp(this.transform.rotation, lookRotation, 10 * Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(this.transform.rotation, lookRotation, smoothness * Time.deltaTime);
     }
 }
