@@ -23,6 +23,7 @@ public class CameraMovement2D : CameraMovement
         //Debug.Log(this.transform.rotation);
         Vector3 newPos = player.position + offset;
         this.transform.position = Vector3.Lerp(this.transform.position, newPos, smoothness * Time.deltaTime);
+
 	}
 
     public void SetOffset(float X, float Y, float Z)
