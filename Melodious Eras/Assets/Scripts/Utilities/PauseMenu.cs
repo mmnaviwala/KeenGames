@@ -99,7 +99,7 @@ public class PauseMenu : MonoBehaviour {
 			if (GUI.Button(new Rect(Screen.width/2 - Screen.width/12, Screen.height/2 + Screen.height*0.001F, buttonWidth, buttonHeight), "Restart", buttonStyle))
 			{
 				Debug.Log("Clicked the restart button");
-				Application.LoadLevel("scene2");
+				Application.LoadLevel(Application.loadedLevel);
 			}
 			
 			if (GUI.Button(new Rect(Screen.width/2 - Screen.width/12, Screen.height/2 + Screen.height*0.125F, buttonWidth, buttonHeight), "Options", buttonStyle))

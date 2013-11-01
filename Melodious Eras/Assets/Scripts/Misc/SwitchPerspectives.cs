@@ -11,7 +11,7 @@ public class SwitchPerspectives : MonoBehaviour
     public Transform target;
     public float smoothness = -1;
     public bool stopPlayer = false;
-    public bool disableHUD = false;
+    public bool disableHUD = false, hideHUD;
     
     void OnTriggerEnter(Collider other)
     {
@@ -59,6 +59,7 @@ public class SwitchPerspectives : MonoBehaviour
                     break;
             }
             other.GetComponent<HUD>().enabled = !disableHUD;
+            other.GetComponent<HUD>().hide = hideHUD;   
         }
     }
 
