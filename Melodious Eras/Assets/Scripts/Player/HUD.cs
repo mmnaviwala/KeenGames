@@ -12,11 +12,13 @@ public class HUD : MonoBehaviour
                    trebleClef,      notesCount;
 
     bool slowedTime = false;
+    
 
     public float[] barCache;
     public GUIStyle myStyle;
     PlayerMovementBasic player;
     CharacterStats playerStats;
+    public bool hide = false;
 	// Use this for initialization
     void Awake()
     {
@@ -55,7 +57,6 @@ public class HUD : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-        //Alternative inputs for jumping/attacking
         if (Input.GetKeyDown(KeyCode.Space))
         {
             player.Jump();
@@ -85,7 +86,6 @@ public class HUD : MonoBehaviour
                 if (enemy.enemyColor == EnemyColor.Purple)
                     playerStats.Attack(enemy);
         }
-
         //Toggles slow-motion
         if(Input.GetKey(KeyCode.T))
         {
@@ -96,46 +96,51 @@ public class HUD : MonoBehaviour
 
     void OnGUI()
     {
-        GUI.DrawTexture(greenBar, greenBarTexture);
-        GUI.DrawTexture(blueBar, blueBarTexture);
-        GUI.DrawTexture(redBar, redBarTexture);
-        GUI.DrawTexture(purpleBar, purpleBarTexture);
-        GUI.Box(notesCount,  "Notes:   " + playerStats.notes +
-                            "\nGreen:  " + playerStats.greenNotes +
-                            "\nBlue:   " + playerStats.blueNotes +
-                            "\nRed:    " + playerStats.redNotes +
-                            "\nPurple: " + playerStats.purpleNotes);
+        GUI.color = new Color(1, 1, 1, 0.5f);
+        if (!hide)
+        {
+            GUI.DrawTexture(greenBar, greenBarTexture);
+            GUI.DrawTexture(blueBar, blueBarTexture);
+            GUI.DrawTexture(redBar, redBarTexture);
+            GUI.DrawTexture(purpleBar, purpleBarTexture);
+            
 
-        //If green button is pressed, searches through all vulnerable enemies and attacks all that are green
-        //(i.e. all green enemies in the green bar at the time)
-        //Same logic for other colors
-        if (GUI.Button(greenButtonRect, greenUnpressed,myStyle))
-        {
-            foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
-                if (enemy.enemyColor == EnemyColor.Green)
-                    playerStats.Attack(enemy);
-        }
-        if (GUI.Button(blueButtonRect, blueUnpressed,myStyle))
-        {
-            foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
-                if (enemy.enemyColor == EnemyColor.Blue)
-                    playerStats.Attack(enemy);
-        }
-        if (GUI.Button(redButtonRect, redUnpressed,myStyle))
-        {
-            foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
-                if (enemy.enemyColor == EnemyColor.Red)
-                    playerStats.Attack(enemy);
-        }
-        if (GUI.Button(purpleButtonRect, purpleUnpressed,myStyle))
-        {
-            foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
-                if (enemy.enemyColor == EnemyColor.Purple)
-                    playerStats.Attack(enemy);
+            //GUI.color = new Color(1, 1, 1, 1f);
+            //If green button is pressed, searches through all vulnerable enemies and attacks all that are green
+            //(i.e. all green enemies in the green bar at the time)
+            //Same logic for other colors
+            if (GUI.Button(greenButtonRect, greenUnpressed, myStyle))
+            {
+                foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
+                    if (enemy.enemyColor == EnemyColor.Green)
+                        playerStats.Attack(enemy);
+            }
+            if (GUI.Button(blueButtonRect, blueUnpressed, myStyle))
+            {
+                foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
+                    if (enemy.enemyColor == EnemyColor.Blue)
+                        playerStats.Attack(enemy);
+            }
+            if (GUI.Button(redButtonRect, redUnpressed, myStyle))
+            {
+                foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
+                    if (enemy.enemyColor == EnemyColor.Red)
+                        playerStats.Attack(enemy);
+            }
+            if (GUI.Button(purpleButtonRect, purpleUnpressed, myStyle))
+            {
+                foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
+                    if (enemy.enemyColor == EnemyColor.Purple)
+                        playerStats.Attack(enemy);
+            }
         }
         if (GUI.Button(trebleClef, "Jump"))
         {
             player.Jump();
-        }
+        } GUI.Box(notesCount, "Notes:   " + playerStats.notes +
+                                 "\nGreen:  " + playerStats.greenNotes +
+                                 "\nBlue:   " + playerStats.blueNotes +
+                                 "\nRed:    " + playerStats.redNotes +
+                                 "\nPurple: " + playerStats.purpleNotes);
     }
 }

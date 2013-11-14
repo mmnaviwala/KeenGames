@@ -50,39 +50,6 @@ public class PlayerMovementBasic : MonoBehaviour
                 this.transform.position = new Vector3(this.transform.position.x, hit.point.y, this.transform.position.z);
             }
         }
-
-        if (!hud.enabled)
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                this.Jump();
-            }
-
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                foreach (EnemyStats enemy in stats.vulnerableEnemies)
-                    if (enemy.enemyColor == EnemyColor.Green)
-                        stats.Attack(enemy);
-            }
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                foreach (EnemyStats enemy in stats.vulnerableEnemies)
-                    if (enemy.enemyColor == EnemyColor.Blue)
-                        stats.Attack(enemy);
-            }
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                foreach (EnemyStats enemy in stats.vulnerableEnemies)
-                    if (enemy.enemyColor == EnemyColor.Red)
-                        stats.Attack(enemy);
-            }
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                foreach (EnemyStats enemy in stats.vulnerableEnemies)
-                    if (enemy.enemyColor == EnemyColor.Purple)
-                        stats.Attack(enemy);
-            }
-        }
 	}
 
     void OnTriggerEnter(Collider other)

@@ -2,13 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 
+//                                      Y        Y           X         X          Z          Z
+public enum FaceRestriction { None = 0, Top = 1, Bottom = 2, Left = 3, Right = 4, Front = 5, Back = 6 };
+
 public class DepthChanging : MonoBehaviour
 {
     public float z_depth = 0f;
     public float speed = 5f;
     public int destroyAfterTriggers = -1;
-    //                                      Y        Y           X         X          Z          Z
-    public enum FaceRestriction { None = 0, Top = 1, Bottom = 2, Left = 3, Right = 4, Front = 5, Back = 6 };
     public FaceRestriction faceRestriction = FaceRestriction.None;
     public bool onEnter = true, onLeave = false, playerOnly = false;
 
@@ -52,11 +53,11 @@ public class DepthChanging : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (playerOnly)
-            if (other.tag != Tags.PLAYER)
-                return;
         if (onEnter)
         {
+            if (playerOnly && other.tag != Tags.PLAYER)
+                return;
+
             if (faceRestriction != FaceRestriction.None)
             {
                 if (faceRestriction == FaceRestriction.Bottom)
@@ -90,11 +91,40 @@ public class DepthChanging : MonoBehaviour
     }
     void OnCollisionEnter(Collision col)
     {
-        if (playerOnly)
-            if (col.collider.tag != Tags.PLAYER)
-                return;
         if (onEnter)
         {
+            if (playerOnly && col.collider.tag != Tags.PLAYER)
+                return;
+
+            switch (faceRestriction)
+            {
+                case FaceRestriction.None: return;
+                case FaceRestriction.Bottom:
+                    if (col.contacts[0].normal.y < .9f)
+                        return; 
+                    break;
+                case FaceRestriction.Top:
+                    if (col.contacts[0].normal.y > -.9f)
+                        return;
+                    break;
+                case FaceRestriction.Left:
+                    if (col.contacts[0].normal.x < .9f)
+                        return;
+                    break;
+                case FaceRestriction.Right:
+                    if (col.contacts[0].normal.x > -.9f)
+                        return; 
+                    break;
+                case FaceRestriction.Front: 
+                    if (col.contacts[0].normal.z < .9f)
+                        return;
+                    break;
+                case FaceRestriction.Back: 
+                    if (col.contacts[0].normal.z > -.9f)
+                        return;
+                    break;
+            }
+
             if (col.collider.rigidbody != null && col.collider.rigidbody.useGravity)
                 affectedCharacters.AddFirst(col.collider.gameObject);
 
@@ -105,11 +135,12 @@ public class DepthChanging : MonoBehaviour
     }
     void OnTriggerLeave(Collider other)
     {
-        if (playerOnly)
-            if (other.tag != Tags.PLAYER)
-                return;
+
         if (onLeave)
         {
+            if (playerOnly && other.tag != Tags.PLAYER)
+                return;
+
             if (faceRestriction != FaceRestriction.None)
             {
                 if (faceRestriction == FaceRestriction.Bottom)
@@ -133,6 +164,7 @@ public class DepthChanging : MonoBehaviour
                     //  return;
                 }
             }
+
             if (other.rigidbody != null && other.rigidbody.useGravity)
                 affectedCharacters.AddFirst(other.gameObject);
 
@@ -144,11 +176,11 @@ public class DepthChanging : MonoBehaviour
     }
     void OnCollisionLeave(Collision col)
     {
-        if (playerOnly)
-            if (col.collider.tag != Tags.PLAYER)
-                return;
         if (onLeave)
         {
+            if (playerOnly && col.collider.tag != Tags.PLAYER)
+                return;
+
             if (col.collider.rigidbody != null && col.collider.rigidbody.useGravity)
                 affectedCharacters.AddFirst(col.collider.gameObject);
 

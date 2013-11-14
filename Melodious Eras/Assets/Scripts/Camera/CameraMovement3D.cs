@@ -21,7 +21,6 @@ public class CameraMovement3D : CameraMovement
         if (target == null)
             SmoothLook();
         else
-
             transform.LookAt(target.position, Vector3.up);
 
         this.transform.position = Vector3.Lerp( this.transform.position, //third-person camera over-the-shoulder offset
