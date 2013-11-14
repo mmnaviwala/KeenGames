@@ -20,6 +20,7 @@ public class PlayerMovementBasic : MonoBehaviour
     private Renderer[] meshRenderers;
     private float gravity;
     private Animator anim;
+    private HUD hud;
 	
 	// Use this for initialization
 	void Start () 
@@ -29,6 +30,7 @@ public class PlayerMovementBasic : MonoBehaviour
         gravity = Mathf.Abs(Physics.gravity.y);
         meshRenderers = this.transform.GetComponentsInChildren<Renderer>();
         anim = this.GetComponent<Animator>();
+        hud = this.GetComponent<HUD>();
         anim.SetFloat("Speed", 7.0f);
         anim.SetBool("IsShooting", isShooting);
 	}
@@ -46,6 +48,39 @@ public class PlayerMovementBasic : MonoBehaviour
             if (hit.point != Vector3.zero)
             {
                 this.transform.position = new Vector3(this.transform.position.x, hit.point.y, this.transform.position.z);
+            }
+        }
+
+        if (!hud.enabled)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                this.Jump();
+            }
+
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                foreach (EnemyStats enemy in stats.vulnerableEnemies)
+                    if (enemy.enemyColor == EnemyColor.Green)
+                        stats.Attack(enemy);
+            }
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                foreach (EnemyStats enemy in stats.vulnerableEnemies)
+                    if (enemy.enemyColor == EnemyColor.Blue)
+                        stats.Attack(enemy);
+            }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                foreach (EnemyStats enemy in stats.vulnerableEnemies)
+                    if (enemy.enemyColor == EnemyColor.Red)
+                        stats.Attack(enemy);
+            }
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                foreach (EnemyStats enemy in stats.vulnerableEnemies)
+                    if (enemy.enemyColor == EnemyColor.Purple)
+                        stats.Attack(enemy);
             }
         }
 	}
@@ -128,5 +163,12 @@ public class PlayerMovementBasic : MonoBehaviour
     public bool IsGrounded()
     {
         return Physics.Raycast(this.transform.position, Vector3.down, 0.25f);
+    }
+
+    public void Stop(bool stopShooting)
+    {
+        this.speed = 0;
+        this.anim.SetFloat("Speed", 0);
+        this.anim.SetBool("IsShooting", !stopShooting);
     }
 }
