@@ -8,6 +8,7 @@ public class HashIDs : MonoBehaviour {
 
     void Awake()
     {
+
         /*dyingState = Animator.StringToHash("Base Layer.Dying");
         deadBool = Animator.StringToHash("Dead");
         locomotionState = Animator.StringToHash("Base Layer.Locomotion");

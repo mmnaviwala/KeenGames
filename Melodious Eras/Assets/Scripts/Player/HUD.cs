@@ -57,30 +57,30 @@ public class HUD : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("Jump"))
         {
             player.Jump();
         }
 
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
             foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
                 if (enemy.enemyColor == EnemyColor.Green)
                     playerStats.Attack(enemy);
         }
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.X))
         {
             foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
                 if (enemy.enemyColor == EnemyColor.Blue)
                     playerStats.Attack(enemy);
         }
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.C))
         {
             foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
                 if (enemy.enemyColor == EnemyColor.Red)
                     playerStats.Attack(enemy);
         }
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.V))
         {
             foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
                 if (enemy.enemyColor == EnemyColor.Purple)

@@ -8,7 +8,7 @@ public class CameraMovement3D : CameraMovement
     public static Vector3 defaultOffset = new Vector3(-0.5f, 1.5f, -1f);
 
     Transform player;
-    private Transform target = null;
+    public Transform target = null;
 	// Use this for initialization
 	void Start () 
     {

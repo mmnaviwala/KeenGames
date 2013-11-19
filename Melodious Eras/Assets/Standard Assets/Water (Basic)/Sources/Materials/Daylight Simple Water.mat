@@ -9,6 +9,7 @@ Material:
   m_Name: Daylight Simple Water
   m_Shader: {fileID: 4800000, guid: 9dccc8e8f0da4494991c26ef59019551, type: 3}
   m_ShaderKeywords: []
+  m_CustomRenderQueue: -1
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
@@ -71,12 +72,12 @@ Material:
     m_Floats:
       data:
         first:
-          name: _WaveScale
-        second: .0702830181
-      data:
-        first:
           name: _Shininess
         second: 1
+      data:
+        first:
+          name: _WaveScale
+        second: .0199999996
       data:
         first:
           name: _Highlight
@@ -104,7 +105,19 @@ Material:
     m_Colors:
       data:
         first:
+          name: _Color
+        second: {r: 0, g: 0, b: 0, a: 1}
+      data:
+        first:
           name: _MainTex_ST
+        second: {r: 1, g: 1, b: 0, a: 0}
+      data:
+        first:
+          name: _SpecColor
+        second: {r: 0, g: 0, b: 0, a: .400000006}
+      data:
+        first:
+          name: _BumpMap_ST
         second: {r: 1, g: 1, b: 0, a: 0}
       data:
         first:
@@ -120,20 +133,8 @@ Material:
         second: {r: 1, g: 1, b: 0, a: 0}
       data:
         first:
-          name: _BumpMap_ST
-        second: {r: 1, g: 1, b: 0, a: 0}
-      data:
-        first:
           name: WaveSpeed
         second: {r: 9, g: 4.5, b: -8, a: -3.5}
-      data:
-        first:
-          name: _Color
-        second: {r: 0, g: 0, b: 0, a: 1}
-      data:
-        first:
-          name: _SpecColor
-        second: {r: 0, g: 0, b: 0, a: .400000006}
       data:
         first:
           name: BumpParm

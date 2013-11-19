@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Runtime.CompilerServices;
 
+public enum FacingDirection2D { Left, Right };
 public class PlayerMovementBasic : MonoBehaviour 
 {
     enum CharacterState {   Idle = 0,
@@ -11,35 +12,105 @@ public class PlayerMovementBasic : MonoBehaviour
                             Jumping = 4 }
     public float jumpForce = 20f;
     public float speed = 7f;
+    private bool moving = false;
     public bool jumping = false;
     public float snapDownThreshold = .25f;
-    public bool isShooting = true;
+    public bool isShooting = false;
+    public bool autoRun = true;
+    public FacingDirection2D facingDirection2D = FacingDirection2D.Right;
+    public Vector3 runDirection = Vector3.right;
+
 
     private Camera mainCam;
+    private CameraMovement2D cam2d;
+    private CameraMovement3D cam3d;
     private CharacterStats stats;
+    private HUD hud;
     private Renderer[] meshRenderers;
     private float gravity;
     private Animator anim;
-    private HUD hud;
 	
 	// Use this for initialization
-	void Start () 
+	void Start ()
     {
-        stats = this.GetComponent<CharacterStats>();
         mainCam = Camera.main;
-        gravity = Mathf.Abs(Physics.gravity.y);
-        meshRenderers = this.transform.GetComponentsInChildren<Renderer>();
+
+        stats = this.GetComponent<CharacterStats>();
+        cam2d = mainCam.GetComponent<CameraMovement2D>();
+        cam3d = mainCam.GetComponent<CameraMovement3D>();
         anim = this.GetComponent<Animator>();
         hud = this.GetComponent<HUD>();
+        meshRenderers = this.transform.GetComponentsInChildren<Renderer>();
+
+        gravity = Mathf.Abs(Physics.gravity.y);
         anim.SetFloat("Speed", 7.0f);
         anim.SetBool("IsShooting", isShooting);
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void Update ()
     {
-        this.transform.position = new Vector3(transform.position.x + (speed * Time.deltaTime), transform.position.y, transform.position.z);
-
+        if (!autoRun)
+        {
+            //All movement inputs in here are temporary
+            moving = false;
+            if (cam2d.enabled)
+            {
+                if (Input.GetKey(KeyCode.D))
+                {
+                    this.transform.position += Vector3.right * speed * Time.deltaTime;
+                    if (facingDirection2D != FacingDirection2D.Right)
+                        this.transform.Rotate(Vector3.up, 180f);
+                    //this.transform.position = new Vector3(transform.position.x + (speed * Time.deltaTime), transform.position.y, transform.position.z);
+                    facingDirection2D = FacingDirection2D.Right;
+                    this.anim.SetFloat("Speed", 7);
+                    moving = true;
+                }
+                else if (Input.GetKey(KeyCode.A))
+                {
+                    this.transform.position -= Vector3.right * speed * Time.deltaTime;
+                    if (facingDirection2D != FacingDirection2D.Left)
+                        this.transform.Rotate(Vector3.up, 180f);
+                    //this.transform.position = new Vector3(transform.position.x - (speed * Time.deltaTime), transform.position.y, transform.position.z);
+                    facingDirection2D = FacingDirection2D.Left;
+                    this.anim.SetFloat("Speed", 7);
+                    moving = true;
+                }
+            }
+            else if (cam3d.enabled)
+            {
+                if (Input.GetKey(KeyCode.W))
+                {
+                    this.transform.position += this.transform.forward * speed * Time.deltaTime;
+                    this.anim.SetFloat("Speed", 7);
+                    moving = true;
+                }
+                if (Input.GetKey(KeyCode.S))
+                {
+                    this.transform.position -= this.transform.forward * speed * Time.deltaTime;
+                    this.anim.SetFloat("Speed", 7);
+                    moving = true;
+                }
+                if (Input.GetKey(KeyCode.A))
+                {
+                    this.transform.position -= this.transform.right * speed * Time.deltaTime;
+                    this.anim.SetFloat("Speed", 7);
+                    moving = true;
+                }
+                if (Input.GetKey(KeyCode.D))
+                {
+                    this.transform.position += this.transform.right * speed * Time.deltaTime;
+                    this.anim.SetFloat("Speed", 7);
+                    moving = true;
+                }
+            }
+            if (!moving)
+                this.anim.SetFloat("Speed", 0);
+        }
+        else
+        {
+            this.transform.position += runDirection * speed * Time.deltaTime;
+        }
         //snapping the character down to the ground for smooth descent
         if (!jumping)
         {
@@ -51,6 +122,15 @@ public class PlayerMovementBasic : MonoBehaviour
             }
         }
 	}
+
+    void FixedUpdate()
+    {
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
+        bool sneaking = Input.GetButton("Sneak");
+
+        MovementManagement(h, v, sneaking);
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -137,5 +217,10 @@ public class PlayerMovementBasic : MonoBehaviour
         this.speed = 0;
         this.anim.SetFloat("Speed", 0);
         this.anim.SetBool("IsShooting", !stopShooting);
+    }
+
+    void MovementManagement(float horizontal, float vertical, bool isSneaking)
+    {
+ 
     }
 }
