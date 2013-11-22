@@ -137,7 +137,9 @@ public class HUD : MonoBehaviour
         if (GUI.Button(trebleClef, "Jump"))
         {
             player.Jump();
-        } GUI.Box(notesCount, "Notes:   " + playerStats.notes +
+        } 
+        
+        GUI.Box(notesCount, "Notes:   " + playerStats.notes +
                                  "\nGreen:  " + playerStats.greenNotes +
                                  "\nBlue:   " + playerStats.blueNotes +
                                  "\nRed:    " + playerStats.redNotes +

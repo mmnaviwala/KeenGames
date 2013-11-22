@@ -12,14 +12,16 @@ public class titleMenu3D : MonoBehaviour
 	void Start () 
     {
         selections = new GameObject[8];
-
         int counter = 0;
         for (int angle = 0; angle < 360; angle += 45)
         {
             selections[counter] = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            selections[counter].transform.parent = this.transform;
+            selections[counter].AddComponent<TitleMenuDisk>();
+            selections[counter].GetComponent<TitleMenuDisk>().fragmentNum = counter;
             selections[counter].transform.position = new Vector3(radius * Mathf.Sin(angle * Mathf.Deg2Rad),
-                                      -10 + radius * Mathf.Cos(angle * Mathf.Deg2Rad),
-                                      -1);
+                                      this.transform.position.y + radius * Mathf.Cos(angle * Mathf.Deg2Rad),
+                                      this.transform.position.z);
 
             selections[counter].transform.localScale = new Vector3(2, 1, .1f);
             selections[counter].renderer.material.color = new Color((angle + 45) / 360f, (angle + 45) / 360f, (angle + 45) / 360f);
@@ -32,27 +34,18 @@ public class titleMenu3D : MonoBehaviour
     // Update is called once per frame
     void Update() 
     {
-        if (centerPosY < -.25f)
+        if (this.transform.position.y < -.25f)
         {
-            centerPosY += 3 * Time.deltaTime;
-
-            for (int i = 0; i < 8; i++)
-                selections[i].transform.position += new Vector3(0, 3 * Time.deltaTime, 0);
+            this.transform.position += new Vector3(0, 5 * Time.deltaTime, 0);
         }
-        else if (centerPosY != 0)
+        else if (this.transform.position.y != 0)
         {
-            centerPosY = 0;
-            for(int angle = 0; angle < 360; angle+= 45)
-                selections[angle / 45].transform.position = new Vector3(radius * Mathf.Sin(angle * Mathf.Deg2Rad),
-                                      radius * Mathf.Cos(angle * Mathf.Deg2Rad),
-                                      -1);
+            this.transform.position = new Vector3(0, 0, -1);
         }
-        if (Input.GetButtonDown("Fire1")) //mouse click
-        {
-            Debug.Log(Input.mousePosition);
-        }
-       
+        this.transform.Rotate(Vector3.right, (Mathf.PerlinNoise(Time.time / 10, 0.0f) - .5f) * .25f);
+        this.transform.Rotate(Vector3.forward, (Mathf.PerlinNoise(Time.time / 10, 0.0f) - .5f) * .25f);
 	}
+
 
     void OnMouseDown()
     {
