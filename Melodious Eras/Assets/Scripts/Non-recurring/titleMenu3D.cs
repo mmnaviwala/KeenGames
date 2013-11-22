@@ -43,7 +43,7 @@ public class titleMenu3D : MonoBehaviour
             this.transform.position = new Vector3(0, 0, -1);
         }
         this.transform.Rotate(Vector3.right, (Mathf.PerlinNoise(Time.time / 10, 0.0f) - .5f) * .25f);
-        this.transform.Rotate(Vector3.forward, (Mathf.PerlinNoise(Time.time / 10, 0.0f) - .5f) * .25f);
+        this.transform.Rotate(Vector3.forward, (Mathf.PerlinNoise(Time.time / 10, 0.0f) - .5f) * .5f);
 	}
 
 
