@@ -23,10 +23,15 @@ public class titleMenu3D : MonoBehaviour
 
             selections[counter].AddComponent<TitleMenuDisk>();
             selections[counter].GetComponent<TitleMenuDisk>().fragmentNum = counter;
-            selections[counter].transform.position = new Vector3(this.transform.position.x + radius * Mathf.Sin(angle * Mathf.Deg2Rad),
-                                                                 this.transform.position.y + radius * Mathf.Cos(angle * Mathf.Deg2Rad),
-                                                                 this.transform.position.z);
-
+            //selections[counter].transform.position = new Vector3(this.transform.position.x + radius * Mathf.Sin(angle * Mathf.Deg2Rad),
+            //                                                     this.transform.position.y + radius * Mathf.Cos(angle * Mathf.Deg2Rad),
+            //                                                     this.transform.position.z);
+            selections[counter].GetComponent<TitleMenuDisk>().offset = new Vector3(radius * Mathf.Sin(angle * Mathf.Deg2Rad),
+                                                                         radius * Mathf.Cos(angle * Mathf.Deg2Rad),
+                                                                         0);
+            //selections[counter].transform.localPosition = new Vector3(radius * Mathf.Sin(angle * Mathf.Deg2Rad),
+            //                                                             radius * Mathf.Cos(angle * Mathf.Deg2Rad),
+            //                                                             0);
             selections[counter].transform.localScale = new Vector3(2, 1, .1f);
             selections[counter].renderer.material.color = new Color((angle + 45) / 360f, (angle + 45) / 360f, (angle + 45) / 360f);
             selections[counter].name = "Cube" + (angle / 45);
