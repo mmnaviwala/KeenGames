@@ -46,7 +46,7 @@ public class HUD : MonoBehaviour
 
 
         trebleClef = new Rect(xx * 3f, yy * 8f, xx * 4f, yy * 2f);
-        notesCount = new Rect(0, 0, xx, yy * 2);
+        notesCount = new Rect(0, 0, xx, yy * 3);
 
         barCache = new float[] {xx * 3f + xx / 8f,//green bar center
                                 xx * 4.25f + xx / 8f, //blue bar center
@@ -143,6 +143,7 @@ public class HUD : MonoBehaviour
                                  "\nGreen:  " + playerStats.greenNotes +
                                  "\nBlue:   " + playerStats.blueNotes +
                                  "\nRed:    " + playerStats.redNotes +
-                                 "\nPurple: " + playerStats.purpleNotes);
+                                 "\nPurple: " + playerStats.purpleNotes +
+                                 "\n FPS:   " + 1/Time.smoothDeltaTime);
     }
 }

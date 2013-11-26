@@ -17,9 +17,9 @@ public class CircuitAlarm : CircuitNode
 	
 	}
 
-    public override bool PerformAction(bool correctCode)
+    public override bool PerformSwitchAction(bool signal)
     {
-        if (hasPower && !correctCode)
+        if (hasPower && !signal)
         {
             numTries++;
             Debug.Log(this.transform.GetChild(0).name);
@@ -27,7 +27,6 @@ public class CircuitAlarm : CircuitNode
             if (numTries == alarmCounter)
             {
                 this.light.enabled = true;
-                //((Behaviour)(this.GetComponent("Halo"))).enabled = true;
             }
         }
         return false;

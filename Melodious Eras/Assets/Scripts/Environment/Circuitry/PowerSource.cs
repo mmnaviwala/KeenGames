@@ -3,15 +3,11 @@ using System.Collections;
 
 public class PowerSource : CircuitNode 
 {
-    
-	// Use this for initialization
-	void Start () 
+    void Awake()
     {
-        if (activated)
-        {
-            electricGrid.hasPower = true;
-        }
-	}
+        //if (activated)
+        //    electricGrid.hasPower = true;
+    }
 	
 	// Update is called once per frame
 	void Update () 

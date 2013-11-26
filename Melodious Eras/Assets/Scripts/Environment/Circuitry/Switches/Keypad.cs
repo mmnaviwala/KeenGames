@@ -22,7 +22,6 @@ public class Keypad : CircuitSwitch
                       CLEAR_NUM = 11;
     private const string NO_POWER = "NO POWER";
 
-    public List<CircuitNode> connectedNodes;
 
 	// Use this for initialization
 
@@ -161,7 +160,7 @@ public class Keypad : CircuitSwitch
                 foreach (CircuitNode connected in connectedNodes)
                 {
                     if (connected != null)
-                        connected.PerformAction(enteredCode == correctCode);
+                        connected.PerformSwitchAction(enteredCode == correctCode);
                 }
                 if (enteredCode == correctCode)
                 {

@@ -3,15 +3,25 @@ using System.Collections;
 
 public class FlipSwitch : CircuitSwitch 
 {
+    
 	// Use this for initialization
 	void Start () 
     {
 	
 	}
-	
-	// Update is called once per frame
-	void Update () 
+
+    void OnTriggerStay(Collider other)
     {
-	
-	}
+        if (other.tag == Tags.PLAYER)
+        {
+            if (Input.GetButtonDown("Use"))
+            {
+                onOffStatus = !onOffStatus;
+                foreach (CircuitNode node in connectedNodes)
+                {
+                    node.PerformSwitchAction(onOffStatus);
+                }
+            }
+        }
+    }
 }

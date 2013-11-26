@@ -23,9 +23,16 @@ public class CircuitLight : CircuitNode
     {
         while (this.hasPower)
         {
-            this.light.enabled = !this.light.enabled;
+            this.light.enabled = false;
+            yield return new WaitForSeconds(.1f);
+            this.light.enabled = true;
             yield return new WaitForSeconds(Random.Range(0f, frequency));
         }
+    }
+    public override bool PerformSwitchAction(bool signal)
+    {
+        this.TurnOnOff(signal);
+        return false;
     }
 
     public override void TurnOnOff(bool power)

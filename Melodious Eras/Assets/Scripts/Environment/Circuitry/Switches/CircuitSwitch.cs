@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class CircuitSwitch : CircuitNode 
 {
-    public bool switchedOn = false;
+    public bool onOffStatus = false;
+    public List<CircuitNode> connectedNodes;
 	// Use this for initialization
 	void Start () 
     {

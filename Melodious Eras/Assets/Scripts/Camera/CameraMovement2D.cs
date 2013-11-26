@@ -21,7 +21,7 @@ public class CameraMovement2D : CameraMovement
 	}
 	
 	// Update is called once per frame
-	void Update ()
+	void LateUpdate ()
     {
         //Debug.Log(this.transform.rotation);
         if ((offset.x > 0) != (playerMovement.facingDirection2D == FacingDirection2D.Right))

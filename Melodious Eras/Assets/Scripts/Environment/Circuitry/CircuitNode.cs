@@ -19,7 +19,7 @@ public class CircuitNode : MonoBehaviour
     {
 	}
 
-    public virtual bool PerformAction(bool correctCode)
+    public virtual bool PerformSwitchAction(bool signal)
     {
         return false;
     }

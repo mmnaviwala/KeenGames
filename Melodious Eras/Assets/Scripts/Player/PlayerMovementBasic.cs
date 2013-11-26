@@ -17,6 +17,7 @@ public class PlayerMovementBasic : MonoBehaviour
     public float snapDownThreshold = .25f;
     public bool isShooting = false;
     public bool autoRun = true;
+    public bool useDefaultMovement = true;
     public FacingDirection2D facingDirection2D = FacingDirection2D.Right;
     public Vector3 runDirection = Vector3.right;
 
@@ -52,6 +53,7 @@ public class PlayerMovementBasic : MonoBehaviour
     {
         if (!autoRun)
         {
+            speed = 0;
             //All movement inputs in here are temporary
             moving = false;
             if (cam2d.enabled)
@@ -61,7 +63,6 @@ public class PlayerMovementBasic : MonoBehaviour
                     this.transform.position += Vector3.right * speed * Time.deltaTime;
                     if (facingDirection2D != FacingDirection2D.Right)
                         this.transform.Rotate(Vector3.up, 180f);
-                    //this.transform.position = new Vector3(transform.position.x + (speed * Time.deltaTime), transform.position.y, transform.position.z);
                     facingDirection2D = FacingDirection2D.Right;
                     this.anim.SetFloat("Speed", 7);
                     moving = true;
@@ -71,37 +72,49 @@ public class PlayerMovementBasic : MonoBehaviour
                     this.transform.position -= Vector3.right * speed * Time.deltaTime;
                     if (facingDirection2D != FacingDirection2D.Left)
                         this.transform.Rotate(Vector3.up, 180f);
-                    //this.transform.position = new Vector3(transform.position.x - (speed * Time.deltaTime), transform.position.y, transform.position.z);
                     facingDirection2D = FacingDirection2D.Left;
                     this.anim.SetFloat("Speed", 7);
                     moving = true;
                 }
             }
-            else if (cam3d.enabled)
+            else if (useDefaultMovement && cam3d.enabled)
             {
+                Vector2 direction = new Vector2();
                 if (Input.GetKey(KeyCode.W))
                 {
-                    this.transform.position += this.transform.forward * speed * Time.deltaTime;
-                    this.anim.SetFloat("Speed", 7);
+                    speed = Input.GetButton("Sneak") ? 2 : 7;
+                    this.transform.position += mainCam.transform.forward * speed * Time.deltaTime;
+                    direction += new Vector2(0, 1);
                     moving = true;
                 }
                 if (Input.GetKey(KeyCode.S))
                 {
-                    this.transform.position -= this.transform.forward * speed * Time.deltaTime;
-                    this.anim.SetFloat("Speed", 7);
+                    speed = Input.GetButton("Sneak") ? 2 : 7;
+                    this.transform.position -= mainCam.transform.forward * speed * Time.deltaTime;
+                    direction -= new Vector2(0, 1);
                     moving = true;
                 }
                 if (Input.GetKey(KeyCode.A))
                 {
-                    this.transform.position -= this.transform.right * speed * Time.deltaTime;
-                    this.anim.SetFloat("Speed", 7);
+                    speed = Input.GetButton("Sneak") ? 2 : 7;
+                    this.transform.position -= mainCam.transform.right * speed * Time.deltaTime;
+                    direction -= new Vector2(1, 0);
                     moving = true;
                 }
                 if (Input.GetKey(KeyCode.D))
                 {
-                    this.transform.position += this.transform.right * speed * Time.deltaTime;
-                    this.anim.SetFloat("Speed", 7);
+                    speed = Input.GetButton("Sneak") ? 2 : 7;
+                    this.transform.position += mainCam.transform.right * speed * Time.deltaTime;
+                    direction += new Vector2(1, 0);
                     moving = true;
+                }
+                if (moving)
+                {
+                    this.anim.SetFloat("Speed", speed);
+                    float angle = Vector2.Angle(Vector2.up, direction);
+                    if (direction.x < 0)
+                        angle = -angle;
+                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, mainCam.transform.eulerAngles.y + angle, this.transform.eulerAngles.z);
                 }
             }
             if (!moving)
@@ -109,10 +122,10 @@ public class PlayerMovementBasic : MonoBehaviour
         }
         else
         {
-            this.transform.position += runDirection * speed * Time.deltaTime;
+            this.transform.position += runDirection * speed * Time.deltaTime; //autorun
         }
         //snapping the character down to the ground for smooth descent
-        if (!jumping)
+        if (!jumping && useDefaultMovement)
         {
             RaycastHit hit;
             Physics.Raycast(this.transform.position, Vector3.down, out hit, snapDownThreshold);
@@ -147,7 +160,16 @@ public class PlayerMovementBasic : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         if (collision.contacts[0].normal.y > .7f)
+        {
             jumping = false;
+            float impactVelocity = Vector3.Magnitude(collision.relativeVelocity);
+            if ( impactVelocity> 30)
+            {
+                Debug.Log("Collision impact high (relative velocity = " + impactVelocity + " > 30; Player taking damage.");
+                //Take damage
+                //emit noise
+            }
+        }
 
         anim.SetBool("IsGrinding", collision.collider.tag == Tags.SLIDE);
     }

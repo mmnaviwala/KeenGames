@@ -18,13 +18,13 @@ public class CircuitMove : CircuitNode
     {
         if (hasPower && activated)
         {
-            activated = PerformAction(true);
+            activated = PerformSwitchAction(true);
         }
 	}
 
-    public override bool PerformAction(bool correctCode)
+    public override bool PerformSwitchAction(bool signal)
     {
-        activated = correctCode;
+        activated = signal;
         if (Vector3.Distance(this.transform.position, targetPos) > .5f)
         {
             //this.transform.position = Vector3.Lerp(this.transform.position, targetPos, movementSpeed * Time.deltaTime);
