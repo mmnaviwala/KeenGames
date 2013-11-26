@@ -60,6 +60,7 @@ public class PlayerMovementBasic : MonoBehaviour
             {
                 if (Input.GetKey(KeyCode.D))
                 {
+                    speed = 7;
                     this.transform.position += Vector3.right * speed * Time.deltaTime;
                     if (facingDirection2D != FacingDirection2D.Right)
                         this.transform.Rotate(Vector3.up, 180f);
@@ -69,11 +70,26 @@ public class PlayerMovementBasic : MonoBehaviour
                 }
                 else if (Input.GetKey(KeyCode.A))
                 {
+                    speed = 7;
                     this.transform.position -= Vector3.right * speed * Time.deltaTime;
                     if (facingDirection2D != FacingDirection2D.Left)
                         this.transform.Rotate(Vector3.up, 180f);
                     facingDirection2D = FacingDirection2D.Left;
                     this.anim.SetFloat("Speed", 7);
+                    moving = true;
+                }
+                if (Input.GetKey(KeyCode.W))
+                {
+                    speed = 7;
+                    this.transform.position += Vector3.forward * speed * Time.deltaTime;
+                    this.anim.SetFloat("Speed", speed);
+                    moving = true;
+                }
+                if (Input.GetKey(KeyCode.S))
+                {
+                    speed = 7;
+                    this.transform.position -= Vector3.forward * speed * Time.deltaTime;
+                    this.anim.SetFloat("Speed", speed);
                     moving = true;
                 }
             }
@@ -83,28 +99,36 @@ public class PlayerMovementBasic : MonoBehaviour
                 if (Input.GetKey(KeyCode.W))
                 {
                     speed = Input.GetButton("Sneak") ? 2 : 7;
-                    this.transform.position += mainCam.transform.forward * speed * Time.deltaTime;
+                    //this.transform.position += mainCam.transform.forward * speed * Time.deltaTime;
+                    this.rigidbody.velocity = mainCam.transform.forward * speed;
+                    Debug.Log(mainCam.transform.forward);
                     direction += new Vector2(0, 1);
                     moving = true;
                 }
                 if (Input.GetKey(KeyCode.S))
                 {
                     speed = Input.GetButton("Sneak") ? 2 : 7;
-                    this.transform.position -= mainCam.transform.forward * speed * Time.deltaTime;
+                    //this.transform.position -= mainCam.transform.forward * speed * Time.deltaTime;
+                    this.rigidbody.velocity = -mainCam.transform.forward * speed;
+                    Debug.Log(mainCam.transform.forward);
                     direction -= new Vector2(0, 1);
                     moving = true;
                 }
                 if (Input.GetKey(KeyCode.A))
                 {
                     speed = Input.GetButton("Sneak") ? 2 : 7;
-                    this.transform.position -= mainCam.transform.right * speed * Time.deltaTime;
+                    //this.transform.position -= mainCam.transform.right * speed * Time.deltaTime;
+                    this.rigidbody.velocity = -mainCam.transform.right * speed;
+                    Debug.Log(mainCam.transform.forward);
                     direction -= new Vector2(1, 0);
                     moving = true;
                 }
                 if (Input.GetKey(KeyCode.D))
                 {
                     speed = Input.GetButton("Sneak") ? 2 : 7;
-                    this.transform.position += mainCam.transform.right * speed * Time.deltaTime;
+                    //this.transform.position += mainCam.transform.right * speed * Time.deltaTime;
+                    this.rigidbody.velocity = mainCam.transform.right * speed;
+                    Debug.Log(mainCam.transform.forward);
                     direction += new Vector2(1, 0);
                     moving = true;
                 }

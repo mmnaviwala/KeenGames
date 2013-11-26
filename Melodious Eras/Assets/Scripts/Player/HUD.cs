@@ -143,7 +143,6 @@ public class HUD : MonoBehaviour
                                  "\nGreen:  " + playerStats.greenNotes +
                                  "\nBlue:   " + playerStats.blueNotes +
                                  "\nRed:    " + playerStats.redNotes +
-                                 "\nPurple: " + playerStats.purpleNotes +
-                                 "\n FPS:   " + 1/Time.smoothDeltaTime);
+                                 "\nPurple: " + playerStats.purpleNotes);
     }
 }

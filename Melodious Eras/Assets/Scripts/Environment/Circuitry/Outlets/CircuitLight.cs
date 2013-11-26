@@ -28,6 +28,7 @@ public class CircuitLight : CircuitNode
             this.light.enabled = true;
             yield return new WaitForSeconds(Random.Range(0f, frequency));
         }
+        this.light.enabled = false; //light needs to turn off once power is lost
     }
     public override bool PerformSwitchAction(bool signal)
     {
