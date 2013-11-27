@@ -17,7 +17,6 @@ public class CameraMovement3D : CameraMovement
     {
         player = GameObject.FindGameObjectWithTag(Tags.PLAYER).transform;
         this.transform.position = player.transform.position + defaultOffset;
-        //targetPos = player.position.
 	}
 	
 	// Update is called once per frame
@@ -39,12 +38,31 @@ public class CameraMovement3D : CameraMovement
         }
 
         float intensityY = Input.GetAxis("Mouse Y") * inversion;
-        if ((intensityY > 0 && this.transform.eulerAngles.x < 30) || intensityY < 0 && this.transform.eulerAngles.x > 330)
+        if (intensityY != 0)
+        {
+            if (this.transform.eulerAngles.x < 30 || this.transform.eulerAngles.x > 330/*(intensityY > 0 && this.transform.eulerAngles.x < 30) || intensityY < 0 && this.transform.eulerAngles.x > 330*/)
+            {
+                this.transform.RotateAround(player.position + new Vector3(0, offsetY, 0), this.transform.right, -intensityY * sensitivity);
+            }
+            else if (this.transform.eulerAngles.x > 30 && intensityY > 0)
+            {
+                this.transform.RotateAround(player.position + new Vector3(0, offsetY, 0), this.transform.right, -intensityY * sensitivity);
+            }
+            else if (this.transform.eulerAngles.x < 330 && intensityY < 0)
+            {
+                this.transform.RotateAround(player.position + new Vector3(0, offsetY, 0), this.transform.right, -intensityY * sensitivity);
+            }
+            /*if (this.transform.eulerAngles.x < 30 || this.transform.eulerAngles.x > 330)
+            {
+                this.transform.RotateAround(player.position + new Vector3(0, offsetY, 0), this.transform.right, -intensityY * sensitivity);
+            }*/
+        }
+        /*if ((intensityY > 0 && this.transform.eulerAngles.x < 30) || intensityY < 0 && this.transform.eulerAngles.x > 330)
         {
             Debug.Log("IntensityY: " + intensityY + 
                 '\n' + this.transform.forward);
             this.transform.RotateAround(player.position + new Vector3(0, offsetY, 0), this.transform.right, -intensityY * sensitivity);
-        }
+        }*/
         //this.transform.position += this.transform.right * offsetX;
         transform.LookAt(player.position + this.transform.up * offsetY + this.transform.right * offsetX, Vector3.up);
         //---------------------------------------------------

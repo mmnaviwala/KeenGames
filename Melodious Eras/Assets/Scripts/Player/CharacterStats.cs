@@ -7,6 +7,7 @@ using System.Collections.Generic;
 /// </summary>
 public class CharacterStats : MonoBehaviour
 {
+    public int health = 100;
     public int notes, greenNotes, blueNotes, redNotes, purpleNotes; //points
     public List<EnemyStats> vulnerableEnemies;
     public int threshold = 5;

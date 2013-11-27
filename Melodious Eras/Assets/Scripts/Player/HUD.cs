@@ -57,10 +57,6 @@ public class HUD : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-        if (Input.GetButtonDown("Jump"))
-        {
-            player.Jump();
-        }
 
         if (Input.GetKeyDown(KeyCode.Z))
         {

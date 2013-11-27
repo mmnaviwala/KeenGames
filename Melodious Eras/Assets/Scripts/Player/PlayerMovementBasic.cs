@@ -20,6 +20,7 @@ public class PlayerMovementBasic : MonoBehaviour
     public bool useDefaultMovement = true;
     public FacingDirection2D facingDirection2D = FacingDirection2D.Right;
     public Vector3 runDirection = Vector3.right;
+    public float sound;
 
 
     private Camera mainCam;
@@ -98,47 +99,38 @@ public class PlayerMovementBasic : MonoBehaviour
                 Vector2 direction = new Vector2();
                 if (Input.GetKey(KeyCode.W))
                 {
-                    speed = Input.GetButton("Sneak") ? 2 : 7;
-                    //this.transform.position += mainCam.transform.forward * speed * Time.deltaTime;
-                    this.rigidbody.velocity = mainCam.transform.forward * speed;
-                    Debug.Log(mainCam.transform.forward);
                     direction += new Vector2(0, 1);
                     moving = true;
                 }
                 if (Input.GetKey(KeyCode.S))
                 {
-                    speed = Input.GetButton("Sneak") ? 2 : 7;
-                    //this.transform.position -= mainCam.transform.forward * speed * Time.deltaTime;
-                    this.rigidbody.velocity = -mainCam.transform.forward * speed;
-                    Debug.Log(mainCam.transform.forward);
                     direction -= new Vector2(0, 1);
                     moving = true;
                 }
                 if (Input.GetKey(KeyCode.A))
                 {
-                    speed = Input.GetButton("Sneak") ? 2 : 7;
-                    //this.transform.position -= mainCam.transform.right * speed * Time.deltaTime;
-                    this.rigidbody.velocity = -mainCam.transform.right * speed;
-                    Debug.Log(mainCam.transform.forward);
                     direction -= new Vector2(1, 0);
                     moving = true;
                 }
                 if (Input.GetKey(KeyCode.D))
                 {
-                    speed = Input.GetButton("Sneak") ? 2 : 7;
-                    //this.transform.position += mainCam.transform.right * speed * Time.deltaTime;
-                    this.rigidbody.velocity = mainCam.transform.right * speed;
-                    Debug.Log(mainCam.transform.forward);
                     direction += new Vector2(1, 0);
                     moving = true;
                 }
                 if (moving)
                 {
+                    speed = Input.GetButton("Sneak") ? 2 : 7;
                     this.anim.SetFloat("Speed", speed);
+                    //this.animation["Locomotion"].speed = (speed > 5.667f) ? 7/5.667f : 1;
                     float angle = Vector2.Angle(Vector2.up, direction);
                     if (direction.x < 0)
                         angle = -angle;
                     this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, mainCam.transform.eulerAngles.y + angle, this.transform.eulerAngles.z);
+                    this.rigidbody.velocity = this.transform.forward * speed;
+                }
+                if (Input.GetButtonDown("Jump"))
+                {
+                    this.Jump();
                 }
             }
             if (!moving)
