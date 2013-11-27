@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class Keypad : CircuitSwitch 
 {
     private GameObject player;
-	private HUD playerHUD;
+	private HUD_Stealth playerHUD;
     private CameraMovement3D cam3d;
 
     public bool usingKeypad = false;
@@ -37,7 +37,7 @@ public class Keypad : CircuitSwitch
         enteredCode = "";
 
         player = GameObject.FindGameObjectWithTag(Tags.PLAYER);
-		playerHUD = player.GetComponent<HUD>();
+		playerHUD = player.GetComponent<HUD_Stealth>();
         cam3d = Camera.main.GetComponent<CameraMovement3D>();
         
 		keypadRect = new Rect(w - h * 2.25f, h, h * 4.5f, h * 8);
@@ -100,17 +100,18 @@ public class Keypad : CircuitSwitch
     void OnTriggerEnter(Collider other)
     {
         //Locking 3rd-person camera onto this keypad
-        if (other.tag == Tags.PLAYER && cam3d.enabled && usingKeypad)
-            cam3d.target = this.transform;
+        //if (other is CapsuleCollider && other.tag == Tags.PLAYER && cam3d.enabled && usingKeypad)
+        //    cam3d.target = this.transform;
     }
 
     void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == Tags.PLAYER)
+        if (other is CapsuleCollider && other.gameObject.tag == Tags.PLAYER)
         {
             if (Input.GetButtonDown(InputType.USE))
             {
                 usingKeypad = true;
+                playerHUD.rigidbody.velocity = new Vector3(0, playerHUD.rigidbody.velocity.y, 0);
             }
         }
     }
@@ -118,7 +119,7 @@ public class Keypad : CircuitSwitch
     //In case the player gets pushed out of range
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == Tags.PLAYER)
+        if (other is CapsuleCollider && other.gameObject.tag == Tags.PLAYER)
         {
             usingKeypad = false;
             cam3d.target = null;

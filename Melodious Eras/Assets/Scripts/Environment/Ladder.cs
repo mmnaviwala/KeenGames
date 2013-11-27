@@ -37,7 +37,7 @@ public class Ladder : MonoBehaviour
                     player.rigidbody.useGravity = true;
                 }
             }
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown(InputType.JUMP))
             {
                 climbing = false;
                 player.GetComponent<PlayerMovementBasic>().useDefaultMovement = true;
@@ -47,12 +47,12 @@ public class Ladder : MonoBehaviour
 	}
     void OnTriggerEnter(Collider other)
     {
-        if(other.tag == Tags.PLAYER)
+        if (other is CapsuleCollider && other.tag == Tags.PLAYER)
             player = other.gameObject;
     }
     void OnTriggerStay(Collider other)
     {
-        if (Input.GetButtonDown("Use") && other.name == player.name)
+        if (other is CapsuleCollider && Input.GetButtonDown(InputType.USE) && other.name == player.name)
         {
             climbing = true;
             player.GetComponent<PlayerMovementBasic>().useDefaultMovement = false;
@@ -61,15 +61,18 @@ public class Ladder : MonoBehaviour
     }
     void OnTriggerExit(Collider other)
     {
-        if (other.transform.position.y >= top - .5f)
+        if (other is CapsuleCollider)
         {
-            other.transform.position = new Vector3(other.transform.position.x, top, other.transform.position.z) + snapDirection;
-            StartCoroutine(FreezeControls());
+            if (other.transform.position.y >= top - .5f)
+            {
+                other.transform.position = new Vector3(other.transform.position.x, top, other.transform.position.z) + snapDirection;
+                StartCoroutine(FreezeControls());
+            }
+            climbing = false;
+            player.GetComponent<PlayerMovementBasic>().useDefaultMovement = true;
+            player.rigidbody.useGravity = true;
         }
 
-        climbing = false;
-        player.GetComponent<PlayerMovementBasic>().useDefaultMovement = true;
-        player.rigidbody.useGravity = true;
     }
 
     IEnumerator FreezeControls()

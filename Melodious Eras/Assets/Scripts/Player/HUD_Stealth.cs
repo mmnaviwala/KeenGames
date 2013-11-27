@@ -3,14 +3,21 @@ using System.Collections;
 
 public class HUD_Stealth : MonoBehaviour 
 {
-    CharacterStats stats;
-    private Rect healthBarMax, healthBarCurrent;
     public GUIStyle healthMaxStyle, healthCurrentStyle;
-    float maxWidth;
-    Color32 plain, health;
+
+    private Rect healthBarMax, healthBarCurrent;
+    private float maxWidth;
+    private bool aiming;
+    private Color32 plain, health;
+
+    private CharacterStats stats;
+    private Camera mainCam;
+
 	// Use this for initialization
 	void Start () {
         stats = this.GetComponent<CharacterStats>();
+        mainCam = Camera.main;
+
         maxWidth = Screen.width / 3;
         healthBarMax = new Rect(Screen.width / 20, Screen.height / 20, maxWidth, maxWidth / 8);
         healthBarCurrent = new Rect(healthBarMax.xMin, healthBarMax.yMin, healthBarMax.width, healthBarMax.height);

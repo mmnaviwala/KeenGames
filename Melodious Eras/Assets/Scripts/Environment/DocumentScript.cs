@@ -8,12 +8,12 @@ public class DocumentScript : MonoBehaviour
     public bool reading = false;
     public Keypad keypadReference;
 
-    private HUD playerHUD;
+    private HUD_Stealth playerHUD;
     private Rect documentRect;
 	// Use this for initialization
 	void Start () 
     {
-        playerHUD = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<HUD>();
+        playerHUD = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<HUD_Stealth>();
 
         if (keypadReference != null)
         {
@@ -35,11 +35,14 @@ public class DocumentScript : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        if (other.tag == Tags.PLAYER)
+        if (other is CapsuleCollider && other.tag == Tags.PLAYER)
         {
-            if (Input.GetButtonDown("Use"))
+            if (Input.GetButtonDown(InputType.USE))
+            {
                 reading = true;
-            if (Input.GetButtonDown("Start"))
+                playerHUD.rigidbody.velocity = new Vector3(0, playerHUD.rigidbody.velocity.y, 0);
+            }
+            if (Input.GetButtonDown(InputType.START))
             {
                 reading = false;
                 playerHUD.enabled = true;
@@ -48,7 +51,7 @@ public class DocumentScript : MonoBehaviour
     }
     void OnTriggerExit(Collider other)
     {
-        if (other.tag == Tags.PLAYER)
+        if (other is CapsuleCollider && other.tag == Tags.PLAYER)
         {
             reading = false;
             playerHUD.enabled = true;

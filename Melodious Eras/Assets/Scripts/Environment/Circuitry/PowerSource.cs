@@ -9,15 +9,10 @@ public class PowerSource : CircuitNode
         //    electricGrid.hasPower = true;
     }
 	
-	// Update is called once per frame
-	void Update () 
-    {
-	    
-	}
 
     void OnTriggerStay(Collider other)
     {
-        if (other.tag == Tags.PLAYER)
+        if (other is CapsuleCollider && other.tag == Tags.PLAYER)
         {
             if(Input.GetButtonDown(InputType.USE))
             {

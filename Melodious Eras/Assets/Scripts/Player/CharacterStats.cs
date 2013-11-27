@@ -40,19 +40,19 @@ public class CharacterStats : MonoBehaviour
     void Update()
     {
         //-------------------------------------------
-        if (Input.GetButton("Melee"))
+        if (Input.GetButton(InputType.MELEE))
         {
             meleeHeldDown += Time.deltaTime;
             if (meleeHeldDown > 2)
             {
                 meleeHeldDown = 0;
-                Debug.Log("Button");
+                Debug.Log("Holding Melee Button");
             }
         }
-        else if (Input.GetButtonUp("Melee"))
+        else if (Input.GetButtonUp(InputType.MELEE))
         {
             meleeHeldDown = 0;
-            Debug.Log("Button up");
+            Debug.Log("Melee Button up");
         }
         //-------------------------------------------
 
@@ -62,7 +62,7 @@ public class CharacterStats : MonoBehaviour
             EnemyStats nearestEnemy = nearbyEnemies[0]; //will actually with the smallest angle away from the player's facing direction
             
 
-            if (Input.GetButtonDown("Melee"))
+            if (Input.GetButtonDown(InputType.MELEE))
             {
                 foreach (EnemyStats enemy in nearbyEnemies)
                 {

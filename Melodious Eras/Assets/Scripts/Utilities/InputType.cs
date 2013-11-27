@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public static class InputType 
+﻿public static class InputType 
 {
     public const string
         HORIZONTAL = "Horizontal",
@@ -15,5 +12,9 @@ public static class InputType
         MOUSE_SCROLL_WHEEL = "Mouse ScrollWheel",
         SNEAK = "Sneak",
         START = "Start",
-        USE = "Use";
+        USE = "Use",
+        MELEE = "Melee",
+        SHIFT_VIEW = "Shift View",
+        TOGGLE_FLASHLIGHT = "Toggle Flashlight",
+        MENU = "Menu";
 }

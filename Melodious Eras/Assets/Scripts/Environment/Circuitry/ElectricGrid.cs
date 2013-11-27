@@ -40,7 +40,6 @@ public class ElectricGrid : MonoBehaviour
             if (node is PowerSource)
                 powerSources.Add(node as PowerSource);
         }*/
-        Debug.Log("Power Sources: " + powerSources.Count);
 
         this.enabled = false;
     }

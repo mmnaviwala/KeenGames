@@ -14,7 +14,7 @@ public class FlipSwitch : CircuitSwitch
     {
         if (other.tag == Tags.PLAYER)
         {
-            if (Input.GetButtonDown("Use"))
+            if (Input.GetButtonDown(InputType.USE))
             {
                 onOffStatus = !onOffStatus;
                 foreach (CircuitNode node in connectedNodes)

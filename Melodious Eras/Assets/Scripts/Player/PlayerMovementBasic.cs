@@ -20,8 +20,7 @@ public class PlayerMovementBasic : MonoBehaviour
 
 
     private Camera mainCam;
-    private CameraMovement2D cam2d;
-    private CameraMovement3D cam3d;
+    public Light flashlight;
     private CharacterStats stats;
     private HUD hud;
     private Renderer[] meshRenderers;
@@ -29,13 +28,14 @@ public class PlayerMovementBasic : MonoBehaviour
     private Animator anim;
 	
 	// Use this for initialization
+    void Awake()
+    {
+        flashlight = this.transform.GetChild(1).GetChild(0).GetChild(0).GetChild(2).GetChild(1).light;
+    }
 	void Start ()
     {
         mainCam = Camera.main;
-
         stats = this.GetComponent<CharacterStats>();
-        cam2d = mainCam.GetComponent<CameraMovement2D>();
-        cam3d = mainCam.GetComponent<CameraMovement3D>();
         anim = this.GetComponent<Animator>();
         hud = this.GetComponent<HUD>();
         meshRenderers = this.transform.GetComponentsInChildren<Renderer>();
@@ -48,6 +48,10 @@ public class PlayerMovementBasic : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        if (Input.GetButtonDown(InputType.TOGGLE_FLASHLIGHT))
+        {
+            ToggleFlashlight();
+        }
         moving = false;
         if (!jumping && useDefaultMovement)
         {
@@ -74,7 +78,7 @@ public class PlayerMovementBasic : MonoBehaviour
             }
             if (moving)
             {
-                speed = Input.GetButton("Sneak") ? 2 : 7;
+                speed = Input.GetButton(InputType.SNEAK) ? 2 : 7;
                 this.anim.SetFloat("Speed", speed);
                 //this.animation["Locomotion"].speed = (speed > 5.667f) ? 7/5.667f : 1;
                 float angle = Vector2.Angle(Vector2.up, direction);
@@ -83,7 +87,7 @@ public class PlayerMovementBasic : MonoBehaviour
                 this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, mainCam.transform.eulerAngles.y + angle, this.transform.eulerAngles.z);
                 this.rigidbody.velocity = this.transform.forward * speed + new Vector3(0, this.rigidbody.velocity.y, 0);
             }
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown(InputType.JUMP))
             {
                 this.Jump();
             }
@@ -104,14 +108,14 @@ public class PlayerMovementBasic : MonoBehaviour
 
     void FixedUpdate()
     {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
-        bool sneaking = Input.GetButton("Sneak");
+        float h = Input.GetAxis(InputType.HORIZONTAL);
+        float v = Input.GetAxis(InputType.VERTICAL);
+        bool sneaking = Input.GetButton(InputType.SNEAK);
 
         MovementManagement(h, v, sneaking);
     }
 
-    void OnTriggerEnter(Collider other)
+    /*void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == Tags.ENEMY)
         {
@@ -122,7 +126,7 @@ public class PlayerMovementBasic : MonoBehaviour
             StartCoroutine(Blink());
             mainCam.GetComponent<CameraShake>().Shake();
         }
-    }
+    }*/
     void OnCollisionEnter(Collision collision)
     {
         if (collision.contacts[0].normal.y > .7f)
@@ -210,5 +214,10 @@ public class PlayerMovementBasic : MonoBehaviour
     void MovementManagement(float horizontal, float vertical, bool isSneaking)
     {
  
+    }
+
+    public void ToggleFlashlight()
+    {
+        flashlight.enabled = !flashlight.enabled;
     }
 }

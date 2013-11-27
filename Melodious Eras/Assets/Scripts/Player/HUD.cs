@@ -130,7 +130,7 @@ public class HUD : MonoBehaviour
                         playerStats.Attack(enemy);
             }
         }
-        if (GUI.Button(trebleClef, "Jump"))
+        if (GUI.Button(trebleClef, InputType.JUMP))
         {
             player.Jump();
         } 

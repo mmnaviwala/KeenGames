@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public static class Environment
+public class Environment : ScriptableObject
 {
     public static Vector3 wind; //wind direction/speed
     public static float turbulence; //variation in wind speed

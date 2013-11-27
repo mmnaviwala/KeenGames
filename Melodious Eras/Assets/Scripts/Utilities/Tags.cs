@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public static class Tags
+﻿public static class Tags
 {
     public const string UNTAGGED = "Untagged";
     public const string PLAYER = "Player";

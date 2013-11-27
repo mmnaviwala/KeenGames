@@ -8,6 +8,7 @@ public class SwitchPerspectives : MonoBehaviour
     public bool useDefaultOffset = false;
     public Vector3 newOffset;
     public Vector3 newRotation = new Vector3(-1, -1, -1);
+    
     public Transform target;
     public float smoothness = -1;
     public bool stopPlayer = false;
@@ -49,9 +50,9 @@ public class SwitchPerspectives : MonoBehaviour
                         perspective3d.enabled = true;
                     }
                     if(target == null)
-                        perspective3d.SetOffset(useDefaultOffset ? CameraMovement3D.defaultOffset : newOffset);
+                        perspective3d.SetOffset(useDefaultOffset ? Camera.main.GetComponent<CameraMovement3D>().defaultOffset : newOffset);
                     else
-                        perspective3d.SetOffset(useDefaultOffset ? CameraMovement3D.defaultOffset : newOffset, target);
+                        perspective3d.SetOffset(useDefaultOffset ? Camera.main.GetComponent<CameraMovement3D>().defaultOffset : newOffset, target);
 
 
                     if(smoothness != -1)
