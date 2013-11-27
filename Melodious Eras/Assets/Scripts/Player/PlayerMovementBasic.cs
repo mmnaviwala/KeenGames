@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Runtime.CompilerServices;
 
-public enum FacingDirection2D { Left, Right };
 public class PlayerMovementBasic : MonoBehaviour 
 {
     enum CharacterState {   Idle = 0,
@@ -16,10 +15,7 @@ public class PlayerMovementBasic : MonoBehaviour
     public bool jumping = false;
     public float snapDownThreshold = .25f;
     public bool isShooting = false;
-    public bool autoRun = true;
     public bool useDefaultMovement = true;
-    public FacingDirection2D facingDirection2D = FacingDirection2D.Right;
-    public Vector3 runDirection = Vector3.right;
     public float sound;
 
 
@@ -52,94 +48,48 @@ public class PlayerMovementBasic : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (!autoRun)
+        moving = false;
+        if (!jumping && useDefaultMovement)
         {
-            speed = 0;
-            //All movement inputs in here are temporary
-            moving = false;
-            if (cam2d.enabled)
+            Vector2 direction = new Vector2();
+            if (Input.GetKey(KeyCode.W))
             {
-                if (Input.GetKey(KeyCode.D))
-                {
-                    speed = 7;
-                    this.transform.position += Vector3.right * speed * Time.deltaTime;
-                    if (facingDirection2D != FacingDirection2D.Right)
-                        this.transform.Rotate(Vector3.up, 180f);
-                    facingDirection2D = FacingDirection2D.Right;
-                    this.anim.SetFloat("Speed", 7);
-                    moving = true;
-                }
-                else if (Input.GetKey(KeyCode.A))
-                {
-                    speed = 7;
-                    this.transform.position -= Vector3.right * speed * Time.deltaTime;
-                    if (facingDirection2D != FacingDirection2D.Left)
-                        this.transform.Rotate(Vector3.up, 180f);
-                    facingDirection2D = FacingDirection2D.Left;
-                    this.anim.SetFloat("Speed", 7);
-                    moving = true;
-                }
-                if (Input.GetKey(KeyCode.W))
-                {
-                    speed = 7;
-                    this.transform.position += Vector3.forward * speed * Time.deltaTime;
-                    this.anim.SetFloat("Speed", speed);
-                    moving = true;
-                }
-                if (Input.GetKey(KeyCode.S))
-                {
-                    speed = 7;
-                    this.transform.position -= Vector3.forward * speed * Time.deltaTime;
-                    this.anim.SetFloat("Speed", speed);
-                    moving = true;
-                }
+                direction += new Vector2(0, 1);
+                moving = true;
             }
-            else if (useDefaultMovement && cam3d.enabled)
+            if (Input.GetKey(KeyCode.S))
             {
-                Vector2 direction = new Vector2();
-                if (Input.GetKey(KeyCode.W))
-                {
-                    direction += new Vector2(0, 1);
-                    moving = true;
-                }
-                if (Input.GetKey(KeyCode.S))
-                {
-                    direction -= new Vector2(0, 1);
-                    moving = true;
-                }
-                if (Input.GetKey(KeyCode.A))
-                {
-                    direction -= new Vector2(1, 0);
-                    moving = true;
-                }
-                if (Input.GetKey(KeyCode.D))
-                {
-                    direction += new Vector2(1, 0);
-                    moving = true;
-                }
-                if (moving)
-                {
-                    speed = Input.GetButton("Sneak") ? 2 : 7;
-                    this.anim.SetFloat("Speed", speed);
-                    //this.animation["Locomotion"].speed = (speed > 5.667f) ? 7/5.667f : 1;
-                    float angle = Vector2.Angle(Vector2.up, direction);
-                    if (direction.x < 0)
-                        angle = -angle;
-                    this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, mainCam.transform.eulerAngles.y + angle, this.transform.eulerAngles.z);
-                    this.rigidbody.velocity = this.transform.forward * speed;
-                }
-                if (Input.GetButtonDown("Jump"))
-                {
-                    this.Jump();
-                }
+                direction -= new Vector2(0, 1);
+                moving = true;
             }
-            if (!moving)
-                this.anim.SetFloat("Speed", 0);
+            if (Input.GetKey(KeyCode.A))
+            {
+                direction -= new Vector2(1, 0);
+                moving = true;
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                direction += new Vector2(1, 0);
+                moving = true;
+            }
+            if (moving)
+            {
+                speed = Input.GetButton("Sneak") ? 2 : 7;
+                this.anim.SetFloat("Speed", speed);
+                //this.animation["Locomotion"].speed = (speed > 5.667f) ? 7/5.667f : 1;
+                float angle = Vector2.Angle(Vector2.up, direction);
+                if (direction.x < 0)
+                    angle = -angle;
+                this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, mainCam.transform.eulerAngles.y + angle, this.transform.eulerAngles.z);
+                this.rigidbody.velocity = this.transform.forward * speed + new Vector3(0, this.rigidbody.velocity.y, 0);
+            }
+            if (Input.GetButtonDown("Jump"))
+            {
+                this.Jump();
+            }
         }
-        else
-        {
-            this.transform.position += runDirection * speed * Time.deltaTime; //autorun
-        }
+        if (!moving)
+            this.anim.SetFloat("Speed", 0);
         //snapping the character down to the ground for smooth descent
         if (!jumping && useDefaultMovement)
         {

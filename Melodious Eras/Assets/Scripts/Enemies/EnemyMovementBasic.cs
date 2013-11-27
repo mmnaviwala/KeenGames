@@ -28,7 +28,7 @@ public class EnemyMovementBasic : MonoBehaviour
     {
         if (stats.isDead)
         {
-            player.vulnerableEnemies.Remove(this.stats);
+            player.nearbyEnemies.Remove(this.stats);
             Destroy(this.gameObject);
         }
         else if(hud.enabled && !hud.hide)
@@ -47,7 +47,7 @@ public class EnemyMovementBasic : MonoBehaviour
                     {
                         stats.isVulnerable = true;
                         this.light.enabled = true;
-                        player.vulnerableEnemies.Add(this.stats);
+                        player.nearbyEnemies.Add(this.stats);
                     }
                 }
                 //when they leave
@@ -56,7 +56,7 @@ public class EnemyMovementBasic : MonoBehaviour
                     ///On non-easy difficulties
                     stats.isVulnerable = false;
                     this.light.enabled = false;
-                    player.GetComponent<CharacterStats>().vulnerableEnemies.Remove(this.stats);
+                    player.GetComponent<CharacterStats>().nearbyEnemies.Remove(this.stats);
 
                     if (isFlying)
                         aggro = true;

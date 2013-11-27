@@ -40,7 +40,7 @@ public class ObstacleScript : MonoBehaviour
                     {
                         stats.isVulnerable = true;
                         this.light.enabled = true;
-                        player.vulnerableEnemies.Add(this.stats);
+                        player.nearbyEnemies.Add(this.stats);
                     }
                 }
                 //when they leave
@@ -49,7 +49,7 @@ public class ObstacleScript : MonoBehaviour
                     ///On non-easy difficulties
                     stats.isVulnerable = false;
                     this.light.enabled = false;
-                    player.GetComponent<CharacterStats>().vulnerableEnemies.Remove(this.stats);
+                    player.GetComponent<CharacterStats>().nearbyEnemies.Remove(this.stats);
 
                 }
             }

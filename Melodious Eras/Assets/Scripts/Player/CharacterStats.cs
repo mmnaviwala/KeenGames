@@ -9,7 +9,7 @@ public class CharacterStats : MonoBehaviour
 {
     public int health = 100;
     public int notes, greenNotes, blueNotes, redNotes, purpleNotes; //points
-    public List<EnemyStats> vulnerableEnemies;
+    public List<EnemyStats> nearbyEnemies;
     public int threshold = 5;
 
     private bool attacking;
@@ -17,6 +17,8 @@ public class CharacterStats : MonoBehaviour
     private Animator anim;
     private PlayerMovement playerMovement;
     private HashIDs hash;
+    private bool inMeleeRange = false;
+    private float meleeHeldDown = 0;
 
     enum InstantKill { NONE = 0, GREEN = 1, BLUE = 2, RED = 3, PURPLE = 4 };
     //int specialAttack = 0;
@@ -31,8 +33,67 @@ public class CharacterStats : MonoBehaviour
         redNotes = 0;
         purpleNotes = 0;
 
-        vulnerableEnemies = new List<EnemyStats>();
+        nearbyEnemies = new List<EnemyStats>();
         specialAttacks = new EnemyColor[5];
+    }
+
+    void Update()
+    {
+        //-------------------------------------------
+        if (Input.GetButton("Melee"))
+        {
+            meleeHeldDown += Time.deltaTime;
+            if (meleeHeldDown > 2)
+            {
+                meleeHeldDown = 0;
+                Debug.Log("Button");
+            }
+        }
+        else if (Input.GetButtonUp("Melee"))
+        {
+            meleeHeldDown = 0;
+            Debug.Log("Button up");
+        }
+        //-------------------------------------------
+
+
+        if(nearbyEnemies.Count > 0)
+        {
+            EnemyStats nearestEnemy = nearbyEnemies[0]; //will actually with the smallest angle away from the player's facing direction
+            
+
+            if (Input.GetButtonDown("Melee"))
+            {
+                foreach (EnemyStats enemy in nearbyEnemies)
+                {
+                    float distance = Vector3.Distance(this.transform.position, enemy.transform.position);
+                    float angle = Vector3.Angle(enemy.transform.forward, this.transform.position);
+                    Debug.Log("Angle: " + angle);
+                    if (distance < 2 && angle > 150) //leaving a 60-degree window for sneak attack
+                    {
+
+                    }
+                }
+            }
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == Tags.ENEMY)
+        {
+            nearbyEnemies.Add(other.GetComponent<EnemyStats>());
+            Debug.Log("Nearby Enemy count: " + nearbyEnemies.Count);
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.tag == Tags.ENEMY)
+        {
+            nearbyEnemies.Remove(other.GetComponent<EnemyStats>());
+            Debug.Log("Nearby Enemy count: " + nearbyEnemies.Count);
+        }
     }
 
     /// <summary>

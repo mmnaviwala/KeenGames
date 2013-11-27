@@ -60,25 +60,25 @@ public class HUD : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
+            foreach (EnemyStats enemy in playerStats.nearbyEnemies)
                 if (enemy.enemyColor == EnemyColor.Green)
                     playerStats.Attack(enemy);
         }
         if (Input.GetKeyDown(KeyCode.X))
         {
-            foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
+            foreach (EnemyStats enemy in playerStats.nearbyEnemies)
                 if (enemy.enemyColor == EnemyColor.Blue)
                     playerStats.Attack(enemy);
         }
         if (Input.GetKeyDown(KeyCode.C))
         {
-            foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
+            foreach (EnemyStats enemy in playerStats.nearbyEnemies)
                 if (enemy.enemyColor == EnemyColor.Red)
                     playerStats.Attack(enemy);
         }
         if (Input.GetKeyDown(KeyCode.V))
         {
-            foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
+            foreach (EnemyStats enemy in playerStats.nearbyEnemies)
                 if (enemy.enemyColor == EnemyColor.Purple)
                     playerStats.Attack(enemy);
         }
@@ -107,25 +107,25 @@ public class HUD : MonoBehaviour
             //Same logic for other colors
             if (GUI.Button(greenButtonRect, greenUnpressed, myStyle))
             {
-                foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
+                foreach (EnemyStats enemy in playerStats.nearbyEnemies)
                     if (enemy.enemyColor == EnemyColor.Green)
                         playerStats.Attack(enemy);
             }
             if (GUI.Button(blueButtonRect, blueUnpressed, myStyle))
             {
-                foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
+                foreach (EnemyStats enemy in playerStats.nearbyEnemies)
                     if (enemy.enemyColor == EnemyColor.Blue)
                         playerStats.Attack(enemy);
             }
             if (GUI.Button(redButtonRect, redUnpressed, myStyle))
             {
-                foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
+                foreach (EnemyStats enemy in playerStats.nearbyEnemies)
                     if (enemy.enemyColor == EnemyColor.Red)
                         playerStats.Attack(enemy);
             }
             if (GUI.Button(purpleButtonRect, purpleUnpressed, myStyle))
             {
-                foreach (EnemyStats enemy in playerStats.vulnerableEnemies)
+                foreach (EnemyStats enemy in playerStats.nearbyEnemies)
                     if (enemy.enemyColor == EnemyColor.Purple)
                         playerStats.Attack(enemy);
             }

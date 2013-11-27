@@ -11,12 +11,12 @@ public class CameraMovement2D : CameraMovement
     public static Vector3 defaultOffset = new Vector3(9, 1, -10);
 
     Transform player;
-    PlayerMovementBasic playerMovement;
+    PlayerMovement2D playerMovement;
 	// Use this for initialization
 	void Start () 
     {
         player = GameObject.FindGameObjectWithTag(Tags.PLAYER).transform;
-        playerMovement = player.GetComponent<PlayerMovementBasic>();
+        playerMovement = player.GetComponent<PlayerMovement2D>();
         Debug.Log(this.GetComponent<SphereCollider>() == null);
 	}
 	
