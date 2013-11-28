@@ -9,6 +9,7 @@ public class Ladder : MonoBehaviour
     public Vector3 snapDirection;
 
     bool climbing = false;
+    bool canClimb = false;
 	// Use this for initialization
 	void Start () 
     {
@@ -19,6 +20,15 @@ public class Ladder : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
+        if (canClimb)
+        {
+            if (Input.GetButtonDown(InputType.USE))
+            {
+                climbing = true;
+                player.GetComponent<PlayerMovementBasic>().useDefaultMovement = false;
+                player.rigidbody.useGravity = false;
+            }
+        }
         if (climbing)
         {
             if (Input.GetAxis(InputType.VERTICAL) > 0)
@@ -48,31 +58,27 @@ public class Ladder : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (other is CapsuleCollider && other.tag == Tags.PLAYER)
-            player = other.gameObject;
-    }
-    void OnTriggerStay(Collider other)
-    {
-        if (other is CapsuleCollider && Input.GetButtonDown(InputType.USE) && other.name == player.name)
         {
-            climbing = true;
-            player.GetComponent<PlayerMovementBasic>().useDefaultMovement = false;
-            player.rigidbody.useGravity = false;
+            player = other.gameObject;
+            canClimb = true;
+            Debug.Log("Player near ladder");
         }
     }
     void OnTriggerExit(Collider other)
     {
-        if (other is CapsuleCollider)
+        if (other is CapsuleCollider && other.tag == Tags.PLAYER)
         {
             if (other.transform.position.y >= top - .5f)
             {
                 other.transform.position = new Vector3(other.transform.position.x, top, other.transform.position.z) + snapDirection;
                 StartCoroutine(FreezeControls());
             }
+            canClimb = false;
             climbing = false;
             player.GetComponent<PlayerMovementBasic>().useDefaultMovement = true;
             player.rigidbody.useGravity = true;
+            Debug.Log("Player leaving ladder");
         }
-
     }
 
     IEnumerator FreezeControls()
