@@ -110,8 +110,17 @@ public class Keypad : CircuitSwitch
         {
             if (Input.GetButtonDown(InputType.USE))
             {
-                usingKeypad = true;
-                playerHUD.rigidbody.velocity = new Vector3(0, playerHUD.rigidbody.velocity.y, 0);
+                Vector3 relPlayerPos = other.transform.position - this.transform.position;
+                Ray ray = new Ray(this.transform.position, relPlayerPos);
+                Debug.DrawLine(ray.origin, player.transform.position, Color.red, 2);
+
+                RaycastHit hit;
+                Physics.Raycast(ray, out hit);
+                if (hit.collider == other)
+                {
+                    usingKeypad = true;
+                    playerHUD.rigidbody.velocity = new Vector3(0, playerHUD.rigidbody.velocity.y, 0);
+                } 
             }
         }
     }

@@ -14,12 +14,13 @@ public class PlayerMovementBasic : MonoBehaviour
     public bool isShooting = false;
     public bool useDefaultMovement = true;
     public bool isAiming = false;
+    public bool isCrouching = false;
     private bool moving = false;
 
     public Flashlight flashlight;
-    private Camera mainCam;
+    private CameraMovement3D mainCam;
     private CharacterStats stats;
-    private HUD hud;
+    private HUD_Stealth hud;
     private Animator anim;
 	
 	// Use this for initialization
@@ -29,10 +30,10 @@ public class PlayerMovementBasic : MonoBehaviour
     }
 	void Start ()
     {
-        mainCam = Camera.main;
+        mainCam = Camera.main.GetComponent<CameraMovement3D>();
         stats = this.GetComponent<CharacterStats>();
         anim = this.GetComponent<Animator>();
-        hud = this.GetComponent<HUD>();
+        hud = this.GetComponent<HUD_Stealth>();
 
         gravity = Mathf.Abs(Physics.gravity.y);
         anim.SetFloat("Speed", 7.0f);
@@ -40,10 +41,30 @@ public class PlayerMovementBasic : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate ()
+	void Update ()
     {
         if (!jumping && useDefaultMovement)
         {
+            //----------------------------------------------
+            //Determining camera offset
+            //AIM (and WALK) offset
+            if (Input.GetButton(InputType.AIM))
+            {
+                mainCam.SetOffset(CameraOffset.Walk);
+            }
+            else if (Input.GetButtonUp(InputType.AIM))
+            {
+                mainCam.SetOffset(isCrouching ? CameraOffset.Crouch : CameraOffset.Default);
+            }
+            //CROUCH offset
+            if (Input.GetButtonDown(InputType.CROUCH))
+            {
+                isCrouching = !isCrouching; //toggled instead of held
+                mainCam.SetOffset(isCrouching ? CameraOffset.Crouch : CameraOffset.Default);
+                //Perform crouch here
+            }
+            //----------------------------------------------
+
             float h = Input.GetAxis(InputType.HORIZONTAL);  //A(neg), D(pos), Left joystick left(neg)/right(pos)
             float v = Input.GetAxis(InputType.VERTICAL);    //S(neg), W(pos), Left joystick down(neg)/up(pos)
 
@@ -52,9 +73,24 @@ public class PlayerMovementBasic : MonoBehaviour
 
             if (moving)
             {
-                speed = Input.GetButton(InputType.SNEAK) ? 2 : 7;
+                //Walking is for PC only; speed is handled by analog sticks on consoles
+                if (Input.GetButton(InputType.WALK))
+                {
+                    speed = 2;
+                    mainCam.SetOffset(CameraOffset.Walk);
+                }
+                else if (Input.GetButtonUp(InputType.WALK))
+                {
+                    mainCam.SetOffset(isCrouching ? CameraOffset.Crouch : CameraOffset.Default);
+                    speed = 7;
+                }
+
+                //Determining speed
+                speed = (Input.GetButton(InputType.WALK) || Input.GetButton(InputType.AIM)) ? 2 : 5.657f;
+                speed *= ((direction.magnitude < 1) ? direction.magnitude : 1);
                 this.anim.SetFloat("Speed", speed);
-                //this.animation["Locomotion"].speed = (speed > 5.667f) ? 7/5.667f : 1;
+
+                // Facing and running the desired direction
                 float angle = Vector2.Angle(Vector2.up, direction);
                 if (direction.x < 0)
                     angle = -angle;
@@ -85,13 +121,14 @@ public class PlayerMovementBasic : MonoBehaviour
         if (collision.contacts[0].normal.y > .7f)
         {
             jumping = false;
-            float impactVelocity = Vector3.Magnitude(collision.relativeVelocity);
-            if ( impactVelocity> 30)
-            {
-                Debug.Log("Collision impact high (relative velocity = " + impactVelocity + " > 30; Player taking damage.");
-                //Take damage
-                //emit noise
-            }
+        }
+        float impactVelocity = Vector3.Magnitude(collision.relativeVelocity);
+        if (impactVelocity > 30)
+        {
+            Debug.Log("Collision impact high (relative velocity = " + impactVelocity + " > 30; Player taking damage.");
+            stats.health -= (int)(impactVelocity - 30);
+            //Take damage
+            //emit noise
         }
 
         anim.SetBool("IsGrinding", collision.collider.tag == Tags.SLIDE);
@@ -132,7 +169,7 @@ public class PlayerMovementBasic : MonoBehaviour
 
 
     /// <summary>
-    /// Determines if the transform is grounded (less than 0.25f off the ground).
+    /// Determines if the transform is grounded (less than 0.25f off the ground) for smooth descents.
     /// </summary>
     /// <returns></returns>
     public bool IsGrounded()
@@ -146,21 +183,4 @@ public class PlayerMovementBasic : MonoBehaviour
         this.anim.SetFloat("Speed", 0);
         this.anim.SetBool("IsShooting", !stopShooting);
     }
-
-
-    #region Not in use yet.
-    //void FixedUpdate()
-    //{
-    //    float h = Input.GetAxis(InputType.HORIZONTAL);
-    //    float v = Input.GetAxis(InputType.VERTICAL);
-    //    bool sneaking = Input.GetButton(InputType.SNEAK);
-
-    //    MovementManagement(h, v, sneaking);
-    //}
-
-    //void MovementManagement(float horizontal, float vertical, bool isSneaking)
-    //{
-
-    //}
-    #endregion
 }

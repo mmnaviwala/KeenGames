@@ -13,7 +13,8 @@ public class CameraMovement3D : CameraMovement
     public Vector3 PDA_Offset;
     private Vector3 activeOffset;
 
-    public float sensitivity = 10;
+    public float x_sensitivity = 5;
+    public float y_sensitivity = 2;
     public int inversion = 1; //1 = not inverted, -1 = inverted (for mouse look)
     public Vector3 targetPos;
 
@@ -29,14 +30,17 @@ public class CameraMovement3D : CameraMovement
         player = GameObject.FindGameObjectWithTag(Tags.PLAYER).transform;
         flashlight = player.GetComponent<PlayerMovementBasic>().flashlight.transform;
         this.transform.position = player.transform.position + defaultOffset;
+        SetOffset(testOffset);
 	}
 	
 	// Update is called once per frame
 	void LateUpdate ()
     {
+        
         if (Input.GetButtonDown(InputType.SHIFT_VIEW))
         {
-            activeOffset = new Vector3(-activeOffset.x, activeOffset.y, activeOffset.z);
+            SetOffset(new Vector3(-activeOffset.x, activeOffset.y, activeOffset.z));
+            //activeOffset = new Vector3(-activeOffset.x, activeOffset.y, activeOffset.z);
             Debug.Log(activeOffset);
         }
         this.transform.position = player.position 
@@ -51,22 +55,22 @@ public class CameraMovement3D : CameraMovement
         
         if (intensityX != 0)
         {
-            this.transform.RotateAround(player.position + new Vector3(0, activeOffset.y, 0), this.transform.up, intensityX * sensitivity);
+            this.transform.RotateAround(player.position + new Vector3(0, activeOffset.y, 0), this.transform.up, intensityX * x_sensitivity);
         }
 
         if (intensityY != 0)
         {
             if (this.transform.eulerAngles.x < 30 || this.transform.eulerAngles.x > 330/*(intensityY > 0 && this.transform.eulerAngles.x < 30) || intensityY < 0 && this.transform.eulerAngles.x > 330*/)
             {
-                this.transform.RotateAround(player.position + new Vector3(0, activeOffset.y, 0), this.transform.right, -intensityY * sensitivity);
+                this.transform.RotateAround(player.position + new Vector3(0, activeOffset.y, 0), this.transform.right, -intensityY * y_sensitivity);
             }
             else if (this.transform.eulerAngles.x > 30 && intensityY > 0)
             {
-                this.transform.RotateAround(player.position + new Vector3(0, activeOffset.y, 0), this.transform.right, -intensityY * sensitivity);
+                this.transform.RotateAround(player.position + new Vector3(0, activeOffset.y, 0), this.transform.right, -intensityY * y_sensitivity);
             }
             else if (this.transform.eulerAngles.x < 330 && intensityY < 0)
             {
-                this.transform.RotateAround(player.position + new Vector3(0, activeOffset.y, 0), this.transform.right, -intensityY * sensitivity);
+                this.transform.RotateAround(player.position + new Vector3(0, activeOffset.y, 0), this.transform.right, -intensityY * y_sensitivity);
             }
         }
         //Following 2 lines need to be done every frame in case something else is causing the character to move
@@ -77,14 +81,22 @@ public class CameraMovement3D : CameraMovement
         flashlight.rotation = this.transform.rotation;
         //---------------------------------------------------
 
-        SetOffset(testOffset);
+        //SetOffset(testOffset);
 	}
 
     public void SetOffset(Vector3 newOffset)
     {
-        offsetX = newOffset.x;
-        offsetY = newOffset.y;
-        offsetZ = newOffset.z;
+        switch (testOffset)
+        {
+            case CameraOffset.Default: defaultOffset = newOffset; break;
+            case CameraOffset.Walk: walkOffset = newOffset; break;
+            case CameraOffset.Crouch: crouchOffset = newOffset; break;
+            case CameraOffset.PDA: PDA_Offset = newOffset; break;
+        }
+        activeOffset = newOffset;
+        //offsetX = newOffset.x;
+        //offsetY = newOffset.y;
+        //offsetZ = newOffset.z;
         target = null;
     }
     public void SetOffset(Vector3 newOffset, Transform targetP)

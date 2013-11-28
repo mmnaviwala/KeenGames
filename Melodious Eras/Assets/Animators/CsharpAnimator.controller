@@ -30,7 +30,7 @@ AnimatorController:
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 1
+    m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
   - m_Name: IsGrinding
     m_Type: 4
@@ -68,15 +68,22 @@ BlendTree:
   m_PrefabInternal: {fileID: 0}
   m_Name: Locomotion
   m_Childs:
+  - m_Motion: {fileID: 7400000, guid: dffa50cfe77e0434bbfa71245b3dd529, type: 3}
+    m_Threshold: 0
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_IsAnim: 1
+    m_Mirror: 0
   - m_Motion: {fileID: 7400000, guid: b1a5e04ae51004842aba06704a6c2903, type: 3}
-    m_Threshold: 1.55499995
+    m_Threshold: 1.55599999
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_IsAnim: 1
     m_Mirror: 0
   - m_Motion: {fileID: 7400000, guid: 1cb8ed3cbba15f0479fbae54e0a963df, type: 3}
-    m_Threshold: 5.66699982
+    m_Threshold: 5.65700006
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -84,8 +91,8 @@ BlendTree:
     m_Mirror: 0
   m_BlendParameter: Speed
   m_BlendParameterY: New Float
-  m_MinThreshold: 1.55499995
-  m_MaxThreshold: 9.77899933
+  m_MinThreshold: 0
+  m_MaxThreshold: 5.65700006
   m_UseAutomaticThresholds: 0
   m_BlendType: 0
 --- !u!1101 &110100000

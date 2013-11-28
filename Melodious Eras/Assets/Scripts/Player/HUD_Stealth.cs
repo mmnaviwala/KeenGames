@@ -7,7 +7,7 @@ public class HUD_Stealth : MonoBehaviour
 
     private Rect healthBarMax, healthBarCurrent, flashlightLife, reticle;
     private float maxWidth;
-    private bool aiming = false;
+    public bool aiming = false;
 
     private CharacterStats stats;
     private PlayerMovementBasic player;
@@ -29,7 +29,7 @@ public class HUD_Stealth : MonoBehaviour
 	void Update () 
     {
         healthBarCurrent.width = maxWidth * stats.health / 100;
-        
+        aiming = Input.GetButton(InputType.AIM);
 	}
 
     void OnGUI()

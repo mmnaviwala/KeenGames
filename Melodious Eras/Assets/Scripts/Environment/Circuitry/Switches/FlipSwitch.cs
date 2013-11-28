@@ -3,19 +3,19 @@ using System.Collections;
 
 public class FlipSwitch : CircuitSwitch 
 {
-    
+    bool inRange = false;
 	// Use this for initialization
 	void Start () 
     {
 	
 	}
-
-    void OnTriggerStay(Collider other)
+    void Update()
     {
-        if (other.tag == Tags.PLAYER)
+        if (inRange)
         {
             if (Input.GetButtonDown(InputType.USE))
             {
+                Debug.Log("Flipped Switch");
                 onOffStatus = !onOffStatus;
                 foreach (CircuitNode node in connectedNodes)
                 {
@@ -23,5 +23,16 @@ public class FlipSwitch : CircuitSwitch
                 }
             }
         }
+    }
+    void OnTriggerStay(Collider other)
+    {
+        if (other is CapsuleCollider && other.tag == Tags.PLAYER)
+            inRange = true;
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other is CapsuleCollider && other.tag == Tags.PLAYER)
+            inRange = false;
     }
 }

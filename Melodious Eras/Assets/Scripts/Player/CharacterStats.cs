@@ -16,6 +16,8 @@ public class CharacterStats : MonoBehaviour
     private Animator anim;
     private PlayerMovement playerMovement;
     private HashIDs hash;
+    private HUD_Stealth hud;
+    private CameraMovement3D mainCam;
     private bool inMeleeRange = false;
     private float meleeHeldDown = 0;
 
@@ -23,6 +25,11 @@ public class CharacterStats : MonoBehaviour
     void Awake()
     {
         nearbyEnemies = new List<EnemyStats>();
+    }
+    void Start()
+    {
+        hud = this.GetComponent<HUD_Stealth>();
+        mainCam = Camera.main.GetComponent<CameraMovement3D>();
     }
 
     void Update()
@@ -42,6 +49,7 @@ public class CharacterStats : MonoBehaviour
             meleeHeldDown = 0;
             Debug.Log("Melee Button up");
         }
+
         //-------------------------------------------
 
         if(nearbyEnemies.Count > 0)

@@ -21,11 +21,11 @@ public class Ladder : MonoBehaviour
     {
         if (climbing)
         {
-            if (Input.GetKey(KeyCode.W))
+            if (Input.GetAxis(InputType.VERTICAL) > 0)
             {
                 player.transform.position += Vector3.up * 1.5f * Time.deltaTime;
             }
-            else if (Input.GetKey(KeyCode.S))
+            else if (Input.GetAxis(InputType.VERTICAL) < 0)
             {
                 player.transform.position -= Vector3.up * 1.5f * Time.deltaTime;
 

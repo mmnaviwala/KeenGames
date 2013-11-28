@@ -8,7 +8,11 @@ public class PowerSource : CircuitNode
         //if (activated)
         //    electricGrid.hasPower = true;
     }
-	
+
+    void Update()
+    {
+ 
+    }
 
     void OnTriggerStay(Collider other)
     {

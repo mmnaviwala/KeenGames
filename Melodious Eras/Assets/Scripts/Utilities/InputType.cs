@@ -7,14 +7,16 @@
         FIRE2 = "Fire2",
         FIRE3 = "Fire3",
         JUMP = "Jump",
-        MOUSE_X = "Mouse X",
-        MOUSE_Y = "Mouse Y",
+        MOUSE_X = "Look X",
+        MOUSE_Y = "Look Y",
         MOUSE_SCROLL_WHEEL = "Mouse ScrollWheel",
-        SNEAK = "Sneak",
+        WALK = "Walk",
+        CROUCH = "Crouch",
         START = "Start",
         USE = "Use",
         MELEE = "Melee",
         SHIFT_VIEW = "Shift View",
         TOGGLE_FLASHLIGHT = "Toggle Flashlight",
-        MENU = "Menu";
+        MENU = "Menu",
+        AIM = "Aim";
 }
