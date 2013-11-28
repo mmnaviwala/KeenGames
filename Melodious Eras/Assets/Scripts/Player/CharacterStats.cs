@@ -8,7 +8,6 @@ using System.Collections.Generic;
 public class CharacterStats : MonoBehaviour
 {
     public int health = 100;
-    public int notes, greenNotes, blueNotes, redNotes, purpleNotes; //points
     public List<EnemyStats> nearbyEnemies;
     public int threshold = 5;
 
@@ -20,21 +19,10 @@ public class CharacterStats : MonoBehaviour
     private bool inMeleeRange = false;
     private float meleeHeldDown = 0;
 
-    enum InstantKill { NONE = 0, GREEN = 1, BLUE = 2, RED = 3, PURPLE = 4 };
-    //int specialAttack = 0;
-    EnemyColor specialAttack;
-    EnemyColor[] specialAttacks;
 
     void Awake()
     {
-        notes = 0;
-        greenNotes = 0;
-        blueNotes = 0;
-        redNotes = 0;
-        purpleNotes = 0;
-
         nearbyEnemies = new List<EnemyStats>();
-        specialAttacks = new EnemyColor[5];
     }
 
     void Update()
@@ -56,12 +44,10 @@ public class CharacterStats : MonoBehaviour
         }
         //-------------------------------------------
 
-
         if(nearbyEnemies.Count > 0)
         {
             EnemyStats nearestEnemy = nearbyEnemies[0]; //will actually with the smallest angle away from the player's facing direction
             
-
             if (Input.GetButtonDown(InputType.MELEE))
             {
                 foreach (EnemyStats enemy in nearbyEnemies)
@@ -109,7 +95,7 @@ public class CharacterStats : MonoBehaviour
     /// </summary>
     /// <param name="noteColor"></param>
     /// <param name="value"></param>
-    public void AddNotes(EnemyColor noteColor, int value)
+    /*public void AddNotes(EnemyColor noteColor, int value)
     {
         switch (noteColor)
         {
@@ -149,14 +135,14 @@ public class CharacterStats : MonoBehaviour
                 notes += value;
                 break;
         }
-    }
+    }*/
 
     /// <summary>
     /// Rewards player for killing an enemy.
     /// </summary>
     /// <param name="enemyColor"></param>
     /// <param name="whiteValue"></param>
-    public void RewardNotes(EnemyColor enemyColor, int whiteValue, int colorValue)
+    /*public void RewardNotes(EnemyColor enemyColor, int whiteValue, int colorValue)
     {
         switch (enemyColor)
         {
@@ -200,5 +186,5 @@ public class CharacterStats : MonoBehaviour
     public void RewardNotes(int value)
     {
         this.notes += value;
-    }
+    }*/
 }

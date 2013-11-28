@@ -10,10 +10,12 @@ public class PlayerMovement2D : MonoBehaviour
     public FacingDirection2D facingDirection2D = FacingDirection2D.Right;
     public Vector3 runDirection = Vector3.right;
     private Animator anim;
+    private Renderer[] meshRenderers;
 
 	// Use this for initialization
 	void Start () {
-	
+
+        meshRenderers = this.transform.GetComponentsInChildren<Renderer>();
 	}
 	
 	// Update is called once per frame
@@ -64,4 +66,22 @@ public class PlayerMovement2D : MonoBehaviour
             this.transform.position += runDirection * speed * Time.deltaTime; //autorun
         }
 	}
+
+    /// <summary>
+    /// Goes through each of the player's renderers (3 total) and flashes them on and off.
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator Blink()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            for (int r = 0; r < 3; r++)
+                meshRenderers[r].enabled = false;
+            yield return new WaitForSeconds(.1f);
+
+            for (int r = 0; r < 3; r++)
+                meshRenderers[r].enabled = true;
+            yield return new WaitForSeconds(.25f);
+        }
+    }
 }

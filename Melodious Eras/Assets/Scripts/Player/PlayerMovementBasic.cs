@@ -4,33 +4,28 @@ using System.Runtime.CompilerServices;
 
 public class PlayerMovementBasic : MonoBehaviour 
 {
-    enum CharacterState {   Idle = 0,
-                            Walking = 1,
-                            Trotting = 2,
-                            Running = 3,
-                            Jumping = 4 }
     public float jumpForce = 20f;
     public float speed = 7f;
-    private bool moving = false;
-    public bool jumping = false;
     public float snapDownThreshold = .25f;
+    public float sound;
+    private float gravity;
+
+    public bool jumping = false;
     public bool isShooting = false;
     public bool useDefaultMovement = true;
-    public float sound;
+    public bool isAiming = false;
+    private bool moving = false;
 
-
+    public Flashlight flashlight;
     private Camera mainCam;
-    public Light flashlight;
     private CharacterStats stats;
     private HUD hud;
-    private Renderer[] meshRenderers;
-    private float gravity;
     private Animator anim;
 	
 	// Use this for initialization
     void Awake()
     {
-        flashlight = this.transform.GetChild(1).GetChild(0).GetChild(0).GetChild(2).GetChild(1).light;
+        flashlight = this.transform.GetChild(1).GetChild(0).GetChild(0).GetChild(2).GetChild(1).GetComponent<Flashlight>();
     }
 	void Start ()
     {
@@ -38,7 +33,6 @@ public class PlayerMovementBasic : MonoBehaviour
         stats = this.GetComponent<CharacterStats>();
         anim = this.GetComponent<Animator>();
         hud = this.GetComponent<HUD>();
-        meshRenderers = this.transform.GetComponentsInChildren<Renderer>();
 
         gravity = Mathf.Abs(Physics.gravity.y);
         anim.SetFloat("Speed", 7.0f);
@@ -46,36 +40,16 @@ public class PlayerMovementBasic : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update ()
+	void FixedUpdate ()
     {
-        if (Input.GetButtonDown(InputType.TOGGLE_FLASHLIGHT))
-        {
-            ToggleFlashlight();
-        }
-        moving = false;
         if (!jumping && useDefaultMovement)
         {
-            Vector2 direction = new Vector2();
-            if (Input.GetKey(KeyCode.W))
-            {
-                direction += new Vector2(0, 1);
-                moving = true;
-            }
-            if (Input.GetKey(KeyCode.S))
-            {
-                direction -= new Vector2(0, 1);
-                moving = true;
-            }
-            if (Input.GetKey(KeyCode.A))
-            {
-                direction -= new Vector2(1, 0);
-                moving = true;
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                direction += new Vector2(1, 0);
-                moving = true;
-            }
+            float h = Input.GetAxis(InputType.HORIZONTAL);  //A(neg), D(pos), Left joystick left(neg)/right(pos)
+            float v = Input.GetAxis(InputType.VERTICAL);    //S(neg), W(pos), Left joystick down(neg)/up(pos)
+
+            Vector2 direction = new Vector2(h, v);
+            moving = !direction.Equals(Vector2.zero);
+
             if (moving)
             {
                 speed = Input.GetButton(InputType.SNEAK) ? 2 : 7;
@@ -106,27 +80,6 @@ public class PlayerMovementBasic : MonoBehaviour
         }
 	}
 
-    void FixedUpdate()
-    {
-        float h = Input.GetAxis(InputType.HORIZONTAL);
-        float v = Input.GetAxis(InputType.VERTICAL);
-        bool sneaking = Input.GetButton(InputType.SNEAK);
-
-        MovementManagement(h, v, sneaking);
-    }
-
-    /*void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == Tags.ENEMY)
-        {
-            stats.notes -= other.GetComponent<EnemyStats>().damageValue;
-            if (stats.notes < 0) 
-                stats.notes = 0;
-
-            StartCoroutine(Blink());
-            mainCam.GetComponent<CameraShake>().Shake();
-        }
-    }*/
     void OnCollisionEnter(Collision collision)
     {
         if (collision.contacts[0].normal.y > .7f)
@@ -177,23 +130,6 @@ public class PlayerMovementBasic : MonoBehaviour
         jumping = true;
     }
 
-    /// <summary>
-    /// Goes through each of the player's renderers (3 total) and flashes them on and off.
-    /// </summary>
-    /// <returns></returns>
-    public IEnumerator Blink()
-    {
-        for (int i = 0; i < 5; i++)
-        {
-            for (int r = 0; r < 3; r++)
-                meshRenderers[r].enabled = false;
-            yield return new WaitForSeconds(.1f);
-
-            for (int r = 0; r < 3; r++)
-                meshRenderers[r].enabled = true;
-            yield return new WaitForSeconds(.25f);
-        }
-    }
 
     /// <summary>
     /// Determines if the transform is grounded (less than 0.25f off the ground).
@@ -211,13 +147,20 @@ public class PlayerMovementBasic : MonoBehaviour
         this.anim.SetBool("IsShooting", !stopShooting);
     }
 
-    void MovementManagement(float horizontal, float vertical, bool isSneaking)
-    {
- 
-    }
 
-    public void ToggleFlashlight()
-    {
-        flashlight.enabled = !flashlight.enabled;
-    }
+    #region Not in use yet.
+    //void FixedUpdate()
+    //{
+    //    float h = Input.GetAxis(InputType.HORIZONTAL);
+    //    float v = Input.GetAxis(InputType.VERTICAL);
+    //    bool sneaking = Input.GetButton(InputType.SNEAK);
+
+    //    MovementManagement(h, v, sneaking);
+    //}
+
+    //void MovementManagement(float horizontal, float vertical, bool isSneaking)
+    //{
+
+    //}
+    #endregion
 }

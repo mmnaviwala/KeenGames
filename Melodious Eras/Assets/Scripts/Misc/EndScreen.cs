@@ -58,11 +58,11 @@ public class EndScreen : MonoBehaviour {
         {
             float buttonWidth = Screen.width*0.1F;
 		    float buttonHeight = Screen.height*0.05F;
-            int totalNotes = playerStats.blueNotes + playerStats.greenNotes + playerStats.redNotes + playerStats.purpleNotes + playerStats.notes;
+            //int totalNotes = playerStats.blueNotes + playerStats.greenNotes + playerStats.redNotes + playerStats.purpleNotes + playerStats.notes;
 
             GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), endScreen);
 
-            GUI.Label(new Rect(Screen.width / 2 - Screen.width / 25, Screen.height / 3 - Screen.height * 0.11F, buttonWidth, buttonHeight), playerStats.blueNotes.ToString(), buttonStyle);
+            /*GUI.Label(new Rect(Screen.width / 2 - Screen.width / 25, Screen.height / 3 - Screen.height * 0.11F, buttonWidth, buttonHeight), playerStats.blueNotes.ToString(), buttonStyle);
 
             GUI.Label(new Rect(Screen.width / 2 - Screen.width / 25, Screen.height / 2 - Screen.height * 0.165F, buttonWidth, buttonHeight), playerStats.greenNotes.ToString(), buttonStyle);
 
@@ -79,6 +79,7 @@ public class EndScreen : MonoBehaviour {
                 Debug.Log("Clicked on button");
                 Application.LoadLevel(Application.loadedLevel + 1);
             }
+             */
         }
     }
 

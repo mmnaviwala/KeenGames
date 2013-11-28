@@ -135,10 +135,5 @@ public class HUD : MonoBehaviour
             player.Jump();
         } 
         
-        GUI.Box(notesCount, "Notes:   " + playerStats.notes +
-                                 "\nGreen:  " + playerStats.greenNotes +
-                                 "\nBlue:   " + playerStats.blueNotes +
-                                 "\nRed:    " + playerStats.redNotes +
-                                 "\nPurple: " + playerStats.purpleNotes);
     }
 }

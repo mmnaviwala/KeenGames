@@ -19,7 +19,7 @@ public class EnemyStats : MonoBehaviour
         if (this.isVulnerable)
         {
             isDead = true;
-            GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<CharacterStats>().RewardNotes(enemyColor, pointValue, colorValue);
+            //GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<CharacterStats>().RewardNotes(enemyColor, pointValue, colorValue);
         }
     }
 }

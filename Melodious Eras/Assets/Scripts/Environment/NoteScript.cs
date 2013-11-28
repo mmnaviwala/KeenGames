@@ -20,12 +20,12 @@ public class NoteScript : MonoBehaviour
     {
         if (other.gameObject.tag == Tags.PLAYER)
         {
-            AddNotes(other.GetComponent<CharacterStats>());
+            //AddNotes(other.GetComponent<CharacterStats>());
         }
     }
-    public void AddNotes(CharacterStats player)
+    /*public void AddNotes(CharacterStats player)
     {
         player.AddNotes(this.noteColor, value);
         Destroy(this.gameObject);
-    }
+    }*/
 }
