@@ -20,7 +20,7 @@ public class HUD_Stealth : MonoBehaviour
         mainCam = Camera.main;
 
         maxWidth = Screen.width / 3;
-        healthBarMax = new Rect(Screen.width / 20, Screen.height / 20, maxWidth, maxWidth / 8);
+        healthBarMax = new Rect(Screen.height / 20, Screen.height / 20, maxWidth, maxWidth / 10);
         healthBarCurrent = new Rect(healthBarMax.xMin, healthBarMax.yMin, healthBarMax.width, healthBarMax.height);
         reticle = new Rect(Screen.width / 2, Screen.height / 2 - Screen.width / 20, Screen.width / 20, Screen.width / 20);
 	}

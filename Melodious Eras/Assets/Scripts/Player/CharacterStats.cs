@@ -54,19 +54,32 @@ public class CharacterStats : MonoBehaviour
 
         if(nearbyEnemies.Count > 0)
         {
-            EnemyStats nearestEnemy = nearbyEnemies[0]; //will actually with the smallest angle away from the player's facing direction
-            
             if (Input.GetButtonDown(InputType.MELEE))
             {
+                //Determining which angle the player's character is facing (the one they want to attack)
+                EnemyStats nearestEnemy = nearbyEnemies[0]; //will actually with the smallest angle away from the player's facing direction
+                float lowestAngle = 180;
                 foreach (EnemyStats enemy in nearbyEnemies)
                 {
                     float distance = Vector3.Distance(this.transform.position, enemy.transform.position);
-                    float angle = Vector3.Angle(enemy.transform.forward, this.transform.position);
-                    Debug.Log("Angle: " + angle);
-                    if (distance < 2 && angle > 150) //leaving a 60-degree window for sneak attack
-                    {
 
+                    Vector3 relEnemyPos = enemy.transform.position - this.transform.position;
+                    float angle = Vector3.Angle(relEnemyPos, this.transform.forward);
+                    if (angle < lowestAngle)
+                    {
+                        lowestAngle = angle;
+                        nearestEnemy = enemy;
                     }
+                }
+                //If the player is behind the target (60-degree area)
+                Vector3 relPlayerPos = this.transform.position - nearestEnemy.transform.position;
+                float enemyAngle = Vector3.Angle(nearestEnemy.transform.forward, new Vector3(relPlayerPos.x, 0, relPlayerPos.z));
+                Debug.Log("Enemy Angle: " + enemyAngle);
+                Debug.Log("Enemy Forward: " + nearestEnemy.transform.forward +
+                          "\nPlayer Relative Position: " + (this.transform.position - nearestEnemy.transform.position));
+                if ( enemyAngle > 150)
+                {
+                    this.Attack(this, nearestEnemy);
                 }
             }
         }
@@ -74,7 +87,7 @@ public class CharacterStats : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == Tags.ENEMY)
+        if (!other.isTrigger && other.tag == Tags.ENEMY)
         {
             nearbyEnemies.Add(other.GetComponent<EnemyStats>());
             Debug.Log("Nearby Enemy count: " + nearbyEnemies.Count);
@@ -83,7 +96,7 @@ public class CharacterStats : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.tag == Tags.ENEMY)
+        if (!other.isTrigger && other.tag == Tags.ENEMY)
         {
             nearbyEnemies.Remove(other.GetComponent<EnemyStats>());
             Debug.Log("Nearby Enemy count: " + nearbyEnemies.Count);
@@ -94,9 +107,9 @@ public class CharacterStats : MonoBehaviour
     /// Instantly kills the target
     /// </summary>
     /// <param name="target"></param>
-    public void Attack(EnemyStats target)
+    public void Attack(CharacterStats attacker, EnemyStats target)
     {
-        target.TakeDamage();
+        target.TakeDamage(true);
     }
     /// <summary>
     /// Used when picking up a note.

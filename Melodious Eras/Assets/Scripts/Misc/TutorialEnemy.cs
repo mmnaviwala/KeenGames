@@ -6,7 +6,7 @@ public class TutorialEnemy : MonoBehaviour
     public Texture2D[] pictures;
     GUIStyle headingStyle = new GUIStyle();
     AudioSource music;
-    HUD playerHUD;
+    HUD_Stealth playerHUD;
     public Font headingFont;
     bool onTutorial = false, finishedTutorial = false;
     string[] text_top, text_bottom;
@@ -17,7 +17,7 @@ public class TutorialEnemy : MonoBehaviour
     void Start()
     {
         music = Camera.main.audio;
-        playerHUD = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<HUD>();
+        playerHUD = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<HUD_Stealth>();
         pictures = new Texture2D[3];
         pictures[0] = Resources.Load("picture_seen") as Texture2D;
         pictures[1] = Resources.Load("picture_attack") as Texture2D;
@@ -62,7 +62,7 @@ public class TutorialEnemy : MonoBehaviour
     {
         if (other.tag == Tags.PLAYER)
         {
-            GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<HUD>();
+            GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<HUD_Stealth>();
             onTutorial = true;
             music.Pause();
             musicTime = music.time;

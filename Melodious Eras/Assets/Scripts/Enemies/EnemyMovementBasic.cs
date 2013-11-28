@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EnemyMovementBasic : MonoBehaviour 
 {
-    private Camera mainCam;
+    /*private Camera mainCam;
     private EnemyStats stats;
     private HUD hud;
     private CharacterStats player;
@@ -26,12 +26,7 @@ public class EnemyMovementBasic : MonoBehaviour
     // Update is called once per frame
     void Update() 
     {
-        if (stats.isDead)
-        {
-            player.nearbyEnemies.Remove(this.stats);
-            Destroy(this.gameObject);
-        }
-        else if(hud.enabled && !hud.hide)
+        if(hud.enabled && !hud.hide)
         {
             float myScreenXPos = mainCam.WorldToScreenPoint(this.transform.position).x;
             float myScreenYPos = mainCam.WorldToScreenPoint(this.transform.position).y;
@@ -64,7 +59,7 @@ public class EnemyMovementBasic : MonoBehaviour
             }
 
             //swoops down at the player
-            if (aggro  /*&& myScreenXPos < hud.barCache[0]*/)
+            if (aggro )
             {
                 SmoothLook();
                 this.transform.position = Vector3.Lerp(this.transform.position, player.transform.position + player.transform.forward, 5 * Time.deltaTime);
@@ -83,5 +78,5 @@ public class EnemyMovementBasic : MonoBehaviour
         Vector3 relPlayerPosition = player.transform.position - this.transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(relPlayerPosition, Vector3.up);
         transform.rotation = Quaternion.Lerp(this.transform.rotation, lookRotation, 10 * Time.deltaTime);
-    }
+    }*/
 }

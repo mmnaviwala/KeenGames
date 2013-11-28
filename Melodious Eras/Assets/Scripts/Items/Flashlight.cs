@@ -14,11 +14,11 @@ public class Flashlight : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        float startX = Screen.width / 20;
+        float startX = Screen.height / 20;
         float barWidth = Screen.width / 3;
         float barHeight = barWidth / 10;
         
-        batteryMaxLifeRect = new Rect(startX, Screen.height - startX - barHeight / 2, barWidth, barHeight);
+        batteryMaxLifeRect = new Rect(startX, Screen.height - 2 * barHeight, barWidth, barHeight);
         batteryLifeRect = batteryMaxLifeRect;
 	}
 	

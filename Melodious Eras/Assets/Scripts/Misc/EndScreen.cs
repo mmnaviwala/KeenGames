@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EndScreen : MonoBehaviour {
     AudioSource music;
-    HUD playerHUD;
+    HUD_Stealth playerHUD;
     GUIStyle headingStyle = new GUIStyle();
     CharacterStats playerStats;
     public Font headingFont;
@@ -16,7 +16,7 @@ public class EndScreen : MonoBehaviour {
     void Start()
     {
         music = Camera.main.audio;
-        playerHUD = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<HUD>();
+        playerHUD = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<HUD_Stealth>();
         playerStats = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<CharacterStats>();
     }
 
@@ -34,7 +34,7 @@ public class EndScreen : MonoBehaviour {
         if (other.tag == Tags.PLAYER)
         {
             yield return new WaitForSeconds(delayTime);
-            GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<HUD>();
+            GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<HUD_Stealth>();
             completeLevel = true;
             //  music.Stop();
             //Time.timeScale = 0;

@@ -10,11 +10,12 @@ public class EnemyAI : MonoBehaviour
 
     private Vector3 lastPlayerSighting;
     public NPCGroup group;
+    public CharacterStats playerStats;
 
 	// Use this for initialization
 	void Start () 
     {
-	
+
 	}
 	
 	// Update is called once per frame
@@ -22,6 +23,14 @@ public class EnemyAI : MonoBehaviour
     {
 	
 	}
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other is CapsuleCollider && other.tag == Tags.PLAYER)
+        {
+            playerStats = other.GetComponent<CharacterStats>();
+        }
+    }
 
     public void Listen()
     {

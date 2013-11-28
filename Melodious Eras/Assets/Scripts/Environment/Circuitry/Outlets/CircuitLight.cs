@@ -8,7 +8,8 @@ public class CircuitLight : CircuitNode
 	// Use this for initialization
 	void Start () 
     {
-        if (flickering)
+        light.enabled = this.hasPower && this.activated;
+        if (this.hasPower && this.activated && flickering)
             StartCoroutine(Flicker());
 	}
 	
@@ -21,7 +22,7 @@ public class CircuitLight : CircuitNode
 
     IEnumerator Flicker()
     {
-        while (this.hasPower)
+        while (this.hasPower && activated)
         {
             this.light.enabled = false;
             yield return new WaitForSeconds(.1f);
@@ -32,15 +33,17 @@ public class CircuitLight : CircuitNode
     }
     public override bool PerformSwitchAction(bool signal)
     {
-        this.TurnOnOff(signal);
+        activated = signal;
+        this.light.enabled = hasPower && signal;
+        if (light.enabled && flickering)
+        {
+            StartCoroutine(Flicker());
+        }
         return false;
     }
 
-    public override void TurnOnOff(bool power)
+    public override void TurnOnOff(bool on)
     {
-        this.hasPower = power;
-        this.light.enabled = power;
-        if (flickering)
-            StartCoroutine(Flicker());        
+        PerformSwitchAction(on);
     }
 }

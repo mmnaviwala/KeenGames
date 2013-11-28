@@ -7,7 +7,10 @@ public class FlipSwitch : CircuitSwitch
 	// Use this for initialization
 	void Start () 
     {
-	
+        foreach (CircuitNode node in connectedNodes)
+        {
+            node.PerformSwitchAction(this.onOffStatus);
+        }
 	}
     void Update()
     {

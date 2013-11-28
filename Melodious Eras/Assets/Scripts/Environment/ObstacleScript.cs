@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ObstacleScript : MonoBehaviour 
 {
-    public float timeDelay = 0f;
+    /*public float timeDelay = 0f;
     public bool falling = false;
     float velocity = 0f;
     EnemyStats stats;
@@ -68,5 +68,5 @@ public class ObstacleScript : MonoBehaviour
     {
         yield return new WaitForSeconds(timeDelay);
         this.rigidbody.useGravity = true;
-    }
+    }*/
 }

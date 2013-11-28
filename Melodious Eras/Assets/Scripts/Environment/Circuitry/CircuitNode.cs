@@ -19,13 +19,21 @@ public class CircuitNode : MonoBehaviour
     {
 	}
 
+    /// <summary>
+    /// Performs an action based on the node type.
+    /// Alarm: counts down on False signal
+    /// Move: moves toward one destination on true, other on false.
+    /// Light: light.enabled = signal.
+    /// </summary>
+    /// <param name="signal"></param>
+    /// <returns></returns>
     public virtual bool PerformSwitchAction(bool signal)
     {
         return false;
     }
 
-    public virtual void TurnOnOff(bool power)
+    public virtual void TurnOnOff(bool on)
     {
-        this.hasPower = power;
+        this.hasPower = on;
     }
 }
