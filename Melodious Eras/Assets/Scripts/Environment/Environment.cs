@@ -8,7 +8,6 @@ public class Environment : ScriptableObject
 
     private static float magX, magY, magZ; //for wind.
 
-
     public static void SetWind(Vector3 windDirection)
     {
         wind = windDirection;

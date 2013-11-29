@@ -14,6 +14,7 @@ public class CharacterStats : MonoBehaviour
     public Flashlight flashlight;
     public Weapon equippedWeapon;
     public Weapon[] holsteredWeapons;
+    public Transform rightHand;
 
     public AudioClip deathClip;
     private Animator anim;
@@ -21,7 +22,6 @@ public class CharacterStats : MonoBehaviour
     private HashIDs hash;
     private HUD_Stealth hud;
     private CameraMovement3D mainCam;
-    private Transform rightHand;
 
     private bool inMeleeRange = false;
     private bool attacking;
@@ -30,8 +30,8 @@ public class CharacterStats : MonoBehaviour
 
     void Awake()
     {
-        flashlight = this.transform.GetChild(1).GetChild(0).GetChild(0).GetChild(2).GetChild(1).GetComponent<Flashlight>();
-        rightHand =  this.transform.GetChild(1).GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(0);
+        //flashlight = this.transform.GetChild(1).GetChild(0).GetChild(0).GetChild(2).GetChild(1).GetComponent<Flashlight>();
+        //rightHand =  this.transform.GetChild(1).GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(0);
         equippedWeapon =  rightHand.GetChild(0).GetComponent<Weapon>();
         //equippedWeapon.player = this;
 
@@ -42,6 +42,7 @@ public class CharacterStats : MonoBehaviour
     {
         hud = this.GetComponent<HUD_Stealth>();
         mainCam = Camera.main.GetComponent<CameraMovement3D>();
+        Debug.Log(Physics.gravity);
     }
 
     void Update()

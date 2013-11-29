@@ -2762,6 +2762,7 @@ MonoBehaviour:
   useDefaultMovement: 1
   isAiming: 0
   isCrouching: 0
+  isWalking: 0
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3039,7 +3040,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 158e1cbb44e531e4990ea6531abc451a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 0}
+  barrelExit: {fileID: 0}
+  projectile: {fileID: 100000, guid: 59498f8907232dd4ebd7707370136e29, type: 2}
   attackAnimation: {fileID: 0}
   mods: []
   shootingSound: {fileID: 0}

@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum AmmoType { Pistol, Shotgun, SMG, AssaultRifle, StunGun};
+public enum AmmoAttribute { Normal, ArmorPiercing, HollowPoint, LowVelocity, Polonium, Incendiary, Cryo, Electric };
+
 public class Projectile : MonoBehaviour 
 {
-    Vector3 shotDirection;
-    Transform model;
     public float damageModifier = 1;
+    public AmmoType ammoType;
+    public AmmoAttribute attribute;
+
 	// Use this for initialization
 	void Start () 
     {
@@ -18,8 +22,13 @@ public class Projectile : MonoBehaviour
 	
 	}
 
-    public void Propel(Vector3 direction)
+    public void Propel(Vector3 direction, float force)
     {
- 
+        this.rigidbody.AddForce(direction * force * damageModifier, ForceMode.Force);
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        Debug.Log(col.contacts[0].point);
     }
 }
