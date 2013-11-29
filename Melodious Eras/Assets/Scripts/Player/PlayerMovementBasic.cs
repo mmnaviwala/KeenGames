@@ -17,17 +17,12 @@ public class PlayerMovementBasic : MonoBehaviour
     public bool isCrouching = false;
     private bool moving = false;
 
-    public Flashlight flashlight;
+
     private CameraMovement3D mainCam;
     private CharacterStats stats;
     private HUD_Stealth hud;
     private Animator anim;
 	
-	// Use this for initialization
-    void Awake()
-    {
-        flashlight = this.transform.GetChild(1).GetChild(0).GetChild(0).GetChild(2).GetChild(1).GetComponent<Flashlight>();
-    }
 	void Start ()
     {
         mainCam = Camera.main.GetComponent<CameraMovement3D>();
@@ -45,10 +40,25 @@ public class PlayerMovementBasic : MonoBehaviour
     {
         if (!jumping && useDefaultMovement)
         {
+            isAiming = false;
             //----------------------------------------------
             //Determining camera offset
             //AIM (and WALK) offset
             if (Input.GetButton(InputType.AIM))
+            {
+                //Semi-auto
+                if (Input.GetButtonDown(InputType.SHOOT) /*&& (weapon is MeleeWeapon || weapon is SemiAuto)*/)
+                {
+                    stats.equippedWeapon.PullTrigger();
+                }
+
+                /*if (Input.GetButton(InputType.SHOOT) && weapon is Automatic)
+                {
+ 
+                }*/
+
+            }
+            if (Input.GetButtonDown(InputType.AIM))
             {
                 mainCam.SetOffset(CameraOffset.Walk);
             }
@@ -74,15 +84,14 @@ public class PlayerMovementBasic : MonoBehaviour
             if (moving)
             {
                 //Walking is for PC only; speed is handled by analog sticks on consoles
-                if (Input.GetButton(InputType.WALK))
+                //Listening for all 3 to avoid camera shifting issues
+                if (Input.GetButtonDown(InputType.WALK))
                 {
-                    speed = 2;
                     mainCam.SetOffset(CameraOffset.Walk);
                 }
                 else if (Input.GetButtonUp(InputType.WALK))
                 {
                     mainCam.SetOffset(isCrouching ? CameraOffset.Crouch : CameraOffset.Default);
-                    speed = 7;
                 }
 
                 //Determining speed

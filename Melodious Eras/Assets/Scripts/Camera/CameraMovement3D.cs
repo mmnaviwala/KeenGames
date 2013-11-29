@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum CameraOffset { Default, Walk, Crouch, PDA };
+public enum CameraOffset { Default, Walk, Crouch, PDA , Fighting };
 public class CameraMovement3D : CameraMovement 
 {
     public float offsetX = 0, offsetY = 0, offsetZ = 0;
@@ -11,6 +11,7 @@ public class CameraMovement3D : CameraMovement
     public Vector3 walkOffset;
     public Vector3 crouchOffset;
     public Vector3 PDA_Offset;
+    public Vector3 fightingOffset;
     private Vector3 activeOffset;
 
     public float x_sensitivity = 5;
@@ -28,9 +29,9 @@ public class CameraMovement3D : CameraMovement
 	void Start () 
     {
         player = GameObject.FindGameObjectWithTag(Tags.PLAYER).transform;
-        flashlight = player.GetComponent<PlayerMovementBasic>().flashlight.transform;
+        flashlight = player.GetComponent<CharacterStats>().flashlight.transform;
         this.transform.position = player.transform.position + defaultOffset;
-        SetOffset(testOffset);
+        SetOffset(CameraOffset.Default);
 	}
 	
 	// Update is called once per frame
@@ -39,7 +40,7 @@ public class CameraMovement3D : CameraMovement
         
         if (Input.GetButtonDown(InputType.SHIFT_VIEW))
         {
-            SetOffset(new Vector3(-activeOffset.x, activeOffset.y, activeOffset.z));
+            AdjustOffset(new Vector3(-activeOffset.x, activeOffset.y, activeOffset.z));
             //activeOffset = new Vector3(-activeOffset.x, activeOffset.y, activeOffset.z);
             Debug.Log(activeOffset);
         }
@@ -84,21 +85,24 @@ public class CameraMovement3D : CameraMovement
         //SetOffset(testOffset);
 	}
 
-    public void SetOffset(Vector3 newOffset)
+    /// <summary>
+    /// Used for Shift View; Currently only used to switch from right-shoulder to left-shoulder view.
+    /// </summary>
+    /// <param name="newOffset"></param>
+    public void AdjustOffset(Vector3 newOffset)
     {
         switch (testOffset)
         {
-            case CameraOffset.Default: defaultOffset = newOffset; break;
-            case CameraOffset.Walk: walkOffset = newOffset; break;
-            case CameraOffset.Crouch: crouchOffset = newOffset; break;
-            case CameraOffset.PDA: PDA_Offset = newOffset; break;
+            case CameraOffset.Default:  defaultOffset = newOffset;  break;
+            case CameraOffset.Walk:     walkOffset = newOffset;     break;
+            case CameraOffset.Crouch:   crouchOffset = newOffset;   break;
+            case CameraOffset.PDA:      PDA_Offset = newOffset;     break;
+            case CameraOffset.Fighting: fightingOffset = newOffset; break;
         }
         activeOffset = newOffset;
-        //offsetX = newOffset.x;
-        //offsetY = newOffset.y;
-        //offsetZ = newOffset.z;
         target = null;
     }
+
     public void SetOffset(Vector3 newOffset, Transform targetP)
     {
         offsetX = newOffset.x;
@@ -106,14 +110,19 @@ public class CameraMovement3D : CameraMovement
         offsetZ = newOffset.z;
         target = targetP;
     }
+    /// <summary>
+    /// Changes current camera offset.
+    /// </summary>
+    /// <param name="newOffset"></param>
     public void SetOffset(CameraOffset newOffset)
     {
         switch (newOffset)
         {
-            case CameraOffset.Default:  activeOffset = defaultOffset; break;
-            case CameraOffset.Walk: activeOffset = walkOffset; break;
-            case CameraOffset.Crouch: activeOffset = crouchOffset; break;
-            case CameraOffset.PDA: activeOffset = PDA_Offset; break;
+            case CameraOffset.Default:  activeOffset = defaultOffset;   break;
+            case CameraOffset.Walk:     activeOffset = walkOffset;      break;
+            case CameraOffset.Crouch:   activeOffset = crouchOffset;    break;
+            case CameraOffset.PDA:      activeOffset = PDA_Offset;      break;
+            case CameraOffset.Fighting: activeOffset = fightingOffset;  break;
         }
     }
 
@@ -124,6 +133,4 @@ public class CameraMovement3D : CameraMovement
         Quaternion lookRotation = Quaternion.LookRotation(relPlayerPosition, Vector3.up);
         transform.rotation = Quaternion.Lerp(this.transform.rotation, lookRotation, smoothness * Time.deltaTime);
     }
-
-    
 }

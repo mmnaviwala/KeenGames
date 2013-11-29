@@ -11,19 +11,31 @@ public class CharacterStats : MonoBehaviour
     public List<EnemyStats> nearbyEnemies;
     public int threshold = 5;
 
-    private bool attacking;
+    public Flashlight flashlight;
+    public Weapon equippedWeapon;
+    public Weapon[] holsteredWeapons;
+
     public AudioClip deathClip;
     private Animator anim;
     private PlayerMovement playerMovement;
     private HashIDs hash;
     private HUD_Stealth hud;
     private CameraMovement3D mainCam;
+    private Transform rightHand;
+
     private bool inMeleeRange = false;
+    private bool attacking;
     private float meleeHeldDown = 0;
 
 
     void Awake()
     {
+        flashlight = this.transform.GetChild(1).GetChild(0).GetChild(0).GetChild(2).GetChild(1).GetComponent<Flashlight>();
+        rightHand =  this.transform.GetChild(1).GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(0);
+        equippedWeapon =  rightHand.GetChild(0).GetComponent<Weapon>();
+        //equippedWeapon.player = this;
+
+        holsteredWeapons = new Weapon[3];
         nearbyEnemies = new List<EnemyStats>();
     }
     void Start()
@@ -34,24 +46,6 @@ public class CharacterStats : MonoBehaviour
 
     void Update()
     {
-        //-------------------------------------------
-        if (Input.GetButton(InputType.MELEE))
-        {
-            meleeHeldDown += Time.deltaTime;
-            if (meleeHeldDown > 2)
-            {
-                meleeHeldDown = 0;
-                Debug.Log("Holding Melee Button");
-            }
-        }
-        else if (Input.GetButtonUp(InputType.MELEE))
-        {
-            meleeHeldDown = 0;
-            Debug.Log("Melee Button up");
-        }
-
-        //-------------------------------------------
-
         if(nearbyEnemies.Count > 0)
         {
             if (Input.GetButtonDown(InputType.MELEE))
@@ -71,12 +65,10 @@ public class CharacterStats : MonoBehaviour
                         nearestEnemy = enemy;
                     }
                 }
+
                 //If the player is behind the target (60-degree area)
                 Vector3 relPlayerPos = this.transform.position - nearestEnemy.transform.position;
                 float enemyAngle = Vector3.Angle(nearestEnemy.transform.forward, new Vector3(relPlayerPos.x, 0, relPlayerPos.z));
-                Debug.Log("Enemy Angle: " + enemyAngle);
-                Debug.Log("Enemy Forward: " + nearestEnemy.transform.forward +
-                          "\nPlayer Relative Position: " + (this.transform.position - nearestEnemy.transform.position));
                 if ( enemyAngle > 150)
                 {
                     this.Attack(this, nearestEnemy);
@@ -111,101 +103,4 @@ public class CharacterStats : MonoBehaviour
     {
         target.TakeDamage(true);
     }
-    /// <summary>
-    /// Used when picking up a note.
-    /// </summary>
-    /// <param name="noteColor"></param>
-    /// <param name="value"></param>
-    /*public void AddNotes(EnemyColor noteColor, int value)
-    {
-        switch (noteColor)
-        {
-            case EnemyColor.Green:
-                greenNotes += value;
-                if (greenNotes >= threshold)
-                {
-                    greenNotes -= threshold;
-                    specialAttack = EnemyColor.Green;
-                }
-                break;
-            case EnemyColor.Blue:
-                blueNotes += value;
-                if (blueNotes >= threshold)
-                {
-                    blueNotes -= threshold;
-                    specialAttack = EnemyColor.Blue;
-                } 
-                break;
-            case EnemyColor.Red:
-                redNotes += value;
-                if (redNotes >= threshold)
-                {
-                    redNotes -= threshold;
-                    specialAttack = EnemyColor.Red;
-                }
-                break;
-            case EnemyColor.Purple:
-                purpleNotes += value;
-                if (purpleNotes >= threshold)
-                {
-                    purpleNotes -= threshold;
-                    specialAttack = EnemyColor.Purple;
-                }
-                break;
-            case EnemyColor.White:
-                notes += value;
-                break;
-        }
-    }*/
-
-    /// <summary>
-    /// Rewards player for killing an enemy.
-    /// </summary>
-    /// <param name="enemyColor"></param>
-    /// <param name="whiteValue"></param>
-    /*public void RewardNotes(EnemyColor enemyColor, int whiteValue, int colorValue)
-    {
-        switch (enemyColor)
-        {
-            case EnemyColor.Green:
-                greenNotes += colorValue;
-                if (greenNotes >= threshold)
-                {
-                    greenNotes -= threshold;
-                    specialAttack = EnemyColor.Green;
-                }
-                break;
-            case EnemyColor.Blue:
-                blueNotes += colorValue;
-                if (blueNotes >= threshold)
-                {
-                    blueNotes -= threshold;
-                    specialAttack = EnemyColor.Blue;
-                }
-                break;
-            case EnemyColor.Red:
-                redNotes += colorValue;
-                if (redNotes >= threshold)
-                {
-                    redNotes -= threshold;
-                    specialAttack = EnemyColor.Red;
-                }
-                break;
-            case EnemyColor.Purple:
-                purpleNotes += colorValue;
-                if (purpleNotes >= threshold)
-                {
-                    purpleNotes -= threshold;
-                    specialAttack = EnemyColor.Purple;
-                }
-                break;
-            case EnemyColor.White:
-                break;
-        }
-        notes += whiteValue;
-    }
-    public void RewardNotes(int value)
-    {
-        this.notes += value;
-    }*/
 }

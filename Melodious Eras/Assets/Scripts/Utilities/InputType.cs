@@ -18,5 +18,6 @@
         SHIFT_VIEW = "Shift View",
         TOGGLE_FLASHLIGHT = "Toggle Flashlight",
         MENU = "Menu",
-        AIM = "Aim";
+        AIM = "Aim",
+        SHOOT = "Shoot";
 }

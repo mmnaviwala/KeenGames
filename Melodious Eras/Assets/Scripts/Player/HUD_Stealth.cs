@@ -14,7 +14,10 @@ public class HUD_Stealth : MonoBehaviour
     private Camera mainCam;
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+    {
+        Screen.showCursor = false;
+
         stats = this.GetComponent<CharacterStats>();
         player = this.GetComponent<PlayerMovementBasic>();
         mainCam = Camera.main;
