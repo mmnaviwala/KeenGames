@@ -61,12 +61,17 @@ public class PlayerMovementBasic : MonoBehaviour
         //----------------------------------------------
         //Determining camera offset
         //AIM (and WALK) offset
+
+        if (Input.GetButtonDown(InputType.RELOAD) && stats.equippedWeapon is Gun)
+        {
+            StartCoroutine(((Gun)stats.equippedWeapon).Reload());
+        }
         if (Input.GetButton(InputType.AIM))
         {
             //Semi-auto
-            if (Input.GetButtonDown(InputType.SHOOT) /*&& (weapon is MeleeWeapon || weapon is SemiAuto)*/)
+            if (Input.GetButtonDown(InputType.SHOOT) && stats.equippedWeapon is Gun /*&& (weapon is MeleeWeapon || weapon is SemiAuto)*/)
             {
-                stats.equippedWeapon.PullTrigger();
+                stats.equippedWeapon.Fire();
             }
             /*if (Input.GetButton(InputType.SHOOT) && weapon is Automatic)
             {
@@ -128,10 +133,13 @@ public class PlayerMovementBasic : MonoBehaviour
 
         if (!isAiming && moving)
         {
-            //this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, mainCam.transform.eulerAngles.y + angle, this.transform.eulerAngles.z);
-            this.transform.eulerAngles = Vector3.Lerp(this.transform.eulerAngles, 
-                new Vector3(this.transform.eulerAngles.x, mainCam.transform.eulerAngles.y + angle, this.transform.eulerAngles.z), 
-                10 * Time.deltaTime);
+            
+            this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, mainCam.transform.eulerAngles.y + angle, this.transform.eulerAngles.z);
+            //this.transform.eulerAngles = Vector3.Lerp(this.transform.eulerAngles, 
+            //    new Vector3(this.transform.eulerAngles.x, mainCam.transform.eulerAngles.y + angle, this.transform.eulerAngles.z), 
+            //    1 * Time.deltaTime);
+
+
             this.rigidbody.velocity = this.transform.forward * speed + new Vector3(0, this.rigidbody.velocity.y, 0);
         }
         else if (isAiming)

@@ -25,7 +25,7 @@ public class HUD_Stealth : MonoBehaviour
         maxWidth = Screen.width / 3;
         healthBarMax = new Rect(Screen.height / 20, Screen.height / 20, maxWidth, maxWidth / 10);
         healthBarCurrent = new Rect(healthBarMax.xMin, healthBarMax.yMin, healthBarMax.width, healthBarMax.height);
-        reticle = new Rect(Screen.width / 2, Screen.height / 2 - Screen.width / 20, Screen.width / 20, Screen.width / 20);
+        reticle = new Rect(Screen.width / 2 - Screen.width / 60, Screen.height / 2 - Screen.width / 60, Screen.width / 30, Screen.width / 30);
 	}
 	
 	// Update is called once per frame
@@ -38,7 +38,7 @@ public class HUD_Stealth : MonoBehaviour
     void OnGUI()
     {
         if(aiming)
-            GUI.Box(reticle, "X");
+            GUI.Box(reticle,"");
 
         GUI.Box(healthBarMax, "Health " + stats.health + "/100");
         GUI.color = new Color(1, 1, 1, .25f);

@@ -19,5 +19,6 @@
         TOGGLE_FLASHLIGHT = "Toggle Flashlight",
         MENU = "Menu",
         AIM = "Aim",
-        SHOOT = "Shoot";
+        SHOOT = "Shoot",
+        RELOAD = "Reload";
 }

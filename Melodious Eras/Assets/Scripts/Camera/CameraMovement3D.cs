@@ -17,7 +17,8 @@ public class CameraMovement3D : CameraMovement
     public float x_sensitivity = 5;
     public float y_sensitivity = 2;
     public int inversion = 1; //1 = not inverted, -1 = inverted (for mouse look)
-    public Vector3 targetPos;
+
+    private Vector3 targetPos, targetLookPos;
 
     Transform player;
     Transform flashlight;
@@ -30,7 +31,11 @@ public class CameraMovement3D : CameraMovement
     {
         player = GameObject.FindGameObjectWithTag(Tags.PLAYER).transform;
         flashlight = player.GetComponent<CharacterStats>().flashlight.transform;
+
         this.transform.position = player.transform.position + defaultOffset;
+
+        targetPos = player.transform.position + defaultOffset;
+
         SetOffset(CameraOffset.Default);
 	}
 	

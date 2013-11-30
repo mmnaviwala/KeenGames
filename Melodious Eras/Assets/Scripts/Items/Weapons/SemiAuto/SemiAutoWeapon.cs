@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SemiAutoWeapon : Weapon 
+public class SemiAutoWeapon : Gun 
 {
 
 	// Use this for initialization

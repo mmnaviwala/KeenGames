@@ -12,14 +12,14 @@ SceneSettings:
     backfaceThreshold: 100
 --- !u!104 &2
 RenderSettings:
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: 0, g: 0, b: 0, a: 1}
   m_FogMode: 3
   m_FogDensity: .0199999996
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientLight: {r: .200000003, g: .200000003, b: .200000003, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 5aab239cac7fe8a4c931693a7535da5c, type: 2}
+  m_AmbientLight: {r: .281238794, g: .286764681, b: .265679032, a: 1}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 53412155bc1016547b1a77b2333c0380, type: 2}
   m_HaloStrength: .5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -2005,6 +2005,68 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 58178192}
   m_Mesh: {fileID: 4302096, guid: e8fd6c73f479b204681263f00e2c0a30, type: 3}
+--- !u!1 &58980717
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 58980719}
+  - 108: {fileID: 58980718}
+  m_Layer: 0
+  m_Name: Directional light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!108 &58980718
+Light:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 58980717}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Type: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: .5
+  m_Range: 10
+  m_SpotAngle: 30
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_Strength: 1
+    m_Bias: .0500000007
+    m_Softness: 4
+    m_SoftnessFade: 1
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_ActuallyLightmapped: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 1
+  m_ShadowSamples: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+  m_IndirectIntensity: 1
+  m_AreaSize: {x: 1, y: 1}
+--- !u!4 &58980719
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 58980717}
+  m_LocalRotation: {x: .408217937, y: -.234569728, z: .109381661, w: .875426114}
+  m_LocalPosition: {x: 8.89422035, y: 10.8525486, z: -26.2021046}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
 --- !u!1 &59293240
 GameObject:
   m_ObjectHideFlags: 0
@@ -21220,6 +21282,7 @@ MonoBehaviour:
   flashlight: {fileID: 0}
   equippedWeapon: {fileID: 0}
   holsteredWeapons: []
+  rightHand: {fileID: 0}
   deathClip: {fileID: 0}
 --- !u!114 &543882908
 MonoBehaviour:
@@ -21242,6 +21305,7 @@ MonoBehaviour:
   useDefaultMovement: 1
   isAiming: 0
   isCrouching: 0
+  isWalking: 0
 --- !u!54 &543882909
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -30138,7 +30202,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 158e1cbb44e531e4990ea6531abc451a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 0}
+  barrelExit: {fileID: 0}
+  projectile: {fileID: 100000, guid: 59498f8907232dd4ebd7707370136e29, type: 2}
   attackAnimation: {fileID: 0}
   mods: []
   shootingSound: {fileID: 0}

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AutoWeapon : Weapon
+public class AutoWeapon : Gun
 {
 
 	// Use this for initialization

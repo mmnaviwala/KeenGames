@@ -22,13 +22,14 @@ public class Projectile : MonoBehaviour
 	
 	}
 
-    public void Propel(Vector3 direction, float force)
+    public void Propel(Vector3 direction, float velocity)
     {
-        this.rigidbody.AddForce(direction * force * damageModifier, ForceMode.Force);
+        this.rigidbody.velocity = direction * velocity;
     }
 
     void OnCollisionEnter(Collision col)
     {
-        Debug.Log(col.contacts[0].point);
+        //Debug.Log("Collision with " + col.collider.name + "at " + col.contacts[0].point);
+        Destroy(this.gameObject);
     }
 }

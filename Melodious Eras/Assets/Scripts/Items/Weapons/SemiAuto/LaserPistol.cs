@@ -19,4 +19,10 @@ public class LaserPistol : SemiAutoWeapon {
 	void Update () {
 	
 	}
+
+    public override IEnumerator Reload()
+    {
+        Debug.Log("Laser Pistol Reload");
+        return base.Reload();
+    }
 }
