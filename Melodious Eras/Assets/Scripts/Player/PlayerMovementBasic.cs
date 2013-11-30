@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Runtime.CompilerServices;
 
-public class PlayerMovementBasic : MonoBehaviour 
+public class PlayerMovementBasic : MonoBehaviour
 {
     public float jumpForce = 20f;
     public float speed = 7f;
@@ -23,8 +23,8 @@ public class PlayerMovementBasic : MonoBehaviour
     private CharacterStats stats;
     private HUD_Stealth hud;
     private Animator anim;
-	
-	void Start ()
+
+    void Start()
     {
         mainCam = Camera.main.GetComponent<CameraMovement3D>();
         stats = this.GetComponent<CharacterStats>();
@@ -34,10 +34,10 @@ public class PlayerMovementBasic : MonoBehaviour
         gravity = Mathf.Abs(Physics.gravity.y);
         anim.SetFloat("Speed", 7.0f);
         anim.SetBool("IsShooting", isShooting);
-	}
-	
-	// Update is called once per frame
-	void Update ()
+    }
+
+    // Update is called once per frame
+    void Update()
     {
         if (!jumping && useDefaultMovement)
         {
@@ -49,7 +49,7 @@ public class PlayerMovementBasic : MonoBehaviour
 
             MovementManager(direction);
         }
-	}
+    }
 
     /// <summary>
     /// <para>Listens for all the necessary inputs associated with character movement. 
@@ -86,7 +86,7 @@ public class PlayerMovementBasic : MonoBehaviour
         }
         else if (Input.GetButtonUp(InputType.AIM))
         {
-            if(!isWalking) //Will only change offset if the player isn't holding down the Walk key
+            if (!isWalking) //Will only change offset if the player isn't holding down the Walk key
                 mainCam.SetOffset(isCrouching ? CameraOffset.Crouch : CameraOffset.Default);
             isAiming = false;
             anim.SetBool("IsShooting", isAiming);
@@ -114,7 +114,7 @@ public class PlayerMovementBasic : MonoBehaviour
         {
             this.Jump();
         }
- 
+
     }
 
     void MovementManager(Vector2 direction)
@@ -133,21 +133,22 @@ public class PlayerMovementBasic : MonoBehaviour
 
         if (!isAiming && moving)
         {
-            
+
             this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, mainCam.transform.eulerAngles.y + angle, this.transform.eulerAngles.z);
+            this.anim.applyRootMotion = true;
             //this.transform.eulerAngles = Vector3.Lerp(this.transform.eulerAngles, 
             //    new Vector3(this.transform.eulerAngles.x, mainCam.transform.eulerAngles.y + angle, this.transform.eulerAngles.z), 
             //    1 * Time.deltaTime);
 
 
-            this.rigidbody.velocity = this.transform.forward * speed + new Vector3(0, this.rigidbody.velocity.y, 0);
+            //this.rigidbody.velocity = this.transform.forward * speed + new Vector3(0, this.rigidbody.velocity.y, 0);
         }
         else if (isAiming)
         {
             this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, mainCam.transform.eulerAngles.y, this.transform.eulerAngles.z);
-            
-            this.rigidbody.velocity = (this.transform.right * direction.x + this.transform.forward * direction.y) * speed + 
-                                       new Vector3(0, this.rigidbody.velocity.y, 0);
+
+            this.anim.applyRootMotion = false;
+            this.rigidbody.velocity = (this.transform.right * direction.x + this.transform.forward * direction.y) * speed + new Vector3(0, this.rigidbody.velocity.y, 0);
         }
         //Snapping character down to the ground on slopes. (May no longer be necessary if moving the player with Velocity rather than translating)
         /*RaycastHit hit;
@@ -167,7 +168,6 @@ public class PlayerMovementBasic : MonoBehaviour
         float impactVelocity = Vector3.Magnitude(collision.relativeVelocity);
         if (impactVelocity > 30)
         {
-            Debug.Log("Collision impact high (relative velocity = " + impactVelocity + " > 30; Player taking damage.");
             stats.health -= (int)(impactVelocity - 30);
             //Take damage
             //emit noise
@@ -217,12 +217,5 @@ public class PlayerMovementBasic : MonoBehaviour
     public bool IsGrounded()
     {
         return Physics.Raycast(this.transform.position, Vector3.down, 0.25f);
-    }
-
-    public void Stop(bool stopShooting)
-    {
-        this.speed = 0;
-        this.anim.SetFloat("Speed", 0);
-        this.anim.SetBool("IsShooting", !stopShooting);
     }
 }

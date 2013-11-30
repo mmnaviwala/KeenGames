@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Gun : Weapon {
+public class Gun : Weapon
+{
     #region Variables
     public Transform barrelExit;
     public GameObject projectile;   //(Optional?) projectile/ammo type
@@ -28,12 +29,18 @@ public class Gun : Weapon {
     // Use this for initialization
     void Start()
     {
+        this.Initialize();
+    }
+
+    public override void Initialize()
+    {
+        base.Initialize();
         if (barrelExit == null)
             barrelExit = this.transform.FindChild("barrel_exit");
         shotFiredTime = nextShotTime = Time.time;
         mainCam = Camera.main;
-        Debug.Log(barrelExit.name);
         centerScreen = new Vector3(mainCam.pixelWidth / 2, mainCam.pixelHeight / 2, mainCam.nearClipPlane);
+
     }
 
     // Update is called once per frame
@@ -72,7 +79,7 @@ public class Gun : Weapon {
                 Quaternion rot = Quaternion.FromToRotation(projectile.transform.up, direction);
 
                 GameObject proj = (GameObject)Instantiate(projectile, barrelExit.position, rot);
-                proj.GetComponent<Projectile>().Propel(direction, muzzleVelocity);
+                proj.GetComponent<Projectile>().Shoot(direction, damage, muzzleVelocity);
                 ammoInClip -= ammoPerShot;
 
                 this.audio.PlayOneShot(shootingSound);
@@ -82,7 +89,8 @@ public class Gun : Weapon {
             else
             {
                 this.audio.PlayOneShot(emptySound);
-                StartCoroutine(this.Reload());
+                if(this.extraAmmo > 0)
+                    StartCoroutine(this.Reload());
                 return false;
             }
         }

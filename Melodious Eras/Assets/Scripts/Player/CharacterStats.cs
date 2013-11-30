@@ -32,7 +32,7 @@ public class CharacterStats : MonoBehaviour
     {
         //flashlight = this.transform.GetChild(1).GetChild(0).GetChild(0).GetChild(2).GetChild(1).GetComponent<Flashlight>();
         //rightHand =  this.transform.GetChild(1).GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(0);
-        equippedWeapon =  rightHand.GetChild(0).GetComponent<Weapon>();
+        equippedWeapon = rightHand.GetChild(0).GetComponent<Weapon>();
         //equippedWeapon.player = this;
 
         holsteredWeapons = new Weapon[3];
@@ -47,7 +47,7 @@ public class CharacterStats : MonoBehaviour
 
     void Update()
     {
-        if(nearbyEnemies.Count > 0)
+        if (nearbyEnemies.Count > 0)
         {
             if (Input.GetButtonDown(InputType.MELEE))
             {
@@ -70,7 +70,7 @@ public class CharacterStats : MonoBehaviour
                 //If the player is behind the target (60-degree area)
                 Vector3 relPlayerPos = this.transform.position - nearestEnemy.transform.position;
                 float enemyAngle = Vector3.Angle(nearestEnemy.transform.forward, new Vector3(relPlayerPos.x, 0, relPlayerPos.z));
-                if ( enemyAngle > 150)
+                if (enemyAngle > 150)
                 {
                     this.Attack(this, nearestEnemy);
                 }

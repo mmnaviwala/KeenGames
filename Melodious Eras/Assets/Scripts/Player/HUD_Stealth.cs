@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HUD_Stealth : MonoBehaviour 
+public class HUD_Stealth : MonoBehaviour
 {
     public GUIStyle healthMaxStyle, healthCurrentStyle, flashlightLifeStyle, reticleStyle;
 
@@ -13,8 +13,8 @@ public class HUD_Stealth : MonoBehaviour
     private PlayerMovementBasic player;
     private Camera mainCam;
 
-	// Use this for initialization
-	void Start () 
+    // Use this for initialization
+    void Start()
     {
         Screen.showCursor = false;
 
@@ -26,21 +26,21 @@ public class HUD_Stealth : MonoBehaviour
         healthBarMax = new Rect(Screen.height / 20, Screen.height / 20, maxWidth, maxWidth / 10);
         healthBarCurrent = new Rect(healthBarMax.xMin, healthBarMax.yMin, healthBarMax.width, healthBarMax.height);
         reticle = new Rect(Screen.width / 2 - Screen.width / 60, Screen.height / 2 - Screen.width / 60, Screen.width / 30, Screen.width / 30);
-	}
-	
-	// Update is called once per frame
-	void Update () 
+    }
+
+    // Update is called once per frame
+    void Update()
     {
         healthBarCurrent.width = maxWidth * stats.health / 100;
         aiming = Input.GetButton(InputType.AIM);
-	}
+    }
 
     void OnGUI()
     {
-        if(aiming)
-            GUI.Box(reticle,"");
+        if (aiming)
+            GUI.Box(reticle, "", reticleStyle);
 
-        GUI.Box(healthBarMax, "Health " + stats.health + "/100");
+        GUI.Box(healthBarMax, "Health: " + stats.health + "/100");
         GUI.color = new Color(1, 1, 1, .25f);
         GUI.Box(healthBarCurrent, "", healthCurrentStyle);
 
