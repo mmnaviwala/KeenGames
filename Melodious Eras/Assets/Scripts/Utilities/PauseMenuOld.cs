@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum Page { None, Main, Options, Credits };
 public class PauseMenuOld : MonoBehaviour
 {
 
@@ -39,10 +40,6 @@ public class PauseMenuOld : MonoBehaviour
 	    "Copyright (c) 2007-2008 Technicat, LLC"};
     public Texture[] crediticons;
 
-    public enum Page
-    {
-        None, Main, Options, Credits
-    }
 
     private Page currentPage;
 
@@ -52,12 +49,16 @@ public class PauseMenuOld : MonoBehaviour
     private int toolbarInt = 0;
     private string[] toolbarstrings = { "Audio", "Graphics", "Stats", "System" };
 
+    private HUD_Stealth hud;
+    private CameraMovement3D cam;
+
 
     void Start()
     {
         fpsarray = new float[Screen.width];
         Time.timeScale = 1;
-        //PauseGame();
+        cam = Camera.main.GetComponent<CameraMovement3D>();
+        hud = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<HUD_Stealth>();
     }
 
     void OnPostRender()
@@ -370,6 +371,8 @@ public class PauseMenuOld : MonoBehaviour
 
     void PauseGame()
     {
+        hud.Disable();
+        cam.enabled = false;
         savedTimeScale = Time.timeScale;
         Time.timeScale = 0;
         AudioListener.pause = true;
@@ -378,6 +381,8 @@ public class PauseMenuOld : MonoBehaviour
 
     void UnPauseGame()
     {
+        hud.Enable();
+        cam.enabled = true;
         Time.timeScale = savedTimeScale;
         AudioListener.pause = false;
 

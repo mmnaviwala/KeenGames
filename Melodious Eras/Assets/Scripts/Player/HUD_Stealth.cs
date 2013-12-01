@@ -61,4 +61,19 @@ public class HUD_Stealth : MonoBehaviour
         GUI.Box(healthBarCurrent, "", healthCurrentStyle);
         GUI.Box(armorBarCurrent, "", armorCurrentStyle);
     }
+
+    public void Enable()
+    {
+        this.enabled = true;
+        Screen.lockCursor = true;
+        Screen.showCursor = false;
+    }
+
+    public void Disable()
+    {
+        this.enabled = false;
+        Screen.lockCursor = false;
+        Screen.showCursor = true;
+ 
+    }
 }
