@@ -15,14 +15,14 @@ public class EnemyStats : MonoBehaviour
         AI = this.GetComponent<EnemyAI>();
     }
 
-    public void Update()
+    /*public void Update()
     {
         if (isDead)
         {
-            AI.playerStats.closeQuarterEnemies.Remove(this);
+            AI.player.closeQuarterEnemies.Remove(this);
             Destroy(this.gameObject);
         }
-    }
+    }*/
 
     /// <summary>
     /// Deals damage to the enemy.
@@ -34,7 +34,19 @@ public class EnemyStats : MonoBehaviour
         if (this.health <= 0)
         {
             this.isDead = true;
+            Destroy(this.gameObject);
         }
+    }
+    public void TakeDamage(int damage, CharacterStats source)
+    {
+        AI.player = source;
+        this.health -= damage;
+        if (this.health <= 0)
+        {
+            this.isDead = true;
+            Destroy(this.gameObject);
+        }
+ 
     }
     /// <summary>
     /// Instantly kills this enemy.
@@ -42,6 +54,7 @@ public class EnemyStats : MonoBehaviour
     public void TakeDamage(bool instantKill)
     {
         isDead = true;
+        Destroy(this.gameObject);
     }
 
 }

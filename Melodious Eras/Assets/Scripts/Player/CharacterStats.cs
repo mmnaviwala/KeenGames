@@ -8,23 +8,26 @@ using System.Collections.Generic;
 public class CharacterStats : MonoBehaviour
 {
     public int health = 100, maxHealth = 100;
+    public bool isDead = false;
     public List<EnemyStats> closeQuarterEnemies, //will be available for melee attacks
                             nearbyEnemies;       //will be in range to hear
     public int threshold = 5;
+    public int meleeDamage = 10; //damage modifier could be calculated by melee weapons
 
     public Suit suit;
     public Flashlight flashlight;
     public Weapon equippedWeapon;
     public Weapon[] holsteredWeapons;
-    public Transform rightHand;
+    public Transform leftHand, rightHand; //right hand holds gun; left hand could hold flashlight/energy shield/sword/secondary gun/etc
 
-    public AudioClip deathClip;
+    public AudioClip deathClip, meleeClip;
     private Animator anim;
     private PlayerMovement playerMovement;
     private HashIDs hash;
     private HUD_Stealth hud;
     private CameraMovement3D mainCam;
 
+    public float attackSpeed = .25f, lastAttack = 0;
     private bool inMeleeRange = false;
     private bool attacking;
     private float meleeHeldDown = 0;
@@ -39,6 +42,7 @@ public class CharacterStats : MonoBehaviour
 
         holsteredWeapons = new Weapon[3];
         closeQuarterEnemies = new List<EnemyStats>();
+        lastAttack = Time.time;
     }
     void Start()
     {
@@ -49,6 +53,9 @@ public class CharacterStats : MonoBehaviour
 
     void Update()
     {
+        closeQuarterEnemies.RemoveAll(enemy => enemy == null); //Scans all nearby enemies each frame and removes those who have died, which wouldn't
+        nearbyEnemies.RemoveAll(enemy => enemy == null);       //trigger the OnTriggerExit function
+
         if (closeQuarterEnemies.Count > 0)
         {
             if (Input.GetButtonDown(InputType.MELEE))
@@ -72,10 +79,15 @@ public class CharacterStats : MonoBehaviour
                 //If the player is behind the target (60-degree area)
                 Vector3 relPlayerPos = this.transform.position - nearestEnemy.transform.position;
                 float enemyAngle = Vector3.Angle(nearestEnemy.transform.forward, new Vector3(relPlayerPos.x, 0, relPlayerPos.z));
-                if (enemyAngle > 150)
+
+                if (Time.time > lastAttack + attackSpeed)
                 {
-                    this.Attack(this, nearestEnemy);
+                    lastAttack = Time.time;
+                    this.Attack(this, nearestEnemy, enemyAngle);
                 }
+                else
+                    Debug.Log("Can't attack yet");
+
             }
         }
     }
@@ -102,13 +114,27 @@ public class CharacterStats : MonoBehaviour
     /// Instantly kills the target
     /// </summary>
     /// <param name="target"></param>
-    public void Attack(CharacterStats attacker, EnemyStats target)
+    public void Attack(CharacterStats attacker, EnemyStats target, float angle)
     {
-        target.TakeDamage(true);
+        Debug.Log("Attack angle: " + angle);
+        if (angle > 140)
+        {
+            target.TakeDamage(true);
+        }
+        else
+        {
+            this.audio.PlayOneShot(meleeClip);
+            target.TakeDamage(meleeDamage, this);
+        }
     }
 
     public void TakeDamage(int damage)
     {
-        
+        this.health -= (health > damage) ? damage : health;
+        if (health == 0)
+        {
+            isDead = true;
+            anim.SetBool("Dead", isDead);
+        }
     }
 }

@@ -6,6 +6,7 @@ public class DocumentScript : MonoBehaviour
     public string message, keycode;
     public GUIStyle docStyle;
     public bool reading = false;
+    bool inTrigger = false;
     public Keypad keypadReference;
 
     private HUD_Stealth playerHUD;
@@ -30,12 +31,7 @@ public class DocumentScript : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-
-	}
-
-    void OnTriggerStay(Collider other)
-    {
-        if (other is CapsuleCollider && other.tag == Tags.PLAYER)
+        if (inTrigger)
         {
             if (Input.GetButtonDown(InputType.USE))
             {
@@ -46,13 +42,23 @@ public class DocumentScript : MonoBehaviour
             {
                 reading = false;
                 playerHUD.enabled = true;
-            }
+            } 
+        }        
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other is CapsuleCollider && other.tag == Tags.PLAYER)
+        {
+            inTrigger = true;
         }
     }
+
     void OnTriggerExit(Collider other)
     {
         if (other is CapsuleCollider && other.tag == Tags.PLAYER)
         {
+            inTrigger = false;
             reading = false;
             playerHUD.enabled = true;
         }

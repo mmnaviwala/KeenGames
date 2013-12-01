@@ -8,6 +8,7 @@ public class Keypad : CircuitSwitch
     private CameraMovement3D cam3d;
 
     public bool usingKeypad = false;
+    bool playerNearKeypad = false;
     public bool randomCode = false;
     public string correctCode;
     private string enteredCode;
@@ -78,6 +79,8 @@ public class Keypad : CircuitSwitch
     // Update is called once per frame
     void Update() 
 	{
+        if (playerNearKeypad && Input.GetButtonDown(InputType.USE))
+            usingKeypad = true;
 		if(hasPower && usingKeypad)
 		{
             playerHUD.enabled = false;
@@ -100,28 +103,31 @@ public class Keypad : CircuitSwitch
     void OnTriggerEnter(Collider other)
     {
         //Locking 3rd-person camera onto this keypad
-        //if (other is CapsuleCollider && other.tag == Tags.PLAYER && cam3d.enabled && usingKeypad)
-        //    cam3d.target = this.transform;
+        if (other is CapsuleCollider && other.tag == Tags.PLAYER)
+        {
+            playerNearKeypad = true;
+            //cam3d.target = this.transform;
+        }
     }
 
     void OnTriggerStay(Collider other)
     {
         if (other is CapsuleCollider && other.gameObject.tag == Tags.PLAYER)
         {
-            if (Input.GetButtonDown(InputType.USE))
-            {
-                Vector3 relPlayerPos = other.transform.position - this.transform.position;
-                Ray ray = new Ray(this.transform.position, relPlayerPos);
-                Debug.DrawLine(ray.origin, player.transform.position, Color.red, 2);
+            //if (Input.GetButtonDown(InputType.USE))
+            //{
+            //    Vector3 relPlayerPos = other.transform.position - this.transform.position;
+            //    Ray ray = new Ray(this.transform.position, relPlayerPos);
+            //    Debug.DrawLine(ray.origin, player.transform.position, Color.red, 2);
 
-                RaycastHit hit;
-                Physics.Raycast(ray, out hit);
-                if (hit.collider == other)
-                {
-                    usingKeypad = true;
-                    playerHUD.rigidbody.velocity = new Vector3(0, playerHUD.rigidbody.velocity.y, 0);
-                } 
-            }
+            //    RaycastHit hit;
+            //    Physics.Raycast(ray, out hit);
+            //    if (hit.collider == other)
+            //    {
+            //        usingKeypad = true;
+            //        playerHUD.rigidbody.velocity = new Vector3(0, playerHUD.rigidbody.velocity.y, 0);
+            //    } 
+            //}
         }
     }
     
@@ -131,6 +137,7 @@ public class Keypad : CircuitSwitch
         if (other is CapsuleCollider && other.gameObject.tag == Tags.PLAYER)
         {
             usingKeypad = false;
+            playerNearKeypad = false;
             cam3d.target = null;
         }
     }
