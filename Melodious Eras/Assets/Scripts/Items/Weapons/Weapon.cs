@@ -4,6 +4,9 @@ using System.Collections;
 public class Weapon : MonoBehaviour
 {
     protected SphereCollider soundSphere;
+    protected Sound sound;
+    public string weaponName;
+    public GUIStyle hudStyle;
     void Start()
     {
     }
@@ -21,8 +24,9 @@ public class Weapon : MonoBehaviour
 
     public virtual void Initialize()
     {
-        soundSphere = this.GetComponent<SphereCollider>();
-        soundSphere.enabled = false;
+        //soundSphere = this.GetComponent<SphereCollider>();
+        //soundSphere.enabled = false;
+        sound = this.GetComponent<Sound>();
     }
 
     /// <summary>
@@ -33,5 +37,14 @@ public class Weapon : MonoBehaviour
     public virtual void Damage(EnemyStats enemy, int damage)
     {
         
+    }
+
+    /// <summary>
+    /// String used in HUD.
+    /// </summary>
+    /// <returns></returns>
+    public virtual string HudString()
+    {
+        return weaponName;
     }
 }

@@ -68,12 +68,6 @@ public class LaserPistol : SemiAutoWeapon
         }
     }
 
-    public override IEnumerator Reload()
-    {
-        Debug.Log("Laser Pistol Reload");
-        return base.Reload();
-    }
-
     IEnumerator ShootLaser(Vector3 start, Vector3 end, float renderTime)
     {
         laser.SetPosition(0, start);

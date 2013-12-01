@@ -7,8 +7,9 @@ using System.Collections.Generic;
 /// </summary>
 public class CharacterStats : MonoBehaviour
 {
-    public int health = 100;
-    public List<EnemyStats> nearbyEnemies;
+    public int health = 100, maxHealth = 100;
+    public List<EnemyStats> closeQuarterEnemies, //will be available for melee attacks
+                            nearbyEnemies;       //will be in range to hear
     public int threshold = 5;
 
     public Flashlight flashlight;
@@ -36,7 +37,7 @@ public class CharacterStats : MonoBehaviour
         //equippedWeapon.player = this;
 
         holsteredWeapons = new Weapon[3];
-        nearbyEnemies = new List<EnemyStats>();
+        closeQuarterEnemies = new List<EnemyStats>();
     }
     void Start()
     {
@@ -47,14 +48,14 @@ public class CharacterStats : MonoBehaviour
 
     void Update()
     {
-        if (nearbyEnemies.Count > 0)
+        if (closeQuarterEnemies.Count > 0)
         {
             if (Input.GetButtonDown(InputType.MELEE))
             {
                 //Determining which angle the player's character is facing (the one they want to attack)
-                EnemyStats nearestEnemy = nearbyEnemies[0]; //will actually with the smallest angle away from the player's facing direction
+                EnemyStats nearestEnemy = closeQuarterEnemies[0]; //will actually with the smallest angle away from the player's facing direction
                 float lowestAngle = 180;
-                foreach (EnemyStats enemy in nearbyEnemies)
+                foreach (EnemyStats enemy in closeQuarterEnemies)
                 {
                     float distance = Vector3.Distance(this.transform.position, enemy.transform.position);
 
@@ -82,8 +83,8 @@ public class CharacterStats : MonoBehaviour
     {
         if (!other.isTrigger && other.tag == Tags.ENEMY)
         {
-            nearbyEnemies.Add(other.GetComponent<EnemyStats>());
-            Debug.Log("Nearby Enemy count: " + nearbyEnemies.Count);
+            closeQuarterEnemies.Add(other.GetComponent<EnemyStats>());
+            Debug.Log("Nearby Enemy count: " + closeQuarterEnemies.Count);
         }
     }
 
@@ -91,8 +92,8 @@ public class CharacterStats : MonoBehaviour
     {
         if (!other.isTrigger && other.tag == Tags.ENEMY)
         {
-            nearbyEnemies.Remove(other.GetComponent<EnemyStats>());
-            Debug.Log("Nearby Enemy count: " + nearbyEnemies.Count);
+            closeQuarterEnemies.Remove(other.GetComponent<EnemyStats>());
+            Debug.Log("Nearby Enemy count: " + closeQuarterEnemies.Count);
         }
     }
 

@@ -19,7 +19,7 @@ public class EnemyStats : MonoBehaviour
     {
         if (isDead)
         {
-            AI.playerStats.nearbyEnemies.Remove(this);
+            AI.playerStats.closeQuarterEnemies.Remove(this);
             Destroy(this.gameObject);
         }
     }

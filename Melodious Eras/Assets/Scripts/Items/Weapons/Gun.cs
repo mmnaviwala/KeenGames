@@ -89,8 +89,7 @@ public class Gun : Weapon
             else
             {
                 this.audio.PlayOneShot(emptySound);
-                if(this.extraAmmo > 0)
-                    StartCoroutine(this.Reload());
+                StartCoroutine(this.Reload());
                 return false;
             }
         }
@@ -107,20 +106,25 @@ public class Gun : Weapon
 
     public virtual IEnumerator Reload()
     {
-        //Play animation, do this stuff once the animation is finished
-        reloading = true;
-        this.audio.PlayOneShot(reloadSound);
+        if (extraAmmo > 0)
+        {
+            //Play animation, do this stuff once the animation is finished
+            reloading = true;
+            this.audio.PlayOneShot(reloadSound);
 
-        yield return new WaitForSeconds(reloadSound.length); //until animation callback is implemented
-        int roundsNeeded = clipSize - ammoInClip;
-        Debug.Log("Rounds needed: " + roundsNeeded);
+            yield return new WaitForSeconds(reloadSound.length); //until animation callback is implemented
+            int roundsNeeded = clipSize - ammoInClip;
 
-        int roundsToReload = (extraAmmo > roundsNeeded) ? roundsNeeded : extraAmmo;
-        Debug.Log("Rounds to reload: " + roundsToReload);
+            int roundsToReload = (extraAmmo > roundsNeeded) ? roundsNeeded : extraAmmo;
 
-        extraAmmo -= roundsToReload;
-        ammoInClip += roundsToReload;
-        reloading = false;
+            extraAmmo -= roundsToReload;
+            ammoInClip += roundsToReload;
+            reloading = false;
+        }
+    }
 
+    public override string HudString()
+    {
+        return weaponName + ": " + ammoInClip + " - " + extraAmmo;
     }
 }
