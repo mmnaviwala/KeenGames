@@ -26,10 +26,13 @@ public class CameraMovement3D : CameraMovement
 
     public CameraOffset testOffset = CameraOffset.Default;
 
+    private Animator playerAnim;
+
 	// Use this for initialization
 	void Start () 
     {
         player = GameObject.FindGameObjectWithTag(Tags.PLAYER).transform;
+        playerAnim = player.GetComponent<Animator>();
         flashlight = player.GetComponent<CharacterStats>().flashlight.transform;
 
         this.transform.position = player.transform.position + defaultOffset;
@@ -42,7 +45,21 @@ public class CameraMovement3D : CameraMovement
 	// Update is called once per frame
 	void LateUpdate ()
     {
-        
+        Ray ray = this.camera.ViewportPointToRay(new Vector3(.5f, .5f, 0));
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 100))
+        {
+            playerAnim.SetLookAtWeight(1, .5f, 1, 1, 1);
+            playerAnim.SetLookAtPosition(hit.point);
+        }
+        else
+        {
+            playerAnim.SetLookAtWeight(1, .5f, 1, 1, 1);
+            playerAnim.SetLookAtPosition(this.transform.position + this.transform.forward * 100);
+
+        }
+
         if (Input.GetButtonDown(InputType.SHIFT_VIEW))
         {
             AdjustOffset(new Vector3(-activeOffset.x, activeOffset.y, activeOffset.z));

@@ -3965,6 +3965,42 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: .707106829
       objectReference: {fileID: 0}
+    - target: {fileID: 400182, guid: 71866b5dca507394c9f3b32a24b206be, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400182, guid: 71866b5dca507394c9f3b32a24b206be, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400182, guid: 71866b5dca507394c9f3b32a24b206be, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400182, guid: 71866b5dca507394c9f3b32a24b206be, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400182, guid: 71866b5dca507394c9f3b32a24b206be, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400182, guid: 71866b5dca507394c9f3b32a24b206be, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400182, guid: 71866b5dca507394c9f3b32a24b206be, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400182, guid: 71866b5dca507394c9f3b32a24b206be, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 12000000, guid: 71866b5dca507394c9f3b32a24b206be, type: 2}
+      propertyPath: m_UseWorldSpace
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 71866b5dca507394c9f3b32a24b206be, type: 2}
   m_RootGameObject: {fileID: 1898683349}
@@ -11718,9 +11754,9 @@ Transform:
   m_PrefabParentObject: {fileID: 400182, guid: 71866b5dca507394c9f3b32a24b206be, type: 2}
   m_PrefabInternal: {fileID: 375621330}
   m_GameObject: {fileID: 1719597780}
-  m_LocalRotation: {x: 0, y: -.707106829, z: 0, w: .707106829}
-  m_LocalPosition: {x: .953157663, y: .288586915, z: .42026484}
-  m_LocalScale: {x: .142857105, y: .142857149, z: .142857105}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1898683350}
 --- !u!135 &1719597782
@@ -14084,6 +14120,7 @@ MonoBehaviour:
   closeQuarterEnemies: []
   nearbyEnemies: []
   threshold: 5
+  suit: {fileID: 0}
   flashlight: {fileID: 1763741538}
   equippedWeapon: {fileID: 0}
   holsteredWeapons: []

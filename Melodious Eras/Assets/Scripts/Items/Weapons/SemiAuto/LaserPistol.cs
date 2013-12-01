@@ -29,11 +29,9 @@ public class LaserPistol : SemiAutoWeapon
 
                 Ray ray = mainCam.ViewportPointToRay(new Vector3(.5f, .5f, 0));
                 RaycastHit hit;
-                Vector3 direction;
 
                 if (Physics.Raycast(ray, out hit, range))
                 {
-                    direction = (hit.point - barrelExit.position).normalized; //will go toward the target
                     StartCoroutine(ShootLaser(barrelExit.position, hit.point, .1f));
                     if (hit.collider.tag == Tags.ENEMY && !hit.collider.isTrigger)
                     {
@@ -42,8 +40,7 @@ public class LaserPistol : SemiAutoWeapon
                 }
                 else
                 {
-                    direction = ray.direction; //will just shoot forward; barrelExit.forward should work too
-                    StartCoroutine(ShootLaser(barrelExit.position, barrelExit.position + direction * range, .1f));
+                    StartCoroutine(ShootLaser(barrelExit.position, barrelExit.position + ray.direction * range, .1f));
                 }
 
                 //laser.GetComponent<Laser>().Shoot(barrelExit.position, hit.point, hit.collider.GetComponent<EnemyStats>(), damage, .1f);

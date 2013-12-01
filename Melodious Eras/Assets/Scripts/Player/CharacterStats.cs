@@ -12,6 +12,7 @@ public class CharacterStats : MonoBehaviour
                             nearbyEnemies;       //will be in range to hear
     public int threshold = 5;
 
+    public Suit suit;
     public Flashlight flashlight;
     public Weapon equippedWeapon;
     public Weapon[] holsteredWeapons;
@@ -104,5 +105,10 @@ public class CharacterStats : MonoBehaviour
     public void Attack(CharacterStats attacker, EnemyStats target)
     {
         target.TakeDamage(true);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        
     }
 }
