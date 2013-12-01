@@ -10,7 +10,7 @@ public class Gun : Weapon
     public WeaponMod[] mods;        //May need to be replaced with sub-transform Mod Slots on each gun model.
     public bool isAuto;
 
-    public AudioClip shootingSound, emptySound;
+    public AudioClip shootingSound, emptySound, reloadSound;
 
     public int ammoCapacity, ammoInClip, extraAmmo, maxAmmo, clipSize, ammoPerShot,
                damage, muzzleVelocity;
@@ -109,8 +109,9 @@ public class Gun : Weapon
     {
         //Play animation, do this stuff once the animation is finished
         reloading = true;
-        yield return new WaitForSeconds(1); //until animation callback is implemented
+        this.audio.PlayOneShot(reloadSound);
 
+        yield return new WaitForSeconds(reloadSound.length); //until animation callback is implemented
         int roundsNeeded = clipSize - ammoInClip;
         Debug.Log("Rounds needed: " + roundsNeeded);
 
@@ -120,5 +121,6 @@ public class Gun : Weapon
         extraAmmo -= roundsToReload;
         ammoInClip += roundsToReload;
         reloading = false;
+
     }
 }

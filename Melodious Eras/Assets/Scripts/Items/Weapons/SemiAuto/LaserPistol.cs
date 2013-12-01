@@ -31,22 +31,19 @@ public class LaserPistol : SemiAutoWeapon
                 RaycastHit hit;
                 Vector3 direction;
 
-                if (Physics.Raycast(ray, out hit))
+                if (Physics.Raycast(ray, out hit, range))
                 {
                     direction = (hit.point - barrelExit.position).normalized; //will go toward the target
+                    StartCoroutine(ShootLaser(barrelExit.position, hit.point, .1f));
+                    if (hit.collider.tag == Tags.ENEMY && !hit.collider.isTrigger)
+                    {
+                        hit.collider.GetComponent<EnemyStats>().TakeDamage(damage);
+                    }
                 }
                 else
                 {
                     direction = ray.direction; //will just shoot forward; barrelExit.forward should work too
-                }
-                //Quaternion rot = Quaternion.FromToRotation(projectile.transform.up, direction);
-                //GameObject proj = (GameObject)Instantiate(projectile, barrelExit.position, rot);
-                //proj.GetComponent<Projectile>().Shoot(direction, damage, muzzleVelocity);
-
-                StartCoroutine(ShootLaser(barrelExit.position, hit.point, .1f));
-                if (hit.collider.tag == Tags.ENEMY && !hit.collider.isTrigger)
-                {
-                    hit.collider.GetComponent<EnemyStats>().TakeDamage(damage);
+                    StartCoroutine(ShootLaser(barrelExit.position, barrelExit.position + direction * range, .1f));
                 }
 
                 //laser.GetComponent<Laser>().Shoot(barrelExit.position, hit.point, hit.collider.GetComponent<EnemyStats>(), damage, .1f);
