@@ -4664,7 +4664,7 @@ Transform:
   m_GameObject: {fileID: 130072921}
   m_LocalRotation: {x: .130526185, y: 0, z: 0, w: .991444886}
   m_LocalPosition: {x: 0, y: 0, z: 1.8158915}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: .99999994}
   m_Children: []
   m_Father: {fileID: 498552541}
 --- !u!1 &130756048
@@ -12489,6 +12489,7 @@ GameObject:
   - 114: {fileID: 326466011}
   - 114: {fileID: 326466012}
   - 114: {fileID: 326466013}
+  - 114: {fileID: 326466014}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -12608,6 +12609,22 @@ MonoBehaviour:
   compositeShader: {fileID: 4800000, guid: 96ca71e39c7b6fb4f9bec2c5bf331349, type: 3}
   blurShader: {fileID: 4800000, guid: fb52973118cf00648825ced2fcca240c, type: 3}
   downsampleShader: {fileID: 4800000, guid: b14b79b8936134d3f8238f0c2d40d634, type: 3}
+--- !u!114 &326466014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 326466005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23e2f1f6b0f9642b384978a118f25a90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rainLevel: 0
+  localPosition: {x: 0, y: 10, z: 0}
+  softRain: {fileID: 100002, guid: d061df6a20b1a45eca9536851887b985, type: 2}
+  rain: {fileID: 100002, guid: d7a0c95ae082b4084be6014e9f3a1ec2, type: 2}
+  heavyRain: {fileID: 100002, guid: ae5d05fda33d34aa2851e95b52cc28c4, type: 2}
 --- !u!1001 &326730299
 Prefab:
   m_ObjectHideFlags: 0
@@ -18149,7 +18166,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400002, guid: b125d79d61d7d4ad58d4d7e611bb1537, type: 3}
   m_PrefabInternal: {fileID: 294760846}
   m_GameObject: {fileID: 498552540}
-  m_LocalRotation: {x: 0, y: .926523209, z: 0, w: -.37623772}
+  m_LocalRotation: {x: 0, y: .926523149, z: 0, w: -.37623769}
   m_LocalPosition: {x: 764.716736, y: 73.2560425, z: 661.57312}
   m_LocalScale: {x: 64.4936447, y: 64.4936447, z: 64.4936447}
   m_Children:
@@ -27012,8 +27029,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 756225491}
-  m_LocalRotation: {x: -.0857245252, y: .425148755, z: .0407269299, w: .900133967}
-  m_LocalPosition: {x: 465.00351, y: -175.350311, z: 404.381561}
+  m_LocalRotation: {x: -.0155746816, y: .37596491, z: .00632100971, w: .926481485}
+  m_LocalPosition: {x: 345.459717, y: -251.078171, z: 198.017822}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -44977,14 +44994,14 @@ GUIText:
   m_Enabled: 1
   serializedVersion: 3
   m_Text: Game Name
-  m_Anchor: 4
+  m_Anchor: 7
   m_Alignment: 0
   m_PixelOffset: {x: 0, y: 0}
   m_LineSpacing: 1
   m_TabSize: 4
   m_Font: {fileID: 12800000, guid: 57cb534f0aa604df198868b80036515b, type: 3}
   m_Material: {fileID: 0}
-  m_FontSize: 50
+  m_FontSize: 70
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
@@ -69323,6 +69340,7 @@ GameObject:
   - 4: {fileID: 1866844603}
   - 108: {fileID: 1866844602}
   - 114: {fileID: 1866844604}
+  - 114: {fileID: 1866844605}
   m_Layer: 0
   m_Name: Directional light
   m_TagString: Untagged
@@ -69390,6 +69408,17 @@ MonoBehaviour:
   iterations: 3
   blurSpread: .600000024
   blurShader: {fileID: 4800000, guid: 57e6deea7c2924e22a5138e2b70bb4dc, type: 3}
+--- !u!114 &1866844605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1866844601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e87fb0b088373476d9b1f0a8bfc825aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1867353714
 GameObject:
   m_ObjectHideFlags: 0
