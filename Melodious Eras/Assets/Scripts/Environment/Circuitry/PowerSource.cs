@@ -30,4 +30,18 @@ public class PowerSource : CircuitNode
         this.activated = !activated;
         this.electricGrid.UpdatePowerSource();
     }
+
+    public override void TakeDamage(int damage)
+    {
+        if (durability != -1)
+        {
+            durability -= (durability > damage) ? damage : durability;
+            if (durability == 0)
+            {
+                this.activated = false;
+                this.electricGrid.UpdatePowerSource();
+                this.isBroken = true;
+            }
+        }
+    }
 }

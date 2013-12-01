@@ -5,9 +5,16 @@ public class CircuitNode : MonoBehaviour
 {
     public bool hasPower = false;
     public bool activated = false;
+    public bool isBroken = false;
     public CircuitSwitch connectedSwitch;
     public ElectricGrid electricGrid;
+    public AudioClip activateSound, breakingSound;
+    public int durability = -1; //-1 = invulnerable
 
+    void Awake()
+    {
+ 
+    }
 	// Use this for initialization
 	void Start () 
     {
@@ -35,5 +42,14 @@ public class CircuitNode : MonoBehaviour
     public virtual void TurnOnOff(bool on)
     {
         this.hasPower = on;
+    }
+
+    public virtual void TakeDamage(int damage)
+    {
+        if (durability != -1)
+        {
+            durability -= (durability > damage) ? damage : durability;
+            //break animation/sound
+        }
     }
 }

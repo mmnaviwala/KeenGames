@@ -3,13 +3,16 @@ using System.Collections;
 
 public class CircuitLight : CircuitNode
 {
+    public Light lightbulb;
     public bool flickering = false;
     public float frequency = .5f;
 	// Use this for initialization
 	void Start () 
     {
-        light.enabled = this.hasPower && this.activated;
-        if (this.hasPower && this.activated && flickering)
+        if (lightbulb == null)
+            lightbulb = this.light;
+        lightbulb.enabled = this.hasPower && this.activated && !this.isBroken;
+        if (this.hasPower && !isBroken && this.activated && flickering)
             StartCoroutine(Flicker());
 	}
 	
@@ -22,20 +25,20 @@ public class CircuitLight : CircuitNode
 
     IEnumerator Flicker()
     {
-        while (this.hasPower && activated)
+        while (this.hasPower && activated && !isBroken)
         {
-            this.light.enabled = false;
+            this.lightbulb.enabled = false;
             yield return new WaitForSeconds(.1f);
-            this.light.enabled = true;
+            this.lightbulb.enabled = true;
             yield return new WaitForSeconds(Random.Range(0f, frequency));
         }
-        this.light.enabled = false; //light needs to turn off once power is lost
+        this.lightbulb.enabled = false; //light needs to turn off once power is lost
     }
     public override bool PerformSwitchAction(bool signal)
     {
-        activated = signal;
-        this.light.enabled = hasPower && signal;
-        if (light.enabled && flickering)
+        activated = signal && !isBroken;
+        this.lightbulb.enabled = hasPower && signal && !isBroken;
+        if (lightbulb.enabled && flickering)
         {
             StartCoroutine(Flicker());
         }
@@ -45,5 +48,19 @@ public class CircuitLight : CircuitNode
     public override void TurnOnOff(bool on)
     {
         PerformSwitchAction(on);
+    }
+
+    public override void TakeDamage(int damage)
+    {
+        if (durability != -1)
+        {
+            durability -= (durability > damage) ? damage : durability;
+            if (durability <= 0)
+            {
+                Debug.Log("Durability: " + durability);
+                this.lightbulb.enabled = false;
+                this.isBroken = true;
+            }
+        }
     }
 }

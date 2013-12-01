@@ -22,7 +22,7 @@ public class ElectricGrid : MonoBehaviour
             if (node is PowerSource)
             {
                 powerSources.Add(node as PowerSource);
-                if (node.activated) 
+                if (node.activated)
                     this.hasPower = true;
             }
         });
@@ -45,11 +45,14 @@ public class ElectricGrid : MonoBehaviour
 
         this.enabled = false;
     }
+    void Start()
+    {
+    }
 
     public void UpdatePowerSource()
     {
         bool previousPowerState = hasPower;
-        hasPower = powerSources.Exists((PowerSource source) => source.activated);
+        hasPower = powerSources.Exists((PowerSource source) => source.activated && !source.isBroken);
         if (hasPower != previousPowerState)
         {
             connectedObjects.ForEach(delegate(CircuitNode node) 

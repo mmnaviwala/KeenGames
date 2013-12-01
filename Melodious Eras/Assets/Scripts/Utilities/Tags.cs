@@ -13,4 +13,5 @@
     public const string EDITOR_ONLY = "EditorOnly";
     public const string MAIN_CAMERA = "MainCamera";
     public const string SLIDE = "Slide";
+    public const string BREAKABLE = "Breakable";
 }

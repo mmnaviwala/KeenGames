@@ -43,6 +43,7 @@ public class HUD_Stealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Screen.lockCursor = true;
         healthBarCurrent.width = width_max_health * stats.health / stats.maxHealth;
         armorBarCurrent.width = width_max_armor * suit.armor / suit.maxArmor;
     }

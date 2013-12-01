@@ -50,12 +50,12 @@ public class CameraMovement3D : CameraMovement
 
         if (Physics.Raycast(ray, out hit, 100))
         {
-            playerAnim.SetLookAtWeight(1, .5f, 1, 1, 1);
+            playerAnim.SetLookAtWeight(1, .6f, 1, 1, 1);
             playerAnim.SetLookAtPosition(hit.point);
         }
         else
         {
-            playerAnim.SetLookAtWeight(1, .5f, 1, 1, 1);
+            playerAnim.SetLookAtWeight(1, .6f, 1, 1, 1);
             playerAnim.SetLookAtPosition(this.transform.position + this.transform.forward * 100);
 
         }
@@ -63,7 +63,6 @@ public class CameraMovement3D : CameraMovement
         if (Input.GetButtonDown(InputType.SHIFT_VIEW))
         {
             AdjustOffset(new Vector3(-activeOffset.x, activeOffset.y, activeOffset.z));
-            //activeOffset = new Vector3(-activeOffset.x, activeOffset.y, activeOffset.z);
             Debug.Log(activeOffset);
         }
         this.transform.position = player.position 

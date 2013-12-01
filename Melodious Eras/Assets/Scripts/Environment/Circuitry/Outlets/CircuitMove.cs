@@ -24,7 +24,9 @@ public class CircuitMove : CircuitNode
 
     public override bool PerformSwitchAction(bool signal)
     {
-        activated = signal;
+        activated = signal && !isBroken;
+        if (!activated)
+            return false;
         if (Vector3.Distance(this.transform.position, targetPos) > .5f)
         {
             //this.transform.position = Vector3.Lerp(this.transform.position, targetPos, movementSpeed * Time.deltaTime);

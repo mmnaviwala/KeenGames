@@ -150,7 +150,7 @@ public class PlayerMovementBasic : MonoBehaviour
             this.anim.applyRootMotion = false;
             this.rigidbody.velocity = (this.transform.right * direction.x + this.transform.forward * direction.y) * speed + new Vector3(0, this.rigidbody.velocity.y, 0);
         }
-        //Snapping character down to the ground on slopes. (May no longer be necessary if moving the player with Velocity rather than translating)
+        //Snapping character down to the ground on slopes. (May no longer be necessary if moving the player with Velocity/root motion rather than translating)
         /*RaycastHit hit;
         Physics.Raycast(this.transform.position, Vector3.down, out hit, snapDownThreshold);
         if (hit.point != Vector3.zero)
@@ -174,6 +174,7 @@ public class PlayerMovementBasic : MonoBehaviour
         }
 
         anim.SetBool("IsGrinding", collision.collider.tag == Tags.SLIDE);
+        Debug.Log("Falling at speed " + impactVelocity);
     }
 
     void OnCollisionExit(Collision collision)
