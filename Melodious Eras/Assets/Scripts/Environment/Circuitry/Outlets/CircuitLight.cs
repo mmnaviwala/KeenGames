@@ -7,10 +7,14 @@ public class CircuitLight : CircuitNode
     public bool flickering = false;
     public float frequency = .5f;
 	// Use this for initialization
-	void Start () 
+
+    void Awake()
     {
         if (lightbulb == null)
-            lightbulb = this.light;
+            lightbulb = this.light; 
+    }
+	void Start () 
+    {
         lightbulb.enabled = this.hasPower && this.activated && !this.isBroken;
         if (this.hasPower && !isBroken && this.activated && flickering)
             StartCoroutine(Flicker());

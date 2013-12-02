@@ -61,7 +61,7 @@ public class CharacterStats : MonoBehaviour
             if (Input.GetButtonDown(InputType.MELEE))
             {
                 //Determining which angle the player's character is facing (the one they want to attack)
-                EnemyStats nearestEnemy = closeQuarterEnemies[0]; //will actually with the smallest angle away from the player's facing direction
+                EnemyStats nearestEnemy = closeQuarterEnemies[0]; //will actually be the enemy with the smallest angle away from the player's facing direction
                 float lowestAngle = 180;
                 foreach (EnemyStats enemy in closeQuarterEnemies)
                 {
@@ -82,12 +82,8 @@ public class CharacterStats : MonoBehaviour
 
                 if (Time.time > lastAttack + attackSpeed)
                 {
-                    lastAttack = Time.time;
                     this.Attack(this, nearestEnemy, enemyAngle);
                 }
-                else
-                    Debug.Log("Can't attack yet");
-
             }
         }
     }
@@ -97,7 +93,7 @@ public class CharacterStats : MonoBehaviour
         if (!other.isTrigger && other.tag == Tags.ENEMY)
         {
             closeQuarterEnemies.Add(other.GetComponent<EnemyStats>());
-            Debug.Log("Nearby Enemy count: " + closeQuarterEnemies.Count);
+            Debug.Log("Close-Quarter Enemies: " + closeQuarterEnemies.Count);
         }
     }
 
@@ -106,7 +102,7 @@ public class CharacterStats : MonoBehaviour
         if (!other.isTrigger && other.tag == Tags.ENEMY)
         {
             closeQuarterEnemies.Remove(other.GetComponent<EnemyStats>());
-            Debug.Log("Nearby Enemy count: " + closeQuarterEnemies.Count);
+            Debug.Log("Close-Quarter Enemies: " + closeQuarterEnemies.Count);
         }
     }
 
@@ -116,7 +112,7 @@ public class CharacterStats : MonoBehaviour
     /// <param name="target"></param>
     public void Attack(CharacterStats attacker, EnemyStats target, float angle)
     {
-        Debug.Log("Attack angle: " + angle);
+        lastAttack = Time.time;
         if (angle > 140)
         {
             target.TakeDamage(true);

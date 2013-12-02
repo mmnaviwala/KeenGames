@@ -15,10 +15,10 @@ GameObject:
   - 114: {fileID: 11400000}
   - 82: {fileID: 8200000}
   - 114: {fileID: 11400004}
-  - 135: {fileID: 13500000}
   - 54: {fileID: 5400000}
   - 114: {fileID: 11400002}
-  m_Layer: 0
+  - 114: {fileID: 11400006}
+  m_Layer: 2
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -224,12 +224,39 @@ MonoBehaviour:
   crouchOffset: {x: 0, y: 1.5, z: -3}
   PDA_Offset: {x: 0, y: 0, z: 0}
   fightingOffset: {x: 0, y: 0, z: 0}
+  climbUpOffset: {x: 0, y: 2, z: -3}
+  climbDownOffset: {x: 0, y: 0, z: -3}
   x_sensitivity: 5
   y_sensitivity: 2
   inversion: 1
-  targetPos: {x: 0, y: 0, z: 0}
   target: {fileID: 0}
   testOffset: 0
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 448b43d1e1effbd4c94b44b5293ecd7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skin: {fileID: 0}
+  mat: {fileID: 0}
+  lowFPSColor: {r: 1, g: 0, b: 0, a: 1}
+  highFPSColor: {r: 0, g: 1, b: 0, a: 1}
+  lowFPS: 30
+  highFPS: 50
+  start: {fileID: 0}
+  url: unity.html
+  statColor: {r: 1, g: .921568632, b: .0156862754, a: 1}
+  credits:
+  - A Fugu Games Production
+  - Programming by Phil Chu
+  - Fugu logo by Shane Nakamura Designs
+  - Copyright (c) 2007-2008 Technicat, LLC
+  crediticons: []
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1
@@ -237,18 +264,6 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
---- !u!135 &13500000
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: .100000001
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -6,6 +6,7 @@ public class Ladder : MonoBehaviour
     public float bottom, top;
     GameObject player;
     Vector3 topPos;
+    CameraMovement3D cam;
     public Vector3 snapDirection;
 
     bool climbing = false;
@@ -15,6 +16,7 @@ public class Ladder : MonoBehaviour
     {
         bottom = this.transform.position.y - this.transform.localScale.y / 2;
         top = bottom + this.transform.localScale.y; //temporary (for cubes)
+        cam = Camera.main.GetComponent<CameraMovement3D>();
 	}
 	
 	// Update is called once per frame
@@ -33,14 +35,17 @@ public class Ladder : MonoBehaviour
         {
             if (Input.GetAxis(InputType.VERTICAL) > 0)
             {
+                cam.SetOffset(CameraOffset.ClimbUp);
                 player.transform.position += Vector3.up * 1.5f * Time.deltaTime;
             }
             else if (Input.GetAxis(InputType.VERTICAL) < 0)
             {
+                cam.SetOffset(CameraOffset.ClimbDown);
                 player.transform.position -= Vector3.up * 1.5f * Time.deltaTime;
 
                 if (player.transform.position.y < bottom + .5f)
                 {
+                    cam.SetOffset(CameraOffset.Default);
                     StartCoroutine(FreezeControls());
                     climbing = false;
                     player.GetComponent<PlayerMovementBasic>().useDefaultMovement = true;
@@ -70,6 +75,7 @@ public class Ladder : MonoBehaviour
         {
             if (other.transform.position.y >= top - .5f)
             {
+                cam.SetOffset(CameraOffset.Default);
                 other.transform.position = new Vector3(other.transform.position.x, top, other.transform.position.z) + snapDirection;
                 StartCoroutine(FreezeControls());
             }

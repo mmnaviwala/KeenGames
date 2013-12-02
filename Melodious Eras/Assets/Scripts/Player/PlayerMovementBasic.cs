@@ -8,7 +8,6 @@ public class PlayerMovementBasic : MonoBehaviour
     public float speed = 7f;
     public float snapDownThreshold = .25f;
     public float sound;
-    private float gravity;
 
     public bool jumping = false;
     public bool isShooting = false;
@@ -31,7 +30,6 @@ public class PlayerMovementBasic : MonoBehaviour
         anim = this.GetComponent<Animator>();
         hud = this.GetComponent<HUD_Stealth>();
 
-        gravity = Mathf.Abs(Physics.gravity.y);
         anim.SetFloat("Speed", 7.0f);
         anim.SetBool("IsShooting", isShooting);
     }
@@ -166,9 +164,9 @@ public class PlayerMovementBasic : MonoBehaviour
             jumping = false;
         }
         float impactVelocity = Vector3.Magnitude(collision.relativeVelocity);
-        if (impactVelocity > 30)
+        if (impactVelocity > 20)
         {
-            stats.health -= (int)(impactVelocity - 30);
+            stats.health -= (int)(impactVelocity - 20);
             //Take damage
             //emit noise
         }
@@ -187,7 +185,7 @@ public class PlayerMovementBasic : MonoBehaviour
     {
         if (!jumping)
         {
-            this.rigidbody.AddForce(Vector3.up * gravity * jumpForce);
+            this.rigidbody.AddForce(Vector3.up * jumpForce);
             jumping = true;
             anim.SetBool("IsGrinding", false);
         }
@@ -196,7 +194,7 @@ public class PlayerMovementBasic : MonoBehaviour
     {
         if (!jumping)
         {
-            this.rigidbody.AddForce(Vector3.up * gravity * force);
+            this.rigidbody.AddForce(Vector3.up * force);
             jumping = true;
             anim.SetBool("IsGrinding", false);
         }
@@ -204,7 +202,7 @@ public class PlayerMovementBasic : MonoBehaviour
     public IEnumerator Launch(float force)
     {
         anim.SetBool("IsGrinding", false);
-        this.rigidbody.AddForce(Vector3.up * gravity * force);
+        this.rigidbody.AddForce(Vector3.up * force);
 
         yield return new WaitForSeconds(0.1f); //Giving the player time to add more force to the jump
         jumping = true;

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum CameraOffset { Default, Walk, Crouch, PDA , Fighting };
+public enum CameraOffset { Default, Walk, Crouch, PDA , Fighting, ClimbUp, ClimbDown};
 public class CameraMovement3D : CameraMovement 
 {
     public float offsetX = 0, offsetY = 0, offsetZ = 0;
@@ -12,11 +12,13 @@ public class CameraMovement3D : CameraMovement
     public Vector3 crouchOffset;
     public Vector3 PDA_Offset;
     public Vector3 fightingOffset;
+    public Vector3 climbUpOffset, climbDownOffset;
     private Vector3 activeOffset;
 
     public float x_sensitivity = 5;
     public float y_sensitivity = 2;
-    public int inversion = 1; //1 = not inverted, -1 = inverted (for mouse look)
+    public int invertLook = 1; //1 = not inverted, -1 = inverted (for mouse look)
+    private int invertOffset = 1; //-1 = inversion of x-offset
 
     private Vector3 targetPos, targetLookPos;
 
@@ -45,24 +47,13 @@ public class CameraMovement3D : CameraMovement
 	// Update is called once per frame
 	void LateUpdate ()
     {
-        Ray ray = this.camera.ViewportPointToRay(new Vector3(.5f, .5f, 0));
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, 100))
-        {
-            playerAnim.SetLookAtWeight(1, .6f, 1, 1, 1);
-            playerAnim.SetLookAtPosition(hit.point);
-        }
-        else
-        {
-            playerAnim.SetLookAtWeight(1, .6f, 1, 1, 1);
-            playerAnim.SetLookAtPosition(this.transform.position + this.transform.forward * 100);
-
-        }
+        if(!(activeOffset.Equals(crouchOffset) || activeOffset.Equals(climbUpOffset) || activeOffset.Equals(climbDownOffset)))
+            TurnPlayerHead();
 
         if (Input.GetButtonDown(InputType.SHIFT_VIEW))
         {
-            AdjustOffset(new Vector3(-activeOffset.x, activeOffset.y, activeOffset.z));
+            InvertOffset();
+            //AdjustOffset(new Vector3(-activeOffset.x, activeOffset.y, activeOffset.z));
             Debug.Log(activeOffset);
         }
         this.transform.position = player.position 
@@ -73,7 +64,7 @@ public class CameraMovement3D : CameraMovement
         //---------------------------------------------------
         //Testing area
         float intensityX = Input.GetAxis(InputType.MOUSE_X);
-        float intensityY = Input.GetAxis(InputType.MOUSE_Y) * inversion;
+        float intensityY = Input.GetAxis(InputType.MOUSE_Y) * invertLook;
         
         if (intensityX != 0)
         {
@@ -106,23 +97,65 @@ public class CameraMovement3D : CameraMovement
         //SetOffset(testOffset);
 	}
 
+    void TurnPlayerHead()
+    {
+        Ray ray = this.camera.ViewportPointToRay(new Vector3(.5f, .5f, 0));
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 100))
+        {
+            playerAnim.SetLookAtWeight(1, .5f, 1, 1, 1);
+            playerAnim.SetLookAtPosition(hit.point);
+        }
+        else
+        {
+            playerAnim.SetLookAtWeight(1, .5f, 1, 1, 1);
+            playerAnim.SetLookAtPosition(this.transform.position + this.transform.forward * 100);
+        } 
+    }
+
+    void CalculateLookPos()
+    {
+        Vector3 faceHeight = player.transform.position + player.transform.up * 1.5f;
+
+        RaycastHit hit;
+        if(Physics.Raycast(faceHeight, player.transform.right * invertOffset, out hit, Mathf.Abs(activeOffset.x)))
+        {
+
+        }
+    }
+    void CalculateCamPos()
+    {
+
+        RaycastHit hit;
+
+        this.transform.position = Vector3.Lerp(this.transform.position, targetPos, 5 * Time.deltaTime);
+        this.transform.LookAt(targetLookPos);
+    }
+
+    public void InvertOffset()
+    {
+        invertOffset = -invertOffset;
+        activeOffset.x = -activeOffset.x;
+    }
     /// <summary>
     /// Used for Shift View; Currently only used to switch from right-shoulder to left-shoulder view.
     /// </summary>
     /// <param name="newOffset"></param>
-    public void AdjustOffset(Vector3 newOffset)
-    {
-        switch (testOffset)
-        {
-            case CameraOffset.Default:  defaultOffset = newOffset;  break;
-            case CameraOffset.Walk:     walkOffset = newOffset;     break;
-            case CameraOffset.Crouch:   crouchOffset = newOffset;   break;
-            case CameraOffset.PDA:      PDA_Offset = newOffset;     break;
-            case CameraOffset.Fighting: fightingOffset = newOffset; break;
-        }
-        activeOffset = newOffset;
-        target = null;
-    }
+    //public void AdjustOffset(Vector3 newOffset)
+    //{
+    //    activeOffset = newOffset;
+    //    //switch (testOffset)
+    //    //{
+    //    //    case CameraOffset.Default:  defaultOffset = newOffset;  break;
+    //    //    case CameraOffset.Walk:     walkOffset = newOffset;     break;
+    //    //    case CameraOffset.Crouch:   crouchOffset = newOffset;   break;
+    //    //    case CameraOffset.PDA:      PDA_Offset = newOffset;     break;
+    //    //    case CameraOffset.Fighting: fightingOffset = newOffset; break;
+    //    //}
+    //    //activeOffset = newOffset;
+    //    target = null;
+    //}
 
     public void SetOffset(Vector3 newOffset, Transform targetP)
     {
@@ -144,7 +177,10 @@ public class CameraMovement3D : CameraMovement
             case CameraOffset.Crouch:   activeOffset = crouchOffset;    break;
             case CameraOffset.PDA:      activeOffset = PDA_Offset;      break;
             case CameraOffset.Fighting: activeOffset = fightingOffset;  break;
+            case CameraOffset.ClimbUp:  activeOffset = climbUpOffset;   break;
+            case CameraOffset.ClimbDown:activeOffset = climbDownOffset; break;
         }
+        activeOffset.x *= invertOffset;
     }
 
     void SmoothLook()

@@ -12,6 +12,7 @@ public class ElectricGrid : MonoBehaviour
 
     void Awake()
     {
+        Debug.Log(this.name + " starting");
         powerSources = new List<PowerSource>();
 
         connectedObjects.ForEach(delegate(CircuitNode node)
