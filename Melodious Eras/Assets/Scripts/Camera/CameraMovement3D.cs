@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum CameraOffset { Default, Walk, Crouch, PDA , Fighting, ClimbUp, ClimbDown};
+public enum CameraOffset { Default, Walk, Crouch, PDA , Fighting, ClimbUp, ClimbDown, Hacking};
 public class CameraMovement3D : CameraMovement 
 {
     public float offsetX = 0, offsetY = 0, offsetZ = 0;
@@ -11,6 +11,7 @@ public class CameraMovement3D : CameraMovement
     public Vector3 walkOffset;
     public Vector3 crouchOffset;
     public Vector3 PDA_Offset;
+    public Vector3 HackingOffset;
     public Vector3 fightingOffset;
     public Vector3 climbUpOffset, climbDownOffset;
     private Vector3 activeOffset;
@@ -126,7 +127,6 @@ public class CameraMovement3D : CameraMovement
     }
     void CalculateCamPos()
     {
-
         RaycastHit hit;
 
         this.transform.position = Vector3.Lerp(this.transform.position, targetPos, 5 * Time.deltaTime);
@@ -138,30 +138,10 @@ public class CameraMovement3D : CameraMovement
         invertOffset = -invertOffset;
         activeOffset.x = -activeOffset.x;
     }
-    /// <summary>
-    /// Used for Shift View; Currently only used to switch from right-shoulder to left-shoulder view.
-    /// </summary>
-    /// <param name="newOffset"></param>
-    //public void AdjustOffset(Vector3 newOffset)
-    //{
-    //    activeOffset = newOffset;
-    //    //switch (testOffset)
-    //    //{
-    //    //    case CameraOffset.Default:  defaultOffset = newOffset;  break;
-    //    //    case CameraOffset.Walk:     walkOffset = newOffset;     break;
-    //    //    case CameraOffset.Crouch:   crouchOffset = newOffset;   break;
-    //    //    case CameraOffset.PDA:      PDA_Offset = newOffset;     break;
-    //    //    case CameraOffset.Fighting: fightingOffset = newOffset; break;
-    //    //}
-    //    //activeOffset = newOffset;
-    //    target = null;
-    //}
 
-    public void SetOffset(Vector3 newOffset, Transform targetP)
+    public void SetOffset(CameraOffset newOffset, Transform targetP)
     {
-        offsetX = newOffset.x;
-        offsetY = newOffset.y;
-        offsetZ = newOffset.z;
+        SetOffset(newOffset);
         target = targetP;
     }
     /// <summary>
@@ -179,6 +159,7 @@ public class CameraMovement3D : CameraMovement
             case CameraOffset.Fighting: activeOffset = fightingOffset;  break;
             case CameraOffset.ClimbUp:  activeOffset = climbUpOffset;   break;
             case CameraOffset.ClimbDown:activeOffset = climbDownOffset; break;
+            case CameraOffset.Hacking: activeOffset = HackingOffset; break;
         }
         activeOffset.x *= invertOffset;
     }

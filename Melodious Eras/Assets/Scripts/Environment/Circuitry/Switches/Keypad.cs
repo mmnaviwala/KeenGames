@@ -79,6 +79,8 @@ public class Keypad : CircuitSwitch
     // Update is called once per frame
     void Update() 
 	{
+        if (playerNearKeypad && Input.GetKeyDown(KeyCode.H))
+            StartCoroutine(OnHacking());
         if (playerNearKeypad && Input.GetButtonDown(InputType.USE))
             usingKeypad = true;
 		if(hasPower && usingKeypad)
@@ -212,5 +214,36 @@ public class Keypad : CircuitSwitch
         correctCode = "";
         for (int n = 0; n < codeLength; n++)
             correctCode += Random.Range(0, 9);
+    }
+
+    IEnumerator OnHacking()
+    {
+        CameraMovement3D cam = Camera.main.GetComponent<CameraMovement3D>();
+
+        //disable default camera movement
+        cam.enabled = false;
+        yield return new WaitForEndOfFrame();
+        cam.transform.position = this.transform.position + this.transform.forward;
+        cam.transform.LookAt(this.transform);
+
+        StartCoroutine(Test());
+        //StartCoroutine(Hack());
+        //enable default camera movement
+        cam.enabled = true;
+    }
+
+    IEnumerator Hack()
+    {
+        while (true /*while hacking*/)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    IEnumerator Test()
+    {
+        Debug.Log("Starting");
+        yield return new WaitForSeconds(1.5f);
+        Debug.Log("Ending");
     }
 }
