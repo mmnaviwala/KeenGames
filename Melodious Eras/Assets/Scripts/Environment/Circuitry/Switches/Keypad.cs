@@ -85,7 +85,7 @@ public class Keypad : CircuitSwitch
 		{
             playerHUD.enabled = false;
             for (int k = 0; k < 10; k++)
-                if (Input.GetKeyDown(KeyCode.Keypad0 + k))
+                if (Input.GetKeyDown(KeyCode.Keypad0 + k) || Input.GetKeyDown(KeyCode.Alpha0 + k))
                     StartCoroutine(InputKey(keyNums[k]));
 
             if (Input.GetButtonDown(InputType.START))
@@ -93,7 +93,7 @@ public class Keypad : CircuitSwitch
                 usingKeypad = false;
                 playerHUD.enabled = true;
             }
-            if (Input.GetKeyDown(KeyCode.KeypadEnter))
+            if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return))
                 StartCoroutine(InputKey(keyNums[ENTER_NUM]));
             if (Input.GetKeyDown(KeyCode.Backspace))
                 StartCoroutine(InputKey(keyNums[CLEAR_NUM]));
@@ -171,7 +171,10 @@ public class Keypad : CircuitSwitch
         switch (keyVal)
         {
             case "C":
-                enteredCode = "";
+                if (enteredCode.Length > 1)
+                    enteredCode = enteredCode.Substring(0, enteredCode.Length - 1);
+                else
+                    enteredCode = "";
                 break;
             case "ENTER":
                 foreach (CircuitNode connected in connectedNodes)

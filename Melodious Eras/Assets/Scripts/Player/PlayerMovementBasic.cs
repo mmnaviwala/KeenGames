@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Runtime.CompilerServices;
 
 public class PlayerMovementBasic : MonoBehaviour
 {
@@ -39,13 +38,10 @@ public class PlayerMovementBasic : MonoBehaviour
     {
         if (!jumping && useDefaultMovement)
         {
-            ListenForInputs();
+            //ListenForInputs();
+            CombatInputs();
+            MovementInputs();
 
-            float h = Input.GetAxis(InputType.HORIZONTAL);  //A(neg), D(pos), Left joystick left(neg)/right(pos)
-            float v = Input.GetAxis(InputType.VERTICAL);    //S(neg), W(pos), Left joystick down(neg)/up(pos)
-            Vector2 direction = new Vector2(h, v);
-
-            MovementManager(direction);
         }
     }
 
@@ -55,6 +51,13 @@ public class PlayerMovementBasic : MonoBehaviour
     /// <para>Inputs: Aim, Shoot, Walk, Crouch, Jump</para>
     /// </summary>
     void ListenForInputs()
+    {
+        
+
+        
+    }
+
+    void CombatInputs()
     {
         //----------------------------------------------
         //Determining camera offset
@@ -76,6 +79,11 @@ public class PlayerMovementBasic : MonoBehaviour
  
             }*/
         }
+        else
+        {
+            if (Input.GetButtonDown(InputType.SHOOT))
+                stats.PerformMelee();
+        }
         if (Input.GetButtonDown(InputType.AIM))
         {
             mainCam.SetOffset(CameraOffset.Walk);
@@ -89,7 +97,10 @@ public class PlayerMovementBasic : MonoBehaviour
             isAiming = false;
             anim.SetBool("IsShooting", isAiming);
         }
+    }
 
+    void MovementInputs()
+    {
         //Walking is for PC only; speed is handled by analog sticks on consoles
         //Listening for all 3 to avoid camera shifting issues
         if (Input.GetButtonDown(InputType.WALK))
@@ -106,6 +117,7 @@ public class PlayerMovementBasic : MonoBehaviour
         {
             isCrouching = !isCrouching; //toggled instead of held
             mainCam.SetOffset(isCrouching ? CameraOffset.Crouch : CameraOffset.Default);
+            this.anim.SetBool("Sneaking", isCrouching);
             //Perform crouch here
         }
         if (Input.GetButtonDown(InputType.JUMP))
@@ -113,6 +125,11 @@ public class PlayerMovementBasic : MonoBehaviour
             this.Jump();
         }
 
+        float h = Input.GetAxis(InputType.HORIZONTAL);  //A(neg), D(pos), Left joystick left(neg)/right(pos)
+        float v = Input.GetAxis(InputType.VERTICAL);    //S(neg), W(pos), Left joystick down(neg)/up(pos)
+        Vector2 direction = new Vector2(h, v);
+
+        MovementManager(direction);
     }
 
     void MovementManager(Vector2 direction)
@@ -123,6 +140,11 @@ public class PlayerMovementBasic : MonoBehaviour
         speed = (isWalking || isAiming) ? 2 : 5.657f;
         speed *= ((direction.magnitude < 1) ? direction.magnitude : 1);
         this.anim.SetFloat("Speed", speed);
+        if (speed == 0)
+        {
+            isCrouching = false;
+            this.anim.SetBool("Sneaking", isCrouching);
+        }
 
         // Facing and running the desired direction
         float angle = Vector2.Angle(Vector2.up, direction);
@@ -138,7 +160,6 @@ public class PlayerMovementBasic : MonoBehaviour
             //    new Vector3(this.transform.eulerAngles.x, mainCam.transform.eulerAngles.y + angle, this.transform.eulerAngles.z), 
             //    1 * Time.deltaTime);
 
-
             //this.rigidbody.velocity = this.transform.forward * speed + new Vector3(0, this.rigidbody.velocity.y, 0);
         }
         else if (isAiming)
@@ -148,13 +169,6 @@ public class PlayerMovementBasic : MonoBehaviour
             this.anim.applyRootMotion = false;
             this.rigidbody.velocity = (this.transform.right * direction.x + this.transform.forward * direction.y) * speed + new Vector3(0, this.rigidbody.velocity.y, 0);
         }
-        //Snapping character down to the ground on slopes. (May no longer be necessary if moving the player with Velocity/root motion rather than translating)
-        /*RaycastHit hit;
-        Physics.Raycast(this.transform.position, Vector3.down, out hit, snapDownThreshold);
-        if (hit.point != Vector3.zero)
-        {
-            this.transform.position = new Vector3(this.transform.position.x, hit.point.y, this.transform.position.z);
-        }*/
     }
 
     void OnCollisionEnter(Collision collision)
@@ -164,9 +178,9 @@ public class PlayerMovementBasic : MonoBehaviour
             jumping = false;
         }
         float impactVelocity = Vector3.Magnitude(collision.relativeVelocity);
-        if (impactVelocity > 20)
+        if (collision.contacts[0].normal.y > .7f && impactVelocity > 20)
         {
-            stats.health -= (int)(impactVelocity - 20);
+            stats.health -= 2 * (int)(impactVelocity - 20);
             //Take damage
             //emit noise
         }

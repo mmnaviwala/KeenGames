@@ -60,31 +60,43 @@ public class CharacterStats : MonoBehaviour
         {
             if (Input.GetButtonDown(InputType.MELEE))
             {
-                //Determining which angle the player's character is facing (the one they want to attack)
-                EnemyStats nearestEnemy = closeQuarterEnemies[0]; //will actually be the enemy with the smallest angle away from the player's facing direction
-                float lowestAngle = 180;
-                foreach (EnemyStats enemy in closeQuarterEnemies)
+                PerformMelee();
+            }
+        }
+    }
+
+    public void PerformMelee()
+    {
+        //Determining which angle the player's character is facing (the one they want to attack)
+        if (closeQuarterEnemies.Count > 0)
+        {
+            EnemyStats nearestEnemy = closeQuarterEnemies[0]; //will actually be the enemy with the smallest angle away from the player's facing direction
+            float lowestAngle = 180;
+            foreach (EnemyStats enemy in closeQuarterEnemies)
+            {
+                float distance = Vector3.Distance(this.transform.position, enemy.transform.position);
+
+                Vector3 relEnemyPos = enemy.transform.position - this.transform.position;
+                float angle = Vector3.Angle(relEnemyPos, this.transform.forward);
+                if (angle < lowestAngle)
                 {
-                    float distance = Vector3.Distance(this.transform.position, enemy.transform.position);
-
-                    Vector3 relEnemyPos = enemy.transform.position - this.transform.position;
-                    float angle = Vector3.Angle(relEnemyPos, this.transform.forward);
-                    if (angle < lowestAngle)
-                    {
-                        lowestAngle = angle;
-                        nearestEnemy = enemy;
-                    }
-                }
-
-                //If the player is behind the target (60-degree area)
-                Vector3 relPlayerPos = this.transform.position - nearestEnemy.transform.position;
-                float enemyAngle = Vector3.Angle(nearestEnemy.transform.forward, new Vector3(relPlayerPos.x, 0, relPlayerPos.z));
-
-                if (Time.time > lastAttack + attackSpeed)
-                {
-                    this.Attack(this, nearestEnemy, enemyAngle);
+                    lowestAngle = angle;
+                    nearestEnemy = enemy;
                 }
             }
+
+            //If the player is behind the target (60-degree area)
+            Vector3 relPlayerPos = this.transform.position - nearestEnemy.transform.position;
+            float enemyAngle = Vector3.Angle(nearestEnemy.transform.forward, new Vector3(relPlayerPos.x, 0, relPlayerPos.z));
+
+            if (Time.time > lastAttack + attackSpeed)
+            {
+                this.Attack(this, nearestEnemy, enemyAngle);
+            }
+        }
+        else
+        {
+            //Just perform melee attack
         }
     }
 
