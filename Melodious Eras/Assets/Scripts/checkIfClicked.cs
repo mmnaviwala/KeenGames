@@ -4,6 +4,8 @@ using System.Collections;
 public class checkIfClicked : MonoBehaviour {
 
 	public string guiTextureNameShouldBe;
+	GUITexture normalTexture;
+	GUITexture hoverTexture;
 
 	void OnMouseDown()
 	{
@@ -12,5 +14,9 @@ public class checkIfClicked : MonoBehaviour {
 			// do something here
 			Debug.Log(guiTextureNameShouldBe + " was clicked");
 		}
+	}
+
+	void OnMouseOver()
+	{
 	}
 }
