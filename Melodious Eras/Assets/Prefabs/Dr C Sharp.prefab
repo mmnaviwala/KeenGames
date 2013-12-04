@@ -2481,7 +2481,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100178}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -1.62920685e-07}
-  m_LocalPosition: {x: 0, y: 0, z: -.0250000004}
+  m_LocalPosition: {x: 0, y: 0, z: -.0399999991}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400052}
@@ -2706,7 +2706,7 @@ Animator:
   m_Avatar: {fileID: 9000000, guid: 77e05913b5efa844d9f79a321cad6bd2, type: 3}
   m_Controller: {fileID: 9100000, guid: f556f52c8236f00489a78775baa142e0, type: 2}
   m_CullingMode: 1
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_AnimatePhysics: 0
   m_HasTransformHierarchy: 1
 --- !u!95 &9500002
@@ -2733,7 +2733,7 @@ Light:
   serializedVersion: 3
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 5
+  m_Intensity: 3
   m_Range: 17.5
   m_SpotAngle: 45
   m_CookieSize: 10

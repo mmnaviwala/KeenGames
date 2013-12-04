@@ -151,7 +151,7 @@ public class PlayerMovementBasic : MonoBehaviour
         if (direction.x < 0)
             angle = -angle;
 
-        if (!isAiming && moving)
+        if (!isAiming && moving && !jumping)
         {
 
             this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, mainCam.transform.eulerAngles.y + angle, this.transform.eulerAngles.z);
@@ -176,17 +176,23 @@ public class PlayerMovementBasic : MonoBehaviour
         if (collision.contacts[0].normal.y > .7f)
         {
             jumping = false;
+            anim.applyRootMotion = true;
         }
         float impactVelocity = Vector3.Magnitude(collision.relativeVelocity);
         if (collision.contacts[0].normal.y > .7f && impactVelocity > 20)
         {
-            stats.health -= 2 * (int)(impactVelocity - 20);
-            //Take damage
+            stats.health -= 5 * (int)(impactVelocity - 20);
+            anim.applyRootMotion = true;
             //emit noise
+        }
+        if (jumping && (Mathf.Abs(collision.contacts[0].normal.x) > .5f || Mathf.Abs(collision.contacts[0].normal.z) > .5f))
+        {
+            this.rigidbody.velocity = Vector3.zero;
+            this.transform.position += collision.contacts[0].normal * .25f;
+            Debug.Log("stopping motion. Jumping: " + jumping);
         }
 
         anim.SetBool("IsGrinding", collision.collider.tag == Tags.SLIDE);
-        Debug.Log("Falling at speed " + impactVelocity);
     }
 
     void OnCollisionExit(Collision collision)
@@ -202,6 +208,7 @@ public class PlayerMovementBasic : MonoBehaviour
             this.rigidbody.AddForce(Vector3.up * jumpForce);
             jumping = true;
             anim.SetBool("IsGrinding", false);
+            anim.applyRootMotion = false;
         }
     }
     public void Jump(float force)
@@ -211,6 +218,7 @@ public class PlayerMovementBasic : MonoBehaviour
             this.rigidbody.AddForce(Vector3.up * force);
             jumping = true;
             anim.SetBool("IsGrinding", false);
+            anim.applyRootMotion = false;
         }
     }
     public IEnumerator Launch(float force)
