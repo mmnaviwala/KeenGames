@@ -6,6 +6,7 @@ public class Keypad : CircuitSwitch
     private GameObject player;
 	private HUD_Stealth playerHUD;
     private CameraMovement3D cam3d;
+    public AudioClip accessDeniedClip;
 
     public bool usingKeypad = false;
     bool playerNearKeypad = false;
@@ -198,6 +199,7 @@ public class Keypad : CircuitSwitch
                 else
                 {
                     enteredCode = "INCORRECT";
+                    this.audio.PlayOneShot(accessDeniedClip);
                     yield return new WaitForSeconds(.5f);
                     enteredCode = "";
                 }

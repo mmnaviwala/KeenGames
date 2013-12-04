@@ -24,6 +24,7 @@ public class CircuitMove : CircuitNode
 
     public override bool PerformSwitchAction(bool signal)
     {
+        base.PerformSwitchAction(signal);
         activated = signal && !isBroken;
         if (!activated)
             return false;

@@ -36,6 +36,8 @@ public class CircuitNode : MonoBehaviour
     /// <returns></returns>
     public virtual bool PerformSwitchAction(bool signal)
     {
+        if (activateSound != null && audio != null)
+            this.audio.PlayOneShot(activateSound);
         return false;
     }
 
