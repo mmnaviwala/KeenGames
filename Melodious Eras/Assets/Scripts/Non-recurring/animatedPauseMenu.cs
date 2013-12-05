@@ -16,10 +16,10 @@ public class animatedPauseMenu : MonoBehaviour {
 				Time.timeScale = 0;
 
 				// Fill logs here
-				//GameObject.Find("GUI Text for gui texture left").gameObject.GetComponent<GUIText>().text = "Logs\n\n";
+				GameObject.Find("GUI Text for gui texture left").gameObject.GetComponent<GUIText>().text = "Logs\n\n- Notes Found \n- Emails \n- Account Numbers \n- Custom Notes";
 
 				// Fill inventory here
-				//GameObject.Find("GUI Text for gui texture right").gameObject.GetComponent<GUIText>().text = "Inventory\n\n";
+				GameObject.Find("GUI Text for gui texture right").gameObject.GetComponent<GUIText>().text = "Inventory\n\n- Pistol \n- Shotgun \n- Energy Shield \n- Katana";
 
 				iTween.MoveTo(GameObject.Find("gui texture bottom left").gameObject, iTween.Hash("path",iTweenPath.GetPath("Move Bottom Left Texture In"), "time", 1, "ignoretimescale", true));
 				iTween.MoveTo(GameObject.Find("gui texture bottom right").gameObject, iTween.Hash("path",iTweenPath.GetPath("Move Bottom Right Texture In"), "time", 1, "ignoretimescale", true));
