@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum CameraOffset { Default, Walk, Crouch, PDA , Fighting, ClimbUp, ClimbDown, Hacking};
+public enum CameraOffset { Default, Aim, Crouch, PDA , Fighting, ClimbUp, ClimbDown, Hacking};
 public class CameraMovement3D : CameraMovement 
 {
-    public float offsetX = 0, offsetY = 0, offsetZ = 0;
-    public float smoothness = 5;
+    public float followSpeed = 5;
 
     public Vector3 defaultOffset = new Vector3(-0.5f, 1.5f, -1f);
-    public Vector3 walkOffset;
+    public Vector3 aimOffset;
     public Vector3 crouchOffset;
     public Vector3 PDA_Offset;
     public Vector3 HackingOffset;
@@ -27,8 +26,6 @@ public class CameraMovement3D : CameraMovement
     Transform player;
     Transform flashlight;
     public Transform target = null;
-
-    public CameraOffset testOffset = CameraOffset.Default;
 
     private Animator playerAnim;
 
@@ -156,7 +153,7 @@ public class CameraMovement3D : CameraMovement
         else
             transform.LookAt(target.position, Vector3.up);
         flashlight.rotation = camTargetPos.transform.rotation;
-        this.transform.position = Vector3.Lerp(this.transform.position, camTargetPos.transform.position, 5 * Time.deltaTime);
+        this.transform.position = Vector3.Lerp(this.transform.position, camTargetPos.transform.position, followSpeed * Time.deltaTime);
         //---------------------------------------------------
         
         //SetOffset(testOffset);
@@ -234,7 +231,7 @@ public class CameraMovement3D : CameraMovement
         switch (newOffset)
         {
             case CameraOffset.Default:  activeOffset = defaultOffset;   break;
-            case CameraOffset.Walk:     activeOffset = walkOffset;      break;
+            case CameraOffset.Aim:     activeOffset = aimOffset;      break;
             case CameraOffset.Crouch:   activeOffset = crouchOffset;    break;
             case CameraOffset.PDA:      activeOffset = PDA_Offset;      break;
             case CameraOffset.Fighting: activeOffset = fightingOffset;  break;
@@ -243,13 +240,5 @@ public class CameraMovement3D : CameraMovement
             case CameraOffset.Hacking: activeOffset = HackingOffset; break;
         }
         activeOffset.x *= invertOffset;
-    }
-
-    void SmoothLook()
-    {
-        //looking ahead of the player
-        Vector3 relPlayerPosition = player.transform.position + player.transform.forward * 100 + player.transform.up * offsetY - this.transform.position;
-        Quaternion lookRotation = Quaternion.LookRotation(relPlayerPosition, Vector3.up);
-        transform.rotation = Quaternion.Lerp(this.transform.rotation, lookRotation, smoothness * Time.deltaTime);
     }
 }

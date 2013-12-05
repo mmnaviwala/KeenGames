@@ -86,7 +86,7 @@ public class PlayerMovementBasic : MonoBehaviour
         }
         if (Input.GetButtonDown(InputType.AIM))
         {
-            mainCam.SetOffset(CameraOffset.Walk);
+            mainCam.SetOffset(CameraOffset.Aim);
             isAiming = true;
             anim.SetBool("IsShooting", isAiming);
         }
@@ -106,7 +106,7 @@ public class PlayerMovementBasic : MonoBehaviour
         if (Input.GetButtonDown(InputType.WALK))
         {
             isWalking = true;
-            mainCam.SetOffset(CameraOffset.Walk);
+            mainCam.SetOffset(CameraOffset.Aim);
         }
         else if (Input.GetButtonUp(InputType.WALK))
         {
