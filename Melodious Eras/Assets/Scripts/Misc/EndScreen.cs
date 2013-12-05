@@ -5,7 +5,7 @@ public class EndScreen : MonoBehaviour {
     AudioSource music;
     HUD_Stealth playerHUD;
     GUIStyle headingStyle = new GUIStyle();
-    CharacterStats playerStats;
+    PlayerStats playerStats;
     public Font headingFont;
     public Texture2D endScreen, btnTexture;
     bool completeLevel = false;
@@ -17,7 +17,7 @@ public class EndScreen : MonoBehaviour {
     {
         music = Camera.main.audio;
         playerHUD = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<HUD_Stealth>();
-        playerStats = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<CharacterStats>();
+        playerStats = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<PlayerStats>();
     }
 
     // Update is called once per frame

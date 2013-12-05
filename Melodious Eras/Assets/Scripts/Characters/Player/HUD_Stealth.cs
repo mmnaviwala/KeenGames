@@ -8,7 +8,7 @@ public class HUD_Stealth : MonoBehaviour
     private Rect healthBarMax, healthBarCurrent, armorBarMax, armorBarCurrent, flashlightLife, reticle, weaponRect;
     private float width_max_health, width_max_armor;
 
-    private CharacterStats stats;
+    private PlayerStats stats;
     private PlayerMovementBasic player;
     private Camera mainCam;
     private Weapon weapon;
@@ -19,9 +19,9 @@ public class HUD_Stealth : MonoBehaviour
     {
         Screen.showCursor = false;
 
-        stats = this.GetComponent<CharacterStats>();
+        stats = this.GetComponent<PlayerStats>();
         player = this.GetComponent<PlayerMovementBasic>();
-        weapon = this.GetComponent<CharacterStats>().equippedWeapon;
+        weapon = this.GetComponent<PlayerStats>().equippedWeapon;
         suit = this.GetComponent<Suit>();
         mainCam = Camera.main;
 

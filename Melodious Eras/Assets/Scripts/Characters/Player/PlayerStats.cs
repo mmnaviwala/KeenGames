@@ -5,10 +5,8 @@ using System.Collections.Generic;
 /// <summary>
 /// Stats for the character (currently just the player)
 /// </summary>
-public class CharacterStats : MonoBehaviour
+public class PlayerStats : Character
 {
-    public int health = 100, maxHealth = 100;
-    public bool isDead = false;
     public List<EnemyStats> closeQuarterEnemies, //will be available for melee attacks
                             nearbyEnemies;       //will be in range to hear
     public int threshold = 5;
@@ -16,9 +14,6 @@ public class CharacterStats : MonoBehaviour
 
     public Suit suit;
     public Flashlight flashlight;
-    public Weapon equippedWeapon;
-    public Weapon[] holsteredWeapons;
-    public Transform leftHand, rightHand; //right hand holds gun; left hand could hold flashlight/energy shield/sword/secondary gun/etc
 
     public AudioClip deathClip, meleeClip;
     private Animator anim;
@@ -91,7 +86,7 @@ public class CharacterStats : MonoBehaviour
 
             if (Time.time > lastAttack + attackSpeed)
             {
-                this.Attack(this, nearestEnemy, enemyAngle);
+                this.Attack(nearestEnemy, this, enemyAngle);
             }
         }
         else
@@ -119,24 +114,24 @@ public class CharacterStats : MonoBehaviour
     }
 
     /// <summary>
-    /// Instantly kills the target
+    /// Instantly kills the target if attacking from behind.
     /// </summary>
-    /// <param name="target"></param>
-    public void Attack(CharacterStats attacker, EnemyStats target, float angle)
+    /// <param name="attackerP"></param>
+    public override void Attack(Character targetP, Character attackerP, float angle)
     {
         lastAttack = Time.time;
         if (angle > 140)
         {
-            target.TakeDamage(true);
+            targetP.TakeDamage(true);
         }
         else
         {
             this.audio.PlayOneShot(meleeClip);
-            target.TakeDamage(meleeDamage, this);
+            targetP.TakeDamage(meleeDamage, this);
         }
     }
 
-    public void TakeDamage(int damage)
+    public override void TakeDamage(int damage)
     {
         this.health -= (health > damage) ? damage : health;
         if (health == 0)

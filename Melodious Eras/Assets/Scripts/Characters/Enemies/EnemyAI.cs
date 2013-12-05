@@ -4,7 +4,7 @@ using System.Collections;
 public class EnemyAI : MonoBehaviour
 {
     public NPCGroup group;
-    public CharacterStats player;
+    public Character currentEnemy;
     public float hearingMultiplier = 1;     //0 = deaf, 1 = normal, >1 = dogs & security
     public float awarenessMultiplier = 1;   //
     public float shootingRange, meleeRange;
@@ -45,7 +45,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (!other.isTrigger && other is CapsuleCollider && other.tag == Tags.PLAYER)
         {
-            player = other.GetComponent<CharacterStats>();
+            currentEnemy = other.GetComponent<PlayerStats>();
         }
     }
 
@@ -137,7 +137,7 @@ public class EnemyAI : MonoBehaviour
  
     }
 
-    void Attack(CharacterStats target)
+    void Attack(PlayerStats target)
     {
         target.TakeDamage(10);
     }

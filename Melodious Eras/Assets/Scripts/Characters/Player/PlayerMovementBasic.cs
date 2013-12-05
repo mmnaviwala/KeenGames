@@ -18,14 +18,14 @@ public class PlayerMovementBasic : MonoBehaviour
 
 
     private CameraMovement3D mainCam;
-    private CharacterStats stats;
+    private PlayerStats stats;
     private HUD_Stealth hud;
     private Animator anim;
 
     void Start()
     {
         mainCam = Camera.main.GetComponent<CameraMovement3D>();
-        stats = this.GetComponent<CharacterStats>();
+        stats = this.GetComponent<PlayerStats>();
         anim = this.GetComponent<Animator>();
         hud = this.GetComponent<HUD_Stealth>();
 

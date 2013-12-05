@@ -34,7 +34,7 @@ public class CameraMovement3D : CameraMovement
     {
         player = GameObject.FindGameObjectWithTag(Tags.PLAYER).transform;
         playerAnim = player.GetComponent<Animator>();
-        flashlight = player.GetComponent<CharacterStats>().flashlight.transform;
+        flashlight = player.GetComponent<PlayerStats>().flashlight.transform;
 
         camTargetPos = new GameObject();
         camTargetPos.transform.position = player.transform.position;

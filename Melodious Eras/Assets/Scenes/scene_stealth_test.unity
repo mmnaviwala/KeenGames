@@ -15391,8 +15391,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followSpeed: 4
-  defaultOffset: {x: .5, y: 1.5, z: -1.5}
-  aimOffset: {x: .5, y: 1.5, z: -1}
+  defaultOffset: {x: .600000024, y: 1.5, z: -1.5}
+  aimOffset: {x: .600000024, y: 1.5, z: -1}
   crouchOffset: {x: 0, y: 1.5, z: -3}
   PDA_Offset: {x: 0, y: 0, z: 0}
   HackingOffset: {x: 0, y: 0, z: 1}
@@ -16706,6 +16706,14 @@ Prefab:
     - target: {fileID: 400000, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
       propertyPath: m_LocalRotation.w
       value: .707106829
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
+      propertyPath: aimOffset.x
+      value: .600000024
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
+      propertyPath: defaultOffset.x
+      value: .600000024
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}

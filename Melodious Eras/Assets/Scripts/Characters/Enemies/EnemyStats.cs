@@ -2,15 +2,13 @@
 using System.Collections;
 
 public enum EnemyColor { Green = 0, Blue = 1, Red = 2, Purple = 3, White = 4 }
-public class EnemyStats : MonoBehaviour
+public class EnemyStats : Character
 {
     public bool isVulnerable = false;
-    public bool isDead = false;
     private bool attacking;
     public float meleeSpeed = .5f, shootSpeed = .5f;
     public int meleeDamage = 15;
     private float lastAttackTime;
-    public int health = 100, maxHealth = 100;
 
     private EnemyAI AI;
 
@@ -24,7 +22,7 @@ public class EnemyStats : MonoBehaviour
     {
         if (isDead)
         {
-            AI.player.closeQuarterEnemies.Remove(this);
+            ((PlayerStats)(AI.currentEnemy)).closeQuarterEnemies.Remove(this);
             Destroy(this.gameObject);
         }
     }
@@ -33,7 +31,7 @@ public class EnemyStats : MonoBehaviour
     /// Deals damage to the enemy.
     /// </summary>
     /// <param name="damage"></param>
-    public void TakeDamage(int damage)
+    public override void TakeDamage(int damage)
     {
         this.health -= damage;
         if (this.health <= 0)
@@ -42,9 +40,9 @@ public class EnemyStats : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-    public void TakeDamage(int damage, CharacterStats source)
+    public override void TakeDamage(int damage, Character source)
     {
-        AI.player = source;
+        AI.currentEnemy = source;
         this.health -= damage;
         if (this.health <= 0)
         {
@@ -56,7 +54,7 @@ public class EnemyStats : MonoBehaviour
     /// <summary>
     /// Instantly kills this enemy.
     /// </summary>
-    public void TakeDamage(bool instantKill)
+    public override void TakeDamage(bool instantKill)
     {
         isDead = true;
         Destroy(this.gameObject);
