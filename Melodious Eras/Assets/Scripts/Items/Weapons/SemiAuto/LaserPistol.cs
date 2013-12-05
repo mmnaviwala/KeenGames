@@ -4,12 +4,14 @@ using System.Collections;
 public class LaserPistol : SemiAutoWeapon
 {
     LineRenderer laser;
+    int layerMask_ignorePlayer = 1 << 10;
     // Use this for initialization
     void Start()
     {
         laser = barrelExit.GetComponent<LineRenderer>();
         laser.enabled = false;
         this.Initialize();
+        layerMask_ignorePlayer = ~layerMask_ignorePlayer;
     }
 
     // Update is called once per frame
@@ -29,8 +31,8 @@ public class LaserPistol : SemiAutoWeapon
 
                 Ray ray = mainCam.ViewportPointToRay(new Vector3(.5f, .5f, 0));
                 RaycastHit hit;
-
-                if (Physics.Raycast(ray, out hit, range))
+                
+                if (Physics.Raycast(ray, out hit, range, layerMask_ignorePlayer))
                 {
                     StartCoroutine(ShootLaser(barrelExit.position, hit.point, .1f));
                     if (hit.collider.tag == Tags.ENEMY && !hit.collider.isTrigger)
