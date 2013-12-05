@@ -5,12 +5,11 @@ using System.Collections.Generic;
 /// <summary>
 /// Stats for the character (currently just the player)
 /// </summary>
-public class PlayerStats : Character
+public class PlayerStats : CharacterStats
 {
     public List<EnemyStats> closeQuarterEnemies, //will be available for melee attacks
                             nearbyEnemies;       //will be in range to hear
     public int threshold = 5;
-    public int meleeDamage = 10; //damage modifier could be calculated by melee weapons
 
     public Suit suit;
     public Flashlight flashlight;
@@ -117,7 +116,7 @@ public class PlayerStats : Character
     /// Instantly kills the target if attacking from behind.
     /// </summary>
     /// <param name="attackerP"></param>
-    public override void Attack(Character targetP, Character attackerP, float angle)
+    public override void Attack(CharacterStats targetP, CharacterStats attackerP, float angle)
     {
         lastAttack = Time.time;
         if (angle > 140)

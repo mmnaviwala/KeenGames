@@ -2,12 +2,11 @@
 using System.Collections;
 
 public enum EnemyColor { Green = 0, Blue = 1, Red = 2, Purple = 3, White = 4 }
-public class EnemyStats : Character
+public class EnemyStats : CharacterStats
 {
     public bool isVulnerable = false;
     private bool attacking;
     public float meleeSpeed = .5f, shootSpeed = .5f;
-    public int meleeDamage = 15;
     private float lastAttackTime;
 
     private EnemyAI AI;
@@ -40,7 +39,7 @@ public class EnemyStats : Character
             Destroy(this.gameObject);
         }
     }
-    public override void TakeDamage(int damage, Character source)
+    public override void TakeDamage(int damage, CharacterStats source)
     {
         AI.currentEnemy = source;
         this.health -= damage;

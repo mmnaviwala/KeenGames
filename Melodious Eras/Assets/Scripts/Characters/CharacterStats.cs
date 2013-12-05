@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Character : MonoBehaviour 
+public class CharacterStats : MonoBehaviour 
 {
     public int health = 100, maxHealth = 100;
     public bool isDead = false;
+    public int meleeDamage = 10; //damage modifier could be calculated by melee weapons
 
     public Weapon equippedWeapon;
     public Weapon[] holsteredWeapons;
@@ -25,7 +26,7 @@ public class Character : MonoBehaviour
  
     }
 
-    public virtual void TakeDamage(int damage, Character source)
+    public virtual void TakeDamage(int damage, CharacterStats source)
     {
  
     }
@@ -35,12 +36,12 @@ public class Character : MonoBehaviour
  
     }
 
-    public virtual void Attack(Character target)
+    public virtual void Attack(CharacterStats target)
     {
  
     }
 
-    public virtual void Attack(Character attacker, Character target, float angle)
+    public virtual void Attack(CharacterStats target, CharacterStats attacker, float angle)
     {
 
     }
