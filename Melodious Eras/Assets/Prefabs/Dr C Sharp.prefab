@@ -3400,6 +3400,9 @@ MonoBehaviour:
   fireRate: .100000001
   accuracy: 0
   range: 100
+  ignorePlayer:
+    serializedVersion: 2
+    m_Bits: 4294966267
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1

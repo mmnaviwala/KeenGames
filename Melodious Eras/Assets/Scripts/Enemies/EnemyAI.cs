@@ -42,7 +42,7 @@ public class EnemyAI : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other is CapsuleCollider && other.tag == Tags.PLAYER)
+        if (!other.isTrigger && other is CapsuleCollider && other.tag == Tags.PLAYER)
         {
             player = other.GetComponent<CharacterStats>();
         }
@@ -50,22 +50,31 @@ public class EnemyAI : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        if (other is CapsuleCollider && other.tag == Tags.PLAYER)
+        if (!other.isTrigger && other is CapsuleCollider && other.tag == Tags.PLAYER)
         {
             RaycastHit[] hits;
             
             if (Vector3.Angle(other.transform.position - this.transform.position, this.transform.forward) < 50)
             {
                 hits = Physics.RaycastAll(this.transform.position, other.transform.position - this.transform.position, Vector3.Distance(this.transform.position, other.transform.position));
-                
+                RaycastHit closestHit = hits[0];
+                float closestHitDistance = Vector3.Distance(this.transform.position, closestHit.point);
                 for (int h = 0; h < hits.Length; h++)
                 {
-                    if (hits[h].collider is CapsuleCollider && hits[h].collider.tag == Tags.PLAYER)
+                    if (hits[h].collider.isTrigger)
+                        continue;
+                    float temp = Vector3.Distance(this.transform.position, hits[h].point);
+                    if ( temp < closestHitDistance)
                     {
-                        this.seesPlayer = this.awareOfPlayer = true;
-                        //stats.attack
-                        break;
+                        closestHitDistance = temp;
+                        closestHit = hits[h];
                     }
+                }
+                if (closestHit.collider is CapsuleCollider && closestHit.collider.tag == Tags.PLAYER)
+                {
+                    this.seesPlayer = this.awareOfPlayer = true;
+                    Debug.Log("Player sighted!");
+                    //stats.attack
                 }
             }
         }
