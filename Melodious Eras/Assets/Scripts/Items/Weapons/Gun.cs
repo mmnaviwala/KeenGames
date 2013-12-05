@@ -9,6 +9,7 @@ public class Gun : Weapon
     public Animation attackAnimation, reloadAnimation;
     public WeaponMod[] mods;        //May need to be replaced with sub-transform Mod Slots on each gun model.
     public bool isAuto;
+    public bool infiniteAmmo;
 
     public AudioClip shootingSound, emptySound, reloadSound;
 

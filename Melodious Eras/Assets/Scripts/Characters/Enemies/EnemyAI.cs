@@ -4,6 +4,7 @@ using System.Collections;
 public class EnemyAI : MonoBehaviour
 {
     public NPCGroup group;
+    public Weapon equippedWeapon;
     public CharacterStats currentEnemy;
     public float hearingMultiplier = 1;     //0 = deaf, 1 = normal, >1 = dogs & security
     public float awarenessMultiplier = 1;   //

@@ -16,9 +16,23 @@ public class Weapon : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Used by the player. Fires where the crosshair is centered.
+    /// </summary>
+    /// <returns></returns>
     public virtual bool Fire()
     {
         Debug.Log("Base trigger");
+        return false;
+    }
+
+    /// <summary>
+    /// Generally used by enemies. Attacks the target.
+    /// </summary>
+    /// <param name="target"></param>
+    /// <returns></returns>
+    public virtual bool Fire(CharacterStats target)
+    {
         return false;
     }
 
