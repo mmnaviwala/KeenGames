@@ -33,6 +33,7 @@ public class CameraMovement3D : CameraMovement
 	void Start () 
     {
         player = GameObject.FindGameObjectWithTag(Tags.PLAYER).transform;
+        Debug.Log(player == null);
         playerAnim = player.GetComponent<Animator>();
         flashlight = player.GetComponent<PlayerStats>().flashlight.transform;
 

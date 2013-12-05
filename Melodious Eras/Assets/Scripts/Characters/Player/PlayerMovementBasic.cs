@@ -142,8 +142,8 @@ public class PlayerMovementBasic : MonoBehaviour
         this.anim.SetFloat("Speed", speed);
         if (speed == 0)
         {
-            isCrouching = false;
-            this.anim.SetBool("Sneaking", isCrouching);
+            //isCrouching = false;
+            //this.anim.SetBool("Sneaking", isCrouching);
         }
 
         // Facing and running the desired direction

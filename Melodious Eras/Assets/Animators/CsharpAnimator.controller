@@ -171,6 +171,10 @@ Transition:
     m_ConditionEvent: Speed
     m_EventTreshold: .100000001
     m_ExitTime: .895833313
+  - m_ConditionMode: 2
+    m_ConditionEvent: Sneaking
+    m_EventTreshold: .100000001
+    m_ExitTime: .895833313
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
@@ -206,6 +210,10 @@ Transition:
   - m_ConditionMode: 1
     m_ConditionEvent: Sneaking
     m_EventTreshold: 0
+    m_ExitTime: .895833373
+  - m_ConditionMode: 3
+    m_ConditionEvent: Speed
+    m_EventTreshold: .100000001
     m_ExitTime: .895833373
   m_Atomic: 1
   m_Solo: 0

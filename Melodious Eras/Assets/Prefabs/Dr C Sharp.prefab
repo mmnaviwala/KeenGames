@@ -2928,16 +2928,16 @@ MonoBehaviour:
   health: 100
   maxHealth: 100
   isDead: 0
-  closeQuarterEnemies: []
-  nearbyEnemies: []
-  threshold: 5
   meleeDamage: 10
-  suit: {fileID: 0}
-  flashlight: {fileID: 11400000}
   equippedWeapon: {fileID: 0}
   holsteredWeapons: []
   leftHand: {fileID: 0}
   rightHand: {fileID: 400140}
+  closeQuarterEnemies: []
+  nearbyEnemies: []
+  threshold: 5
+  suit: {fileID: 0}
+  flashlight: {fileID: 11400000}
   deathClip: {fileID: 0}
   meleeClip: {fileID: 8300000, guid: 3ca121c001790493aac9f6aec90cfc06, type: 3}
   attackSpeed: .200000003
