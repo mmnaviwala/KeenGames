@@ -1,15 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CircuitNode : MonoBehaviour 
+public class CircuitNode : BreakableObject 
 {
     public bool hasPower = false;
     public bool activated = false;
     public bool isBroken = false;
     public CircuitSwitch connectedSwitch;
     public ElectricGrid electricGrid;
-    public AudioClip activateSound, breakingSound;
-    public int durability = -1; //-1 = invulnerable
+    public AudioClip activateSound;
 
     void Awake()
     {
@@ -44,14 +43,5 @@ public class CircuitNode : MonoBehaviour
     public virtual void TurnOnOff(bool on)
     {
         this.hasPower = on;
-    }
-
-    public virtual void TakeDamage(int damage)
-    {
-        if (durability != -1)
-        {
-            durability -= (durability > damage) ? damage : durability;
-            //break animation/sound
-        }
     }
 }

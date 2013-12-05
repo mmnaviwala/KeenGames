@@ -80,9 +80,9 @@ public class Keypad : CircuitSwitch
     // Update is called once per frame
     void Update() 
 	{
-        if (playerNearKeypad && Input.GetKeyDown(KeyCode.H))
+        if (!isBroken && playerNearKeypad && Input.GetKeyDown(KeyCode.H))
             StartCoroutine(OnHacking());
-        if (playerNearKeypad && Input.GetButtonDown(InputType.USE))
+        if (!isBroken && playerNearKeypad && Input.GetButtonDown(InputType.USE))
             usingKeypad = true;
 		if(hasPower && usingKeypad)
 		{

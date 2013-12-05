@@ -47,17 +47,17 @@ public class EnemyAI : MonoBehaviour
             player = other.GetComponent<CharacterStats>();
         }
     }
+
     void OnTriggerStay(Collider other)
     {
         if (other is CapsuleCollider && other.tag == Tags.PLAYER)
         {
             RaycastHit[] hits;
             
-            
             if (Vector3.Angle(other.transform.position - this.transform.position, this.transform.forward) < 50)
             {
                 hits = Physics.RaycastAll(this.transform.position, other.transform.position - this.transform.position, Vector3.Distance(this.transform.position, other.transform.position));
-                //Physics.Raycast(this.transform.position, other.transform.position - this.transform.position, out hit);
+                
                 for (int h = 0; h < hits.Length; h++)
                 {
                     if (hits[h].collider is CapsuleCollider && hits[h].collider.tag == Tags.PLAYER)
@@ -65,7 +65,6 @@ public class EnemyAI : MonoBehaviour
                         this.seesPlayer = this.awareOfPlayer = true;
                         //stats.attack
                         break;
-                        
                     }
                 }
             }
@@ -93,5 +92,10 @@ public class EnemyAI : MonoBehaviour
     public void Listen()
     {
  
+    }
+
+    void Attack(CharacterStats target)
+    {
+        target.TakeDamage(10);
     }
 }
