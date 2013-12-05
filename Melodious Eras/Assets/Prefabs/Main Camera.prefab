@@ -63,7 +63,7 @@ Camera:
     m_Bits: 4294967295
   m_RenderingPath: 2
   m_TargetTexture: {fileID: 0}
-  m_HDR: 0
+  m_HDR: 1
   m_OcclusionCulling: 1
 --- !u!54 &5400000
 Rigidbody:
@@ -95,7 +95,7 @@ AudioSource:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 821eed10bb09f804b9e58d6e427279b8, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ca7a9e4a3d02a46a7ac93ffc34907652, type: 3}
   m_PlayOnAwake: 1
   m_Volume: .5
   m_Pitch: 1

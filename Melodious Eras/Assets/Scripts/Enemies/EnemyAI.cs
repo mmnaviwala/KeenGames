@@ -7,6 +7,7 @@ public class EnemyAI : MonoBehaviour
     public CharacterStats player;
     public float hearingMultiplier = 1;     //0 = deaf, 1 = normal, >1 = dogs & security
     public float awarenessMultiplier = 1;   //
+    public float shootingRange, meleeRange;
     private float lightDifferenceMultiplier; //optional feature. Enemies in high-light areas will find it harder to detect players in low-light areas.
     public float patrolSpeed = 2, 
                  chaseSpeed = 5, 
@@ -14,8 +15,12 @@ public class EnemyAI : MonoBehaviour
                  patrolWaitTime = 2;
     public Transform[] patrolWaypoints;
 
+    public bool seesPlayer = false;
+    public bool awareOfPlayer = false;
+
     private Vector3 lastPlayerSighting;
     private NavMeshAgent nav;
+    private EnemyStats stats;
 
     private float chaseTimer = 0;
     private float patrolTimer = 0;
@@ -25,6 +30,7 @@ public class EnemyAI : MonoBehaviour
 	void Start () 
     {
         nav = this.GetComponent<NavMeshAgent>();
+        stats = this.GetComponent<EnemyStats>();
 	}
 	
 	// Update is called once per frame
@@ -39,6 +45,30 @@ public class EnemyAI : MonoBehaviour
         if (other is CapsuleCollider && other.tag == Tags.PLAYER)
         {
             player = other.GetComponent<CharacterStats>();
+        }
+    }
+    void OnTriggerStay(Collider other)
+    {
+        if (other is CapsuleCollider && other.tag == Tags.PLAYER)
+        {
+            RaycastHit[] hits;
+            
+            
+            if (Vector3.Angle(other.transform.position - this.transform.position, this.transform.forward) < 50)
+            {
+                hits = Physics.RaycastAll(this.transform.position, other.transform.position - this.transform.position, Vector3.Distance(this.transform.position, other.transform.position));
+                //Physics.Raycast(this.transform.position, other.transform.position - this.transform.position, out hit);
+                for (int h = 0; h < hits.Length; h++)
+                {
+                    if (hits[h].collider is CapsuleCollider && hits[h].collider.tag == Tags.PLAYER)
+                    {
+                        this.seesPlayer = this.awareOfPlayer = true;
+                        //stats.attack
+                        break;
+                        
+                    }
+                }
+            }
         }
     }
 

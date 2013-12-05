@@ -3384,13 +3384,13 @@ MonoBehaviour:
   reloadAnimation: {fileID: 0}
   mods: []
   isAuto: 0
-  shootingSound: {fileID: 8300000, guid: 68afba37b0add4662b322912a5e54259, type: 3}
+  shootingSound: {fileID: 8300000, guid: 0af3d513283ae634480aa98a0d2da839, type: 3}
   emptySound: {fileID: 8300000, guid: 3b7a828a646174088aa48ee1db9c439c, type: 3}
   reloadSound: {fileID: 8300000, guid: cc98b8ccdf9a248059887d064e7e5067, type: 3}
   ammoCapacity: 10
   ammoInClip: 10
-  extraAmmo: 40
-  maxAmmo: 50
+  extraAmmo: 15
+  maxAmmo: 25
   clipSize: 10
   ammoPerShot: 1
   damage: 35

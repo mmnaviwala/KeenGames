@@ -6,6 +6,10 @@ public class EnemyStats : MonoBehaviour
 {
     public bool isVulnerable = false;
     public bool isDead = false;
+    private bool attacking;
+    public float meleeSpeed = .5f, shootSpeed = .5f;
+    public int meleeDamage = 15;
+    private float lastAttackTime;
     public int health = 100, maxHealth = 100;
 
     private EnemyAI AI;
@@ -13,16 +17,17 @@ public class EnemyStats : MonoBehaviour
     void Start()
     {
         AI = this.GetComponent<EnemyAI>();
+        lastAttackTime = Time.time;
     }
 
-    /*public void Update()
+    public void Update()
     {
         if (isDead)
         {
             AI.player.closeQuarterEnemies.Remove(this);
             Destroy(this.gameObject);
         }
-    }*/
+    }
 
     /// <summary>
     /// Deals damage to the enemy.
