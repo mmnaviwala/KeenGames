@@ -17,6 +17,9 @@ public class Ladder : MonoBehaviour
         bottom = this.transform.position.y - this.transform.localScale.y / 2;
         top = bottom + this.transform.localScale.y; //temporary (for cubes)
         cam = Camera.main.GetComponent<CameraMovement3D>();
+
+        bottom = this.renderer.bounds.min.y;
+        top = this.renderer.bounds.max.y;
 	}
 	
 	// Update is called once per frame

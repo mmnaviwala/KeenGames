@@ -340,7 +340,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: .923879564, z: 0, w: .382683456}
-  m_LocalPosition: {x: 22.7127495, y: 2.27355003, z: -2.99058843}
+  m_LocalPosition: {x: -64.6285858, y: 14.9970579, z: 32.7026825}
   m_LocalScale: {x: 26, y: 26, z: 26}
   m_Children:
   - {fileID: 400002}
@@ -571,7 +571,7 @@ Transform:
   m_GameObject: {fileID: 100040}
   m_LocalRotation: {x: -.232160524, y: -.27793467, z: .829730213, w: -.424737185}
   m_LocalPosition: {x: .00540923746, y: .0167478137, z: .0170510449}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: .100000001, y: .100000001, z: .100000001}
   m_Children:
   - {fileID: 400022}
   - {fileID: 400010}
@@ -823,9 +823,7 @@ MonoBehaviour:
   chaseSpeed: 5
   chaseWaitTime: 5
   patrolWaitTime: 2
-  patrolWaypoints:
-  - {fileID: 0}
-  - {fileID: 0}
+  patrolWaypoints: []
   seesPlayer: 0
   awareOfPlayer: 0
 --- !u!114 &11400004
