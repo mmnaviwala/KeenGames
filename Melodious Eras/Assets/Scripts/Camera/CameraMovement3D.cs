@@ -218,6 +218,11 @@ public class CameraMovement3D : CameraMovement
         activeOffset.x = -activeOffset.x;
     }
 
+    public void SetSideView(float xOffset)
+    {
+        activeOffset.x = xOffset;
+    }
+
     public void SetOffset(CameraOffset newOffset, Transform targetP)
     {
         SetOffset(newOffset);

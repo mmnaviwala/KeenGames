@@ -140,11 +140,6 @@ public class PlayerMovementBasic : MonoBehaviour
         speed = (isWalking || isAiming) ? 2 : 5.657f;
         speed *= ((direction.magnitude < 1) ? direction.magnitude : 1);
         this.anim.SetFloat("Speed", speed);
-        if (speed == 0)
-        {
-            //isCrouching = false;
-            //this.anim.SetBool("Sneaking", isCrouching);
-        }
 
         // Facing and running the desired direction
         float angle = Vector2.Angle(Vector2.up, direction);
@@ -168,6 +163,11 @@ public class PlayerMovementBasic : MonoBehaviour
 
             this.anim.applyRootMotion = false;
             this.rigidbody.velocity = (this.transform.right * direction.x + this.transform.forward * direction.y) * speed + new Vector3(0, this.rigidbody.velocity.y, 0);
+
+            /*if (direction.x < 0)
+                mainCam.SetSideView(.6f);
+            else if(direction.x > 0)
+                mainCam.SetSideView(-.6f);*/
         }
     }
 
