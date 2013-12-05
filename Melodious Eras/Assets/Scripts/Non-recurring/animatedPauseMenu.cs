@@ -10,11 +10,16 @@ public class animatedPauseMenu : MonoBehaviour {
 		Screen.showCursor = true;
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
+			audio.Play();
 			if (Time.timeScale == 1)
 			{
 				Time.timeScale = 0;
 
+				// Fill logs here
 				//GameObject.Find("GUI Text for gui texture left").gameObject.GetComponent<GUIText>().text = "Logs\n\n";
+
+				// Fill inventory here
+				//GameObject.Find("GUI Text for gui texture right").gameObject.GetComponent<GUIText>().text = "Inventory\n\n";
 
 				iTween.MoveTo(GameObject.Find("gui texture bottom left").gameObject, iTween.Hash("path",iTweenPath.GetPath("Move Bottom Left Texture In"), "time", 1, "ignoretimescale", true));
 				iTween.MoveTo(GameObject.Find("gui texture bottom right").gameObject, iTween.Hash("path",iTweenPath.GetPath("Move Bottom Right Texture In"), "time", 1, "ignoretimescale", true));

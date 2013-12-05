@@ -911,9 +911,9 @@ GUIText:
   m_PixelOffset: {x: 0, y: 0}
   m_LineSpacing: 1
   m_TabSize: 4
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: 584f2d3477fcb4ab6bb5dff9834a692b, type: 3}
   m_Material: {fileID: 0}
-  m_FontSize: 0
+  m_FontSize: 20
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
@@ -1182,7 +1182,7 @@ GUIText:
   m_PixelOffset: {x: 0, y: 0}
   m_LineSpacing: 1
   m_TabSize: 4
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: 584f2d3477fcb4ab6bb5dff9834a692b, type: 3}
   m_Material: {fileID: 0}
   m_FontSize: 0
   m_FontStyle: 0
@@ -9884,7 +9884,7 @@ GameObject:
   - 4: {fileID: 240011677}
   - 132: {fileID: 240011678}
   m_Layer: 0
-  m_Name: GUI Text
+  m_Name: GUI Text for gui texture right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9915,7 +9915,7 @@ GUIText:
   m_PixelOffset: {x: 0, y: 0}
   m_LineSpacing: 1
   m_TabSize: 4
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: e2c477e388d134d4c8f0ca4442c04919, type: 3}
   m_Material: {fileID: 0}
   m_FontSize: 0
   m_FontStyle: 0
@@ -11267,13 +11267,13 @@ GUIText:
   m_GameObject: {fileID: 283765760}
   m_Enabled: 1
   serializedVersion: 3
-  m_Text: Exit Game
+  m_Text: Exit To Main Menu
   m_Anchor: 4
   m_Alignment: 0
   m_PixelOffset: {x: 0, y: 0}
   m_LineSpacing: 1
   m_TabSize: 4
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: 584f2d3477fcb4ab6bb5dff9834a692b, type: 3}
   m_Material: {fileID: 0}
   m_FontSize: 0
   m_FontStyle: 0
@@ -21712,16 +21712,16 @@ MonoBehaviour:
   health: 100
   maxHealth: 100
   isDead: 0
-  closeQuarterEnemies: []
-  nearbyEnemies: []
-  threshold: 5
   meleeDamage: 10
-  suit: {fileID: 0}
-  flashlight: {fileID: 739393346}
   equippedWeapon: {fileID: 0}
   holsteredWeapons: []
   leftHand: {fileID: 0}
   rightHand: {fileID: 930422421}
+  closeQuarterEnemies: []
+  nearbyEnemies: []
+  threshold: 5
+  suit: {fileID: 0}
+  flashlight: {fileID: 739393346}
   deathClip: {fileID: 0}
   meleeClip: {fileID: 8300000, guid: 3ca121c001790493aac9f6aec90cfc06, type: 3}
   attackSpeed: .200000003
@@ -30259,14 +30259,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 203b520320c623143b175778963cecf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  durability: -1
+  breakingSound: {fileID: 0}
   hasPower: 0
   activated: 0
   isBroken: 0
   connectedSwitch: {fileID: 767104746}
   electricGrid: {fileID: 0}
   activateSound: {fileID: 0}
-  breakingSound: {fileID: 0}
-  durability: -1
   lightbulb: {fileID: 229952516}
   flickering: 0
   frequency: .5
@@ -30295,14 +30295,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b30b2274daf0e249bf8641e2a9ca1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  durability: -1
+  breakingSound: {fileID: 0}
   hasPower: 0
   activated: 0
   isBroken: 0
   connectedSwitch: {fileID: 0}
   electricGrid: {fileID: 0}
   activateSound: {fileID: 0}
-  breakingSound: {fileID: 0}
-  durability: -1
   onOffStatus: 1
   connectedNodes:
   - {fileID: 767104744}
@@ -30859,13 +30859,14 @@ MonoBehaviour:
   reloadAnimation: {fileID: 0}
   mods: []
   isAuto: 0
-  shootingSound: {fileID: 8300000, guid: 68afba37b0add4662b322912a5e54259, type: 3}
+  infiniteAmmo: 0
+  shootingSound: {fileID: 8300000, guid: 0af3d513283ae634480aa98a0d2da839, type: 3}
   emptySound: {fileID: 8300000, guid: 3b7a828a646174088aa48ee1db9c439c, type: 3}
   reloadSound: {fileID: 8300000, guid: cc98b8ccdf9a248059887d064e7e5067, type: 3}
   ammoCapacity: 10
   ammoInClip: 10
-  extraAmmo: 40
-  maxAmmo: 50
+  extraAmmo: 15
+  maxAmmo: 25
   clipSize: 10
   ammoPerShot: 1
   damage: 35
@@ -30875,6 +30876,9 @@ MonoBehaviour:
   fireRate: .100000001
   accuracy: 0
   range: 100
+  ignorePlayer:
+    serializedVersion: 2
+    m_Bits: 4294966267
 --- !u!95 &776074809
 Animator:
   serializedVersion: 2
@@ -46788,23 +46792,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78e9ac1bc7cd741478f9f04deda1b866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offsetX: .600000024
-  offsetY: 1.5
-  offsetZ: -2.5
-  smoothness: 10
-  defaultOffset: {x: .600000024, y: 1.5, z: -2.5}
-  walkOffset: {x: .5, y: 1.5, z: -1}
+  followSpeed: 4
+  defaultOffset: {x: .5, y: 1.5, z: -1.5}
+  aimOffset: {x: .5, y: 1.5, z: -1}
   crouchOffset: {x: 0, y: 1.5, z: -3}
   PDA_Offset: {x: 0, y: 0, z: 0}
   HackingOffset: {x: 0, y: 0, z: 1}
   fightingOffset: {x: 0, y: 0, z: 0}
   climbUpOffset: {x: 0, y: 2, z: -3}
-  climbDownOffset: {x: 0, y: 1, z: -3}
+  climbDownOffset: {x: 0, y: 0, z: -3}
   x_sensitivity: 5
   y_sensitivity: 2
   invertLook: 1
   target: {fileID: 0}
-  testOffset: 0
 --- !u!82 &1222045818
 AudioSource:
   m_ObjectHideFlags: 0
@@ -46814,7 +46814,7 @@ AudioSource:
   m_GameObject: {fileID: 1222045813}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 821eed10bb09f804b9e58d6e427279b8, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ca7a9e4a3d02a46a7ac93ffc34907652, type: 3}
   m_PlayOnAwake: 1
   m_Volume: .5
   m_Pitch: 1
@@ -46930,7 +46930,7 @@ Camera:
     m_Bits: 4294967295
   m_RenderingPath: 2
   m_TargetTexture: {fileID: 0}
-  m_HDR: 0
+  m_HDR: 1
   m_OcclusionCulling: 1
 --- !u!4 &1222045824
 Transform:
@@ -67412,6 +67412,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1749952861}
   - 114: {fileID: 1749952862}
+  - 82: {fileID: 1749952863}
   m_Layer: 0
   m_Name: Pause Menu Stuff
   m_TagString: Untagged
@@ -67447,6 +67448,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ee0064b572d348139e522b6784ebcce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &1749952863
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1749952860}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: bf9286436f133426ba196670df0ffb90, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: .5
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1 &1751229526
 GameObject:
   m_ObjectHideFlags: 0
