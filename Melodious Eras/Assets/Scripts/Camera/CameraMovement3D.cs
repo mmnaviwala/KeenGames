@@ -156,7 +156,7 @@ public class CameraMovement3D : CameraMovement
         else
             transform.LookAt(target.position, Vector3.up);
         flashlight.rotation = camTargetPos.transform.rotation;
-        this.transform.position = Vector3.Lerp(this.transform.position, camTargetPos.transform.position, 10 * Time.deltaTime);
+        this.transform.position = Vector3.Lerp(this.transform.position, camTargetPos.transform.position, 5 * Time.deltaTime);
         //---------------------------------------------------
         
         //SetOffset(testOffset);

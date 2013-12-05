@@ -4,6 +4,7 @@ using System.Collections;
 public class LaserPistol : SemiAutoWeapon
 {
     LineRenderer laser;
+    public LayerMask ignorePlayer;
     int layerMask_ignorePlayer = 1 << 10;
     // Use this for initialization
     void Start()
@@ -32,7 +33,7 @@ public class LaserPistol : SemiAutoWeapon
                 Ray ray = mainCam.ViewportPointToRay(new Vector3(.5f, .5f, 0));
                 RaycastHit hit;
                 
-                if (Physics.Raycast(ray, out hit, range, layerMask_ignorePlayer))
+                if (Physics.Raycast(ray, out hit, range, ignorePlayer))
                 {
                     StartCoroutine(ShootLaser(barrelExit.position, hit.point, .1f));
                     if (hit.collider.tag == Tags.ENEMY && !hit.collider.isTrigger)

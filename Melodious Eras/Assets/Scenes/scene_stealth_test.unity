@@ -500,14 +500,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b30b2274daf0e249bf8641e2a9ca1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  durability: -1
+  breakingSound: {fileID: 0}
   hasPower: 0
   activated: 0
   isBroken: 0
   connectedSwitch: {fileID: 0}
   electricGrid: {fileID: 1634141201}
   activateSound: {fileID: 0}
-  breakingSound: {fileID: 0}
-  durability: -1
   onOffStatus: 1
   connectedNodes:
   - {fileID: 11652426}
@@ -535,14 +535,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 203b520320c623143b175778963cecf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  durability: -1
+  breakingSound: {fileID: 0}
   hasPower: 0
   activated: 0
   isBroken: 0
   connectedSwitch: {fileID: 11652424}
   electricGrid: {fileID: 1634141201}
   activateSound: {fileID: 0}
-  breakingSound: {fileID: 0}
-  durability: -1
   lightbulb: {fileID: 1356765457}
   flickering: 0
   frequency: .5
@@ -1462,14 +1462,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 203b520320c623143b175778963cecf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  durability: -1
+  breakingSound: {fileID: 0}
   hasPower: 0
   activated: 1
   isBroken: 0
   connectedSwitch: {fileID: 0}
   electricGrid: {fileID: 1914477371}
   activateSound: {fileID: 0}
-  breakingSound: {fileID: 0}
-  durability: -1
   lightbulb: {fileID: 0}
   flickering: 0
   frequency: .5
@@ -4733,14 +4733,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 203b520320c623143b175778963cecf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  durability: 5
+  breakingSound: {fileID: 0}
   hasPower: 0
   activated: 0
   isBroken: 0
   connectedSwitch: {fileID: 1751580475}
   electricGrid: {fileID: 937008674}
   activateSound: {fileID: 0}
-  breakingSound: {fileID: 0}
-  durability: 5
   lightbulb: {fileID: 1130331550}
   flickering: 1
   frequency: 1
@@ -6058,14 +6058,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 570dd2a9f963b6242af0bc426c7e38ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  durability: -1
+  breakingSound: {fileID: 0}
   hasPower: 0
   activated: 0
   isBroken: 0
   connectedSwitch: {fileID: 1537709797}
   electricGrid: {fileID: 1914477371}
   activateSound: {fileID: 8300000, guid: 6be6df9c39e4b7f448d382605b849a08, type: 3}
-  breakingSound: {fileID: 0}
-  durability: -1
   moveDirection: {x: 0, y: 0, z: 3}
   movementSpeed: .5
 --- !u!23 &528047606
@@ -7616,14 +7616,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b30b2274daf0e249bf8641e2a9ca1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  durability: -1
+  breakingSound: {fileID: 0}
   hasPower: 0
   activated: 0
   isBroken: 0
   connectedSwitch: {fileID: 0}
   electricGrid: {fileID: 1634141201}
   activateSound: {fileID: 0}
-  breakingSound: {fileID: 0}
-  durability: -1
   onOffStatus: 0
   connectedNodes:
   - {fileID: 1342983643}
@@ -9180,14 +9180,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 203b520320c623143b175778963cecf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  durability: -1
+  breakingSound: {fileID: 0}
   hasPower: 0
   activated: 0
   isBroken: 0
   connectedSwitch: {fileID: 716477817}
   electricGrid: {fileID: 1634141201}
   activateSound: {fileID: 0}
-  breakingSound: {fileID: 0}
-  durability: -1
   lightbulb: {fileID: 0}
   flickering: 0
   frequency: .5
@@ -9584,14 +9584,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 203b520320c623143b175778963cecf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  durability: -1
+  breakingSound: {fileID: 0}
   hasPower: 0
   activated: 0
   isBroken: 0
   connectedSwitch: {fileID: 716477817}
   electricGrid: {fileID: 1634141201}
   activateSound: {fileID: 0}
-  breakingSound: {fileID: 0}
-  durability: -1
   lightbulb: {fileID: 0}
   flickering: 0
   frequency: .5
@@ -10809,14 +10809,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 203b520320c623143b175778963cecf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  durability: -1
+  breakingSound: {fileID: 0}
   hasPower: 0
   activated: 1
   isBroken: 0
   connectedSwitch: {fileID: 0}
   electricGrid: {fileID: 1914477371}
   activateSound: {fileID: 0}
-  breakingSound: {fileID: 0}
-  durability: -1
   lightbulb: {fileID: 0}
   flickering: 0
   frequency: .5
@@ -10995,14 +10995,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b30b2274daf0e249bf8641e2a9ca1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  durability: -1
+  breakingSound: {fileID: 0}
   hasPower: 0
   activated: 0
   isBroken: 0
   connectedSwitch: {fileID: 0}
   electricGrid: {fileID: 1914477371}
   activateSound: {fileID: 0}
-  breakingSound: {fileID: 0}
-  durability: -1
   onOffStatus: 0
   connectedNodes:
   - {fileID: 528047605}
@@ -11100,14 +11100,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9076523e191bb2f479b9868b0637fad8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  durability: 100
+  breakingSound: {fileID: 0}
   hasPower: 1
   activated: 1
   isBroken: 0
   connectedSwitch: {fileID: 0}
   electricGrid: {fileID: 1914477371}
   activateSound: {fileID: 0}
-  breakingSound: {fileID: 0}
-  durability: 100
 --- !u!65 &1012002799
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12979,14 +12979,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 203b520320c623143b175778963cecf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  durability: -1
+  breakingSound: {fileID: 0}
   hasPower: 0
   activated: 1
   isBroken: 0
   connectedSwitch: {fileID: 0}
   electricGrid: {fileID: 1914477371}
   activateSound: {fileID: 0}
-  breakingSound: {fileID: 0}
-  durability: -1
   lightbulb: {fileID: 0}
   flickering: 0
   frequency: .5
@@ -13358,12 +13358,12 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1590143733}
   - {fileID: 1284693719}
-  - {fileID: 1198267336}
   - {fileID: 1834165468}
+  - {fileID: 1198267336}
   - {fileID: 422996187}
   - {fileID: 938288074}
+  - {fileID: 1590143733}
   - {fileID: 876717402}
   - {fileID: 3789058}
   - {fileID: 1749193076}
@@ -13528,14 +13528,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6295100fe6eb1a64c85956bca94dfcda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  durability: -1
+  breakingSound: {fileID: 0}
   hasPower: 0
   activated: 0
   isBroken: 0
   connectedSwitch: {fileID: 1537709797}
   electricGrid: {fileID: 1914477371}
   activateSound: {fileID: 0}
-  breakingSound: {fileID: 0}
-  durability: -1
   alarmCounter: 3
 --- !u!123 &1236688603
 LensFlare:
@@ -14363,14 +14363,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 203b520320c623143b175778963cecf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  durability: -1
+  breakingSound: {fileID: 0}
   hasPower: 0
   activated: 0
   isBroken: 0
   connectedSwitch: {fileID: 716477817}
   electricGrid: {fileID: 1634141201}
   activateSound: {fileID: 0}
-  breakingSound: {fileID: 0}
-  durability: -1
   lightbulb: {fileID: 0}
   flickering: 0
   frequency: .5
@@ -16382,14 +16382,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a40d96730097c8a45b57b95344c0a7b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  durability: -1
+  breakingSound: {fileID: 0}
   hasPower: 0
   activated: 0
   isBroken: 0
   connectedSwitch: {fileID: 0}
   electricGrid: {fileID: 1914477371}
   activateSound: {fileID: 0}
-  breakingSound: {fileID: 0}
-  durability: -1
   onOffStatus: 0
   connectedNodes:
   - {fileID: 1236688601}
@@ -16670,6 +16670,10 @@ Prefab:
     - target: {fileID: 400110, guid: 71866b5dca507394c9f3b32a24b206be, type: 2}
       propertyPath: m_LocalRotation.w
       value: .707106829
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: 71866b5dca507394c9f3b32a24b206be, type: 2}
+      propertyPath: ignorePlayer.m_Bits
+      value: 4294966267
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 71866b5dca507394c9f3b32a24b206be, type: 2}
@@ -19231,14 +19235,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b30b2274daf0e249bf8641e2a9ca1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  durability: -1
+  breakingSound: {fileID: 0}
   hasPower: 0
   activated: 1
   isBroken: 0
   connectedSwitch: {fileID: 0}
   electricGrid: {fileID: 937008674}
   activateSound: {fileID: 0}
-  breakingSound: {fileID: 0}
-  durability: -1
   onOffStatus: 1
   connectedNodes:
   - {fileID: 416554819}
@@ -21566,14 +21570,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 203b520320c623143b175778963cecf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  durability: -1
+  breakingSound: {fileID: 0}
   hasPower: 0
   activated: 1
   isBroken: 0
   connectedSwitch: {fileID: 0}
   electricGrid: {fileID: 1914477371}
   activateSound: {fileID: 0}
-  breakingSound: {fileID: 0}
-  durability: -1
   lightbulb: {fileID: 0}
   flickering: 0
   frequency: .5
@@ -23590,14 +23594,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 203b520320c623143b175778963cecf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  durability: -1
+  breakingSound: {fileID: 0}
   hasPower: 0
   activated: 1
   isBroken: 0
   connectedSwitch: {fileID: 0}
   electricGrid: {fileID: 1914477371}
   activateSound: {fileID: 0}
-  breakingSound: {fileID: 0}
-  durability: -1
   lightbulb: {fileID: 0}
   flickering: 1
   frequency: .5
@@ -24802,6 +24806,9 @@ MonoBehaviour:
   fireRate: .100000001
   accuracy: 0
   range: 100
+  ignorePlayer:
+    serializedVersion: 2
+    m_Bits: 4294966267
 --- !u!82 &2129106947
 AudioSource:
   m_ObjectHideFlags: 0
