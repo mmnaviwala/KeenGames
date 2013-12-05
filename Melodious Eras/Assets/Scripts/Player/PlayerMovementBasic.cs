@@ -29,7 +29,7 @@ public class PlayerMovementBasic : MonoBehaviour
         anim = this.GetComponent<Animator>();
         hud = this.GetComponent<HUD_Stealth>();
 
-        anim.SetFloat("Speed", 7.0f);
+        anim.SetFloat("Speed", 0f);
         anim.SetBool("IsShooting", isShooting);
     }
 

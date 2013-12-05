@@ -51,6 +51,9 @@ Renderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
 --- !u!33 &3300000
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -60,6 +63,7 @@ MeshFilter:
   m_Mesh: {fileID: 4300000, guid: 79329d9f8578c9e46af8de685be10f8f, type: 3}
 --- !u!95 &9500000
 Animator:
+  serializedVersion: 2
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -70,6 +74,7 @@ Animator:
   m_CullingMode: 1
   m_ApplyRootMotion: 1
   m_AnimatePhysics: 0
+  m_HasTransformHierarchy: 1
 --- !u!108 &10800000
 Light:
   m_ObjectHideFlags: 1
@@ -116,12 +121,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b43d1c440b4aca4f9114ccb5b1423fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointValue: 1
-  colorValue: 0
-  damageValue: 2
   isVulnerable: 0
   isDead: 0
-  enemyColor: 0
+  meleeSpeed: .5
+  shootSpeed: .5
+  meleeDamage: 15
+  health: 100
+  maxHealth: 100
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -133,7 +139,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed3c8e1593af5cf4e8a729ab32a33768, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFlying: 0
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -21,6 +21,7 @@ public class EnemyAI : MonoBehaviour
     private Vector3 lastPlayerSighting;
     private NavMeshAgent nav;
     private EnemyStats stats;
+    private static Vector3 resetPos = new Vector3(1000, 1000, 1000);
 
     private float chaseTimer = 0;
     private float patrolTimer = 0;
@@ -96,6 +97,39 @@ public class EnemyAI : MonoBehaviour
             patrolTimer = 0;
 
         nav.destination = patrolWaypoints[waypointIndex].position;
+    }
+
+    void Chasing()
+    {
+        // Create a vector from the enemy to the last sighting of the player.
+        Vector3 sightingDeltaPos = lastPlayerSighting - transform.position;
+
+        // If the the last personal sighting of the player is not close...
+        if (sightingDeltaPos.sqrMagnitude > 4f)
+            // ... set the destination for the NavMeshAgent to the last personal sighting of the player.
+            nav.destination = lastPlayerSighting;
+
+        // Set the appropriate speed for the NavMeshAgent.
+        nav.speed = chaseSpeed;
+
+        // If near the last personal sighting...
+        if (nav.remainingDistance < nav.stoppingDistance)
+        {
+            // ... increment the timer.
+            chaseTimer += Time.deltaTime;
+
+            // If the timer exceeds the wait time...
+            if (chaseTimer >= chaseWaitTime)
+            {
+                // ... reset last global sighting, the last personal sighting and the timer.
+                lastPlayerSighting = resetPos;
+                lastPlayerSighting = resetPos;
+                chaseTimer = 0f;
+            }
+        }
+        else
+            // If not near the last sighting personal sighting of the player, reset the timer.
+            chaseTimer = 0f;
     }
 
     public void Listen()
