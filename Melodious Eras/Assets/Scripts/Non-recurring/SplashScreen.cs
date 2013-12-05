@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SplashScreen : MonoBehaviour 
 {
-
+	public string levelToLoad;
     public float delayTime = 2f;
     public bool done = false; //could be used for doing background work/loading various things
 	
@@ -20,6 +20,6 @@ public class SplashScreen : MonoBehaviour
 	{
         delayTime -= Time.deltaTime;
         if (delayTime <= 0f)
-            Application.LoadLevel("testTitleMenuQuads");
+            Application.LoadLevel(levelToLoad);
 	}
 }

@@ -5,23 +5,42 @@ public class moveLogoRight : MonoBehaviour {
 	
 	public float xTransform;
 	AudioSource[] music;
+	private bool delayComplete = false;
+	private bool musicPlayed = false;	
+	public float delayTimeBefore = 0.5f;
 	
 	void Start()
 	{
 		xTransform = transform.localPosition.x;
 		guiTexture.enabled = true;
 		music = Camera.main.GetComponents<AudioSource>();
-		music[2].Play();
 	}
 
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		if(xTransform < 1.3F)
+
+		delayTimeBefore -= Time.deltaTime;
+		if (delayTimeBefore <= 0f)
+			delayComplete = true;
+
+		if(delayComplete && !musicPlayed)
 		{
-			transform.localPosition = new Vector3(xTransform, 0.51F, 1);
-			xTransform = xTransform + 0.01F;
+			// Hide gui texture
+			GameObject.Find("5thFloorStudiosTexture").GetComponent<GUITexture>().enabled = false;
+			music[2].Play();
+			musicPlayed = true;
+		}
+
+
+		if(delayComplete)
+		{
+			if(xTransform < 1.3F)
+			{
+				transform.localPosition = new Vector3(xTransform, 0.51F, 1);
+				xTransform = xTransform + 0.01F;
+			}
 		}
 	}
 }
