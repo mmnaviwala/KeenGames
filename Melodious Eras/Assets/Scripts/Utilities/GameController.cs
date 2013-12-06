@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour
         Time.timeScale = 1;
 
         InitializeEnvironment();
+        XMLUtilities.Test();
     }
 
     // Update is called once per frame

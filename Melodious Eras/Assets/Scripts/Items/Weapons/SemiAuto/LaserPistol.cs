@@ -47,6 +47,12 @@ public class LaserPistol : SemiAutoWeapon
                     }
                     Debug.Log("Shooting at " + hit.collider.name);
                     Debug.DrawLine(barrelExit.position, hit.point, Color.red, 5);
+
+                    //if (hit.rigidbody != null)
+                    //{
+                    //    hit.rigidbody.AddForce(ray.direction * 100);
+                    //    Debug.Log("Adding force");
+                    //}
                 }
                 else
                 {

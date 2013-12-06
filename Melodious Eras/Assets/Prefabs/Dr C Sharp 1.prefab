@@ -2929,6 +2929,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9ab3466454cde64cbe6d9cb61ca0802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  faction: 3
   health: 100
   maxHealth: 100
   isDead: 0
@@ -3409,6 +3410,7 @@ MonoBehaviour:
   reloadAnimation: {fileID: 0}
   mods: []
   isAuto: 0
+  infiniteAmmo: 0
   shootingSound: {fileID: 8300000, guid: 0af3d513283ae634480aa98a0d2da839, type: 3}
   emptySound: {fileID: 8300000, guid: 3b7a828a646174088aa48ee1db9c439c, type: 3}
   reloadSound: {fileID: 8300000, guid: cc98b8ccdf9a248059887d064e7e5067, type: 3}

@@ -14,6 +14,8 @@ public class HUD_Stealth : MonoBehaviour
     private Weapon weapon;
     private Suit suit;
 
+    Rect temp;
+
     // Use this for initialization
     void Start()
     {
@@ -38,6 +40,8 @@ public class HUD_Stealth : MonoBehaviour
         weaponRect = new Rect(healthBarMax.xMin, Screen.height - 3 * healthBarMax.height, healthBarMax.width, healthBarMax.height);
 
         reticle = new Rect(Screen.width / 2 - Screen.width / 60, Screen.height / 2 - Screen.width / 60, Screen.width / 30, Screen.width / 30);
+
+        temp = new Rect(10, Screen.height / 2, Screen.width, 50);
     }
 
     // Update is called once per frame
@@ -56,6 +60,8 @@ public class HUD_Stealth : MonoBehaviour
         GUI.Box(healthBarMax, stats.health.ToString(), healthMaxStyle);
         GUI.Box(armorBarMax, suit.armor.ToString(), armorMaxStyle);
         GUI.Label(weaponRect, weapon.HudString(), weapon.hudStyle);
+
+        GUI.Label(temp, XMLUtilities.currentDirectory);
 
         GUI.color = new Color(1, 1, 1, .25f);
         GUI.Box(healthBarCurrent, "", healthCurrentStyle);

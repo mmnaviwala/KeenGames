@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum Faction { Enemy1, Enemy2, Neutral, Player }
 public class CharacterStats : MonoBehaviour 
 {
+    public Faction faction;
     public int health = 100, maxHealth = 100;
     public bool isDead = false;
     public int meleeDamage = 10; //damage modifier could be calculated by melee weapons
