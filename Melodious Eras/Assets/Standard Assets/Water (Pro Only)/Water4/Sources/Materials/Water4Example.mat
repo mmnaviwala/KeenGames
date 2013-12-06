@@ -157,15 +157,15 @@ Material:
       data:
         first:
           name: _Shininess
-        second: 313.218414
+        second: 225
       data:
         first:
           name: _FresnelScale
-        second: .75999999
+        second: 4
       data:
         first:
           name: _GerstnerIntensity
-        second: .389999986
+        second: -.150000006
       data:
         first:
           name: _InvFade
@@ -249,12 +249,20 @@ Material:
         second: {r: 1, g: 1, b: 1, a: 1}
       data:
         first:
+          name: _Displacement
+        second: {r: 6.6371665, g: 20.3539829, b: -1, a: -.681415975}
+      data:
+        first:
+          name: _ShoreTiling
+        second: {r: 1, g: 1, b: .100000001, a: .100000001}
+      data:
+        first:
           name: _MainTex_ST
         second: {r: 1, g: 1, b: 0, a: 0}
       data:
         first:
           name: _DistortParams
-        second: {r: 2.05999994, g: .5, b: 1.60000002, a: -.531428456}
+        second: {r: .579999983, g: .5, b: 10, a: -.5}
       data:
         first:
           name: _InvFadeParemeter
@@ -323,14 +331,6 @@ Material:
         first:
           name: _BumpMap_ST
         second: {r: 1, g: 1, b: 0, a: 0}
-      data:
-        first:
-          name: _Displacement
-        second: {r: 6.6371665, g: 20.3539829, b: -1, a: -.681415975}
-      data:
-        first:
-          name: _ShoreTiling
-        second: {r: 1, g: 1, b: .100000001, a: .100000001}
       data:
         first:
           name: _RefrColor
