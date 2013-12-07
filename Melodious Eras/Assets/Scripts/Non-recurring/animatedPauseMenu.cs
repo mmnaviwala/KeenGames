@@ -13,6 +13,8 @@ public class animatedPauseMenu : MonoBehaviour {
 			audio.Play();
 			if (Time.timeScale == 1)
 			{
+                Screen.lockCursor = false;
+                Screen.showCursor = true;
 				Time.timeScale = 0;
 
 				// Fill logs here
@@ -35,6 +37,8 @@ public class animatedPauseMenu : MonoBehaviour {
 			}
 			else
 			{
+                Screen.lockCursor = true;
+                Screen.showCursor = false;
 				Time.timeScale = 1;
 				iTween.MoveTo(GameObject.Find("gui texture bottom left").gameObject, iTween.Hash("path",iTweenPath.GetPath("Move Bottom Left Texture Out"), "time", 1, "ignoretimescale", true));
 				iTween.MoveTo(GameObject.Find("gui texture bottom right").gameObject, iTween.Hash("path",iTweenPath.GetPath("Move Bottom Right Texture Out"), "time", 1, "ignoretimescale", true));

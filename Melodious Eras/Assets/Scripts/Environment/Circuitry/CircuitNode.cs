@@ -42,6 +42,7 @@ public class CircuitNode : BreakableObject
 
     public virtual void TurnOnOff(bool on)
     {
-        this.hasPower = on;
+        //this.hasPower = on;
+        this.activated = on;
     }
 }

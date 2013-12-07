@@ -8,9 +8,12 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
+  - 65: {fileID: 6500000}
+  - 65: {fileID: 6500002}
+  - 114: {fileID: 11400000}
   m_Layer: 0
   m_Name: computer_single_monitor
-  m_TagString: Untagged
+  m_TagString: Breakable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -25,7 +28,6 @@ GameObject:
   - 4: {fileID: 400002}
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
-  - 95: {fileID: 9500000}
   m_Layer: 0
   m_Name: Monitor
   m_TagString: Untagged
@@ -74,7 +76,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13, y: 13.1499996, z: -6}
+  m_LocalPosition: {x: 13, y: 13.125, z: -6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400004}
@@ -173,20 +175,30 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_Mesh: {fileID: 4300000, guid: 1e9f23a15f83aae439623e263be2d9fe, type: 3}
---- !u!95 &9500000
-Animator:
-  serializedVersion: 2
+--- !u!65 &6500000
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100002}
+  m_GameObject: {fileID: 100000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: f06891250579b7249bceba6bdfd93753, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_ApplyRootMotion: 1
-  m_AnimatePhysics: 0
-  m_HasTransformHierarchy: 1
+  serializedVersion: 2
+  m_Size: {x: .200000003, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &6500002
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1.5}
+  m_Center: {x: 1.25, y: -1.10000002, z: 0}
 --- !u!95 &9500002
 Animator:
   serializedVersion: 2
@@ -236,6 +248,31 @@ Light:
   m_ShadowAngle: 0
   m_IndirectIntensity: 1
   m_AreaSize: {x: 1, y: 1}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 026f1f9a8425691469e1693cb0840cf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  durability: 100
+  breakingSound: {fileID: 0}
+  hasPower: 0
+  activated: 1
+  isBroken: 0
+  connectedSwitch: {fileID: 0}
+  electricGrid: {fileID: 0}
+  activateSound: {fileID: 0}
+  userName: 
+  password: password
+  onScreen: {fileID: 2100000, guid: ebe949777b3d5a44aac73f8fc8633917, type: 2}
+  offScreen: {fileID: 2100000, guid: 6a2d6ac62e4b8104c8314add185f1c4a, type: 2}
+  monitors:
+  - {fileID: 400002}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
