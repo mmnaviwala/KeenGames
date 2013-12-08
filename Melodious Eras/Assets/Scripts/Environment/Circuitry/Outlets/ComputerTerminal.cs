@@ -74,14 +74,9 @@ public class ComputerTerminal : CircuitSwitch
                     }
                 }
             }
-            if (Input.GetButtonUp(InputType.USE))
-            {
-                pressTime = 0;
-                alreadyActivated = false;
-            }
 
             //Using computer
-            if (this.activated && Input.GetButtonDown(InputType.USE))
+            if (this.activated && !alreadyActivated && Input.GetButtonUp(InputType.USE))
             {
                 UsingComputer(true);
             }
@@ -93,10 +88,16 @@ public class ComputerTerminal : CircuitSwitch
                     UsingComputer(false);
                 }
                 //reading passwprd input stream for this frame (ASCII characters only)
-                else for (int i = 0; i < Input.inputString.Length; i++)
+                else if(!alreadyActivated)
                 {
-                    StartCoroutine(InputKey(Input.inputString[i]));
+                    for (int i = 0; i < Input.inputString.Length; i++)
+                        StartCoroutine(InputKey(Input.inputString[i]));
                 }
+            }
+            if (Input.GetButtonUp(InputType.USE))
+            {
+                pressTime = 0;
+                alreadyActivated = false;
             }
         }    
 	}
@@ -182,7 +183,7 @@ public class ComputerTerminal : CircuitSwitch
         {
             case '\n':
             case '\r':
-                passwordGuess = passwordGuess == password ? "CORRECT" : "INCORRECT";
+                passwordGuess = passwordGuess == password ? "Welcome, " + userName : "INCORRECT";
                 yield return new WaitForSeconds(.5f);
                 hasAccess = true;
                 //open up email/security window

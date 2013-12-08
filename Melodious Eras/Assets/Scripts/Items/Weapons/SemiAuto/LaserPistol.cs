@@ -4,7 +4,6 @@ using System.Collections;
 public class LaserPistol : SemiAutoWeapon
 {
     LineRenderer laser;
-    public LayerMask ignorePlayer;
     int layerMask_ignorePlayer = 1 << 10;
     // Use this for initialization
     void Start()
@@ -33,16 +32,16 @@ public class LaserPistol : SemiAutoWeapon
                 Ray ray = mainCam.ViewportPointToRay(new Vector3(.5f, .5f, 0));
                 RaycastHit hit;
                 
-                if (Physics.Raycast(ray, out hit, range, ignorePlayer))
+                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range, ignorePlayer))
                 {
                     StartCoroutine(ShootLaser(barrelExit.position, hit.point, .1f));
                     if (hit.collider.tag == Tags.ENEMY && !hit.collider.isTrigger)
                     {
-                        hit.collider.GetComponent<EnemyStats>().TakeDamage(damage);
+                        hit.collider.transform.GetComponent<EnemyStats>().TakeDamage(damage);
                     }
                     else if (hit.collider.tag == Tags.BREAKABLE && !hit.collider.isTrigger)
                     {
-                        hit.collider.GetComponent<CircuitNode>().TakeDamage(damage);
+                        hit.collider.transform.GetComponent<BreakableObject>().TakeDamage(damage);
                         Debug.Log("Shooting breakable object");
                     }
                     Debug.Log("Shooting at " + hit.collider.name);

@@ -4,6 +4,7 @@ using System.Collections;
 public class Gun : Weapon
 {
     #region Variables
+    public LayerMask ignorePlayer;
     public Transform barrelExit;
     public GameObject projectile;   //(Optional?) projectile/ammo type
     public Animation attackAnimation, reloadAnimation;

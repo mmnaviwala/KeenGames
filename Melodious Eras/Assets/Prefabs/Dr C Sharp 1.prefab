@@ -2004,7 +2004,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100100}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -.0396792665, y: .0244838614, z: 3.1867522e-08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400178}
@@ -2783,6 +2783,7 @@ MonoBehaviour:
   infiniteBattery: 0
   maxBatteryLife: 100
   batteryLife: 100
+  efficiency: 10
   c_battery:
     serializedVersion: 2
     rgba: 2149179848

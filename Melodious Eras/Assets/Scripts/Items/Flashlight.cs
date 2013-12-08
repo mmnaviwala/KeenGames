@@ -6,6 +6,7 @@ public class Flashlight : MonoBehaviour
     public bool infiniteBattery = true;
     public float maxBatteryLife = 100;  //time in seconds
     public float batteryLife = 100;     //
+    public int efficiency = 10;
     private Suit playerSuit;
     public Color32 c_battery;
     public GUIStyle lightGuiStyle, backGuiStyle;
@@ -35,7 +36,7 @@ public class Flashlight : MonoBehaviour
             }
             if (!infiniteBattery && light.enabled)
             {
-                batteryLife -= Time.deltaTime;
+                batteryLife -= Time.deltaTime / efficiency;
                 batteryLifeRect.width = batteryMaxLifeRect.width * batteryLife / maxBatteryLife;
             }
         }
