@@ -2209,7 +2209,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100134}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -1.62920685e-07}
-  m_LocalPosition: {x: 0, y: 0, z: -.0399999991}
+  m_LocalPosition: {x: 0, y: 0, z: -.0225000009}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400166}
@@ -2734,7 +2734,7 @@ Light:
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 3
-  m_Range: 17.5
+  m_Range: 12.5
   m_SpotAngle: 45
   m_CookieSize: 10
   m_Shadows:
@@ -3416,8 +3416,8 @@ MonoBehaviour:
   reloadSound: {fileID: 8300000, guid: cc98b8ccdf9a248059887d064e7e5067, type: 3}
   ammoCapacity: 10
   ammoInClip: 10
-  extraAmmo: 15
-  maxAmmo: 25
+  extraAmmo: 10
+  maxAmmo: 20
   clipSize: 10
   ammoPerShot: 1
   damage: 35

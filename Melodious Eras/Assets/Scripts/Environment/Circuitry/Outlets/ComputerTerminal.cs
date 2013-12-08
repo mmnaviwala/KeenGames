@@ -1,23 +1,55 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ComputerTerminal : CircuitOutlet 
+public class ComputerTerminal : CircuitSwitch
 {
+    #region variables
     public string userName; //for display purposes only
     public string password;
+    private string passwordGuess = "";
 
     bool playerNearby = false;
     bool alreadyActivated = false;
+    bool usingTerminal = false;
+    bool hasAccess = false;
     float pressTime = 0;
 
     public Material onScreen, offScreen;
     public Transform[] monitors;
-    
 
-	// Use this for initialization
+    HUD_Stealth playerHUD;
+    PlayerMovementBasic playerMovement;
+    animatedPauseMenu pauseMenu;
+    CameraMovement3D cam3d;
+
+    private Rect    terminalRect,  usernameRect,  passwordRect,  emailListRect,  emailBodyRect,  promptRect, emailListNodeRect, exitButtonRect;
+    public GUIStyle terminalStyle, usernameStyle, passwordStyle, emailListStyle, emailBodyStyle, promptStyle, exitButtonStyle;
+
+
+    public int selectedEmailIndex = 0;
+    public string[] emailSelection = new string[] { "Grid 1", "Grid 2", "Grid 3", "Grid 4" };
+    public string[] emailBody;
+    #endregion
+
+    #region MonoBehavior functions
+    // Use this for initialization
 	void Start () 
     {
+        pauseMenu = GameObject.Find("Pause Menu Stuff").GetComponent<animatedPauseMenu>();
+        cam3d = Camera.main.GetComponent<CameraMovement3D>();
 
+        float terminalWidth = Screen.width * .75f;
+        float terminalHeight = Screen.height * .75f;
+
+        promptRect = new Rect(Screen.width / 2 - 100, Screen.height * .75f, 200, 50);
+
+        terminalRect = new Rect((Screen.width - terminalWidth) / 2, (Screen.height - terminalHeight) / 2, terminalWidth, terminalHeight);
+        exitButtonRect = new Rect(terminalRect.xMin + terminalRect.width - 25, terminalRect.yMin, 25, 25);
+        usernameRect = new Rect(Screen.width / 2 - 100, Screen.height / 2, 200, 50);
+        passwordRect = new Rect(Screen.width / 2 - 100, Screen.height / 2 + 75, 200, 50);
+
+        emailListNodeRect = new Rect(terminalRect.xMin + 25, terminalRect.yMin + 25, terminalRect.width / 2 - 50, terminalRect.width / 4);
+        emailBodyRect = new Rect(Screen.width / 2, terminalRect.yMin + 25, terminalRect.width / 2 - 25, terminalRect.height - 50);
 	}
 
     // Update is called once per frame
@@ -25,6 +57,7 @@ public class ComputerTerminal : CircuitOutlet
     {
         if (playerNearby && this.hasPower)
         {
+            //Turning computer on/off
             if (!alreadyActivated && Input.GetButton(InputType.USE))
             {
                 pressTime += Time.deltaTime;
@@ -46,19 +79,63 @@ public class ComputerTerminal : CircuitOutlet
                 pressTime = 0;
                 alreadyActivated = false;
             }
-            
-        }
-        if (this.hasPower && this.activated && playerNearby && Input.GetButtonDown(InputType.USE))
-        {
-            Debug.Log("Using computer");
-        }	    
+
+            //Using computer
+            if (this.activated && Input.GetButtonDown(InputType.USE))
+            {
+                UsingComputer(true);
+            }
+
+            if (usingTerminal)
+            {
+                if (Input.GetButtonDown(InputType.START))
+                {
+                    UsingComputer(false);
+                }
+                //reading passwprd input stream for this frame (ASCII characters only)
+                else for (int i = 0; i < Input.inputString.Length; i++)
+                {
+                    StartCoroutine(InputKey(Input.inputString[i]));
+                }
+            }
+        }    
 	}
+
+    void OnGUI()
+    {
+        if (playerNearby && !usingTerminal)
+        {
+            GUI.Box(promptRect, "HOLD [USE] for power. Press [USE] to interact", promptStyle);
+        }
+        else if (usingTerminal)
+        {
+            GUI.Box(terminalRect, "");
+            if (GUI.Button(exitButtonRect, "X"))
+            {
+                UsingComputer(false);
+            }
+            //Login screen
+            if (!hasAccess)
+            {
+                GUI.Box(usernameRect, userName);
+                GUI.Box(passwordRect, passwordGuess);
+            }
+            //Email/security screen
+            else
+            {
+                selectedEmailIndex = GUI.SelectionGrid(emailListNodeRect, selectedEmailIndex, emailSelection, 1);
+                GUI.Box(emailBodyRect, emailBody[selectedEmailIndex]);
+            }
+        }
+    }
 
     void OnTriggerEnter(Collider other)
     {
         if (other is CapsuleCollider && other.tag == Tags.PLAYER)
         {
             playerNearby = true;
+            playerHUD = other.GetComponent<HUD_Stealth>();
+            playerMovement = other.GetComponent<PlayerMovementBasic>();
         }
     }
     void OnTriggerExit(Collider other)
@@ -66,11 +143,59 @@ public class ComputerTerminal : CircuitOutlet
         if (other is CapsuleCollider && other.tag == Tags.PLAYER)
         {
             playerNearby = false;
+            UsingComputer(false);
         }
     }
+    #endregion
 
+    #region Custom functions
+
+    /// <summary>
+    /// Populate emails from XML file; use XMLUtilities.
+    /// </summary>
+    public void GetEmails()
+    {
+ 
+    }
     public override void TurnOnOff(bool on)
     {
         activated = on;
     }
+
+    void UsingComputer(bool usingTerminalP)
+    {
+        usingTerminal =      usingTerminalP;
+
+        cam3d.enabled =     !usingTerminalP;
+        playerHUD.enabled = !usingTerminalP;
+        playerMovement.enabled = !usingTerminal;
+        pauseMenu.enabled = !usingTerminalP;
+
+        Screen.showCursor =  usingTerminalP;
+        Screen.lockCursor = !usingTerminalP;
+        
+    }
+
+    IEnumerator InputKey(char keyVal)
+    {
+        switch (keyVal)
+        {
+            case '\n':
+            case '\r':
+                passwordGuess = passwordGuess == password ? "CORRECT" : "INCORRECT";
+                yield return new WaitForSeconds(.5f);
+                hasAccess = true;
+                //open up email/security window
+                break;
+            case '\b':
+                if(passwordGuess.Length > 0)
+                    passwordGuess = passwordGuess.Substring(0, passwordGuess.Length - 1);
+                break;
+            default:
+                if (passwordGuess.Length < 20)
+                    passwordGuess += keyVal;
+                break;
+        }
+    }
+    #endregion
 }

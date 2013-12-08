@@ -27,7 +27,7 @@ public class CameraMovement3D : CameraMovement
     Transform flashlight;
     public Transform target = null;
 
-    private Animator playerAnim;
+    private Animator playerAnim; //making the player look in the camera's direction
 
 	// Use this for initialization
 	void Start () 
@@ -40,9 +40,17 @@ public class CameraMovement3D : CameraMovement
         camTargetPos = new GameObject();
         camTargetPos.transform.position = player.transform.position;
 
-        this.transform.position = player.transform.position + defaultOffset;
+        //camTargetPos.transform.position = player.position
+        //                        + player.right * defaultOffset.x
+        //                        + player.up * defaultOffset.y
+        //                        + player.forward * defaultOffset.z;
 
-        targetPos = player.transform.position + defaultOffset;
+        //this.transform.position = player.position
+        //                        + player.right * defaultOffset.x
+        //                        + player.up * defaultOffset.y
+        //                        + player.forward * defaultOffset.z;
+
+        //camTargetPos.transform.LookAt(player.position + player.up * activeOffset.y + player.right * activeOffset.x, Vector3.up);
 
         SetOffset(CameraOffset.Default);
 	}
@@ -50,60 +58,6 @@ public class CameraMovement3D : CameraMovement
 	// Update is called once per frame
 	void LateUpdate ()
     {
-        /*if(!(activeOffset.Equals(crouchOffset) || activeOffset.Equals(climbUpOffset) || activeOffset.Equals(climbDownOffset)))
-            TurnPlayerHead();
-
-        if (Input.GetButtonDown(InputType.SHIFT_VIEW))
-        {
-            InvertOffset();
-            //AdjustOffset(new Vector3(-activeOffset.x, activeOffset.y, activeOffset.z));
-            Debug.Log(activeOffset);
-        }
-        this.transform.position = player.position 
-                                + this.transform.right * activeOffset.x
-                                + this.transform.up * activeOffset.y
-                                + this.transform.forward * activeOffset.z;
-
-        //---------------------------------------------------
-        //Testing area
-        float intensityX = Input.GetAxis(InputType.MOUSE_X);
-        float intensityY = Input.GetAxis(InputType.MOUSE_Y) * invertLook;
-        
-        if (intensityX != 0)
-        {
-            this.transform.RotateAround(player.position + new Vector3(0, activeOffset.y, 0), this.transform.up, intensityX * x_sensitivity);
-        }
-
-        if (intensityY != 0)
-        {
-            if (this.transform.eulerAngles.x < 30 || this.transform.eulerAngles.x > 330)
-            {
-                this.transform.RotateAround(player.position + new Vector3(0, activeOffset.y, 0), this.transform.right, -intensityY * y_sensitivity);
-            }
-            else if (this.transform.eulerAngles.x > 30 && intensityY > 0)
-            {
-                this.transform.RotateAround(player.position + new Vector3(0, activeOffset.y, 0), this.transform.right, -intensityY * y_sensitivity);
-            }
-            else if (this.transform.eulerAngles.x < 330 && intensityY < 0)
-            {
-                this.transform.RotateAround(player.position + new Vector3(0, activeOffset.y, 0), this.transform.right, -intensityY * y_sensitivity);
-            }
-        }
-        //Following 2 lines need to be done every frame in case something else is causing the character to move
-        if (target == null)
-        {
-            transform.LookAt(player.position + this.transform.up * activeOffset.y + this.transform.right * activeOffset.x, Vector3.up);
-            //transform.LookAt(player.position + Vector3.up * activeOffset.y + this.transform.right * activeOffset.x, Vector3.up);
-        }
-        else
-            transform.LookAt(target.position, Vector3.up);
-        flashlight.rotation = this.transform.rotation;
-        //---------------------------------------------------
-
-        //SetOffset(testOffset);
-        */
-
-
         if (!(activeOffset.Equals(crouchOffset) || activeOffset.Equals(climbUpOffset) || activeOffset.Equals(climbDownOffset)))
             TurnPlayerHead();
 
