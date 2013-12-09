@@ -2462,7 +2462,7 @@ GameObject:
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!135 &210215676
 SphereCollider:
@@ -2584,7 +2584,9 @@ MonoBehaviour:
   chaseSpeed: 5
   chaseWaitTime: 5
   patrolWaitTime: 2
-  patrolWaypoints: []
+  patrolWaypoints:
+  - {fileID: 1401450085}
+  - {fileID: 944489914}
   seesPlayer: 0
   awareOfPlayer: 0
 --- !u!54 &210215685
@@ -2599,7 +2601,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: .0500000007
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
@@ -4882,7 +4884,7 @@ GameObject:
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &363514897
 Transform:
@@ -4891,7 +4893,7 @@ Transform:
   m_PrefabInternal: {fileID: 404140573}
   m_GameObject: {fileID: 363514896}
   m_LocalRotation: {x: 0, y: .923879564, z: 0, w: .382683456}
-  m_LocalPosition: {x: -64.6285858, y: 14.9970579, z: 32.7026825}
+  m_LocalPosition: {x: -64.6285858, y: 15.8158417, z: 32.7026825}
   m_LocalScale: {x: 26, y: 26, z: 26}
   m_Children:
   - {fileID: 1995401950}
@@ -4930,7 +4932,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: .0500000007
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
@@ -5325,7 +5327,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d59002d00ccf46f49b5098cd933dafe4, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 14.9970579
+      value: 15.8158417
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d59002d00ccf46f49b5098cd933dafe4, type: 2}
       propertyPath: m_LocalPosition.z
@@ -5350,6 +5352,14 @@ Prefab:
     - target: {fileID: 100000, guid: d59002d00ccf46f49b5098cd933dafe4, type: 2}
       propertyPath: m_Name
       value: airman_blue_floor2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: d59002d00ccf46f49b5098cd933dafe4, type: 2}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d59002d00ccf46f49b5098cd933dafe4, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59002d00ccf46f49b5098cd933dafe4, type: 2}
@@ -6485,6 +6495,14 @@ Prefab:
     - target: {fileID: 2300000, guid: d59002d00ccf46f49b5098cd933dafe4, type: 2}
       propertyPath: m_CastShadows
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d59002d00ccf46f49b5098cd933dafe4, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: d59002d00ccf46f49b5098cd933dafe4, type: 2}
+      propertyPath: m_IsKinematic
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59002d00ccf46f49b5098cd933dafe4, type: 2}
@@ -8760,6 +8778,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 672406741}
     m_Modifications:
+    - target: {fileID: 11400002, guid: d59002d00ccf46f49b5098cd933dafe4, type: 2}
+      propertyPath: patrolWaypoints.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d59002d00ccf46f49b5098cd933dafe4, type: 2}
       propertyPath: m_LocalPosition.x
       value: 22.7127495
@@ -8807,6 +8829,14 @@ Prefab:
     - target: {fileID: 11400002, guid: d59002d00ccf46f49b5098cd933dafe4, type: 2}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: d59002d00ccf46f49b5098cd933dafe4, type: 2}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d59002d00ccf46f49b5098cd933dafe4, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59002d00ccf46f49b5098cd933dafe4, type: 2}
@@ -18550,6 +18580,10 @@ Prefab:
       propertyPath: m_Name
       value: Dr C Sharp
       objectReference: {fileID: 0}
+    - target: {fileID: 11400012, guid: 61d60109816c7f94b90f184894b6e6f3, type: 2}
+      propertyPath: infiniteAmmo
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 61d60109816c7f94b90f184894b6e6f3, type: 2}
   m_RootGameObject: {fileID: 1898683349}
@@ -22791,6 +22825,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 672406741}
     m_Modifications:
+    - target: {fileID: 11400002, guid: d59002d00ccf46f49b5098cd933dafe4, type: 2}
+      propertyPath: patrolWaypoints.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d59002d00ccf46f49b5098cd933dafe4, type: 2}
       propertyPath: m_LocalPosition.x
       value: 40.2378044
@@ -22831,6 +22869,22 @@ Prefab:
       propertyPath: patrolWaypoints.Array.data[1]
       value: 
       objectReference: {fileID: 944489914}
+    - target: {fileID: 11400002, guid: d59002d00ccf46f49b5098cd933dafe4, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19500000, guid: d59002d00ccf46f49b5098cd933dafe4, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d59002d00ccf46f49b5098cd933dafe4, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: d59002d00ccf46f49b5098cd933dafe4, type: 2}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d59002d00ccf46f49b5098cd933dafe4, type: 2}
   m_RootGameObject: {fileID: 210215675}
@@ -24186,7 +24240,7 @@ GameObject:
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!135 &1623917056
 SphereCollider:
@@ -24323,7 +24377,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: .0500000007
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
@@ -25798,7 +25852,7 @@ GameObject:
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1746856507
 Transform:
@@ -25873,7 +25927,9 @@ MonoBehaviour:
   chaseSpeed: 5
   chaseWaitTime: 5
   patrolWaitTime: 2
-  patrolWaypoints: []
+  patrolWaypoints:
+  - {fileID: 417572444}
+  - {fileID: 1686210183}
   seesPlayer: 0
   awareOfPlayer: 0
 --- !u!95 &1746856512
@@ -25935,7 +25991,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: .0500000007
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
@@ -32969,7 +33025,7 @@ MonoBehaviour:
   reloadAnimation: {fileID: 0}
   mods: []
   isAuto: 0
-  infiniteAmmo: 0
+  infiniteAmmo: 1
   shootingSound: {fileID: 8300000, guid: 0af3d513283ae634480aa98a0d2da839, type: 3}
   emptySound: {fileID: 8300000, guid: 3b7a828a646174088aa48ee1db9c439c, type: 3}
   reloadSound: {fileID: 8300000, guid: cc98b8ccdf9a248059887d064e7e5067, type: 3}

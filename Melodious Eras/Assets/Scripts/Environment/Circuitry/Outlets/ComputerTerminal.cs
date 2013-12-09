@@ -104,7 +104,7 @@ public class ComputerTerminal : CircuitSwitch
 
     void OnGUI()
     {
-        if (playerNearby && !usingTerminal)
+        if (playerNearby && !usingTerminal && this.hasPower)
         {
             GUI.Box(promptRect, "HOLD [USE] for power. Press [USE] to interact", promptStyle);
         }

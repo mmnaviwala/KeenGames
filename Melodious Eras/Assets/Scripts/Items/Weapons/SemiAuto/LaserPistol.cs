@@ -24,7 +24,7 @@ public class LaserPistol : SemiAutoWeapon
     {
         if (!reloading && Time.time > nextShotTime)
         {
-            if (ammoInClip > 0)
+            if (ammoInClip > 0 || infiniteAmmo)
             {
                 shotFiredTime = Time.time;
                 nextShotTime = shotFiredTime + fireRate;
@@ -59,8 +59,8 @@ public class LaserPistol : SemiAutoWeapon
                 }
 
                 //laser.GetComponent<Laser>().Shoot(barrelExit.position, hit.point, hit.collider.GetComponent<EnemyStats>(), damage, .1f);
-
-                ammoInClip -= ammoPerShot;
+                if(!infiniteAmmo)
+                    ammoInClip -= ammoPerShot;
 
                 this.audio.PlayOneShot(shootingSound);
 
