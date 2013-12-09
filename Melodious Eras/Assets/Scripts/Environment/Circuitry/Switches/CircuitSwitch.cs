@@ -6,6 +6,12 @@ public class CircuitSwitch : CircuitNode
 {
     public bool onOffStatus = false;
     public List<CircuitNode> connectedNodes;
+
+    void Awake()
+    {
+        if (this.electricGrid != null)
+            electricGrid.connectedObjects.Add(this);
+    }
 	// Use this for initialization
 	void Start () 
     {

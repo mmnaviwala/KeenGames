@@ -87,11 +87,13 @@ public class PlayerMovementBasic : MonoBehaviour
         if (Input.GetButtonDown(InputType.AIM))
         {
             mainCam.SetOffset(CameraOffset.Aim);
+            mainCam.followSpeed = (float)CameraFollowSpeed.Aiming;
             isAiming = true;
             anim.SetBool("IsShooting", isAiming);
         }
         else if (Input.GetButtonUp(InputType.AIM))
         {
+            mainCam.followSpeed = (float)CameraFollowSpeed.Default;
             if (!isWalking) //Will only change offset if the player isn't holding down the Walk key
                 mainCam.SetOffset(isCrouching ? CameraOffset.Crouch : CameraOffset.Default);
             isAiming = false;

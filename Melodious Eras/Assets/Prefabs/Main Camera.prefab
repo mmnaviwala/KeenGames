@@ -18,6 +18,7 @@ GameObject:
   - 54: {fileID: 5400000}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400006}
+  - 114: {fileID: 11400008}
   m_Layer: 2
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -215,9 +216,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78e9ac1bc7cd741478f9f04deda1b866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  followSpeed: 4
-  defaultOffset: {x: .5, y: 1.5, z: -1.5}
-  aimOffset: {x: .5, y: 1.5, z: -1}
+  followSpeed: 5
+  defaultOffset: {x: .600000024, y: 1.5, z: -1.5}
+  aimOffset: {x: .600000024, y: 1.5, z: -1}
   crouchOffset: {x: 0, y: 1.5, z: -3}
   PDA_Offset: {x: 0, y: 0, z: 0}
   HackingOffset: {x: 0, y: 0, z: 1}
@@ -234,7 +235,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 448b43d1e1effbd4c94b44b5293ecd7f, type: 3}
   m_Name: 
@@ -254,6 +255,20 @@ MonoBehaviour:
   - Fugu logo by Shane Nakamura Designs
   - Copyright (c) 2007-2008 Technicat, LLC
   crediticons: []
+--- !u!114 &11400008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 478a2083ad114a07d000fbfb8d76c639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shader: {fileID: 4800000, guid: e9ba2083ad114a07d000fbfb8d76c639, type: 3}
+  blurAmount: .100000001
+  extraBlur: 0
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1

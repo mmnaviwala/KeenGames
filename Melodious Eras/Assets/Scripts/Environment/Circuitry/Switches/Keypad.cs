@@ -29,6 +29,8 @@ public class Keypad : CircuitSwitch
 
     void Awake()
     {
+        if (this.electricGrid != null)
+            electricGrid.connectedObjects.Add(this);
         if (randomCode)
             GenerateCode();
     }

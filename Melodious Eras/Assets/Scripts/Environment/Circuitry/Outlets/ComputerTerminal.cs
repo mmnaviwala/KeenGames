@@ -32,6 +32,12 @@ public class ComputerTerminal : CircuitSwitch
     #endregion
 
     #region MonoBehavior functions
+
+    void Awake()
+    {
+        if(this.electricGrid != null)
+            electricGrid.connectedObjects.Add(this);
+    }
     // Use this for initialization
 	void Start () 
     {

@@ -4,6 +4,11 @@ using System.Collections;
 public class CircuitAnimate : CircuitNode
 {
 
+    void Awake()
+    {
+        if (this.electricGrid != null)
+            electricGrid.connectedObjects.Add(this);
+    }
 	// Use this for initialization
 	void Start () {
 	

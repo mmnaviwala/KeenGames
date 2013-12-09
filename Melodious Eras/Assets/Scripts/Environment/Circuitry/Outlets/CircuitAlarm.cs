@@ -5,6 +5,12 @@ public class CircuitAlarm : CircuitNode
 {
     public int alarmCounter = -1;
     private int numTries = 0;
+
+    void Awake()
+    {
+        if (this.electricGrid != null)
+            electricGrid.connectedObjects.Add(this);
+    }
 	// Use this for initialization
 	void Start () 
     {

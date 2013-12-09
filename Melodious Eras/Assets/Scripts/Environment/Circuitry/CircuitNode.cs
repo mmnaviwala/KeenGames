@@ -12,7 +12,8 @@ public class CircuitNode : BreakableObject
 
     void Awake()
     {
- 
+        if (this.electricGrid != null)
+            electricGrid.connectedObjects.Add(this);
     }
 	// Use this for initialization
 	void Start () 
@@ -42,7 +43,12 @@ public class CircuitNode : BreakableObject
 
     public virtual void TurnOnOff(bool on)
     {
-        //this.hasPower = on;
-        this.activated = on;
+        this.hasPower = on;
+        //this.activated = on;
+    }
+
+    public void ConnectToGrid(ElectricGrid grid)
+    {
+        grid.connectedObjects.Add(this);
     }
 }

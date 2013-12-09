@@ -4,6 +4,12 @@ using System.Collections;
 public class FlipSwitch : CircuitSwitch 
 {
     bool inRange = false;
+
+    void Awake()
+    {
+        if (this.electricGrid != null)
+            electricGrid.connectedObjects.Add(this);
+    }
 	// Use this for initialization
 	void Start () 
     {

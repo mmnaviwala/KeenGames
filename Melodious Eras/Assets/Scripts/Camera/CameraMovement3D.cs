@@ -2,6 +2,7 @@
 using System.Collections;
 
 public enum CameraOffset { Default, Aim, Crouch, PDA , Fighting, ClimbUp, ClimbDown, Hacking};
+public enum CameraFollowSpeed { Default = 5, Aiming = 20 };
 public class CameraMovement3D : CameraMovement 
 {
     public float followSpeed = 5;

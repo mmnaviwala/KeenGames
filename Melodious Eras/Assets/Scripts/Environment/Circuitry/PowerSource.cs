@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PowerSource : CircuitNode 
+public class PowerSource : CircuitNode
 {
     void Awake()
     {
-        //if (activated)
-        //    electricGrid.hasPower = true;
+        if (this.electricGrid != null)
+            electricGrid.connectedObjects.Add(this);
     }
 
     void Update()

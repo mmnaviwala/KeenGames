@@ -6,6 +6,12 @@ public class CircuitMove : CircuitNode
     public Vector3 moveDirection;
     private Vector3 targetPos, resetPos;
     public float movementSpeed = .5f;
+
+    void Awake()
+    {
+        if (this.electricGrid != null)
+            electricGrid.connectedObjects.Add(this);
+    }
 	// Use this for initialization
 	void Start () 
     {

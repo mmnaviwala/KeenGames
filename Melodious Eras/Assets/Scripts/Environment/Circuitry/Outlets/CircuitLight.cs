@@ -10,6 +10,8 @@ public class CircuitLight : CircuitNode
 
     void Awake()
     {
+        if (this.electricGrid != null)
+            electricGrid.connectedObjects.Add(this);
         if (lightbulb == null)
             lightbulb = this.light; 
     }
@@ -18,13 +20,6 @@ public class CircuitLight : CircuitNode
         lightbulb.enabled = this.hasPower && this.activated && !this.isBroken;
         if (this.hasPower && !isBroken && this.activated && flickering)
             StartCoroutine(Flicker());
-	}
-	
-	// Update is called once per frame
-	void Update () 
-    {
-        //if (!this.hasPower)
-        //   this.light.enabled = false;
 	}
 
     IEnumerator Flicker()
@@ -58,10 +53,9 @@ public class CircuitLight : CircuitNode
     {
         if (durability != -1)
         {
-            durability -= (durability > damage) ? damage : durability;
+            durability -= damage;
             if (durability <= 0)
             {
-                Debug.Log("Durability: " + durability);
                 this.lightbulb.enabled = false;
                 this.isBroken = true;
             }
