@@ -55,7 +55,7 @@ public class EnemyAI : MonoBehaviour
         {
             RaycastHit[] hits;
             
-            if (Vector3.Angle(other.transform.position - this.transform.position, this.transform.forward) < 50)
+            if (Vector3.Angle(other.transform.position - this.transform.position, this.transform.forward) < 75)
             {
                 hits = Physics.RaycastAll(this.transform.position, other.transform.position - this.transform.position, Vector3.Distance(this.transform.position, other.transform.position));
                 RaycastHit closestHit = hits[0];
