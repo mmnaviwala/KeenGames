@@ -14,7 +14,7 @@ public class Gun : Weapon
 
     public AudioClip shootingSound, emptySound, reloadSound;
 
-    public int ammoCapacity, ammoInClip, extraAmmo, maxAmmo, clipSize, ammoPerShot,
+    public int ammoInClip, extraAmmo, maxAmmo, clipSize, ammoPerShot,
                damage, muzzleVelocity;
     public int durability, weight;
     public float fireRate, //Time between shots.
@@ -108,7 +108,7 @@ public class Gun : Weapon
 
     public virtual IEnumerator Reload()
     {
-        if (extraAmmo > 0)
+        if (extraAmmo > 0 && this.ammoInClip < clipSize)
         {
             //Play animation, do this stuff once the animation is finished
             reloading = true;

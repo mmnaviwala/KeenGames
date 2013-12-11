@@ -10,7 +10,8 @@ public class DocumentScript : MonoBehaviour
     public Keypad keypadReference;
 
     private HUD_Stealth playerHUD;
-    private Rect documentRect;
+    private Rect documentRect, promptRect;
+    public GUIStyle promptStyle;
 	// Use this for initialization
 	void Start () 
     {
@@ -25,6 +26,8 @@ public class DocumentScript : MonoBehaviour
         int w = Screen.width / 2;
         int h = Screen.height / 10;
         documentRect = new Rect(w - h * 2.25f, h, h * 4.5f, h * 8);
+        promptRect = new Rect(w - 100, Screen.height * .75f, 200, 50);
+
         docStyle.padding = new RectOffset(h / 4, h / 4, h / 2, h / 2);
 	}
 	
@@ -66,6 +69,8 @@ public class DocumentScript : MonoBehaviour
 
     void OnGUI()
     {
+        if (inTrigger && !reading)
+            GUI.Box(promptRect, "Press [USE] to read.", promptStyle);
         if (reading)
         {
             playerHUD.enabled = false;

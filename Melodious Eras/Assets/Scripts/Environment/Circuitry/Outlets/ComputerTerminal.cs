@@ -112,7 +112,10 @@ public class ComputerTerminal : CircuitSwitch
     {
         if (playerNearby && !usingTerminal && this.hasPower)
         {
-            GUI.Box(promptRect, "HOLD [USE] for power. Press [USE] to interact", promptStyle);
+            if (this.activated)
+                GUI.Box(promptRect, "HOLD [USE] to turn off. Press [USE] to interact.", promptStyle);
+            else
+                GUI.Box(promptRect, "HOLD [USE] to turn on.", promptStyle);
         }
         else if (usingTerminal)
         {

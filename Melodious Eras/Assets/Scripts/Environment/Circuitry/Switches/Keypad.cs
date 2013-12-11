@@ -14,9 +14,8 @@ public class Keypad : CircuitSwitch
     public string correctCode;
     private string enteredCode;
 
-	private Rect keypadRect;
-    private Rect codeDisplayRect;
-    private Rect exitRect;
+	private Rect keypadRect, codeDisplayRect, exitRect, promptRect;
+    public GUIStyle promptStyle;
     private Rect[] keyRects;
     private string[] keyNums;
 
@@ -54,6 +53,7 @@ public class Keypad : CircuitSwitch
         //Arranging key locations below this line
         exitRect = new Rect(w + h * 1.5f, h, h / 2, h / 2);
         codeDisplayRect = new Rect(w - h * 2, h * 1.5f, h * 4, h);
+        promptRect = new Rect(Screen.width / 2 - 100, Screen.height * .75f, 200, 50);
 
         float keyY = 3f*h;
         float keyX = w - h*2;
@@ -114,27 +114,6 @@ public class Keypad : CircuitSwitch
             //cam3d.target = this.transform;
         }
     }
-
-    void OnTriggerStay(Collider other)
-    {
-        if (other is CapsuleCollider && other.gameObject.tag == Tags.PLAYER)
-        {
-            //if (Input.GetButtonDown(InputType.USE))
-            //{
-            //    Vector3 relPlayerPos = other.transform.position - this.transform.position;
-            //    Ray ray = new Ray(this.transform.position, relPlayerPos);
-            //    Debug.DrawLine(ray.origin, player.transform.position, Color.red, 2);
-
-            //    RaycastHit hit;
-            //    Physics.Raycast(ray, out hit);
-            //    if (hit.collider == other)
-            //    {
-            //        usingKeypad = true;
-            //        playerHUD.rigidbody.velocity = new Vector3(0, playerHUD.rigidbody.velocity.y, 0);
-            //    } 
-            //}
-        }
-    }
     
     //In case the player gets pushed out of range
     void OnTriggerExit(Collider other)
@@ -149,6 +128,10 @@ public class Keypad : CircuitSwitch
 
 	void OnGUI()
 	{
+        if (playerNearKeypad && !usingKeypad && this.hasPower)
+        {
+            GUI.Box(promptRect, "Press [USE] to interact.", promptStyle);
+        }
 		if(hasPower && usingKeypad)
 		{
             GUI.Box(keypadRect, "Keypad");
