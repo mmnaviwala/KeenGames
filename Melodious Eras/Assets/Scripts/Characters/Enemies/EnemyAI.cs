@@ -54,7 +54,7 @@ public class EnemyAI : MonoBehaviour
         if (!other.isTrigger && other is CapsuleCollider && other.tag == Tags.PLAYER)
         {
             RaycastHit[] hits;
-            
+
             if (Vector3.Angle(other.transform.position - this.transform.position, this.transform.forward) < 75)
             {
                 hits = Physics.RaycastAll(this.transform.position, other.transform.position - this.transform.position, Vector3.Distance(this.transform.position, other.transform.position));
@@ -65,7 +65,7 @@ public class EnemyAI : MonoBehaviour
                     if (hits[h].collider.isTrigger)
                         continue;
                     float temp = Vector3.Distance(this.transform.position, hits[h].point);
-                    if ( temp < closestHitDistance)
+                    if (temp < closestHitDistance)
                     {
                         closestHitDistance = temp;
                         closestHit = hits[h];

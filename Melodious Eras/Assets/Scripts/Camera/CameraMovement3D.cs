@@ -2,7 +2,7 @@
 using System.Collections;
 
 public enum CameraOffset { Default, Aim, Crouch, PDA , Fighting, ClimbUp, ClimbDown, Hacking};
-public enum CameraFollowSpeed { Default = 5, Aiming = 20 };
+public enum CameraFollowSpeed { Default = 4, Aiming = 15 };
 public class CameraMovement3D : CameraMovement 
 {
     public float followSpeed = 5;
@@ -27,6 +27,7 @@ public class CameraMovement3D : CameraMovement
     Transform player;
     Transform flashlight;
     public Transform target = null;
+    GameObject go;
 
     private Animator playerAnim; //making the player look in the camera's direction
 
@@ -41,6 +42,7 @@ public class CameraMovement3D : CameraMovement
         camTargetPos = new GameObject();
         camTargetPos.transform.position = player.transform.position;
 
+
         //camTargetPos.transform.position = player.position
         //                        + player.right * defaultOffset.x
         //                        + player.up * defaultOffset.y
@@ -54,10 +56,21 @@ public class CameraMovement3D : CameraMovement
         //camTargetPos.transform.LookAt(player.position + player.up * activeOffset.y + player.right * activeOffset.x, Vector3.up);
 
         SetOffset(CameraOffset.Default);
+
+        go = new GameObject();
+        go.name = "camTarget";
+        go.transform.position = player.position + new Vector3(0, activeOffset.y, 0);
+        go.transform.rotation = player.rotation;
 	}
 	
 	// Update is called once per frame
 	void LateUpdate ()
+    {
+        //OldCameraRotation();
+        NewCameraRotation();
+	}
+
+    void OldCameraRotation()
     {
         if (!(activeOffset.Equals(crouchOffset) || activeOffset.Equals(climbUpOffset) || activeOffset.Equals(climbDownOffset)))
             TurnPlayerHead();
@@ -101,8 +114,9 @@ public class CameraMovement3D : CameraMovement
         //Following 2 lines need to be done every frame in case something else is causing the character to move
         if (target == null)
         {
-            
-            camTargetPos.transform.LookAt(player.position + camTargetPos.transform.up * activeOffset.y + camTargetPos.transform.right * activeOffset.x, Vector3.up);
+            targetLookPos = player.position + camTargetPos.transform.up * activeOffset.y + camTargetPos.transform.right * activeOffset.x;
+            camTargetPos.transform.LookAt(targetLookPos, Vector3.up);
+            Debug.DrawLine(this.transform.position, targetLookPos);
             this.transform.rotation = camTargetPos.transform.rotation;
             //transform.LookAt(player.position + Vector3.up * activeOffset.y + this.transform.right * activeOffset.x, Vector3.up);
         }
@@ -111,24 +125,44 @@ public class CameraMovement3D : CameraMovement
         flashlight.rotation = camTargetPos.transform.rotation;
         this.transform.position = Vector3.Lerp(this.transform.position, camTargetPos.transform.position, followSpeed * Time.deltaTime);
         //---------------------------------------------------
-        
+
         //SetOffset(testOffset);
-	}
+ 
+    }
     void NewCameraRotation()
     {
-        RaycastHit hit;
-        float range = activeOffset.magnitude;
-        Vector3 direction = this.transform.right * activeOffset.x + this.transform.up * activeOffset.y + this.transform.forward * activeOffset.z;
+        if (!(activeOffset.Equals(crouchOffset) || activeOffset.Equals(climbUpOffset) || activeOffset.Equals(climbDownOffset)))
+            TurnPlayerHead();
 
-        if (Physics.Raycast(player.transform.position, direction, out hit, range))
+        if (Input.GetButtonDown(InputType.SHIFT_VIEW))
+            InvertOffset();
+
+        //---------------------------------------------------
+        //Testing area
+        float intensityX = Input.GetAxis(InputType.MOUSE_X);
+        float intensityY = Input.GetAxis(InputType.MOUSE_Y) * invertLook;
+
+        if (intensityX != 0)
         {
-            camTargetPos.transform.position = hit.point;
-            this.transform.position = Vector3.Lerp(this.transform.position, hit.point, 5 * Time.deltaTime);
+            //go.transform.Rotate(player.up, intensityX * x_sensitivity);
+            //go.transform.Rotate(0, intensityX * x_sensitivity, 0);
+            go.transform.rotation = Quaternion.Euler(go.transform.eulerAngles.x, go.transform.eulerAngles.y + intensityX * x_sensitivity, go.transform.eulerAngles.z);
         }
-        else
+        if (intensityY != 0)
         {
-            
+            //go.transform.Rotate(this.transform.right, -intensityY * y_sensitivity);
+            //go.transform.Rotate(-intensityY * y_sensitivity, 0, 0);
+            go.transform.rotation = Quaternion.Euler(go.transform.eulerAngles.x - intensityY * y_sensitivity, go.transform.eulerAngles.y, go.transform.eulerAngles.z);
         }
+        targetLookPos = player.position + player.up * activeOffset.y + go.transform.right * activeOffset.x;
+
+        this.transform.rotation = go.transform.rotation;
+        //camTargetPos.transform.position = player.position + go.transform.right * activeOffset.x + go.transform.up * activeOffset.y + go.transform.forward * activeOffset.z;
+        camTargetPos.transform.position = targetLookPos + this.transform.forward * activeOffset.z;
+
+        flashlight.rotation = this.transform.rotation;
+        this.transform.position = Vector3.Lerp(this.transform.position, camTargetPos.transform.position, followSpeed * Time.deltaTime);
+        Debug.DrawLine(camTargetPos.transform.position, targetLookPos);
     }
 
     void TurnPlayerHead()

@@ -2732,9 +2732,9 @@ Light:
   m_Enabled: 0
   serializedVersion: 3
   m_Type: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 3
-  m_Range: 12.5
+  m_Color: {r: .784313738, g: 1, b: 1, a: 1}
+  m_Intensity: 5
+  m_Range: 15
   m_SpotAngle: 45
   m_CookieSize: 10
   m_Shadows:
@@ -3418,7 +3418,6 @@ MonoBehaviour:
   shootingSound: {fileID: 8300000, guid: 0af3d513283ae634480aa98a0d2da839, type: 3}
   emptySound: {fileID: 8300000, guid: 3b7a828a646174088aa48ee1db9c439c, type: 3}
   reloadSound: {fileID: 8300000, guid: cc98b8ccdf9a248059887d064e7e5067, type: 3}
-  ammoCapacity: 10
   ammoInClip: 10
   extraAmmo: 10
   maxAmmo: 20
