@@ -47,8 +47,9 @@ public class CircuitNode : BreakableObject
         //this.activated = on;
     }
 
-    public void ConnectToGrid(ElectricGrid grid)
+    public void PlugIn(ElectricGrid grid)
     {
-        grid.connectedObjects.Add(this);
+        if(grid != null)
+            grid.connectedObjects.Add(this);
     }
 }

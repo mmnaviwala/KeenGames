@@ -1,0 +1,151 @@
+Shader "_DirtyEmissiveDiffuse"
+{
+	Properties 
+	{
+_DiffuseTexture("_DiffuseTexture", 2D) = "black" {}
+_Dirt("_Dirt", 2D) = "black" {}
+_MakeDirty("_MakeDirty", Range(0,1.5) ) = 1
+_DiffuseIntensity("_DiffuseIntensity", Range(0,2) ) = 1
+_SpecularIntensity("_SpecularIntensity", Range(0,6) ) = 2
+_SpecularPower("_SpecularPower", Range(0,2) ) = 0.5
+_BumpMap("_BumpMap", 2D) = "black" {}
+_EmissionColor("_EmissionColor", Color) = (1,1,1,1)
+_Emission("_Emission", 2D) = "black" {}
+_EmissionIntensity("_EmissionIntensity", Range(0,6) ) = 1
+_DirtIntensity("_DirtIntensity", 2D) = "black" {}
+_SpecularColor("_SpecularColor", Color) = (1,1,1,1)
+_DiffuseColor("_DiffuseColor", Color) = (1,1,1,1)
+
+	}
+	
+	SubShader 
+	{
+		Tags
+		{
+"Queue"="Geometry"
+"IgnoreProjector"="False"
+"RenderType"="Opaque"
+
+		}
+
+		
+Cull Back
+ZWrite On
+ZTest LEqual
+ColorMask RGBA
+Fog{
+}
+
+
+		CGPROGRAM
+#pragma surface surf BlinnPhongEditor  vertex:vert
+#pragma target 2.0
+
+
+sampler2D _DiffuseTexture;
+sampler2D _Dirt;
+float _MakeDirty;
+float _DiffuseIntensity;
+float _SpecularIntensity;
+float _SpecularPower;
+sampler2D _BumpMap;
+float4 _EmissionColor;
+sampler2D _Emission;
+float _EmissionIntensity;
+sampler2D _DirtIntensity;
+float4 _SpecularColor;
+float4 _DiffuseColor;
+
+			struct EditorSurfaceOutput {
+				half3 Albedo;
+				half3 Normal;
+				half3 Emission;
+				half3 Gloss;
+				half Specular;
+				half Alpha;
+				half4 Custom;
+			};
+			
+			inline half4 LightingBlinnPhongEditor_PrePass (EditorSurfaceOutput s, half4 light)
+			{
+half3 spec = light.a * s.Gloss;
+half4 c;
+c.rgb = (s.Albedo * light.rgb + light.rgb * spec);
+c.a = s.Alpha;
+return c;
+
+			}
+
+			inline half4 LightingBlinnPhongEditor (EditorSurfaceOutput s, half3 lightDir, half3 viewDir, half atten)
+			{
+				half3 h = normalize (lightDir + viewDir);
+				
+				half diff = max (0, dot ( lightDir, s.Normal ));
+				
+				float nh = max (0, dot (s.Normal, h));
+				float spec = pow (nh, s.Specular*128.0);
+				
+				half4 res;
+				res.rgb = _LightColor0.rgb * diff;
+				res.w = spec * Luminance (_LightColor0.rgb);
+				res *= atten * 2.0;
+
+				return LightingBlinnPhongEditor_PrePass( s, res );
+			}
+			
+			struct Input {
+				float2 uv_DiffuseTexture;
+float2 uv_Dirt;
+float2 uv_DirtIntensity;
+float2 uv_Emission;
+
+			};
+
+			void vert (inout appdata_full v, out Input o) {
+float4 VertexOutputMaster0_0_NoInput = float4(0,0,0,0);
+float4 VertexOutputMaster0_1_NoInput = float4(0,0,0,0);
+float4 VertexOutputMaster0_2_NoInput = float4(0,0,0,0);
+float4 VertexOutputMaster0_3_NoInput = float4(0,0,0,0);
+
+
+			}
+			
+
+			void surf (Input IN, inout EditorSurfaceOutput o) {
+				o.Normal = float3(0.0,0.0,1.0);
+				o.Alpha = 1.0;
+				o.Albedo = 0.0;
+				o.Emission = 0.0;
+				o.Gloss = 0.0;
+				o.Specular = 0.0;
+				o.Custom = 0.0;
+				
+float4 Tex2D1=tex2D(_DiffuseTexture,(IN.uv_DiffuseTexture.xyxy).xy);
+float4 Tex2D0=tex2D(_Dirt,(IN.uv_Dirt.xyxy).xy);
+float4 Tex2D6=tex2D(_DirtIntensity,(IN.uv_DirtIntensity.xyxy).xy);
+float4 Multiply5=Tex2D6 * _MakeDirty.xxxx;
+float4 Lerp0=lerp(Tex2D1,Tex2D0,Multiply5);
+float4 Multiply8=_DiffuseIntensity.xxxx * _DiffuseColor;
+float4 Multiply0=Lerp0 * Multiply8;
+float4 Tex2D2=tex2D(_Emission,(IN.uv_Emission.xyxy).xy);
+float4 Tex2D4=tex2D(_Dirt,(IN.uv_Dirt.xyxy).xy);
+float4 Tex2D5=tex2D(_DirtIntensity,(IN.uv_DirtIntensity.xyxy).xy);
+float4 Multiply4=Tex2D5 * _MakeDirty.xxxx;
+float4 Lerp2=lerp(Tex2D2,Tex2D4,Multiply4);
+float4 Multiply2=Lerp2 * _EmissionIntensity.xxxx;
+float4 Multiply3=Multiply2 * _EmissionColor;
+float4 Master0_1_NoInput = float4(0,0,1,1);
+float4 Master0_3_NoInput = float4(0,0,0,0);
+float4 Master0_4_NoInput = float4(0,0,0,0);
+float4 Master0_5_NoInput = float4(1,1,1,1);
+float4 Master0_7_NoInput = float4(0,0,0,0);
+float4 Master0_6_NoInput = float4(1,1,1,1);
+o.Albedo = Multiply0;
+o.Emission = Multiply3;
+
+				o.Normal = normalize(o.Normal);
+			}
+		ENDCG
+	}
+	Fallback ""
+}

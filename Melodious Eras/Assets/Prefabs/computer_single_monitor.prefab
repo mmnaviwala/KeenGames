@@ -67,7 +67,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &400000
 Transform:
@@ -272,7 +272,7 @@ MonoBehaviour:
   userName: admin
   password: password
   onScreen: {fileID: 2100000, guid: ebe949777b3d5a44aac73f8fc8633917, type: 2}
-  offScreen: {fileID: 2100000, guid: 6a2d6ac62e4b8104c8314add185f1c4a, type: 2}
+  offScreen: {fileID: 2100000, guid: 532aaf8947d20774895284afbe4c52fe, type: 2}
   monitors:
   - {fileID: 400002}
   terminalStyle:

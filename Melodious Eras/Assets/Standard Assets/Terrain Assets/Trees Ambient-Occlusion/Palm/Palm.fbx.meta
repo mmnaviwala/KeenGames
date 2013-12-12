@@ -6,6 +6,7 @@ ModelImporter:
     100000: //RootNode
     400000: //RootNode
     2300000: //RootNode
+    2800000: __AssetImporterPreview
     3300000: //RootNode
     4300000: polySurface1
     11100000: //RootNode
@@ -14,7 +15,7 @@ ModelImporter:
     materialName: 3
     materialSearch: 1
   animations:
-    legacyGenerateAnimations: 0
+    legacyGenerateAnimations: 4
     bakeSimulation: 0
     optimizeGameObjects: 0
     animationCompression: 1
@@ -27,7 +28,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: .300000012
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
@@ -43,7 +44,7 @@ ModelImporter:
   tangentSpace:
     normalSmoothAngle: 60
     splitTangentsAcrossUV: 0
-    normalImportMode: 0
+    normalImportMode: 1
     tangentImportMode: 1
   importAnimation: 1
   copyAvatar: 0

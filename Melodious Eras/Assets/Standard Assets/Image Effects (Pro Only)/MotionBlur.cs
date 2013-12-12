@@ -16,7 +16,7 @@ public class MotionBlur : ImageEffectBase
 	
 	private RenderTexture accumTexture;
 	
-	override protected void Start()
+	 protected void Start()
 	{
 		if(!SystemInfo.supportsRenderTextures)
 		{
@@ -26,7 +26,7 @@ public class MotionBlur : ImageEffectBase
 		base.Start();
 	}
 	
-	override protected void OnDisable()
+	 protected void OnDisable()
 	{
 		base.OnDisable();
 		DestroyImmediate(accumTexture);

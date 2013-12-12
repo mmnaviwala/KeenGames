@@ -17,8 +17,9 @@ public class CircuitLight : CircuitNode
     }
 	void Start () 
     {
-        lightbulb.enabled = this.hasPower && this.activated && !this.isBroken;
-        if (this.hasPower && !isBroken && this.activated && flickering)
+        if(this.lightbulb != null)
+            lightbulb.enabled = this.hasPower && this.activated && !this.isBroken;
+        if (this.lightbulb != null && this.hasPower && !isBroken && this.activated && flickering)
             StartCoroutine(Flicker());
 	}
 
