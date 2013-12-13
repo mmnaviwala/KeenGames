@@ -20,10 +20,10 @@ PlayerSettings:
   defaultScreenHeightWeb: 600
   m_RenderingPath: 2
   m_MobileRenderingPath: 1
-  m_ActiveColorSpace: 0
+  m_ActiveColorSpace: 1
   m_MTRendering: 1
   m_MobileMTRendering: 0
-  m_UseDX11: 0
+  m_UseDX11: 1
   iosShowActivityIndicatorOnLoading: -1
   androidShowActivityIndicatorOnLoading: -1
   displayResolutionDialog: 1
@@ -70,7 +70,7 @@ PlayerSettings:
   m_SupportedAspectRatios:
     4:3: 0
     5:4: 0
-    16:10: 0
+    16:10: 1
     16:9: 1
     Others: 0
   iPhoneBundleIdentifier: com.Company.ProductName

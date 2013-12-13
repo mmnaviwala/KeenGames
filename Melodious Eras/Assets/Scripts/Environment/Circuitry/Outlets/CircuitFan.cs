@@ -29,8 +29,11 @@ public class CircuitFan : CircuitNode
     {
         bool temp = activated;
         activated = signal && !isBroken;
-        if(temp != activated)
+        if (temp != activated)
+        {
+            this.StopAllCoroutines();
             StartCoroutine(activated ? SpeedUp() : SlowDown());
+        }
         return false;
     }
 
@@ -62,6 +65,7 @@ public class CircuitFan : CircuitNode
             if (durability <= 0)
             {
                 this.isBroken = true;
+                this.StopAllCoroutines();
                 this.StartCoroutine(SlowDown());
             }
         }
