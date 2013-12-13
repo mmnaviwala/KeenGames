@@ -41,11 +41,11 @@ public class LaserPistol : SemiAutoWeapon
                     }
                     else if (hit.collider.tag == Tags.BREAKABLE && !hit.collider.isTrigger)
                     {
-                        hit.collider.transform.GetComponent<BreakableObject>().TakeDamage(damage);
-                        Debug.Log("Shooting breakable object");
+                        BreakableObject[] components = hit.collider.transform.GetComponents<BreakableObject>();
+                        for (int i = 0; i < components.Length; i++)
+                            components[i].TakeDamage(damage);
+                        //hit.collider.transform.GetComponent<BreakableObject>().TakeDamage(damage);
                     }
-                    Debug.Log("Shooting at " + hit.collider.name);
-                    Debug.DrawLine(barrelExit.position, hit.point, Color.red, 5);
 
                     //if (hit.rigidbody != null)
                     //{

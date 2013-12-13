@@ -54,4 +54,16 @@ public class CircuitFan : CircuitNode
         }
         speed = 0;
     }
+    public override void TakeDamage(int damage)
+    {
+        if (this.durability != -1)
+        {
+            durability -= damage;
+            if (durability <= 0)
+            {
+                this.isBroken = true;
+                this.StartCoroutine(SlowDown());
+            }
+        }
+    }
 }
