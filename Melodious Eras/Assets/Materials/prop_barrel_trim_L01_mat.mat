@@ -7,8 +7,9 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: prop_barrel_trim_L01_mat
-  m_Shader: {fileID: 23, guid: 0000000000000000e000000000000000, type: 0}
+  m_Shader: {fileID: 23, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: []
+  m_CustomRenderQueue: -1
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
@@ -30,7 +31,7 @@ Material:
         first:
           name: _Cube
         second:
-          m_Texture: {fileID: 8900000, guid: 6c5668bb9f9669342bfdd3eaddebb56b, type: 2}
+          m_Texture: {fileID: 8900000, guid: 9bad60b19d2741742ab81d4012e8c29b, type: 2}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
