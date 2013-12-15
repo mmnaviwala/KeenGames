@@ -45,9 +45,6 @@ public class ElectricGrid : MonoBehaviour
 
         this.enabled = false;
     }
-    void Start()
-    {
-    }
 
     public void UpdatePowerSource()
     {

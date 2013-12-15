@@ -10,12 +10,12 @@ GameObject:
   - 4: {fileID: 400000}
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
+  - 195: {fileID: 19500000}
   - 95: {fileID: 9500000}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
   - 135: {fileID: 13500000}
   - 54: {fileID: 5400000}
-  - 195: {fileID: 19500000}
   m_Layer: 0
   m_Name: airman_blue
   m_TagString: Enemy
@@ -875,7 +875,6 @@ MonoBehaviour:
   shootingSound: {fileID: 8300000, guid: 0af3d513283ae634480aa98a0d2da839, type: 3}
   emptySound: {fileID: 8300000, guid: 3b7a828a646174088aa48ee1db9c439c, type: 3}
   reloadSound: {fileID: 8300000, guid: cc98b8ccdf9a248059887d064e7e5067, type: 3}
-  ammoCapacity: 10
   ammoInClip: 10
   extraAmmo: 15
   maxAmmo: 25

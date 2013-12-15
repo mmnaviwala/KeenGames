@@ -190,8 +190,7 @@ public class PlayerMovementBasic : MonoBehaviour
         if (jumping && (Mathf.Abs(collision.contacts[0].normal.x) > .5f || Mathf.Abs(collision.contacts[0].normal.z) > .5f))
         {
             this.rigidbody.velocity = Vector3.zero;
-            this.transform.position += collision.contacts[0].normal * .25f;
-            Debug.Log("stopping motion. Jumping: " + jumping);
+            this.transform.position += collision.contacts[0].normal * .1f;
         }
 
         anim.SetBool("IsGrinding", collision.collider.tag == Tags.SLIDE);
