@@ -88,7 +88,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 40.0336685, y: 12.585968, z: -6.17668247}
+  m_LocalPosition: {x: 40.0336685, y: 12.585968, z: -10.9229317}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400004}
@@ -207,8 +207,8 @@ Light:
   serializedVersion: 3
   m_Type: 2
   m_Color: {r: 1, g: .949797153, b: .669117689, a: 1}
-  m_Intensity: 3.5
-  m_Range: 6.90553761
+  m_Intensity: 1.5
+  m_Range: 7
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -251,7 +251,7 @@ MonoBehaviour:
   connectedSwitch: {fileID: 0}
   electricGrid: {fileID: 0}
   activateSound: {fileID: 0}
-  onOffStatus: 0
+  onOffStatus: 1
   connectedNodes:
   - {fileID: 11400002}
   promptStyle:
