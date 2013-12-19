@@ -3,11 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 
 public enum Difficulty { Easy = 0, Medium = 1, Hard = 2 }
+public enum QualityLevel_5FS { VeryFast, Fast, Simple, Good, High, VeryHigh, Ultra};
 public class GameController : MonoBehaviour
 {
     public Difficulty difficulty = Difficulty.Medium;
     public Vector3 wind;
     public float turbulence = 0;
+    public float shadowDistance = -1;
+    private static float defaultShadowDistance = 100;
 
     // Use this for initialization
     void Awake()

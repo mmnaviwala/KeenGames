@@ -181,7 +181,7 @@ public class PlayerMovementBasic : MonoBehaviour
             anim.applyRootMotion = true;
         }
         float impactVelocity = Vector3.Magnitude(collision.relativeVelocity);
-        if (collision.contacts[0].normal.y > .7f && impactVelocity > 20)
+        if (impactVelocity > 20)
         {
             stats.health -= 5 * (int)(impactVelocity - 20);
             anim.applyRootMotion = true;
@@ -190,8 +190,6 @@ public class PlayerMovementBasic : MonoBehaviour
         if (jumping && !(collision.rigidbody && collision.rigidbody.isKinematic) && (Mathf.Abs(collision.contacts[0].normal.x) > .5f || Mathf.Abs(collision.contacts[0].normal.z) > .5f))
         {
             Debug.Log("collision has no rigidbody: " + collision.transform.name);
-            this.rigidbody.velocity = Vector3.zero;
-            this.transform.position += collision.contacts[0].normal * .1f;
         }
 
         anim.SetBool("IsGrinding", collision.collider.tag == Tags.SLIDE);

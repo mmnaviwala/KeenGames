@@ -44,6 +44,12 @@ public class LaserPistol : SemiAutoWeapon
                         BreakableObject[] components = hit.collider.transform.GetComponents<BreakableObject>();
                         for (int i = 0; i < components.Length; i++)
                             components[i].TakeDamage(damage);
+
+                        if (hit.rigidbody && !hit.rigidbody.isKinematic)
+                        {
+                            hit.rigidbody.AddForce(ray.direction * 10);
+                            Debug.Log("Applying force to " + hit.rigidbody.name);
+                        }
                         //hit.collider.transform.GetComponent<BreakableObject>().TakeDamage(damage);
                     }
 
