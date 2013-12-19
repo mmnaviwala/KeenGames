@@ -37,6 +37,7 @@ public static class XMLUtilities
     {
         currentDirectory = Directory.GetCurrentDirectory();
         Debug.Log(currentDirectory);
+        Debug.Log(savePath);
 
     }
 }

@@ -28,6 +28,7 @@ public class CameraMovement3D : CameraMovement
     Transform flashlight;
     public Transform target = null;
     GameObject go;
+    public bool atTargetPos = false;
 
     private Animator playerAnim; //making the player look in the camera's direction
 
@@ -144,24 +145,35 @@ public class CameraMovement3D : CameraMovement
 
         if (intensityX != 0)
         {
-            //go.transform.Rotate(player.up, intensityX * x_sensitivity);
-            //go.transform.Rotate(0, intensityX * x_sensitivity, 0);
+            atTargetPos = false;
             go.transform.rotation = Quaternion.Euler(go.transform.eulerAngles.x, go.transform.eulerAngles.y + intensityX * x_sensitivity, go.transform.eulerAngles.z);
         }
         if (intensityY != 0)
         {
-            //go.transform.Rotate(this.transform.right, -intensityY * y_sensitivity);
-            //go.transform.Rotate(-intensityY * y_sensitivity, 0, 0);
+            atTargetPos = false;
             go.transform.rotation = Quaternion.Euler(go.transform.eulerAngles.x - intensityY * y_sensitivity, go.transform.eulerAngles.y, go.transform.eulerAngles.z);
         }
+        Vector3 lookTemp = targetLookPos;
         targetLookPos = player.position + player.up * activeOffset.y + go.transform.right * activeOffset.x;
+        if (lookTemp != targetLookPos)
+            atTargetPos = false;
 
         this.transform.rotation = go.transform.rotation;
         //camTargetPos.transform.position = player.position + go.transform.right * activeOffset.x + go.transform.up * activeOffset.y + go.transform.forward * activeOffset.z;
+        
         camTargetPos.transform.position = targetLookPos + this.transform.forward * activeOffset.z;
 
         flashlight.rotation = this.transform.rotation;
-        this.transform.position = Vector3.Lerp(this.transform.position, camTargetPos.transform.position, followSpeed * Time.deltaTime);
+        if (!atTargetPos)
+        {
+            if (Vector3.Distance(this.transform.position, camTargetPos.transform.position) > .01f)
+                this.transform.position = Vector3.Lerp(this.transform.position, camTargetPos.transform.position, followSpeed * Time.deltaTime);
+            else
+            {
+                this.transform.position = camTargetPos.transform.position;
+                atTargetPos = true;
+            }
+        }
         Debug.DrawLine(camTargetPos.transform.position, targetLookPos);
     }
 
