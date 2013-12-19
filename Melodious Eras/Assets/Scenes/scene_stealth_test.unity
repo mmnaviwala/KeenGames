@@ -38379,6 +38379,7 @@ GameObject:
   - 114: {fileID: 1418120069}
   - 114: {fileID: 1418120060}
   - 114: {fileID: 1418120068}
+  - 114: {fileID: 1418120071}
   m_Layer: 2
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -38668,6 +38669,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1418120071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1418120058}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab4ef0cf883921b438ed50cfc0fdc827, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shader: {fileID: 4800000, guid: 5fdc3f8c50c29cd46abe679ec1cac01c, type: 3}
 --- !u!1001 &1418732029
 Prefab:
   m_ObjectHideFlags: 0

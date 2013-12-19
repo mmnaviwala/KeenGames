@@ -29,6 +29,7 @@ public class CameraMovement3D : CameraMovement
     public Transform target = null;
     GameObject go;
     public bool atTargetPos = false;
+	NightVisionTestCS nightVision;
 
     private Animator playerAnim; //making the player look in the camera's direction
 
@@ -39,6 +40,7 @@ public class CameraMovement3D : CameraMovement
         Debug.Log(player == null);
         playerAnim = player.GetComponent<Animator>();
         flashlight = player.GetComponent<PlayerStats>().flashlight.transform;
+		nightVision = this.GetComponent<NightVisionTestCS>();
 
         camTargetPos = new GameObject();
         camTargetPos.transform.position = player.transform.position;
@@ -68,6 +70,10 @@ public class CameraMovement3D : CameraMovement
 	void LateUpdate ()
     {
         //OldCameraRotation();
+		if(Input.GetButtonDown(InputType.TOGGLE_NIGHTVISION))
+		{
+			nightVision.enabled = !nightVision.enabled;
+		}
         NewCameraRotation();
 	}
 

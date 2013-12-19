@@ -17,6 +17,7 @@
         MELEE = "Melee",
         SHIFT_VIEW = "Shift View",
         TOGGLE_FLASHLIGHT = "Toggle Flashlight",
+		TOGGLE_NIGHTVISION = "Toggle Nightvision",
         MENU = "Menu",
         AIM = "Aim",
         SHOOT = "Shoot",
