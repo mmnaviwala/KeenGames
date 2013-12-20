@@ -19,6 +19,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400008}
+  - 114: {fileID: 11400010}
   m_Layer: 2
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -65,7 +66,7 @@ Camera:
   m_RenderingPath: 2
   m_TargetTexture: {fileID: 0}
   m_HDR: 1
-  m_OcclusionCulling: 1
+  m_OcclusionCulling: 0
 --- !u!54 &5400000
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -218,7 +219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followSpeed: 4
   defaultOffset: {x: .600000024, y: 1.5, z: -1.25}
-  aimOffset: {x: .600000024, y: 1.5, z: -.75}
+  aimOffset: {x: .600000024, y: 1.5, z: -.5}
   crouchOffset: {x: 0, y: 1.5, z: -3}
   PDA_Offset: {x: 0, y: 0, z: 0}
   HackingOffset: {x: 0, y: 0, z: 1}
@@ -229,6 +230,7 @@ MonoBehaviour:
   y_sensitivity: 2
   invertLook: 1
   target: {fileID: 0}
+  atTargetPos: 0
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -289,6 +291,18 @@ MonoBehaviour:
   adaptionSpeed: 1.5
   tonemapper: {fileID: 4800000, guid: 003377fc2620a44939dadde6fe3f8190, type: 3}
   validRenderTextureFormat: 1
+--- !u!114 &11400010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab4ef0cf883921b438ed50cfc0fdc827, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shader: {fileID: 4800000, guid: 5fdc3f8c50c29cd46abe679ec1cac01c, type: 3}
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1

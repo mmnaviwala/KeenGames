@@ -1,7 +1,7 @@
 ﻿Shader "Custom/Screen Flicker" {
 	Properties {
 		_TintColor ("Tint Color", Color) = (0.5, 0.5, 0.5)
-		_MainTex ("Base (RGB) Gloss (A)", 2D) = "white" {}
+		_MainTex ("Particle Texture", 2D) = "white" {}
 		_Interlace ("Particle Texture", 2D) = "white" {}
 	}
 	Category {
@@ -24,10 +24,10 @@
 					combine constant * primary
 				}
 				SetTexture [_MainTex] {
-					combine texture * previous DOUBLE
+					combine texture * previous
 				}
 				SetTexture [_Interlace] {
-					combine texture * previous DOUBLE
+					combine texture * previous
 				}
 			}
 		}
@@ -39,5 +39,5 @@
 		}
 	}
 	FallBack "Diffuse"
-}
+	}
 }
