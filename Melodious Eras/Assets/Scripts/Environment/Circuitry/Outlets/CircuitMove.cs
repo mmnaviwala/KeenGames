@@ -5,10 +5,10 @@ public class CircuitMove : CircuitNode
 {
     public Vector3 moveDirection;
     public Vector3[] destinations; //should always have at least 2 (original + 1 or more destinations)
-    public Vector3[] directions;
+    protected Vector3[] directions;
 
-    private int destIndex = 0;
-    private Vector3 targetPos, resetPos;
+    protected int destIndex = 0;
+    protected Vector3 targetPos, resetPos;
     public float movementSpeed = .5f;
 
     void Awake()

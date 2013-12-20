@@ -2,8 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class CircuitSwitch : CircuitNode 
+public class CircuitSwitch : CircuitNode
 {
+    public bool initializeSwitch = true;
     public bool onOffStatus = false;
     public List<CircuitNode> connectedNodes;
 
