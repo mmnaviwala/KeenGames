@@ -25,11 +25,14 @@ public class CircuitLight : CircuitNode
 
     IEnumerator Flicker()
     {
+        float defaultIntensity = this.lightbulb.intensity;
         while (this.hasPower && activated && !isBroken)
         {
-            this.lightbulb.enabled = false;
+            this.lightbulb.intensity = Random.value * defaultIntensity;
+            //this.lightbulb.enabled = false;
             yield return new WaitForSeconds(.1f);
-            this.lightbulb.enabled = true;
+            //this.lightbulb.enabled = true;
+            this.lightbulb.intensity = defaultIntensity;
             yield return new WaitForSeconds(Random.Range(0f, frequency));
         }
         this.lightbulb.enabled = false; //light needs to turn off once power is lost
