@@ -3,6 +3,7 @@ using System.Collections;
 
 public class FlipSwitch : CircuitSwitch 
 {
+    public bool initializeSwitch = true;
     bool inRange = false;
     private Rect promptRect;
     public GUIStyle promptStyle;
@@ -16,9 +17,12 @@ public class FlipSwitch : CircuitSwitch
 	// Use this for initialization
 	void Start ()
     {
-        foreach (CircuitNode node in connectedNodes)
+        if (initializeSwitch)
         {
-            node.PerformSwitchAction(this.onOffStatus);
+            foreach (CircuitNode node in connectedNodes)
+            {
+                node.PerformSwitchAction(this.onOffStatus);
+            }
         }
 	}
     void Update()
