@@ -20,13 +20,14 @@ public class Elevator : MonoBehaviour
     //public int triggerCount = 0; //2 triggers in elevator. Avoiding OnTriggerExit action if still inside
     void OnTriggerEnter(Collider other)
     {
-        if (!other.isTrigger)
+        if (!other.isTrigger && other is CapsuleCollider)
         {
             Passenger passenger = passengers.Find(p => p.passengerTransform.Equals(other.transform));
             if (passenger == null)
             {
                 passenger = new Passenger(other.transform);
                 passengers.Add(passenger);
+                other.transform.parent = this.transform;
                 Debug.Log("New passenger: " + passengers.Count);
             }
             passenger.triggerCount++;
@@ -36,14 +37,17 @@ public class Elevator : MonoBehaviour
     }
 
     void OnTriggerExit(Collider other)
-    {        
-        if (!other.isTrigger)
+    {
+        if (!other.isTrigger && other is CapsuleCollider)
         {
             Passenger passenger = passengers.Find(p => p.passengerTransform.Equals(other.transform));
             passenger.triggerCount--;
             Debug.Log("Trigger count: " + passenger.triggerCount);
             if (passenger.triggerCount == 0)
+            {
                 passengers.Remove(passenger);
+                other.transform.parent = null;
+            }
         }
     }
 }
