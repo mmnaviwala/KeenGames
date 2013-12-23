@@ -75,10 +75,6 @@ public class PlayerMovementBasic : MonoBehaviour
             {
                 stats.equippedWeapon.Fire();
             }
-            /*if (Input.GetButton(InputType.SHOOT) && weapon is Automatic)
-            {
- 
-            }*/
         }
         else
         {

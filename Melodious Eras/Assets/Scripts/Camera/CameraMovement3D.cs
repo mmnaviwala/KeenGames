@@ -2,7 +2,7 @@
 using System.Collections;
 
 public enum CameraOffset { Default, Aim, Crouch, PDA , Fighting, ClimbUp, ClimbDown, Hacking};
-public enum CameraFollowSpeed { Default = 4, Aiming = 15 };
+public enum CameraFollowSpeed { Default = 4, Aiming = 10 };
 
 [AddComponentMenu("Scripts/Camera/Camera Movement 3D")]
 public class CameraMovement3D : CameraMovement 
@@ -78,66 +78,6 @@ public class CameraMovement3D : CameraMovement
 		}
         NewCameraRotation();
 	}
-
-    void OldCameraRotation()
-    {
-        if (!(activeOffset.Equals(crouchOffset) || activeOffset.Equals(climbUpOffset) || activeOffset.Equals(climbDownOffset)))
-            TurnPlayerHead();
-
-        if (Input.GetButtonDown(InputType.SHIFT_VIEW))
-        {
-            InvertOffset();
-            //AdjustOffset(new Vector3(-activeOffset.x, activeOffset.y, activeOffset.z));
-            Debug.Log(activeOffset);
-        }
-        camTargetPos.transform.position = player.position
-                                + camTargetPos.transform.right * activeOffset.x
-                                + camTargetPos.transform.up * activeOffset.y
-                                + camTargetPos.transform.forward * activeOffset.z;
-
-        //---------------------------------------------------
-        //Testing area
-        float intensityX = Input.GetAxis(InputType.MOUSE_X);
-        float intensityY = Input.GetAxis(InputType.MOUSE_Y) * invertLook;
-
-        if (intensityX != 0)
-        {
-            camTargetPos.transform.RotateAround(player.position + new Vector3(0, activeOffset.y, 0), camTargetPos.transform.up, intensityX * x_sensitivity);
-        }
-
-        if (intensityY != 0)
-        {
-            if (this.transform.eulerAngles.x < 30 || this.transform.eulerAngles.x > 330)
-            {
-                camTargetPos.transform.RotateAround(player.position + new Vector3(0, activeOffset.y, 0), camTargetPos.transform.right, -intensityY * y_sensitivity);
-            }
-            else if (this.transform.eulerAngles.x > 30 && intensityY > 0)
-            {
-                camTargetPos.transform.RotateAround(player.position + new Vector3(0, activeOffset.y, 0), camTargetPos.transform.right, -intensityY * y_sensitivity);
-            }
-            else if (this.transform.eulerAngles.x < 330 && intensityY < 0)
-            {
-                camTargetPos.transform.RotateAround(player.position + new Vector3(0, activeOffset.y, 0), camTargetPos.transform.right, -intensityY * y_sensitivity);
-            }
-        }
-        //Following 2 lines need to be done every frame in case something else is causing the character to move
-        if (target == null)
-        {
-            targetLookPos = player.position + camTargetPos.transform.up * activeOffset.y + camTargetPos.transform.right * activeOffset.x;
-            camTargetPos.transform.LookAt(targetLookPos, Vector3.up);
-            Debug.DrawLine(this.transform.position, targetLookPos);
-            this.transform.rotation = camTargetPos.transform.rotation;
-            //transform.LookAt(player.position + Vector3.up * activeOffset.y + this.transform.right * activeOffset.x, Vector3.up);
-        }
-        else
-            transform.LookAt(target.position, Vector3.up);
-        flashlight.rotation = camTargetPos.transform.rotation;
-        this.transform.position = Vector3.Lerp(this.transform.position, camTargetPos.transform.position, followSpeed * Time.deltaTime);
-        //---------------------------------------------------
-
-        //SetOffset(testOffset);
- 
-    }
     void NewCameraRotation()
     {
         if (!(activeOffset.Equals(crouchOffset) || activeOffset.Equals(climbUpOffset) || activeOffset.Equals(climbDownOffset)))
@@ -146,34 +86,39 @@ public class CameraMovement3D : CameraMovement
         if (Input.GetButtonDown(InputType.SHIFT_VIEW))
             InvertOffset();
 
-        //---------------------------------------------------
-        //Testing area
+        //Adjusting look rotation
         float intensityX = Input.GetAxis(InputType.MOUSE_X);
         float intensityY = Input.GetAxis(InputType.MOUSE_Y) * invertLook;
 
         if (intensityX != 0)
         {
-            atTargetPos = false;
+            //atTargetPos = false;
             go.transform.rotation = Quaternion.Euler(go.transform.eulerAngles.x, go.transform.eulerAngles.y + intensityX * x_sensitivity, go.transform.eulerAngles.z);
         }
         if (intensityY != 0)
         {
-            atTargetPos = false;
-            go.transform.rotation = Quaternion.Euler(go.transform.eulerAngles.x - intensityY * y_sensitivity, go.transform.eulerAngles.y, go.transform.eulerAngles.z);
+            //atTargetPos = false;
+            float angle = go.transform.eulerAngles.x - intensityY * y_sensitivity;
+            if (angle > 180) angle -= 360;
+            angle = Mathf.Clamp(angle, -60, 80);
+            go.transform.rotation = Quaternion.Euler(angle, 
+                                                     go.transform.eulerAngles.y,
+                                                     go.transform.eulerAngles.z);
         }
+
+        //Deciding if we should manipulate the camera
+        //Saving calculation/render time if camera doesn't have to move
         Vector3 lookTemp = targetLookPos;
-        targetLookPos = player.position + player.up * activeOffset.y + go.transform.right * activeOffset.x;
+        targetLookPos = player.position + player.up * activeOffset.y + go.transform.right * activeOffset.x + player.forward * .125f;
         if (lookTemp != targetLookPos)
             atTargetPos = false;
 
-        this.transform.rotation = go.transform.rotation;
-        //camTargetPos.transform.position = player.position + go.transform.right * activeOffset.x + go.transform.up * activeOffset.y + go.transform.forward * activeOffset.z;
-        
-        camTargetPos.transform.position = targetLookPos + this.transform.forward * activeOffset.z;
-
-        flashlight.rotation = this.transform.rotation;
         if (!atTargetPos)
         {
+            this.transform.rotation = go.transform.rotation;
+            flashlight.rotation = this.transform.rotation;
+            camTargetPos.transform.position = targetLookPos + this.transform.forward * activeOffset.z;
+
             if (Vector3.Distance(this.transform.position, camTargetPos.transform.position) > .01f)
                 this.transform.position = Vector3.Lerp(this.transform.position, camTargetPos.transform.position, followSpeed * Time.deltaTime);
             else
