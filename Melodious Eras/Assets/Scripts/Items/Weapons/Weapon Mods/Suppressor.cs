@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Items/Weapons/Suppressor")]
 public class Suppressor : WeaponMod 
 {
 

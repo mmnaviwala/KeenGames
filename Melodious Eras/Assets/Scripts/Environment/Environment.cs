@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Environment/Environment")]
 public static class Environment
 {
     public static Vector3 wind; //wind direction/speed

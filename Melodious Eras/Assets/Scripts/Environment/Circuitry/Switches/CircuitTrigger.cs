@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Environment/Circuitry/Circuit Trigger")]
 public class CircuitTrigger : CircuitNode {
 
     void Awake()

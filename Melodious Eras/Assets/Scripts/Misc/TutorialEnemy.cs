@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Misc/Tutorial Enemy")]
 public class TutorialEnemy : MonoBehaviour
 {
     public Texture2D[] pictures;

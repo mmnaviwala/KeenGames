@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Characters/Player Movement")]
 public class PlayerMovement : MonoBehaviour {
 
     public AudioClip shoutingClip;

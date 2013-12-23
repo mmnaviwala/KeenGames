@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Items/Weapons/Weapon")]
 public class Weapon : MonoBehaviour
 {
     protected SphereCollider soundSphere;

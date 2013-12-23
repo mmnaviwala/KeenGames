@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Items/Weapons/Semi Auto Weapon")]
 public class SemiAutoWeapon : Gun 
 {
 

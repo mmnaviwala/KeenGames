@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Environment/Light Glow")]
 public class LightGlow : MonoBehaviour 
 {
     public float intensity = 1

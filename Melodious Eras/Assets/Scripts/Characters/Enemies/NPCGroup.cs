@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[AddComponentMenu("Scripts/Characters/NPC Group")]
 public class NPCGroup : MonoBehaviour 
 {
     public List<EnemyAI> NPCs;

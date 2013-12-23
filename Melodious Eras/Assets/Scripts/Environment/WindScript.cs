@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Environment/Wind Script")]
 public class WindScript : MonoBehaviour
 {
     // Use this for initialization

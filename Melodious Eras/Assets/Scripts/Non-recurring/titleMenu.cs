@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Non-recurring/Title Menu")]
 public class titleMenu : MonoBehaviour 
 {
     Rect startButton, exitButton, titleBar;

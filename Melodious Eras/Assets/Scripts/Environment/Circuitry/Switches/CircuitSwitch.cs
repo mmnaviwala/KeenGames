@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[AddComponentMenu("Scripts/Environment/Circuitry/Circuit Switch")]
 public class CircuitSwitch : CircuitNode
 {
     public bool initializeSwitch = true;

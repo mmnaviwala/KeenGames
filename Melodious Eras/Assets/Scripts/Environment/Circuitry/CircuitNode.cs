@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Environment/Circuitry/Circuit Node")]
 public class CircuitNode : BreakableObject 
 {
     public bool hasPower = false;

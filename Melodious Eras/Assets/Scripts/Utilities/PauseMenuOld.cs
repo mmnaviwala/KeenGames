@@ -2,6 +2,7 @@
 using System.Collections;
 
 public enum Page { None, Main, Options, Credits };
+[AddComponentMenu("Scripts/Utilities/Pause Menu (Old)")]
 public class PauseMenuOld : MonoBehaviour
 {
 

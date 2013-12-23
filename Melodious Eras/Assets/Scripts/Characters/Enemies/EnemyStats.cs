@@ -2,6 +2,8 @@
 using System.Collections;
 
 public enum EnemyColor { Green = 0, Blue = 1, Red = 2, Purple = 3, White = 4 }
+
+[AddComponentMenu("Scripts/Characters/Enemy Stats")]
 public class EnemyStats : CharacterStats
 {
     public bool isVulnerable = false;

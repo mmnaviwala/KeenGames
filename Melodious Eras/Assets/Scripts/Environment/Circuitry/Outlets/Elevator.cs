@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+[AddComponentMenu("Scripts/Environment/Circuitry/Elevator")]
 public class Elevator : MonoBehaviour 
 {
     //wrapper for each passenger in the elevator; just keeps track of their trigger count.

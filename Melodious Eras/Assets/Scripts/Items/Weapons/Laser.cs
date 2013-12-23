@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Items/Weapons/Laser")]
 public class Laser : Projectile
 {
     LineRenderer laser;

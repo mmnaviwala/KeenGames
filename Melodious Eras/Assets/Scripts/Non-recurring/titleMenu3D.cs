@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Non-recurring/Title Menu 3D")]
 public class titleMenu3D : MonoBehaviour 
 {
     public GameObject objectType;

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Environment/Breakable Object")]
 public class BreakableObject : MonoBehaviour
 {
     public int durability = -1; //-1 = invulnerable

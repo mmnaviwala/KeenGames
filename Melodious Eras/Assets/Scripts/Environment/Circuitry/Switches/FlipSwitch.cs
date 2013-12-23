@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Environment/Circuitry/Flip Switch")]
 public class FlipSwitch : CircuitSwitch 
 {
     bool inRange = false;

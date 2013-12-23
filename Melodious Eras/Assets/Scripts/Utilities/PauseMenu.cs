@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
- 
+
+[AddComponentMenu("Scripts/Utilities/Pause Menu")]
 public class PauseMenu : MonoBehaviour {
  
 	public Texture2D[] pictures;

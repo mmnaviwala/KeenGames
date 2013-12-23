@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Environment/Ladder")]
 public class Ladder : MonoBehaviour 
 {
     public float bottom, top;

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Environment/Circuitry/Power Source")]
 public class PowerSource : CircuitNode
 {
     bool playerNearby = false;

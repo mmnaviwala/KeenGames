@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Non-recurring/Animated Pause Menu")]
 public class animatedPauseMenu : MonoBehaviour {
 	
 	private bool gamePaused = false;
@@ -31,7 +32,7 @@ public class animatedPauseMenu : MonoBehaviour {
 
 				GameObject.Find("Main Camera").gameObject.GetComponent<CameraMovement3D>().enabled = false;
 				GameObject.Find("Main Camera").gameObject.GetComponent<AudioSource>().mute = true;
-				GameObject.Find("Dr C Sharp").gameObject.GetComponent<HUD_Stealth>().enabled = false;
+				GameObject.FindGameObjectWithTag(Tags.PLAYER).gameObject.GetComponent<HUD_Stealth>().enabled = false;
 				GameObject.Find("player_flashlight").gameObject.GetComponent<Flashlight>().enabled = false;
 				//GameObject.Find("gui texture background").gameObject.GetComponent<GUITexture>().enabled = true;
 			}

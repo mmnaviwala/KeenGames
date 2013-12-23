@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[AddComponentMenu("Scripts/Environment/Circuitry/Electric Grid")]
 public class ElectricGrid : MonoBehaviour 
 {
     

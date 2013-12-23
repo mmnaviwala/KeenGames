@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Items/Weapons/Energy Shield")]
 public class EnergyShield : Weapon {
 
 	// Use this for initialization

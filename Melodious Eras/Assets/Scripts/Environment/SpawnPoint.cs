@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Environment/Spawn Point")]
 public class SpawnPoint : MonoBehaviour 
 {
     public Transform objectToSpawn;

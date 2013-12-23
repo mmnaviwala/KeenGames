@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Utilities/Hash IDs")]
 public class HashIDs : MonoBehaviour {
 
 	public int dyingState, deadBool, locomotionState, shoutState, speedFloat, sneakingBool, shoutingBool,

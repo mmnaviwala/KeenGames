@@ -14,4 +14,5 @@
     public const string MAIN_CAMERA = "MainCamera";
     public const string SLIDE = "Slide";
     public const string BREAKABLE = "Breakable";
+	public const string WEAPON = "Weapon";
 }

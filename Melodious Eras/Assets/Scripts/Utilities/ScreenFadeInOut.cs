@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Utilities/Screen Fade In Out")]
 public class ScreenFadeInOut : MonoBehaviour
 {
     public float fadeSpeed = 1.5f;

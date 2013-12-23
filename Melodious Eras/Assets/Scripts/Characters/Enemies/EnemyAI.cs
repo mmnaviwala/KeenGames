@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Characters/Enemy AI")]
 public class EnemyAI : MonoBehaviour
 {
     public NPCGroup group;

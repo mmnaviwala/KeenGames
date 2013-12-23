@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Non-recurring/Title Menu Disk")]
 public class TitleMenuDisk : MonoBehaviour 
 {
     Transform disk;

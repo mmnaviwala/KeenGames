@@ -2,6 +2,7 @@
 using System.Collections;
 
 [ExecuteInEditMode]
+[AddComponentMenu("Image Effects/Custom/Night Vision Test")]
 public class NightVisionTestCS : ImageEffectBase 
 {
 	//Called by camera to apply image effect

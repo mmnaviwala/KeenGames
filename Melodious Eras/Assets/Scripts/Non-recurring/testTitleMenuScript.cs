@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Non-recurring/Test Title Menu Script")]
 public class testTitleMenuScript : MonoBehaviour
 {
 

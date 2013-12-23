@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Non-recurring/Splash Screen")]
 public class SplashScreen : MonoBehaviour 
 {
 	public string levelToLoad;

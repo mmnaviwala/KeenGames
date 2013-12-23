@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Misc/iTween Mover")]
 public class iTweenMover : MonoBehaviour {
 
 	public string pathName;

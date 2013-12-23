@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Environment/Light Flicker")]
 public class LightFlicker : MonoBehaviour 
 {
     public bool flickering = false;

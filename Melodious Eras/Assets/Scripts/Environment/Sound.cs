@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Environment/Sound")]
 public class Sound : MonoBehaviour 
 {
     SphereCollider soundSphere;

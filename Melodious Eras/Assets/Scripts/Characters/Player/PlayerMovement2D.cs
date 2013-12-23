@@ -2,6 +2,8 @@
 using System.Collections;
 
 public enum FacingDirection2D { Left, Right };
+
+[AddComponentMenu("Scripts/Characters/Player Movement 2D")]
 public class PlayerMovement2D : MonoBehaviour 
 {
     public bool autoRun = true;

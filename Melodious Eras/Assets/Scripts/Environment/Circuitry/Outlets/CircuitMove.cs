@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Environment/Circuitry/Circuit Move")]
 public class CircuitMove : CircuitNode
 {
     public Vector3 moveDirection;

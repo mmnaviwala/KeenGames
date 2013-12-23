@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Environment/Circuitry/Circuit Fan")]
 public class CircuitFan : CircuitNode 
 {
     public Transform blades;

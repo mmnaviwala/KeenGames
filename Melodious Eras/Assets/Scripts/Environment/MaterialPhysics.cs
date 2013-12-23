@@ -2,6 +2,8 @@
 using System.Collections;
 
 public enum MaterialType { Grass, Carpet, Wood, Concrete, Stone, Marble, LightMetal, HeavyMetal, Glass, BrokenGlass, AbsorbAllSound, Custom };
+
+[AddComponentMenu("Scripts/Environment/Material Physics")]
 public class MaterialPhysics : MonoBehaviour 
 {
     public MaterialType surfaceMaterial, coreMaterial;

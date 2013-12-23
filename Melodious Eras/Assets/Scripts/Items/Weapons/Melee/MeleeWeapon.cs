@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Items/Weapons/Melee Weapon")]
 public class MeleeWeapon : Weapon 
 {
 

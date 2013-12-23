@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Camera/Terrain Camera Movement")]
 public class TerrainCameraMovement : MonoBehaviour {
 
 	public float positionX;

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Misc/Check If Clicked")]
 public class checkIfClicked : MonoBehaviour {
 
 	public string guiTextureNameShouldBe;
@@ -44,7 +45,7 @@ public class checkIfClicked : MonoBehaviour {
 			
 			GameObject.Find("Main Camera").gameObject.GetComponent<CameraMovement3D>().enabled = true;
 			GameObject.Find("Main Camera").gameObject.GetComponent<AudioSource>().mute = false;
-			GameObject.Find("Dr C Sharp").gameObject.GetComponent<HUD_Stealth>().enabled = true;
+			GameObject.FindGameObjectWithTag(Tags.PLAYER).gameObject.GetComponent<HUD_Stealth>().enabled = true;
 			GameObject.Find("player_flashlight").gameObject.GetComponent<Flashlight>().enabled = true;
 			//GameObject.Find("gui texture background").gameObject.GetComponent<GUITexture>().enabled = false;
 		}

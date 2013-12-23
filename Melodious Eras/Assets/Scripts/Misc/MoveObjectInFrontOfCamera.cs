@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Misc/Move Object In Front Of Camera")]
 public class MoveObjectInFrontOfCamera : MonoBehaviour {
 
 	public bool moveInX;

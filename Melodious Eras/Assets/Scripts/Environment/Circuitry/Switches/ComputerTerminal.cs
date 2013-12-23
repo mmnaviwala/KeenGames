@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Environment/Circuitry/Computer Terminal")]
 public class ComputerTerminal : CircuitSwitch
 {
     #region variables

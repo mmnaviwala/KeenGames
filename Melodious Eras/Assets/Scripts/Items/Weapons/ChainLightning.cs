@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Items/Weapons/Chain Lightning")]
 public class ChainLightning : Projectile 
 {
     public int chainLength = 4;

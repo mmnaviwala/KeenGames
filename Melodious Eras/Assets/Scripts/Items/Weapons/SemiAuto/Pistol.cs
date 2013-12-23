@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Items/Weapons/Pistol")]
 public class Pistol : SemiAutoWeapon {
 
 	// Use this for initialization

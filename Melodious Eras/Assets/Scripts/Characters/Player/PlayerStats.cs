@@ -5,6 +5,7 @@ using System.Collections.Generic;
 /// <summary>
 /// Stats for the character (currently just the player)
 /// </summary>
+[AddComponentMenu("Scripts/Characters/Player Stats")]
 public class PlayerStats : CharacterStats
 {
     public List<EnemyStats> closeQuarterEnemies, //will be available for melee attacks
@@ -31,7 +32,18 @@ public class PlayerStats : CharacterStats
     {
         //flashlight = this.transform.GetChild(1).GetChild(0).GetChild(0).GetChild(2).GetChild(1).GetComponent<Flashlight>();
         //rightHand =  this.transform.GetChild(1).GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(0);
-        equippedWeapon = rightHand.GetChild(0).GetComponent<Weapon>();
+        if(equippedWeapon == null)
+		{
+			for(int c = 0; c < rightHand.childCount; c++)
+			{
+				if(rightHand.GetChild(c).tag == Tags.WEAPON)
+				{
+					equippedWeapon = rightHand.GetChild(c).GetComponent<Weapon>();
+					break;
+				}
+			}
+		}
+		//equippedWeapon = rightHand.GetComponent<Weapon>();
         //equippedWeapon.player = this;
 
         holsteredWeapons = new Weapon[3];

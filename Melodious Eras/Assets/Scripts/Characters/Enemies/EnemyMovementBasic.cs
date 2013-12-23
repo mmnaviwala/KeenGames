@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Characters/Enemy Movement Basic")]
 public class EnemyMovementBasic : MonoBehaviour 
 {
     /*private Camera mainCam;

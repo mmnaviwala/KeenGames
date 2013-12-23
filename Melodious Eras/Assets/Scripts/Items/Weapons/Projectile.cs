@@ -4,6 +4,7 @@ using System.Collections;
 public enum AmmoType { Pistol, Shotgun, SMG, AssaultRifle, StunGun, Laser };
 public enum AmmoAttribute { Normal, ArmorPiercing, HollowPoint, LowVelocity, Polonium, Incendiary, Cryo, Electric };
 
+[AddComponentMenu("Scripts/Items/Weapons/Projectile")]
 public class Projectile : MonoBehaviour
 {
     public float damageModifier = 1;

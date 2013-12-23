@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Characters/Player Movement Basic")]
 public class PlayerMovementBasic : MonoBehaviour
 {
     public float jumpForce = 20f;

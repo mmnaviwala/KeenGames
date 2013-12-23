@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Camera/Camera Movement 2D")]
 /// <summary>
 /// Used for typical 2D sidescrolling
 /// </summary>

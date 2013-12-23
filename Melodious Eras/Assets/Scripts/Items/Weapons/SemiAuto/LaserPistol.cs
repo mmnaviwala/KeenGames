@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Items/Weapons/Laser Pistol")]
 public class LaserPistol : SemiAutoWeapon
 {
     LineRenderer laser;

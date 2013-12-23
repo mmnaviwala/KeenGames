@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+
+[AddComponentMenu("Scripts/Camera/Camera Shake")]
 public class CameraShake : MonoBehaviour
 {
     

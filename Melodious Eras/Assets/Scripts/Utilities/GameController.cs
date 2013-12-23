@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public enum Difficulty { Easy = 0, Medium = 1, Hard = 2 }
 public enum QualityLevel_5FS { VeryFast, Fast, Simple, Good, High, VeryHigh, Ultra};
+[AddComponentMenu("Scripts/Utilities/Game Controller")]
 public class GameController : MonoBehaviour
 {
     public Difficulty difficulty = Difficulty.Medium;

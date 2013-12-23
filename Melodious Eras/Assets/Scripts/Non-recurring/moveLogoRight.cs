@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Non-recurring/Move Logo Right")]
 public class moveLogoRight : MonoBehaviour {
 	
 	public float xTransform;

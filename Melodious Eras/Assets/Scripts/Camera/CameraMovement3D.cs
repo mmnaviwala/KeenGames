@@ -3,6 +3,8 @@ using System.Collections;
 
 public enum CameraOffset { Default, Aim, Crouch, PDA , Fighting, ClimbUp, ClimbDown, Hacking};
 public enum CameraFollowSpeed { Default = 4, Aiming = 15 };
+
+[AddComponentMenu("Scripts/Camera/Camera Movement 3D")]
 public class CameraMovement3D : CameraMovement 
 {
     public float followSpeed = 5;

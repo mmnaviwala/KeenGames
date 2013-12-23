@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Environment/Circuitry/Circuit Alarm")]
 public class CircuitAlarm : CircuitNode
 {
     public int alarmCounter = -1;

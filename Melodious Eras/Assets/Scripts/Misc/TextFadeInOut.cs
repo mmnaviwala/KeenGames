@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+[AddComponentMenu("Scripts/Misc/Text Fade In Out")]
 public class TextFadeInOut : MonoBehaviour
 {
 	public float fadeDuration = 3.0f; 

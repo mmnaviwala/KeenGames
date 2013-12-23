@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Environment/Circuitry/Circuit Light")]
 public class CircuitLight : CircuitNode
 {
     public Light lightbulb;

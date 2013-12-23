@@ -2,6 +2,8 @@
 using System.Collections;
 
 public enum Faction { Enemy1, Enemy2, Neutral, Player }
+
+[AddComponentMenu("Scripts/Characters/Character Stats")]
 public class CharacterStats : MonoBehaviour 
 {
     public Faction faction;

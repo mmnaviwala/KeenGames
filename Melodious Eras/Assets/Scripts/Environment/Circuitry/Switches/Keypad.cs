@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+
+[AddComponentMenu("Scripts/Environment/Circuitry/Keypad")]
 public class Keypad : CircuitSwitch 
 {
     private GameObject player;

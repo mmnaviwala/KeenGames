@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Misc/End Screen")]
 public class EndScreen : MonoBehaviour {
     AudioSource music;
     HUD_Stealth playerHUD;

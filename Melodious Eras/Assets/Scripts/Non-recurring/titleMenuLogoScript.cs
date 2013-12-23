@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Non-recurring/Title Menu Logo Script")]
 public class titleMenuLogoScript : MonoBehaviour {
 	
 	public GUIStyle buttonStyle;

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Items/Flashlight")]
 public class Flashlight : MonoBehaviour 
 {
     public bool infiniteBattery = true;

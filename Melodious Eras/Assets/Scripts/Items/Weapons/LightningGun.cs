@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Items/Weapons/Lightning Gun")]
 public class LightningGun : Gun 
 {
     ChainLightning lightningBolt;

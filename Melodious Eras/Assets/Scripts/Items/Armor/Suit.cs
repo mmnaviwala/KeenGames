@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Items/Armor/Suit")]
 public class Suit : MonoBehaviour 
 {
     public ArmorMod[] armorMods;

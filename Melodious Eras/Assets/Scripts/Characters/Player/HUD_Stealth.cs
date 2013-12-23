@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[AddComponentMenu("Scripts/Characters/HUD Stealth")]
 public class HUD_Stealth : MonoBehaviour
 {
     public GUIStyle healthMaxStyle, healthCurrentStyle, armorMaxStyle, armorCurrentStyle, flashlightLifeStyle, reticleStyle;
