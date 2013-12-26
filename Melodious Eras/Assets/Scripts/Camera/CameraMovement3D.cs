@@ -47,19 +47,6 @@ public class CameraMovement3D : CameraMovement
         camTargetPos = new GameObject();
         camTargetPos.transform.position = player.transform.position;
 
-
-        //camTargetPos.transform.position = player.position
-        //                        + player.right * defaultOffset.x
-        //                        + player.up * defaultOffset.y
-        //                        + player.forward * defaultOffset.z;
-
-        //this.transform.position = player.position
-        //                        + player.right * defaultOffset.x
-        //                        + player.up * defaultOffset.y
-        //                        + player.forward * defaultOffset.z;
-
-        //camTargetPos.transform.LookAt(player.position + player.up * activeOffset.y + player.right * activeOffset.x, Vector3.up);
-
         SetOffset(CameraOffset.Default);
 
         go = new GameObject();
@@ -146,24 +133,6 @@ public class CameraMovement3D : CameraMovement
             playerAnim.SetLookAtWeight(1, .5f, 1, 1, 1);
             playerAnim.SetLookAtPosition(this.transform.position + this.transform.forward * 100);
         } 
-    }
-
-    void CalculateLookPos()
-    {
-        Vector3 faceHeight = player.transform.position + player.transform.up * 1.5f;
-
-        RaycastHit hit;
-        if(Physics.Raycast(faceHeight, player.transform.right * invertOffset, out hit, Mathf.Abs(activeOffset.x)))
-        {
-
-        }
-    }
-    void CalculateCamPos()
-    {
-        RaycastHit hit;
-
-        this.transform.position = Vector3.Lerp(this.transform.position, targetPos, 5 * Time.deltaTime);
-        this.transform.LookAt(targetLookPos);
     }
 
     public void InvertOffset()

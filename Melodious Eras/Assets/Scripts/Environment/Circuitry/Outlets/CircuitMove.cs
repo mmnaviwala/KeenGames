@@ -9,7 +9,6 @@ public class CircuitMove : CircuitNode
     protected Vector3[] directions;
 
     protected int destIndex = 0;
-    protected Vector3 targetPos, resetPos;
     public float movementSpeed = .5f;
 
     void Awake()
@@ -28,12 +27,6 @@ public class CircuitMove : CircuitNode
             }
         }
     }
-	// Use this for initialization
-	void Start () 
-    {
-        targetPos = this.transform.position + moveDirection;
-        resetPos = this.transform.position;
-	}
 	
 	// Update is called once per frame
 	void Update ()
@@ -62,7 +55,7 @@ public class CircuitMove : CircuitNode
         return false; 
     }
 
-    private void Move()
+    protected virtual void Move()
     {
         if (Vector3.Distance(this.transform.position, destinations[destIndex]) > .15f)
             this.transform.position += directions[destIndex] * movementSpeed * Time.deltaTime;
@@ -70,6 +63,7 @@ public class CircuitMove : CircuitNode
         {
             this.transform.position = destinations[destIndex];
             activated = false;
+
         }
     }
 }

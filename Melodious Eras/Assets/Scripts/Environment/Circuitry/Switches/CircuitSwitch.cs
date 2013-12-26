@@ -7,6 +7,7 @@ public class CircuitSwitch : CircuitNode
 {
     public bool initializeSwitch = true;
     public bool onOffStatus = false;
+    protected bool inRange = false;
     public List<CircuitNode> connectedNodes;
 
     void Awake()

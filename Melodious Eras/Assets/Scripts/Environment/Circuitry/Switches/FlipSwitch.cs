@@ -4,7 +4,6 @@ using System.Collections;
 [AddComponentMenu("Scripts/Environment/Circuitry/Flip Switch")]
 public class FlipSwitch : CircuitSwitch 
 {
-    bool inRange = false;
     private Rect promptRect;
     public GUIStyle promptStyle;
 

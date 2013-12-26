@@ -5,13 +5,11 @@ using System.Collections.Generic;
 [AddComponentMenu("Scripts/Environment/Circuitry/Keypad")]
 public class Keypad : CircuitSwitch 
 {
-    private GameObject player;
 	private HUD_Stealth playerHUD;
     private CameraMovement3D cam3d;
     public AudioClip accessDeniedClip;
 
     public bool usingKeypad = false;
-    bool playerNearKeypad = false;
     public bool randomCode = false;
     public string correctCode;
     private string enteredCode;
@@ -41,8 +39,6 @@ public class Keypad : CircuitSwitch
         int w = Screen.width / 2;
         enteredCode = "";
 
-        player = GameObject.FindGameObjectWithTag(Tags.PLAYER);
-		playerHUD = player.GetComponent<HUD_Stealth>();
         cam3d = Camera.main.GetComponent<CameraMovement3D>();
         
 		keypadRect = new Rect(w - h * 2.25f, h, h * 4.5f, h * 8);
@@ -84,9 +80,9 @@ public class Keypad : CircuitSwitch
     // Update is called once per frame
     void Update() 
 	{
-        if (!isBroken && playerNearKeypad && Input.GetKeyDown(KeyCode.H))
+        if (inRange && !isBroken && Input.GetKeyDown(KeyCode.H))
             StartCoroutine(OnHacking());
-        if (!isBroken && playerNearKeypad && Input.GetButtonDown(InputType.USE))
+        if (inRange && !isBroken && Input.GetButtonDown(InputType.USE))
             usingKeypad = true;
 		if(hasPower && usingKeypad)
 		{
@@ -112,8 +108,9 @@ public class Keypad : CircuitSwitch
         //Locking 3rd-person camera onto this keypad
         if (other is CapsuleCollider && other.tag == Tags.PLAYER)
         {
-            playerNearKeypad = true;
-            //cam3d.target = this.transform;
+            inRange = true;
+            if (playerHUD == null)
+                playerHUD = other.GetComponent<HUD_Stealth>();
         }
     }
     
@@ -123,14 +120,14 @@ public class Keypad : CircuitSwitch
         if (other is CapsuleCollider && other.gameObject.tag == Tags.PLAYER)
         {
             usingKeypad = false;
-            playerNearKeypad = false;
+            inRange = false;
             cam3d.target = null;
         }
     }
 
 	void OnGUI()
 	{
-        if (playerNearKeypad && !usingKeypad && this.hasPower)
+        if (inRange && !usingKeypad && this.hasPower)
         {
             GUI.Box(promptRect, "Press [USE] to interact.", promptStyle);
         }
