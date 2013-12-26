@@ -42,7 +42,8 @@ public class Elevator : CircuitMove
     }
 	void Update()
 	{
-
+		if(activated)
+			Move ();
 	}
 
     //public int triggerCount = 0; //2 triggers in elevator. Avoiding OnTriggerExit action if still inside
@@ -75,6 +76,7 @@ public class Elevator : CircuitMove
             {
                 passengers.Remove(passenger);
                 other.transform.parent = null;
+				StartCoroutine(CloseDoors());
             }
         }
     }
@@ -103,7 +105,9 @@ public class Elevator : CircuitMove
 	private IEnumerator<Coroutine> MoveElevator ()
 	{
 		yield return StartCoroutine(CloseDoors());
-		Move ();
+		Debug.Log("Done Closing");
+		//Move ();
+		activated = true;
 	}
 
 	IEnumerator<YieldInstruction> CloseDoors()
@@ -114,7 +118,6 @@ public class Elevator : CircuitMove
 			rightDoor.localPosition = new Vector3(rightDoor.localPosition.x + Time.deltaTime, rightDoor.localPosition.y, rightDoor.localPosition.z);
 			yield return new WaitForEndOfFrame();
 		}
-		Debug.Log("Done Closing");
 		leftDoor.localPosition = new Vector3(1.25f, leftDoor.localPosition.y, leftDoor.localPosition.z);
 		rightDoor.localPosition = new Vector3(-1.25f, leftDoor.localPosition.y, leftDoor.localPosition.z);
 	}
