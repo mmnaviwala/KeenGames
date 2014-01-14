@@ -1,4 +1,4 @@
-﻿Shader "Custom/NightVisionTest" {
+﻿Shader "Custom/Fullscreen/NightVisionTest" {
 	Properties {
 		_MainTex ("Base (RGB)", 2D) = "white" {}
 	}
@@ -21,10 +21,10 @@
 				fixed4 original = tex2D(_MainTex, i.uv);
 				
 				//get intensity value (Y part of YIQ color space)
-				fixed Y = dot(fixed3(0.2, 0.5, 0.2), original.rgb);
+				fixed Y = dot(fixed3(.2, 0.5, 0.2), original.rgb);
 				
 				//Convert to Night Vision Tone by adding constant
-				fixed4 nightVisionConvert = float4(-.150, .010, -.050, 0.0);
+				fixed4 nightVisionConvert = float4(-.10, .010, .010, 0.0);
 				fixed4 output = Y + nightVisionConvert;
 				output.a = original.a;
 				

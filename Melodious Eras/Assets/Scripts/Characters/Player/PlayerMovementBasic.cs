@@ -147,14 +147,11 @@ public class PlayerMovementBasic : MonoBehaviour
 
         if (!isAiming && moving && !jumping)
         {
-
             this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, mainCam.transform.eulerAngles.y + angle, this.transform.eulerAngles.z);
-            this.anim.applyRootMotion = true;
-            //this.transform.eulerAngles = Vector3.Lerp(this.transform.eulerAngles, 
+			this.anim.applyRootMotion = true;
+            //this.transform.eulerAngles = Vector3.Slerp(this.transform.eulerAngles, 
             //    new Vector3(this.transform.eulerAngles.x, mainCam.transform.eulerAngles.y + angle, this.transform.eulerAngles.z), 
             //    1 * Time.deltaTime);
-
-            //this.rigidbody.velocity = this.transform.forward * speed + new Vector3(0, this.rigidbody.velocity.y, 0);
         }
         else if (isAiming)
         {

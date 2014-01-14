@@ -20,18 +20,20 @@ public class CameraMovement3D : CameraMovement
 
     public float x_sensitivity = 5;
     public float y_sensitivity = 2;
-    public int invertLook = 1; //1 = not inverted, -1 = inverted (for mouse look)
+	public int invertLook = 1; //1 = not inverted, -1 = inverted (for mouse look)
+	public Transform target = null;
+	public bool atTargetPos = false;
+
     private int invertOffset = 1; //-1 = inversion of x-offset
+	private float raycastDistance = 1;
 
     private Vector3 targetPos, targetLookPos;
     private GameObject camTargetPos, camLookPos;
 
     Transform player;
     Transform flashlight;
-    public Transform target = null;
     GameObject go;
-    public bool atTargetPos = false;
-	NightVisionTestCS nightVision;
+	ImageEffectBase nightVision, fisheye, noiseAndGrain;
 
     private Animator playerAnim; //making the player look in the camera's direction
 
@@ -42,7 +44,10 @@ public class CameraMovement3D : CameraMovement
         Debug.Log(player == null);
         playerAnim = player.GetComponent<Animator>();
         flashlight = player.GetComponent<PlayerStats>().flashlight.transform;
+
 		nightVision = this.GetComponent<NightVisionTestCS>();
+		fisheye = this.GetComponent ("Fisheye") as ImageEffectBase;
+		noiseAndGrain = this.GetComponent ("NoiseAndGrain") as ImageEffectBase;
 
         camTargetPos = new GameObject();
         camTargetPos.transform.position = player.transform.position;
@@ -58,64 +63,73 @@ public class CameraMovement3D : CameraMovement
 	// Update is called once per frame
 	void LateUpdate ()
     {
-        //OldCameraRotation();
 		if(Input.GetButtonDown(InputType.TOGGLE_NIGHTVISION))
 		{
 			nightVision.enabled = !nightVision.enabled;
+			fisheye.enabled = !fisheye.enabled;
+			noiseAndGrain.enabled = !noiseAndGrain.enabled;
 		}
-        NewCameraRotation();
+
+		if (!(activeOffset.Equals(crouchOffset) || activeOffset.Equals(climbUpOffset) || activeOffset.Equals(climbDownOffset)))
+			TurnPlayerHead();
+		
+		if (Input.GetButtonDown(InputType.SHIFT_VIEW))
+			InvertOffset();
+		
+		//Adjusting look rotation
+		float intensityX = Input.GetAxis(InputType.MOUSE_X);
+		float intensityY = Input.GetAxis(InputType.MOUSE_Y) * invertLook;
+		
+		if (intensityX != 0)
+		{
+			//atTargetPos = false;
+			go.transform.rotation = Quaternion.Euler(go.transform.eulerAngles.x, go.transform.eulerAngles.y + intensityX * x_sensitivity, go.transform.eulerAngles.z);
+		}
+		if (intensityY != 0)
+		{
+			//atTargetPos = false;
+			float angle = go.transform.eulerAngles.x - intensityY * y_sensitivity;
+			if (angle > 180) angle -= 360;
+			angle = Mathf.Clamp(angle, -80, 80);
+			go.transform.rotation = Quaternion.Euler(angle, 
+			                                         go.transform.eulerAngles.y,
+			                                         go.transform.eulerAngles.z);
+		}
+		
+		//Deciding if we should manipulate the camera
+		//Saving calculation/render time if camera doesn't have to move
+		Vector3 lookTemp = targetLookPos;
+		targetLookPos = player.position + player.up * activeOffset.y + go.transform.right * activeOffset.x /* + player.forward * .125f*/;
+		if (lookTemp != targetLookPos)
+			atTargetPos = false;
+		
+		if (!atTargetPos)
+		{
+			this.transform.rotation = go.transform.rotation;
+			flashlight.rotation = this.transform.rotation;
+			Vector3 offsetDirection = this.transform.forward * activeOffset.z;
+
+			//Preventing clipping
+			RaycastHit hit;
+			if(Physics.Raycast (targetLookPos, offsetDirection, out hit, raycastDistance))
+			{
+				/*this.transform.position = */camTargetPos.transform.position = hit.point + this.transform.forward;
+				Debug.DrawLine(targetLookPos, camTargetPos.transform.position);
+				//return;
+			}
+			else
+				camTargetPos.transform.position = targetLookPos + offsetDirection + player.forward * .125f;
+
+			//Smoothly moving toward target
+			if (Vector3.Distance(this.transform.position, camTargetPos.transform.position) > .01f)
+				this.transform.position = Vector3.Lerp(this.transform.position, camTargetPos.transform.position, followSpeed * Time.deltaTime);
+			else
+			{
+				this.transform.position = camTargetPos.transform.position;
+				atTargetPos = true;
+			}
+		}
 	}
-    void NewCameraRotation()
-    {
-        if (!(activeOffset.Equals(crouchOffset) || activeOffset.Equals(climbUpOffset) || activeOffset.Equals(climbDownOffset)))
-            TurnPlayerHead();
-
-        if (Input.GetButtonDown(InputType.SHIFT_VIEW))
-            InvertOffset();
-
-        //Adjusting look rotation
-        float intensityX = Input.GetAxis(InputType.MOUSE_X);
-        float intensityY = Input.GetAxis(InputType.MOUSE_Y) * invertLook;
-
-        if (intensityX != 0)
-        {
-            //atTargetPos = false;
-            go.transform.rotation = Quaternion.Euler(go.transform.eulerAngles.x, go.transform.eulerAngles.y + intensityX * x_sensitivity, go.transform.eulerAngles.z);
-        }
-        if (intensityY != 0)
-        {
-            //atTargetPos = false;
-            float angle = go.transform.eulerAngles.x - intensityY * y_sensitivity;
-            if (angle > 180) angle -= 360;
-            angle = Mathf.Clamp(angle, -60, 80);
-            go.transform.rotation = Quaternion.Euler(angle, 
-                                                     go.transform.eulerAngles.y,
-                                                     go.transform.eulerAngles.z);
-        }
-
-        //Deciding if we should manipulate the camera
-        //Saving calculation/render time if camera doesn't have to move
-        Vector3 lookTemp = targetLookPos;
-        targetLookPos = player.position + player.up * activeOffset.y + go.transform.right * activeOffset.x + player.forward * .125f;
-        if (lookTemp != targetLookPos)
-            atTargetPos = false;
-
-        if (!atTargetPos)
-        {
-            this.transform.rotation = go.transform.rotation;
-            flashlight.rotation = this.transform.rotation;
-            camTargetPos.transform.position = targetLookPos + this.transform.forward * activeOffset.z;
-
-            if (Vector3.Distance(this.transform.position, camTargetPos.transform.position) > .01f)
-                this.transform.position = Vector3.Lerp(this.transform.position, camTargetPos.transform.position, followSpeed * Time.deltaTime);
-            else
-            {
-                this.transform.position = camTargetPos.transform.position;
-                atTargetPos = true;
-            }
-        }
-        Debug.DrawLine(camTargetPos.transform.position, targetLookPos);
-    }
 
     void TurnPlayerHead()
     {
@@ -169,5 +183,6 @@ public class CameraMovement3D : CameraMovement
             case CameraOffset.Hacking: activeOffset = HackingOffset; break;
         }
         activeOffset.x *= invertOffset;
+		raycastDistance = activeOffset.magnitude;
     }
 }

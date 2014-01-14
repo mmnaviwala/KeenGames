@@ -5,16 +5,22 @@ using System.Collections;
 public class CircuitLight : CircuitNode
 {
     public Light lightbulb;
+	public LensFlare lensFlare;
     public bool flickering = false;
     public float frequency = .5f;
+	private Transform cam;
+	public float flareDistance = 10, flareBrightness = 1;
 	// Use this for initialization
 
     void Awake()
     {
+		cam = Camera.main.transform;
         if (this.electricGrid != null)
             electricGrid.connectedObjects.Add(this);
         if (lightbulb == null)
-            lightbulb = this.light; 
+            lightbulb = this.light;
+		if(lensFlare == null)
+			lensFlare = this.GetComponent<LensFlare>();
     }
 	void Start () 
     {
@@ -22,6 +28,23 @@ public class CircuitLight : CircuitNode
             lightbulb.enabled = this.hasPower && this.activated && !this.isBroken;
         if (this.lightbulb != null && this.hasPower && !isBroken && this.activated && flickering)
             StartCoroutine(Flicker());
+	}
+
+	void Update()
+	{
+		if(this.lightbulb.enabled && lensFlare != null)
+		{
+			float distance = Vector3.Distance(lightbulb.transform.position, cam.position);
+			if(distance < flareDistance)
+			{
+				lensFlare.enabled = true;
+				lensFlare.brightness = flareBrightness / distance;
+			}
+			else
+				lensFlare.enabled = false;
+		}
+		else if(lensFlare != null)
+			lensFlare.enabled = false;
 	}
 
     IEnumerator Flicker()

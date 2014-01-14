@@ -5,6 +5,7 @@ using System.Collections;
 [AddComponentMenu("Image Effects/Custom/Night Vision Test")]
 public class NightVisionTestCS : ImageEffectBase 
 {
+
 	//Called by camera to apply image effect
 	void OnRenderImage(RenderTexture source, RenderTexture destination)
 	{
