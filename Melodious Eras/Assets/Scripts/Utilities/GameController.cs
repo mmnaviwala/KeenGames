@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
 {
     public Difficulty difficulty = Difficulty.Medium;
     public Vector3 wind;
+	public Color32 ambientLight = new Color32(51, 51, 51, 255);
     public float turbulence = 0;
     public float shadowDistance = -1;
     private static float defaultShadowDistance = 100;
@@ -36,4 +37,10 @@ public class GameController : MonoBehaviour
         Environment.SetWind(this.wind, this.turbulence);
         StartCoroutine(Environment.BlowWind());
     }
+
+	[ContextMenu("Bake Settings")]
+	public void BakeSettings()
+	{
+		RenderSettings.ambientLight = this.ambientLight;
+	}
 }
