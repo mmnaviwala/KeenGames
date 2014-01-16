@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [AddComponentMenu("Scripts/Characters/Enemy AI")]
 public class EnemyAI : MonoBehaviour
@@ -28,10 +29,14 @@ public class EnemyAI : MonoBehaviour
     private float chaseTimer = 0;
     private float patrolTimer = 0;
     private int waypointIndex;
+	private bool enemyInRange = false;
+
+	private List<CharacterStats> enemiesInRange;
 
 	// Use this for initialization
 	void Start () 
     {
+		enemiesInRange = new List<CharacterStats>();
         nav = this.GetComponent<NavMeshAgent>();
         stats = this.GetComponent<EnemyStats>();
 	}
@@ -41,47 +46,69 @@ public class EnemyAI : MonoBehaviour
     {
         if (patrolWaypoints != null && patrolWaypoints.Length > 0)
             Patrol();
+		if(enemyInRange)
+		{
+			foreach(CharacterStats ch in enemiesInRange)
+			{
+				RaycastHit[] hits;
+				
+				if (Vector3.Angle(ch.transform.position - this.transform.position, this.transform.forward) < 75)
+				{
+					hits = Physics.RaycastAll(this.transform.position, 
+					                          ch.transform.position - this.transform.position, 
+					                          Vector3.Distance(this.transform.position, ch.transform.position));
+					RaycastHit closestHit = hits[0];
+					float closestHitDistance = Vector3.Distance(this.transform.position, closestHit.point);
+					for (int h = 0; h < hits.Length; h++)
+					{
+						if (hits[h].collider.isTrigger)
+							continue;
+						float temp = Vector3.Distance(this.transform.position, hits[h].point);
+						if (temp < closestHitDistance)
+						{
+							closestHitDistance = temp;
+							closestHit = hits[h];
+						}
+					}
+
+					CharacterStats hitCharStats = closestHit.collider.GetComponent<CharacterStats>();
+					if (closestHit.collider is CapsuleCollider && hitCharStats != null && hitCharStats.faction != this.stats.faction)
+					{
+						this.seesPlayer = this.awareOfPlayer = true;
+						currentEnemy = ch;
+						Debug.Log("Player sighted!");
+						//stats.attack
+					}
+				}
+			}
+		}
 	}
 
     void OnTriggerEnter(Collider other)
     {
-        if (!other.isTrigger && other is CapsuleCollider && other.tag == Tags.PLAYER)
+        if (!other.isTrigger && other is CapsuleCollider)
         {
+			CharacterStats charStats = other.GetComponent<CharacterStats>();
+			if(charStats != null && charStats.faction != this.stats.faction)
+			{
+				enemiesInRange.Add(charStats);
+				enemyInRange = true;
+			}
         }
     }
 
-    void OnTriggerStay(Collider other)
-    {
-        if (!other.isTrigger && other is CapsuleCollider && other.tag == Tags.PLAYER)
-        {
-            RaycastHit[] hits;
-
-            if (Vector3.Angle(other.transform.position - this.transform.position, this.transform.forward) < 75)
-            {
-                hits = Physics.RaycastAll(this.transform.position, other.transform.position - this.transform.position, Vector3.Distance(this.transform.position, other.transform.position));
-                RaycastHit closestHit = hits[0];
-                float closestHitDistance = Vector3.Distance(this.transform.position, closestHit.point);
-                for (int h = 0; h < hits.Length; h++)
-                {
-                    if (hits[h].collider.isTrigger)
-                        continue;
-                    float temp = Vector3.Distance(this.transform.position, hits[h].point);
-                    if (temp < closestHitDistance)
-                    {
-                        closestHitDistance = temp;
-                        closestHit = hits[h];
-                    }
-                }
-                if (closestHit.collider is CapsuleCollider && closestHit.collider.tag == Tags.PLAYER)
-                {
-                    this.seesPlayer = this.awareOfPlayer = true;
-                    currentEnemy = other.GetComponent<PlayerStats>();
-                    Debug.Log("Player sighted!");
-                    //stats.attack
-                }
-            }
-        }
-    }
+	void OnTriggerExit(Collider other)
+	{
+		if (!other.isTrigger && other is CapsuleCollider)
+		{
+			CharacterStats charStats = other.GetComponent<CharacterStats>();
+			if(charStats != null && charStats.faction != this.stats.faction)
+			{
+				enemiesInRange.Remove(charStats);
+				enemyInRange = enemiesInRange.Count == 0;
+			}
+		}
+	}
 
     void Patrol()
     {

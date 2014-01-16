@@ -43,8 +43,8 @@ public class checkIfClicked : MonoBehaviour {
 			iTween.MoveTo(GameObject.Find("gui texture right").gameObject, iTween.Hash("path",iTweenPath.GetPath("Move Right Texture Out"), "time", 1, "ignoretimescale", true));
 			iTween.MoveTo(GameObject.Find("gui texture top").gameObject, iTween.Hash("path",iTweenPath.GetPath("Move Top Texture Out"), "time", 1, "ignoretimescale", true));	
 			
-			GameObject.Find("Main Camera").gameObject.GetComponent<CameraMovement3D>().enabled = true;
-			GameObject.Find("Main Camera").gameObject.GetComponent<AudioSource>().mute = false;
+			Camera.main.GetComponent<CameraMovement3D>().enabled = true;
+			Camera.main.GetComponent<AudioSource>().mute = false;
 			GameObject.FindGameObjectWithTag(Tags.PLAYER).gameObject.GetComponent<HUD_Stealth>().enabled = true;
 			GameObject.Find("player_flashlight").gameObject.GetComponent<Flashlight>().enabled = true;
 			//GameObject.Find("gui texture background").gameObject.GetComponent<GUITexture>().enabled = false;
