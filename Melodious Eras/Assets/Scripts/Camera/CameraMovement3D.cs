@@ -42,13 +42,15 @@ public class CameraMovement3D : CameraMovement
 	void Start () 
     {
         player = GameObject.FindGameObjectWithTag(Tags.PLAYER).transform;
-        Debug.Log(player == null);
+
         playerAnim = player.GetComponent<Animator>();
         flashlight = player.GetComponent<PlayerStats>().flashlight.transform;
 
 		nightVision = this.GetComponent<NightVisionTestCS>();
 		fisheye = this.GetComponent ("Fisheye") as ImageEffectBase;
+		Debug.Log(fisheye == null);
 		noiseAndGrain = this.GetComponent ("NoiseAndGrain") as ImageEffectBase;
+		Debug.Log(noiseAndGrain == null);
 
         camTargetPos = new GameObject();
         camTargetPos.transform.position = player.transform.position;
