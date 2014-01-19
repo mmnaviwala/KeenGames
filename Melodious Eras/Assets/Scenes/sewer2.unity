@@ -4106,7 +4106,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 10
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -6360,7 +6360,7 @@ MonoBehaviour:
   shader: {fileID: 4800000, guid: 1a375515730b690469571e0d582a7e78, type: 3}
   textureRamp: {fileID: 0}
   rampOffset: 0
-  effectAmount: 1
+  effectAmount: 0
 --- !u!114 &1707941972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6380,7 +6380,7 @@ MonoBehaviour:
   focalTransform: {fileID: 0}
   maxBlurSize: 2
   highResolution: 1
-  blurType: 0
+  blurType: 1
   blurSampleCount: 2
   nearBlur: 1
   foregroundOverlap: 1
@@ -6492,7 +6492,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1838046103}
   m_GameObject: {fileID: 1707941970}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd05e71c69dd4457fa205c9eea7c2326, type: 3}
   m_Name: 
@@ -7779,7 +7779,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 10
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0

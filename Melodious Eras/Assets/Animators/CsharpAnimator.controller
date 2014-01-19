@@ -80,6 +80,12 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
+  - m_Name: Jumping
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 3
     m_Name: Base Layer
@@ -703,15 +709,6 @@ StateMachine:
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
     data:
-      first: {fileID: 110232752}
-      second: []
-    data:
-      first: {fileID: 110228598}
-      second: []
-    data:
-      first: {fileID: 110277189}
-      second: []
-    data:
       first: {fileID: 0}
       second:
       - {fileID: 110166835}
@@ -740,6 +737,27 @@ StateMachine:
       second:
       - {fileID: 110173598}
       - {fileID: 110105872}
+    data:
+      first: {fileID: 110277189}
+      second: []
+    data:
+      first: {fileID: 110228598}
+      second: []
+    data:
+      first: {fileID: 110232752}
+      second: []
+    data:
+      first: {fileID: 110234287}
+      second: []
+    data:
+      first: {fileID: 110275651}
+      second: []
+    data:
+      first: {fileID: 110279588}
+      second: []
+    data:
+      first: {fileID: 110292171}
+      second: []
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: -264, y: -72, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

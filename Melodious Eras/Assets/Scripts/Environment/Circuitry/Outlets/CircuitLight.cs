@@ -17,8 +17,12 @@ public class CircuitLight : CircuitNode
 		cam = Camera.main.transform;
         if (this.electricGrid != null)
             electricGrid.connectedObjects.Add(this);
-        if (lightbulb == null)
+        if (lightbulb == null) 
+		{
             lightbulb = this.light;
+			if(lightbulb == null)
+				lightbulb = this.transform.GetComponentInChildren<Light>();
+		}
 		if(lensFlare == null)
 			lensFlare = this.GetComponent<LensFlare>();
     }

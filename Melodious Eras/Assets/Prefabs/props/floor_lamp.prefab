@@ -28,6 +28,7 @@ GameObject:
   - 114: {fileID: 11400000}
   - 65: {fileID: 6500000}
   - 65: {fileID: 6500002}
+  - 54: {fileID: 5400000}
   m_Layer: 0
   m_Name: floor_lamp
   m_TagString: Breakable
@@ -88,7 +89,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 40.0336685, y: 12.585968, z: -10.9229317}
+  m_LocalPosition: {x: 40.0336685, y: 12.585968, z: -4.55993748}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400004}
@@ -173,6 +174,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_Mesh: {fileID: 4300002, guid: f53ba428acbc8c240b51c227ff0304b6, type: 3}
+--- !u!54 &5400000
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &6500000
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -220,7 +236,7 @@ Light:
     m_SoftnessFade: 1
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
-  m_ActuallyLightmapped: 0
+  m_ActuallyLightmapped: 1
   m_Flare: {fileID: 0}
   m_RenderMode: 0
   m_CullingMask:
@@ -251,6 +267,7 @@ MonoBehaviour:
   connectedSwitch: {fileID: 0}
   electricGrid: {fileID: 0}
   activateSound: {fileID: 0}
+  initializeSwitch: 1
   onOffStatus: 1
   connectedNodes:
   - {fileID: 11400002}
@@ -333,8 +350,11 @@ MonoBehaviour:
   electricGrid: {fileID: 0}
   activateSound: {fileID: 0}
   lightbulb: {fileID: 10800000}
+  lensFlare: {fileID: 0}
   flickering: 0
   frequency: .5
+  flareDistance: 10
+  flareBrightness: 1
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1

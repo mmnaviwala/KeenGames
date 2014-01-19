@@ -35,28 +35,33 @@ public class PlayerMovementBasic : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (!jumping && useDefaultMovement)
         {
-            //ListenForInputs();
-            CombatInputs();
             MovementInputs();
 
         }
     }
 
-    /// <summary>
-    /// <para>Listens for all the necessary inputs associated with character movement. 
-    /// Putting input detection in here since the Update function was getting pretty monolithic.</para>
-    /// <para>Inputs: Aim, Shoot, Walk, Crouch, Jump</para>
-    /// </summary>
-    void ListenForInputs()
-    {
-        
-
-        
-    }
+	void Update()
+	{
+		if(!jumping && useDefaultMovement)
+		{
+			if (Input.GetButtonDown(InputType.CROUCH))
+			{
+				isCrouching = !isCrouching; //toggled instead of held
+				mainCam.SetOffset(isCrouching ? CameraOffset.Crouch : CameraOffset.Default);
+				this.anim.SetBool("Sneaking", isCrouching);
+				//Perform crouch here
+			}
+			if (Input.GetButtonDown(InputType.JUMP))
+			{
+				this.Jump();
+			}
+			CombatInputs();
+		}
+	}
 
     void CombatInputs()
     {
@@ -111,17 +116,6 @@ public class PlayerMovementBasic : MonoBehaviour
         {
             isWalking = isAiming; //Will still be walking if the player is aiming
             mainCam.SetOffset(isCrouching ? CameraOffset.Crouch : CameraOffset.Default);
-        }
-        else if (Input.GetButtonDown(InputType.CROUCH))
-        {
-            isCrouching = !isCrouching; //toggled instead of held
-            mainCam.SetOffset(isCrouching ? CameraOffset.Crouch : CameraOffset.Default);
-            this.anim.SetBool("Sneaking", isCrouching);
-            //Perform crouch here
-        }
-        if (Input.GetButtonDown(InputType.JUMP))
-        {
-            this.Jump();
         }
 
         float h = Input.GetAxis(InputType.HORIZONTAL);  //A(neg), D(pos), Left joystick left(neg)/right(pos)

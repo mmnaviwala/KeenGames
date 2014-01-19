@@ -43,7 +43,7 @@ public class CameraMovement3D : CameraMovement
     {
         player = GameObject.FindGameObjectWithTag(Tags.PLAYER).transform;
 
-        playerAnim = player.GetComponent<Animator>();
+		playerAnim = player.GetComponent<Animator>();
         flashlight = player.GetComponent<PlayerStats>().flashlight.transform;
 
 		nightVision = this.GetComponent<NightVisionTestCS>();
@@ -138,16 +138,14 @@ public class CameraMovement3D : CameraMovement
     {
         Ray ray = this.camera.ViewportPointToRay(new Vector3(.5f, .5f, 0));
         RaycastHit hit;
-
+		
+		playerAnim.SetLookAtWeight(1, 1, 1, 1, 1);
         if (Physics.Raycast(ray, out hit, 100) && hit.collider.tag != Tags.PLAYER && Vector3.Distance(hit.point, player.position) > 1)
         {
-            
-            playerAnim.SetLookAtWeight(1, .5f, 1, 1, 1);
             playerAnim.SetLookAtPosition(hit.point);
         }
         else
         {
-            playerAnim.SetLookAtWeight(1, .5f, 1, 1, 1);
             playerAnim.SetLookAtPosition(this.transform.position + this.transform.forward * 100);
         } 
     }

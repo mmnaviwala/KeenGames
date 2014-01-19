@@ -278,6 +278,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400030}
+  - 65: {fileID: 6500052}
+  - 65: {fileID: 6500040}
   m_Layer: 0
   m_Name: warehouseshelving_01
   m_TagString: Untagged
@@ -832,8 +834,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100030}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: .25, z: -9.5}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
+  m_LocalPosition: {x: 1, y: .25, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400070}
@@ -2378,6 +2380,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.17389786, y: 1.17389786, z: .999999881}
   m_Center: {x: .394322962, y: -.586948931, z: .49999994}
+--- !u!65 &6500040
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100030}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.25, y: 1.5, z: 6.69999981}
+  m_Center: {x: -.925624371, y: 3.30999994, z: 0}
 --- !u!65 &6500042
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -2438,6 +2452,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &6500052
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100030}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.25, y: 1.5, z: 6.69999981}
+  m_Center: {x: -.925624371, y: 1, z: 0}
 --- !u!95 &9500000
 Animator:
   serializedVersion: 2
