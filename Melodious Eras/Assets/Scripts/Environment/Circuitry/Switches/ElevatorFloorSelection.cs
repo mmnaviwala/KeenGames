@@ -5,7 +5,7 @@ using System.Collections;
 public class ElevatorFloorSelection : CircuitSwitch 
 {
     private bool inUse;
-    public int[] floors;
+    public string[] floors;
 
     private Rect selectionRect, exitRect, promptRect;
     private Rect[] buttons;
@@ -69,7 +69,7 @@ public class ElevatorFloorSelection : CircuitSwitch
 
             for (int b = 0; b < buttons.Length; b++)
             {
-                if (GUI.Button(buttons[b], "Floor " + floors[b]))
+                if (GUI.Button(buttons[b], floors[b]))
                 {
                     elevator.Call(b);
                     UseButtons(false);

@@ -8,8 +8,9 @@ public class Door : MonoBehaviour
 	Quaternion closedRotation, openRotation;
 	bool inRange = false;
 	bool openingOrClosing = false;
-	public bool locked = false;
 	public bool closed = true;
+	public bool locked = false;
+	public string key;
 
 	// Use this for initialization
 	void Awake()

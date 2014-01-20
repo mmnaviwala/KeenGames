@@ -391,7 +391,6 @@ GameObject:
   - 82: {fileID: 8200000}
   - 54: {fileID: 5400000}
   - 136: {fileID: 13600000}
-  - 143: {fileID: 14300000}
   - 135: {fileID: 13500002}
   m_Layer: 10
   m_Name: player_FreeCharacter
@@ -1454,7 +1453,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100050}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
-  m_LocalPosition: {x: -17.9409981, y: 1.89853144, z: 0}
+  m_LocalPosition: {x: -1.54965782, y: .757044792, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400042}
@@ -2084,10 +2083,10 @@ Rigidbody:
   m_Mass: 75
   m_Drag: 0
   m_AngularDrag: .0500000007
-  m_UseGravity: 0
-  m_IsKinematic: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 2
 --- !u!82 &8200000
 AudioSource:
@@ -2242,7 +2241,7 @@ Light:
   m_Enabled: 0
   serializedVersion: 3
   m_Type: 0
-  m_Color: {r: .784313738, g: 1, b: 1, a: 1}
+  m_Color: {r: .882352948, g: 1, b: 1, a: 1}
   m_Intensity: 5
   m_Range: 10
   m_SpotAngle: 45
@@ -2308,9 +2307,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55986eba75dac404d9ab3d6b14c30748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemType: 2
   armorMods: []
   armor: 50
   maxArmor: 50
+  batteryLife: 100
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2697,6 +2698,7 @@ MonoBehaviour:
   isAiming: 0
   isCrouching: 0
   isWalking: 0
+  lookatTarget: {fileID: 0}
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2710,8 +2712,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   infiniteBattery: 0
   maxBatteryLife: 100
-  batteryLife: 100
-  efficiency: 10
+  efficiency: 5
   c_battery:
     serializedVersion: 2
     rgba: 2149179848
@@ -2844,6 +2845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 158e1cbb44e531e4990ea6531abc451a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemType: 1
   weaponName: Laser Pistol
   hudStyle:
     m_Name: 
@@ -3095,20 +3097,6 @@ SkinnedMeshRenderer:
     m_Center: {x: .0250937343, y: .0279117599, z: -4.76837158e-07}
     m_Extent: {x: 1.01281905, y: .229769528, z: .666060209}
   m_DirtyAABB: 0
---- !u!143 &14300000
-CharacterController:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100050}
-  serializedVersion: 2
-  m_Height: 2
-  m_Radius: .25
-  m_SlopeLimit: 45
-  m_StepOffset: .300000012
-  m_SkinWidth: .0799999982
-  m_MinMoveDistance: 0
-  m_Center: {x: 0, y: .949999988, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

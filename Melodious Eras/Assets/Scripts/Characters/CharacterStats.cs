@@ -14,6 +14,9 @@ public class CharacterStats : MonoBehaviour
     public Weapon equippedWeapon;
     public Weapon[] holsteredWeapons;
     public Transform leftHand, rightHand; //right hand holds gun; left hand could hold flashlight/energy shield/sword/secondary gun/etc
+	public Inventory inventory = new Inventory(15);
+	public Inventory tempInventory = new Inventory(); //for level-specific items like keys
+	public Transform lookatTarget;
 
 	// Use this for initialization
 	void Start () {
@@ -49,4 +52,9 @@ public class CharacterStats : MonoBehaviour
     {
 
     }
+
+	public virtual void PickUp(Item item)
+	{
+
+	}
 }

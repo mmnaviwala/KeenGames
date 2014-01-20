@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[AddComponentMenu("Scripts/Items/Armor/Armor Mod")]
-public class ArmorMod : Item {
-
+public enum ItemType {Battery, Weapon, Armor, Key, Misc };
+public class Item : MonoBehaviour 
+{
+	public ItemType itemType;
 	// Use this for initialization
 	void Start () {
 	

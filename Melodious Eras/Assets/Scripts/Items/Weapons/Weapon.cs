@@ -2,7 +2,7 @@
 using System.Collections;
 
 [AddComponentMenu("Scripts/Items/Weapons/Weapon")]
-public class Weapon : MonoBehaviour
+public class Weapon : Item
 {
     protected SphereCollider soundSphere;
     protected Sound sound;

@@ -6,6 +6,7 @@ public class InterlaceRoller : MonoBehaviour
 	public float scrollSpeed = .1f;
     public Light _Light;
     public int screenMatIndex = 0;
+	public bool flickering = false;
 
 	private Color initialColor;
 	private float flicker = 0.0f;
@@ -26,7 +27,7 @@ public class InterlaceRoller : MonoBehaviour
 		float scaleY = Mathf.Sin(Time.time) * 0.2f;
         this.renderer.materials[screenMatIndex].SetTextureScale("_Interlace", new Vector2(2.0f, scaleY + 1.6f));
 
-		if(Random.value >= .7f)
+		if(flickering && Random.value >= .7f)
 		{
 			flicker = Random.value + 0.2f;
             this.renderer.materials[screenMatIndex].SetColor("_TintColor", new Color(initialColor.r * flicker, initialColor.g * flicker, initialColor.b * flicker));

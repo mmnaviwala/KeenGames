@@ -2,7 +2,7 @@
 using System.Collections;
 
 [AddComponentMenu("Scripts/Items/Weapons/Weapon Mod")]
-public class WeaponMod : MonoBehaviour 
+public class WeaponMod : Item 
 {
     public Transform model;
 

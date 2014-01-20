@@ -6,8 +6,8 @@ public class Flashlight : MonoBehaviour
 {
     public bool infiniteBattery = true;
     public float maxBatteryLife = 100;  //time in seconds
-    public float batteryLife = 100;     //
-    public int efficiency = 10;
+    //public float batteryLife = 100;    
+	public int efficiency = 10;
     private Suit playerSuit;
     public Color32 c_battery;
     public GUIStyle lightGuiStyle, backGuiStyle;
@@ -29,7 +29,7 @@ public class Flashlight : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-        if (infiniteBattery || batteryLife > 0)
+        if (infiniteBattery || playerSuit.batteryLife > 0)
         {
             if (Input.GetButtonDown(InputType.TOGGLE_FLASHLIGHT))
             {
@@ -37,15 +37,15 @@ public class Flashlight : MonoBehaviour
             }
             if (!infiniteBattery && light.enabled)
             {
-                batteryLife -= Time.deltaTime / efficiency;
-                batteryLifeRect.width = batteryMaxLifeRect.width * batteryLife / maxBatteryLife;
+				playerSuit.batteryLife -= Time.deltaTime / efficiency;
+				batteryLifeRect.width = batteryMaxLifeRect.width * playerSuit.batteryLife / maxBatteryLife;
             }
         }
 	}
 
     void OnGUI()
     {
-        GUI.Box(batteryMaxLifeRect, string.Format("Battery Life: {0:f1}", batteryLife), backGuiStyle);
+		GUI.Box(batteryMaxLifeRect, string.Format("Battery Life: {0:f1}", playerSuit.batteryLife), backGuiStyle);
         GUI.color = new Color(1, 1, 1, .25f);
         GUI.Box(batteryLifeRect, "", lightGuiStyle);
     }
@@ -61,8 +61,8 @@ public class Flashlight : MonoBehaviour
     /// <param name="capacity"></param>
     public void InsertBattery(float capacity)
     {
-        batteryLife += capacity;
-        if (batteryLife > 100) 
-            batteryLife = 100;
+		playerSuit.batteryLife += capacity;
+		if (playerSuit.batteryLife > 100) 
+			playerSuit.batteryLife = 100;
     }
 }

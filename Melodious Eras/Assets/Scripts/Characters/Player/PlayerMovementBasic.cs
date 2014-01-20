@@ -18,6 +18,7 @@ public class PlayerMovementBasic : MonoBehaviour
     private bool moving = false;
 
 
+
     private CameraMovement3D mainCam;
     private PlayerStats stats;
     private HUD_Stealth hud;

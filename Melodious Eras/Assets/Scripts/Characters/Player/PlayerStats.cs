@@ -151,4 +151,5 @@ public class PlayerStats : CharacterStats
             anim.SetBool("Dead", isDead);
         }
     }
+
 }
