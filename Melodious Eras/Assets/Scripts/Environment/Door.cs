@@ -40,7 +40,6 @@ public class Door : MonoBehaviour
 		if(other.tag == Tags.PLAYER && other is CapsuleCollider)
 		{
 			inRange = true;
-			Debug.Log("Entering light trigger");
 		}
 	}
 	void OnTriggerExit(Collider other)
@@ -48,7 +47,6 @@ public class Door : MonoBehaviour
 		if(other.tag == Tags.PLAYER && other is CapsuleCollider)
 		{
 			inRange = false;
-			Debug.Log("Exiting light trigger");
 		}
 	}
 

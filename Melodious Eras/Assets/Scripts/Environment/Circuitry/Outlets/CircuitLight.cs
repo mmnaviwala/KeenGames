@@ -25,6 +25,7 @@ public class CircuitLight : CircuitNode
 		}
 		if(lensFlare == null)
 			lensFlare = this.GetComponent<LensFlare>();
+		//this.GetComponent<SphereCollider>().radius = lightbulb.range;
     }
 	void Start () 
     {
@@ -39,16 +40,26 @@ public class CircuitLight : CircuitNode
 		if(this.lightbulb.enabled && lensFlare != null)
 		{
 			float distance = Vector3.Distance(lightbulb.transform.position, cam.position);
-			if(distance < flareDistance)
+			if(distance < lightbulb.range)
 			{
+				float intensity = lightbulb.range / 2 / distance;//flareBrightness / distance;
 				lensFlare.enabled = true;
-				lensFlare.brightness = flareBrightness / distance;
+				lensFlare.brightness = intensity * intensity;
 			}
 			else
 				lensFlare.enabled = false;
 		}
 		else if(lensFlare != null)
 			lensFlare.enabled = false;
+	}
+
+	void OnTriggerEnter(Collider col)
+	{
+
+	}
+	void OnTriggerExit(Collider col)
+	{
+
 	}
 
     IEnumerator Flicker()

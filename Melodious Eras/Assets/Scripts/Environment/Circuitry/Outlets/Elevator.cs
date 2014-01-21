@@ -57,6 +57,8 @@ public class Elevator : CircuitMove
                 passenger = new Passenger(other.transform);
                 passengers.Add(passenger);
                 other.transform.parent = this.transform;
+				if(other.tag == Tags.PLAYER)
+					Camera.main.transform.parent = this.transform;
                 Debug.Log("New passenger: " + passengers.Count);
             }
             passenger.triggerCount++;
@@ -75,7 +77,9 @@ public class Elevator : CircuitMove
             if (passenger.triggerCount == 0)
             {
                 passengers.Remove(passenger);
-                other.transform.parent = null;
+				other.transform.parent = null;
+				if(other.tag == Tags.PLAYER)
+					Camera.main.transform.parent = null;
 				StartCoroutine(CloseDoors());
             }
         }

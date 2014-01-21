@@ -57,6 +57,8 @@ public class ComputerTerminal : CircuitSwitch
 
         emailListNodeRect = new Rect(terminalRect.xMin + 25, terminalRect.yMin + 25, terminalRect.width / 2 - 50, terminalRect.width / 4);
         emailBodyRect = new Rect(Screen.width / 2, terminalRect.yMin + 25, terminalRect.width / 2 - 25, terminalRect.height - 50);
+		for(int m = 0; m < monitors.Length; m++)
+			monitors[m].GetChild(0).light.enabled = activated;
 	}
 
     // Update is called once per frame
