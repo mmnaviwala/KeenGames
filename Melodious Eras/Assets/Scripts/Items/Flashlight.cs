@@ -43,12 +43,12 @@ public class Flashlight : MonoBehaviour
         }
 	}
 
-    void OnGUI()
-    {
-		GUI.Box(batteryMaxLifeRect, string.Format("Battery Life: {0:f1}", playerSuit.batteryLife), backGuiStyle);
-        GUI.color = new Color(1, 1, 1, .25f);
-        GUI.Box(batteryLifeRect, "", lightGuiStyle);
-    }
+//    void OnGUI()
+//    {
+//		GUI.Box(batteryMaxLifeRect, string.Format("Battery Life: {0:f1}", playerSuit.batteryLife), backGuiStyle);
+//        GUI.color = new Color(1, 1, 1, .25f);
+//        GUI.Box(batteryLifeRect, "", lightGuiStyle);
+//    }
 
     public void Toggle()
     {
