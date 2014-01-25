@@ -596,7 +596,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &100078
 GameObject:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -1145,6 +1145,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &100150
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400150}
+  - 114: {fileID: 11400014}
+  m_Layer: 0
+  m_Name: NightVisionGoggles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -1382,7 +1398,8 @@ Transform:
   m_LocalRotation: {x: -1.40925154e-13, y: -1.22977539e-07, z: .0443392731, w: .999016523}
   m_LocalPosition: {x: -.0923222303, y: .00970512349, z: -3.73329367e-09}
   m_LocalScale: {x: 1, y: .99999994, z: .99999994}
-  m_Children: []
+  m_Children:
+  - {fileID: 400150}
   m_Father: {fileID: 400114}
 --- !u!4 &400040
 Transform:
@@ -1458,6 +1475,7 @@ Transform:
   m_Children:
   - {fileID: 400042}
   - {fileID: 400086}
+  - {fileID: 400078}
   m_Father: {fileID: 0}
 --- !u!4 &400052
 Transform:
@@ -1621,11 +1639,11 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100078}
-  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: -.00475980621, y: -.233111084, z: .00273162918}
+  m_LocalRotation: {x: .00510394061, y: -.0545871519, z: -.994160116, w: -.0929511786}
+  m_LocalPosition: {x: 0, y: 1.75, z: .5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 400126}
+  m_Father: {fileID: 400050}
 --- !u!4 &400080
 Transform:
   m_ObjectHideFlags: 1
@@ -1906,7 +1924,6 @@ Transform:
   m_LocalScale: {x: .99999994, y: 1, z: .99999994}
   m_Children:
   - {fileID: 400004}
-  - {fileID: 400078}
   m_Father: {fileID: 400114}
 --- !u!4 &400128
 Transform:
@@ -2044,6 +2061,17 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400112}
+--- !u!4 &400150
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100150}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400038}
 --- !u!23 &2300000
 Renderer:
   m_ObjectHideFlags: 1
@@ -2287,6 +2315,7 @@ MonoBehaviour:
   holsteredWeapons: []
   leftHand: {fileID: 0}
   rightHand: {fileID: 0}
+  lookatTarget: {fileID: 0}
   closeQuarterEnemies: []
   nearbyEnemies: []
   threshold: 5
@@ -2312,6 +2341,7 @@ MonoBehaviour:
   armor: 50
   maxArmor: 50
   batteryLife: 100
+  maxBatteryLife: 100
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2698,7 +2728,6 @@ MonoBehaviour:
   isAiming: 0
   isCrouching: 0
   isWalking: 0
-  lookatTarget: {fileID: 0}
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2710,9 +2739,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08b10c7cfc4a61e4fad6947b501e4e2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  infiniteBattery: 0
-  maxBatteryLife: 100
+  infiniteBattery: 1
   efficiency: 5
+  playerSuit: {fileID: 11400002}
   c_battery:
     serializedVersion: 2
     rgba: 2149179848
@@ -2942,6 +2971,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c8b20a75559be34b87c8b01b649e46f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11400014
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2478cb17eb6b12243aedc7d006d9d47e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSuit: {fileID: 11400002}
+  efficiency: 5
+  activated: 0
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1

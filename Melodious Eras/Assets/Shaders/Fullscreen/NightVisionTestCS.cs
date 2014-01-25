@@ -7,6 +7,7 @@ public class NightVisionTestCS : ImageEffectBase
 {
 	GameController gameController;
 	public Color NV_ambientLight = new Color(.235f, .235f, .235f, 1);
+	public Vector4 adjustColorRGBA = new Vector4(-.10f, .010f, .010f, 0.0f);
 	void Start()
 	{
 		// Disable if we don't support image effects
@@ -25,6 +26,7 @@ public class NightVisionTestCS : ImageEffectBase
 	//Called by camera to apply image effect
 	void OnRenderImage(RenderTexture source, RenderTexture destination)
 	{
+		material.SetVector("_ColorAdjustment", adjustColorRGBA);
 		Graphics.Blit(source, destination, material);
 	}
 

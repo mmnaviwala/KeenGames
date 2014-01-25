@@ -34,10 +34,7 @@ public class CameraMovement3D : CameraMovement
     Transform player;
 	PlayerStats playerStats;
     Transform flashlight;
-    GameObject go;
-	ImageEffectBase nightVision;
-	Bloom bloom;
-	Fisheye fisheye;
+    public GameObject go;
 
     private Animator playerAnim; //making the player look in the camera's direction
 
@@ -50,17 +47,15 @@ public class CameraMovement3D : CameraMovement
 		playerAnim = player.GetComponent<Animator>();
         flashlight = player.GetComponent<PlayerStats>().flashlight.transform;
 
-		nightVision = this.GetComponent<NightVisionTestCS>();
-		bloom = this.GetComponent<Bloom>();
-		fisheye = this.GetComponent<Fisheye>();
-
         camTargetPos = new GameObject();
         camTargetPos.transform.position = player.transform.position;
 
         SetOffset(CameraOffset.Default);
-
-        go = new GameObject();
-        go.name = "camTarget";
+		if(go == null)
+		{
+        	go = new GameObject();
+        	go.name = "camTarget";
+		}
         go.transform.position = player.position + new Vector3(0, activeOffset.y, 0);
         go.transform.rotation = player.rotation;
 	}
@@ -68,12 +63,6 @@ public class CameraMovement3D : CameraMovement
 	// Update is called once per frame
 	void LateUpdate ()
     {
-		if(Input.GetButtonDown(InputType.TOGGLE_NIGHTVISION))
-		{
-			nightVision.enabled = !nightVision.enabled;
-			bloom.enabled = !bloom.enabled;
-			fisheye.enabled = !fisheye.enabled;
-		}
 
 		if (!(activeOffset.Equals(crouchOffset) || activeOffset.Equals(climbUpOffset) || activeOffset.Equals(climbDownOffset)))
 			TurnPlayerHead();
@@ -104,26 +93,45 @@ public class CameraMovement3D : CameraMovement
 		//Deciding if we should manipulate the camera
 		//Saving calculation/render time if camera doesn't have to move
 		Vector3 lookTemp = targetLookPos;
-		targetLookPos = player.position + player.up * activeOffset.y + go.transform.right * activeOffset.x /* + player.forward * .125f*/;
+
+		Vector3 lookPosOffset = player.up * activeOffset.y + go.transform.right * activeOffset.x;
+		targetLookPos = player.position +  lookPosOffset/* + player.forward * .125f*/;
+		RaycastHit hit1;
+		if(Physics.Raycast (player.position + player.up * activeOffset.y, go.transform.right * activeOffset.x, out hit1, Mathf.Abs(activeOffset.x)))
+		{
+			InvertOffset();
+		}
+
 		if (lookTemp != targetLookPos)
 			atTargetPos = false;
-		
+
 		if (!atTargetPos)
 		{
 			this.transform.rotation = go.transform.rotation;
-			flashlight.rotation = this.transform.rotation;
+
 			Vector3 offsetDirection = this.transform.forward * activeOffset.z;
 
 			//Preventing clipping
 			RaycastHit hit;
-			if(Physics.Raycast (targetLookPos, offsetDirection, out hit, raycastDistance))
+
+			Ray ray = new Ray(targetLookPos, offsetDirection);
+			if(Physics.Raycast (ray, out hit, raycastDistance) && hit.collider.tag != Tags.MAIN_CAMERA)
 			{
-				/*this.transform.position = */camTargetPos.transform.position = hit.point + this.transform.forward;
+				/*this.transform.position = */camTargetPos.transform.position = hit.point - ray.direction;
 				Debug.DrawLine(targetLookPos, camTargetPos.transform.position);
 				//return;
 			}
 			else
-				camTargetPos.transform.position = targetLookPos + offsetDirection + player.forward * .125f;
+				camTargetPos.transform.position = targetLookPos + offsetDirection;
+
+			//moving flashlight
+			Vector3 fOrigin = player.position + new Vector3(0, activeOffset.y, 0);
+
+			flashlight.rotation = this.transform.rotation;
+			if(Physics.Raycast (fOrigin, this.transform.forward, out hit, 0.5f))
+				flashlight.position =  fOrigin + this.transform.forward / 8;
+			else 
+				flashlight.position =  fOrigin + this.transform.forward;
 
 			//Smoothly moving toward target
 			if (Vector3.Distance(this.transform.position, camTargetPos.transform.position) > .01f)

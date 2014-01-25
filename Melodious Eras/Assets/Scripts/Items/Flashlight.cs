@@ -5,10 +5,10 @@ using System.Collections;
 public class Flashlight : MonoBehaviour 
 {
     public bool infiniteBattery = true;
-    public float maxBatteryLife = 100;  //time in seconds
+    //public float maxBatteryLife = 100;  //time in seconds
     //public float batteryLife = 100;    
 	public int efficiency = 10;
-    private Suit playerSuit;
+    public Suit playerSuit;
     public Color32 c_battery;
     public GUIStyle lightGuiStyle, backGuiStyle;
 
@@ -17,7 +17,13 @@ public class Flashlight : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        playerSuit = this.transform.root.GetComponent<Suit>();
+		if(playerSuit == null)
+		{
+			Transform temp = this.transform;
+			while(temp.tag != Tags.PLAYER)
+				temp = temp.parent;
+			playerSuit = temp.GetComponent<Suit>();
+		}
         float startX = Screen.height / 20;
         float barWidth = Screen.width / 3;
         float barHeight = barWidth / 10;
@@ -38,14 +44,14 @@ public class Flashlight : MonoBehaviour
             if (!infiniteBattery && light.enabled)
             {
 				playerSuit.batteryLife -= Time.deltaTime / efficiency;
-				batteryLifeRect.width = batteryMaxLifeRect.width * playerSuit.batteryLife / maxBatteryLife;
+				batteryLifeRect.width = batteryMaxLifeRect.width * playerSuit.batteryLife / playerSuit.maxBatteryLife;
             }
         }
 	}
 
 //    void OnGUI()
 //    {
-//		GUI.Box(batteryMaxLifeRect, string.Format("Battery Life: {0:f1}", playerSuit.batteryLife), backGuiStyle);
+//		  GUI.Box(batteryMaxLifeRect, string.Format("Battery Life: {0:f1}", playerSuit.batteryLife), backGuiStyle);
 //        GUI.color = new Color(1, 1, 1, .25f);
 //        GUI.Box(batteryLifeRect, "", lightGuiStyle);
 //    }
