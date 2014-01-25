@@ -23,7 +23,6 @@ public class Door : MonoBehaviour
 		hinge = this.transform.GetChild(0);
 		doorBody = hinge.GetChild(0);
 		doorknob = doorBody.GetChild(0);
-		Debug.Log("Hinge rotation: " + hinge.localRotation.y + ", " + hinge.localRotation.w);
 	}
 	
 	// Update is called once per frame

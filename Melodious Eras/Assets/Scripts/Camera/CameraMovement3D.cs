@@ -35,7 +35,9 @@ public class CameraMovement3D : CameraMovement
 	PlayerStats playerStats;
     Transform flashlight;
     GameObject go;
-	ImageEffectBase nightVision, fisheye, noiseAndGrain;
+	ImageEffectBase nightVision;
+	Bloom bloom;
+	Fisheye fisheye;
 
     private Animator playerAnim; //making the player look in the camera's direction
 
@@ -49,10 +51,8 @@ public class CameraMovement3D : CameraMovement
         flashlight = player.GetComponent<PlayerStats>().flashlight.transform;
 
 		nightVision = this.GetComponent<NightVisionTestCS>();
-		fisheye = this.GetComponent ("Fisheye") as ImageEffectBase;
-		Debug.Log(fisheye == null);
-		noiseAndGrain = this.GetComponent ("NoiseAndGrain") as ImageEffectBase;
-		Debug.Log(noiseAndGrain == null);
+		bloom = this.GetComponent<Bloom>();
+		fisheye = this.GetComponent<Fisheye>();
 
         camTargetPos = new GameObject();
         camTargetPos.transform.position = player.transform.position;
@@ -71,6 +71,8 @@ public class CameraMovement3D : CameraMovement
 		if(Input.GetButtonDown(InputType.TOGGLE_NIGHTVISION))
 		{
 			nightVision.enabled = !nightVision.enabled;
+			bloom.enabled = !bloom.enabled;
+			fisheye.enabled = !fisheye.enabled;
 		}
 
 		if (!(activeOffset.Equals(crouchOffset) || activeOffset.Equals(climbUpOffset) || activeOffset.Equals(climbDownOffset)))

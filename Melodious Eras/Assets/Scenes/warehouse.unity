@@ -14189,8 +14189,8 @@ MonoBehaviour:
   hdr: 0
   sepBlurSpread: 2.5
   quality: 1
-  bloomIntensity: .5
-  bloomThreshhold: .5
+  bloomIntensity: 9
+  bloomThreshhold: .00999999978
   bloomThreshholdColor: {r: 1, g: 1, b: 1, a: 1}
   bloomBlurIterations: 2
   hollywoodFlareBlurIterations: 2
@@ -14433,13 +14433,13 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1634951690}
   m_GameObject: {fileID: 300273066}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d5488e098d8f4eb492591bb089fe793, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strengthX: .25
-  strengthY: .25
+  strengthX: .0500000007
+  strengthY: .5
   fishEyeShader: {fileID: 4800000, guid: 874ceab4425f64bccb1d14032f4452b1, type: 3}
 --- !u!114 &300273087
 MonoBehaviour:
@@ -62181,7 +62181,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
       propertyPath: bloomIntensity
-      value: .5
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
       propertyPath: NV_ambientLight.rgba
@@ -62189,7 +62189,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
       propertyPath: bloomThreshhold
-      value: .5
+      value: .00999999978
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
       propertyPath: tweakMode
@@ -62206,6 +62206,26 @@ Prefab:
     - target: {fileID: 11400014, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
       propertyPath: effectAmount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
+      propertyPath: bloomBlurIterations
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
+      propertyPath: screenBlendMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400018, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400018, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
+      propertyPath: strengthX
+      value: .0500000007
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400018, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
+      propertyPath: strengthY
+      value: .5
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400006, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
