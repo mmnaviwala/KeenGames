@@ -71,8 +71,6 @@ public class CameraMovement3D : CameraMovement
 		if(Input.GetButtonDown(InputType.TOGGLE_NIGHTVISION))
 		{
 			nightVision.enabled = !nightVision.enabled;
-			fisheye.enabled = !fisheye.enabled;
-			noiseAndGrain.enabled = !noiseAndGrain.enabled;
 		}
 
 		if (!(activeOffset.Equals(crouchOffset) || activeOffset.Equals(climbUpOffset) || activeOffset.Equals(climbDownOffset)))
@@ -193,4 +191,5 @@ public class CameraMovement3D : CameraMovement
         activeOffset.x *= invertOffset;
 		raycastDistance = activeOffset.magnitude;
     }
+
 }
