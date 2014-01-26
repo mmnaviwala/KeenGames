@@ -35,9 +35,24 @@ public class NightVisionGoggles : MonoBehaviour {
 		{
 			activated = !activated;
 			nightvision.enabled = activated;
-			bloom.enabled = activated;
+			//bloom.enabled = activated;
 			fisheye.enabled = activated;
 			dof.enabled = activated;
+			if(activated)
+			{
+				bloom.bloomIntensity = 15;
+				bloom.bloomThreshhold = .02f;
+				bloom.bloomBlurIterations = 1;
+				bloom.hollyStretchWidth = 3.25f;
+			}
+			else
+			{
+				bloom.bloomIntensity = .5f;
+				bloom.bloomThreshhold = .3f;
+				bloom.bloomBlurIterations = 2;
+				bloom.hollyStretchWidth = 2.5f;
+
+			}
 		}
 		if(activated)
 		{
@@ -45,9 +60,14 @@ public class NightVisionGoggles : MonoBehaviour {
 			{
 				activated = false;
 				nightvision.enabled = false;
-				bloom.enabled = false;
+				//bloom.enabled = false;
 				fisheye.enabled = false;
 				dof.enabled = false;
+
+				bloom.bloomIntensity = .5f;
+				bloom.bloomThreshhold = .5f;
+				bloom.bloomBlurIterations = 2;
+				bloom.hollyStretchWidth = 2.5f;
 				//Emit noise
 			}
 			else
