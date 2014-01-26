@@ -8,8 +8,10 @@ using System.Collections.Generic;
 [AddComponentMenu("Scripts/Characters/Player Stats")]
 public class PlayerStats : CharacterStats
 {
-    public List<EnemyStats> closeQuarterEnemies, //will be available for melee attacks
-                            nearbyEnemies;       //will be in range to hear
+   // public List<EnemyStats> _CloseQuarterEnemies, //will be available for melee attacks
+    //                        _CearbyEnemies;       //will be in range to hear
+	public DetectionSphere _closeQuarterEnemies;
+	public DetectionSphere _nearbyEnemies;
     public int threshold = 5;
 
     public Suit suit;
@@ -47,7 +49,7 @@ public class PlayerStats : CharacterStats
         //equippedWeapon.player = this;
 
         holsteredWeapons = new Weapon[3];
-        closeQuarterEnemies = new List<EnemyStats>();
+        _closeQuarterEnemies.charactersInRange = new List<CharacterStats>();
         lastAttack = Time.time;
     }
     void Start()
@@ -59,10 +61,10 @@ public class PlayerStats : CharacterStats
 
     void Update()
     {
-        closeQuarterEnemies.RemoveAll(enemy => enemy == null); //Scans all nearby enemies each frame and removes those who have died, which wouldn't
-        nearbyEnemies.RemoveAll(enemy => enemy == null);       //trigger the OnTriggerExit function
+        _closeQuarterEnemies.charactersInRange.RemoveAll(enemy => enemy == null); //Scans all nearby enemies each frame and removes those who have died, which wouldn't
+        _nearbyEnemies.charactersInRange.RemoveAll(enemy => enemy == null);       //trigger the OnTriggerExit function
 
-        if (closeQuarterEnemies.Count > 0)
+        if (_closeQuarterEnemies.charactersInRange.Count > 0)
         {
             if (Input.GetButtonDown(InputType.MELEE))
             {
@@ -74,11 +76,11 @@ public class PlayerStats : CharacterStats
     public void PerformMelee()
     {
         //Determining which angle the player's character is facing (the one they want to attack)
-        if (closeQuarterEnemies.Count > 0)
+        if (_closeQuarterEnemies.charactersInRange.Count > 0)
         {
-            EnemyStats nearestEnemy = closeQuarterEnemies[0]; //will actually be the enemy with the smallest angle away from the player's facing direction
+            CharacterStats nearestEnemy = _closeQuarterEnemies.charactersInRange[0]; //will actually be the enemy with the smallest angle away from the player's facing direction
             float lowestAngle = 180;
-            foreach (EnemyStats enemy in closeQuarterEnemies)
+            foreach (EnemyStats enemy in _closeQuarterEnemies.charactersInRange)
             {
                 float distance = Vector3.Distance(this.transform.position, enemy.transform.position);
 
@@ -106,23 +108,23 @@ public class PlayerStats : CharacterStats
         }
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (!other.isTrigger && other.tag == Tags.ENEMY)
-        {
-            closeQuarterEnemies.Add(other.GetComponent<EnemyStats>());
-            Debug.Log("Close-Quarter Enemies: " + closeQuarterEnemies.Count);
-        }
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        if (!other.isTrigger && other.tag == Tags.ENEMY)
-        {
-            closeQuarterEnemies.Remove(other.GetComponent<EnemyStats>());
-            Debug.Log("Close-Quarter Enemies: " + closeQuarterEnemies.Count);
-        }
-    }
+//    void OnTriggerEnter(Collider other)
+//    {
+//        if (!other.isTrigger && other.tag == Tags.ENEMY)
+//        {
+//            closeQuarterEnemies.Add(other.GetComponent<EnemyStats>());
+//            Debug.Log("Close-Quarter Enemies: " + closeQuarterEnemies.Count);
+//        }
+//    }
+//
+//    void OnTriggerExit(Collider other)
+//    {
+//        if (!other.isTrigger && other.tag == Tags.ENEMY)
+//        {
+//            closeQuarterEnemies.Remove(other.GetComponent<EnemyStats>());
+//            Debug.Log("Close-Quarter Enemies: " + closeQuarterEnemies.Count);
+//        }
+//    }
 
     /// <summary>
     /// Instantly kills the target if attacking from behind.

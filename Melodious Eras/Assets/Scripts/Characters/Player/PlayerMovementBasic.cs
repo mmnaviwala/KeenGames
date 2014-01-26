@@ -48,7 +48,7 @@ public class PlayerMovementBasic : MonoBehaviour
 			RaycastHit hit;
 			if(Physics.Raycast (this.transform.position, Vector3.down, out hit, .25f))
 			{
-				Debug.Log(hit.collider.name);
+				//Debug.Log(hit.collider.name);
 			}
         }
     }

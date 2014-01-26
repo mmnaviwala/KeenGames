@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public enum EnemyColor { Green = 0, Blue = 1, Red = 2, Purple = 3, White = 4 }
@@ -23,7 +23,7 @@ public class EnemyStats : CharacterStats
     {
         if (isDead)
         {
-            ((PlayerStats)(AI.currentEnemy)).closeQuarterEnemies.Remove(this);
+            ((PlayerStats)(AI.currentEnemy))._closeQuarterEnemies.charactersInRange.Remove(this);
             Destroy(this.gameObject);
         }
     }

@@ -27,7 +27,11 @@
 				
 				//Convert to Night Vision Tone by adding constant
 				//fixed4 nightVisionConvert = float4(-.10, .010, .010, 0.0);
-				fixed4 output = Y + _ColorAdjustment;
+				fixed4 output = Y + _ColorAdjustment; //Decide on "original" or "Y"
+				
+				//With Original: RGB(-.5, .005, .015)
+				//With Y: RGB(-.05, .005, .015)
+				
 				output.a = original.a;
 				
 				return output;

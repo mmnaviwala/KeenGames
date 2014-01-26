@@ -188,14 +188,14 @@ MonoBehaviour:
   sepBlurSpread: 2.5
   quality: 1
   bloomIntensity: 15
-  bloomThreshhold: .0250000004
+  bloomThreshhold: .00999999978
   bloomThreshholdColor: {r: 1, g: 1, b: 1, a: 1}
   bloomBlurIterations: 2
-  hollywoodFlareBlurIterations: 2
+  hollywoodFlareBlurIterations: 1
   flareRotation: 0
   lensflareMode: 1
-  hollyStretchWidth: 2.5
-  lensflareIntensity: 0
+  hollyStretchWidth: 3.25
+  lensflareIntensity: .5
   lensflareThreshhold: .300000012
   lensFlareSaturation: .75
   flareColorA: {r: .400000006, g: .400000006, b: .800000012, a: .75}
@@ -378,7 +378,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visualizeFocus: 0
   focalLength: 10
-  focalSize: .0500000007
+  focalSize: .5
   aperture: 11.5
   focalTransform: {fileID: 0}
   maxBlurSize: 2
