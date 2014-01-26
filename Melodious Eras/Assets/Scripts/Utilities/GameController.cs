@@ -8,11 +8,14 @@ public enum QualityLevel_5FS { VeryFast, Fast, Simple, Good, High, VeryHigh, Ult
 public class GameController : MonoBehaviour
 {
     public Difficulty difficulty = Difficulty.Medium;
+
+	//Level settings; consider putting in seperate class
     public Vector3 wind;
 	public Color32 ambientLight = new Color32(51, 51, 51, 255);
     public float turbulence = 0;
     public float shadowDistance = -1;
     private static float defaultShadowDistance = 100;
+	public float farClipDistance = -1;
 
     // Use this for initialization
     void Awake()
@@ -21,6 +24,9 @@ public class GameController : MonoBehaviour
         //Physics.gravity = new Vector3(0f, -49f, 0f);
         AudioListener.pause = false;
         Time.timeScale = 1;
+		QualitySettings.shadowDistance = (shadowDistance == -1) ? defaultShadowDistance : shadowDistance;
+		if(farClipDistance != -1)
+			Camera.main.farClipPlane = farClipDistance;
 
         InitializeEnvironment();
         XMLUtilities.Test();

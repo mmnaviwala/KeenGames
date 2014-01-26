@@ -8,15 +8,19 @@ public class Door : MonoBehaviour
 	Quaternion closedRotation, openRotation;
 	bool inRange = false;
 	bool openingOrClosing = false;
-	public bool closed = true;
+	public bool open = false;
 	public bool locked = false;
 	public string key;
+	public OcclusionPortal occlusionPortal;
 
 	// Use this for initialization
 	void Awake()
 	{
 		closedRotation = new Quaternion(0, 0, 0, 1);
 		openRotation = new Quaternion(0, .7071068f, 0, .7071068f);
+		
+		if(occlusionPortal != null)
+			this.occlusionPortal.open = this.open;
 	}
 	void Start () 
 	{
@@ -30,7 +34,7 @@ public class Door : MonoBehaviour
 	{
 		if(inRange && Input.GetButtonDown(InputType.USE) && !openingOrClosing)
 		{
-			StartCoroutine(closed ? OpenDoor() : CloseDoor());
+			StartCoroutine(open ? CloseDoor(): OpenDoor());
 		}
 	}
 
@@ -54,32 +58,40 @@ public class Door : MonoBehaviour
 		openingOrClosing = true;
 		BoxCollider doorCollider = doorBody.GetComponent<BoxCollider>();
 		doorCollider.enabled = false;
+
 		while(hinge.localEulerAngles.y > 1)
 		{
 			hinge.localRotation = Quaternion.Slerp(hinge.localRotation, closedRotation, 4 * Time.deltaTime);
 			yield return new WaitForEndOfFrame();
 		}
+
 		hinge.localRotation = closedRotation;
 		doorCollider.enabled = true;
-		closed = true;
+		open = false;
 		openingOrClosing = false;
-		Debug.Log("Closed door");
+		
+		if(occlusionPortal != null)
+			occlusionPortal.open = false;
 	}
 
 	IEnumerator OpenDoor()
 	{
+		if(occlusionPortal != null)
+			occlusionPortal.open = true;
+
 		openingOrClosing = true;
 		BoxCollider doorCollider = doorBody.GetComponent<BoxCollider>();
 		doorCollider.enabled = false;
+
 		while(hinge.localEulerAngles.y < 89)
 		{
 			hinge.localRotation = Quaternion.Slerp(hinge.localRotation, openRotation, 4 * Time.deltaTime);
 			yield return new WaitForEndOfFrame();
 		}
+
 		hinge.localRotation = openRotation;
 		doorCollider.enabled = true;
-		closed = false;
+		open = true;
 		openingOrClosing = false;
-		Debug.Log("Opened Door");
 	}
 }

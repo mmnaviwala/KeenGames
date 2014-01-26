@@ -22,6 +22,7 @@ public class Elevator : CircuitMove
     private bool doorsClosed = true;
     private bool openingClosing = false;
     public Transform leftDoor, rightDoor;
+	public int currentFloorIndex = 0;
 
     void Awake()
     {
@@ -110,7 +111,7 @@ public class Elevator : CircuitMove
 	{
 		yield return StartCoroutine(CloseDoors());
 		Debug.Log("Done Closing");
-		//Move ();
+		Move ();
 		activated = true;
 	}
 

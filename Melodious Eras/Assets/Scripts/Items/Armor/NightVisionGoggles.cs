@@ -31,7 +31,7 @@ public class NightVisionGoggles : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{		
-		if(Input.GetButtonDown(InputType.TOGGLE_NIGHTVISION))
+		if(Input.GetButtonDown(InputType.TOGGLE_NIGHTVISION) && playerSuit.batteryLife > 0)
 		{
 			activated = !activated;
 			nightvision.enabled = activated;
@@ -41,7 +41,19 @@ public class NightVisionGoggles : MonoBehaviour {
 		}
 		if(activated)
 		{
-			playerSuit.batteryLife -= Time.deltaTime / efficiency;
+			if(playerSuit.batteryLife == 0)
+			{
+				activated = false;
+				nightvision.enabled = false;
+				bloom.enabled = false;
+				fisheye.enabled = false;
+				dof.enabled = false;
+			}
+			else
+			{
+				float drain = Time.deltaTime / efficiency;
+				playerSuit.batteryLife = (playerSuit.batteryLife > drain) ? playerSuit.batteryLife - drain : 0;
+			}
 		}
 	}
 }

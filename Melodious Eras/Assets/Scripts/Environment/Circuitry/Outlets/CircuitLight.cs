@@ -10,6 +10,7 @@ public class CircuitLight : CircuitNode
     public float frequency = .5f;
 	private Transform cam;
 	public float flareDistance = 10, flareBrightness = 1;
+	public Light[] ambientLight;
 	// Use this for initialization
 
     void Awake()
@@ -33,6 +34,9 @@ public class CircuitLight : CircuitNode
             lightbulb.enabled = this.hasPower && this.activated && !this.isBroken;
         if (this.lightbulb != null && this.hasPower && !isBroken && this.activated && flickering)
             StartCoroutine(Flicker());
+
+		for(int a = 0; a < ambientLight.Length; a++)
+			ambientLight[a].color = this.lightbulb.color;
 	}
 
 	void Update()
@@ -65,14 +69,24 @@ public class CircuitLight : CircuitNode
     IEnumerator Flicker()
     {
         float defaultIntensity = this.lightbulb.intensity;
+		float[] defaultAmbientIntensities = new float[ambientLight.Length];
+		for(int a = 0; a < ambientLight.Length; a++)
+			defaultAmbientIntensities[a] = ambientLight[a].intensity;
+
         while (this.hasPower && activated && !isBroken)
         {
-            this.lightbulb.intensity = Random.value * defaultIntensity;
-            //this.lightbulb.enabled = false;
+			float f = Random.value;
+            this.lightbulb.intensity = f * defaultIntensity;
+			for(int a = 0; a < ambientLight.Length; a++)
+				ambientLight[a].intensity = f * defaultAmbientIntensities[a];
+
             yield return new WaitForSeconds(.1f);
-            //this.lightbulb.enabled = true;
-            this.lightbulb.intensity = defaultIntensity;
-            yield return new WaitForSeconds(Random.Range(0f, frequency));
+
+			this.lightbulb.intensity = defaultIntensity;
+			for(int a = 0; a < ambientLight.Length; a++)
+				ambientLight[a].intensity = f * defaultAmbientIntensities[a];
+
+			yield return new WaitForSeconds(Random.Range(0f, frequency));
         }
         this.lightbulb.enabled = false; //light needs to turn off once power is lost
     }
@@ -80,6 +94,10 @@ public class CircuitLight : CircuitNode
     {
         activated = signal && !isBroken;
         this.lightbulb.enabled = hasPower && signal && !isBroken;
+
+		for(int a = 0; a < ambientLight.Length; a++)
+			ambientLight[a].enabled = this.lightbulb.enabled;
+
         if (lightbulb.enabled && flickering)
         {
             StartCoroutine(Flicker());
@@ -101,6 +119,8 @@ public class CircuitLight : CircuitNode
             {
                 this.lightbulb.enabled = false;
                 this.isBroken = true;
+				for(int a = 0; a < ambientLight.Length; a++)
+					ambientLight[a].enabled = false;
             }
         }
     }
