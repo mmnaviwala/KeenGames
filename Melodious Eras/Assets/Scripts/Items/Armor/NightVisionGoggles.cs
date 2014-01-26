@@ -48,6 +48,7 @@ public class NightVisionGoggles : MonoBehaviour {
 				bloom.enabled = false;
 				fisheye.enabled = false;
 				dof.enabled = false;
+				//Emit noise
 			}
 			else
 			{

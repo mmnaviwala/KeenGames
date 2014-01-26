@@ -13,16 +13,20 @@ public class PlayerMovementBasic : MonoBehaviour
     public bool isShooting = false;
     public bool useDefaultMovement = true;
     public bool isAiming = false;
-    public bool isCrouching = false;
-    public bool isWalking = false;
+	public bool isWalking = false;
+	public bool isCrouching = false;
+	public float crouchHeightFactor = 0.6f;
+	public float crouchChangeSpeed = 4;
+	public PhysicMaterial zeroFriction, 
+						  fullFriction;
+
     private bool moving = false;
-
-
 
     private CameraMovement3D mainCam;
     private PlayerStats stats;
     private HUD_Stealth hud;
     private Animator anim;
+
 
     void Start()
     {
@@ -41,7 +45,11 @@ public class PlayerMovementBasic : MonoBehaviour
         if (!jumping && useDefaultMovement)
         {
             MovementInputs();
-
+			RaycastHit hit;
+			if(Physics.Raycast (this.transform.position, Vector3.down, out hit, .25f))
+			{
+				Debug.Log(hit.collider.name);
+			}
         }
     }
 
@@ -166,7 +174,8 @@ public class PlayerMovementBasic : MonoBehaviour
     {
         if (collision.contacts[0].normal.y > .7f)
         {
-            jumping = false;
+			jumping = false;
+			anim.SetBool("Jumping", false);
             anim.applyRootMotion = true;
         }
         float impactVelocity = Vector3.Magnitude(collision.relativeVelocity);
@@ -197,6 +206,7 @@ public class PlayerMovementBasic : MonoBehaviour
             this.rigidbody.AddForce(Vector3.up * jumpForce);
             jumping = true;
             anim.SetBool("IsGrinding", false);
+			anim.SetBool("Jumping", true);
             anim.applyRootMotion = false;
         }
     }

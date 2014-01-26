@@ -42,10 +42,9 @@ public class CameraMovement3D : CameraMovement
 	void Start () 
     {
         player = GameObject.FindGameObjectWithTag(Tags.PLAYER).transform;
-
 		playerStats = player.GetComponent<PlayerStats>();
 		playerAnim = player.GetComponent<Animator>();
-        flashlight = player.GetComponent<PlayerStats>().flashlight.transform;
+		flashlight = player.GetComponent<PlayerStats>().flashlight.transform;
 
         camTargetPos = new GameObject();
         camTargetPos.transform.position = player.transform.position;
