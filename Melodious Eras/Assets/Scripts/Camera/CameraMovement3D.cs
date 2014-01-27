@@ -62,8 +62,7 @@ public class CameraMovement3D : CameraMovement
 	// Update is called once per frame
 	void LateUpdate ()
     {
-
-		if (!(activeOffset.Equals(crouchOffset) || activeOffset.Equals(climbUpOffset) || activeOffset.Equals(climbDownOffset)))
+		if (!(activeOffset.Equals(climbUpOffset) || activeOffset.Equals(climbDownOffset)))
 			TurnPlayerHead();
 		
 		if (Input.GetButtonDown(InputType.SHIFT_VIEW))
@@ -130,7 +129,7 @@ public class CameraMovement3D : CameraMovement
 			if(Physics.Raycast (fOrigin, this.transform.forward, out hit, 0.5f))
 				flashlight.position =  fOrigin + this.transform.forward / 8;
 			else 
-				flashlight.position =  fOrigin + this.transform.forward;
+				flashlight.position =  fOrigin + this.transform.forward / 2;
 
 			//Smoothly moving toward target
 			if (Vector3.Distance(this.transform.position, camTargetPos.transform.position) > .01f)
@@ -149,14 +148,15 @@ public class CameraMovement3D : CameraMovement
         RaycastHit hit;
 
 
+		playerAnim.SetLookAtWeight(1, .25f, 2);
 		if(playerStats.lookatTarget != null)
 		{
-			playerAnim.SetLookAtWeight(1, .5f, 1, 1, 1);
+			//playerAnim.SetLookAtWeight(1, .5f, 1, 1, 1);
 			playerAnim.SetLookAtPosition(playerStats.lookatTarget.position);
 		}
         else 
 		{			
-			playerAnim.SetLookAtWeight(1, 1, 1, 1, 1);
+			//playerAnim.SetLookAtWeight(1, 1, 1, 1, 1);
 			if (Physics.Raycast(ray, out hit, 100) && hit.collider.tag != Tags.PLAYER && Vector3.Distance(hit.point, player.position) > 1)
 				playerAnim.SetLookAtPosition(hit.point);
 			else

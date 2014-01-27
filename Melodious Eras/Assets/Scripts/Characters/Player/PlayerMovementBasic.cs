@@ -71,7 +71,7 @@ public class PlayerMovementBasic : MonoBehaviour
 			CombatInputs();
 		}
 	}
-
+	#region Inputs
     void CombatInputs()
     {
         //----------------------------------------------
@@ -133,6 +133,7 @@ public class PlayerMovementBasic : MonoBehaviour
 
         MovementManager(direction);
     }
+	#endregion
 
     void MovementManager(Vector2 direction)
     {
@@ -203,11 +204,16 @@ public class PlayerMovementBasic : MonoBehaviour
     {
         if (!jumping)
         {
+			//if no obstacles in front of player
             this.rigidbody.AddForce(Vector3.up * jumpForce);
             jumping = true;
             anim.SetBool("IsGrinding", false);
 			anim.SetBool("Jumping", true);
             anim.applyRootMotion = false;
+			//if low obstacle (vault)
+			//...
+			//if high obstacle (climb wall)
+			//...
         }
     }
     public void Jump(float force)
