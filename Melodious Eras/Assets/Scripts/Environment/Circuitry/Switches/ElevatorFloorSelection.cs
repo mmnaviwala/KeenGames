@@ -41,7 +41,7 @@ public class ElevatorFloorSelection : CircuitSwitch
     // Update is called once per frame
     void Update() 
     {
-        if (inRange)
+		if (detectionSphere.playerInRange)
         {
             if (Input.GetButtonDown(InputType.USE))
             {
@@ -82,7 +82,6 @@ public class ElevatorFloorSelection : CircuitSwitch
     {
         if (other is CapsuleCollider && other.tag == Tags.PLAYER)
         {
-            inRange = true;
             playerHUD = other.GetComponent<HUD_Stealth>();
             cam3d = Camera.main.GetComponent<CameraMovement3D>();
         }
@@ -91,7 +90,6 @@ public class ElevatorFloorSelection : CircuitSwitch
     {
         if (other is CapsuleCollider && other.tag == Tags.PLAYER)
         {
-            inRange = false;
             inUse = false;
         }
     }

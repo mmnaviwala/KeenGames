@@ -80,9 +80,9 @@ public class Keypad : CircuitSwitch
     // Update is called once per frame
     void Update() 
 	{
-        if (inRange && !isBroken && Input.GetKeyDown(KeyCode.H))
+		if (detectionSphere.playerInRange && !isBroken && Input.GetKeyDown(KeyCode.H))
             StartCoroutine(OnHacking());
-        if (inRange && !isBroken && Input.GetButtonDown(InputType.USE))
+		if (detectionSphere.playerInRange && !isBroken && Input.GetButtonDown(InputType.USE))
             usingKeypad = true;
 		if(hasPower && usingKeypad)
 		{
@@ -108,7 +108,7 @@ public class Keypad : CircuitSwitch
         //Locking 3rd-person camera onto this keypad
         if (other is CapsuleCollider && other.tag == Tags.PLAYER)
         {
-            inRange = true;
+			detectionSphere.playerInRange = true;
             if (playerHUD == null)
                 playerHUD = other.GetComponent<HUD_Stealth>();
         }
@@ -120,14 +120,14 @@ public class Keypad : CircuitSwitch
         if (other is CapsuleCollider && other.gameObject.tag == Tags.PLAYER)
         {
             usingKeypad = false;
-            inRange = false;
+			detectionSphere.playerInRange = false;
             cam3d.target = null;
         }
     }
 
 	void OnGUI()
 	{
-        if (inRange && !usingKeypad && this.hasPower)
+		if (detectionSphere.playerInRange && !usingKeypad && this.hasPower)
         {
             GUI.Box(promptRect, "Press [USE] to interact.", promptStyle);
         }

@@ -18,24 +18,13 @@ public class ElevatorCallButton : CircuitSwitch
 	// Update is called once per frame
 	void Update () 
     {
-        if (inRange && Input.GetButtonDown(InputType.USE))
+        if (detectionSphere.playerInRange && Input.GetButtonDown(InputType.USE))
             connectedElevator.Call(floor);
 	}
 
     void OnGUI()
     {
-        if (inRange && this.hasPower)
+		if (detectionSphere.playerInRange && this.hasPower)
             GUI.Box(promptRect, "Press [USE] to switch " + (onOffStatus ? "off" : "on"), promptStyle);
-    }
-    void OnTriggerEnter(Collider other)
-    {
-        if (other is CapsuleCollider && other.tag == Tags.PLAYER)
-            inRange = true;
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        if (other is CapsuleCollider && other.tag == Tags.PLAYER)
-            inRange = false;
     }
 }

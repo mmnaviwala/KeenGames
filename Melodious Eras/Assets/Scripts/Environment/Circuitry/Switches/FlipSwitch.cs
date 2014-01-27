@@ -26,9 +26,9 @@ public class FlipSwitch : CircuitSwitch
 	}
     void Update()
     {
-        if (inRange)
+		if (detectionSphere.playerInRange)
         {
-            if (Input.GetButtonDown(InputType.USE))
+            if (Input.GetButtonDown(InputType.USE) && this.hasPower)
             {
                 onOffStatus = !onOffStatus;
                 foreach (CircuitNode node in connectedNodes)
@@ -41,18 +41,7 @@ public class FlipSwitch : CircuitSwitch
 
     void OnGUI()
     {
-        if (inRange && this.hasPower)
+		if (detectionSphere.playerInRange && this.hasPower)
             GUI.Box(promptRect, "Press [USE] to switch " + (onOffStatus ? "off" : "on"), promptStyle);
-    }
-    void OnTriggerEnter(Collider other)
-    {
-        if (other is CapsuleCollider && other.tag == Tags.PLAYER)
-            inRange = true;
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        if (other is CapsuleCollider && other.tag == Tags.PLAYER)
-            inRange = false;
     }
 }

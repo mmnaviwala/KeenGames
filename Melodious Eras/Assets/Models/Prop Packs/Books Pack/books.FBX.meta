@@ -35,6 +35,7 @@ ModelImporter:
     2300014: Box107
     2300016: Box108
     2300018: Box109
+    2300020: //RootNode
     3300000: Box100
     3300002: Box101
     3300004: Box102
@@ -45,6 +46,7 @@ ModelImporter:
     3300014: Box107
     3300016: Box108
     3300018: Box109
+    3300020: //RootNode
     4300000: Box100
     4300002: Box101
     4300004: Box102
@@ -74,8 +76,8 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: .00999999978
-    meshCompression: 0
+    globalScale: .0149999997
+    meshCompression: 3
     addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
@@ -91,7 +93,7 @@ ModelImporter:
     normalSmoothAngle: 60
     splitTangentsAcrossUV: 1
     normalImportMode: 0
-    tangentImportMode: 1
+    tangentImportMode: 0
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
