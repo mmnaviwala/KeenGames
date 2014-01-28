@@ -7,13 +7,13 @@ public class ComputerTerminal : CircuitSwitch
     #region variables
     public string userName; //for display purposes only
     public string password;
-    private string passwordGuess = "";
+	protected string passwordGuess = "";
 
-    bool playerNearby = false;
-    bool alreadyActivated = false;
-    bool usingTerminal = false;
-    bool hasAccess = false;
-    float pressTime = 0;
+    protected bool playerNearby = false;
+	protected bool alreadyActivated = false;
+	protected bool usingTerminal = false;
+	protected bool hasAccess = false;
+	protected float pressTime = 0;
 
     public Material onScreen, offScreen;
     public Transform[] monitors;
@@ -23,7 +23,7 @@ public class ComputerTerminal : CircuitSwitch
     animatedPauseMenu pauseMenu;
     CameraMovement3D cam3d;
 
-    private Rect    terminalRect,  usernameRect,  passwordRect,  emailListRect,  emailBodyRect,  promptRect, emailListNodeRect, exitButtonRect;
+	protected Rect    terminalRect,  usernameRect,  passwordRect,  emailListRect,  emailBodyRect,  promptRect, emailListNodeRect, exitButtonRect;
     public GUIStyle terminalStyle, usernameStyle, passwordStyle, emailListStyle, emailBodyStyle, promptStyle, exitButtonStyle;
 
 

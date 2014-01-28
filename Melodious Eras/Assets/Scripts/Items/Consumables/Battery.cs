@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(Item))]
 [AddComponentMenu("Scripts/Items/Pickup Object (Battery)")]
@@ -24,22 +23,30 @@ public class Battery : PickupObject
 	{
 		if(inRange)
 		{
-			if(playerSuit.batteryLife < 100)
+			Ray ray = new Ray(this.transform.position, character.transform.position + new Vector3(0, 1.75f, 0) - this.transform.position);
+			RaycastHit hit;
+
+			//If there aren't any obstacles in the way
+			if((Physics.Raycast (ray, out hit) 
+			    || Physics.Raycast (this.transform.position, character.transform.position + new Vector3(0, .25f, 0) - this.transform.position, out hit)) 
+			   && hit.transform == character.transform)
 			{
-				Ray ray = new Ray(this.transform.position, character.transform.position + new Vector3(0, 1.75f, 0) - this.transform.position);
-				RaycastHit hit;
-				if(Physics.Raycast (ray, out hit) && hit.transform == character.transform)
+				if(playerSuit.batteryLife < 100)
 				{
 					//Display prompt
-					if(Input.GetButtonDown(InputType.USE))
+				}
+
+				if(Input.GetButtonDown (InputType.USE))
+				{
+					if(playerSuit.batteryLife < 100)
 					{
 						PickUp();
 					}
+					else
+					{
+						//Display "Battery Fully Charged"
+					}
 				}
-			}
-			else
-			{
-				//Display "Battery Fully Charged"
 			}
 		}
 	}
