@@ -31,4 +31,14 @@ public class SecurityCamera : CircuitOutlet
 			yield return new WaitForEndOfFrame();
 		}
 	}
+	public override void TakeDamage (int damage)
+	{
+		this.durability -= damage;
+		if(durability < 0)
+		{
+			cam.enabled = false;
+			this.activated = false;
+			this.isBroken = true;
+		}
+	}
 }
