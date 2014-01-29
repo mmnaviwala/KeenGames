@@ -9,28 +9,57 @@ public class LightProbeGroupTrigger : MonoBehaviour
 	public class DynamicObject {
 		public GameObject go;
 		public int triggerCount;
+		public bool triggered = false;
 		public DynamicObject(GameObject go)
 		{
 			this.go = go;
 			triggerCount = 0;
 		}
+
+		public void TriggerLightProbes(bool onOff)
+		{
+			triggered = onOff;
+			if(go.renderer != null)
+				go.renderer.useLightProbes = onOff;
+			else
+			{
+				Renderer[] renderers = go.GetComponentsInChildren<Renderer>();
+				for(int r = 0; r < renderers.Length; r++)
+					renderers[r].useLightProbes = onOff;
+			}
+		}
 	}
 	void OnTriggerEnter(Collider other)
 	{
-		if(!other.isTrigger && !other.gameObject.isStatic && dynamicObjects.Find((DynamicObject d) => d.go == other.gameObject) == null)
-			dynamicObjects.Add (new DynamicObject(other.gameObject));
+		if(!other.isTrigger && !other.gameObject.isStatic)
+		{
+			DynamicObject dgo = dynamicObjects.Find((DynamicObject d) => d.go == other.gameObject);
+			if( dgo == null)
+			{
+				dgo = new DynamicObject(other.gameObject);
+				dgo.triggerCount++;
+				Debug.Log ("Trigger Entered: " + dgo.go.name + ", " + dgo.triggerCount);
+				dgo.TriggerLightProbes(true);
+				dynamicObjects.Add (dgo);
+			}
+			else
+			{
+				dgo.triggerCount++;
+				if(!dgo.triggered)
+					dgo.TriggerLightProbes(true);
+			}
+		}
 	}
-	void OnTriggerStay(Collider other)
+	void OnTriggerExit(Collider other)
 	{
 		if(!other.isTrigger && !other.gameObject.isStatic)
 		{
-			if(other.renderer != null)
-				other.renderer.useLightProbes = true;
-			else
+			DynamicObject dgo = dynamicObjects.Find((DynamicObject d) => d.go == other.gameObject);
+			if(dgo != null && --dgo.triggerCount <= 0)
 			{
-				Renderer[] renderers = other.GetComponentsInChildren<Renderer>();
-				for(int r = 0; r < renderers.Length; r++)
-					renderers[r].useLightProbes = true;
+				Debug.Log ("Triggers left: " + dgo.go.name + ", " + dgo.triggerCount);
+				if(dgo.triggered)
+					dgo.TriggerLightProbes(false);
 			}
 		}
 	}
