@@ -26,12 +26,13 @@ public static class Environment
         turbulence = turbulenceP;
     }
 
+	static YieldInstruction waitTime = new WaitForSeconds(Time.fixedDeltaTime * 100);
     public static IEnumerator BlowWind()
     {
         while (!wind.Equals(Vector3.zero))
         {
             wind = new Vector3(magX + Random.Range(-turbulence, turbulence), magY + Random.Range(-turbulence, turbulence), magZ + Random.Range(-turbulence, turbulence));
-            yield return new WaitForSeconds(Time.fixedDeltaTime * 100);
+            yield return waitTime;
         }
     }
 }

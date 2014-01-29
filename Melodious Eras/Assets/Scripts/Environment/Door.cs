@@ -13,6 +13,8 @@ public class Door : MonoBehaviour
 	public string key;
 	public OcclusionPortal occlusionPortal;
 
+	YieldInstruction frameWait = new WaitForEndOfFrame();
+
 	// Use this for initialization
 	void Awake()
 	{
@@ -62,7 +64,7 @@ public class Door : MonoBehaviour
 		while(hinge.localEulerAngles.y > 1)
 		{
 			hinge.localRotation = Quaternion.Slerp(hinge.localRotation, closedRotation, 4 * Time.deltaTime);
-			yield return new WaitForEndOfFrame();
+			yield return frameWait;
 		}
 
 		hinge.localRotation = closedRotation;
@@ -86,7 +88,7 @@ public class Door : MonoBehaviour
 		while(hinge.localEulerAngles.y < 89)
 		{
 			hinge.localRotation = Quaternion.Slerp(hinge.localRotation, openRotation, 4 * Time.deltaTime);
-			yield return new WaitForEndOfFrame();
+			yield return frameWait;
 		}
 
 		hinge.localRotation = openRotation;

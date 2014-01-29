@@ -8,6 +8,9 @@ public class NightVisionTestCS : ImageEffectBase
 	GameController gameController;
 	public Color NV_ambientLight = new Color(.235f, .235f, .235f, 1);
 	public Vector4 adjustColorRGBA = new Vector4(-.10f, .010f, .010f, 0.0f);
+
+	private YieldInstruction waitforframe = new WaitForEndOfFrame();
+
 	void Start()
 	{
 		// Disable if we don't support image effects
@@ -49,7 +52,7 @@ public class NightVisionTestCS : ImageEffectBase
 		while(RenderSettings.ambientLight.r  < NV_ambientLight.r - .01f)
 		{
 			RenderSettings.ambientLight = Color.Lerp(RenderSettings.ambientLight, NV_ambientLight, 2 * Time.deltaTime);
-			yield return new WaitForEndOfFrame();
+			yield return waitforframe;
 		}
 		Debug.Log("Goggles on");
 		RenderSettings.ambientLight = NV_ambientLight;

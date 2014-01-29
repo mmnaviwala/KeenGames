@@ -228,12 +228,14 @@ public class PlayerMovementBasic : MonoBehaviour
             anim.applyRootMotion = false;
         }
     }
+
+	YieldInstruction waitp1 = new WaitForSeconds(.1f);
     public IEnumerator Launch(float force)
     {
         anim.SetBool("IsGrinding", false);
         this.rigidbody.AddForce(Vector3.up * force);
 
-        yield return new WaitForSeconds(0.1f); //Giving the player time to add more force to the jump
+        yield return waitp1; //Giving the player time to add more force to the jump
         jumping = true;
     }
 

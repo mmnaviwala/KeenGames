@@ -9,6 +9,13 @@ public class SpawnPoint : MonoBehaviour
                 playerOnly = false;
     public float delay = 0f;
 
+	private WaitForSeconds delayTime;
+
+	void Awake()
+	{
+		delayTime = new WaitForSeconds(delay);
+	}
+
     void OnTriggerEnter(Collider other)
     {
         if (setOnTrigger && !(playerOnly && other.tag != Tags.PLAYER))
@@ -19,7 +26,7 @@ public class SpawnPoint : MonoBehaviour
     public IEnumerator SpawnObject()
     {
         if (delay != 0f)
-            yield return new WaitForSeconds(delay);
+			yield return delayTime;
         Instantiate(objectToSpawn, new Vector3(113.5f, 60f, 6f), objectToSpawn.transform.rotation);
     }
     public IEnumerator SpawnObject(float delayP)

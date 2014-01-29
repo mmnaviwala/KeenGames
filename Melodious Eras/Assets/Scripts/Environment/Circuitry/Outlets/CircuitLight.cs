@@ -11,10 +11,13 @@ public class CircuitLight : CircuitNode
 	private Transform cam;
 	public float flareDistance = 10, flareBrightness = 1;
 	public Light[] ambientLight;
+
+	private bool isStatic;
 	// Use this for initialization
 
     void Awake()
     {
+		this.isStatic = this.gameObject.isStatic;
 		cam = Camera.main.transform;
         if (this.electricGrid != null)
             electricGrid.connectedObjects.Add(this);
@@ -30,6 +33,7 @@ public class CircuitLight : CircuitNode
     }
 	void Start () 
     {
+		Debug.Log("Lightbulb starting");
         if(this.lightbulb != null)
             lightbulb.enabled = this.hasPower && this.activated && !this.isBroken;
         if (this.lightbulb != null && this.hasPower && !isBroken && this.activated && flickering)
@@ -124,4 +128,23 @@ public class CircuitLight : CircuitNode
             }
         }
     }
+
+	/// <summary>
+	/// Automatically turns lightbulbs on/off when triggered. Avoids updating Activated attribute 
+	/// so the lights can be reverted to their previous state if the player comes back to the area
+	/// </summary>
+	/// <param name="onOff">If set to <c>true</c> on off.</param>
+	public void AutoSwitch(bool onOff)
+	{
+		this.lightbulb.enabled = onOff && hasPower && activated && !isBroken;
+		Debug.Log ("Auto switch: " + this.lightbulb.enabled);
+		
+		for(int a = 0; a < ambientLight.Length; a++)
+			ambientLight[a].enabled = this.lightbulb.enabled;
+		
+		if (lightbulb.enabled && flickering)
+		{
+			StartCoroutine(Flicker());
+		}
+	}
 }

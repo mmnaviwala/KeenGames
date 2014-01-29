@@ -91,10 +91,11 @@ public class Ladder : MonoBehaviour
         }
     }
 
+	private YieldInstruction freezeWait = new WaitForSeconds(.5f);
     IEnumerator FreezeControls()
     {
         player.GetComponent<PlayerMovementBasic>().enabled = false;
-        yield return new WaitForSeconds(.5f);
+		yield return freezeWait;
         player.GetComponent<PlayerMovementBasic>().enabled = true;
     }
 }

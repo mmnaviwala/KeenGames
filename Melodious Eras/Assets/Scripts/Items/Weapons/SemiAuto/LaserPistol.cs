@@ -4,7 +4,8 @@ using System.Collections;
 [AddComponentMenu("Scripts/Items/Weapons/Laser Pistol")]
 public class LaserPistol : SemiAutoWeapon
 {
-    LineRenderer laser;
+	LineRenderer laser;
+	YieldInstruction waitp1 = new WaitForSeconds(.1f); //render time for laser
     int layerMask_ignorePlayer = 1 << 10;
     // Use this for initialization
     void Start()
@@ -35,7 +36,7 @@ public class LaserPistol : SemiAutoWeapon
                 
                 if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, range, ignorePlayer))
                 {
-                    StartCoroutine(ShootLaser(barrelExit.position, hit.point, .1f));
+                    StartCoroutine(ShootLaser(barrelExit.position, hit.point));
                     if (hit.collider.tag == Tags.ENEMY && !hit.collider.isTrigger)
                     {
                         hit.collider.transform.GetComponent<EnemyStats>().TakeDamage(damage);
@@ -62,7 +63,7 @@ public class LaserPistol : SemiAutoWeapon
                 }
                 else
                 {
-                    StartCoroutine(ShootLaser(barrelExit.position, barrelExit.position + ray.direction * range, .1f));
+                    StartCoroutine(ShootLaser(barrelExit.position, barrelExit.position + ray.direction * range));
                 }
 
                 //laser.GetComponent<Laser>().Shoot(barrelExit.position, hit.point, hit.collider.GetComponent<EnemyStats>(), damage, .1f);
@@ -87,12 +88,12 @@ public class LaserPistol : SemiAutoWeapon
         }
     }
 
-    IEnumerator ShootLaser(Vector3 start, Vector3 end, float renderTime)
+    IEnumerator ShootLaser(Vector3 start, Vector3 end)
     {
         laser.SetPosition(0, start);
         laser.SetPosition(1, end);
         laser.enabled = true;
-        yield return new WaitForSeconds(renderTime);
+        yield return waitp1;
         laser.enabled = false;
     }
 }
