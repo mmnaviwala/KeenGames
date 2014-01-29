@@ -9,13 +9,13 @@ public class PlayerMovement : MonoBehaviour {
     public float speedDampTime = 0.1f;
 
     private Animator anim;
-    private HashIDs hash;
+    //private HashIDs hash;
     private SphereCollider col;
 
     void Awake()
     {
         anim = this.GetComponent<Animator>();
-        hash = GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<HashIDs>();
+        //hash = GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<HashIDs>();
         col = this.GetComponent<SphereCollider>();
         anim.SetLayerWeight(1, 1f);
     }
@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour {
         {
             //Debug.Log("H: " + horizontalValue + ", V: " + verticalValue);
             Rotate(horizontalValue, verticalValue);
-            anim.SetFloat(hash.speedFloat, 5.5f, speedDampTime, Time.deltaTime);
+			anim.SetFloat(HashIDs.speed_float, 5.5f, speedDampTime, Time.deltaTime);
 
             //Fast but smooth increase in sound bubble (for visual effect)
             if (!sneaking)
@@ -51,7 +51,7 @@ public class PlayerMovement : MonoBehaviour {
         }
         else
         {
-            anim.SetFloat(hash.speedFloat, 0f);
+			anim.SetFloat(HashIDs.speed_float, 0f);
             col.radius = (col.radius > 1) ? Mathf.Lerp(col.radius, 0f, 15 * Time.deltaTime) : 0f;
             //this.col.radius = 0f;
         }

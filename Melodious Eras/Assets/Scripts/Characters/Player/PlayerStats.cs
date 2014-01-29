@@ -20,7 +20,7 @@ public class PlayerStats : CharacterStats
     public AudioClip deathClip, meleeClip;
     private Animator anim;
     private PlayerMovement playerMovement;
-    private HashIDs hash;
+    //private HashIDs hash;
     private HUD_Stealth hud;
     private CameraMovement3D mainCam;
 
@@ -150,7 +150,7 @@ public class PlayerStats : CharacterStats
         if (health == 0)
         {
             isDead = true;
-            anim.SetBool("Dead", isDead);
+            anim.SetBool(HashIDs.dead_bool, isDead);
         }
     }
 

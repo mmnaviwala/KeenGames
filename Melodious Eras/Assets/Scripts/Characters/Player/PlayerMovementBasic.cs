@@ -35,8 +35,10 @@ public class PlayerMovementBasic : MonoBehaviour
         anim = this.GetComponent<Animator>();
         hud = this.GetComponent<HUD_Stealth>();
 
-        anim.SetFloat("Speed", 0f);
-        anim.SetBool("IsShooting", isShooting);
+        anim.SetFloat(HashIDs.speed_float, 0f);
+		anim.SetBool(HashIDs.shooting_float, isShooting);
+		anim.SetLayerWeight(1, 1f);
+		anim.SetLayerWeight(2, 1f);
     }
 
     // Update is called once per frame
@@ -61,7 +63,7 @@ public class PlayerMovementBasic : MonoBehaviour
 			{
 				isCrouching = !isCrouching; //toggled instead of held
 				mainCam.SetOffset(isCrouching ? CameraOffset.Crouch : CameraOffset.Default);
-				this.anim.SetBool("Sneaking", isCrouching);
+				this.anim.SetBool(HashIDs.sneaking_bool, isCrouching);
 				//Perform crouch here
 			}
 			if (Input.GetButtonDown(InputType.JUMP))
@@ -100,7 +102,7 @@ public class PlayerMovementBasic : MonoBehaviour
             mainCam.SetOffset(CameraOffset.Aim);
             mainCam.followSpeed = (float)CameraFollowSpeed.Aiming;
             isAiming = true;
-            anim.SetBool("IsShooting", isAiming);
+			anim.SetBool(HashIDs.shooting_float, isAiming);
         }
         else if (Input.GetButtonUp(InputType.AIM))
         {
@@ -108,7 +110,7 @@ public class PlayerMovementBasic : MonoBehaviour
             if (!isWalking) //Will only change offset if the player isn't holding down the Walk key
                 mainCam.SetOffset(isCrouching ? CameraOffset.Crouch : CameraOffset.Default);
             isAiming = false;
-            anim.SetBool("IsShooting", isAiming);
+			anim.SetBool(HashIDs.shooting_float, isAiming);
         }
     }
 
@@ -142,7 +144,7 @@ public class PlayerMovementBasic : MonoBehaviour
         //Determining speed
         speed = (isWalking || isAiming) ? 2 : 5.657f;
         speed *= ((direction.magnitude < 1) ? direction.magnitude : 1);
-        this.anim.SetFloat("Speed", speed);
+        this.anim.SetFloat(HashIDs.speed_float, speed);
 
         // Facing and running the desired direction
         float angle = Vector2.Angle(Vector2.up, direction);
@@ -176,7 +178,7 @@ public class PlayerMovementBasic : MonoBehaviour
         if (collision.contacts[0].normal.y > .7f)
         {
 			jumping = false;
-			anim.SetBool("Jumping", false);
+
             anim.applyRootMotion = true;
         }
         float impactVelocity = Vector3.Magnitude(collision.relativeVelocity);
@@ -208,7 +210,7 @@ public class PlayerMovementBasic : MonoBehaviour
             this.rigidbody.AddForce(Vector3.up * jumpForce);
             jumping = true;
             anim.SetBool("IsGrinding", false);
-			anim.SetBool("Jumping", true);
+			//anim.SetBool("Jumping", true);
             anim.applyRootMotion = false;
 			//if low obstacle (vault)
 			//...

@@ -30,6 +30,7 @@ public class GameController : MonoBehaviour
 
         InitializeEnvironment();
         XMLUtilities.Test();
+		HashIDs.Initialize();
     }
 
     // Update is called once per frame
