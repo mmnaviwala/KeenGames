@@ -4,22 +4,32 @@ using System.Collections;
 [RequireComponent(typeof(Camera))]
 public class PerCameraRenderSettings : MonoBehaviour {	
 	// Public variables -- set these in the inspector
-	public bool fog = RenderSettings.fog;
-	public Color fogColor = RenderSettings.fogColor;
-	public float fogDensity = RenderSettings.fogDensity;
-	public Color ambientLight = RenderSettings.ambientLight;
-	public float haloStrength = RenderSettings.haloStrength;
-	public float flareStrength = RenderSettings.flareStrength;
+	public bool fog;// = RenderSettings.fog;
+	public Color fogColor;// = RenderSettings.fogColor;
+	public float fogDensity;// = RenderSettings.fogDensity;
+	public Color ambientLight;// = RenderSettings.ambientLight;
+	public float haloStrength;// = RenderSettings.haloStrength;
+	public float flareStrength;// = RenderSettings.flareStrength;
 	
 	// Private variables -- used to reset the render settings after the current camera has been rendered
-	private bool _global_fog = RenderSettings.fog;
-	private Color _global_fogColor = RenderSettings.fogColor;
-	private float _global_fogDensity = RenderSettings.fogDensity;
-	private Color _global_ambientLight = RenderSettings.ambientLight;
-	private float _global_haloStrength = RenderSettings.haloStrength;
-	private float _global_flareStrength = RenderSettings.flareStrength;
+	private static bool _global_fog;// = RenderSettings.fog;
+	private static Color _global_fogColor;// = RenderSettings.fogColor;
+	private static float _global_fogDensity;// = RenderSettings.fogDensity;
+	private static Color _global_ambientLight;// = RenderSettings.ambientLight;
+	private static float _global_haloStrength;// = RenderSettings.haloStrength;
+	private static float _global_flareStrength;// = RenderSettings.flareStrength;
 	
 	private bool dirty = false; // Used to flag that the render settings have been overridden and need a restore
+
+	void Awake()
+	{
+		_global_fog = fog = RenderSettings.fog;
+		_global_fogColor = fogColor = RenderSettings.fogColor;
+		_global_fogDensity = fogDensity = RenderSettings.fogDensity;
+		_global_ambientLight = ambientLight = RenderSettings.ambientLight;
+		_global_haloStrength = haloStrength = RenderSettings.haloStrength;
+		_global_flareStrength = flareStrength = RenderSettings.flareStrength;
+	}
 	
 	void OnPreRender () {
 		if (! enabled ) return; // If the component is disabled, use the global render settings

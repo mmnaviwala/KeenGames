@@ -10,6 +10,7 @@ public class NightVisionGoggles : MonoBehaviour {
 	private Fisheye fisheye;
 	private DepthOfFieldScatter dof;
 	public bool activated = false;
+	public Camera cam;
 
 	// Use this for initialization
 	void Start () {
@@ -22,10 +23,14 @@ public class NightVisionGoggles : MonoBehaviour {
 			}
 			playerSuit = temp_transform.GetComponent<Suit>();
 		}
-		nightvision = Camera.main.GetComponent<NightVisionTestCS>();
-		bloom = Camera.main.GetComponent<Bloom>();
-		fisheye = Camera.main.GetComponent<Fisheye>();
-		dof = Camera.main.GetComponent<DepthOfFieldScatter>();
+
+		if(cam == null) 
+			cam = Camera.main;
+
+		nightvision = cam.GetComponent<NightVisionTestCS>();
+		bloom = cam.GetComponent<Bloom>();
+		fisheye = cam.GetComponent<Fisheye>();
+		dof = cam.GetComponent<DepthOfFieldScatter>();
 	}
 	
 	// Update is called once per frame
