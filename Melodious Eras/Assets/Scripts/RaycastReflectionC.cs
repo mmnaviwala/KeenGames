@@ -32,21 +32,21 @@ public class RaycastReflectionC : MonoBehaviour
 			{  
 				if(Physics.Raycast(ray.origin,ray.direction, out hit, 100))  
 				{   
-					Debug.DrawLine(ray.origin, hit.point, Color.red);
+					Debug.DrawLine(ray.origin, hit.transform.position, Color.red);
 
 					reflectionPoints.Add(ray.origin);		// ----------------------------------------
-					reflectionPoints.Add(hit.point);		// ----------------------------------------
+					reflectionPoints.Add(hit.transform.position);		// ----------------------------------------
 
 					inDirection = Vector3.Reflect(ray.direction, hit.normal);  
-					ray = new Ray(hit.point, inDirection);  
+					ray = new Ray(hit.transform.position, inDirection);  
 
-					Debug.DrawRay(hit.point, inDirection*100, Color.magenta);
+					Debug.DrawRay(hit.transform.position, inDirection*100, Color.magenta);
 
 					// add points for the next possible point.
 					// if the next point doesnt actually exist, then these points will stay
 					// else these points will be replaced by actual hit points
-					reflectionPoints.Add(hit.point);						// ~~~~
-					reflectionPoints.Add((hit.point + inDirection*100));	// ~~~~
+					reflectionPoints.Add(hit.transform.position);						// ~~~~
+					reflectionPoints.Add((hit.transform.position + inDirection*100));	// ~~~~
 				}
 				else
 				{
@@ -62,18 +62,18 @@ public class RaycastReflectionC : MonoBehaviour
 					reflectionPoints.RemoveAt(reflectionPoints.Count-1);	// ~~~~
 					reflectionPoints.RemoveAt(reflectionPoints.Count-1);	// ~~~~
 
-					Debug.DrawLine(ray.origin, hit.point, Color.red);
+					Debug.DrawLine(ray.origin, hit.transform.position, Color.red);
 
 					reflectionPoints.Add(ray.origin);		// ----------------------------------------
-					reflectionPoints.Add(hit.point);		// ----------------------------------------
+					reflectionPoints.Add(hit.transform.position);		// ----------------------------------------
 
 					inDirection = Vector3.Reflect(inDirection,hit.normal);  
-					ray = new Ray(hit.point,inDirection);  
+					ray = new Ray(hit.transform.position,inDirection);  
 					  
-					Debug.DrawRay(hit.point, inDirection*100, Color.magenta);
+					Debug.DrawRay(hit.transform.position, inDirection*100, Color.magenta);
 
-					reflectionPoints.Add(hit.point);						// ~~~~
-					reflectionPoints.Add((hit.point + inDirection*100));	// ~~~~
+					reflectionPoints.Add(hit.transform.position);						// ~~~~
+					reflectionPoints.Add((hit.transform.position + inDirection*100));	// ~~~~
 
 //					Debug.Log("i = " + i);
 //					Debug.Log("Hit Point: " + hit.point);
