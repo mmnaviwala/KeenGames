@@ -128,7 +128,6 @@ GameObject:
   - 4: {fileID: 400014}
   - 33: {fileID: 3300004}
   - 23: {fileID: 2300004}
-  - 95: {fileID: 9500000}
   m_Layer: 0
   m_Name: Keyboard
   m_TagString: Untagged
@@ -235,7 +234,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.0742054, y: 6.0999999, z: -19.1583958}
+  m_LocalPosition: {x: 1.72793579, y: 6.0999999, z: -19.1583958}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400012}
@@ -535,20 +534,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .699999988, y: .699999988, z: .100000001}
   m_Center: {x: -.0438529477, y: -.0599999987, z: .625}
---- !u!95 &9500000
-Animator:
-  serializedVersion: 2
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100014}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 1e9f23a15f83aae439623e263be2d9fe, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_ApplyRootMotion: 1
-  m_AnimatePhysics: 0
-  m_HasTransformHierarchy: 1
 --- !u!108 &10800000
 Light:
   m_ObjectHideFlags: 1
@@ -572,7 +557,7 @@ Light:
     m_SoftnessFade: 1
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
-  m_ActuallyLightmapped: 0
+  m_ActuallyLightmapped: 1
   m_Flare: {fileID: 0}
   m_RenderMode: 0
   m_CullingMask:
