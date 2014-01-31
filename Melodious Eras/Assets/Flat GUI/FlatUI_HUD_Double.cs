@@ -20,9 +20,18 @@ public class FlatUI_HUD_Double : MonoBehaviour {
 	public enum BarType { HealthArmor, Ammo }
 	public Position positions;
 	public BarType bartype;
+
+	private PlayerStats stats;
+	private Gun weapon;
+	private Suit suit;
 	
 	void Start ()
 	{
+		stats = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<PlayerStats>();
+		suit = stats.GetComponent<Suit>();
+		weapon = stats.equippedWeapon as Gun;
+
+
 		xx = Screen.width / 10;
 		yy = Screen.height / 10;
 
@@ -69,23 +78,13 @@ public class FlatUI_HUD_Double : MonoBehaviour {
 		switch(bartype)
 		{
 		case BarType.Ammo:
-			currentNumber1 = 25;
-			currentNumber2 = 100;
+			currentNumber1 = weapon.ammoInClip;
+			currentNumber2 = weapon.extraAmmo;
 			break;
 		case BarType.HealthArmor:
-			currentNumber1 = GameObject.Find("player_FreeCharacter").GetComponent<PlayerStats>().health;
-			currentNumber2 = GameObject.Find("player_FreeCharacter").GetComponent<Suit>().armor;
+			currentNumber1 = stats.health;
+			currentNumber2 = suit.armor;
 			break;
-		}
-
-		if(currentNumber1 > -1)
-		{
-			currentHealth1 = (Screen.height*1.8f) - ((Screen.height*1.8f)*(currentNumber1/100f)) + 1;
-		}
-
-		if(currentNumber2 > -1)
-		{
-			currentHealth2 = (Screen.height*1.8f) - ((Screen.height*1.8f)*(currentNumber2/100f)) + 1;
 		}
 	}
 	
@@ -93,7 +92,7 @@ public class FlatUI_HUD_Double : MonoBehaviour {
 	{
 		GUI.DrawTexture(outerRect, bottomTexture);
 		
-		outterMat.SetFloat("_Cutoff", Mathf.InverseLerp(0, Screen.width, currentHealth1));
+		outterMat.SetFloat("_Cutoff", Mathf.InverseLerp(0, 100, stats.health));
 		Graphics.DrawTexture(outerRect, outerBarTexture, outterMat);
 		
 		GUI.DrawTexture(outerRect, topTexture);

@@ -8408,6 +8408,10 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: add2a538778239f47862a8e8175703c0, type: 2}
+      propertyPath: equippedWeapon
+      value: 
+      objectReference: {fileID: 1769580796}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: add2a538778239f47862a8e8175703c0, type: 2}
   m_RootGameObject: {fileID: 979560893}
@@ -58202,7 +58206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   group: {fileID: 0}
-  equippedWeapon: {fileID: 0}
+  equippedWeapon: {fileID: 1769580796}
   currentEnemy: {fileID: 0}
   hearingMultiplier: 1
   awarenessMultiplier: 1
@@ -67862,6 +67866,10 @@ Prefab:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400016, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400018, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}

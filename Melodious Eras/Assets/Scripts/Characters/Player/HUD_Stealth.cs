@@ -67,6 +67,7 @@ public class HUD_Stealth : MonoBehaviour
         GUI.color = new Color(1, 1, 1, .25f);
         GUI.Box(healthBarCurrent, "", healthCurrentStyle);
         GUI.Box(armorBarCurrent, "", armorCurrentStyle);
+		GUI.Box (flashlightLife, "", flashlightLifeStyle);
     }
 
     public void Enable()

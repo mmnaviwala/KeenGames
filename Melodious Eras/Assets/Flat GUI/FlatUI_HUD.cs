@@ -7,7 +7,6 @@ public class FlatUI_HUD : MonoBehaviour {
 	
 	public Texture bottomTexture, topTexture, barTexture;
 	private Rect rectSize, numberLabelSize, stringLabelSize;
-	private float currentHealth = 0.0f;
 	private float xx, yy;
 	private GUIStyle smallFont;
 	public GUIStyle bigFont;
@@ -92,21 +91,13 @@ public class FlatUI_HUD : MonoBehaviour {
 //			currentNumber = 80;
 			break;
 		}
-
-		if(currentNumber > -1)
-		{
-			currentHealth = (Screen.height*1.8f) - ((Screen.height*1.8f)*(currentNumber/100f)) + 1;
-			Debug.Log(bartype + " " + currentHealth + " " + currentNumber);
-		}
 	}
 	
 	void OnGUI ()
 	{
-		GUI.DrawTexture(rectSize, bottomTexture);
-
-		gameObject.renderer.material.SetFloat("_Cutoff", Mathf.InverseLerp(0, Screen.width, currentHealth));
+		GUI.DrawTexture(rectSize, bottomTexture);	
+		renderer.material.SetFloat("_Cutoff", Mathf.Clamp(Mathf.InverseLerp(0f, 100, 100 - currentNumber), .01f, 1));
 		Graphics.DrawTexture(rectSize, barTexture, gameObject.renderer.material);
-
 		GUI.DrawTexture(rectSize, topTexture);
 		
 		GUI.Label(numberLabelSize, string.Format("{0:f1}", currentNumber), bigFont);
