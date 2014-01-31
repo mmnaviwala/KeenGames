@@ -1,0 +1,114 @@
+﻿using UnityEngine;
+using System.Collections;
+
+//[RequireComponent (typeof (MeshRenderer))]
+
+public class FlatUI_HUD_Double : MonoBehaviour {
+	
+	public Texture bottomTexture, topTexture, outerBarTexture, innerBarTexture;
+	private Rect innerRect, outerRect, firstLabel, secondLabel;
+	private float currentHealth1 = 0.0f;
+	private float currentHealth2 = 0.0f;
+	private float xx, yy;
+	public GUIStyle smallFont1, smallFont2;
+	private string textToDisplay1, textToDisplay2;
+	public float currentNumber1 = 100;
+	public float currentNumber2 = 100;
+	public Material outterMat, innerMat;
+
+	public enum Position { Position1, Position3 }
+	public enum BarType { HealthArmor, Ammo }
+	public Position positions;
+	public BarType bartype;
+	
+	void Start ()
+	{
+		xx = Screen.width / 10;
+		yy = Screen.height / 10;
+
+		textToDisplay1 = "Health: ";
+		textToDisplay2 = "Armor: ";
+		
+		smallFont1.fontSize = System.Convert.ToInt32(Screen.height * 0.023f);
+		smallFont2.fontSize = System.Convert.ToInt32(Screen.height * 0.023f);
+
+		switch(positions)
+		{
+		case Position.Position1:
+			innerRect = new Rect(xx * 0.30f, yy * 8.12f, xx+10, xx+10);
+			outerRect = new Rect(xx * 0.22f, yy * 8.0f, xx+30, xx+30);
+			
+			firstLabel = new Rect(xx * 0.22f, yy * 7.8f, xx+30, xx+30);
+			secondLabel = new Rect(xx * 0.22f, yy * 8.2f, xx+30, xx+30);
+			break;
+		case Position.Position3:
+			innerRect = new Rect(xx * 7.55f, yy * 8.13f, xx+10, xx+10);
+			outerRect = new Rect(xx * 7.47f, yy * 8.0f, xx+30, xx+30);
+			
+			firstLabel = new Rect(xx * 7.47f, yy * 7.8f, xx+30, xx+30);
+			secondLabel = new Rect(xx * 7.47f, yy * 8.2f, xx+30, xx+30);
+			break;
+		}
+
+		switch(bartype)
+		{
+		case BarType.Ammo:
+			textToDisplay1 = "Clips: ";
+			textToDisplay2 = "Bullets: ";
+			break;
+		case BarType.HealthArmor:
+			textToDisplay1 = "Health: ";
+			textToDisplay2 = "Armor: ";
+			break;
+		}
+
+	}
+	
+	void Update ()
+	{
+		switch(bartype)
+		{
+		case BarType.Ammo:
+			currentNumber1 = 25;
+			currentNumber2 = 100;
+			break;
+		case BarType.HealthArmor:
+			currentNumber1 = GameObject.Find("player_FreeCharacter").GetComponent<PlayerStats>().health;
+			currentNumber2 = GameObject.Find("player_FreeCharacter").GetComponent<Suit>().armor;
+			break;
+		}
+
+		if(currentNumber1 > -1)
+		{
+			currentHealth1 = (Screen.height*1.8f) - ((Screen.height*1.8f)*(currentNumber1/100f)) + 1;
+		}
+
+		if(currentNumber2 > -1)
+		{
+			currentHealth2 = (Screen.height*1.8f) - ((Screen.height*1.8f)*(currentNumber2/100f)) + 1;
+		}
+	}
+	
+	void OnGUI ()
+	{
+		GUI.DrawTexture(outerRect, bottomTexture);
+		
+		outterMat.SetFloat("_Cutoff", Mathf.InverseLerp(0, Screen.width, currentHealth1));
+		Graphics.DrawTexture(outerRect, outerBarTexture, outterMat);
+		
+		GUI.DrawTexture(outerRect, topTexture);
+
+		// -----------------------------------------------------
+
+		GUI.DrawTexture(innerRect, bottomTexture);
+		
+		innerMat.SetFloat("_Cutoff", Mathf.InverseLerp(0, Screen.width, currentHealth2));
+		Graphics.DrawTexture(innerRect, innerBarTexture, innerMat);
+		
+		GUI.DrawTexture(innerRect, topTexture);
+
+		GUI.Label(firstLabel, textToDisplay1 + string.Format("{0:f1}", currentNumber1), smallFont1);
+		GUI.Label(secondLabel, textToDisplay2 + string.Format("{0:f1}", currentNumber2), smallFont2);
+	}
+}
+
