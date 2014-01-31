@@ -19,6 +19,8 @@ public class PlayerMovementBasic : MonoBehaviour
 	public float crouchChangeSpeed = 4;
 	public PhysicMaterial zeroFriction, 
 						  fullFriction;
+	public LayerMask ignorePlayer;
+	public Vector3 targetPoint;
 
     private bool moving = false;
 
@@ -36,9 +38,9 @@ public class PlayerMovementBasic : MonoBehaviour
         hud = this.GetComponent<HUD_Stealth>();
 
         anim.SetFloat(HashIDs.speed_float, 0f);
-		anim.SetBool(HashIDs.shooting_float, isShooting);
+		anim.SetBool(HashIDs.aiming_bool, isShooting);
 		anim.SetLayerWeight(1, 1f);
-		anim.SetLayerWeight(2, 1f);
+		//anim.SetLayerWeight(2, 1f);
     }
 
     // Update is called once per frame
@@ -78,7 +80,19 @@ public class PlayerMovementBasic : MonoBehaviour
     {
         //----------------------------------------------
         //Determining camera offset
-        //AIM (and WALK) offset
+		//AIM (and WALK) offset
+		//Walking is for PC only; speed is handled by analog sticks on consoles
+		//Listening for all 3 to avoid camera shifting issues
+		if (Input.GetButtonDown(InputType.WALK))
+		{
+			isWalking = true;
+			mainCam.SetOffset(CameraOffset.Aim);
+		}
+		else if (Input.GetButtonUp(InputType.WALK))
+		{
+			isWalking = isAiming; //Will still be walking if the player is aiming
+			mainCam.SetOffset(isCrouching ? CameraOffset.Crouch : CameraOffset.Default);
+		}
 
         if (Input.GetButtonDown(InputType.RELOAD) && stats.equippedWeapon is Gun)
         {
@@ -99,10 +113,11 @@ public class PlayerMovementBasic : MonoBehaviour
         }
         if (Input.GetButtonDown(InputType.AIM))
         {
-            mainCam.SetOffset(CameraOffset.Aim);
+			if(!isCrouching)
+            	mainCam.SetOffset(CameraOffset.Aim);
             mainCam.followSpeed = (float)CameraFollowSpeed.Aiming;
             isAiming = true;
-			anim.SetBool(HashIDs.shooting_float, isAiming);
+			anim.SetBool(HashIDs.aiming_bool, isAiming);
         }
         else if (Input.GetButtonUp(InputType.AIM))
         {
@@ -110,24 +125,53 @@ public class PlayerMovementBasic : MonoBehaviour
             if (!isWalking) //Will only change offset if the player isn't holding down the Walk key
                 mainCam.SetOffset(isCrouching ? CameraOffset.Crouch : CameraOffset.Default);
             isAiming = false;
-			anim.SetBool(HashIDs.shooting_float, isAiming);
+			anim.SetBool(HashIDs.aiming_bool, isAiming);
+        }
+    }
+
+	void OnAnimatorIK(int layerIndex)
+	{
+		if (!(mainCam.activeOffset.Equals(mainCam.climbUpOffset) || mainCam.activeOffset.Equals(mainCam.climbDownOffset)))
+			TurnPlayerHead();
+
+		if(this.isAiming)
+		{
+
+			anim.SetIKPosition(AvatarIKGoal.RightHand, targetPoint);
+			anim.SetIKPositionWeight(AvatarIKGoal.RightHand, anim.GetFloat(HashIDs.aimWeight_float));
+		}
+	}
+
+    void TurnPlayerHead()
+    {
+        Ray ray = mainCam.camera.ViewportPointToRay(new Vector3(.5f, .5f, 0));
+        RaycastHit hit;
+
+
+		anim.SetLookAtWeight(1, .25f, 2);
+		if(stats.lookatTarget != null)
+		{
+			//playerAnim.SetLookAtWeight(1, .5f, 1, 1, 1);
+			anim.SetLookAtPosition(stats.lookatTarget.position);
+		}
+        else 
+		{			
+			//playerAnim.SetLookAtWeight(1, 1, 1, 1, 1);
+			if (Physics.Raycast(ray, out hit, 100, ignorePlayer) && hit.collider.tag != Tags.PLAYER && Vector3.Distance(hit.point, mainCam.transform.position) > 1)
+			{
+				targetPoint = hit.point;
+				anim.SetLookAtPosition(targetPoint);
+			}
+			else
+			{
+				targetPoint = mainCam.transform.position + mainCam.transform.forward * 100;
+				anim.SetLookAtPosition(targetPoint);
+			}
         }
     }
 
     void MovementInputs()
     {
-        //Walking is for PC only; speed is handled by analog sticks on consoles
-        //Listening for all 3 to avoid camera shifting issues
-        if (Input.GetButtonDown(InputType.WALK))
-        {
-            isWalking = true;
-            mainCam.SetOffset(CameraOffset.Aim);
-        }
-        else if (Input.GetButtonUp(InputType.WALK))
-        {
-            isWalking = isAiming; //Will still be walking if the player is aiming
-            mainCam.SetOffset(isCrouching ? CameraOffset.Crouch : CameraOffset.Default);
-        }
 
         float h = Input.GetAxis(InputType.HORIZONTAL);  //A(neg), D(pos), Left joystick left(neg)/right(pos)
         float v = Input.GetAxis(InputType.VERTICAL);    //S(neg), W(pos), Left joystick down(neg)/up(pos)

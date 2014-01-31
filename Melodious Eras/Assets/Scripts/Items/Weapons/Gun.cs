@@ -20,7 +20,8 @@ public class Gun : Weapon
     public int durability, weight;
     public float fireRate, //Time between shots.
                  accuracy, //0 = perfect accuracy for now.
-                 range;    //Range projectile will travel, or range where reticle will turn red.
+				 range,//Range projectile will travel, or range where reticle will turn red.
+				 npcRange; //range NPCs will use for this weapon
 
     protected float shotFiredTime, nextShotTime;
     protected bool reloading = false;

@@ -33,7 +33,6 @@ public class CircuitLight : CircuitNode
     }
 	void Start () 
     {
-		Debug.Log("Lightbulb starting");
         if(this.lightbulb != null)
             lightbulb.enabled = this.hasPower && this.activated && !this.isBroken;
         if (this.lightbulb != null && this.hasPower && !isBroken && this.activated && flickering)
@@ -137,7 +136,6 @@ public class CircuitLight : CircuitNode
 	public void AutoSwitch(bool onOff)
 	{
 		this.lightbulb.enabled = onOff && hasPower && activated && !isBroken;
-		Debug.Log ("Auto switch: " + this.lightbulb.enabled);
 		
 		for(int a = 0; a < ambientLight.Length; a++)
 			ambientLight[a].enabled = this.lightbulb.enabled;

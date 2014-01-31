@@ -16,7 +16,6 @@ public class DetectionSphere : MonoBehaviour {
 		if (!other.isTrigger && (other.tag == Tags.ENEMY || other.tag == Tags.PLAYER))
 		{
 			this.charactersInRange.Add(other.GetComponent<EnemyStats>());
-			Debug.Log("Enemies within " + this.name + ": " + this.charactersInRange.Count);
 		}
 	}
 	void OnTriggerExit(Collider other)
@@ -24,7 +23,6 @@ public class DetectionSphere : MonoBehaviour {
 		if (!other.isTrigger && (other.tag == Tags.ENEMY || other.tag == Tags.PLAYER))
 		{
 			this.charactersInRange.Remove(other.GetComponent<EnemyStats>());
-			Debug.Log("Enemies within " + this.name + ": " + this.charactersInRange.Count);
 		}
 	}
 }

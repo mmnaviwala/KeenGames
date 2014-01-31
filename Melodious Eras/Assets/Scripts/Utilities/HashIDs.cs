@@ -7,12 +7,10 @@ public static class HashIDs {
 	public static int 	dying_state, 
 					  	dead_bool, 
 						locomotion_state, 
-						shout_state, 
 						speed_float, 
 						sneaking_bool, 
-						shouting_bool,
                			playerInSight_bool, 
-						shooting_float, 
+						aiming_bool, 
 						aimWeight_float, 
 						angularSpeed_float, 
 						open_bool,
@@ -21,15 +19,13 @@ public static class HashIDs {
 
     public static void Initialize()
     {
-		dying_state = Animator.StringToHash("Base Layer.Dying");
+		dying_state = Animator.StringToHash("Player Animator.Dying");
 		dead_bool = Animator.StringToHash("Dead");
-		locomotion_state = Animator.StringToHash("Base Layer.Locomotion");
-		shout_state = Animator.StringToHash("Shouting.Shout");
+		locomotion_state = Animator.StringToHash("Player Animator.Locomotion");
 		speed_float = Animator.StringToHash("Speed");
 		sneaking_bool = Animator.StringToHash("Sneaking");
-		shouting_bool = Animator.StringToHash("Shouting");
 		playerInSight_bool = Animator.StringToHash("PlayerInSight");
-		shooting_float = Animator.StringToHash("IsShooting");
+		aiming_bool = Animator.StringToHash("Aiming");
 		aimWeight_float = Animator.StringToHash("AimWeight");
 		angularSpeed_float = Animator.StringToHash("AngularSpeed");
 		open_bool = Animator.StringToHash("Open");

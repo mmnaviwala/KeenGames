@@ -13,7 +13,6 @@ public class LightTrigger : MonoBehaviour
 
 	void Start()
 	{
-		Debug.Log("Light Trigger starting");
 		Switch (startOn);
 	}
 

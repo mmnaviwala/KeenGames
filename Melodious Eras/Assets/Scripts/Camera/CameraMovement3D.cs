@@ -17,7 +17,7 @@ public class CameraMovement3D : CameraMovement
     public Vector3 HackingOffset;
     public Vector3 fightingOffset;
     public Vector3 climbUpOffset, climbDownOffset;
-    private Vector3 activeOffset;
+    public Vector3 activeOffset;
 
     public float x_sensitivity = 5;
     public float y_sensitivity = 2;
@@ -62,8 +62,8 @@ public class CameraMovement3D : CameraMovement
 	// Update is called once per frame
 	void LateUpdate ()
     {
-		if (!(activeOffset.Equals(climbUpOffset) || activeOffset.Equals(climbDownOffset)))
-			TurnPlayerHead();
+//		if (!(activeOffset.Equals(climbUpOffset) || activeOffset.Equals(climbDownOffset)))
+//			TurnPlayerHead();
 		
 		if (Input.GetButtonDown(InputType.SHIFT_VIEW))
 			InvertOffset();
@@ -142,27 +142,27 @@ public class CameraMovement3D : CameraMovement
 		}
 	}
 
-    void TurnPlayerHead()
-    {
-        Ray ray = this.camera.ViewportPointToRay(new Vector3(.5f, .5f, 0));
-        RaycastHit hit;
-
-
-		playerAnim.SetLookAtWeight(1, .25f, 2);
-		if(playerStats.lookatTarget != null)
-		{
-			//playerAnim.SetLookAtWeight(1, .5f, 1, 1, 1);
-			playerAnim.SetLookAtPosition(playerStats.lookatTarget.position);
-		}
-        else 
-		{			
-			//playerAnim.SetLookAtWeight(1, 1, 1, 1, 1);
-			if (Physics.Raycast(ray, out hit, 100) && hit.collider.tag != Tags.PLAYER && Vector3.Distance(hit.point, player.position) > 1)
-				playerAnim.SetLookAtPosition(hit.point);
-			else
-				playerAnim.SetLookAtPosition(this.transform.position + this.transform.forward * 100);
-        }
-    }
+//    void TurnPlayerHead()
+//    {
+//        Ray ray = this.camera.ViewportPointToRay(new Vector3(.5f, .5f, 0));
+//        RaycastHit hit;
+//
+//
+//		playerAnim.SetLookAtWeight(1, .25f, 2);
+//		if(playerStats.lookatTarget != null)
+//		{
+//			//playerAnim.SetLookAtWeight(1, .5f, 1, 1, 1);
+//			playerAnim.SetLookAtPosition(playerStats.lookatTarget.position);
+//		}
+//        else 
+//		{			
+//			//playerAnim.SetLookAtWeight(1, 1, 1, 1, 1);
+//			if (Physics.Raycast(ray, out hit, 100) && hit.collider.tag != Tags.PLAYER && Vector3.Distance(hit.point, player.position) > 1)
+//				playerAnim.SetLookAtPosition(hit.point);
+//			else
+//				playerAnim.SetLookAtPosition(this.transform.position + this.transform.forward * 100);
+//        }
+//    }
 
     public void InvertOffset()
     {

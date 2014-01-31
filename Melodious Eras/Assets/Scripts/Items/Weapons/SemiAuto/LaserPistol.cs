@@ -6,14 +6,14 @@ public class LaserPistol : SemiAutoWeapon
 {
 	LineRenderer laser;
 	YieldInstruction waitp1 = new WaitForSeconds(.1f); //render time for laser
-    int layerMask_ignorePlayer = 1 << 10;
+	YieldInstruction endOfFrame = new WaitForEndOfFrame();
+
     // Use this for initialization
     void Start()
     {
         laser = barrelExit.GetComponent<LineRenderer>();
         laser.enabled = false;
         this.Initialize();
-        layerMask_ignorePlayer = ~layerMask_ignorePlayer;
     }
 
     // Update is called once per frame
@@ -93,7 +93,18 @@ public class LaserPistol : SemiAutoWeapon
         laser.SetPosition(0, start);
         laser.SetPosition(1, end);
         laser.enabled = true;
+		StartCoroutine(Flash ());
         yield return waitp1;
         laser.enabled = false;
     }
+
+	IEnumerator Flash()
+	{
+		barrelExit.light.intensity = 1;
+		while(barrelExit.light.intensity > .01f)
+		{
+			barrelExit.light.intensity = Mathf.Lerp (barrelExit.light.intensity, 0f, 10 * Time.deltaTime);
+			yield return endOfFrame;
+		}
+	}
 }

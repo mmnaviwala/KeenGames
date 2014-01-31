@@ -12,6 +12,8 @@ public class NightVisionGoggles : MonoBehaviour {
 	public bool activated = false;
 	public Camera cam;
 
+	private YieldInstruction endOfFrame = new WaitForEndOfFrame();
+
 	// Use this for initialization
 	void Start () {
 		if(playerSuit == null)
@@ -39,6 +41,8 @@ public class NightVisionGoggles : MonoBehaviour {
 		if(Input.GetButtonDown(InputType.TOGGLE_NIGHTVISION) && playerSuit.batteryLife > 0)
 		{
 			activated = !activated;
+			this.StopAllCoroutines();
+			StartCoroutine(Toggle ());
 			nightvision.enabled = activated;
 			//bloom.enabled = activated;
 			fisheye.enabled = activated;
@@ -48,7 +52,7 @@ public class NightVisionGoggles : MonoBehaviour {
 				bloom.bloomIntensity = 15;
 				bloom.bloomThreshhold = .02f;
 				bloom.bloomBlurIterations = 1;
-				bloom.hollyStretchWidth = 3.25f;
+				bloom.hollyStretchWidth = 1.25f;
 			}
 			else
 			{
@@ -80,6 +84,22 @@ public class NightVisionGoggles : MonoBehaviour {
 				float drain = Time.deltaTime / efficiency;
 				playerSuit.batteryLife = (playerSuit.batteryLife > drain) ? playerSuit.batteryLife - drain : 0;
 			}
+		}
+	}
+
+	IEnumerator Toggle()
+	{
+		if(activated)
+		{
+			while(this.light.intensity < .09f)
+			{
+				this.light.intensity = Mathf.Lerp (this.light.intensity, .1f, 2 * Time.deltaTime);
+				yield return endOfFrame;
+			}
+		}
+		else
+		{
+			this.light.intensity = 0;
 		}
 	}
 }

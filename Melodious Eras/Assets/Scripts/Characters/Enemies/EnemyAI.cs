@@ -16,7 +16,7 @@ public class EnemyAI : MonoBehaviour
                  chaseSpeed = 5, 
                  chaseWaitTime = 5, 
                  patrolWaitTime = 2;
-    public Transform[] patrolWaypoints;
+    public Waypoint[] patrolWaypoints;
 
     public bool seesPlayer = false;
     public bool awareOfPlayer = false;
@@ -116,7 +116,7 @@ public class EnemyAI : MonoBehaviour
         if (nav.remainingDistance < nav.stoppingDistance /*|| nav.destination == lastPlayerSighting*/)
         {
             patrolTimer += Time.deltaTime;
-            if (patrolTimer >= patrolWaitTime)
+            if (patrolTimer >= patrolWaypoints[waypointIndex].waitTime)
             {
                 waypointIndex = (waypointIndex + 1) % patrolWaypoints.Length;
                 patrolTimer = 0;
@@ -125,7 +125,7 @@ public class EnemyAI : MonoBehaviour
         else
             patrolTimer = 0;
 
-        nav.destination = patrolWaypoints[waypointIndex].position;
+        nav.destination = patrolWaypoints[waypointIndex].transform.position;
     }
 
     void Chasing()
