@@ -4,6 +4,7 @@ using System.Collections.Generic;
 [AddComponentMenu("Scripts/Environment/Circuitry/Elevator")]
 public class Elevator : CircuitMove 
 {
+	public AudioClip openSound, closeSound, ding, elevatorMusic;
     //wrapper for each passenger in the elevator; just keeps track of their trigger count.
     private class Passenger
     {

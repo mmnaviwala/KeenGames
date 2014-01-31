@@ -190,6 +190,14 @@ public class PlayerMovementBasic : MonoBehaviour
         speed *= ((direction.magnitude < 1) ? direction.magnitude : 1);
         this.anim.SetFloat(HashIDs.speed_float, speed);
 
+		if(speed > 4 && !isCrouching)
+		{
+			if(!this.audio.isPlaying)
+				this.audio.Play();
+		}
+		else if(this.audio.isPlaying)
+			this.audio.Stop ();
+
         // Facing and running the desired direction
         float angle = Vector2.Angle(Vector2.up, direction);
         if (direction.x < 0)
@@ -199,6 +207,7 @@ public class PlayerMovementBasic : MonoBehaviour
         {
             this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, mainCam.transform.eulerAngles.y + angle, this.transform.eulerAngles.z);
 			this.anim.applyRootMotion = true;
+
             //this.transform.eulerAngles = Vector3.Slerp(this.transform.eulerAngles, 
             //    new Vector3(this.transform.eulerAngles.x, mainCam.transform.eulerAngles.y + angle, this.transform.eulerAngles.z), 
             //    1 * Time.deltaTime);
