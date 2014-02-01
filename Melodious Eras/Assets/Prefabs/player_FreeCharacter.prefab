@@ -634,6 +634,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400082}
   - 120: {fileID: 12000000}
+  - 108: {fileID: 10800004}
   m_Layer: 10
   m_Name: barrel_exit
   m_TagString: Untagged
@@ -1153,6 +1154,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400150}
   - 114: {fileID: 11400014}
+  - 108: {fileID: 10800002}
   m_Layer: 0
   m_Name: NightVisionGoggles
   m_TagString: Untagged
@@ -1521,8 +1523,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100050}
-  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
-  m_LocalPosition: {x: -1.68897676, y: .5, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.04195642, y: 3.57749748, z: -41.0073433}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400042}
@@ -2066,8 +2068,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100142}
-  m_LocalRotation: {x: -.837944925, y: .107753098, z: .073671028, w: -.529915392}
-  m_LocalPosition: {x: -.117854334, y: .0538025312, z: .0100356964}
+  m_LocalRotation: {x: -.838650525, y: .184344351, z: .129108891, w: -.495997459}
+  m_LocalPosition: {x: -.117844626, y: .0538026579, z: .0100386422}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 400082}
@@ -2239,9 +2241,9 @@ AudioSource:
   m_GameObject: {fileID: 100050}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_audioClip: {fileID: 8300000, guid: 49b6d86b05116ed41b535d441773b07c, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: .5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2424,6 +2426,76 @@ Light:
   m_ShadowAngle: 0
   m_IndirectIntensity: 1
   m_AreaSize: {x: 1, y: 1}
+--- !u!108 &10800002
+Light:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100150}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Type: 2
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 0
+  m_Range: 10
+  m_SpotAngle: 30
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_Strength: 1
+    m_Bias: .0500000007
+    m_Softness: 4
+    m_SoftnessFade: 1
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_ActuallyLightmapped: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 1
+  m_ShadowSamples: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+  m_IndirectIntensity: 1
+  m_AreaSize: {x: 1, y: 1}
+--- !u!108 &10800004
+Light:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100082}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Type: 2
+  m_Color: {r: .498039216, g: .870588243, b: .964705884, a: 1}
+  m_Intensity: 0
+  m_Range: 10
+  m_SpotAngle: 30
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_Strength: 1
+    m_Bias: .0500000007
+    m_Softness: 4
+    m_SoftnessFade: 1
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_ActuallyLightmapped: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 1
+  m_ShadowSamples: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+  m_IndirectIntensity: 1
+  m_AreaSize: {x: 1, y: 1}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2441,7 +2513,8 @@ MonoBehaviour:
   isDead: 0
   meleeDamage: 10
   equippedWeapon: {fileID: 11400010}
-  holsteredWeapons: []
+  holsteredWeapons:
+  - {fileID: 11400000, guid: 6a7152cea42a0e3428c1d55850486ea1, type: 2}
   leftHand: {fileID: 400012}
   rightHand: {fileID: 400068}
   lookatTarget: {fileID: 0}
@@ -2861,6 +2934,10 @@ MonoBehaviour:
   crouchChangeSpeed: 4
   zeroFriction: {fileID: 13400000, guid: 40ffd4c9381f6d744b11b1f58839cd99, type: 2}
   fullFriction: {fileID: 13400000, guid: 505fe72ad171fa24d96bc176a4bebe01, type: 2}
+  ignorePlayer:
+    serializedVersion: 2
+    m_Bits: 4294966267
+  targetPoint: {x: 0, y: 0, z: 0}
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3068,6 +3145,12 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
+  ammoInClip: 10
+  extraAmmo: 15
+  maxAmmo: 25
+  clipSize: 10
+  ammoPerShot: 1
+  damage: 35
   ignorePlayer:
     serializedVersion: 2
     m_Bits: 4294966267
@@ -3081,12 +3164,6 @@ MonoBehaviour:
   shootingSound: {fileID: 8300000, guid: 0af3d513283ae634480aa98a0d2da839, type: 3}
   emptySound: {fileID: 8300000, guid: 3b7a828a646174088aa48ee1db9c439c, type: 3}
   reloadSound: {fileID: 8300000, guid: cc98b8ccdf9a248059887d064e7e5067, type: 3}
-  ammoInClip: 10
-  extraAmmo: 15
-  maxAmmo: 25
-  clipSize: 10
-  ammoPerShot: 1
-  damage: 35
   muzzleVelocity: 100
   durability: 100
   weight: 5
