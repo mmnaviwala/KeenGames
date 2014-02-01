@@ -151,4 +151,18 @@ public class LightTrigger : MonoBehaviour
 		for(int i = 0; i < lights.Length; i++)
 			lights[i].enabled = onOff;
 	}
+
+	void OnDrawGizmos () {
+		if (transform.parent) {
+			Gizmos.color = new Color (0.5f, 0.7f, 0.4f, 0.15f);
+			Gizmos.DrawCube (collider.bounds.center, collider.bounds.size );
+		}
+	}
+	
+	void OnDrawGizmosSelected () {
+		if (transform.parent) {
+			Gizmos.color = new Color (0.5f, 0.7f, .4f, 0.5f);
+			Gizmos.DrawCube (collider.bounds.center, collider.bounds.size );
+		}
+	}
 }

@@ -80,18 +80,18 @@ AudioSource:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_audioClip: {fileID: 8300000, guid: c4d8928c75c21af43998193f0f038429, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: .449999988
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 3
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -100,13 +100,48 @@ AudioSource:
     m_Curve:
     - time: 0
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: -166.733322
+      outSlope: -166.733322
+      tangentMode: 0
+    - time: .00386991911
+      value: .5
+      inSlope: -41.6833305
+      outSlope: -41.6833305
+      tangentMode: 0
+    - time: .0240000002
+      value: .25
+      inSlope: -10.4208326
+      outSlope: -10.4208326
+      tangentMode: 0
+    - time: .0480000004
+      value: .125
+      inSlope: -2.60520816
+      outSlope: -2.60520816
+      tangentMode: 0
+    - time: .0960000008
+      value: .0625
+      inSlope: -.65130204
+      outSlope: -.65130204
+      tangentMode: 0
+    - time: .192000002
+      value: .03125
+      inSlope: -.16282551
+      outSlope: -.16282551
+      tangentMode: 0
+    - time: .384000003
+      value: .015625
+      inSlope: -.0407063775
+      outSlope: -.0407063775
+      tangentMode: 0
+    - time: .768000007
+      value: .0078125
+      inSlope: -.0101765944
+      outSlope: -.0101765944
       tangentMode: 0
     - time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
+      value: .00600000005
+      inSlope: -.00600239541
+      outSlope: -.00600239541
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -219,9 +254,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e144f406499039448a33f2556f8fa94b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundClip: {fileID: 0}
+  soundClip: {fileID: 8300000, guid: c83d290580d9743409e4185fd2e1c647, type: 3}
   useTrigger: 1
   triggerArea: {fileID: 0}
+  minVolume: 0
+  maxVolume: .449999988
+  soundFadeSpeed: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
