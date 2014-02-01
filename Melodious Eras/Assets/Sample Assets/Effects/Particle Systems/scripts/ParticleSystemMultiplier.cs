@@ -7,9 +7,11 @@ public class ParticleSystemMultiplier : MonoBehaviour {
 
 	public float multiplier = 1;
 
-	void Start()
+	public void Detonate()
 	{
+		Debug.Log("multiplier");
 		var systems = GetComponentsInChildren<ParticleSystem>();
+		this.audio.Play();
 		foreach (ParticleSystem system in systems) {
 			system.startSize *= multiplier;
 			system.startSpeed *= multiplier;

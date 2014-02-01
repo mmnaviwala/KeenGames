@@ -8,6 +8,11 @@ public class Weapon : Item
     protected Sound sound;
     public string weaponName;
     public GUIStyle hudStyle;
+
+	
+	public int ammoInClip, extraAmmo, maxAmmo, clipSize, ammoPerShot,
+	damage;
+
     void Start()
     {
     }

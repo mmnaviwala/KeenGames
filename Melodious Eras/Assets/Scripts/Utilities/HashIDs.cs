@@ -5,7 +5,7 @@ using System.Collections;
 public static class HashIDs {
 
 	public static int 	dying_state, 
-					  	dead_bool, 
+				  		dead_bool, 
 						locomotion_state, 
 						speed_float, 
 						sneaking_bool, 
@@ -20,7 +20,7 @@ public static class HashIDs {
     public static void Initialize()
     {
 		dying_state = Animator.StringToHash("Player Animator.Dying");
-		dead_bool = Animator.StringToHash("Dead");
+		dead_bool = Animator.StringToHash("Player Animator.Dead");
 		locomotion_state = Animator.StringToHash("Player Animator.Locomotion");
 		speed_float = Animator.StringToHash("Speed");
 		sneaking_bool = Animator.StringToHash("Sneaking");

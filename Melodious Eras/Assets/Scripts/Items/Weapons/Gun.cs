@@ -14,9 +14,8 @@ public class Gun : Weapon
     public bool infiniteAmmo;
 
     public AudioClip shootingSound, emptySound, reloadSound;
+	public float muzzleVelocity;
 
-    public int ammoInClip, extraAmmo, maxAmmo, clipSize, ammoPerShot,
-               damage, muzzleVelocity;
     public int durability, weight;
     public float fireRate, //Time between shots.
                  accuracy, //0 = perfect accuracy for now.

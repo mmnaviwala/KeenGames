@@ -101,7 +101,7 @@ public class PlayerMovementBasic : MonoBehaviour
         if (Input.GetButton(InputType.AIM))
         {
             //Semi-auto
-            if (Input.GetButtonDown(InputType.SHOOT) && stats.equippedWeapon is Gun /*&& (weapon is MeleeWeapon || weapon is SemiAuto)*/)
+            if (Input.GetButtonDown(InputType.SHOOT) && stats.equippedWeapon != null /*&& (weapon is MeleeWeapon || weapon is SemiAuto)*/)
             {
                 stats.equippedWeapon.Fire();
             }

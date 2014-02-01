@@ -6,11 +6,12 @@ public class ExplosionPhysicsForce : MonoBehaviour {
 
 	public float explosionForce = 4;
 
-	IEnumerator Start()
+	public void Detonate()
 	{
+		Debug.Log ("explosion " + explosionForce);
 		// wait one frame because some explosions instantiate debris which should then
 		// be pushed by physics force
-		yield return null;
+		//yield return null;
 
 		float multiplier = GetComponent<ParticleSystemMultiplier>().multiplier;
 
@@ -26,7 +27,11 @@ public class ExplosionPhysicsForce : MonoBehaviour {
 		}
 		foreach (var rb in rigidbodies)
 		{
-			rb.AddExplosionForce( explosionForce*multiplier, transform.position, r, 1*multiplier, ForceMode.Impulse );
+			//avoiding forces on enemies, since it causes weird navmesh issues
+			if(!(rb.tag == Tags.ENEMY || rb.tag == Tags.PLAYER))
+				rb.AddExplosionForce( explosionForce*multiplier, transform.position, r, 1*multiplier, ForceMode.Impulse );
+
+
 			CharacterStats character = rb.GetComponent<CharacterStats>();
 			if(character != null)
 			{
