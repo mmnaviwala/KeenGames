@@ -1,14 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum WeaponClass {SmallArms, LargeArms, Melee, Thrown};
 [AddComponentMenu("Scripts/Items/Weapons/Weapon")]
 public class Weapon : Item
 {
+	public Vector3 wieldPosition;
+	public Vector3 wieldRotation;
+
     protected SphereCollider soundSphere;
     protected Sound sound;
     public string weaponName;
     public GUIStyle hudStyle;
-
+	public WeaponClass _class;
 	
 	public int ammoInClip, extraAmmo, maxAmmo, clipSize, ammoPerShot,
 	damage;
@@ -58,6 +62,13 @@ public class Weapon : Item
     {
         
     }
+
+	public virtual void Equip(Transform rightHand)
+	{
+		this.transform.parent = rightHand;
+		this.transform.localPosition = wieldPosition;
+		this.transform.localEulerAngles = wieldRotation;
+	}
 
     /// <summary>
     /// String used in HUD.

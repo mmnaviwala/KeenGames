@@ -15,8 +15,6 @@ public class PlayerMovementBasic : MonoBehaviour
     public bool isAiming = false;
 	public bool isWalking = false;
 	public bool isCrouching = false;
-	public float crouchHeightFactor = 0.6f;
-	public float crouchChangeSpeed = 4;
 	public PhysicMaterial zeroFriction, 
 						  fullFriction;
 	public LayerMask ignorePlayer;
@@ -55,7 +53,7 @@ public class PlayerMovementBasic : MonoBehaviour
     void Start()
     {
 		diveTime = new WaitForSeconds(2.233f);
-		vaultTime = new WaitForSeconds(2.067f);
+		vaultTime = new WaitForSeconds(1.4f);
 		climbTime = new WaitForSeconds(3f);
 
         mainCam = Camera.main.GetComponent<CameraMovement3D>();
@@ -268,9 +266,9 @@ public class PlayerMovementBasic : MonoBehaviour
             anim.applyRootMotion = true;
         }
         float impactVelocity = Vector3.Magnitude(collision.relativeVelocity);
-        if (impactVelocity > 20)
+        if (impactVelocity > 12.5f)
         {
-            stats.health -= 5 * (int)(impactVelocity - 20);
+            stats.health -= 5 * (int)(impactVelocity - 12.5f);
             anim.applyRootMotion = true;
             //emit noise
         }
@@ -299,17 +297,19 @@ public class PlayerMovementBasic : MonoBehaviour
 
 
 			//Determining action
-			Ray low = new Ray(this.transform.position + Vector3.up * .25f, this.transform.forward);
-			Debug.DrawLine(low.origin, low.origin + low.direction, Color.red);
+			Ray low = new Ray(this.transform.position + Vector3.up * .75f, this.transform.forward);
 			Ray high = new Ray(this.transform.position + Vector3.up * 1.5f, this.transform.forward);
-			Debug.DrawLine(high.origin, high.origin + high.direction, Color.red);
 			RaycastHit hitLow, hitHigh;
 
+			float raycastDistance = Mathf.Max(1f, anim.GetFloat(HashIDs.speed_float));
+			Debug.DrawLine(low.origin, low.origin + low.direction * raycastDistance, Color.red);
+			Debug.DrawLine(high.origin, high.origin + high.direction * raycastDistance, Color.red);
+
 			//if low hit and high miss
-			if(Physics.Raycast (high, out hitHigh, 1f))
+			if(Physics.Raycast (high, out hitHigh, raycastDistance))
 			{
 				Ray climbHeight = new Ray(this.transform.position + Vector3.up * 2.5f, this.transform.forward);
-				if(!Physics.Raycast(climbHeight, 1f))
+				if(!Physics.Raycast(climbHeight, raycastDistance))
 				{
 					//climb wall
 					//need to match hand placement with top of wall
@@ -319,7 +319,7 @@ public class PlayerMovementBasic : MonoBehaviour
 					anim.SetBool(HashIDs.onGround_bool, true);
 				}
 			}
-			else if(Physics.Raycast(low, out hitLow, 1f))
+			else if(Physics.Raycast(low, out hitLow, raycastDistance))
 			{
 				//vault
 				anim.SetBool(HashIDs.vault_bool, true);
@@ -367,4 +367,20 @@ public class PlayerMovementBasic : MonoBehaviour
     {
         return Physics.Raycast(this.transform.position, Vector3.down, 0.25f);
     }
+
+	void ProcessMatchTarget()
+	{
+		AnimatorStateInfo info = this.anim.GetCurrentAnimatorStateInfo(0);
+//		if(info.IsName(HashIDs.vault_bool))
+//		{			
+//			if(MatchTarget) 
+//			{
+//				m_Animator.MatchTarget(m_Target,new Quaternion(),AvatarTarget.LeftHand,new MatchTargetWeightMask(Vector3.one,0),m_VaultMatchTargetStart,m_VaultMatchTargetStop); // start and stop time 
+//			}
+//		}
+//		else if(info.IsName(HashIDs)) // always do match targeting.
+//		{
+//			m_Animator.MatchTarget(m_Target,new Quaternion(),AvatarTarget.Root,new MatchTargetWeightMask(new Vector3(1,0,1),0),m_SlideMatchTargetStart,m_SlideMatchTargetStop);				
+//		}
+	}
 }

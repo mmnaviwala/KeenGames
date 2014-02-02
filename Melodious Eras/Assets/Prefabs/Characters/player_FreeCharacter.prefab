@@ -2402,7 +2402,7 @@ Light:
   m_Type: 0
   m_Color: {r: .882352948, g: 1, b: 1, a: 1}
   m_Intensity: 5
-  m_Range: 10
+  m_Range: 15
   m_SpotAngle: 45
   m_CookieSize: 10
   m_Shadows:
@@ -2513,8 +2513,10 @@ MonoBehaviour:
   isDead: 0
   meleeDamage: 10
   equippedWeapon: {fileID: 11400010}
-  holsteredWeapons:
-  - {fileID: 11400000, guid: 6a7152cea42a0e3428c1d55850486ea1, type: 2}
+  sidearm: {fileID: 0}
+  largeWeapon: {fileID: 0}
+  thrown: {fileID: 0}
+  explosive: {fileID: 0}
   leftHand: {fileID: 400012}
   rightHand: {fileID: 400068}
   lookatTarget: {fileID: 0}
@@ -2930,14 +2932,25 @@ MonoBehaviour:
   isAiming: 0
   isWalking: 0
   isCrouching: 0
-  crouchHeightFactor: .600000024
-  crouchChangeSpeed: 4
   zeroFriction: {fileID: 13400000, guid: 40ffd4c9381f6d744b11b1f58839cd99, type: 2}
   fullFriction: {fileID: 13400000, guid: 505fe72ad171fa24d96bc176a4bebe01, type: 2}
   ignorePlayer:
     serializedVersion: 2
     m_Bits: 4294966267
   targetPoint: {x: 0, y: 0, z: 0}
+  advancedSettings:
+    stationaryTurnSpeed: 180
+    movingTurnSpeed: 360
+    headLookResponseSpeed: 2
+    crouchHeightFactor: .600000024
+    crouchChangeSpeed: 4
+    autoTurnThresholdAngle: 100
+    autoTurnSpeed: 2
+    zeroFrictionMaterial: {fileID: 0}
+    highFrictionMaterial: {fileID: 0}
+    jumpRepeatDelayTime: .25
+    runCycleLegOffset: .200000003
+    groundStickyEffect: 5
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3085,6 +3098,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 1
+  wieldPosition: {x: 0, y: 0, z: 0}
+  wieldRotation: {x: 0, y: 0, z: 0}
   weaponName: Laser Pistol
   hudStyle:
     m_Name: 
@@ -3145,6 +3160,7 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
+  _class: 0
   ammoInClip: 10
   extraAmmo: 15
   maxAmmo: 25

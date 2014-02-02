@@ -11,6 +11,7 @@ public static class HashIDs
 	//booleans
 	public static int dead_bool;
 	public static int sneaking_bool;
+	public static int slide_bool;
 	public static int playerInSight_bool;
 	public static int aiming_bool;
 	public static int open_bool;
@@ -48,5 +49,6 @@ public static class HashIDs
 		climbUp_bool = Animator.StringToHash("ClimbUp");
 		climbDown_bool = Animator.StringToHash("ClimbDown");
 		climbeLedge_bool = Animator.StringToHash("ClimbLedge");
+		slide_bool = Animator.StringToHash("Slide");
     }
 }

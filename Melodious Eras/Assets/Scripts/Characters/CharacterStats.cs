@@ -12,7 +12,10 @@ public class CharacterStats : MonoBehaviour
     public int meleeDamage = 10; //damage modifier could be calculated by melee weapons
 
     public Weapon equippedWeapon;
-    public Weapon[] holsteredWeapons;
+	public Weapon sidearm;
+	public Weapon largeWeapon;
+	public Weapon thrown;
+	public Weapon explosive;
     public Transform leftHand, rightHand; //right hand holds gun; left hand could hold flashlight/energy shield/sword/secondary gun/etc
 	public Inventory inventory = new Inventory(15);
 	public Inventory tempInventory = new Inventory(); //for level-specific items like keys
@@ -54,6 +57,15 @@ public class CharacterStats : MonoBehaviour
     }
 
 	public virtual void PickUp(Item item)
+	{
+
+	}
+
+	public virtual void SwitchWeapon(WeaponClass slot)
+	{
+
+	}
+	public virtual void HolsterWeapon()
 	{
 
 	}

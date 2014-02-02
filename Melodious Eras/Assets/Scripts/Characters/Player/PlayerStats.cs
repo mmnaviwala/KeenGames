@@ -48,7 +48,6 @@ public class PlayerStats : CharacterStats
 		//equippedWeapon = rightHand.GetComponent<Weapon>();
         //equippedWeapon.player = this;
 
-        holsteredWeapons = new Weapon[3];
         _closeQuarterEnemies.charactersInRange = new List<CharacterStats>();
         lastAttack = Time.time;
     }
@@ -153,5 +152,4 @@ public class PlayerStats : CharacterStats
             anim.SetBool(HashIDs.dead_bool, isDead);
         }
     }
-
 }
