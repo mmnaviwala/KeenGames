@@ -42,9 +42,12 @@ public class CameraMovement3D : CameraMovement
 	void Start () 
     {
         player = GameObject.FindGameObjectWithTag(Tags.PLAYER).transform;
+		Debug.Log("Hello " + (player == null));
 		playerStats = player.GetComponent<PlayerStats>();
+		Debug.Log("Player stats null: " + (playerStats == null));
 		playerAnim = player.GetComponent<Animator>();
-		flashlight = player.GetComponent<PlayerStats>().flashlight.transform;
+		flashlight = playerStats.flashlight.transform;
+		Debug.Log("flashlight null " + (flashlight == null));
 
         camTargetPos = new GameObject();
         camTargetPos.transform.position = player.transform.position;
@@ -52,8 +55,8 @@ public class CameraMovement3D : CameraMovement
         SetOffset(CameraOffset.Default);
 		if(go == null)
 		{
-        	go = new GameObject();
-        	go.name = "camTarget";
+			go = new GameObject();
+			go.name = "camTarget";
 		}
         go.transform.position = player.position + new Vector3(0, activeOffset.y, 0);
         go.transform.rotation = player.rotation;

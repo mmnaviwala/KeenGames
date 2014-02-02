@@ -2,20 +2,31 @@
 using System.Collections;
 
 [AddComponentMenu("Scripts/Utilities/Hash IDs")]
-public static class HashIDs {
+public static class HashIDs 
+{
+	//states
+	public static int dying_state;
+	public static int locomotion_state;
 
-	public static int 	dying_state, 
-				  		dead_bool, 
-						locomotion_state, 
-						speed_float, 
-						sneaking_bool, 
-               			playerInSight_bool, 
-						aiming_bool, 
-						aimWeight_float, 
-						angularSpeed_float, 
-						open_bool,
-						jump_float,
-						jumpLeg_float;
+	//booleans
+	public static int dead_bool;
+	public static int sneaking_bool;
+	public static int playerInSight_bool;
+	public static int aiming_bool;
+	public static int open_bool;
+	public static int onGround_bool;
+	public static int vault_bool;
+	public static int dive_bool;
+	public static int climbUp_bool;
+	public static int climbDown_bool;
+	public static int climbeLedge_bool;
+
+	//floats
+	public static int speed_float;
+	public static int aimWeight_float;
+	public static int angularSpeed_float;
+	public static int jump_float;
+	public static int jumpLeg_float;
 
     public static void Initialize()
     {
@@ -31,5 +42,11 @@ public static class HashIDs {
 		open_bool = Animator.StringToHash("Open");
 		jump_float = Animator.StringToHash("Jump");
 		jumpLeg_float = Animator.StringToHash("JumpLeg");
+		onGround_bool = Animator.StringToHash("OnGround");
+		vault_bool = Animator.StringToHash("Vault");
+		dive_bool = Animator.StringToHash("Dive");
+		climbUp_bool = Animator.StringToHash("ClimbUp");
+		climbDown_bool = Animator.StringToHash("ClimbDown");
+		climbeLedge_bool = Animator.StringToHash("ClimbLedge");
     }
 }

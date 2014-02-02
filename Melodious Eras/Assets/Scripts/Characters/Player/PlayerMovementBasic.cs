@@ -28,14 +28,41 @@ public class PlayerMovementBasic : MonoBehaviour
     private PlayerStats stats;
     private HUD_Stealth hud;
     private Animator anim;
+	private CapsuleCollider capsule;
 
+	private YieldInstruction diveTime, vaultTime, climbTime, slideTime;
+	
+	[SerializeField] AdvancedSettings advancedSettings;                 // Container for the advanced settings class , thiss allows the advanced settings to be in a foldout in the inspector
+	
+	
+	[System.Serializable]
+	public class AdvancedSettings
+	{
+		public float stationaryTurnSpeed = 180;				// additional turn speed added when the player is stationary (added to animation root rotation)
+		public float movingTurnSpeed = 360;					// additional turn speed added when the player is moving (added to animation root rotation)
+		public float headLookResponseSpeed = 2;				// speed at which head look follows its target
+		public float crouchHeightFactor = 0.6f; 			// collider height is multiplied by this when crouching
+		public float crouchChangeSpeed = 4;					// speed at which capsule changes height when crouching/standing
+		public float autoTurnThresholdAngle = 100;			// character auto turns towards camera direction if facing away by more than this angle
+		public float autoTurnSpeed = 2;						// speed at which character auto-turns towards cam direction
+		public PhysicMaterial zeroFrictionMaterial;			// used when in motion to enable smooth movement
+		public PhysicMaterial highFrictionMaterial;			// used when stationary to avoid sliding down slopes
+		public float jumpRepeatDelayTime = 0.25f;			// amount of time that must elapse between landing and being able to jump again
+		public float runCycleLegOffset = 0.2f;				// animation cycle offset (0-1) used for determining correct leg to jump off
+		public float groundStickyEffect = 5f;				// power of 'stick to ground' effect - prevents bumping down slopes.
+	}
 
     void Start()
     {
+		diveTime = new WaitForSeconds(2.233f);
+		vaultTime = new WaitForSeconds(2.067f);
+		climbTime = new WaitForSeconds(3f);
+
         mainCam = Camera.main.GetComponent<CameraMovement3D>();
         stats = this.GetComponent<PlayerStats>();
         anim = this.GetComponent<Animator>();
         hud = this.GetComponent<HUD_Stealth>();
+		capsule = this.GetComponent<CapsuleCollider>();
 
         anim.SetFloat(HashIDs.speed_float, 0f);
 		anim.SetBool(HashIDs.aiming_bool, isShooting);
@@ -70,7 +97,7 @@ public class PlayerMovementBasic : MonoBehaviour
 			}
 			if (Input.GetButtonDown(InputType.JUMP))
 			{
-				this.Jump();
+				this.StartCoroutine(Jump());
 			}
 			CombatInputs();
 		}
@@ -190,6 +217,12 @@ public class PlayerMovementBasic : MonoBehaviour
         speed *= ((direction.magnitude < 1) ? direction.magnitude : 1);
         this.anim.SetFloat(HashIDs.speed_float, speed);
 
+		float runCycle = Mathf.Repeat (anim.GetCurrentAnimatorStateInfo (0).normalizedTime + advancedSettings.runCycleLegOffset, 1);
+		float jumpLeg = (runCycle < .5f ? 1 : -1) /** forwardAmount*/;
+		if (!jumping) {
+			anim.SetFloat ("JumpLeg", jumpLeg);
+		}
+
 		if(speed > 4 && !isCrouching)
 		{
 			if(!this.audio.isPlaying)
@@ -245,8 +278,6 @@ public class PlayerMovementBasic : MonoBehaviour
         {
             Debug.Log("collision has no rigidbody: " + collision.transform.name);
         }
-
-        anim.SetBool("IsGrinding", collision.collider.tag == Tags.SLIDE);
     }
 
     void OnCollisionExit(Collision collision)
@@ -255,20 +286,55 @@ public class PlayerMovementBasic : MonoBehaviour
             anim.SetBool("IsGrinding", false);
     }
 
-    public void Jump()
+    public IEnumerator Jump()
     {
-        if (!jumping)
+        if (!jumping || anim.GetBool(HashIDs.onGround_bool))
         {
 			//if no obstacles in front of player
-            this.rigidbody.AddForce(Vector3.up * jumpForce);
+            //this.rigidbody.AddForce(Vector3.up * jumpForce);
             jumping = true;
-            anim.SetBool("IsGrinding", false);
-			//anim.SetBool("Jumping", true);
-            anim.applyRootMotion = false;
-			//if low obstacle (vault)
-			//...
-			//if high obstacle (climb wall)
-			//...
+
+			//anim.SetBool(HashIDs.onGround_bool, false);
+            //anim.applyRootMotion = false;
+
+
+			//Determining action
+			Ray low = new Ray(this.transform.position + Vector3.up * .25f, this.transform.forward);
+			Debug.DrawLine(low.origin, low.origin + low.direction, Color.red);
+			Ray high = new Ray(this.transform.position + Vector3.up * 1.5f, this.transform.forward);
+			Debug.DrawLine(high.origin, high.origin + high.direction, Color.red);
+			RaycastHit hitLow, hitHigh;
+
+			//if low hit and high miss
+			if(Physics.Raycast (high, out hitHigh, 1f))
+			{
+				Ray climbHeight = new Ray(this.transform.position + Vector3.up * 2.5f, this.transform.forward);
+				if(!Physics.Raycast(climbHeight, 1f))
+				{
+					//climb wall
+					//need to match hand placement with top of wall
+					anim.SetBool(HashIDs.climbeLedge_bool, true);
+					yield return climbTime;
+					anim.SetBool(HashIDs.climbeLedge_bool, false);
+					anim.SetBool(HashIDs.onGround_bool, true);
+				}
+			}
+			else if(Physics.Raycast(low, out hitLow, 1f))
+			{
+				//vault
+				anim.SetBool(HashIDs.vault_bool, true);
+				yield return vaultTime;
+				anim.SetBool(HashIDs.vault_bool, false);
+				anim.SetBool(HashIDs.onGround_bool, true);
+			}
+			else
+			{
+				//either jump or dive
+				anim.SetBool(HashIDs.dive_bool, true);
+				yield return diveTime;
+				anim.SetBool(HashIDs.dive_bool, false);
+				anim.SetBool(HashIDs.onGround_bool, true);
+			}
         }
     }
     public void Jump(float force)

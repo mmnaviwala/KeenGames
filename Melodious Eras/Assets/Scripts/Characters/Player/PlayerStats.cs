@@ -55,8 +55,8 @@ public class PlayerStats : CharacterStats
     void Start()
     {
         hud = this.GetComponent<HUD_Stealth>();
+		anim = this.GetComponent<Animator>();
         mainCam = Camera.main.GetComponent<CameraMovement3D>();
-        Debug.Log(Physics.gravity);
     }
 
     void Update()

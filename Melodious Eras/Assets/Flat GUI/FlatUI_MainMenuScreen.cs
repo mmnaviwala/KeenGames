@@ -12,7 +12,7 @@ public class FlatUI_MainMenuScreen : MonoBehaviour {
 		GUI.DrawTexture(new Rect(0,0,Screen.width,Screen.height), cainExtendedText);
 		// left, top, width,height
 		if (GUI.Button(new Rect(Screen.width/2.5f, Screen.height/1.4f, Screen.width/4, Screen.height/9), startGameText))
-			Application.LoadLevel("sewer2");
+			Application.LoadLevel(Application.loadedLevel + 1);
 	}
 
 }

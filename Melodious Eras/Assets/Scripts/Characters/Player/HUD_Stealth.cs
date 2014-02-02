@@ -62,7 +62,7 @@ public class HUD_Stealth : MonoBehaviour
         GUI.Box(armorBarMax, suit.armor.ToString(), armorMaxStyle);
         GUI.Label(weaponRect, weapon.HudString(), weapon.hudStyle);
 
-        GUI.Label(temp, XMLUtilities.currentDirectory);
+        //GUI.Label(temp, XMLUtilities.currentDirectory);
 
         GUI.color = new Color(1, 1, 1, .25f);
         GUI.Box(healthBarCurrent, "", healthCurrentStyle);

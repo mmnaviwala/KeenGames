@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Laminated wood Mat 2
-  m_Shader: {fileID: 4800000, guid: 91083837e9bad4a5f8211c02db74526e, type: 3}
+  m_Shader: {fileID: 4, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -18,14 +18,14 @@ Material:
           name: _MainTex
         second:
           m_Texture: {fileID: 2800000, guid: 72926028ea26040c0bd0c1963f3e7151, type: 3}
-          m_Scale: {x: 5, y: 5}
+          m_Scale: {x: 10, y: 10}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _BumpMap
         second:
           m_Texture: {fileID: 2800000, guid: b60eb740248ead045bf8e99d6d2c6964, type: 3}
-          m_Scale: {x: 3, y: 3}
+          m_Scale: {x: 10, y: 10}
           m_Offset: {x: 0, y: 0}
       data:
         first:
@@ -59,12 +59,12 @@ Material:
       data:
         first:
           name: _Shininess
-        second: 1
+        second: .413204849
     m_Colors:
       data:
         first:
           name: _Color
-        second: {r: 1, g: 1, b: 1, a: 1}
+        second: {r: .83088237, g: .83088237, b: .83088237, a: 1}
       data:
         first:
           name: _SpecColor
