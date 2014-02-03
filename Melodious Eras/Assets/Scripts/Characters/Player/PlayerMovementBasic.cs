@@ -399,7 +399,4 @@ public class PlayerMovementBasic : MonoBehaviour
 			capsule.center = Vector3.MoveTowards (capsule.center, Vector3.up * originalHeight * .5f, Time.deltaTime * 2);
 		}
 	}
-	void PreventStandingInLowHeadroom ()
-	{
-	}	
 }

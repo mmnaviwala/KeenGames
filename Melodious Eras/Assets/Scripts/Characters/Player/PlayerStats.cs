@@ -28,10 +28,11 @@ public class PlayerStats : CharacterStats
     private bool inMeleeRange = false;
     private bool attacking;
     private float meleeHeldDown = 0;
-
+	public List<Light> affectingLights;
 
     void Awake()
     {
+		affectingLights = new List<Light>();
         //flashlight = this.transform.GetChild(1).GetChild(0).GetChild(0).GetChild(2).GetChild(1).GetComponent<Flashlight>();
         //rightHand =  this.transform.GetChild(1).GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(0);
         if(equippedWeapon == null)
@@ -107,24 +108,6 @@ public class PlayerStats : CharacterStats
         }
     }
 
-//    void OnTriggerEnter(Collider other)
-//    {
-//        if (!other.isTrigger && other.tag == Tags.ENEMY)
-//        {
-//            closeQuarterEnemies.Add(other.GetComponent<EnemyStats>());
-//            Debug.Log("Close-Quarter Enemies: " + closeQuarterEnemies.Count);
-//        }
-//    }
-//
-//    void OnTriggerExit(Collider other)
-//    {
-//        if (!other.isTrigger && other.tag == Tags.ENEMY)
-//        {
-//            closeQuarterEnemies.Remove(other.GetComponent<EnemyStats>());
-//            Debug.Log("Close-Quarter Enemies: " + closeQuarterEnemies.Count);
-//        }
-//    }
-
     /// <summary>
     /// Instantly kills the target if attacking from behind.
     /// </summary>
@@ -152,4 +135,21 @@ public class PlayerStats : CharacterStats
             anim.SetBool(HashIDs.dead_bool, isDead);
         }
     }
+
+	public float VisibilityMultiplier()
+	{
+		if(affectingLights.Count > 0)
+		{
+			foreach(Light _light in affectingLights)
+			{
+				float relativeDistance = Vector3.Distance(_light.transform.position, this.transform.position);
+				if(_light.intensity * relativeDistance * relativeDistance > .5f)
+					return 1;
+			}
+			//calculate lighting visibility
+			return 1;
+		}
+		else
+			return 0; //complete darkness = invisible
+	}
 }

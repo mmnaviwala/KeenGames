@@ -6,13 +6,11 @@ using System.Collections.Generic;
 public class NPCGroup : MonoBehaviour 
 {
     public List<EnemyAI> NPCs;
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	public void AlertGroup(Vector3 sightingCoords)
+	{
+		NPCs.ForEach(delegate(EnemyAI member) {
+			member.lastPlayerSighting = sightingCoords;
+		});
 	}
 }

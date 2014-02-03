@@ -1172,7 +1172,7 @@ GameObject:
   - 4: {fileID: 400152}
   - 135: {fileID: 13500002}
   - 114: {fileID: 11400016}
-  m_Layer: 10
+  m_Layer: 2
   m_Name: Melee Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1189,7 +1189,7 @@ GameObject:
   - 4: {fileID: 400154}
   - 135: {fileID: 13500004}
   - 114: {fileID: 11400018}
-  m_Layer: 10
+  m_Layer: 2
   m_Name: Sound Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1524,7 +1524,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100050}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
-  m_LocalPosition: {x: -1.68897676, y: .5, z: 0}
+  m_LocalPosition: {x: -23.8331642, y: .5, z: 2.57264605e-06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400042}
@@ -2068,8 +2068,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100142}
-  m_LocalRotation: {x: -.838650525, y: .184344351, z: .129108891, w: -.495997459}
-  m_LocalPosition: {x: -.117844626, y: .0538026579, z: .0100386422}
+  m_LocalRotation: {x: -.842137277, y: .192371383, z: .134404495, w: -.485523939}
+  m_LocalPosition: {x: -.119999997, y: .0500000007, z: .00999999978}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 400082}
@@ -2942,7 +2942,7 @@ MonoBehaviour:
     stationaryTurnSpeed: 180
     movingTurnSpeed: 360
     headLookResponseSpeed: 2
-    crouchHeightFactor: .600000024
+    crouchHeightFactor: .5
     crouchChangeSpeed: 4
     autoTurnThresholdAngle: 100
     autoTurnSpeed: 2

@@ -1127,6 +1127,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &100148
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400148}
+  - 114: {fileID: 11400010}
+  - 135: {fileID: 13500002}
+  m_Layer: 2
+  m_Name: NPC_fov
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -1591,7 +1608,8 @@ Transform:
   m_LocalRotation: {x: -1.40925154e-13, y: -1.22977539e-07, z: .0443392731, w: .999016523}
   m_LocalPosition: {x: -.0923222303, y: .00970512349, z: -3.73329367e-09}
   m_LocalScale: {x: 1, y: .99999994, z: .99999994}
-  m_Children: []
+  m_Children:
+  - {fileID: 400148}
   m_Father: {fileID: 400078}
 --- !u!4 &400078
 Transform:
@@ -1780,8 +1798,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100108}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.8170567, y: 5.07250023, z: -27.2740574}
+  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: -.707106829}
+  m_LocalPosition: {x: 2.49777603, y: .5, z: -.0608811378}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400106}
@@ -2014,6 +2032,17 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400120}
+--- !u!4 &400148
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100148}
+  m_LocalRotation: {x: .384098053, y: .607146502, z: .36852634, w: -.589940906}
+  m_LocalPosition: {x: -.155780748, y: .12799643, z: 2.57448107e-07}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400076}
 --- !u!23 &2300000
 Renderer:
   m_ObjectHideFlags: 1
@@ -2195,8 +2224,11 @@ MonoBehaviour:
   maxHealth: 100
   isDead: 0
   meleeDamage: 10
-  equippedWeapon: {fileID: 0}
-  holsteredWeapons: []
+  equippedWeapon: {fileID: 11400008}
+  sidearm: {fileID: 11400008}
+  largeWeapon: {fileID: 0}
+  thrown: {fileID: 0}
+  explosive: {fileID: 0}
   leftHand: {fileID: 0}
   rightHand: {fileID: 0}
   lookatTarget: {fileID: 0}
@@ -2215,6 +2247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   group: {fileID: 0}
+  eyes: {fileID: 400148}
   equippedWeapon: {fileID: 11400008}
   currentEnemy: {fileID: 0}
   hearingMultiplier: 1
@@ -2228,6 +2261,12 @@ MonoBehaviour:
   patrolWaypoints: []
   seesPlayer: 0
   awareOfPlayer: 0
+  sightLayer:
+    serializedVersion: 2
+    m_Bits: 4294967289
+  sightDistance: 20
+  lastPlayerSighting: {x: 0, y: 0, z: 0}
+  enemiesInRange: []
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2263,6 +2302,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 1
+  wieldPosition: {x: 0, y: 0, z: 0}
+  wieldRotation: {x: 0, y: 0, z: 0}
   weaponName: Laser Pistol
   hudStyle:
     m_Name: 
@@ -2323,6 +2364,13 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
+  _class: 0
+  ammoInClip: 10
+  extraAmmo: 15
+  maxAmmo: 25
+  clipSize: 10
+  ammoPerShot: 1
+  damage: 35
   ignorePlayer:
     serializedVersion: 2
     m_Bits: 4294966267
@@ -2336,12 +2384,6 @@ MonoBehaviour:
   shootingSound: {fileID: 8300000, guid: 0af3d513283ae634480aa98a0d2da839, type: 3}
   emptySound: {fileID: 8300000, guid: 3b7a828a646174088aa48ee1db9c439c, type: 3}
   reloadSound: {fileID: 8300000, guid: cc98b8ccdf9a248059887d064e7e5067, type: 3}
-  ammoInClip: 10
-  extraAmmo: 15
-  maxAmmo: 25
-  clipSize: 10
-  ammoPerShot: 1
-  damage: 35
   muzzleVelocity: 100
   durability: 100
   weight: 5
@@ -2349,6 +2391,18 @@ MonoBehaviour:
   accuracy: 0
   range: 45
   npcRange: 15
+--- !u!114 &11400010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b69721bdad5e17f47928e057d9463648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charactersInRange: []
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -2394,6 +2448,18 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 9.99999975e-06
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &13500002
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100148}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 20
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &13600000
 CapsuleCollider:
