@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 400000}
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
-  - 95: {fileID: 9500000}
   - 114: {fileID: 11400000}
   - 65: {fileID: 6500000}
   m_Layer: 0
@@ -18,7 +17,7 @@ GameObject:
   m_TagString: Breakable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967292
   m_IsActive: 1
 --- !u!1 &100002
 GameObject:
@@ -34,7 +33,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967292
   m_IsActive: 1
 --- !u!4 &400000
 Transform:
@@ -100,20 +99,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.46559501, y: 2.33537197, z: 2.88529205}
   m_Center: {x: .0425925255, y: 0, z: -1.44264603}
---- !u!95 &9500000
-Animator:
-  serializedVersion: 2
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 36f691160234bb64088adf2976c2ff2a, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_ApplyRootMotion: 1
-  m_AnimatePhysics: 0
-  m_HasTransformHierarchy: 1
 --- !u!108 &10800000
 Light:
   m_ObjectHideFlags: 1

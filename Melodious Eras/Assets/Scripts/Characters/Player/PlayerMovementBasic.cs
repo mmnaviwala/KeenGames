@@ -29,6 +29,7 @@ public class PlayerMovementBasic : MonoBehaviour
 	private CapsuleCollider capsule;
 
 	private YieldInstruction diveTime, vaultTime, climbTime, slideTime;
+	private float originalHeight;
 	
 	[SerializeField] AdvancedSettings advancedSettings;                 // Container for the advanced settings class , thiss allows the advanced settings to be in a foldout in the inspector
 	
@@ -61,6 +62,7 @@ public class PlayerMovementBasic : MonoBehaviour
         anim = this.GetComponent<Animator>();
         hud = this.GetComponent<HUD_Stealth>();
 		capsule = this.GetComponent<CapsuleCollider>();
+		originalHeight = capsule.height;
 
         anim.SetFloat(HashIDs.speed_float, 0f);
 		anim.SetBool(HashIDs.aiming_bool, isShooting);
@@ -88,7 +90,19 @@ public class PlayerMovementBasic : MonoBehaviour
 		{
 			if (Input.GetButtonDown(InputType.CROUCH))
 			{
-				isCrouching = !isCrouching; //toggled instead of held
+				if(!isCrouching)
+				{
+					isCrouching = true;
+				}
+				else
+				{
+					// prevent standing up in crouch-only zones
+					Ray crouchRay = new Ray (rigidbody.position + Vector3.up * capsule.radius * .5f, Vector3.up);
+					float crouchRayLength = originalHeight - capsule.radius * .5f;
+					if (!Physics.SphereCast (crouchRay, capsule.radius * .5f, crouchRayLength)) 
+						isCrouching = false;
+				}
+				//isCrouching = !isCrouching; //toggled instead of held
 				mainCam.SetOffset(isCrouching ? CameraOffset.Crouch : CameraOffset.Default);
 				this.anim.SetBool(HashIDs.sneaking_bool, isCrouching);
 				//Perform crouch here
@@ -99,6 +113,7 @@ public class PlayerMovementBasic : MonoBehaviour
 			}
 			CombatInputs();
 		}
+		ScaleCapsuleForCrouching();
 	}
 	#region Inputs
     void CombatInputs()
@@ -154,32 +169,96 @@ public class PlayerMovementBasic : MonoBehaviour
         }
     }
 
+
+    void MovementInputs()
+    {
+
+        float h = Input.GetAxis(InputType.HORIZONTAL);  //A(neg), D(pos), Left joystick left(neg)/right(pos)
+        float v = Input.GetAxis(InputType.VERTICAL);    //S(neg), W(pos), Left joystick down(neg)/up(pos)
+        Vector2 direction = new Vector2(h, v);
+
+        MovementManager(direction);
+	}
+	
+	void MovementManager(Vector2 direction)
+	{
+		moving = !direction.Equals(Vector2.zero);
+		
+		//Determining speed
+		speed = (isWalking || isAiming) ? 2 : 5.657f;
+		speed *= ((direction.magnitude < 1) ? direction.magnitude : 1);
+		this.anim.SetFloat(HashIDs.speed_float, speed);
+		
+		float runCycle = Mathf.Repeat (anim.GetCurrentAnimatorStateInfo (0).normalizedTime + advancedSettings.runCycleLegOffset, 1);
+		float jumpLeg = (runCycle < .5f ? 1 : -1) /** forwardAmount*/;
+		if (!jumping) {
+			anim.SetFloat ("JumpLeg", jumpLeg);
+		}
+		
+		if(speed > 4 && !isCrouching)
+		{
+			if(!this.audio.isPlaying)
+				this.audio.Play();
+		}
+		else if(this.audio.isPlaying)
+			this.audio.Stop ();
+		
+		// Facing and running the desired direction
+		float angle = Vector2.Angle(Vector2.up, direction);
+		if (direction.x < 0)
+			angle = -angle;
+		
+		if (!isAiming && moving && !jumping)
+		{
+			this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, mainCam.transform.eulerAngles.y + angle, this.transform.eulerAngles.z);
+			this.anim.applyRootMotion = true;
+			
+			//this.transform.eulerAngles = Vector3.Slerp(this.transform.eulerAngles, 
+			//    new Vector3(this.transform.eulerAngles.x, mainCam.transform.eulerAngles.y + angle, this.transform.eulerAngles.z), 
+			//    1 * Time.deltaTime);
+		}
+		else if (isAiming)
+		{
+			this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, mainCam.transform.eulerAngles.y, this.transform.eulerAngles.z);
+			
+			this.anim.applyRootMotion = false;
+			this.rigidbody.velocity = (this.transform.right * direction.x + this.transform.forward * direction.y) * speed + new Vector3(0, this.rigidbody.velocity.y, 0);
+			
+			/*if (direction.x < 0)
+                mainCam.SetSideView(.6f);
+            else if(direction.x > 0)
+                mainCam.SetSideView(-.6f);*/
+		}
+	}
+	#endregion
+
+	#region animator IK
 	void OnAnimatorIK(int layerIndex)
 	{
 		if (!(mainCam.activeOffset.Equals(mainCam.climbUpOffset) || mainCam.activeOffset.Equals(mainCam.climbDownOffset)))
 			TurnPlayerHead();
-
-		if(this.isAiming)
+		
+		if(layerIndex == 1 && this.isAiming)
 		{
 
 			anim.SetIKPosition(AvatarIKGoal.RightHand, targetPoint);
 			anim.SetIKPositionWeight(AvatarIKGoal.RightHand, anim.GetFloat(HashIDs.aimWeight_float));
 		}
 	}
-
-    void TurnPlayerHead()
-    {
-        Ray ray = mainCam.camera.ViewportPointToRay(new Vector3(.5f, .5f, 0));
-        RaycastHit hit;
-
-
+	
+	void TurnPlayerHead()
+	{
+		Ray ray = mainCam.camera.ViewportPointToRay(new Vector3(.5f, .5f, 0));
+		RaycastHit hit;
+		
+		
 		anim.SetLookAtWeight(1, .25f, 2);
 		if(stats.lookatTarget != null)
 		{
 			//playerAnim.SetLookAtWeight(1, .5f, 1, 1, 1);
 			anim.SetLookAtPosition(stats.lookatTarget.position);
 		}
-        else 
+		else 
 		{			
 			//playerAnim.SetLookAtWeight(1, 1, 1, 1, 1);
 			if (Physics.Raycast(ray, out hit, 100, ignorePlayer) && hit.collider.tag != Tags.PLAYER && Vector3.Distance(hit.point, mainCam.transform.position) > 1)
@@ -192,70 +271,9 @@ public class PlayerMovementBasic : MonoBehaviour
 				targetPoint = mainCam.transform.position + mainCam.transform.forward * 100;
 				anim.SetLookAtPosition(targetPoint);
 			}
-        }
-    }
-
-    void MovementInputs()
-    {
-
-        float h = Input.GetAxis(InputType.HORIZONTAL);  //A(neg), D(pos), Left joystick left(neg)/right(pos)
-        float v = Input.GetAxis(InputType.VERTICAL);    //S(neg), W(pos), Left joystick down(neg)/up(pos)
-        Vector2 direction = new Vector2(h, v);
-
-        MovementManager(direction);
-    }
+		}
+	}
 	#endregion
-
-    void MovementManager(Vector2 direction)
-    {
-        moving = !direction.Equals(Vector2.zero);
-
-        //Determining speed
-        speed = (isWalking || isAiming) ? 2 : 5.657f;
-        speed *= ((direction.magnitude < 1) ? direction.magnitude : 1);
-        this.anim.SetFloat(HashIDs.speed_float, speed);
-
-		float runCycle = Mathf.Repeat (anim.GetCurrentAnimatorStateInfo (0).normalizedTime + advancedSettings.runCycleLegOffset, 1);
-		float jumpLeg = (runCycle < .5f ? 1 : -1) /** forwardAmount*/;
-		if (!jumping) {
-			anim.SetFloat ("JumpLeg", jumpLeg);
-		}
-
-		if(speed > 4 && !isCrouching)
-		{
-			if(!this.audio.isPlaying)
-				this.audio.Play();
-		}
-		else if(this.audio.isPlaying)
-			this.audio.Stop ();
-
-        // Facing and running the desired direction
-        float angle = Vector2.Angle(Vector2.up, direction);
-        if (direction.x < 0)
-            angle = -angle;
-
-        if (!isAiming && moving && !jumping)
-        {
-            this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, mainCam.transform.eulerAngles.y + angle, this.transform.eulerAngles.z);
-			this.anim.applyRootMotion = true;
-
-            //this.transform.eulerAngles = Vector3.Slerp(this.transform.eulerAngles, 
-            //    new Vector3(this.transform.eulerAngles.x, mainCam.transform.eulerAngles.y + angle, this.transform.eulerAngles.z), 
-            //    1 * Time.deltaTime);
-        }
-        else if (isAiming)
-        {
-            this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, mainCam.transform.eulerAngles.y, this.transform.eulerAngles.z);
-
-            this.anim.applyRootMotion = false;
-            this.rigidbody.velocity = (this.transform.right * direction.x + this.transform.forward * direction.y) * speed + new Vector3(0, this.rigidbody.velocity.y, 0);
-
-            /*if (direction.x < 0)
-                mainCam.SetSideView(.6f);
-            else if(direction.x > 0)
-                mainCam.SetSideView(-.6f);*/
-        }
-    }
 
     void OnCollisionEnter(Collision collision)
     {
@@ -308,6 +326,7 @@ public class PlayerMovementBasic : MonoBehaviour
 			//if low hit and high miss
 			if(Physics.Raycast (high, out hitHigh, raycastDistance))
 			{
+
 				Ray climbHeight = new Ray(this.transform.position + Vector3.up * 2.5f, this.transform.forward);
 				if(!Physics.Raycast(climbHeight, raycastDistance))
 				{
@@ -318,6 +337,8 @@ public class PlayerMovementBasic : MonoBehaviour
 					anim.SetBool(HashIDs.climbeLedge_bool, false);
 					anim.SetBool(HashIDs.onGround_bool, true);
 				}
+				else
+					jumping = false;
 			}
 			else if(Physics.Raycast(low, out hitLow, raycastDistance))
 			{
@@ -337,27 +358,6 @@ public class PlayerMovementBasic : MonoBehaviour
 			}
         }
     }
-    public void Jump(float force)
-    {
-        if (!jumping)
-        {
-            this.rigidbody.AddForce(Vector3.up * force);
-            jumping = true;
-            anim.SetBool("IsGrinding", false);
-            anim.applyRootMotion = false;
-        }
-    }
-
-	YieldInstruction waitp1 = new WaitForSeconds(.1f);
-    public IEnumerator Launch(float force)
-    {
-        anim.SetBool("IsGrinding", false);
-        this.rigidbody.AddForce(Vector3.up * force);
-
-        yield return waitp1; //Giving the player time to add more force to the jump
-        jumping = true;
-    }
-
 
     /// <summary>
     /// Determines if the transform is grounded (less than 0.25f off the ground) for smooth descents.
@@ -383,4 +383,23 @@ public class PlayerMovementBasic : MonoBehaviour
 //			m_Animator.MatchTarget(m_Target,new Quaternion(),AvatarTarget.Root,new MatchTargetWeightMask(new Vector3(1,0,1),0),m_SlideMatchTargetStart,m_SlideMatchTargetStop);				
 //		}
 	}
+	
+	void ScaleCapsuleForCrouching ()
+	{
+		// scale the capsule collider according to
+		// if crouching ...
+		if ( isCrouching && (capsule.height != originalHeight * advancedSettings.crouchHeightFactor)) {
+			capsule.height = Mathf.MoveTowards (capsule.height, originalHeight * advancedSettings.crouchHeightFactor, Time.deltaTime * 4);
+			capsule.center = Vector3.MoveTowards (capsule.center, Vector3.up * originalHeight * advancedSettings.crouchHeightFactor * .5f, Time.deltaTime * 2);
+		}
+		// ... everything else 
+		else
+		if (capsule.height != originalHeight && capsule.center != Vector3.up * originalHeight * .5f) {
+			capsule.height = Mathf.MoveTowards (capsule.height, originalHeight, Time.deltaTime * 4);
+			capsule.center = Vector3.MoveTowards (capsule.center, Vector3.up * originalHeight * .5f, Time.deltaTime * 2);
+		}
+	}
+	void PreventStandingInLowHeadroom ()
+	{
+	}	
 }
