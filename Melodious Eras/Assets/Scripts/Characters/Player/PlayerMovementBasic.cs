@@ -57,7 +57,7 @@ public class PlayerMovementBasic : MonoBehaviour
 
     void Start()
     {
-		diveTime = new WaitForSeconds(2.233f);
+		diveTime = new WaitForSeconds(1.367f);
 		vaultTime = new WaitForSeconds(1.4f);
 		climbTime = new WaitForSeconds(3f);
 		endOfFrame = new WaitForEndOfFrame();

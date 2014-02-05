@@ -27,6 +27,7 @@ public class EnemyAI : MonoBehaviour
 	public float sightDistance = 20;
 
     public Vector3 lastPlayerSighting;
+    private static Vector3 lpsResetPosition = new Vector3(999, 999, 999);
     private NavMeshAgent nav;
     private EnemyStats stats;
     private static Vector3 resetPos = new Vector3(1000, 1000, 1000);
@@ -59,6 +60,9 @@ public class EnemyAI : MonoBehaviour
     {
         if (patrolWaypoints != null && patrolWaypoints.Length > 0)
             Patrol();
+        else if (lastPlayerSighting != lpsResetPosition && currentEnemy.health > 0f)
+            // ... chase.
+            Chasing();
 		if(enemiesInRange.Count > 0)
 		{
 			foreach(CharacterStats ch in enemiesInRange)
@@ -86,35 +90,10 @@ public class EnemyAI : MonoBehaviour
 						currentEnemy = ch;
 						break;
 					}
-
-//					hits = Physics.RaycastAll(this.head.position, 
-//					                          ch.transform.position + Vector3.up - this.head.position, 
-//					                          Vector3.Distance(this.head.position, ch.collider.bounds.center));
-//					RaycastHit closestHit = hits[0];
-//					float closestHitDistance = Vector3.Distance(this.head.position, closestHit.point);
-//					for (int h = 0; h < hits.Length; h++)
-//					{
-//						if (hits[h].collider.isTrigger)
-//							continue;
-//						float temp = Vector3.Distance(this.head.position, hits[h].point);
-//						if (temp < closestHitDistance)
-//						{
-//							closestHitDistance = temp;
-//							closestHit = hits[h];
-//						}
-//					}
-
-//					CharacterStats hitCharStats = closestHit.collider.GetComponent<CharacterStats>();
-//					if (closestHit.collider is CapsuleCollider && hitCharStats != null && hitCharStats.faction != this.stats.faction)
-//					{
-//						this.seesPlayer = this.awareOfPlayer = true;
-//						currentEnemy = ch;
-//						Debug.Log("Player sighted!");
-//						//stats.attack
-//					}
 				}
 			}
 		}
+
 	}
 
     void OnTriggerEnter(Collider other)
