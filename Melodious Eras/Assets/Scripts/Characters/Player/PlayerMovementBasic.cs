@@ -19,6 +19,7 @@ public class PlayerMovementBasic : MonoBehaviour
 						  fullFriction;
 	public LayerMask ignorePlayer;
 	public Vector3 targetPoint;
+	private Vector3 m_target; //MatchTarget coords
 
     private bool moving = false;
 
@@ -28,11 +29,14 @@ public class PlayerMovementBasic : MonoBehaviour
     private Animator anim;
 	private CapsuleCollider capsule;
 
-	private YieldInstruction diveTime, vaultTime, climbTime, slideTime;
+	private YieldInstruction diveTime, vaultTime, climbTime, slideTime, endOfFrame;
 	private float originalHeight;
 	
 	[SerializeField] AdvancedSettings advancedSettings;                 // Container for the advanced settings class , thiss allows the advanced settings to be in a foldout in the inspector
+
 	
+	private const float m_VaultMatchTargetStart 	= 0.40f;
+	private const float m_VaultMatchTargetStop 		= 0.51f;
 	
 	[System.Serializable]
 	public class AdvancedSettings
@@ -56,6 +60,7 @@ public class PlayerMovementBasic : MonoBehaviour
 		diveTime = new WaitForSeconds(2.233f);
 		vaultTime = new WaitForSeconds(1.4f);
 		climbTime = new WaitForSeconds(3f);
+		endOfFrame = new WaitForEndOfFrame();
 
         mainCam = Camera.main.GetComponent<CameraMovement3D>();
         stats = this.GetComponent<PlayerStats>();
@@ -113,7 +118,9 @@ public class PlayerMovementBasic : MonoBehaviour
 			}
 			CombatInputs();
 		}
+		//ProcessMatchTarget ();
 		ScaleCapsuleForCrouching();
+		//ScaleForVaulting();
 	}
 	#region Inputs
     void CombatInputs()
@@ -344,6 +351,11 @@ public class PlayerMovementBasic : MonoBehaviour
 			{
 				//vault
 				anim.SetBool(HashIDs.vault_bool, true);
+				//StartCoroutine(ProcessMatchTarget(hitLow.collider, hitLow.point));
+				m_target = hitLow.point;
+				m_target.y = hitLow.collider.bounds.max.y;
+				Debug.Log(m_target);
+				StartCoroutine(ProcessMatchTarget(hitLow.collider, hitLow.point, this.transform.position));
 				yield return vaultTime;
 				anim.SetBool(HashIDs.vault_bool, false);
 				anim.SetBool(HashIDs.onGround_bool, true);
@@ -370,18 +382,52 @@ public class PlayerMovementBasic : MonoBehaviour
 
 	void ProcessMatchTarget()
 	{
-		AnimatorStateInfo info = this.anim.GetCurrentAnimatorStateInfo(0);
-//		if(info.IsName(HashIDs.vault_bool))
-//		{			
-//			if(MatchTarget) 
-//			{
-//				m_Animator.MatchTarget(m_Target,new Quaternion(),AvatarTarget.LeftHand,new MatchTargetWeightMask(Vector3.one,0),m_VaultMatchTargetStart,m_VaultMatchTargetStop); // start and stop time 
-//			}
-//		}
-//		else if(info.IsName(HashIDs)) // always do match targeting.
-//		{
-//			m_Animator.MatchTarget(m_Target,new Quaternion(),AvatarTarget.Root,new MatchTargetWeightMask(new Vector3(1,0,1),0),m_SlideMatchTargetStart,m_SlideMatchTargetStop);				
-//		}
+		if(this.anim.GetCurrentAnimatorStateInfo(0).IsName("Player Animator.Vault"))
+		{
+			//this.collider.enabled = false;
+			//this.rigidbody.useGravity = false;
+			this.anim.MatchTarget(m_target, new Quaternion(), AvatarTarget.LeftHand, new MatchTargetWeightMask(Vector3.one, 0), m_VaultMatchTargetStart, m_VaultMatchTargetStop);
+			//this.anim.MatchTarget(m_target, new Quaternion(), AvatarTarget.LeftHand, new MatchTargetWeightMask(Vector3.one, 0), m_VaultMatchTargetStart, m_VaultMatchTargetStop);
+		}
+		else
+		{
+			this.collider.enabled = true;
+			this.rigidbody.useGravity = true;
+		}
+	}
+	/// <summary>
+	/// Matching target for vaulting
+	/// </summary>
+	/// <returns>The match target.</returns>
+	/// <param name="hitCol">Hit col.</param>
+	/// <param name="hitPoint">Hit point.</param>
+	/// <param name="startPos">Start position.</param>
+	IEnumerator ProcessMatchTarget(Collider hitCol, Vector3 hitPoint, Vector3 startPos)
+	{
+		Vector3 matchTarget = hitPoint;
+		matchTarget.y = hitCol.bounds.max.y;
+		//hitCol.enabled = false;
+
+		this.collider.enabled = false;
+		this.rigidbody.useGravity = false;
+
+		float distance = Vector3.Distance(hitPoint, startPos);
+		float startTime = m_VaultMatchTargetStart * (distance / 4); //trying to avoid clipping animation
+		float endTime = m_VaultMatchTargetStop * (distance / 4);
+
+		while(this.anim.GetBool(HashIDs.vault_bool))
+		{
+			AnimatorStateInfo state = this.anim.GetCurrentAnimatorStateInfo(0);
+			if(state.IsName("Player Animator.Vault")&& state.normalizedTime > startTime)
+			{
+				this.anim.MatchTarget(matchTarget, new Quaternion(), AvatarTarget.LeftHand, new MatchTargetWeightMask(Vector3.one, 0), startTime, endTime);
+				
+			}yield return endOfFrame;
+		}
+		Debug.Log("Stopped vaulting");
+		this.collider.enabled = true;
+		this.rigidbody.useGravity = true;
+		//hitCol.enabled = true;
 	}
 	
 	void ScaleCapsuleForCrouching ()
@@ -391,6 +437,20 @@ public class PlayerMovementBasic : MonoBehaviour
 		if ( isCrouching && (capsule.height != originalHeight * advancedSettings.crouchHeightFactor)) {
 			capsule.height = Mathf.MoveTowards (capsule.height, originalHeight * advancedSettings.crouchHeightFactor, Time.deltaTime * 4);
 			capsule.center = Vector3.MoveTowards (capsule.center, Vector3.up * originalHeight * advancedSettings.crouchHeightFactor * .5f, Time.deltaTime * 2);
+		}
+		// ... everything else 
+		else
+		if (capsule.height != originalHeight && capsule.center != Vector3.up * originalHeight * .5f) {
+			capsule.height = Mathf.MoveTowards (capsule.height, originalHeight, Time.deltaTime * 4);
+			capsule.center = Vector3.MoveTowards (capsule.center, Vector3.up * originalHeight * .5f, Time.deltaTime * 2);
+		}
+	}
+
+	void ScaleForVaulting()
+	{
+		if ( anim.GetBool(HashIDs.vault_bool) && (capsule.height != originalHeight * advancedSettings.crouchHeightFactor)) {
+			capsule.height = Mathf.MoveTowards (capsule.height, originalHeight * advancedSettings.crouchHeightFactor, Time.deltaTime * 4);
+			capsule.center = Vector3.MoveTowards (capsule.center, Vector3.up * (1 - originalHeight * advancedSettings.crouchHeightFactor * .5f), Time.deltaTime * 2);
 		}
 		// ... everything else 
 		else
