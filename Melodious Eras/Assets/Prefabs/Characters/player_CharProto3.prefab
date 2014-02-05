@@ -9049,6 +9049,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &101084
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 401084}
+  - 114: {fileID: 11400018}
+  m_Layer: 0
+  m_Name: NightVisionGoggles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -10542,6 +10558,7 @@ Transform:
   m_Children:
   - {fileID: 400860}
   - {fileID: 400552}
+  - {fileID: 401084}
   - {fileID: 400232}
   - {fileID: 400152}
   - {fileID: 400320}
@@ -14008,7 +14025,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 101038}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
-  m_LocalPosition: {x: .3708601, y: .5, z: -.312376976}
+  m_LocalPosition: {x: -2.06852055, y: .5, z: -.312376738}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400434}
@@ -15552,6 +15569,17 @@ Transform:
   - {fileID: 401064}
   - {fileID: 401062}
   m_Father: {fileID: 400988}
+--- !u!4 &401084
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 101084}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400266}
 --- !u!23 &2300000
 Renderer:
   m_ObjectHideFlags: 1
@@ -28703,14 +28731,25 @@ MonoBehaviour:
   isAiming: 0
   isWalking: 0
   isCrouching: 0
-  crouchHeightFactor: .600000024
-  crouchChangeSpeed: 4
   zeroFriction: {fileID: 13400000, guid: 40ffd4c9381f6d744b11b1f58839cd99, type: 2}
   fullFriction: {fileID: 13400000, guid: 505fe72ad171fa24d96bc176a4bebe01, type: 2}
   ignorePlayer:
     serializedVersion: 2
     m_Bits: 4294966267
   targetPoint: {x: 0, y: 0, z: 0}
+  advancedSettings:
+    stationaryTurnSpeed: 180
+    movingTurnSpeed: 360
+    headLookResponseSpeed: 2
+    crouchHeightFactor: .600000024
+    crouchChangeSpeed: 4
+    autoTurnThresholdAngle: 100
+    autoTurnSpeed: 2
+    zeroFrictionMaterial: {fileID: 0}
+    highFrictionMaterial: {fileID: 0}
+    jumpRepeatDelayTime: .25
+    runCycleLegOffset: .200000003
+    groundStickyEffect: 5
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -28728,8 +28767,10 @@ MonoBehaviour:
   isDead: 0
   meleeDamage: 10
   equippedWeapon: {fileID: 11400016}
-  holsteredWeapons:
-  - {fileID: 11400000, guid: 6a7152cea42a0e3428c1d55850486ea1, type: 2}
+  sidearm: {fileID: 11400016}
+  largeWeapon: {fileID: 0}
+  thrown: {fileID: 0}
+  explosive: {fileID: 0}
   leftHand: {fileID: 0}
   rightHand: {fileID: 0}
   lookatTarget: {fileID: 0}
@@ -28742,6 +28783,7 @@ MonoBehaviour:
   meleeClip: {fileID: 8300000, guid: 3ca121c001790493aac9f6aec90cfc06, type: 3}
   attackSpeed: .25
   lastAttack: 0
+  affectingLights: []
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -28924,6 +28966,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 1
+  wieldPosition: {x: 0, y: 0, z: 0}
+  wieldRotation: {x: 0, y: 0, z: 0}
   weaponName: Laser Pistol
   hudStyle:
     m_Name: 
@@ -28984,6 +29028,7 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
+  _class: 0
   ammoInClip: 10
   extraAmmo: 15
   maxAmmo: 25
@@ -29010,6 +29055,21 @@ MonoBehaviour:
   accuracy: 0
   range: 45
   npcRange: 15
+--- !u!114 &11400018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 101084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2478cb17eb6b12243aedc7d006d9d47e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSuit: {fileID: 11400000}
+  efficiency: 5
+  activated: 0
+  cam: {fileID: 0}
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1

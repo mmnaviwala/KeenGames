@@ -42,7 +42,7 @@ public class ComputerTerminal : CircuitSwitch
     // Use this for initialization
 	void Start () 
     {
-        pauseMenu = GameObject.Find("Pause Menu Stuff").GetComponent<animatedPauseMenu>();
+        pauseMenu = GameObject.FindGameObjectWithTag(Tags.PAUSE_MENU).GetComponent<animatedPauseMenu>();
         cam3d = Camera.main.GetComponent<CameraMovement3D>();
 
         float terminalWidth = Screen.width * .75f;

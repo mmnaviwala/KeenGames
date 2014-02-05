@@ -15,4 +15,5 @@
     public const string SLIDE = "Slide";
     public const string BREAKABLE = "Breakable";
 	public const string WEAPON = "Weapon";
+	public const string PAUSE_MENU = "Pause menu";
 }

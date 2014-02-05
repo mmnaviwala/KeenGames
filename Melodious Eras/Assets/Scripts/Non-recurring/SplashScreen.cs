@@ -21,6 +21,6 @@ public class SplashScreen : MonoBehaviour
 	{
         delayTime -= Time.deltaTime;
         if (delayTime <= 0f)
-            Application.LoadLevel(levelToLoad);
+            Application.LoadLevel(Application.loadedLevel + 1);
 	}
 }

@@ -69,7 +69,7 @@ public class FlatUI_PauseMenu : MonoBehaviour {
 			}
 			if (GUI.Button(exitRect, exit))
 			{
-				Application.LoadLevel(0);
+				Application.LoadLevel(1);
 			}
 			GUI.backgroundColor = guiColorOriginal;
 

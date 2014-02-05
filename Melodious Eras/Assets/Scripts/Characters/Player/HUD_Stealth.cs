@@ -4,9 +4,9 @@ using System.Collections;
 [AddComponentMenu("Scripts/Characters/HUD Stealth")]
 public class HUD_Stealth : MonoBehaviour
 {
-    public GUIStyle healthMaxStyle, healthCurrentStyle, armorMaxStyle, armorCurrentStyle, flashlightLifeStyle, reticleStyle;
+    public GUIStyle healthMaxStyle, healthCurrentStyle, armorMaxStyle, armorCurrentStyle, flashlightLifeStyle, reticleStyle, objectiveRectStyle;
 
-    private Rect healthBarMax, healthBarCurrent, armorBarMax, armorBarCurrent, flashlightLife, reticle, weaponRect;
+    private Rect healthBarMax, healthBarCurrent, armorBarMax, armorBarCurrent, flashlightLife, reticle, weaponRect, objectiveRect;
     private float width_max_health, width_max_armor;
 
     private PlayerStats stats;
@@ -41,6 +41,7 @@ public class HUD_Stealth : MonoBehaviour
         weaponRect = new Rect(healthBarMax.xMin, Screen.height - 3 * healthBarMax.height, healthBarMax.width, healthBarMax.height);
 
         reticle = new Rect(Screen.width / 2 - Screen.width / 60, Screen.height / 2 - Screen.width / 60, Screen.width / 30, Screen.width / 30);
+		objectiveRect = new Rect(Screen.width * .85f, Screen.height * .05f, Screen.width / 10, Screen.width / 10);
 
         temp = new Rect(10, Screen.height / 2, Screen.width, 50);
     }
@@ -51,6 +52,7 @@ public class HUD_Stealth : MonoBehaviour
         Screen.lockCursor = true;
         healthBarCurrent.width = width_max_health * stats.health / stats.maxHealth;
         armorBarCurrent.width = width_max_armor * suit.armor / suit.maxArmor;
+		flashlightLife.width = width_max_health * suit.batteryLife / suit.maxBatteryLife;
     }
 
     void OnGUI()
@@ -60,6 +62,8 @@ public class HUD_Stealth : MonoBehaviour
 
         GUI.Box(healthBarMax, stats.health.ToString(), healthMaxStyle);
         GUI.Box(armorBarMax, suit.armor.ToString(), armorMaxStyle);
+		GUI.Box (flashlightLife, suit.batteryLife.ToString(), flashlightLifeStyle);
+		GUI.Box (objectiveRect, "Objectives:");
         GUI.Label(weaponRect, weapon.HudString(), weapon.hudStyle);
 
         //GUI.Label(temp, XMLUtilities.currentDirectory);
