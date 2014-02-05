@@ -406,10 +406,7 @@ public class PlayerMovementBasic : MonoBehaviour
 	{
 		Vector3 matchTarget = hitPoint;
 		matchTarget.y = hitCol.bounds.max.y;
-		//hitCol.enabled = false;
 
-		this.collider.enabled = false;
-		this.rigidbody.useGravity = false;
 
 		float distance = Vector3.Distance(hitPoint, startPos);
 		float startTime = m_VaultMatchTargetStart * (distance / 4); //trying to avoid clipping animation
@@ -420,14 +417,12 @@ public class PlayerMovementBasic : MonoBehaviour
 			AnimatorStateInfo state = this.anim.GetCurrentAnimatorStateInfo(0);
 			if(state.IsName("Player Animator.Vault")&& state.normalizedTime > startTime)
 			{
+				this.rigidbody.isKinematic = true;
 				this.anim.MatchTarget(matchTarget, new Quaternion(), AvatarTarget.LeftHand, new MatchTargetWeightMask(Vector3.one, 0), startTime, endTime);
 				
 			}yield return endOfFrame;
 		}
-		Debug.Log("Stopped vaulting");
-		this.collider.enabled = true;
-		this.rigidbody.useGravity = true;
-		//hitCol.enabled = true;
+		this.rigidbody.isKinematic = false;
 	}
 	
 	void ScaleCapsuleForCrouching ()
