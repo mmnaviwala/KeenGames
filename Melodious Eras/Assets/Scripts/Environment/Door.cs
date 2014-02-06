@@ -76,24 +76,27 @@ public class Door : MonoBehaviour
 			occlusionPortal.open = false;
 	}
 
-	IEnumerator OpenDoor()
-	{
-		if(occlusionPortal != null)
-			occlusionPortal.open = true;
+    IEnumerator OpenDoor()
+    {
+        if (!this.locked)
+        {
+            if (occlusionPortal != null)
+                occlusionPortal.open = true;
 
-		openingOrClosing = true;
-		BoxCollider doorCollider = doorBody.GetComponent<BoxCollider>();
-		doorCollider.enabled = false;
+            openingOrClosing = true;
+            BoxCollider doorCollider = doorBody.GetComponent<BoxCollider>();
+            doorCollider.enabled = false;
 
-		while(hinge.localEulerAngles.y < 89)
-		{
-			hinge.localRotation = Quaternion.Slerp(hinge.localRotation, openRotation, 4 * Time.deltaTime);
-			yield return frameWait;
-		}
+            while (hinge.localEulerAngles.y < 89)
+            {
+                hinge.localRotation = Quaternion.Slerp(hinge.localRotation, openRotation, 4 * Time.deltaTime);
+                yield return frameWait;
+            }
 
-		hinge.localRotation = openRotation;
-		doorCollider.enabled = true;
-		open = true;
-		openingOrClosing = false;
-	}
+            hinge.localRotation = openRotation;
+            doorCollider.enabled = true;
+            open = true;
+            openingOrClosing = false;
+        }
+    }
 }

@@ -55,6 +55,10 @@ public class PlayerMovementBasic : MonoBehaviour
 		public float groundStickyEffect = 5f;				// power of 'stick to ground' effect - prevents bumping down slopes.
 	}
 
+    void Awake()
+    {
+        HashIDs.Initialize();
+    }
     void Start()
     {
 		diveTime = new WaitForSeconds(1.367f);

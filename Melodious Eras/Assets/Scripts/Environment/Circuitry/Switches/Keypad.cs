@@ -5,6 +5,7 @@ using System.Collections.Generic;
 [AddComponentMenu("Scripts/Environment/Circuitry/Keypad")]
 public class Keypad : CircuitSwitch 
 {
+    public Door door;
 	private HUD_Stealth playerHUD;
     private CameraMovement3D cam3d;
     public AudioClip accessDeniedClip;
@@ -87,6 +88,10 @@ public class Keypad : CircuitSwitch
 		if(hasPower && usingKeypad)
 		{
             playerHUD.enabled = false;
+            Screen.lockCursor = false;
+            Screen.showCursor = true;
+            cam3d.enabled = false;
+
             for (int k = 0; k < 10; k++)
                 if (Input.GetKeyDown(KeyCode.Keypad0 + k) || Input.GetKeyDown(KeyCode.Alpha0 + k))
                     StartCoroutine(InputKey(keyNums[k]));
@@ -95,6 +100,9 @@ public class Keypad : CircuitSwitch
             {
                 usingKeypad = false;
                 playerHUD.enabled = true;
+                Screen.lockCursor = true;
+                Screen.showCursor = false;
+                cam3d.enabled = true;
             }
             if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return))
                 StartCoroutine(InputKey(keyNums[ENTER_NUM]));
@@ -140,6 +148,9 @@ public class Keypad : CircuitSwitch
             {
                 usingKeypad = false;
                 playerHUD.enabled = true;
+                Screen.lockCursor = true;
+                Screen.showCursor = false;
+                cam3d.enabled = true;
             }
 
             for (int k = 0; k < 12; k++)
@@ -171,6 +182,8 @@ public class Keypad : CircuitSwitch
                 }
                 if (enteredCode == correctCode)
                 {
+                    if (door != null)
+                        door.locked = false;
                     enteredCode = "CORRECT";
                     //if(connectedObject != null)
                      //   connectedObject.GetComponent<CircuitScript>().activated = true;
@@ -179,6 +192,9 @@ public class Keypad : CircuitSwitch
                     enteredCode = "";
                     usingKeypad = false;
                     playerHUD.enabled = true;
+                    Screen.lockCursor = true;
+                    Screen.showCursor = false;
+                    cam3d.enabled = true;
                 }
                 else
                 {
