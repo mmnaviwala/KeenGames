@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Base class for all circuit nodes.
+/// </summary>
 [AddComponentMenu("Scripts/Environment/Circuitry/Circuit Node")]
 public class CircuitNode : BreakableObject 
 {
@@ -13,7 +16,7 @@ public class CircuitNode : BreakableObject
 
     void Awake()
     {
-        if (this.electricGrid != null)
+        if (this.electricGrid != null) //"Plugs in" this node to the electric grid
             electricGrid.connectedObjects.Add(this);
     }
 	// Use this for initialization
@@ -28,7 +31,7 @@ public class CircuitNode : BreakableObject
 	}
 
     /// <summary>
-    /// Performs an action based on the node type.
+    /// Performs an action based on the node type. Overridden by subclasses.
     /// Alarm: counts down on False signal
     /// Move: moves toward one destination on true, other on false.
     /// Light: light.enabled = signal.
@@ -45,12 +48,18 @@ public class CircuitNode : BreakableObject
     public virtual void TurnOnOff(bool on)
     {
         this.hasPower = on;
-        //this.activated = on;
     }
 
+    /// <summary>
+    /// Adds this object to the grid's connectedObjects list.
+    /// </summary>
+    /// <param name="grid"></param>
     public void PlugIn(ElectricGrid grid)
     {
-        if(grid != null)
+        if (grid != null)
+        {
             grid.connectedObjects.Add(this);
+            this.hasPower = grid.hasPower;
+        }
     }
 }

@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Just keeps the hashed IDs of animations, for more efficient access.
+/// Variables are suffixed with "bool", "float", etc to quickly see what type of data they're representing
+/// </summary>
 [AddComponentMenu("Scripts/Utilities/Hash IDs")]
 public static class HashIDs 
 {

@@ -2,6 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 
+/// <summary>
+/// Used primarily for keeping track of multiple triggers on an object.
+/// For example, the player has a smaller sphere (melee trigger) and larger sphere (sound trigger), so we're using
+/// 2 of these to keep melee-range and sound-range enemies seperate.
+/// </summary>
 public class DetectionSphere : MonoBehaviour {
 	
 	public List<CharacterStats> charactersInRange;

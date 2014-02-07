@@ -10,18 +10,16 @@ public class FlipSwitch : CircuitSwitch
     void Awake()
     {
         promptRect = new Rect(Screen.width / 2 - 100, Screen.height * .75f, 200, 50);
-        if (this.electricGrid != null)
-            electricGrid.connectedObjects.Add(this);
+        this.PlugIn(electricGrid);
     }
 	// Use this for initialization
 	void Start ()
     {
         if (initializeSwitch)
         {
-            foreach (CircuitNode node in connectedNodes)
-            {
-                node.PerformSwitchAction(this.onOffStatus);
-            }
+            connectedNodes.ForEach(delegate(CircuitNode node) {
+                node.PerformSwitchAction(onOffStatus);
+            });
         }
 	}
     void Update()
@@ -31,10 +29,10 @@ public class FlipSwitch : CircuitSwitch
             if (Input.GetButtonDown(InputType.USE) && this.hasPower)
             {
                 onOffStatus = !onOffStatus;
-                foreach (CircuitNode node in connectedNodes)
-                {
+
+                connectedNodes.ForEach(delegate(CircuitNode node) {
                     node.PerformSwitchAction(onOffStatus);
-                }
+                });
             }
         }
     }

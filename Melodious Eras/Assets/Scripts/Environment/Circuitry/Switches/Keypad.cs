@@ -5,49 +5,50 @@ using System.Collections.Generic;
 [AddComponentMenu("Scripts/Environment/Circuitry/Keypad")]
 public class Keypad : CircuitSwitch 
 {
-    public Door door;
-	private HUD_Stealth playerHUD;
-    private CameraMovement3D cam3d;
-    public AudioClip accessDeniedClip;
+    public Door door;                   //optional: door for the keypad to unlock
+	private HUD_Stealth playerHUD;      //used to disable default HUD when using keypad
+    private CameraMovement3D cam3d;     //used to disable camera movement when using keypad
+    public AudioClip accessDeniedClip; 
 
     public bool usingKeypad = false;
-    public bool randomCode = false;
-    public string correctCode;
-    private string enteredCode;
+    public bool randomCode = false;     //check this to randomly generate a code
+    public string correctCode;          
+    private string enteredCode;         //code the player has entered
 
+    //GUI stuff
 	private Rect keypadRect, codeDisplayRect, exitRect, promptRect;
     public GUIStyle promptStyle;
     private Rect[] keyRects;
+
     private string[] keyNums;
 
-    private const int ENTER_NUM = 10,
-                      CLEAR_NUM = 11;
-    private const string NO_POWER = "NO POWER";
+    private const int ENTER_NUM = 10, //keynums[10] = Enter
+                      CLEAR_NUM = 11; //keynums[11] = Clear
 
 
 	// Use this for initialization
-
     void Awake()
     {
-        if (this.electricGrid != null)
-            electricGrid.connectedObjects.Add(this);
+        if (this.electricGrid != null) //"Plugs in" this circuit node to the electric grid
+            this.PlugIn(electricGrid);
         if (randomCode)
             GenerateCode();
     }
 	void Start ()
     {
-        int h = Screen.height / 10;
-        int w = Screen.width / 2;
         enteredCode = "";
 
-        cam3d = Camera.main.GetComponent<CameraMovement3D>();
+        connectedNodes.ForEach(delegate(CircuitNode node) { //probably not necessary anymore
+            node.connectedSwitch = this;
+        });
+
+        //All GUI stuff below here
+        int h = Screen.height / 10;
+        int w = Screen.width / 2;
         
 		keypadRect = new Rect(w - h * 2.25f, h, h * 4.5f, h * 8);
         keyRects = new Rect[12];
         keyNums = new string[12];
-
-        foreach (CircuitNode connected in connectedNodes)
-            connected.connectedSwitch = this;
 
         //Arranging key locations below this line
         exitRect = new Rect(w + h * 1.5f, h, h / 2, h / 2);
@@ -81,29 +82,27 @@ public class Keypad : CircuitSwitch
     // Update is called once per frame
     void Update() 
 	{
+        //Press H to start hacking. Not implemented yet
 		if (detectionSphere.playerInRange && !isBroken && Input.GetKeyDown(KeyCode.H))
             StartCoroutine(OnHacking());
-		if (detectionSphere.playerInRange && !isBroken && Input.GetButtonDown(InputType.USE))
-            usingKeypad = true;
-		if(hasPower && usingKeypad)
-		{
-            playerHUD.enabled = false;
-            Screen.lockCursor = false;
-            Screen.showCursor = true;
-            cam3d.enabled = false;
 
+        if (detectionSphere.playerInRange && !this.isBroken && this.hasPower && Input.GetButtonDown(InputType.USE))
+        {
+            UseKeypad(true);
+        }
+
+		if(usingKeypad)
+		{
+            //Checking to see if any of the keys (or numpad keys) have been pressed this frame
             for (int k = 0; k < 10; k++)
                 if (Input.GetKeyDown(KeyCode.Keypad0 + k) || Input.GetKeyDown(KeyCode.Alpha0 + k))
                     StartCoroutine(InputKey(keyNums[k]));
 
-            if (Input.GetButtonDown(InputType.START))
-            {
-                usingKeypad = false;
-                playerHUD.enabled = true;
-                Screen.lockCursor = true;
-                Screen.showCursor = false;
-                cam3d.enabled = true;
-            }
+
+            if (Input.GetButtonDown(InputType.START)) //if player hits Start or Escape
+                UseKeypad(false);
+
+            //special conditions for Enter/Clear selections
             if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return))
                 StartCoroutine(InputKey(keyNums[ENTER_NUM]));
             if (Input.GetKeyDown(KeyCode.Backspace))
@@ -117,8 +116,12 @@ public class Keypad : CircuitSwitch
         if (other is CapsuleCollider && other.tag == Tags.PLAYER)
         {
 			detectionSphere.playerInRange = true;
-            if (playerHUD == null)
+            if (playerHUD == null || cam3d == null)
+            {
+                //caching HUD and camera script once the player enters the trigger the first time
                 playerHUD = other.GetComponent<HUD_Stealth>();
+                cam3d = Camera.main.GetComponent<CameraMovement3D>();
+            }
         }
     }
     
@@ -126,11 +129,7 @@ public class Keypad : CircuitSwitch
     void OnTriggerExit(Collider other)
     {
         if (other is CapsuleCollider && other.gameObject.tag == Tags.PLAYER)
-        {
-            usingKeypad = false;
-			detectionSphere.playerInRange = false;
-            cam3d.target = null;
-        }
+            UseKeypad(false);
     }
 
 	void OnGUI()
@@ -146,18 +145,13 @@ public class Keypad : CircuitSwitch
 
             if (GUI.Button(exitRect, "X"))
             {
-                usingKeypad = false;
-                playerHUD.enabled = true;
-                Screen.lockCursor = true;
-                Screen.showCursor = false;
-                cam3d.enabled = true;
+                UseKeypad(false);
             }
 
             for (int k = 0; k < 12; k++)
             {
-                if (GUI.Button(keyRects[k], keyNums[k]) /*|| (k < 10 && Input.GetKeyDown(KeyCode.Keypad0 + k))*/)
+                if (GUI.Button(keyRects[k], keyNums[k]))
                 {
-                    Debug.Log("Event: " + Event.current.type);
                     StartCoroutine(InputKey(keyNums[k]));
                 }
             }
@@ -175,28 +169,23 @@ public class Keypad : CircuitSwitch
                     enteredCode = "";
                 break;
             case "ENTER":
-                foreach (CircuitNode connected in connectedNodes)
-                {
-                    if (connected != null)
-                        connected.PerformSwitchAction(enteredCode == correctCode);
-                }
-                if (enteredCode == correctCode)
+                //emits a signal to all connected nodes saying whether the code was correct
+                connectedNodes.ForEach(delegate(CircuitNode node) {
+                    node.PerformSwitchAction(enteredCode == correctCode);
+                });
+
+                if (enteredCode == correctCode) //if correct
                 {
                     if (door != null)
                         door.locked = false;
                     enteredCode = "CORRECT";
-                    //if(connectedObject != null)
-                     //   connectedObject.GetComponent<CircuitScript>().activated = true;
+
                     yield return new WaitForSeconds(.5f);
 
                     enteredCode = "";
-                    usingKeypad = false;
-                    playerHUD.enabled = true;
-                    Screen.lockCursor = true;
-                    Screen.showCursor = false;
-                    cam3d.enabled = true;
+                    UseKeypad(false);
                 }
-                else
+                else //if incorrect
                 {
                     enteredCode = "INCORRECT";
                     this.audio.PlayOneShot(accessDeniedClip);
@@ -204,7 +193,7 @@ public class Keypad : CircuitSwitch
                     enteredCode = "";
                 }
                 break;
-            default:
+            default: //[0-9] adds number to enteredCode
                 enteredCode += keyVal;
                 break;
         }
@@ -228,7 +217,6 @@ public class Keypad : CircuitSwitch
         cam.transform.position = this.transform.position + this.transform.forward;
         cam.transform.LookAt(this.transform);
 
-        StartCoroutine(Test());
         //StartCoroutine(Hack());
         //enable default camera movement
         cam.enabled = true;
@@ -242,10 +230,16 @@ public class Keypad : CircuitSwitch
         }
     }
 
-    IEnumerator Test()
+    /// <summary>
+    /// Toggles HUD, cursor, and camera movement when using (or not using) the keypad
+    /// </summary>
+    /// <param name="usingKeypad"></param>
+    void UseKeypad(bool usingKeypad)
     {
-        Debug.Log("Starting");
-        yield return new WaitForSeconds(1.5f);
-        Debug.Log("Ending");
+        this.usingKeypad = usingKeypad;
+        playerHUD.enabled = !usingKeypad;
+        Screen.lockCursor = !usingKeypad;
+        Screen.showCursor = usingKeypad;
+        cam3d.enabled = !usingKeypad;
     }
 }

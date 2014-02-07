@@ -10,7 +10,8 @@ public class CameraMovement3D : CameraMovement
 {
     public float followSpeed = 5;
 
-    public Vector3 defaultOffset = new Vector3(-0.5f, 1.5f, -1f);
+    //various camera offsets
+    public Vector3 defaultOffset = new Vector3(-0.5f, 1.5f, -1f); //relative to player. x = left/right, y = up/down, z = forward/backward
     public Vector3 aimOffset;
     public Vector3 crouchOffset;
     public Vector3 PDA_Offset;
@@ -19,55 +20,44 @@ public class CameraMovement3D : CameraMovement
     public Vector3 climbUpOffset, climbDownOffset;
     public Vector3 activeOffset;
 
-    public float x_sensitivity = 5;
-    public float y_sensitivity = 2;
-	public int invertLook = 1; //1 = not inverted, -1 = inverted (for mouse look)
-	public Transform target = null;
-	public bool atTargetPos = false;
+    public float x_sensitivity = 5;             //mouse X sensitivity
+    public float y_sensitivity = 2;             //mouse Y sensitivity
+	public int invertLook = 1;                  //1 = not inverted, -1 = inverted (for mouse look)
+	public Transform target = null;             //for following target other than player
+	public bool atTargetPos = false;            //if atTargetPos = true, saves calculations
 
-    private int invertOffset = 1; //-1 = inversion of x-offset
-	private float raycastDistance = 1;
+    private int invertOffset = 1;               //-1 = inversion of x-offset
+	private float raycastDistance = 1;          //distance for raycast to avoid clipping through walls
 
-    private Vector3 targetPos, targetLookPos;
-    private GameObject camTargetPos, camLookPos;
+    private Vector3 targetLookPos;              //targetLookPos = position over player's shoulder to look at
+    private Vector3 camTargetPos;
 
     Transform player;
-	PlayerStats playerStats;
     Transform flashlight;
-    public GameObject go;
+    public GameObject camRotationHelper;        //helping with camera rotation
 
-    private Animator playerAnim; //making the player look in the camera's direction
 
 	// Use this for initialization
 	void Start () 
     {
         player = GameObject.FindGameObjectWithTag(Tags.PLAYER).transform;
-		Debug.Log("Hello " + (player == null));
-		playerStats = player.GetComponent<PlayerStats>();
-		Debug.Log("Player stats null: " + (playerStats == null));
-		playerAnim = player.GetComponent<Animator>();
-		flashlight = playerStats.flashlight.transform;
-		Debug.Log("flashlight null " + (flashlight == null));
+		flashlight = player.GetComponent<PlayerStats>().flashlight.transform;
 
-        camTargetPos = new GameObject();
-        camTargetPos.transform.position = player.transform.position;
+        camTargetPos = player.transform.position;
 
         SetOffset(CameraOffset.Default);
-		if(go == null)
+		if(camRotationHelper == null)
 		{
-			go = new GameObject();
-			go.name = "camTarget";
+			camRotationHelper = new GameObject();
+			camRotationHelper.name = "camTarget";
 		}
-        go.transform.position = player.position + new Vector3(0, activeOffset.y, 0);
-        go.transform.rotation = player.rotation;
+        camRotationHelper.transform.position = player.position + new Vector3(0, activeOffset.y, 0);
+        camRotationHelper.transform.rotation = player.rotation;
 	}
 	
-	// Update is called once per frame
+	// LateUpdate is called once per frame
 	void LateUpdate ()
-    {
-//		if (!(activeOffset.Equals(climbUpOffset) || activeOffset.Equals(climbDownOffset)))
-//			TurnPlayerHead();
-		
+    {		
 		if (Input.GetButtonDown(InputType.SHIFT_VIEW))
 			InvertOffset();
 		
@@ -77,28 +67,24 @@ public class CameraMovement3D : CameraMovement
 		
 		if (intensityX != 0)
 		{
-			//atTargetPos = false;
-			go.transform.rotation = Quaternion.Euler(go.transform.eulerAngles.x, go.transform.eulerAngles.y + intensityX * x_sensitivity, go.transform.eulerAngles.z);
+			camRotationHelper.transform.rotation = Quaternion.Euler(camRotationHelper.transform.eulerAngles.x, camRotationHelper.transform.eulerAngles.y + intensityX * x_sensitivity, camRotationHelper.transform.eulerAngles.z);
 		}
 		if (intensityY != 0)
 		{
-			//atTargetPos = false;
-			float angle = go.transform.eulerAngles.x - intensityY * y_sensitivity;
+			float angle = camRotationHelper.transform.eulerAngles.x - intensityY * y_sensitivity;
 			if (angle > 180) angle -= 360;
 			angle = Mathf.Clamp(angle, -80, 80);
-			go.transform.rotation = Quaternion.Euler(angle, 
-			                                         go.transform.eulerAngles.y,
-			                                         go.transform.eulerAngles.z);
+			camRotationHelper.transform.rotation = Quaternion.Euler(angle, camRotationHelper.transform.eulerAngles.y, camRotationHelper.transform.eulerAngles.z);
 		}
 		
 		//Deciding if we should manipulate the camera
 		//Saving calculation/render time if camera doesn't have to move
 		Vector3 lookTemp = targetLookPos;
 
-		Vector3 lookPosOffset = player.up * activeOffset.y + go.transform.right * activeOffset.x;
+		Vector3 lookPosOffset = player.up * activeOffset.y + camRotationHelper.transform.right * activeOffset.x;
 		targetLookPos = player.position +  lookPosOffset/* + player.forward * .125f*/;
 		RaycastHit hit1;
-		if(Physics.Raycast (player.position + player.up * activeOffset.y, go.transform.right * activeOffset.x, out hit1, Mathf.Abs(activeOffset.x)))
+		if(Physics.Raycast (player.position + player.up * activeOffset.y, camRotationHelper.transform.right * activeOffset.x, out hit1, Mathf.Abs(activeOffset.x)))
 		{
 			InvertOffset();
 		}
@@ -108,7 +94,7 @@ public class CameraMovement3D : CameraMovement
 
 		if (!atTargetPos)
 		{
-			this.transform.rotation = go.transform.rotation;
+			this.transform.rotation = camRotationHelper.transform.rotation;
 
 			Vector3 offsetDirection = this.transform.forward * activeOffset.z;
 
@@ -118,12 +104,10 @@ public class CameraMovement3D : CameraMovement
 			Ray ray = new Ray(targetLookPos, offsetDirection);
 			if(Physics.Raycast (ray, out hit, raycastDistance) && hit.collider.tag != Tags.MAIN_CAMERA)
 			{
-				/*this.transform.position = */camTargetPos.transform.position = hit.point - ray.direction;
-				Debug.DrawLine(targetLookPos, camTargetPos.transform.position);
-				//return;
+				camTargetPos = hit.point - ray.direction;
 			}
 			else
-				camTargetPos.transform.position = targetLookPos + offsetDirection;
+				camTargetPos = targetLookPos + offsetDirection;
 
 			//moving flashlight
 			Vector3 fOrigin = player.position + new Vector3(0, activeOffset.y, 0);
@@ -135,47 +119,23 @@ public class CameraMovement3D : CameraMovement
 				flashlight.position =  fOrigin + this.transform.forward / 2;
 
 			//Smoothly moving toward target
-			if (Vector3.Distance(this.transform.position, camTargetPos.transform.position) > .01f)
-				this.transform.position = Vector3.Lerp(this.transform.position, camTargetPos.transform.position, followSpeed * Time.deltaTime);
+			if (Vector3.Distance(this.transform.position, camTargetPos) > .01f)
+				this.transform.position = Vector3.Lerp(this.transform.position, camTargetPos, followSpeed * Time.deltaTime);
 			else
 			{
-				this.transform.position = camTargetPos.transform.position;
+				this.transform.position = camTargetPos;
 				atTargetPos = true;
 			}
 		}
 	}
 
-//    void TurnPlayerHead()
-//    {
-//        Ray ray = this.camera.ViewportPointToRay(new Vector3(.5f, .5f, 0));
-//        RaycastHit hit;
-//
-//
-//		playerAnim.SetLookAtWeight(1, .25f, 2);
-//		if(playerStats.lookatTarget != null)
-//		{
-//			//playerAnim.SetLookAtWeight(1, .5f, 1, 1, 1);
-//			playerAnim.SetLookAtPosition(playerStats.lookatTarget.position);
-//		}
-//        else 
-//		{			
-//			//playerAnim.SetLookAtWeight(1, 1, 1, 1, 1);
-//			if (Physics.Raycast(ray, out hit, 100) && hit.collider.tag != Tags.PLAYER && Vector3.Distance(hit.point, player.position) > 1)
-//				playerAnim.SetLookAtPosition(hit.point);
-//			else
-//				playerAnim.SetLookAtPosition(this.transform.position + this.transform.forward * 100);
-//        }
-//    }
-
+    /// <summary>
+    /// Just inverts left/right offset
+    /// </summary>
     public void InvertOffset()
     {
         invertOffset = -invertOffset;
         activeOffset.x = -activeOffset.x;
-    }
-
-    public void SetSideView(float xOffset)
-    {
-        activeOffset.x = xOffset;
     }
 
     public void SetOffset(CameraOffset newOffset, Transform targetP)
@@ -183,6 +143,7 @@ public class CameraMovement3D : CameraMovement
         SetOffset(newOffset);
         target = targetP;
     }
+
     /// <summary>
     /// Changes current camera offset.
     /// </summary>

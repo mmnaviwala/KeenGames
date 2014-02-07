@@ -7,8 +7,7 @@ public class CircuitOutlet : CircuitNode
 
     void Awake()
     {
-        if (this.electricGrid != null)
-            electricGrid.connectedObjects.Add(this);
+        this.PlugIn(electricGrid);
     }
 	// Use this for initialization
 	void Start () 

@@ -2,7 +2,7 @@
 using System.Collections;
 
 [AddComponentMenu("Scripts/Environment/Circuitry/Circuit Move")]
-public class CircuitMove : CircuitNode
+public class CircuitMove : CircuitOutlet
 {
     public Vector3 moveDirection;
     public Vector3[] destinations; //should always have at least 2 (original + 1 or more destinations)
@@ -48,7 +48,6 @@ public class CircuitMove : CircuitNode
             destIndex = (destIndex > 0) ? destIndex - 1 : destinations.Length - 1;//destIndex = (destIndex - 1) % destinations.Length;    //will reverse movement if already in action once it receives a new signal
         else
             destIndex = (destIndex + 1) % destinations.Length;
-        Debug.Log("Dest Index: " + destIndex);
 
         activated = true;
         Move();

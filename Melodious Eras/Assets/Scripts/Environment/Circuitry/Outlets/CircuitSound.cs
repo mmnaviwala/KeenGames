@@ -2,7 +2,7 @@
 using System.Collections;
 
 [RequireComponent(typeof(AudioSource))]
-public class CircuitSound : MonoBehaviour 
+public class CircuitSound : CircuitOutlet 
 {
 	public AudioClip soundClip;
 	public bool useTrigger = false;
@@ -16,6 +16,7 @@ public class CircuitSound : MonoBehaviour
 	// Use this for initialization
 	void Awake () 
 	{
+        this.PlugIn(electricGrid);
 		//this.audio.clip = soundClip;
 		if(useTrigger)
 		{
@@ -40,6 +41,11 @@ public class CircuitSound : MonoBehaviour
 		}
 	}
 
+    /// <summary>
+    /// Sound fades/increases smoothly, to feel realistic.
+    /// </summary>
+    /// <param name="upDown"></param>
+    /// <returns></returns>
 	IEnumerator FadeSound(bool upDown)
 	{
 		float goal = minVolume + (maxVolume - minVolume) * (upDown ? .95f : .05f);

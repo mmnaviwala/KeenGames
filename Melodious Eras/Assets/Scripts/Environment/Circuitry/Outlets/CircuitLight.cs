@@ -5,28 +5,29 @@ using System.Collections;
 public class CircuitLight : CircuitNode
 {
     public Light lightbulb;
-	public LensFlare lensFlare;
+	public LensFlare lensFlare;                             //Optional lens flare
     public bool flickering = false;
-    public float frequency = .5f;
-	private Transform cam;
-	public float flareDistance = 10, flareBrightness = 1;
-	public Light[] ambientLight;
+    public float frequency = .5f;                           //flicker frequency
 
-	private bool isStatic;
+	private Transform cam;                                  //position used when calculating flare intensity
+	public float flareDistance = 10, flareBrightness = 1;   //optional flare stats
+	public Light[] ambientLight;                            //Optional (faked) ambient lighting for this light
+
 	// Use this for initialization
 
     void Awake()
     {
-		this.isStatic = this.gameObject.isStatic;
 		cam = Camera.main.transform;
-        if (this.electricGrid != null)
-            electricGrid.connectedObjects.Add(this);
+        if (this.electricGrid != null) //Plugging this node into the electric grid
+            this.PlugIn(electricGrid);
+
         if (lightbulb == null) 
 		{
             lightbulb = this.light;
 			if(lightbulb == null)
 				lightbulb = this.transform.GetComponentInChildren<Light>();
 		}
+
 		if(lensFlare == null)
 			lensFlare = this.GetComponent<LensFlare>();
 		//this.GetComponent<SphereCollider>().radius = lightbulb.range;
@@ -93,10 +94,16 @@ public class CircuitLight : CircuitNode
         }
         this.lightbulb.enabled = false; //light needs to turn off once power is lost
     }
+    /// <summary>
+    /// If signal == true, activate light. Only enables lightbulb if there's power.
+    /// Starts flickering light, if "flickering" is true
+    /// </summary>
+    /// <param name="signal"></param>
+    /// <returns></returns>
     public override bool PerformSwitchAction(bool signal)
     {
         activated = signal && !isBroken;
-        this.lightbulb.enabled = hasPower && signal && !isBroken;
+        this.lightbulb.enabled = activated && hasPower;
 
 		for(int a = 0; a < ambientLight.Length; a++)
 			ambientLight[a].enabled = this.lightbulb.enabled;

@@ -8,11 +8,8 @@ using System.Collections.Generic;
 [AddComponentMenu("Scripts/Characters/Player Stats")]
 public class PlayerStats : CharacterStats
 {
-   // public List<EnemyStats> _CloseQuarterEnemies, //will be available for melee attacks
-    //                        _CearbyEnemies;       //will be in range to hear
-	public DetectionSphere _closeQuarterEnemies;
-	public DetectionSphere _nearbyEnemies;
-    public int threshold = 5;
+	public DetectionSphere _closeQuarterEnemies; //enemies within melee range
+	public DetectionSphere _nearbyEnemies;       //enemies within hearing range
 
     public Suit suit;
     public Flashlight flashlight;
@@ -20,21 +17,20 @@ public class PlayerStats : CharacterStats
     public AudioClip deathClip, meleeClip;
     private Animator anim;
     private PlayerMovement playerMovement;
-    //private HashIDs hash;
     private HUD_Stealth hud;
     private CameraMovement3D mainCam;
 
-    public float attackSpeed = .25f, lastAttack = 0;
-    private bool inMeleeRange = false;
+    public float attackSpeed = .25f, lastAttackTime = 0;
     private bool attacking;
-    private float meleeHeldDown = 0;
-	public List<Light> affectingLights;
+
+	public List<Light> affectingLights;             //will be used in calculating visibility
+    public float visibility;                        //visibility multiplier; 1 = normal, 0 = invisible
 
     void Awake()
     {
 		affectingLights = new List<Light>();
-        //flashlight = this.transform.GetChild(1).GetChild(0).GetChild(0).GetChild(2).GetChild(1).GetComponent<Flashlight>();
-        //rightHand =  this.transform.GetChild(1).GetChild(0).GetChild(0).GetChild(2).GetChild(0).GetChild(0).GetChild(0);
+        
+        //registering an equipped weapon, if any
         if(equippedWeapon == null)
 		{
 			for(int c = 0; c < rightHand.childCount; c++)
@@ -46,11 +42,9 @@ public class PlayerStats : CharacterStats
 				}
 			}
 		}
-		//equippedWeapon = rightHand.GetComponent<Weapon>();
-        //equippedWeapon.player = this;
 
         _closeQuarterEnemies.charactersInRange = new List<CharacterStats>();
-        lastAttack = Time.time;
+        lastAttackTime = Time.time;
     }
     void Start()
     {
@@ -61,24 +55,20 @@ public class PlayerStats : CharacterStats
 
     void Update()
     {
-        _closeQuarterEnemies.charactersInRange.RemoveAll(enemy => enemy == null); //Scans all nearby enemies each frame and removes those who have died, which wouldn't
-        _nearbyEnemies.charactersInRange.RemoveAll(enemy => enemy == null);       //trigger the OnTriggerExit function
+        //These lists will never be too large, but should still be moved out of Update at some point
+        _closeQuarterEnemies.charactersInRange.RemoveAll((CharacterStats enemy) => enemy == null); //Scans all nearby enemies each frame and removes those who have died, which wouldn't
+        _nearbyEnemies.charactersInRange.RemoveAll((CharacterStats enemy) => enemy == null);       //trigger the OnTriggerExit function
 
-        if (_closeQuarterEnemies.charactersInRange.Count > 0)
-        {
-            if (Input.GetButtonDown(InputType.MELEE))
-            {
-                PerformMelee();
-            }
-        }
+        if (_closeQuarterEnemies.charactersInRange.Count > 0 && Input.GetButtonDown(InputType.MELEE))
+            PerformMelee();
     }
 
     public void PerformMelee()
     {
-        //Determining which angle the player's character is facing (the one they want to attack)
         if (_closeQuarterEnemies.charactersInRange.Count > 0)
         {
-            CharacterStats nearestEnemy = _closeQuarterEnemies.charactersInRange[0]; //will actually be the enemy with the smallest angle away from the player's facing direction
+            //Determining which angle the player's character is facing (the one they want to attack)
+            CharacterStats nearestEnemy = _closeQuarterEnemies.charactersInRange[0];
             float lowestAngle = 180;
             foreach (EnemyStats enemy in _closeQuarterEnemies.charactersInRange)
             {
@@ -97,24 +87,24 @@ public class PlayerStats : CharacterStats
             Vector3 relPlayerPos = this.transform.position - nearestEnemy.transform.position;
             float enemyAngle = Vector3.Angle(nearestEnemy.transform.forward, new Vector3(relPlayerPos.x, 0, relPlayerPos.z));
 
-            if (Time.time > lastAttack + attackSpeed)
+            if (Time.time > lastAttackTime + attackSpeed)
             {
                 this.Attack(nearestEnemy, this, enemyAngle);
             }
         }
         else
         {
-            //Just perform melee attack
+            //Possibly just attack the air, once we get an animation
         }
     }
 
     /// <summary>
-    /// Instantly kills the target if attacking from behind.
+    /// Melee attack. Instantly kills the target if attacking from behind.
     /// </summary>
     /// <param name="attackerP"></param>
     public override void Attack(CharacterStats targetP, CharacterStats attackerP, float angle)
     {
-        lastAttack = Time.time;
+        lastAttackTime = Time.time;
         if (angle > 140)
         {
             targetP.TakeDamage(true);
@@ -126,16 +116,24 @@ public class PlayerStats : CharacterStats
         }
     }
 
+    /// <summary>
+    /// Shared by all characters
+    /// </summary>
+    /// <param name="damage"></param>
     public override void TakeDamage(int damage)
     {
         this.health -= (health > damage) ? damage : health;
         if (health == 0)
         {
-            isDead = true;
+            this.isDead = true;
             anim.SetBool(HashIDs.dead_bool, isDead);
         }
     }
 
+    /// <summary>
+    /// Calculates visibility based on lighting
+    /// </summary>
+    /// <returns></returns>
 	public float VisibilityMultiplier()
 	{
 		if(affectingLights.Count > 0)

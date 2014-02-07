@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 [AddComponentMenu("Scripts/Environment/Circuitry/Elevator")]
@@ -20,15 +21,12 @@ public class Elevator : CircuitMove
 
     private List<Passenger> passengers = new List<Passenger>();
     private int moveUpDown = 0; //1 = up, -1 = down
-    private bool doorsClosed = true;
-    private bool openingClosing = false;
     public Transform leftDoor, rightDoor;
 	public int currentFloorIndex = 0;
 
     void Awake()
     {
-        if (this.electricGrid != null)
-            electricGrid.connectedObjects.Add(this);
+        this.PlugIn(electricGrid);
 
         if (destinations != null)
         {
@@ -108,7 +106,7 @@ public class Elevator : CircuitMove
 			StartCoroutine(OpenDoors());
         }
     }
-	private IEnumerator<Coroutine> MoveElevator ()
+	private IEnumerator MoveElevator ()
 	{
 		yield return StartCoroutine(CloseDoors());
 		Debug.Log("Done Closing");
@@ -116,7 +114,7 @@ public class Elevator : CircuitMove
 		activated = true;
 	}
 
-	IEnumerator<YieldInstruction> CloseDoors()
+	IEnumerator CloseDoors()
 	{
 		while(leftDoor.localPosition.x >= 1.25f)
 		{			
@@ -127,7 +125,7 @@ public class Elevator : CircuitMove
 		leftDoor.localPosition = new Vector3(1.25f, leftDoor.localPosition.y, leftDoor.localPosition.z);
 		rightDoor.localPosition = new Vector3(-1.25f, leftDoor.localPosition.y, leftDoor.localPosition.z);
 	}
-	IEnumerator<YieldInstruction> OpenDoors()
+	IEnumerator OpenDoors()
 	{
 		while(leftDoor.localPosition.x <= 3.5f)
 		{

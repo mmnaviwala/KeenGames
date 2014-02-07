@@ -1,5 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+
+/// <summary>
+/// Currently being used for security cameras, so they can have nightvision
+/// without affecting the rest of the ambient lighting
+/// </summary>
 [AddComponentMenu ("Rendering/Per Camera Render Settings")]
 [RequireComponent(typeof(Camera))]
 public class PerCameraRenderSettings : MonoBehaviour {	

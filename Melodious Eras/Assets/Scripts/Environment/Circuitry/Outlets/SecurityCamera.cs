@@ -11,16 +11,19 @@ public class SecurityCamera : CircuitOutlet
 	public Camera cam;
 	[SerializeField][Range(0, 5)]public float waitTime = 1;
 
+    void Awake()
+    {
+        cam.enabled = false;
+    }
 	// Use this for initialization
 	void Start () {
-		cam.enabled = false;
 		StartCoroutine(Sweep ());
 		//cam.enabled = this.activated && this.hasPower && !this.isBroken;
 	}
 
 	IEnumerator Sweep()
 	{
-		while(this.activated)
+		while(this.activated && this.hasPower)
 		{
 			pivot.Rotate (Vector3.up, speed * Time.deltaTime, Space.Self);
 			if(pivot.localEulerAngles.y < minRotation || pivot.localEulerAngles.y > maxRotation)

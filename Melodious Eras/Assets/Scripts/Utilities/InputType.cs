@@ -1,4 +1,8 @@
-﻿public static class InputType 
+﻿
+/// <summary>
+/// Centralized names for all input, for easy name changing
+/// </summary>
+public static class InputType 
 {
     public const string
         HORIZONTAL = "Horizontal",

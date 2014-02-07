@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Monolothic character control class. I've had as much fun writing it as you'll have reading it.
+/// </summary>
 [AddComponentMenu("Scripts/Characters/Player Movement Basic")]
 public class PlayerMovementBasic : MonoBehaviour
 {
-    public float jumpForce = 20f;
-    public float speed = 7f;
-    public float snapDownThreshold = .25f;
-    public float sound;
+    #region variables
+    public float speed = 0f;                //current speed of character
+    public float snapDownThreshold = .25f;  //Length of downward raycasts for smooth descent of ramps
+    public float soundwaveDistance;
 
     public bool jumping = false;
     public bool isShooting = false;
@@ -17,10 +20,12 @@ public class PlayerMovementBasic : MonoBehaviour
 	public bool isCrouching = false;
 	public PhysicMaterial zeroFriction, 
 						  fullFriction;
-	public LayerMask ignorePlayer;
-	public Vector3 targetPoint;
-	private Vector3 m_target; //MatchTarget coords
+	public LayerMask ignorePlayer;          //used to prevent LookAt IK function from bugging out when camera's pointed at player
+	public Vector3 targetPoint;             //center of camera. When aiming, this points the arm at the target
 
+
+    private Vector3 m_target;               //MatchTarget coords
+    private Vector2 moveDirection;          //movement direction of the player. Cached here to minimize garbage collection.
     private bool moving = false;
 
     private CameraMovement3D mainCam;
@@ -30,14 +35,12 @@ public class PlayerMovementBasic : MonoBehaviour
 	private CapsuleCollider capsule;
 
 	private YieldInstruction diveTime, vaultTime, climbTime, slideTime, endOfFrame;
-	private float originalHeight;
+    private float originalHeight;
+    private const float m_VaultMatchTargetStart = 0.40f;
+    private const float m_VaultMatchTargetStop = 0.51f;
 	
 	[SerializeField] AdvancedSettings advancedSettings;                 // Container for the advanced settings class , thiss allows the advanced settings to be in a foldout in the inspector
 
-	
-	private const float m_VaultMatchTargetStart 	= 0.40f;
-	private const float m_VaultMatchTargetStop 		= 0.51f;
-	
 	[System.Serializable]
 	public class AdvancedSettings
 	{
@@ -54,11 +57,14 @@ public class PlayerMovementBasic : MonoBehaviour
 		public float runCycleLegOffset = 0.2f;				// animation cycle offset (0-1) used for determining correct leg to jump off
 		public float groundStickyEffect = 5f;				// power of 'stick to ground' effect - prevents bumping down slopes.
 	}
+    #endregion
 
     void Awake()
     {
         HashIDs.Initialize();
+        moveDirection = new Vector2();
     }
+
     void Start()
     {
 		diveTime = new WaitForSeconds(1.367f);
@@ -73,53 +79,51 @@ public class PlayerMovementBasic : MonoBehaviour
 		capsule = this.GetComponent<CapsuleCollider>();
 		originalHeight = capsule.height;
 
-        anim.SetFloat(HashIDs.speed_float, 0f);
+        anim.SetFloat(HashIDs.speed_float, 0f); //initializes animator to idle stance
 		anim.SetBool(HashIDs.aiming_bool, isShooting);
-		anim.SetLayerWeight(1, 1f);
-		//anim.SetLayerWeight(2, 1f);
+		anim.SetLayerWeight(1, 1f);             //Layer 0 = base, Layer 1 = aim layer. This makes sure aiming mask overrides default arm animations
+		//anim.SetLayerWeight(2, 1f);           //optional gun grip, but too small to notice for now
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Movement is handled under FixedUpdate() to avoid jittering. 
+    /// Everything else is handled under Update() for correct input detection
+    /// </summary>
     void FixedUpdate()
     {
         if (!jumping && useDefaultMovement)
         {
             MovementInputs();
-			RaycastHit hit;
-			if(Physics.Raycast (this.transform.position, Vector3.down, out hit, .25f))
-			{
-				//Debug.Log(hit.collider.name);
-			}
+
+			RaycastHit hit; //snapping character to ground for smooth slope descent 
+			if(Physics.Raycast (this.transform.position, Vector3.down, out hit, .125f))
+                this.transform.position = hit.point;
         }
     }
 
 	void Update()
 	{
-		if(!jumping && useDefaultMovement)
+		if(!jumping && useDefaultMovement) //if default movement controls aren't being overridden
 		{
 			if (Input.GetButtonDown(InputType.CROUCH))
 			{
 				if(!isCrouching)
-				{
 					isCrouching = true;
-				}
 				else
 				{
-					// prevent standing up in crouch-only zones
+					// prevent standing up in crouch-only areas (under desks, in vents, etc)
 					Ray crouchRay = new Ray (rigidbody.position + Vector3.up * capsule.radius * .5f, Vector3.up);
 					float crouchRayLength = originalHeight - capsule.radius * .5f;
 					if (!Physics.SphereCast (crouchRay, capsule.radius * .5f, crouchRayLength)) 
 						isCrouching = false;
 				}
-				//isCrouching = !isCrouching; //toggled instead of held
 				mainCam.SetOffset(isCrouching ? CameraOffset.Crouch : CameraOffset.Default);
 				this.anim.SetBool(HashIDs.sneaking_bool, isCrouching);
-				//Perform crouch here
 			}
+
 			if (Input.GetButtonDown(InputType.JUMP))
-			{
 				this.StartCoroutine(Jump());
-			}
+
 			CombatInputs();
 		}
 		//ProcessMatchTarget ();
@@ -127,6 +131,9 @@ public class PlayerMovementBasic : MonoBehaviour
 		//ScaleForVaulting();
 	}
 	#region Inputs
+    /// <summary>
+    /// Covers: Aiming, Walking, Reloading, Shooting
+    /// </summary>
     void CombatInputs()
     {
         //----------------------------------------------
@@ -145,24 +152,8 @@ public class PlayerMovementBasic : MonoBehaviour
 			mainCam.SetOffset(isCrouching ? CameraOffset.Crouch : CameraOffset.Default);
 		}
 
-        if (Input.GetButtonDown(InputType.RELOAD) && stats.equippedWeapon is Gun)
-        {
-            StartCoroutine(((Gun)stats.equippedWeapon).Reload());
-        }
-        if (Input.GetButton(InputType.AIM))
-        {
-            //Semi-auto
-            if (Input.GetButtonDown(InputType.SHOOT) && stats.equippedWeapon != null /*&& (weapon is MeleeWeapon || weapon is SemiAuto)*/)
-            {
-                stats.equippedWeapon.Fire();
-            }
-        }
-        else
-        {
-            if (Input.GetButtonDown(InputType.SHOOT))
-                stats.PerformMelee();
-        }
-        if (Input.GetButtonDown(InputType.AIM))
+        //AIM input
+        if (Input.GetButtonDown(InputType.AIM)) //When AIM is pressed
         {
 			if(!isCrouching)
             	mainCam.SetOffset(CameraOffset.Aim);
@@ -170,7 +161,7 @@ public class PlayerMovementBasic : MonoBehaviour
             isAiming = true;
 			anim.SetBool(HashIDs.aiming_bool, isAiming);
         }
-        else if (Input.GetButtonUp(InputType.AIM))
+        else if (Input.GetButtonUp(InputType.AIM))//When AIM is released
         {
             mainCam.followSpeed = (float)CameraFollowSpeed.Default;
             if (!isWalking) //Will only change offset if the player isn't holding down the Walk key
@@ -178,80 +169,81 @@ public class PlayerMovementBasic : MonoBehaviour
             isAiming = false;
 			anim.SetBool(HashIDs.aiming_bool, isAiming);
         }
+
+        //SHOOT input
+        if (Input.GetButtonDown(InputType.SHOOT))
+        {
+            if (isAiming && stats.equippedWeapon != null)
+                stats.equippedWeapon.Fire();
+            else
+                stats.PerformMelee();
+        }
+
+        //RELOAD input
+        if (Input.GetButtonDown(InputType.RELOAD) && stats.equippedWeapon is Gun)
+        {
+            StartCoroutine(((Gun)stats.equippedWeapon).Reload());
+        }
     }
 
 
     void MovementInputs()
     {
+        moveDirection.x = Input.GetAxis(InputType.HORIZONTAL);  //A(neg), D(pos), Left joystick left(neg)/right(pos)
+        moveDirection.y = Input.GetAxis(InputType.VERTICAL);    //S(neg), W(pos), Left joystick down(neg)/up(pos)
+        moving = !moveDirection.Equals(Vector2.zero);
 
-        float h = Input.GetAxis(InputType.HORIZONTAL);  //A(neg), D(pos), Left joystick left(neg)/right(pos)
-        float v = Input.GetAxis(InputType.VERTICAL);    //S(neg), W(pos), Left joystick down(neg)/up(pos)
-        Vector2 direction = new Vector2(h, v);
+        //Determining speed
+        speed = (isWalking || isAiming) ? 2 : 5.657f;
+        speed *= ((moveDirection.magnitude < 1) ? moveDirection.magnitude : 1);
+        this.anim.SetFloat(HashIDs.speed_float, speed);
 
-        MovementManager(direction);
-	}
-	
-	void MovementManager(Vector2 direction)
-	{
-		moving = !direction.Equals(Vector2.zero);
-		
-		//Determining speed
-		speed = (isWalking || isAiming) ? 2 : 5.657f;
-		speed *= ((direction.magnitude < 1) ? direction.magnitude : 1);
-		this.anim.SetFloat(HashIDs.speed_float, speed);
-		
-		float runCycle = Mathf.Repeat (anim.GetCurrentAnimatorStateInfo (0).normalizedTime + advancedSettings.runCycleLegOffset, 1);
-		float jumpLeg = (runCycle < .5f ? 1 : -1) /** forwardAmount*/;
-		if (!jumping) {
-			anim.SetFloat ("JumpLeg", jumpLeg);
-		}
-		
-		if(speed > 4 && !isCrouching)
-		{
-			if(!this.audio.isPlaying)
-				this.audio.Play();
-		}
-		else if(this.audio.isPlaying)
-			this.audio.Stop ();
-		
-		// Facing and running the desired direction
-		float angle = Vector2.Angle(Vector2.up, direction);
-		if (direction.x < 0)
-			angle = -angle;
-		
-		if (!isAiming && moving && !jumping)
-		{
-			this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, mainCam.transform.eulerAngles.y + angle, this.transform.eulerAngles.z);
-			this.anim.applyRootMotion = true;
-			
-			//this.transform.eulerAngles = Vector3.Slerp(this.transform.eulerAngles, 
-			//    new Vector3(this.transform.eulerAngles.x, mainCam.transform.eulerAngles.y + angle, this.transform.eulerAngles.z), 
-			//    1 * Time.deltaTime);
-		}
-		else if (isAiming)
-		{
-			this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, mainCam.transform.eulerAngles.y, this.transform.eulerAngles.z);
-			
-			this.anim.applyRootMotion = false;
-			this.rigidbody.velocity = (this.transform.right * direction.x + this.transform.forward * direction.y) * speed + new Vector3(0, this.rigidbody.velocity.y, 0);
-			
-			/*if (direction.x < 0)
-                mainCam.SetSideView(.6f);
-            else if(direction.x > 0)
-                mainCam.SetSideView(-.6f);*/
-		}
+        //Keeping track of the last leg to hit the ground. Only needed when falling
+        float runCycle = Mathf.Repeat(anim.GetCurrentAnimatorStateInfo(0).normalizedTime + advancedSettings.runCycleLegOffset, 1);
+        float jumpLeg = (runCycle < .5f ? 1 : -1) /** forwardAmount*/;
+        if (!jumping)
+        {
+            anim.SetFloat("JumpLeg", jumpLeg);
+        }
+
+        if (speed > 4 && !isCrouching)
+        {
+            if (!this.audio.isPlaying) //play footsteps
+                this.audio.Play();
+        }
+        else if (this.audio.isPlaying)
+            this.audio.Stop();
+
+        // Facing and running the desired direction. If-condition is there because Vector2.Angle only returns positive 0-180
+        float angle = Vector2.Angle(Vector2.up, moveDirection);
+        if (moveDirection.x < 0)
+            angle = -angle;
+
+        //Rotates character to face desired direction, if not aiming
+        if (!isAiming && moving && !jumping)
+        {
+            this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, mainCam.transform.eulerAngles.y + angle, this.transform.eulerAngles.z);
+            this.anim.applyRootMotion = true;
+        }
+        else if (isAiming) //overrides root motion for more accurate movement when aiming (player can't see legs when aiming anyways)
+        {
+            this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, mainCam.transform.eulerAngles.y, this.transform.eulerAngles.z);
+
+            this.anim.applyRootMotion = false;
+            this.rigidbody.velocity = (this.transform.right * moveDirection.x + this.transform.forward * moveDirection.y) * speed + new Vector3(0, this.rigidbody.velocity.y, 0);
+        }
 	}
 	#endregion
 
 	#region animator IK
 	void OnAnimatorIK(int layerIndex)
 	{
-		if (!(mainCam.activeOffset.Equals(mainCam.climbUpOffset) || mainCam.activeOffset.Equals(mainCam.climbDownOffset)))
+		if (!(mainCam.activeOffset == mainCam.climbUpOffset || mainCam.activeOffset == mainCam.climbDownOffset))
 			TurnPlayerHead();
 		
+        //Points arm toward target when aiming
 		if(layerIndex == 1 && this.isAiming)
 		{
-
 			anim.SetIKPosition(AvatarIKGoal.RightHand, targetPoint);
 			anim.SetIKPositionWeight(AvatarIKGoal.RightHand, anim.GetFloat(HashIDs.aimWeight_float));
 		}
@@ -259,7 +251,7 @@ public class PlayerMovementBasic : MonoBehaviour
 	
 	void TurnPlayerHead()
 	{
-		Ray ray = mainCam.camera.ViewportPointToRay(new Vector3(.5f, .5f, 0));
+		Ray rayFromCam = mainCam.camera.ViewportPointToRay(new Vector3(.5f, .5f, 0));
 		RaycastHit hit;
 		
 		
@@ -272,7 +264,7 @@ public class PlayerMovementBasic : MonoBehaviour
 		else 
 		{			
 			//playerAnim.SetLookAtWeight(1, 1, 1, 1, 1);
-			if (Physics.Raycast(ray, out hit, 100, ignorePlayer) && hit.collider.tag != Tags.PLAYER && Vector3.Distance(hit.point, mainCam.transform.position) > 1)
+			if (Physics.Raycast(rayFromCam, out hit, 100, ignorePlayer) && hit.collider.tag != Tags.PLAYER && Vector3.Distance(hit.point, mainCam.transform.position) > 1)
 			{
 				targetPoint = hit.point;
 				anim.SetLookAtPosition(targetPoint);
@@ -288,12 +280,14 @@ public class PlayerMovementBasic : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        //Determining if the player's landed on ground
         if (collision.contacts[0].normal.y > .7f)
         {
 			jumping = false;
-
             anim.applyRootMotion = true;
         }
+
+        //Calculating fall damage
         float impactVelocity = Vector3.Magnitude(collision.relativeVelocity);
         if (impactVelocity > 12.5f)
         {
@@ -313,29 +307,26 @@ public class PlayerMovementBasic : MonoBehaviour
             anim.SetBool("IsGrinding", false);
     }
 
+    /// <summary>
+    /// Determines whether to dive, vault, or climb a wall based on raycasts.
+    /// </summary>
+    /// <returns></returns>
     public IEnumerator Jump()
     {
         if (!jumping || anim.GetBool(HashIDs.onGround_bool))
         {
-			//if no obstacles in front of player
-            //this.rigidbody.AddForce(Vector3.up * jumpForce);
             jumping = true;
-
-			//anim.SetBool(HashIDs.onGround_bool, false);
-            //anim.applyRootMotion = false;
-
 
 			//Determining action
 			Ray low = new Ray(this.transform.position + Vector3.up * .75f, this.transform.forward);
 			Ray high = new Ray(this.transform.position + Vector3.up * 1.5f, this.transform.forward);
-			RaycastHit hitLow, hitHigh;
+			RaycastHit hitLowInfo, hitHighInfo;
 
 			float raycastDistance = Mathf.Max(1f, anim.GetFloat(HashIDs.speed_float));
-			Debug.DrawLine(low.origin, low.origin + low.direction * raycastDistance, Color.red);
-			Debug.DrawLine(high.origin, high.origin + high.direction * raycastDistance, Color.red);
 
-			//if low hit and high miss
-			if(Physics.Raycast (high, out hitHigh, raycastDistance))
+
+			//if high hit
+			if(Physics.Raycast (high, out hitHighInfo, raycastDistance))
 			{
 
 				Ray climbHeight = new Ray(this.transform.position + Vector3.up * 2.5f, this.transform.forward);
@@ -351,15 +342,13 @@ public class PlayerMovementBasic : MonoBehaviour
 				else
 					jumping = false;
 			}
-			else if(Physics.Raycast(low, out hitLow, raycastDistance))
+			else if(Physics.Raycast(low, out hitLowInfo, raycastDistance))
 			{
 				//vault
 				anim.SetBool(HashIDs.vault_bool, true);
-				//StartCoroutine(ProcessMatchTarget(hitLow.collider, hitLow.point));
-				m_target = hitLow.point;
-				m_target.y = hitLow.collider.bounds.max.y;
-				Debug.Log(m_target);
-				StartCoroutine(ProcessMatchTarget(hitLow.collider, hitLow.point, this.transform.position));
+				m_target = hitLowInfo.point;
+				m_target.y = hitLowInfo.collider.bounds.max.y;
+				StartCoroutine(ProcessMatchTarget(hitLowInfo.collider, hitLowInfo.point, this.transform.position));
 				yield return vaultTime;
 				anim.SetBool(HashIDs.vault_bool, false);
 				anim.SetBool(HashIDs.onGround_bool, true);
@@ -400,7 +389,7 @@ public class PlayerMovementBasic : MonoBehaviour
 		}
 	}
 	/// <summary>
-	/// Matching target for vaulting
+	/// Matching target for vaulting/climbing ledge. Currently only vaulting has been tested
 	/// </summary>
 	/// <returns>The match target.</returns>
 	/// <param name="hitCol">Hit col.</param>
@@ -416,16 +405,28 @@ public class PlayerMovementBasic : MonoBehaviour
 		float startTime = m_VaultMatchTargetStart * (distance / 4); //trying to avoid clipping animation
 		float endTime = m_VaultMatchTargetStop * (distance / 4);
 
+        //IK for vaulting
 		while(this.anim.GetBool(HashIDs.vault_bool))
 		{
 			AnimatorStateInfo state = this.anim.GetCurrentAnimatorStateInfo(0);
-			if(state.IsName("Player Animator.Vault")&& state.normalizedTime > startTime)
+			if(state.IsName("Player Animator.Vault") && state.normalizedTime > startTime)
 			{
 				this.rigidbody.isKinematic = true;
 				this.anim.MatchTarget(matchTarget, new Quaternion(), AvatarTarget.LeftHand, new MatchTargetWeightMask(Vector3.one, 0), startTime, endTime);
-				
-			}yield return endOfFrame;
+			}
+            yield return endOfFrame;
 		}
+        //IK for climbing ledge. Not tested yet
+        while (this.anim.GetBool(HashIDs.climbeLedge_bool))
+        {
+            this.rigidbody.isKinematic = true;
+            AnimatorStateInfo state = this.anim.GetCurrentAnimatorStateInfo(0);
+            if (state.IsName("Player Animator.Jump to Ledge") && state.normalizedTime > startTime)
+            {
+                this.anim.MatchTarget(matchTarget, new Quaternion(), AvatarTarget.RightHand, new MatchTargetWeightMask(Vector3.one, 0), startTime, endTime);
+            }
+            yield return endOfFrame;
+        }
 		this.rigidbody.isKinematic = false;
 	}
 	
@@ -436,20 +437,6 @@ public class PlayerMovementBasic : MonoBehaviour
 		if ( isCrouching && (capsule.height != originalHeight * advancedSettings.crouchHeightFactor)) {
 			capsule.height = Mathf.MoveTowards (capsule.height, originalHeight * advancedSettings.crouchHeightFactor, Time.deltaTime * 4);
 			capsule.center = Vector3.MoveTowards (capsule.center, Vector3.up * originalHeight * advancedSettings.crouchHeightFactor * .5f, Time.deltaTime * 2);
-		}
-		// ... everything else 
-		else
-		if (capsule.height != originalHeight && capsule.center != Vector3.up * originalHeight * .5f) {
-			capsule.height = Mathf.MoveTowards (capsule.height, originalHeight, Time.deltaTime * 4);
-			capsule.center = Vector3.MoveTowards (capsule.center, Vector3.up * originalHeight * .5f, Time.deltaTime * 2);
-		}
-	}
-
-	void ScaleForVaulting()
-	{
-		if ( anim.GetBool(HashIDs.vault_bool) && (capsule.height != originalHeight * advancedSettings.crouchHeightFactor)) {
-			capsule.height = Mathf.MoveTowards (capsule.height, originalHeight * advancedSettings.crouchHeightFactor, Time.deltaTime * 4);
-			capsule.center = Vector3.MoveTowards (capsule.center, Vector3.up * (1 - originalHeight * advancedSettings.crouchHeightFactor * .5f), Time.deltaTime * 2);
 		}
 		// ... everything else 
 		else

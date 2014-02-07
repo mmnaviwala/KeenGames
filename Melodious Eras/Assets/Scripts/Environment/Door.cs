@@ -35,9 +35,7 @@ public class Door : MonoBehaviour
 	void Update () 
 	{
 		if(inRange && Input.GetButtonDown(InputType.USE) && !openingOrClosing)
-		{
 			StartCoroutine(open ? CloseDoor(): OpenDoor());
-		}
 	}
 
 	void OnTriggerEnter(Collider other)
@@ -55,6 +53,11 @@ public class Door : MonoBehaviour
 		}
 	}
 
+    /// <summary>
+    /// Smoothly closes door by rotating the hinge, and disabled the door's collider while it's moving. Same concept with OpenDoor.
+    /// Optionally open/closes the attached Occlusion portal, but that isn't working properly yet.
+    /// </summary>
+    /// <returns></returns>
 	IEnumerator CloseDoor()
 	{
 		openingOrClosing = true;

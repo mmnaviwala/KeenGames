@@ -36,8 +36,7 @@ public class ComputerTerminal : CircuitSwitch
 
     void Awake()
     {
-        if(this.electricGrid != null)
-            electricGrid.connectedObjects.Add(this);
+        this.PlugIn(electricGrid);
     }
     // Use this for initialization
 	void Start () 
@@ -45,6 +44,13 @@ public class ComputerTerminal : CircuitSwitch
         pauseMenu = GameObject.FindGameObjectWithTag(Tags.PAUSE_MENU).GetComponent<animatedPauseMenu>();
         cam3d = Camera.main.GetComponent<CameraMovement3D>();
 
+        for (int m = 0; m < monitors.Length; m++)
+        {
+            monitors[m].GetChild(0).light.enabled = activated;
+            monitors[m].renderer.material = activated ? onScreen : offScreen;
+        }
+
+        //GUI stuff
         float terminalWidth = Screen.width * .75f;
         float terminalHeight = Screen.height * .75f;
 
@@ -57,11 +63,6 @@ public class ComputerTerminal : CircuitSwitch
 
         emailListNodeRect = new Rect(terminalRect.xMin + 25, terminalRect.yMin + 25, terminalRect.width / 2 - 50, terminalRect.width / 4);
         emailBodyRect = new Rect(Screen.width / 2, terminalRect.yMin + 25, terminalRect.width / 2 - 25, terminalRect.height - 50);
-		for(int m = 0; m < monitors.Length; m++)
-		{
-			monitors[m].GetChild(0).light.enabled = activated;
-			monitors[m].renderer.material = activated ? onScreen : offScreen;
-		}
 	}
 
     // Update is called once per frame
@@ -69,7 +70,7 @@ public class ComputerTerminal : CircuitSwitch
     {
         if (playerNearby && this.hasPower)
         {
-            //Turning computer on/off
+            //Turning computer on/off if USE button is held down
             if (!alreadyActivated && Input.GetButton(InputType.USE))
             {
                 pressTime += Time.deltaTime;
@@ -77,7 +78,7 @@ public class ComputerTerminal : CircuitSwitch
                 {
                     this.activated = !this.activated;
                     pressTime = 0;
-                    alreadyActivated = true;
+                    alreadyActivated = true; //marking as already activated this time, to avoid derpy-ness
 
                     for (int m = 0; m < monitors.Length; m++)
                     {
@@ -87,29 +88,25 @@ public class ComputerTerminal : CircuitSwitch
                 }
             }
 
-            //Using computer
+            //Using computer, if USE is held down for < .75 seconds
             if (this.activated && !alreadyActivated && Input.GetButtonUp(InputType.USE))
-            {
                 UsingComputer(true);
+            if (Input.GetButtonUp(InputType.USE))
+            {
+                pressTime = 0;
+                alreadyActivated = false;
             }
 
             if (usingTerminal)
             {
                 if (Input.GetButtonDown(InputType.START))
-                {
                     UsingComputer(false);
-                }
-                //reading passwprd input stream for this frame (ASCII characters only)
-                else if(!alreadyActivated)
+
+                else if (!alreadyActivated) //reading password input stream for this frame (ASCII characters only). if-condition prevents EEEEEEEEEEE spam
                 {
                     for (int i = 0; i < Input.inputString.Length; i++)
                         StartCoroutine(InputKey(Input.inputString[i]));
                 }
-            }
-            if (Input.GetButtonUp(InputType.USE))
-            {
-                pressTime = 0;
-                alreadyActivated = false;
             }
         }    
 	}
@@ -139,6 +136,7 @@ public class ComputerTerminal : CircuitSwitch
             //Email/security screen
             else
             {
+                //Displays contents of the selected email
                 selectedEmailIndex = GUI.SelectionGrid(emailListNodeRect, selectedEmailIndex, emailSelection, 1);
                 GUI.Box(emailBodyRect, emailBody[selectedEmailIndex]);
             }
@@ -198,9 +196,10 @@ public class ComputerTerminal : CircuitSwitch
         {
             case '\n':
             case '\r':
-                passwordGuess = passwordGuess == password ? "Welcome, " + userName : "INCORRECT";
+                bool isCorrect = passwordGuess == password;
+                passwordGuess = isCorrect ? "Welcome, " + userName : "INCORRECT";
                 yield return new WaitForSeconds(.5f);
-                hasAccess = true;
+                hasAccess = isCorrect;
                 //open up email/security window
                 break;
             case '\b':

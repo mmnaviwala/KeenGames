@@ -4,26 +4,21 @@ using System.Collections;
 [AddComponentMenu("Scripts/Environment/Circuitry/Circuit Fan")]
 public class CircuitFan : CircuitNode 
 {
-    public Transform blades;
-    float speed = 0;
-    public float maxSpeed;
-    public float acceleration;
+    public Transform blades;        //Will rotate the blades when powered
+    float angularSpeed = 0;
+    public float maxSpeed;          //max anguler speed
+    public float acceleration;      //angular acceleration
+
     void Awake()
     {
         this.PlugIn(electricGrid);
     }
-	// Use this for initialization
-	void Start () 
-    {
-	}
 	
 	// Update is called once per frame
 	void Update () 
     {
-        if (speed > 0)
-        {
-            blades.Rotate(blades.up, speed * Time.deltaTime);
-        }
+        if (angularSpeed > 0)
+            blades.Rotate(blades.up, angularSpeed * Time.deltaTime);
 	}
 
     public override bool PerformSwitchAction(bool signal)
@@ -40,24 +35,24 @@ public class CircuitFan : CircuitNode
 
     IEnumerator SpeedUp()
     {
-        //speed = 0;
-        while (speed < maxSpeed)
+        while (angularSpeed < maxSpeed)
         {
-            speed += acceleration * Time.deltaTime;
+            angularSpeed += acceleration * Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        speed = maxSpeed;
+        angularSpeed = maxSpeed;
     }
 
     IEnumerator SlowDown()
     {
-        while (speed > 0)
+        while (angularSpeed > 0)
         {
-            speed -= acceleration * Time.deltaTime;
+            angularSpeed -= acceleration * Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        speed = 0;
+        angularSpeed = 0;
     }
+
     public override void TakeDamage(int damage)
     {
         if (this.durability != -1)
