@@ -20,7 +20,6 @@ public class ComputerTerminal : CircuitSwitch
 
     HUD_Stealth playerHUD;
     PlayerMovementBasic playerMovement;
-    animatedPauseMenu pauseMenu;
     CameraMovement3D cam3d;
 
 	protected Rect    terminalRect,  usernameRect,  passwordRect,  emailListRect,  emailBodyRect,  promptRect, emailListNodeRect, exitButtonRect;
@@ -41,7 +40,6 @@ public class ComputerTerminal : CircuitSwitch
     // Use this for initialization
 	void Start () 
     {
-        pauseMenu = GameObject.FindGameObjectWithTag(Tags.PAUSE_MENU).GetComponent<animatedPauseMenu>();
         cam3d = Camera.main.GetComponent<CameraMovement3D>();
 
         for (int m = 0; m < monitors.Length; m++)
@@ -183,7 +181,6 @@ public class ComputerTerminal : CircuitSwitch
         cam3d.enabled =     !usingTerminalP;
         playerHUD.enabled = !usingTerminalP;
         playerMovement.enabled = !usingTerminal;
-        pauseMenu.enabled = !usingTerminalP;
 
         Screen.showCursor =  usingTerminalP;
         Screen.lockCursor = !usingTerminalP;
