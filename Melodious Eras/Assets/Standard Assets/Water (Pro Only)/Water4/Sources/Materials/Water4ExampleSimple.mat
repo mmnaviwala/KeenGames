@@ -87,11 +87,15 @@ Material:
       data:
         first:
           name: _Shininess
-        second: 349.137939
+        second: 409
       data:
         first:
           name: _FresnelScale
         second: .389714301
+      data:
+        first:
+          name: _GerstnerIntensity
+        second: 1
       data:
         first:
           name: _HeightDisplacement
@@ -100,15 +104,15 @@ Material:
         first:
           name: _NormalsDisplacement
         second: 72.7272797
-      data:
-        first:
-          name: _GerstnerIntensity
-        second: 1
     m_Colors:
       data:
         first:
           name: _Color
         second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _SpecularColor
+        second: {r: .822131038, g: .807142794, b: .773422658, a: 1}
       data:
         first:
           name: _DistortParams
@@ -136,15 +140,11 @@ Material:
       data:
         first:
           name: _BaseColor
-        second: {r: .172755614, g: .224076003, b: .24626863, a: .505882382}
+        second: {r: .175431252, g: .226915687, b: .249160364, a: .505882382}
       data:
         first:
           name: _ReflectionColor
-        second: {r: .47582978, g: .606486499, b: .664179087, a: .470588237}
-      data:
-        first:
-          name: _SpecularColor
-        second: {r: .820895553, g: .805815935, b: .771886885, a: 1}
+        second: {r: .478601307, g: .608835936, b: .666285038, a: .470588237}
       data:
         first:
           name: _WorldLightDir

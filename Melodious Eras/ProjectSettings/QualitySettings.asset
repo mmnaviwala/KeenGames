@@ -100,7 +100,12 @@ QualitySettings:
     lodBias: 1.5
     maximumLODLevel: 0
     particleRaycastBudget: 1024
-    excludedTargetPlatforms: []
+    excludedTargetPlatforms:
+    - iPhone
+    - Android
+    - BlackBerry
+    - Windows Store Apps
+    - WP8
   - serializedVersion: 2
     name: Very high
     pixelLightCount: 100
@@ -119,7 +124,12 @@ QualitySettings:
     lodBias: 2
     maximumLODLevel: 0
     particleRaycastBudget: 4096
-    excludedTargetPlatforms: []
+    excludedTargetPlatforms:
+    - WP8
+    - Windows Store Apps
+    - BlackBerry
+    - Android
+    - iPhone
   - serializedVersion: 2
     name: Ultra
     pixelLightCount: 100
@@ -138,7 +148,12 @@ QualitySettings:
     lodBias: 2
     maximumLODLevel: 0
     particleRaycastBudget: 4096
-    excludedTargetPlatforms: []
+    excludedTargetPlatforms:
+    - iPhone
+    - Android
+    - BlackBerry
+    - Windows Store Apps
+    - WP8
   m_PerPlatformDefaultQuality:
     Android: 1
     BlackBerry: 1
