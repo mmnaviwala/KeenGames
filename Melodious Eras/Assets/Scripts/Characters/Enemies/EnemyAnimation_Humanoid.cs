@@ -12,7 +12,8 @@ public class EnemyAnimation_Humanoid : MonoBehaviour
 	private AnimatorSetup animSetup;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
+        HashIDs.Initialize();
 		player = GameObject.FindGameObjectWithTag(Tags.PLAYER).transform;
 		AI = this.GetComponent<EnemyAI>();
 		nav = this.GetComponent<NavMeshAgent>();

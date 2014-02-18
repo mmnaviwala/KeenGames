@@ -27,7 +27,7 @@ public class EnemyAI : MonoBehaviour
 	public float sightDistance = 20;
 
     public Vector3 lastPlayerSighting;
-    private static Vector3 lpsResetPosition = new Vector3(999, 999, 999);
+    private Vector3 lpsResetPosition = new Vector3(999, 999, 999);
     private NavMeshAgent nav;
     private EnemyStats stats;
     private static Vector3 resetPos = new Vector3(1000, 1000, 1000);
@@ -53,16 +53,17 @@ public class EnemyAI : MonoBehaviour
 		enemiesInRange = new List<CharacterStats>();
         nav = this.GetComponent<NavMeshAgent>();
         stats = this.GetComponent<EnemyStats>();
+		lastPlayerSighting = lpsResetPosition;
 	}
 	
 	// Update is called once per frame
 	void Update () 
-    {
-        if (patrolWaypoints != null && patrolWaypoints.Length > 0)
+	{
+		if (lastPlayerSighting != lpsResetPosition && currentEnemy.health > 0f)
+			// ... chase.
+			Chasing();
+        else if (patrolWaypoints != null && patrolWaypoints.Length > 0)
             Patrol();
-        else if (lastPlayerSighting != lpsResetPosition && currentEnemy.health > 0f)
-            // ... chase.
-            Chasing();
 		if(enemiesInRange.Count > 0)
 		{
 			foreach(CharacterStats ch in enemiesInRange)
@@ -98,27 +99,28 @@ public class EnemyAI : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.name + " entered trigger, layer " + other.gameObject.layer);
         if (!other.isTrigger && other is CapsuleCollider)
         {
-			CharacterStats charStats = other.GetComponent<CharacterStats>();
-			if(charStats != null && charStats.faction != this.stats.faction)
-			{
-				enemiesInRange.Add(charStats);
-			}
+            CharacterStats charStats = other.GetComponent<CharacterStats>();
+            if (charStats != null && charStats.faction != this.stats.faction)
+            {
+                enemiesInRange.Add(charStats);
+            }
         }
     }
 
-	void OnTriggerExit(Collider other)
-	{
-		if (!other.isTrigger && other is CapsuleCollider)
-		{
-			CharacterStats charStats = other.GetComponent<CharacterStats>();
-			if(charStats != null && charStats.faction != this.stats.faction)
-			{
-				enemiesInRange.Remove(charStats);
-			}
-		}
-	}
+    void OnTriggerExit(Collider other)
+    {
+        if (!other.isTrigger && other is CapsuleCollider)
+        {
+            CharacterStats charStats = other.GetComponent<CharacterStats>();
+            if (charStats != null && charStats.faction != this.stats.faction)
+            {
+                enemiesInRange.Remove(charStats);
+            }
+        }
+    }
 
     void Patrol()
     {
@@ -171,9 +173,32 @@ public class EnemyAI : MonoBehaviour
             chaseTimer = 0f;
     }
 
-    public void Listen(Vector3 source)
+    public void Listen(Vector3 source, float volume)
     {
- 		
+        if (CalculatePathLengthTo(source) < volume)
+        {
+            lastPlayerSighting = source;
+        }
+    }
+    float CalculatePathLengthTo(Vector3 source)
+    {
+        NavMeshPath path = new NavMeshPath();
+        if (nav.enabled)
+            nav.CalculatePath(source, path);
+
+        Vector3[] allWaypoints = new Vector3[path.corners.Length + 2];
+
+        allWaypoints[0] = this.transform.position;
+        allWaypoints[allWaypoints.Length - 1] = source;
+        for (int i = 0; i < path.corners.Length; i++)
+            allWaypoints[i + 1] = path.corners[i];
+
+        float pathLength = 0;
+        for (int w = 0; w < allWaypoints.Length - 1; w++)
+            pathLength += Vector3.Distance(allWaypoints[w], allWaypoints[w + 1]);
+
+        return pathLength;
+ 
     }
 
     void Attack(PlayerStats target)

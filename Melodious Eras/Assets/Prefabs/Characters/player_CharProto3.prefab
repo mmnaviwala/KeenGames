@@ -8714,7 +8714,7 @@ GameObject:
   - 4: {fileID: 401040}
   - 108: {fileID: 10800000}
   - 114: {fileID: 11400008}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: player_flashlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8748,7 +8748,7 @@ GameObject:
   - 4: {fileID: 401044}
   - 135: {fileID: 13500002}
   - 114: {fileID: 11400012}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: Melee Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28816,10 +28816,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f307043a3f69db347a4bd9808459a6c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 30000
   speed: 0
   snapDownThreshold: .25
-  sound: 0
+  soundwaveDistance: 0
   jumping: 0
   isShooting: 0
   useDefaultMovement: 1
@@ -28871,14 +28870,14 @@ MonoBehaviour:
   lookatTarget: {fileID: 0}
   _closeQuarterEnemies: {fileID: 11400012}
   _nearbyEnemies: {fileID: 11400010}
-  threshold: 5
   suit: {fileID: 11400000}
   flashlight: {fileID: 11400008}
   deathClip: {fileID: 0}
   meleeClip: {fileID: 8300000, guid: 3ca121c001790493aac9f6aec90cfc06, type: 3}
   attackSpeed: .25
-  lastAttack: 0
+  lastAttackTime: 0
   affectingLights: []
+  visibility: 0
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
