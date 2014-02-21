@@ -155,8 +155,10 @@ public class PlayerMovementBasic : MonoBehaviour
         //AIM input
         if (Input.GetButtonDown(InputType.AIM)) //When AIM is pressed
         {
-			if(!isCrouching)
-            	mainCam.SetOffset(CameraOffset.Aim);
+            if (!isCrouching)
+                mainCam.SetOffset(CameraOffset.Aim);
+            else
+                mainCam.SetOffset(CameraOffset.CrouchAim);
             mainCam.followSpeed = (float)CameraFollowSpeed.Aiming;
             isAiming = true;
 			anim.SetBool(HashIDs.aiming_bool, isAiming);
@@ -238,7 +240,7 @@ public class PlayerMovementBasic : MonoBehaviour
 	#region animator IK
 	void OnAnimatorIK(int layerIndex)
 	{
-		if (!(mainCam.activeOffset == mainCam.climbUpOffset || mainCam.activeOffset == mainCam.climbDownOffset))
+        if (!(mainCam.activeOffset == mainCam.offsets.climbUp || mainCam.activeOffset == mainCam.offsets.climbDown))
 			TurnPlayerHead();
 		
         //Points arm toward target when aiming

@@ -2,23 +2,30 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public enum CameraOffset { Default, Aim, Crouch, PDA , Fighting, ClimbUp, ClimbDown, Hacking};
+public enum CameraOffset { Default, Aim, Crouch, PDA , Fighting, ClimbUp, ClimbDown, Hacking, CrouchAim};
 public enum CameraFollowSpeed { Default = 4, Aiming = 10 };
 
 [AddComponentMenu("Scripts/Camera/Camera Movement 3D")]
 public class CameraMovement3D : CameraMovement 
 {
+    [System.Serializable]
+    public class Offsets
+    {
+        public Vector3 defaultOffset; //relative to player. x = left/right, y = up/down, z = forward/backward
+        public Vector3 aim;
+        public Vector3 crouch;
+        public Vector3 PDA;
+        public Vector3 Hacking;
+        public Vector3 fightingt;
+        public Vector3 climbUp, climbDown;
+        public Vector3 crouchAim;
+
+    }
+    [SerializeField] public Offsets offsets;
+    public Vector3 activeOffset;
     public float followSpeed = 5;
 
     //various camera offsets
-    public Vector3 defaultOffset = new Vector3(-0.5f, 1.5f, -1f); //relative to player. x = left/right, y = up/down, z = forward/backward
-    public Vector3 aimOffset;
-    public Vector3 crouchOffset;
-    public Vector3 PDA_Offset;
-    public Vector3 HackingOffset;
-    public Vector3 fightingOffset;
-    public Vector3 climbUpOffset, climbDownOffset;
-    public Vector3 activeOffset;
 
     public float x_sensitivity = 5;             //mouse X sensitivity
     public float y_sensitivity = 2;             //mouse Y sensitivity
@@ -64,7 +71,7 @@ public class CameraMovement3D : CameraMovement
 		if (Input.GetButtonDown(InputType.SHIFT_VIEW))
 			InvertOffset();
         if (Input.GetKeyDown(KeyCode.K) && !shaking)
-            StartCoroutine(Shake(.75f, 3, 3));
+            StartCoroutine(Shake(.125f, 8, 3));
 		
 		//Adjusting look rotation
 		float intensityX = Input.GetAxis(InputType.MOUSE_X);
@@ -115,7 +122,7 @@ public class CameraMovement3D : CameraMovement
 				camTargetPos = targetLookPos + offsetDirection;
 
 			//moving flashlight
-			Vector3 fOrigin = player.position + new Vector3(0, activeOffset.y, 0);
+            Vector3 fOrigin = player.position + new Vector3(0, activeOffset.y, 0);
 
 			flashlight.rotation = this.transform.rotation;
 			if(Physics.Raycast (fOrigin, this.transform.forward, out hit, 0.5f))
@@ -157,17 +164,18 @@ public class CameraMovement3D : CameraMovement
     {
         switch (newOffset)
         {
-            case CameraOffset.Default:  activeOffset = defaultOffset;   break;
-            case CameraOffset.Aim:      activeOffset = aimOffset;       break;
-            case CameraOffset.Crouch:   activeOffset = crouchOffset;    break;
-            case CameraOffset.PDA:      activeOffset = PDA_Offset;      break;
-            case CameraOffset.Fighting: activeOffset = fightingOffset;  break;
-            case CameraOffset.ClimbUp:  activeOffset = climbUpOffset;   break;
-            case CameraOffset.ClimbDown:activeOffset = climbDownOffset; break;
-            case CameraOffset.Hacking:  activeOffset = HackingOffset;   break;
+            case CameraOffset.Default:  activeOffset = offsets.defaultOffset;   break;
+            case CameraOffset.Aim: activeOffset = offsets.aim; break;
+            case CameraOffset.Crouch: activeOffset = offsets.crouch; break;
+            case CameraOffset.PDA: activeOffset = offsets.PDA; break;
+            case CameraOffset.Fighting: activeOffset = offsets.fightingt; break;
+            case CameraOffset.ClimbUp: activeOffset = offsets.climbUp; break;
+            case CameraOffset.ClimbDown: activeOffset = offsets.climbDown; break;
+            case CameraOffset.Hacking: activeOffset = offsets.Hacking; break;
+            case CameraOffset.CrouchAim: activeOffset = offsets.crouchAim; break;
         }
         activeOffset.x *= invertOffset;
-		raycastDistance = activeOffset.magnitude;
+        raycastDistance = activeOffset.magnitude;
     }
 
     IEnumerator Shake(float intensity, float speed, float duration)
@@ -180,8 +188,10 @@ public class CameraMovement3D : CameraMovement
             this.atTargetPos = false;
 
             float _intensity = intensity * (endTime - Time.time);
-            shakeOffsetX = Mathf.PerlinNoise(Time.time * speed, Time.time * speed) * _intensity - _intensity / 2f;
-            shakeOffsetY = Mathf.PerlinNoise((Time.time + 1) * speed, (Time.time + 1) * speed) * _intensity - _intensity / 2f;
+            //shakeOffsetX = Mathf.PerlinNoise(Time.time * speed, Time.time * speed) * _intensity - _intensity / 2f;
+            shakeOffsetY = (Mathf.PerlinNoise((Time.time + 1) * speed / 4, (Time.time + 1) * speed / 4) * _intensity - _intensity / 2f) * 2;
+            shakeOffsetX = Mathf.Cos(Time.time * speed) * _intensity;
+            //shakeOffsetY = Mathf.Sin(Time.time * speed * 2) * _intensity / 2;
 
             this.transform.position = camTargetPos + transform.right * shakeOffsetX + transform.up * shakeOffsetY;
             yield return eof;
