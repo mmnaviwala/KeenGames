@@ -11317,7 +11317,7 @@ Renderer:
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
   - {fileID: 2100000, guid: f0d141bbdd1f66842870fab2d61fc6da, type: 2}
-  - {fileID: 2100000, guid: c84208cf872aa524481a5efcac4e9e1d, type: 2}
+  - {fileID: 2100000, guid: 27f4c37535896d7459384dd6d27cfda7, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -16802,6 +16802,65 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
+  objectiveRectStyle:
+    m_Name: 
+    m_Normal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Hover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Active:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 0}
+    m_FontSize: 0
+    m_FontStyle: 0
+    m_Alignment: 0
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
 --- !u!114 &344796723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16814,24 +16873,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f307043a3f69db347a4bd9808459a6c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 30000
   speed: 7
   snapDownThreshold: .25
-  sound: 0
+  soundwaveDistance: 0
   jumping: 0
   isShooting: 0
   useDefaultMovement: 1
   isAiming: 0
   isWalking: 0
   isCrouching: 0
-  crouchHeightFactor: .600000024
-  crouchChangeSpeed: 4
   zeroFriction: {fileID: 13400000, guid: 40ffd4c9381f6d744b11b1f58839cd99, type: 2}
   fullFriction: {fileID: 13400000, guid: 505fe72ad171fa24d96bc176a4bebe01, type: 2}
   ignorePlayer:
     serializedVersion: 2
     m_Bits: 4294966267
   targetPoint: {x: 0, y: 0, z: 0}
+  advancedSettings:
+    stationaryTurnSpeed: 180
+    movingTurnSpeed: 360
+    headLookResponseSpeed: 2
+    crouchHeightFactor: .5
+    crouchChangeSpeed: 4
+    autoTurnThresholdAngle: 100
+    autoTurnSpeed: 2
+    zeroFrictionMaterial: {fileID: 0}
+    highFrictionMaterial: {fileID: 0}
+    jumpRepeatDelayTime: .25
+    runCycleLegOffset: .200000003
+    groundStickyEffect: 5
 --- !u!114 &344796724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16850,20 +16919,23 @@ MonoBehaviour:
   isDead: 0
   meleeDamage: 10
   equippedWeapon: {fileID: 953318744}
-  holsteredWeapons:
-  - {fileID: 11400000, guid: 6a7152cea42a0e3428c1d55850486ea1, type: 2}
+  sidearm: {fileID: 0}
+  largeWeapon: {fileID: 0}
+  thrown: {fileID: 0}
+  explosive: {fileID: 0}
   leftHand: {fileID: 1550580971}
   rightHand: {fileID: 84881917}
   lookatTarget: {fileID: 0}
   _closeQuarterEnemies: {fileID: 727033505}
   _nearbyEnemies: {fileID: 550072860}
-  threshold: 5
   suit: {fileID: 344796721}
   flashlight: {fileID: 1408356232}
   deathClip: {fileID: 0}
   meleeClip: {fileID: 8300000, guid: 3ca121c001790493aac9f6aec90cfc06, type: 3}
   attackSpeed: .25
-  lastAttack: 0
+  lastAttackTime: 0
+  affectingLights: []
+  visibility: 0
 --- !u!95 &344796725
 Animator:
   serializedVersion: 2
@@ -19131,7 +19203,7 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_Lightmapping: 1
+  m_Lightmapping: 2
   m_ShadowSamples: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -20267,7 +20339,7 @@ Renderer:
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
   - {fileID: 2100000, guid: f0d141bbdd1f66842870fab2d61fc6da, type: 2}
-  - {fileID: 2100000, guid: c84208cf872aa524481a5efcac4e9e1d, type: 2}
+  - {fileID: 2100000, guid: 27f4c37535896d7459384dd6d27cfda7, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -26426,7 +26498,7 @@ GameObject:
   - 4: {fileID: 550072859}
   - 135: {fileID: 550072861}
   - 114: {fileID: 550072860}
-  m_Layer: 10
+  m_Layer: 2
   m_Name: Sound Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33012,7 +33084,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: effa9853456c744589264d651534ff39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guiTextureNameShouldBe: gui texture left
 --- !u!114 &695409050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33025,15 +33096,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01bffa8aa898b437183cd5617f7b5303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathName: Move Left Texture Out
-  pathColor: {r: 0, g: 1, b: 1, a: 1}
-  nodes:
-  - {x: .289999992, y: .5, z: 0}
-  - {x: -.289999992, y: .5, z: 0}
-  nodeCount: 2
-  initialized: 1
-  initialName: New Path 6
-  pathVisible: 1
 --- !u!114 &695409051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33046,15 +33108,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01bffa8aa898b437183cd5617f7b5303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathName: Move Left Texture In
-  pathColor: {r: 0, g: 1, b: 1, a: 1}
-  nodes:
-  - {x: -.289999992, y: .5, z: 0}
-  - {x: .289999992, y: .5, z: 0}
-  nodeCount: 2
-  initialized: 1
-  initialName: New Path 5
-  pathVisible: 1
 --- !u!131 &695409052
 GUITexture:
   m_ObjectHideFlags: 0
@@ -34799,7 +34852,7 @@ GameObject:
   - 4: {fileID: 727033504}
   - 135: {fileID: 344796717}
   - 114: {fileID: 727033505}
-  m_Layer: 10
+  m_Layer: 2
   m_Name: Melee Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44708,8 +44761,8 @@ Transform:
   m_PrefabParentObject: {fileID: 400142, guid: 2decc1294902f90418c35ecef80a6cb3, type: 2}
   m_PrefabInternal: {fileID: 1886587657}
   m_GameObject: {fileID: 953318740}
-  m_LocalRotation: {x: -.838650525, y: .184344351, z: .129108891, w: -.495997459}
-  m_LocalPosition: {x: -.117844626, y: .0538026579, z: .0100386422}
+  m_LocalRotation: {x: -.842137277, y: .192371383, z: .134404495, w: -.485523939}
+  m_LocalPosition: {x: -.119999997, y: .0500000007, z: .00999999978}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 1262279126}
@@ -44807,6 +44860,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 1
+  wieldPosition: {x: 0, y: 0, z: 0}
+  wieldRotation: {x: 0, y: 0, z: 0}
   weaponName: Laser Pistol
   hudStyle:
     m_Name: 
@@ -44867,6 +44922,7 @@ MonoBehaviour:
     m_FixedHeight: 0
     m_StretchWidth: 1
     m_StretchHeight: 0
+  _class: 0
   ammoInClip: 10
   extraAmmo: 15
   maxAmmo: 25
@@ -48790,7 +48846,7 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_Lightmapping: 1
+  m_Lightmapping: 2
   m_ShadowSamples: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -62722,7 +62778,7 @@ Light:
   m_Type: 0
   m_Color: {r: .882352948, g: 1, b: 1, a: 1}
   m_Intensity: 5
-  m_Range: 10
+  m_Range: 15
   m_SpotAngle: 45
   m_CookieSize: 10
   m_Shadows:
@@ -65341,7 +65397,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: effa9853456c744589264d651534ff39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guiTextureNameShouldBe: gui texture top
 --- !u!114 &1462856694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65354,15 +65409,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01bffa8aa898b437183cd5617f7b5303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathName: Move Top Texture Out
-  pathColor: {r: 0, g: 1, b: 1, a: 1}
-  nodes:
-  - {x: .5, y: .870000005, z: 0}
-  - {x: .5, y: 1.49000001, z: 0}
-  nodeCount: 2
-  initialized: 1
-  initialName: New Path 10
-  pathVisible: 1
 --- !u!114 &1462856695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65375,15 +65421,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01bffa8aa898b437183cd5617f7b5303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathName: Move Top Texture In
-  pathColor: {r: 0, g: 1, b: 1, a: 1}
-  nodes:
-  - {x: .5, y: 1.49000001, z: 0}
-  - {x: .5, y: .870000005, z: 0}
-  nodeCount: 2
-  initialized: 1
-  initialName: New Path 9
-  pathVisible: 1
 --- !u!131 &1462856696
 GUITexture:
   m_ObjectHideFlags: 0
@@ -66468,7 +66505,7 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_Lightmapping: 1
+  m_Lightmapping: 2
   m_ShadowSamples: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -77120,7 +77157,7 @@ MonoBehaviour:
   invertLook: 1
   target: {fileID: 0}
   atTargetPos: 0
-  go: {fileID: 0}
+  camRotationHelper: {fileID: 0}
 --- !u!82 &1707941983
 AudioSource:
   m_ObjectHideFlags: 0
@@ -77865,7 +77902,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: effa9853456c744589264d651534ff39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guiTextureNameShouldBe: gui texture bottom left
 --- !u!114 &1728705022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77878,15 +77914,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01bffa8aa898b437183cd5617f7b5303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathName: Move Bottom Left Texture Out
-  pathColor: {r: 0, g: 1, b: 1, a: 1}
-  nodes:
-  - {x: .289999992, y: .109999999, z: 0}
-  - {x: .289999992, y: -.109999999, z: 0}
-  nodeCount: 2
-  initialized: 1
-  initialName: New Path 2
-  pathVisible: 1
 --- !u!114 &1728705023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77899,15 +77926,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01bffa8aa898b437183cd5617f7b5303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathName: Move Bottom Left Texture In
-  pathColor: {r: 0, g: 1, b: 1, a: 1}
-  nodes:
-  - {x: .289999992, y: -.109999999, z: 0}
-  - {x: .289999992, y: .109999999, z: 0}
-  nodeCount: 2
-  initialized: 1
-  initialName: New Path 1
-  pathVisible: 1
 --- !u!131 &1728705024
 GUITexture:
   m_ObjectHideFlags: 0
@@ -79851,7 +79869,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: effa9853456c744589264d651534ff39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guiTextureNameShouldBe: gui texture right
 --- !u!114 &1768846585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79864,15 +79881,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01bffa8aa898b437183cd5617f7b5303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathName: Move Right Texture Out
-  pathColor: {r: 0, g: 1, b: 1, a: 1}
-  nodes:
-  - {x: .709999979, y: .5, z: 0}
-  - {x: 1.39999998, y: .5, z: 0}
-  nodeCount: 2
-  initialized: 1
-  initialName: New Path 8
-  pathVisible: 1
 --- !u!114 &1768846586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79885,15 +79893,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01bffa8aa898b437183cd5617f7b5303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathName: Move Right Texture In
-  pathColor: {r: 0, g: 1, b: 1, a: 1}
-  nodes:
-  - {x: 1.39999998, y: .5, z: 0}
-  - {x: .709999979, y: .5, z: 0}
-  nodeCount: 2
-  initialized: 1
-  initialName: New Path 7
-  pathVisible: 1
 --- !u!131 &1768846587
 GUITexture:
   m_ObjectHideFlags: 0
@@ -81053,7 +81052,7 @@ Renderer:
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
   - {fileID: 2100000, guid: f0d141bbdd1f66842870fab2d61fc6da, type: 2}
-  - {fileID: 2100000, guid: c84208cf872aa524481a5efcac4e9e1d, type: 2}
+  - {fileID: 2100000, guid: 27f4c37535896d7459384dd6d27cfda7, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -83719,7 +83718,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1882333313
 Transform:
   m_ObjectHideFlags: 0
@@ -94652,7 +94651,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: effa9853456c744589264d651534ff39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guiTextureNameShouldBe: gui texture bottom right
 --- !u!114 &2141182933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94665,15 +94663,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01bffa8aa898b437183cd5617f7b5303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathName: Move Bottom Right Texture Out
-  pathColor: {r: 0, g: 1, b: 1, a: 1}
-  nodes:
-  - {x: .709999979, y: .109999999, z: 0}
-  - {x: .709999979, y: -.109999999, z: 0}
-  nodeCount: 2
-  initialized: 1
-  initialName: New Path 4
-  pathVisible: 1
 --- !u!114 &2141182934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94686,15 +94675,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01bffa8aa898b437183cd5617f7b5303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathName: Move Bottom Right Texture In
-  pathColor: {r: 0, g: 1, b: 1, a: 1}
-  nodes:
-  - {x: .709999979, y: -.109999999, z: 0}
-  - {x: .709999979, y: .109999999, z: 0}
-  nodeCount: 2
-  initialized: 1
-  initialName: New Path 3
-  pathVisible: 1
 --- !u!131 &2141182935
 GUITexture:
   m_ObjectHideFlags: 0

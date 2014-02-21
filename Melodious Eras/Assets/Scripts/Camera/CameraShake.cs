@@ -10,34 +10,36 @@ public class CameraShake : MonoBehaviour
     public float shakeDecay;
     public float shakeIntensity;
     Vector3 cameraOffset;
+    YieldInstruction eof;// = new WaitForEndOfFrame();
+    CameraMovement3D cam3d;
+    private bool shaking = false;
 
     Transform player;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag(Tags.PLAYER).transform;
+        cam3d = this.GetComponent<CameraMovement3D>();
         cameraOffset = this.transform.position - player.position - new Vector3(0f, 0f, 0f);
         this.audio.Play();
+        eof = new WaitForEndOfFrame();
     }
 
     void Update()
     {
-        if (shakeIntensity > 0)
+        if (Input.GetKeyDown(KeyCode.K))
         {
-            //transform.position = player.position + cameraOffset + Random.insideUnitSphere * shakeIntensity;
-            transform.rotation = new Quaternion(
-                originRotation.x + Random.Range(-shakeIntensity, shakeIntensity) * .05f,
-                originRotation.y + Random.Range(-shakeIntensity, shakeIntensity) * .05f,
-                originRotation.z + Random.Range(-shakeIntensity, shakeIntensity) * .05f,
-                originRotation.w + Random.Range(-shakeIntensity, shakeIntensity) * .05f);
-            shakeIntensity -= shakeDecay;
+            StartCoroutine(Shake(5, 3));
         }
     }
-
-    public void Shake()
+    IEnumerator Shake(float intensity, float duration)
     {
-        originPosition = transform.position;
-        originRotation = transform.rotation;
-        shakeIntensity = .75f;
-        shakeDecay = 0.01f;
+        shaking = true;
+        float endTime = Time.time + duration;
+        while (Time.time < endTime)
+        {
+            
+            yield return eof;
+        }
+        shaking = false;
     }
 }

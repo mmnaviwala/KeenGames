@@ -36,12 +36,15 @@ public class CameraMovement3D : CameraMovement
     Transform flashlight;
     public GameObject camRotationHelper;        //helping with camera rotation
 
+    private bool shaking;
+    private YieldInstruction eof;
 
 	// Use this for initialization
 	void Start () 
     {
         player = GameObject.FindGameObjectWithTag(Tags.PLAYER).transform;
 		flashlight = player.GetComponent<PlayerStats>().flashlight.transform;
+        eof = new WaitForEndOfFrame();
 
         camTargetPos = player.transform.position;
 
@@ -60,6 +63,8 @@ public class CameraMovement3D : CameraMovement
     {		
 		if (Input.GetButtonDown(InputType.SHIFT_VIEW))
 			InvertOffset();
+        if (Input.GetKeyDown(KeyCode.K) && !shaking)
+            StartCoroutine(Shake(.75f, 3, 3));
 		
 		//Adjusting look rotation
 		float intensityX = Input.GetAxis(InputType.MOUSE_X);
@@ -153,16 +158,34 @@ public class CameraMovement3D : CameraMovement
         switch (newOffset)
         {
             case CameraOffset.Default:  activeOffset = defaultOffset;   break;
-            case CameraOffset.Aim:     activeOffset = aimOffset;      break;
+            case CameraOffset.Aim:      activeOffset = aimOffset;       break;
             case CameraOffset.Crouch:   activeOffset = crouchOffset;    break;
             case CameraOffset.PDA:      activeOffset = PDA_Offset;      break;
             case CameraOffset.Fighting: activeOffset = fightingOffset;  break;
             case CameraOffset.ClimbUp:  activeOffset = climbUpOffset;   break;
             case CameraOffset.ClimbDown:activeOffset = climbDownOffset; break;
-            case CameraOffset.Hacking: activeOffset = HackingOffset; break;
+            case CameraOffset.Hacking:  activeOffset = HackingOffset;   break;
         }
         activeOffset.x *= invertOffset;
 		raycastDistance = activeOffset.magnitude;
     }
 
+    IEnumerator Shake(float intensity, float speed, float duration)
+    {
+        shaking = true;
+        float endTime = Time.time + duration;
+        float shakeOffsetX, shakeOffsetY;
+        while (Time.time < endTime)
+        {
+            this.atTargetPos = false;
+
+            float _intensity = intensity * (endTime - Time.time);
+            shakeOffsetX = Mathf.PerlinNoise(Time.time * speed, Time.time * speed) * _intensity - _intensity / 2f;
+            shakeOffsetY = Mathf.PerlinNoise((Time.time + 1) * speed, (Time.time + 1) * speed) * _intensity - _intensity / 2f;
+
+            this.transform.position = camTargetPos + transform.right * shakeOffsetX + transform.up * shakeOffsetY;
+            yield return eof;
+        }
+        shaking = false;
+    }
 }
