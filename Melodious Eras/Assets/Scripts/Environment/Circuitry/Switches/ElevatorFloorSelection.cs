@@ -24,6 +24,8 @@ public class ElevatorFloorSelection : CircuitSwitch
 	// Use this for initialization
 	void Start () 
     {
+        playerHUD = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<HUD_Stealth>();
+        cam3d = Camera.main.GetComponent<CameraMovement3D>();
         elevator = this.transform.parent.GetComponent<Elevator>();
         int h = Screen.height / 10;
         int w = Screen.width / 2;
@@ -82,6 +84,7 @@ public class ElevatorFloorSelection : CircuitSwitch
     {
         if (other is CapsuleCollider && other.tag == Tags.PLAYER)
         {
+            Debug.Log(other.name + " entered elevator");
             playerHUD = other.GetComponent<HUD_Stealth>();
             cam3d = Camera.main.GetComponent<CameraMovement3D>();
         }

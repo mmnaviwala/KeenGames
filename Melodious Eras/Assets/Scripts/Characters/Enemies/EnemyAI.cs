@@ -70,7 +70,7 @@ public class EnemyAI : MonoBehaviour
 			{
 				//RaycastHit[] hits;
 				
-				if (Vector3.Angle(ch.transform.position - this.eyes.position, this.eyes.forward) < fov)
+				if (Vector3.Angle(ch.transform.position + Vector3.up - this.eyes.position, this.eyes.forward) < fov)
 				{
 					//calculating rays for 3 points on the character
 					float charHeight = ch.collider.bounds.max.y - ch.collider.bounds.min.y;

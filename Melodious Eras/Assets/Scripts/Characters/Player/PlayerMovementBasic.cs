@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+enum Acrobatics { Vault, Dive, ClimbLedge };
 /// <summary>
 /// Monolothic character control class. I've had as much fun writing it as you'll have reading it.
 /// </summary>
@@ -22,6 +23,7 @@ public class PlayerMovementBasic : MonoBehaviour
 						  fullFriction;
 	public LayerMask ignorePlayer;          //used to prevent LookAt IK function from bugging out when camera's pointed at player
 	public Vector3 targetPoint;             //center of camera. When aiming, this points the arm at the target
+    public LayerMask obstacleLayers;
 
 
     private Vector3 m_target;               //MatchTarget coords
@@ -38,6 +40,8 @@ public class PlayerMovementBasic : MonoBehaviour
     private float originalHeight;
     private const float m_VaultMatchTargetStart = 0.40f;
     private const float m_VaultMatchTargetStop = 0.51f;
+    private const float m_ClimbMatchTargetStart = .19f;
+    private const float m_ClimbMatchTargetStop = .3f;
 	
 	[SerializeField] AdvancedSettings advancedSettings;                 // Container for the advanced settings class , thiss allows the advanced settings to be in a foldout in the inspector
 
@@ -328,15 +332,16 @@ public class PlayerMovementBasic : MonoBehaviour
 
 
 			//if high hit
-			if(Physics.Raycast (high, out hitHighInfo, raycastDistance))
+			if(Physics.Raycast (high, out hitHighInfo, raycastDistance, obstacleLayers))
 			{
 
 				Ray climbHeight = new Ray(this.transform.position + Vector3.up * 2.5f, this.transform.forward);
-				if(!Physics.Raycast(climbHeight, raycastDistance))
+				if(!Physics.Raycast(climbHeight, raycastDistance, obstacleLayers))
 				{
 					//climb wall
 					//need to match hand placement with top of wall
 					anim.SetBool(HashIDs.climbeLedge_bool, true);
+                    StartCoroutine(ProcessMatchTarget(hitHighInfo.collider, hitHighInfo.point, this.transform.position, Acrobatics.ClimbLedge));
 					yield return climbTime;
 					anim.SetBool(HashIDs.climbeLedge_bool, false);
 					anim.SetBool(HashIDs.onGround_bool, true);
@@ -344,13 +349,13 @@ public class PlayerMovementBasic : MonoBehaviour
 				else
 					jumping = false;
 			}
-			else if(Physics.Raycast(low, out hitLowInfo, raycastDistance))
+			else if(Physics.Raycast(low, out hitLowInfo, raycastDistance, obstacleLayers))
 			{
 				//vault
 				anim.SetBool(HashIDs.vault_bool, true);
 				m_target = hitLowInfo.point;
 				m_target.y = hitLowInfo.collider.bounds.max.y;
-				StartCoroutine(ProcessMatchTarget(hitLowInfo.collider, hitLowInfo.point, this.transform.position));
+				StartCoroutine(ProcessMatchTarget(hitLowInfo.collider, hitLowInfo.point, this.transform.position, Acrobatics.Vault));
 				yield return vaultTime;
 				anim.SetBool(HashIDs.vault_bool, false);
 				anim.SetBool(HashIDs.onGround_bool, true);
@@ -384,11 +389,14 @@ public class PlayerMovementBasic : MonoBehaviour
 			this.anim.MatchTarget(m_target, new Quaternion(), AvatarTarget.LeftHand, new MatchTargetWeightMask(Vector3.one, 0), m_VaultMatchTargetStart, m_VaultMatchTargetStop);
 			//this.anim.MatchTarget(m_target, new Quaternion(), AvatarTarget.LeftHand, new MatchTargetWeightMask(Vector3.one, 0), m_VaultMatchTargetStart, m_VaultMatchTargetStop);
 		}
-		else
-		{
-			this.collider.enabled = true;
-			this.rigidbody.useGravity = true;
-		}
+        else if (this.anim.GetCurrentAnimatorStateInfo(0).IsName("Player Animator.Jump to Ledge"))
+        {
+        }
+        else
+        {
+            this.collider.enabled = true;
+            this.rigidbody.useGravity = true;
+        }
 	}
 	/// <summary>
 	/// Matching target for vaulting/climbing ledge. Currently only vaulting has been tested
@@ -397,37 +405,47 @@ public class PlayerMovementBasic : MonoBehaviour
 	/// <param name="hitCol">Hit col.</param>
 	/// <param name="hitPoint">Hit point.</param>
 	/// <param name="startPos">Start position.</param>
-	IEnumerator ProcessMatchTarget(Collider hitCol, Vector3 hitPoint, Vector3 startPos)
-	{
-		Vector3 matchTarget = hitPoint;
-		matchTarget.y = hitCol.bounds.max.y;
+	IEnumerator ProcessMatchTarget(Collider hitCol, Vector3 hitPoint, Vector3 startPos, Acrobatics stunt)
+    {
+        Vector3 matchTarget = hitPoint;
+        matchTarget.y = hitCol.bounds.max.y;
+        float distance = Vector3.Distance(hitPoint, startPos);
+        float startTime = 0, endTime = 0;
+        AnimatorStateInfo state;
 
-
-		float distance = Vector3.Distance(hitPoint, startPos);
-		float startTime = m_VaultMatchTargetStart * (distance / 4); //trying to avoid clipping animation
-		float endTime = m_VaultMatchTargetStop * (distance / 4);
-
-        //IK for vaulting
-		while(this.anim.GetBool(HashIDs.vault_bool))
-		{
-			AnimatorStateInfo state = this.anim.GetCurrentAnimatorStateInfo(0);
-			if(state.IsName("Player Animator.Vault") && state.normalizedTime > startTime)
-			{
-				this.rigidbody.isKinematic = true;
-				this.anim.MatchTarget(matchTarget, new Quaternion(), AvatarTarget.LeftHand, new MatchTargetWeightMask(Vector3.one, 0), startTime, endTime);
-			}
-            yield return endOfFrame;
-		}
-        //IK for climbing ledge. Not tested yet
-        while (this.anim.GetBool(HashIDs.climbeLedge_bool))
+        switch (stunt)
         {
-            this.rigidbody.isKinematic = true;
-            AnimatorStateInfo state = this.anim.GetCurrentAnimatorStateInfo(0);
-            if (state.IsName("Player Animator.Jump to Ledge") && state.normalizedTime > startTime)
-            {
-                this.anim.MatchTarget(matchTarget, new Quaternion(), AvatarTarget.RightHand, new MatchTargetWeightMask(Vector3.one, 0), startTime, endTime);
-            }
-            yield return endOfFrame;
+            case Acrobatics.Vault:  //IK for vaulting
+		        startTime = m_VaultMatchTargetStart * (distance / 4); //trying to avoid clipping animation
+		        endTime = m_VaultMatchTargetStop * (distance / 4);
+
+                while(this.anim.GetBool(HashIDs.vault_bool))
+		        {
+			        state = this.anim.GetCurrentAnimatorStateInfo(0);
+			        if(state.IsName("Player Animator.Vault") && state.normalizedTime > startTime)
+			        {
+				        this.rigidbody.isKinematic = true;
+				        this.anim.MatchTarget(matchTarget, new Quaternion(), AvatarTarget.LeftHand, new MatchTargetWeightMask(Vector3.one, 0), startTime, endTime);
+			        }
+                    yield return endOfFrame;
+		        }
+                break;
+
+            case Acrobatics.ClimbLedge: //IK for climbing ledge. Not tested yet
+                startTime = m_ClimbMatchTargetStart;
+                endTime = m_ClimbMatchTargetStop;
+                while (this.anim.GetBool(HashIDs.climbeLedge_bool))
+                {
+                    this.rigidbody.isKinematic = true;
+                    state = this.anim.GetCurrentAnimatorStateInfo(0);
+                    if (state.IsName("Player Animator.Jump to Ledge") && state.normalizedTime > startTime)
+                    {
+                        Debug.Log("Jumping to ledge");
+                        this.anim.MatchTarget(matchTarget, new Quaternion(), AvatarTarget.RightHand, new MatchTargetWeightMask(Vector3.one, 0), startTime, endTime);
+                    }
+                    yield return endOfFrame;
+                }
+                break;
         }
 		this.rigidbody.isKinematic = false;
 	}

@@ -109,7 +109,6 @@ public class Elevator : CircuitMove
 	private IEnumerator MoveElevator ()
 	{
 		yield return StartCoroutine(CloseDoors());
-		Debug.Log("Done Closing");
 		Move ();
 		activated = true;
 	}
@@ -145,6 +144,5 @@ public class Elevator : CircuitMove
     {
         destIndex = floorIndex;
 		StartCoroutine(MoveElevator());
-        Debug.Log("Elevator called to floor " + floorIndex);
     }
 }

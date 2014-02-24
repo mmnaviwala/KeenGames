@@ -46,6 +46,12 @@ public class CameraMovement3D : CameraMovement
     private bool shaking;
     private YieldInstruction eof;
 
+    void Awake()
+    {
+        camRotationHelper = new GameObject();
+        camRotationHelper.name = "camTarget";
+ 
+    }
 	// Use this for initialization
 	void Start () 
     {
@@ -56,11 +62,8 @@ public class CameraMovement3D : CameraMovement
         camTargetPos = player.transform.position;
 
         SetOffset(CameraOffset.Default);
-		if(camRotationHelper == null)
-		{
-			camRotationHelper = new GameObject();
-			camRotationHelper.name = "camTarget";
-		}
+		
+		
         camRotationHelper.transform.position = player.position + new Vector3(0, activeOffset.y, 0);
         camRotationHelper.transform.rotation = player.rotation;
 	}

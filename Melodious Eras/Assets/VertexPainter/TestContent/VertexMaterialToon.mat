@@ -17,14 +17,21 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: 5705f2fc1302ea340a90c9525cc0428b, type: 3}
+          m_Texture: {fileID: 2800000, guid: 1319748ce3409bc48bfe727826758472, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _BumpMap
         second:
-          m_Texture: {fileID: 2800000, guid: e4e97d23f9bd614429d7e119e5d3cc51, type: 3}
+          m_Texture: {fileID: 2800000, guid: aaf90183dc6921440a12e0609090eb2a, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _RampTex
+        second:
+          m_Texture: {fileID: 2800000, guid: e950636c300acaa45a3365cbe5b186ab, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -64,13 +71,6 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _RampTex
-        second:
-          m_Texture: {fileID: 2800000, guid: e950636c300acaa45a3365cbe5b186ab, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-      data:
-        first:
           name: _NebulaTex
         second:
           m_Texture: {fileID: 2800000, guid: 8fd2497f958064b489f84f289225f510, type: 3}
@@ -86,16 +86,16 @@ Material:
     m_Floats:
       data:
         first:
+          name: _Illum
+        second: 0
+      data:
+        first:
           name: _RimPower
         second: 1.5
       data:
         first:
           name: _BlendTile
         second: 2
-      data:
-        first:
-          name: _Illum
-        second: 0
     m_Colors:
       data:
         first:
