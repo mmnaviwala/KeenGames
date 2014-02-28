@@ -1135,8 +1135,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400148}
-  - 114: {fileID: 11400010}
   - 135: {fileID: 13500002}
+  - 54: {fileID: 5400002}
+  - 114: {fileID: 11400010}
   m_Layer: 2
   m_Name: NPC_fov
   m_TagString: Untagged
@@ -1798,8 +1799,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100108}
-  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: -.707106829}
-  m_LocalPosition: {x: 2.49777603, y: .5, z: -.0608811378}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.5, y: .5, z: -2.90243483}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400106}
@@ -2038,7 +2039,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100148}
-  m_LocalRotation: {x: .384098053, y: .607146502, z: .36852634, w: -.589940906}
+  m_LocalRotation: {x: .43824324, y: .569515407, z: .424370974, w: -.55091238}
   m_LocalPosition: {x: -.155780748, y: .12799643, z: 2.57448107e-07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2082,10 +2083,25 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: .0500000007
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 80
+  m_CollisionDetection: 0
+--- !u!54 &5400002
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100148}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!82 &8200000
 AudioSource:
@@ -2196,7 +2212,7 @@ Light:
     m_SoftnessFade: 1
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
-  m_ActuallyLightmapped: 0
+  m_ActuallyLightmapped: 1
   m_Flare: {fileID: 0}
   m_RenderMode: 0
   m_CullingMask:
@@ -2252,13 +2268,16 @@ MonoBehaviour:
   currentEnemy: {fileID: 0}
   hearingMultiplier: 1
   awarenessMultiplier: 1
+  fieldOfView: 110
   shootingRange: 0
   meleeRange: 0
   patrolSpeed: 2
   chaseSpeed: 5
   chaseWaitTime: 5
   patrolWaitTime: 2
-  patrolWaypoints: []
+  patrolWaypoints:
+  - {fileID: 0}
+  - {fileID: 0}
   seesPlayer: 0
   awareOfPlayer: 0
   sightLayer:
@@ -2267,6 +2286,7 @@ MonoBehaviour:
   sightDistance: 20
   lastPlayerSighting: {x: 0, y: 0, z: 0}
   enemiesInRange: []
+  sight: {fileID: 11400010}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2399,10 +2419,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 100148}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b69721bdad5e17f47928e057d9463648, type: 3}
+  m_Script: {fileID: 11500000, guid: 1915519f7faceb14d9cce10ed91a5c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   charactersInRange: []
+  ai: {fileID: 11400002}
+  fovAngle: 160
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1

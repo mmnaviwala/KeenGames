@@ -10,24 +10,29 @@ using System.Collections.Generic;
 public class DetectionSphere : MonoBehaviour {
 	
 	public List<CharacterStats> charactersInRange;
+    bool isFOV = false;
 	// Use this for initialization
 	void Awake () 
 	{
 		charactersInRange = new List<CharacterStats>();
+        if (this.gameObject.layer == 13)
+            isFOV = true;
 	}
 	
 	void OnTriggerEnter(Collider other)
 	{
 		if (!other.isTrigger && (other.tag == Tags.ENEMY || other.tag == Tags.PLAYER))
 		{
-			this.charactersInRange.Add(other.GetComponent<EnemyStats>());
+			this.charactersInRange.Add(other.GetComponent<CharacterStats>());
+            if (isFOV)
+                Debug.Log("Player in range");
 		}
 	}
 	void OnTriggerExit(Collider other)
 	{
 		if (!other.isTrigger && (other.tag == Tags.ENEMY || other.tag == Tags.PLAYER))
 		{
-			this.charactersInRange.Remove(other.GetComponent<EnemyStats>());
+            this.charactersInRange.Remove(other.GetComponent<CharacterStats>());
 		}
 	}
 }

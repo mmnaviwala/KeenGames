@@ -9,8 +9,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 135: {fileID: 13500000}
-  - 114: {fileID: 11400006}
   - 54: {fileID: 5400002}
+  - 114: {fileID: 11400006}
   m_Layer: 13
   m_Name: fov
   m_TagString: Untagged
@@ -27487,6 +27487,7 @@ MonoBehaviour:
   sightDistance: 20
   lastPlayerSighting: {x: 0, y: 0, z: 0}
   enemiesInRange: []
+  sight: {fileID: 0}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -27507,10 +27508,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b69721bdad5e17f47928e057d9463648, type: 3}
+  m_Script: {fileID: 11500000, guid: 1915519f7faceb14d9cce10ed91a5c0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   charactersInRange: []
+  ai: {fileID: 11400002}
+  fovAngle: 160
 --- !u!135 &13500000
 SphereCollider:
   m_ObjectHideFlags: 1

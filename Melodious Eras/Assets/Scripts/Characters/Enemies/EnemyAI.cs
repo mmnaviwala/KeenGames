@@ -30,27 +30,28 @@ public class EnemyAI : MonoBehaviour
     private Vector3 lpsResetPosition = new Vector3(999, 999, 999);
     private NavMeshAgent nav;
     private EnemyStats stats;
-    private static Vector3 resetPos = new Vector3(1000, 1000, 1000);
+    private static Vector3 resetPos = new Vector3(999, 999, 999);
 
     private float chaseTimer = 0;
     private float patrolTimer = 0;
     private int waypointIndex;
 
-	public List<CharacterStats> enemiesInRange;
-	private Ray rayUpper, rayLower, rayCenter;
-	private RaycastHit hit;
+	private Ray rayUpper, rayLower, rayCenter;  //will be used often; avoiding garbage collection
+	private RaycastHit hit;                     //
+    public EnemySight sight;
 
 
 	// Use this for initialization
 	void Start () 
     {
-		fov = fieldOfView / 2 * awarenessMultiplier;
+		fov = sight.fovAngle / 2 * awarenessMultiplier;
+        sightDistance = sight.GetComponent<SphereCollider>().radius;
+        Debug.Log("Sight Distance: " + sightDistance);
 		//keeping rays permanent to avoid garbage collection
 		rayUpper = new Ray();
 		rayLower = new Ray();
 		rayCenter = new Ray();
 
-		enemiesInRange = new List<CharacterStats>();
         nav = this.GetComponent<NavMeshAgent>();
         stats = this.GetComponent<EnemyStats>();
 		lastPlayerSighting = lpsResetPosition;
@@ -64,9 +65,9 @@ public class EnemyAI : MonoBehaviour
 			Chasing();
         else if (patrolWaypoints != null && patrolWaypoints.Length > 0)
             Patrol();
-		if(enemiesInRange.Count > 0)
+		if(sight.charactersInRange.Count > 0)
 		{
-			foreach(CharacterStats ch in enemiesInRange)
+			foreach(CharacterStats ch in sight.charactersInRange)
 			{
 				//RaycastHit[] hits;
 				
@@ -81,9 +82,9 @@ public class EnemyAI : MonoBehaviour
 					rayCenter.direction = (ch.collider.bounds.min + Vector3.up*charHeight/2) - this.eyes.position;
 
 					//if any rays hit
-					if((Physics.Raycast(rayUpper, out hit, sightDistance, sightLayer) ||
-					    Physics.Raycast(rayCenter, out hit, sightDistance, sightLayer) ||
-					    Physics.Raycast(rayLower, out hit, sightDistance, sightLayer)) 
+					if((Physics.Raycast(rayUpper,   out hit, sightDistance, sightLayer) ||
+					    Physics.Raycast(rayCenter,  out hit, sightDistance, sightLayer) ||
+					    Physics.Raycast(rayLower,   out hit, sightDistance, sightLayer))
 					    && hit.collider.tag == Tags.PLAYER)
 					{
 						this.seesPlayer = this.awareOfPlayer = true;
@@ -96,31 +97,6 @@ public class EnemyAI : MonoBehaviour
 		}
 
 	}
-
-    void OnTriggerEnter(Collider other)
-    {
-        Debug.Log(other.name + " entered trigger, layer " + other.gameObject.layer);
-        if (!other.isTrigger && other is CapsuleCollider)
-        {
-            CharacterStats charStats = other.GetComponent<CharacterStats>();
-            if (charStats != null && charStats.faction != this.stats.faction)
-            {
-                enemiesInRange.Add(charStats);
-            }
-        }
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        if (!other.isTrigger && other is CapsuleCollider)
-        {
-            CharacterStats charStats = other.GetComponent<CharacterStats>();
-            if (charStats != null && charStats.faction != this.stats.faction)
-            {
-                enemiesInRange.Remove(charStats);
-            }
-        }
-    }
 
     void Patrol()
     {
@@ -173,6 +149,7 @@ public class EnemyAI : MonoBehaviour
             chaseTimer = 0f;
     }
 
+    #region Enemy Senses
     public void Listen(Vector3 source, float volume)
     {
         if (CalculatePathLengthTo(source) < volume)
@@ -180,6 +157,11 @@ public class EnemyAI : MonoBehaviour
             lastPlayerSighting = source;
         }
     }
+    public void See(Transform tran)
+    {
+ 
+    }
+    #endregion
     float CalculatePathLengthTo(Vector3 source)
     {
         NavMeshPath path = new NavMeshPath();
