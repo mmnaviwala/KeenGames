@@ -25,6 +25,7 @@ public class EnemyAI : MonoBehaviour
 	public bool awareOfPlayer = false;
 	public LayerMask sightLayer;
 	public float sightDistance = 20;
+    public float desiredSpeed = 0;
 
     public Vector3 lastPlayerSighting;
     private Vector3 lpsResetPosition = new Vector3(999, 999, 999);
@@ -61,7 +62,6 @@ public class EnemyAI : MonoBehaviour
 	void Update () 
 	{
 		if (lastPlayerSighting != lpsResetPosition && currentEnemy.health > 0f)
-			// ... chase.
 			Chasing();
         else if (patrolWaypoints != null && patrolWaypoints.Length > 0)
             Patrol();
@@ -70,8 +70,8 @@ public class EnemyAI : MonoBehaviour
 			foreach(CharacterStats ch in sight.charactersInRange)
 			{
 				//RaycastHit[] hits;
-				
-				if (Vector3.Angle(ch.transform.position + Vector3.up - this.eyes.position, this.eyes.forward) < fov)
+				float angle = Vector3.Angle(ch.transform.position + Vector3.up - this.eyes.position, this.eyes.forward);
+				if ( angle < fov)
 				{
 					//calculating rays for 3 points on the character
 					float charHeight = ch.collider.bounds.max.y - ch.collider.bounds.min.y;
@@ -86,7 +86,8 @@ public class EnemyAI : MonoBehaviour
 					    Physics.Raycast(rayCenter,  out hit, sightDistance, sightLayer) ||
 					    Physics.Raycast(rayLower,   out hit, sightDistance, sightLayer))
 					    && hit.collider.tag == Tags.PLAYER)
-					{
+                    {
+                        Debug.Log("angle: " + angle);
 						this.seesPlayer = this.awareOfPlayer = true;
 						this.lastPlayerSighting = ch.transform.position;
 						currentEnemy = ch;
@@ -100,7 +101,7 @@ public class EnemyAI : MonoBehaviour
 
     void Patrol()
     {
-        nav.speed = patrolSpeed;
+        nav.speed = desiredSpeed = patrolSpeed;
         if (nav.remainingDistance < nav.stoppingDistance /*|| nav.destination == lastPlayerSighting*/)
         {
             patrolTimer += Time.deltaTime;
@@ -127,7 +128,7 @@ public class EnemyAI : MonoBehaviour
             nav.destination = lastPlayerSighting;
 
         // Set the appropriate speed for the NavMeshAgent.
-        nav.speed = chaseSpeed;
+        nav.speed = desiredSpeed = chaseSpeed;
 
         // If near the last personal sighting...
         if (nav.remainingDistance < nav.stoppingDistance)

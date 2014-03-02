@@ -46,7 +46,7 @@ public class EnemyAnimation_Humanoid : MonoBehaviour
 
 		if(this.AI.seesPlayer)
 		{
-			speed = 0f;
+			speed = AI.desiredSpeed;
 			angle = FindAngle (this.transform.forward, player.position - this.transform.position, transform.up);
 		}
 		else //handles speed during turning, to avoid having the enemy run in a wide arc (rather than make a sharp turn)
@@ -61,7 +61,6 @@ public class EnemyAnimation_Humanoid : MonoBehaviour
 				angle = 0f;
 			}
 		}
-
 		animSetup.Setup(speed, angle);
 	}
 

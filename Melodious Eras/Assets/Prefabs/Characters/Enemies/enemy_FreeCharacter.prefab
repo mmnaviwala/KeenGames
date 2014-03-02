@@ -2282,10 +2282,10 @@ MonoBehaviour:
   awareOfPlayer: 0
   sightLayer:
     serializedVersion: 2
-    m_Bits: 4294967289
+    m_Bits: 4294955001
   sightDistance: 20
+  desiredSpeed: 0
   lastPlayerSighting: {x: 0, y: 0, z: 0}
-  enemiesInRange: []
   sight: {fileID: 11400010}
 --- !u!114 &11400004
 MonoBehaviour:
