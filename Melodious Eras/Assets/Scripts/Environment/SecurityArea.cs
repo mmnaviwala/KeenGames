@@ -23,11 +23,20 @@ public class SecurityArea : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
- 
+        if (!other.isTrigger && (other.tag == Tags.PLAYER || other.tag == Tags.ENEMY))
+        {
+            other.GetComponent<CharacterStats>().currentSecLevel = this.securityLevel;
+        }
     }
 
     void OnTriggerExit(Collider other)
     {
+        if (!other.isTrigger && (other.tag == Tags.PLAYER || other.tag == Tags.ENEMY))
+        {
+            CharacterStats stats = other.GetComponent<CharacterStats>();
+            if(stats.currentSecLevel == this.securityLevel) //checking to make sure their security level is still the same. 
+                stats.currentSecLevel = this.securityLevel; //This prevents adjacent security areas from screwing with each other
+        }
  
     }
 }
