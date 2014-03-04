@@ -52,12 +52,11 @@ public class EnemyAnimation_Humanoid : MonoBehaviour
 		else //handles speed during turning, to avoid having the enemy run in a wide arc (rather than make a sharp turn)
 		{
 			speed = Vector3.Project(nav.desiredVelocity, this.transform.forward).magnitude;
-
 			angle = FindAngle (this.transform.forward, nav.desiredVelocity, this.transform.up);
 
 			if(Mathf.Abs (angle) < deadZone)
 			{
-				this.transform.LookAt(this.transform.position, nav.desiredVelocity);
+				this.transform.LookAt(this.transform.position + nav.desiredVelocity);
 				angle = 0f;
 			}
 		}

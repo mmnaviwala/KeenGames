@@ -47,7 +47,6 @@ public class EnemyAI : MonoBehaviour
     {
 		fov = sight.fovAngle / 2 * awarenessMultiplier;
         sightDistance = sight.GetComponent<SphereCollider>().radius;
-        Debug.Log("Sight Distance: " + sightDistance);
 		//keeping rays permanent to avoid garbage collection
 		rayUpper = new Ray();
 		rayLower = new Ray();
@@ -61,6 +60,7 @@ public class EnemyAI : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
+		this.seesPlayer = false;
 		if (lastPlayerSighting != lpsResetPosition && currentEnemy.health > 0f)
 			Chasing();
         else if (patrolWaypoints != null && patrolWaypoints.Length > 0)
@@ -87,7 +87,6 @@ public class EnemyAI : MonoBehaviour
 					    Physics.Raycast(rayLower,   out hit, sightDistance, sightLayer))
 					    && hit.collider.tag == Tags.PLAYER)
                     {
-                        Debug.Log("angle: " + angle);
 						this.seesPlayer = this.awareOfPlayer = true;
 						this.lastPlayerSighting = ch.transform.position;
 						currentEnemy = ch;
@@ -123,9 +122,11 @@ public class EnemyAI : MonoBehaviour
         Vector3 sightingDeltaPos = lastPlayerSighting - transform.position;
 
         // If the the last personal sighting of the player is not close...
-        if (sightingDeltaPos.sqrMagnitude > 4f)
+        if (/*sightingDeltaPos.sqrMagnitude*/CalculatePathLengthTo(lastPlayerSighting) > 4f)
+		{
             // ... set the destination for the NavMeshAgent to the last personal sighting of the player.
             nav.destination = lastPlayerSighting;
+		}
 
         // Set the appropriate speed for the NavMeshAgent.
         nav.speed = desiredSpeed = chaseSpeed;
@@ -151,16 +152,24 @@ public class EnemyAI : MonoBehaviour
     }
 
     #region Enemy Senses
-    public void Listen(Vector3 source, float volume)
+    public bool Listen(Vector3 source, float volume)
     {
         if (CalculatePathLengthTo(source) < volume)
         {
             lastPlayerSighting = source;
+			return true;
         }
+		return false;
     }
-    public void See(Transform tran)
+    public bool See(Transform tran)
     {
- 
+ 		if(Physics.Raycast(this.eyes.position, tran.position + Vector3.up, sightLayer))
+		{
+			this.seesPlayer = this.awareOfPlayer = true;
+			lastPlayerSighting = tran.position;
+			return true;
+		}
+		return false;
     }
     #endregion
     float CalculatePathLengthTo(Vector3 source)
