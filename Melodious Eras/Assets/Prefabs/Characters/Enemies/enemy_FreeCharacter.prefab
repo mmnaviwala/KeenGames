@@ -2236,6 +2236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   faction: 0
+  currentSecLevel: 0
   health: 100
   maxHealth: 100
   isDead: 0
@@ -2271,7 +2272,7 @@ MonoBehaviour:
   fieldOfView: 110
   shootingRange: 0
   meleeRange: 0
-  patrolSpeed: 2
+  patrolSpeed: 1.5
   chaseSpeed: 5
   chaseWaitTime: 5
   patrolWaitTime: 2

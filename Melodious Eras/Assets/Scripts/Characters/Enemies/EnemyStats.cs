@@ -17,6 +17,7 @@ public class EnemyStats : CharacterStats
     {
         AI = this.GetComponent<EnemyAI>();
         lastAttackTime = Time.time;
+		this.currentSecLevel = GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<GameController>().baseSecurityLevel;
     }
 
     public void Update()

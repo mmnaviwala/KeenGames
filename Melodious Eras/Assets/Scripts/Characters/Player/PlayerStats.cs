@@ -51,6 +51,7 @@ public class PlayerStats : CharacterStats
         hud = this.GetComponent<HUD_Stealth>();
 		anim = this.GetComponent<Animator>();
         mainCam = Camera.main.GetComponent<CameraMovement3D>();
+		this.currentSecLevel = GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<GameController>().baseSecurityLevel;
     }
 
     void Update()
