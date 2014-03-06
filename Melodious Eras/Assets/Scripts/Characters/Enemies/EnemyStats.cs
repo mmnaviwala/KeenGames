@@ -11,11 +11,15 @@ public class EnemyStats : CharacterStats
     public float meleeSpeed = .5f, shootSpeed = .5f;
     private float lastAttackTime;
 
-    private EnemyAI AI;
+    private EnemyAI ai;
+    public EnemyAI AI { 
+        get { return ai; }
+        set { ai = value; }
+    }
 
     void Start()
     {
-        AI = this.GetComponent<EnemyAI>();
+        ai = this.GetComponent<EnemyAI>();
         lastAttackTime = Time.time;
 		this.currentSecArea = GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<SecurityArea>();
     }
@@ -24,7 +28,7 @@ public class EnemyStats : CharacterStats
     {
         if (isDead)
         {
-            ((PlayerStats)(AI.currentEnemy))._closeQuarterEnemies.charactersInRange.Remove(this);
+            ((PlayerStats)(ai.currentEnemy))._closeQuarterEnemies.charactersInRange.Remove(this);
             Destroy(this.gameObject);
         }
     }
@@ -44,7 +48,7 @@ public class EnemyStats : CharacterStats
     }
     public override void TakeDamage(int damage, CharacterStats source)
     {
-        AI.currentEnemy = source;
+        ai.currentEnemy = source;
         this.health -= damage;
         if (this.health <= 0)
         {

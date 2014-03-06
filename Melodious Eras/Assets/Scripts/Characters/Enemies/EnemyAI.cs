@@ -29,9 +29,12 @@ public class EnemyAI : MonoBehaviour
 
     public Vector3 lastPlayerSighting;
     private Vector3 lpsResetPosition = new Vector3(999, 999, 999);
+    private Vector3 lastHostileDetection = new Vector3(999, 999, 999); //last position to hear a hostile character
+    private static Vector3 resetPos = new Vector3(999, 999, 999);
+
     private NavMeshAgent nav;
     private EnemyStats stats;
-    private static Vector3 resetPos = new Vector3(999, 999, 999);
+    public EnemySight sight;
 
     private float chaseTimer = 0;
     private float patrolTimer = 0;
@@ -39,7 +42,6 @@ public class EnemyAI : MonoBehaviour
 
 	private Ray rayUpper, rayLower, rayCenter;  //will be used often; avoiding garbage collection
 	private RaycastHit hit;                     //
-    public EnemySight sight;
 
 
 	// Use this for initialization
@@ -72,7 +74,6 @@ public class EnemyAI : MonoBehaviour
 		{
 			foreach(CharacterStats ch in sight.charactersInRange)
 			{
-				//RaycastHit[] hits;
 				float angle = Vector3.Angle(ch.transform.position + Vector3.up - this.eyes.position, this.eyes.forward);
 				if ( angle < fov)
 				{
@@ -84,9 +85,10 @@ public class EnemyAI : MonoBehaviour
 					rayLower.direction = (ch.collider.bounds.min + Vector3.up*charHeight/8) - this.eyes.position;
 					rayCenter.direction = (ch.collider.bounds.min + Vector3.up*charHeight/2) - this.eyes.position;
 
+                    //reducing sight distance at wide angles, to simulate peripheral vision
                     float sightDistanceMultiplier = (angle > 30) ?
-                                                    sightDistance * (Mathf.Sqrt(fov - angle) / fovSqrt) :   //reduces sight distance at wide angles
-                                                    sightDistance;                                          //to simulate peripheral vision
+                                                    sightDistance * (Mathf.Sqrt(fov - angle) / fovSqrt) :
+                                                    sightDistance;
 
 					//if any rays hit
                     if ((Physics.Raycast(rayUpper,  out hit, sightDistanceMultiplier, sightLayer) ||
@@ -105,6 +107,9 @@ public class EnemyAI : MonoBehaviour
 
 	}
 
+    /// <summary>
+    /// This enemy's standard patrol route
+    /// </summary>
     void Patrol()
     {
         nav.speed = desiredSpeed = patrolSpeed;
@@ -123,6 +128,17 @@ public class EnemyAI : MonoBehaviour
         nav.destination = patrolWaypoints[waypointIndex].transform.position;
     }
 
+    /// <summary>
+    /// Inspecting some anomaly, such as a sound or open door (that shouldn't be open)
+    /// </summary>
+    void Inspect()
+    {
+ 
+    }
+
+    /// <summary>
+    /// Chasing the player
+    /// </summary>
     void Chasing()
     {
         // Create a vector from the enemy to the last sighting of the player.
@@ -149,7 +165,7 @@ public class EnemyAI : MonoBehaviour
             {
                 // ... reset last global sighting, the last personal sighting and the timer.
                 lastPlayerSighting = resetPos;
-                lastPlayerSighting = resetPos;
+                lastHostileDetection = resetPos;
                 chaseTimer = 0f;
             }
         }
@@ -158,12 +174,22 @@ public class EnemyAI : MonoBehaviour
             chaseTimer = 0f;
     }
 
+    /// <summary>
+    /// Shooting at the player
+    /// </summary>
+    void Shooting()
+    {
+ 
+    }
+
     #region Enemy Senses
     public bool Listen(Vector3 source, float volume)
     {
+        Debug.Log(this.name + " listening to " + source);
         if (CalculatePathLengthTo(source) < volume)
         {
-            lastPlayerSighting = source;
+            //lastPlayerSighting = source;
+            lastHostileDetection = source;
 			return true;
         }
 		return false;

@@ -216,6 +216,10 @@ public class PlayerMovementBasic : MonoBehaviour
         {
             if (!this.audio.isPlaying) //play footsteps
                 this.audio.Play();
+            foreach(EnemyStats enemy in stats._nearbyEnemies.charactersInRange)
+            {
+                enemy.AI.Listen(this.transform.position, 10);
+            }
         }
         else if (this.audio.isPlaying)
             this.audio.Stop();
