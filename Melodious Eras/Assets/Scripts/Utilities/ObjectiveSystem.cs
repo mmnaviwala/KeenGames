@@ -7,6 +7,7 @@ public class ObjectiveSystem : MonoBehaviour
 {
     public TextAsset objectiveFile;
     private XmlDocument xmlDoc;
+<<<<<<< HEAD
     LinkedList<Objective> objectives;
     Objective currentObjective;
     // Use this for initialization
@@ -58,6 +59,55 @@ public class ObjectiveSystem : MonoBehaviour
 
         return null;
     }
+=======
+    List<Objective> objectives;
+    Objective currentObjective;
+	// Use this for initialization
+	void Start () {
+        xmlDoc = new XmlDocument();
+        xmlDoc.LoadXml(objectiveFile.text);
+        //Debug.Log(xmlDoc.FirstChild.InnerText);
+        //TraverseNodes(xmlDoc.FirstChild);
+        SetObjectives(xmlDoc);
+    }
+	
+	// Update is called once per frame
+	void Update () {
+	
+	}
+    private void TraverseNodes(XmlNode curr)
+    {
+        if (curr.HasChildNodes)
+            TraverseNodes(curr.FirstChild);
+        else
+        {
+            Debug.Log(curr.InnerText);
+            while ((curr = curr.NextSibling) != null)
+            {
+                Debug.Log(curr.InnerText);
+                if (curr.HasChildNodes)
+                    TraverseNodes(curr.FirstChild);
+            }
+        }
+
+    }
+    private void SetObjectives(XmlDocument doc)
+    {
+        foreach (XmlNode node in doc.SelectNodes("objectives/objective"))
+        {
+            string title = node.SelectSingleNode("title").InnerText;
+            string description = node.SelectSingleNode("description").InnerText;
+            objectives.Add(new Objective(title, description));
+        }
+    }
+
+    public Objective CurrentObjective { get { return currentObjective; } }
+    public Objective CompleteObjective(string id)
+    {
+
+        return null;
+    }
+>>>>>>> 5a56ede33e3ca30a5045947476ff0e9dfafa19d5
 }
 
 public class Objective
@@ -77,9 +127,12 @@ public class Objective
         this.description = descriptionP;
         this.completed = completedP;
     }
+<<<<<<< HEAD
 
     public override string ToString()
     {
         return this.title + '\n' + this.description;
     }
+=======
+>>>>>>> 5a56ede33e3ca30a5045947476ff0e9dfafa19d5
 }

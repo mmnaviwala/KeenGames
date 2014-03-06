@@ -17,7 +17,11 @@ public class EnemyStats : CharacterStats
     {
         AI = this.GetComponent<EnemyAI>();
         lastAttackTime = Time.time;
+<<<<<<< HEAD
 		this.currentSecArea = GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<SecurityArea>();
+=======
+		this.currentSecArea = GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<GameController>().baseSecArea;
+>>>>>>> 5a56ede33e3ca30a5045947476ff0e9dfafa19d5
     }
 
     public void Update()
