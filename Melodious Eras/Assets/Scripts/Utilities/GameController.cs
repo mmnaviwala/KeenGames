@@ -8,7 +8,7 @@ public enum QualityLevel_5FS { VeryFast, Fast, Simple, Good, High, VeryHigh, Ult
 public class GameController : MonoBehaviour
 {
     public Difficulty difficulty = Difficulty.Medium;
-    public SecurityLevel baseSecurityLevel;
+    public SecurityArea baseSecArea;
 
 	//Level settings; consider putting in seperate class
     public Vector3 wind;
@@ -21,6 +21,9 @@ public class GameController : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
+        if(baseSecArea == null)
+            baseSecArea = this.GetComponentInChildren<SecurityArea>();
+
         Screen.orientation = ScreenOrientation.LandscapeLeft;
         //Physics.gravity = new Vector3(0f, -49f, 0f);
         AudioListener.pause = false;

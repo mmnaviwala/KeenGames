@@ -51,9 +51,8 @@ public class PlayerStats : CharacterStats
         hud = this.GetComponent<HUD_Stealth>();
 		anim = this.GetComponent<Animator>();
         mainCam = Camera.main.GetComponent<CameraMovement3D>();
-		this.currentSecLevel = GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<GameController>().baseSecurityLevel;
+		this.currentSecArea = GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<GameController>().baseSecArea;
     }
-
     void Update()
     {
         //These lists will never be too large, but should still be moved out of Update at some point
