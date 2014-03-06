@@ -12,7 +12,7 @@ public class EnemyAI : MonoBehaviour
     public float hearingMultiplier = 1;     //0 = deaf, 1 = normal, >1 = dogs & security
     public float awarenessMultiplier = 1;   //
 	public float fieldOfView = 110f;
-	private float fov;
+	private float fov, fovSqrt;
     public float shootingRange, meleeRange;
     private float lightDifferenceMultiplier; //optional feature. Enemies in high-light areas will find it harder to detect players in low-light areas.
     public float patrolSpeed = 2, 
@@ -46,6 +46,7 @@ public class EnemyAI : MonoBehaviour
 	void Start () 
     {
 		fov = sight.fovAngle / 2 * awarenessMultiplier;
+        fovSqrt = Mathf.Sqrt(fov);
         sightDistance = sight.GetComponent<SphereCollider>().radius;
 		//keeping rays permanent to avoid garbage collection
 		rayUpper = new Ray();
@@ -65,6 +66,8 @@ public class EnemyAI : MonoBehaviour
 			Chasing();
         else if (patrolWaypoints != null && patrolWaypoints.Length > 0)
             Patrol();
+        
+        //detecting enemies; currently only detects player
 		if(sight.charactersInRange.Count > 0)
 		{
 			foreach(CharacterStats ch in sight.charactersInRange)
@@ -81,10 +84,14 @@ public class EnemyAI : MonoBehaviour
 					rayLower.direction = (ch.collider.bounds.min + Vector3.up*charHeight/8) - this.eyes.position;
 					rayCenter.direction = (ch.collider.bounds.min + Vector3.up*charHeight/2) - this.eyes.position;
 
+                    float sightDistanceMultiplier = (angle > 30) ?
+                                                    sightDistance * (Mathf.Sqrt(fov - angle) / fovSqrt) :   //reduces sight distance at wide angles
+                                                    sightDistance;                                          //to simulate peripheral vision
+
 					//if any rays hit
-					if((Physics.Raycast(rayUpper,   out hit, sightDistance, sightLayer) ||
-					    Physics.Raycast(rayCenter,  out hit, sightDistance, sightLayer) ||
-					    Physics.Raycast(rayLower,   out hit, sightDistance, sightLayer))
+                    if ((Physics.Raycast(rayUpper,  out hit, sightDistanceMultiplier, sightLayer) ||
+                        Physics.Raycast(rayCenter,  out hit, sightDistanceMultiplier, sightLayer) ||
+                        Physics.Raycast(rayLower,   out hit, sightDistanceMultiplier, sightLayer))
 					    && hit.collider.tag == Tags.PLAYER)
                     {
 						this.seesPlayer = this.awareOfPlayer = true;
