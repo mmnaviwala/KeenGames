@@ -24253,13 +24253,13 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 511560264}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 944653fff5cb34d5cb031042d721cdd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fadeDuration: 10
-  waitTimeBeforeFade: 7
+  waitTimeBeforeFade: 8
   shouldFadeOut: 0
   destroyAfterFade: 0
 --- !u!131 &511560267
@@ -48787,7 +48787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeDuration: 10
-  waitTimeBeforeFade: 7
+  waitTimeBeforeFade: 6
   shouldFadeOut: 0
   destroyAfterFade: 0
 --- !u!131 &1000806288
@@ -49379,13 +49379,13 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1014354062}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 944653fff5cb34d5cb031042d721cdd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fadeDuration: 10
-  waitTimeBeforeFade: 7
+  waitTimeBeforeFade: 8
   shouldFadeOut: 0
   destroyAfterFade: 0
 --- !u!131 &1014354066
@@ -91863,7 +91863,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeDuration: 10
-  waitTimeBeforeFade: 6
+  waitTimeBeforeFade: 7
   shouldFadeOut: 0
   destroyAfterFade: 0
 --- !u!131 &1843364868
