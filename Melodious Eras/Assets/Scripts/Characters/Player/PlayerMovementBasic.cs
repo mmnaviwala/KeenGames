@@ -440,7 +440,6 @@ public class PlayerMovementBasic : MonoBehaviour
                     state = this.anim.GetCurrentAnimatorStateInfo(0);
                     if (state.IsName("Player Animator.Jump to Ledge") && state.normalizedTime > startTime)
                     {
-                        Debug.Log("Jumping to ledge");
                         this.anim.MatchTarget(matchTarget, new Quaternion(), AvatarTarget.RightHand, new MatchTargetWeightMask(Vector3.one, 0), startTime, endTime);
                     }
                     yield return endOfFrame;

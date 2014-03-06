@@ -8,8 +8,8 @@ using System.Collections.Generic;
 [AddComponentMenu("Scripts/Characters/Player Stats")]
 public class PlayerStats : CharacterStats
 {
-	public DetectionSphere _closeQuarterEnemies; //enemies within melee range
-	public DetectionSphere _nearbyEnemies;       //enemies within hearing range
+    public DetectionSphere _closeQuarterEnemies; //enemies within melee range
+    public DetectionSphere _nearbyEnemies;       //enemies within hearing range
 
     public Suit suit;
     public Flashlight flashlight;
@@ -23,25 +23,25 @@ public class PlayerStats : CharacterStats
     public float attackSpeed = .25f, lastAttackTime = 0;
     private bool attacking;
 
-	public List<Light> affectingLights;             //will be used in calculating visibility
+    public List<Light> affectingLights;             //will be used in calculating visibility
     public float visibility;                        //visibility multiplier; 1 = normal, 0 = invisible
 
     void Awake()
     {
-		affectingLights = new List<Light>();
-        
+        affectingLights = new List<Light>();
+
         //registering an equipped weapon, if any
-        if(equippedWeapon == null)
-		{
-			for(int c = 0; c < rightHand.childCount; c++)
-			{
-				if(rightHand.GetChild(c).tag == Tags.WEAPON)
-				{
-					equippedWeapon = rightHand.GetChild(c).GetComponent<Weapon>();
-					break;
-				}
-			}
-		}
+        if (equippedWeapon == null)
+        {
+            for (int c = 0; c < rightHand.childCount; c++)
+            {
+                if (rightHand.GetChild(c).tag == Tags.WEAPON)
+                {
+                    equippedWeapon = rightHand.GetChild(c).GetComponent<Weapon>();
+                    break;
+                }
+            }
+        }
 
         _closeQuarterEnemies.charactersInRange = new List<CharacterStats>();
         lastAttackTime = Time.time;
@@ -49,11 +49,10 @@ public class PlayerStats : CharacterStats
     void Start()
     {
         hud = this.GetComponent<HUD_Stealth>();
-		anim = this.GetComponent<Animator>();
+        anim = this.GetComponent<Animator>();
         mainCam = Camera.main.GetComponent<CameraMovement3D>();
-		this.currentSecLevel = GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<GameController>().baseSecurityLevel;
+        this.currentSecArea = GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<SecurityArea>(); //base security area
     }
-
     void Update()
     {
         //These lists will never be too large, but should still be moved out of Update at some point
@@ -135,20 +134,20 @@ public class PlayerStats : CharacterStats
     /// Calculates visibility based on lighting
     /// </summary>
     /// <returns></returns>
-	public float VisibilityMultiplier()
-	{
-		if(affectingLights.Count > 0)
-		{
-			foreach(Light _light in affectingLights)
-			{
-				float relativeDistance = Vector3.Distance(_light.transform.position, this.transform.position);
-				if(_light.intensity * relativeDistance * relativeDistance > .5f)
-					return 1;
-			}
-			//calculate lighting visibility
-			return 1;
-		}
-		else
-			return 0; //complete darkness = invisible
-	}
+    public float VisibilityMultiplier()
+    {
+        if (affectingLights.Count > 0)
+        {
+            foreach (Light _light in affectingLights)
+            {
+                float relativeDistance = Vector3.Distance(_light.transform.position, this.transform.position);
+                if (_light.intensity * relativeDistance * relativeDistance > .5f)
+                    return 1;
+            }
+            //calculate lighting visibility
+            return 1;
+        }
+        else
+            return 0; //complete darkness = invisible
+    }
 }

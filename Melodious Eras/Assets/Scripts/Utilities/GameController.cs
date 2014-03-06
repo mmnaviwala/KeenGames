@@ -8,7 +8,6 @@ public enum QualityLevel_5FS { VeryFast, Fast, Simple, Good, High, VeryHigh, Ult
 public class GameController : MonoBehaviour
 {
     public Difficulty difficulty = Difficulty.Medium;
-    public SecurityLevel baseSecurityLevel;
 
 	//Level settings; consider putting in seperate class
     public Vector3 wind;

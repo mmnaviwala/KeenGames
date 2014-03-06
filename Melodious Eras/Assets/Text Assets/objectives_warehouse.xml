@@ -1,6 +1,10 @@
-<objectives_warehouse>
-    <objective>
-        <title>Get to Overseer's Office</title>
-        <description>Reach the Overseer's office on the level B1</description>
-    </objective>
-</objectives_warehouse>
+<objectives>
+  <objective id="warehouse_00" completed="false">
+    <title>Get to the Security Room</title>
+    <description>Reach the Security Room on the level B1</description>
+  </objective>
+  <objective id="warehouse_01" completed="false">
+    <title>Find the Keycode</title>
+    <description>Search the offices for a keycode to the security room.</description>
+  </objective>
+</objectives>
