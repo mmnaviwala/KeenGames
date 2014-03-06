@@ -13,6 +13,7 @@ public class HUD_Stealth : MonoBehaviour
     private PlayerMovementBasic player;
     private Weapon weapon;
     private Suit suit;
+    private ObjectiveSystem objectiveSystem;
 
     Rect temp;
 
@@ -25,6 +26,7 @@ public class HUD_Stealth : MonoBehaviour
         player = this.GetComponent<PlayerMovementBasic>();
         weapon = this.GetComponent<PlayerStats>().equippedWeapon;
         suit = this.GetComponent<Suit>();
+        objectiveSystem = GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<ObjectiveSystem>();
 
         //GUI stuff
         width_max_health = Screen.width / 3;
@@ -61,7 +63,7 @@ public class HUD_Stealth : MonoBehaviour
         GUI.Box(healthBarMax, stats.health.ToString(), healthMaxStyle);
         GUI.Box(armorBarMax, suit.armor.ToString(), armorMaxStyle);
 		GUI.Box (flashlightLife, suit.batteryLife.ToString(), flashlightLifeStyle);
-		GUI.Box (objectiveRect, "Objectives:");
+		GUI.Box (objectiveRect, "Objectives:\n" + objectiveSystem.CurrentObjective.Title, objectiveRectStyle);
         GUI.Label(weaponRect, weapon.HudString(), weapon.hudStyle);
 
         //GUI.Label(temp, XMLUtilities.currentDirectory);

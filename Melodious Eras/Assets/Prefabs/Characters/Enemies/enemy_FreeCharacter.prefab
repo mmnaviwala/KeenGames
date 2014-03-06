@@ -1800,7 +1800,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100108}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.86868382, y: 63.4974442, z: 128.468964}
+  m_LocalPosition: {x: 11.5, y: .5, z: -2.90243483}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400106}
@@ -2249,7 +2249,7 @@ MonoBehaviour:
   leftHand: {fileID: 0}
   rightHand: {fileID: 0}
   lookatTarget: {fileID: 0}
-  isVulnerable: 0
+  isVulnerable: 1
   meleeSpeed: .5
   shootSpeed: .5
 --- !u!114 &11400002
@@ -2269,7 +2269,7 @@ MonoBehaviour:
   currentEnemy: {fileID: 0}
   hearingMultiplier: 1
   awarenessMultiplier: 1
-  fieldOfView: 110
+  fieldOfView: 160
   shootingRange: 0
   meleeRange: 0
   patrolSpeed: 1.5

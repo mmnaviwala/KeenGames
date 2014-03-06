@@ -187,7 +187,6 @@ public class EnemyAI : MonoBehaviour
     #region Enemy Senses
     public bool Listen(Vector3 source, float volume)
     {
-        Debug.Log(this.name + " listening to " + source);
         if (CalculatePathLengthTo(source) < volume)
         {
             //lastPlayerSighting = source;

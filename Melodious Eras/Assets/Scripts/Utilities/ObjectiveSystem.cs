@@ -6,13 +6,20 @@ using System.Xml;
 public class ObjectiveSystem : MonoBehaviour
 {
     public TextAsset objectiveFile;
+    public LinkedList<Objective> objectives;
     private XmlDocument xmlDoc;
-    LinkedList<Objective> objectives;
-    Objective currentObjective;
+
+    private LinkedListNode<Objective> currentObjectiveNode;
+    private Objective currentObjective;
+
+    public Objective CurrentObjective { get { return currentObjectiveNode.Value; } }
+
+
     // Use this for initialization
     void Start()
     {
         objectives = new LinkedList<Objective>();
+        currentObjectiveNode = objectives.First;
         xmlDoc = new XmlDocument();
         xmlDoc.LoadXml(objectiveFile.text);
         SetObjectives(xmlDoc);
@@ -31,13 +38,13 @@ public class ObjectiveSystem : MonoBehaviour
             if (currentObjective == null && node.Attributes["completed"].Value == "false")
             {
                 currentObjective = newObjective;
+                currentObjectiveNode = objectives.Last;
                 Debug.Log("Current objective: " + currentObjective.ToString());
             }
             Debug.Log(objectives.Last.Value);
         }
     }
 
-    public Objective CurrentObjective { get { return currentObjective; } }
     /// <summary>
     /// Completes the specified objective in this level and moves on to the next, if any.
     /// </summary>
@@ -53,33 +60,10 @@ public class ObjectiveSystem : MonoBehaviour
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    public Objective CompleteCurrentMainObjective(string id)
+    public Objective CompleteCurrentMainObjective()
     {
-
+        currentObjectiveNode = currentObjectiveNode.Next;
         return null;
     }
 }
 
-public class Objective
-{
-    private string title, description;
-    private bool completed;
-
-    public Objective(string titleP, string descriptionP)
-    {
-        this.title = titleP;
-        this.description = descriptionP;
-        this.completed = false;
-    }
-    public Objective(string titleP, string descriptionP, bool completedP)
-    {
-        this.title = titleP;
-        this.description = descriptionP;
-        this.completed = completedP;
-    }
-
-    public override string ToString()
-    {
-        return this.title + '\n' + this.description;
-    }
-}
