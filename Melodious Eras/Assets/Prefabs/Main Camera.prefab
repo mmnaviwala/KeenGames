@@ -37,8 +37,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
-  m_LocalPosition: {x: -4.73031235, y: 2.02636909, z: -.790394425}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.53440428, y: 33.1251373, z: 12.1787901}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -59,7 +59,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: .300000012
-  far clip plane: 100
+  far clip plane: 1000
   field of view: 60
   orthographic: 0
   orthographic size: 10
@@ -101,7 +101,7 @@ AudioSource:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: ca7a9e4a3d02a46a7ac93ffc34907652, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 2e03ea08721f4428bad8a4aca5b4d869, type: 3}
   m_PlayOnAwake: 1
   m_Volume: .5
   m_Pitch: 1
@@ -188,7 +188,7 @@ MonoBehaviour:
   sepBlurSpread: 2.5
   quality: 1
   bloomIntensity: .5
-  bloomThreshhold: .5
+  bloomThreshhold: .300000012
   bloomThreshholdColor: {r: 1, g: 1, b: 1, a: 1}
   bloomBlurIterations: 2
   hollywoodFlareBlurIterations: 4
@@ -221,21 +221,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78e9ac1bc7cd741478f9f04deda1b866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offsets:
+    defaultOffset: {x: .600000024, y: 1.75, z: -1.25}
+    aim: {x: .5, y: 1.89999998, z: -.75}
+    crouch: {x: .5, y: 1, z: -1}
+    PDA: {x: 0, y: 0, z: 0}
+    Hacking: {x: 0, y: 0, z: 1}
+    fightingt: {x: 0, y: 0, z: 0}
+    climbUp: {x: 0, y: 2, z: -3}
+    climbDown: {x: 0, y: 0, z: -3}
+    crouchAim: {x: .5, y: 1.25, z: -1}
+  activeOffset: {x: 0, y: 0, z: 0}
   followSpeed: 4
-  defaultOffset: {x: .600000024, y: 1.75, z: -1.25}
-  aimOffset: {x: .5, y: 1.89999998, z: -.75}
-  crouchOffset: {x: .5, y: 1, z: -1}
-  PDA_Offset: {x: 0, y: 0, z: 0}
-  HackingOffset: {x: 0, y: 0, z: 1}
-  fightingOffset: {x: 0, y: 0, z: 0}
-  climbUpOffset: {x: 0, y: 2, z: -3}
-  climbDownOffset: {x: 0, y: 0, z: -3}
   x_sensitivity: 5
   y_sensitivity: 2
   invertLook: 1
   target: {fileID: 0}
   atTargetPos: 0
-  go: {fileID: 0}
+  camRotationHelper: {fileID: 0}
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -414,7 +417,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd05e71c69dd4457fa205c9eea7c2326, type: 3}
   m_Name: 
@@ -453,7 +456,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0923359e9e352a4b9b11c7b7161ad67, type: 3}
   m_Name: 

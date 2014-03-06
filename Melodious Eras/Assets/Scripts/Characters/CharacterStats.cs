@@ -46,7 +46,19 @@ public class CharacterStats : MonoBehaviour
     {
  
     }
+    public virtual void TakeDamageThroughArmor(int damage)
+    {
+ 
+    }
+    public virtual void TakeDamageThroughArmor(int damage, CharacterStats source)
+    {
 
+    }
+
+    public virtual void TakeDamageThroughArmor(bool instantKill)
+    {
+
+    }
     public virtual void Attack(CharacterStats target)
     {
  

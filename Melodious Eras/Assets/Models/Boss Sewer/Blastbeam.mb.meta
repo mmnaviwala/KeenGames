@@ -2,7 +2,60 @@ fileFormatVersion: 2
 guid: 86c831def706145feb86a1864ab8e0b4
 ModelImporter:
   serializedVersion: 16
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: group1
+    100004: group2
+    100006: group3
+    100008: group4
+    100010: pCube1
+    100012: pCylinder15
+    100014: pCylinder16
+    100016: pCylinder17
+    100018: pCylinder18
+    100020: pCylinder19
+    100022: pCylinder20
+    100024: polySurface2
+    100026: sunDirection
+    100028: transform2
+    400000: //RootNode
+    400002: group1
+    400004: group2
+    400006: group3
+    400008: group4
+    400010: pCube1
+    400012: pCylinder15
+    400014: pCylinder16
+    400016: pCylinder17
+    400018: pCylinder18
+    400020: pCylinder19
+    400022: pCylinder20
+    400024: polySurface2
+    400026: sunDirection
+    400028: transform2
+    2300000: pCylinder15
+    2300002: pCylinder16
+    2300004: pCylinder17
+    2300006: pCylinder18
+    2300008: pCylinder19
+    2300010: pCylinder20
+    2300012: polySurface2
+    3300000: pCylinder15
+    3300002: pCylinder16
+    3300004: pCylinder17
+    3300006: pCylinder18
+    3300008: pCylinder19
+    3300010: pCylinder20
+    3300012: polySurface2
+    4300000: polySurface2
+    4300002: pCylinder18
+    4300004: pCylinder20
+    4300006: pCylinder19
+    4300008: pCylinder16
+    4300010: pCylinder15
+    4300012: pCylinder17
+    7400000: Take 001
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -17,7 +70,63 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 90
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: group1
+        weight: 1
+      - path: group2
+        weight: 1
+      - path: group2/group3
+        weight: 1
+      - path: group4
+        weight: 1
+      - path: group4/pCylinder15
+        weight: 1
+      - path: group4/pCylinder16
+        weight: 1
+      - path: group4/pCylinder17
+        weight: 1
+      - path: group4/pCylinder18
+        weight: 1
+      - path: group4/pCylinder19
+        weight: 1
+      - path: group4/pCylinder20
+        weight: 1
+      - path: pCube1
+        weight: 1
+      - path: pCube1/transform2
+        weight: 1
+      - path: polySurface2
+        weight: 1
+      - path: sunDirection
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []

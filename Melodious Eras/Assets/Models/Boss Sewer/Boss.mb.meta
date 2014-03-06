@@ -2,7 +2,92 @@ fileFormatVersion: 2
 guid: ec225ffaa04ab46bd852d9f00c0e58e2
 ModelImporter:
   serializedVersion: 16
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: group1
+    100004: group2
+    100006: group3
+    100008: pCube1
+    100010: pCube2
+    100012: pCylinder10
+    100014: pCylinder11
+    100016: pCylinder12
+    100018: pCylinder13
+    100020: pCylinder6
+    100022: pCylinder7
+    100024: pCylinder8
+    100026: pCylinder9
+    100028: polySurface1
+    100030: polySurface2
+    100032: pSphere1
+    100034: pSphere2
+    100036: pSphere3
+    100038: pSphere4
+    100040: sunDirection
+    100042: transform1
+    100044: transform2
+    100046: transform3
+    100048: transform4
+    100050: transform5
+    100052: transform6
+    100054: transform7
+    400000: //RootNode
+    400002: group1
+    400004: group2
+    400006: group3
+    400008: pCube1
+    400010: pCube2
+    400012: pCylinder10
+    400014: pCylinder11
+    400016: pCylinder12
+    400018: pCylinder13
+    400020: pCylinder6
+    400022: pCylinder7
+    400024: pCylinder8
+    400026: pCylinder9
+    400028: polySurface1
+    400030: polySurface2
+    400032: pSphere1
+    400034: pSphere2
+    400036: pSphere3
+    400038: pSphere4
+    400040: sunDirection
+    400042: transform1
+    400044: transform2
+    400046: transform3
+    400048: transform4
+    400050: transform5
+    400052: transform6
+    400054: transform7
+    2300000: pCylinder10
+    2300002: pCylinder11
+    2300004: pCylinder12
+    2300006: pCylinder13
+    2300008: pCylinder6
+    2300010: pCylinder7
+    2300012: pCylinder8
+    2300014: pCylinder9
+    2300016: polySurface2
+    3300000: pCylinder10
+    3300002: pCylinder11
+    3300004: pCylinder12
+    3300006: pCylinder13
+    3300008: pCylinder6
+    3300010: pCylinder7
+    3300012: pCylinder8
+    3300014: pCylinder9
+    3300016: polySurface2
+    4300000: pCylinder6
+    4300002: pCylinder7
+    4300004: pCylinder8
+    4300006: pCylinder9
+    4300008: pCylinder10
+    4300010: pCylinder11
+    4300012: pCylinder12
+    4300014: pCylinder13
+    4300016: polySurface2
+    7400000: Boss Idle
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -17,11 +102,93 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Boss Idle
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 48
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: group1
+        weight: 1
+      - path: group2
+        weight: 1
+      - path: group2/group3
+        weight: 1
+      - path: group2/group3/pCylinder6
+        weight: 1
+      - path: group2/group3/pCylinder7
+        weight: 1
+      - path: group2/group3/pCylinder8
+        weight: 1
+      - path: group2/group3/pCylinder9
+        weight: 1
+      - path: group2/group3/pCylinder10
+        weight: 1
+      - path: group2/group3/pCylinder11
+        weight: 1
+      - path: group2/group3/pCylinder12
+        weight: 1
+      - path: group2/group3/pCylinder13
+        weight: 1
+      - path: pCube1
+        weight: 1
+      - path: pCube1/transform2
+        weight: 1
+      - path: pCube2
+        weight: 1
+      - path: pCube2/transform1
+        weight: 1
+      - path: polySurface1
+        weight: 1
+      - path: polySurface1/transform3
+        weight: 1
+      - path: polySurface2
+        weight: 1
+      - path: pSphere1
+        weight: 1
+      - path: pSphere1/transform7
+        weight: 1
+      - path: pSphere2
+        weight: 1
+      - path: pSphere2/transform6
+        weight: 1
+      - path: pSphere3
+        weight: 1
+      - path: pSphere3/transform5
+        weight: 1
+      - path: pSphere4
+        weight: 1
+      - path: pSphere4/transform4
+        weight: 1
+      - path: sunDirection
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: .5
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
@@ -51,7 +218,7 @@ ModelImporter:
     armStretch: .0500000007
     legStretch: .0500000007
     feetSpacing: 0
-    rootMotionBoneName: 
+    rootMotionBoneName: polySurface2
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 2
   additionalBone: 0

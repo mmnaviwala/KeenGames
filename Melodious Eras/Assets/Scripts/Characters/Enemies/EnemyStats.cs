@@ -33,6 +33,7 @@ public class EnemyStats : CharacterStats
         }
     }
 
+    #region Damage taking and stat changes
     /// <summary>
     /// Deals damage to the enemy.
     /// </summary>
@@ -40,7 +41,7 @@ public class EnemyStats : CharacterStats
     public override void TakeDamage(int damage)
     {
         this.health -= damage;
-        if (this.health <= 0)
+        if (this.isVulnerable && this.health <= 0)
         {
             this.isDead = true;
             Destroy(this.gameObject);
@@ -50,7 +51,7 @@ public class EnemyStats : CharacterStats
     {
         ai.currentEnemy = source;
         this.health -= damage;
-        if (this.health <= 0)
+        if (this.isVulnerable && this.health <= 0)
         {
             this.isDead = true;
             Destroy(this.gameObject);
@@ -62,8 +63,48 @@ public class EnemyStats : CharacterStats
     /// </summary>
     public override void TakeDamage(bool instantKill)
     {
+        if (this.isVulnerable)
+        {
+            isDead = true;
+            Destroy(this.gameObject);
+        }
+    }
+    /// <summary>
+    /// Deals damage to invulnerable enemy.
+    /// </summary>
+    /// <param name="damage"></param>
+    public override void TakeDamageThroughArmor(int damage)
+    {
+        this.health -= damage;
+        if (this.health <= 0)
+        {
+            this.isDead = true;
+            Destroy(this.gameObject);
+        }
+    }
+    /// <summary>
+    /// Deals damage to invulnerable enemy. Use this to tell the enemy who just attacked it
+    /// </summary>
+    /// <param name="damage"></param>
+    /// <param name="source"></param>
+    public override void TakeDamageThroughArmor(int damage, CharacterStats source)
+    {
+        ai.currentEnemy = source;
+        this.health -= damage;
+        if (this.health <= 0)
+        {
+            this.isDead = true;
+            Destroy(this.gameObject);
+        }
+
+    }
+    /// <summary>
+    /// Instantly kills this enemy, even if invulnerable.
+    /// </summary>
+    public override void TakeDamageThroughArmor(bool instantKill)
+    {
         isDead = true;
         Destroy(this.gameObject);
     }
-
+    #endregion
 }

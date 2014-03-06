@@ -44,20 +44,22 @@ public class EnemyAI : MonoBehaviour
 	private RaycastHit hit;                     //
 
 
+    void Awake()
+    {
+        nav = this.GetComponent<NavMeshAgent>();
+        stats = this.GetComponent<EnemyStats>();
+        sightDistance = sight.GetComponent<SphereCollider>().radius;
+        lastPlayerSighting = lpsResetPosition;
+    }
 	// Use this for initialization
 	void Start () 
     {
 		fov = sight.fovAngle / 2 * awarenessMultiplier;
         fovSqrt = Mathf.Sqrt(fov);
-        sightDistance = sight.GetComponent<SphereCollider>().radius;
 		//keeping rays permanent to avoid garbage collection
 		rayUpper = new Ray();
 		rayLower = new Ray();
 		rayCenter = new Ray();
-
-        nav = this.GetComponent<NavMeshAgent>();
-        stats = this.GetComponent<EnemyStats>();
-		lastPlayerSighting = lpsResetPosition;
 	}
 	
 	// Update is called once per frame
