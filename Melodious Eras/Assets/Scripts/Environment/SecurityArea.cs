@@ -20,18 +20,11 @@ public class SecurityArea : MonoBehaviour
     {
         this.gameObject.layer = 2; //ignore raycast layer
     }
-<<<<<<< HEAD
     // Use this for initialization
     void Start()
     {
 
     }
-=======
-	// Use this for initialization
-	void Start () {
-	
-	}
->>>>>>> 5a56ede33e3ca30a5045947476ff0e9dfafa19d5
 
     void OnTriggerEnter(Collider other)
     {
@@ -46,11 +39,7 @@ public class SecurityArea : MonoBehaviour
         if (!other.isTrigger && (other.tag == Tags.PLAYER || other.tag == Tags.ENEMY))
         {
             CharacterStats stats = other.GetComponent<CharacterStats>();
-<<<<<<< HEAD
             if (stats.currentSecArea == this) //checking to make sure their security level is still the same. 
-=======
-            if(stats.currentSecArea == this) //checking to make sure their security level is still the same. 
->>>>>>> 5a56ede33e3ca30a5045947476ff0e9dfafa19d5
                 stats.currentSecArea = null; //This prevents adjacent security areas from screwing with each other
         }
 

@@ -38,7 +38,6 @@ public class LightProbeGroupTrigger : MonoBehaviour
 			{
 				dgo = new DynamicObject(other.gameObject);
 				dgo.triggerCount++;
-				Debug.Log ("Trigger Entered: " + dgo.go.name + ", " + dgo.triggerCount);
 				dgo.TriggerLightProbes(true);
 				dynamicObjects.Add (dgo);
 			}
