@@ -12,7 +12,7 @@ AnimatorController:
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 0
+    m_DefaultBool: 1
     m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 3
@@ -26,14 +26,14 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
---- !u!1101 &110100000
+--- !u!1101 &110154587
 Transition:
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: 
   m_SrcState: {fileID: 110200000}
-  m_DstState: {fileID: 110281562}
+  m_DstState: {fileID: 110211361}
   m_TransitionDuration: .101694919
   m_TransitionOffset: 0
   m_Conditions:
@@ -128,6 +128,21 @@ State:
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
+--- !u!1102 &110211361
+State:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Take 001
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Motions:
+  - {fileID: 7400000, guid: 0f8be2c5fc16542f8897cf6970a38436, type: 3}
+  m_ParentStateMachine: {fileID: 110700000}
+  m_Position: {x: 312, y: 72, z: 0}
+  m_IKOnFeet: 0
+  m_Mirror: 0
+  m_Tag: 
 --- !u!1102 &110220717
 State:
   m_ObjectHideFlags: 3
@@ -165,27 +180,28 @@ StateMachine:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Base Layer
-  m_DefaultState: {fileID: 110281562}
+  m_DefaultState: {fileID: 110200000}
   m_States:
   - {fileID: 110200000}
   - {fileID: 110281562}
   - {fileID: 110205556}
   - {fileID: 110220717}
+  - {fileID: 110211361}
   m_ChildStateMachine: []
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
     data:
       first: {fileID: 110200000}
       second:
-      - {fileID: 110100000}
-    data:
-      first: {fileID: 110281562}
-      second:
-      - {fileID: 110165612}
+      - {fileID: 110154587}
     data:
       first: {fileID: 110205556}
       second:
       - {fileID: 110198153}
+    data:
+      first: {fileID: 110281562}
+      second:
+      - {fileID: 110165612}
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

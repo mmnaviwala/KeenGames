@@ -4,9 +4,15 @@ using System.Collections.Generic;
 
 public class Objective : MonoBehaviour
 {
+    #region variables
     protected string title, description;
     protected bool completed;
     public List<ObjectiveCondition> conditions;
+
+    public string Title { get { return title; } }
+    public string Description { get { return description; } }
+    public bool Completed { get { return completed; } }
+    #endregion
 
     public Objective(string titleP)
     {
@@ -29,9 +35,6 @@ public class Objective : MonoBehaviour
     {
         return this.title + '\n' + this.description;
     }
-    public string Title { get { return title; } }
-    public string Description { get { return description; } }
-    public bool Completed { get { return completed; } }
 }
 
 /// <summary>
