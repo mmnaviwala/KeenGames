@@ -27,6 +27,7 @@ GameObject:
   - 4: {fileID: 400002}
   - 33: {fileID: 3300002}
   - 23: {fileID: 2300002}
+  - 136: {fileID: 13600000}
   m_Layer: 0
   m_Name: pCylinder1
   m_TagString: Untagged
@@ -78,7 +79,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.7312489, y: 5.07250023, z: -33.9020538}
+  m_LocalPosition: {x: 17.8062439, y: 5.07250023, z: -28.2494946}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -140,6 +141,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_Mesh: {fileID: 4300000, guid: e8341f83937e24e0f9d8ea611fa26afa, type: 3}
+--- !u!136 &13600000
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: .40780282
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: -1.49011612e-08, y: .15913555, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

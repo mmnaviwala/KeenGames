@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class Objective : MonoBehaviour
+public class Objective
 {
     #region variables
     protected string title, description;
@@ -40,7 +40,7 @@ public class Objective : MonoBehaviour
 /// <summary>
 /// Conditions used in each objective
 /// </summary>
-public class ObjectiveCondition
+public class ObjectiveCondition : MonoBehaviour
 {
     public bool completed;
 }
