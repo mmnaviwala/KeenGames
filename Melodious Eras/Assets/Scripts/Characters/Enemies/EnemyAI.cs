@@ -34,6 +34,7 @@ public class EnemyAI : MonoBehaviour
 
     private NavMeshAgent nav;
     private EnemyStats stats;
+	private Animator anim;
     public EnemySight sight;
 
     private float chaseTimer = 0;
@@ -44,10 +45,13 @@ public class EnemyAI : MonoBehaviour
 	private RaycastHit hit;                     //
 
 
+	public Animator Anim {get {return anim; } set {anim = value;}}
+
     void Awake()
     {
         nav = this.GetComponent<NavMeshAgent>();
-        stats = this.GetComponent<EnemyStats>();
+		stats = this.GetComponent<EnemyStats>();
+		this.anim = this.GetComponent<Animator>();
         sightDistance = sight.GetComponent<SphereCollider>().radius;
         lastPlayerSighting = lpsResetPosition;
     }
@@ -65,48 +69,56 @@ public class EnemyAI : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		this.seesPlayer = false;
-		if (lastPlayerSighting != lpsResetPosition && currentEnemy.health > 0f)
-			Chasing();
-        else if (patrolWaypoints != null && patrolWaypoints.Length > 0)
-            Patrol();
-        
-        //detecting enemies; currently only detects player
-		if(sight.charactersInRange.Count > 0)
+		if(!this.stats.isDead)
 		{
-			foreach(CharacterStats ch in sight.charactersInRange)
+			this.seesPlayer = false;
+			if (lastPlayerSighting != lpsResetPosition && currentEnemy.health > 0f)
+				Chasing();
+	        else if (patrolWaypoints != null && patrolWaypoints.Length > 0)
+	            Patrol();
+	        
+	        //detecting enemies; currently only detects player
+			if(sight.charactersInRange.Count > 0)
 			{
-				float angle = Vector3.Angle(ch.transform.position + Vector3.up - this.eyes.position, this.eyes.forward);
-				if ( angle < fov)
+				foreach(CharacterStats ch in sight.charactersInRange)
 				{
-					//calculating rays for 3 points on the character
-					float charHeight = ch.collider.bounds.max.y - ch.collider.bounds.min.y;
-					rayUpper.origin = rayCenter.origin = rayLower.origin = this.eyes.position + this.eyes.forward/4;
+					float angle = Vector3.Angle(ch.transform.position + Vector3.up - this.eyes.position, this.eyes.forward);
+					if ( angle < fov)
+					{
+						//calculating rays for 3 points on the character
+						float charHeight = ch.collider.bounds.max.y - ch.collider.bounds.min.y;
+						rayUpper.origin = rayCenter.origin = rayLower.origin = this.eyes.position + this.eyes.forward/4;
 
-					rayUpper.direction = (ch.collider.bounds.max - Vector3.up*charHeight/8) - this.eyes.position;
-					rayLower.direction = (ch.collider.bounds.min + Vector3.up*charHeight/8) - this.eyes.position;
-					rayCenter.direction = (ch.collider.bounds.min + Vector3.up*charHeight/2) - this.eyes.position;
+						rayUpper.direction = (ch.collider.bounds.max - Vector3.up*charHeight/8) - this.eyes.position;
+						rayLower.direction = (ch.collider.bounds.min + Vector3.up*charHeight/8) - this.eyes.position;
+						rayCenter.direction = (ch.collider.bounds.min + Vector3.up*charHeight/2) - this.eyes.position;
 
-                    //reducing sight distance at wide angles, to simulate peripheral vision
-                    float sightDistanceMultiplier = (angle > 30) ?
-                                                    sightDistance * (Mathf.Sqrt(fov - angle) / fovSqrt) :
-                                                    sightDistance;
+	                    //reducing sight distance at wide angles, to simulate peripheral vision
+	                    float sightDistanceMultiplier = (angle > 30) ?
+	                                                    sightDistance * (Mathf.Sqrt(fov - angle) / fovSqrt) :
+	                                                    sightDistance;
 
-					//if any rays hit
-                    if ((Physics.Raycast(rayUpper,  out hit, sightDistanceMultiplier, sightLayer) ||
-                        Physics.Raycast(rayCenter,  out hit, sightDistanceMultiplier, sightLayer) ||
-                        Physics.Raycast(rayLower,   out hit, sightDistanceMultiplier, sightLayer))
-					    && hit.collider.tag == Tags.PLAYER)
-                    {
-						this.seesPlayer = this.awareOfPlayer = true;
-						this.lastPlayerSighting = ch.transform.position;
-						currentEnemy = ch;
-						break;
+						//if any rays hit
+	                    if ((Physics.Raycast(rayUpper,  out hit, sightDistanceMultiplier, sightLayer) ||
+	                        Physics.Raycast(rayCenter,  out hit, sightDistanceMultiplier, sightLayer) ||
+	                        Physics.Raycast(rayLower,   out hit, sightDistanceMultiplier, sightLayer))
+						    && hit.collider.tag == Tags.PLAYER)
+	                    {
+							this.seesPlayer = this.awareOfPlayer = true;
+							this.lastPlayerSighting = ch.transform.position;
+							currentEnemy = ch;
+							break;
+						}
 					}
 				}
 			}
 		}
-
+		else
+		{
+			this.nav.enabled = false;
+			this.nav.speed = 0;
+			this.anim.SetFloat(HashIDs.speed_float, 0f);
+		}
 	}
 
     /// <summary>

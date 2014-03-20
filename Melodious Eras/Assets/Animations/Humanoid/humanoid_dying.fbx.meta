@@ -182,6 +182,7 @@ ModelImporter:
     4300008: Le_Eye_Mesh
     4300010: Ri_Eye_Mesh
     7400000: Unity_Falling_Down_Dead_tk01
+    7400002: Dead
     9500000: //RootNode
     13700000: Lw_Teeth_Mesh
     13700002: Tounge_Mesh
@@ -194,13 +195,16 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
+    optimizeGameObjects: 0
     animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5
     animationScaleError: .5
     animationWrapMode: 0
+    extraExposedTransformPaths: []
     clipAnimations:
-    - name: Unity_Falling_Down_Dead_tk01
+    - serializedVersion: 16
+      name: Unity_Falling_Down_Dead_tk01
       takeName: Unity_Falling_Down_Dead_tk01
       firstFrame: 29
       lastFrame: 115
@@ -209,6 +213,7 @@ ModelImporter:
       level: 0
       cycleOffset: 0
       loop: 0
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 1
@@ -220,7 +225,204 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
+      events: []
       transformMask: []
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: Dead
+      takeName: Unity_Falling_Down_Dead_tk01
+      firstFrame: 100
+      lastFrame: 115
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Geo_grp
+        weight: 0
+      - path: Geo_grp/Lw_Teeth_Mesh
+        weight: 0
+      - path: Geo_grp/Tounge_Mesh
+        weight: 0
+      - path: Geo_grp/Unity_Body_Mesh
+        weight: 0
+      - path: Geo_grp/Up_Teeth_Mesh
+        weight: 0
+      - path: Reference
+        weight: 1
+      - path: Reference/Hips
+        weight: 1
+      - path: Reference/Hips/LeftUpLeg
+        weight: 1
+      - path: Reference/Hips/LeftUpLeg/LeftLeg
+        weight: 1
+      - path: Reference/Hips/LeftUpLeg/LeftLeg/LeftFoot
+        weight: 1
+      - path: Reference/Hips/LeftUpLeg/LeftLeg/LeftFoot/LeftToes
+        weight: 1
+      - path: Reference/Hips/RightUpLeg
+        weight: 1
+      - path: Reference/Hips/RightUpLeg/RightLeg
+        weight: 1
+      - path: Reference/Hips/RightUpLeg/RightLeg/RightFoot
+        weight: 1
+      - path: Reference/Hips/RightUpLeg/RightLeg/RightFoot/RightToes
+        weight: 1
+      - path: Reference/Hips/Spine
+        weight: 1
+      - path: Reference/Hips/Spine/Chest
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/LeftShoulder
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/LeftShoulder/LeftArm
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/LeftShoulder/LeftArm/LeftForeArm
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/LeftShoulder/LeftArm/LeftForeArm/LeftHand
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandIndex1
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandIndex1/LeftHandIndex2
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandIndex1/LeftHandIndex2/LeftHandIndex3
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandMiddle1
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandMiddle1/LeftHandMiddle2
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandMiddle1/LeftHandMiddle2/LeftHandMiddle3
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandPinky1
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandPinky1/LeftHandPinky2
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandPinky1/LeftHandPinky2/LeftHandPinky3
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandRing1
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandRing1/LeftHandRing2
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandRing1/LeftHandRing2/LeftHandRing3
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandThumb1
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandThumb1/LeftHandThumb2
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/LeftShoulder/LeftArm/LeftForeArm/LeftHand/LeftHandThumb1/LeftHandThumb2/LeftHandThumb3
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/Neck
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/Neck/Head
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/Neck/Head/Jaw
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/Neck/Head/Jaw/JawEND
+        weight: 0
+      - path: Reference/Hips/Spine/Chest/Neck/Head/Jaw/LeftLipCorner
+        weight: 0
+      - path: Reference/Hips/Spine/Chest/Neck/Head/Jaw/LeftLipLower
+        weight: 0
+      - path: Reference/Hips/Spine/Chest/Neck/Head/Jaw/RightLipCorner
+        weight: 0
+      - path: Reference/Hips/Spine/Chest/Neck/Head/Jaw/RightLipLower
+        weight: 0
+      - path: Reference/Hips/Spine/Chest/Neck/Head/Jaw/TongueBack
+        weight: 0
+      - path: Reference/Hips/Spine/Chest/Neck/Head/Jaw/TongueBack/TongueTip
+        weight: 0
+      - path: Reference/Hips/Spine/Chest/Neck/Head/LeftCheek
+        weight: 0
+      - path: Reference/Hips/Spine/Chest/Neck/Head/LeftEye
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/Neck/Head/LeftEye/Le_Eye_Mesh
+        weight: 0
+      - path: Reference/Hips/Spine/Chest/Neck/Head/LeftEyelidLower
+        weight: 0
+      - path: Reference/Hips/Spine/Chest/Neck/Head/LeftEyelidUpper
+        weight: 0
+      - path: Reference/Hips/Spine/Chest/Neck/Head/LeftInnerBrow
+        weight: 0
+      - path: Reference/Hips/Spine/Chest/Neck/Head/LeftIOuterBrow
+        weight: 0
+      - path: Reference/Hips/Spine/Chest/Neck/Head/LeftLipUpper
+        weight: 0
+      - path: Reference/Hips/Spine/Chest/Neck/Head/LeftNostril
+        weight: 0
+      - path: Reference/Hips/Spine/Chest/Neck/Head/RightCheek
+        weight: 0
+      - path: Reference/Hips/Spine/Chest/Neck/Head/RightEye
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/Neck/Head/RightEye/Ri_Eye_Mesh
+        weight: 0
+      - path: Reference/Hips/Spine/Chest/Neck/Head/RightEyelidLower
+        weight: 0
+      - path: Reference/Hips/Spine/Chest/Neck/Head/RightEyelidUpper
+        weight: 0
+      - path: Reference/Hips/Spine/Chest/Neck/Head/RightInnerBrow
+        weight: 0
+      - path: Reference/Hips/Spine/Chest/Neck/Head/RightIOuterBrow
+        weight: 0
+      - path: Reference/Hips/Spine/Chest/Neck/Head/RightLipUpper
+        weight: 0
+      - path: Reference/Hips/Spine/Chest/Neck/Head/RightNostril
+        weight: 0
+      - path: Reference/Hips/Spine/Chest/RightShoulder
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/RightShoulder/RightArm
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/RightShoulder/RightArm/RightForeArm
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/RightShoulder/RightArm/RightForeArm/RightHand
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/RightShoulder/RightArm/RightForeArm/RightHand/RightHandIndex1
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/RightShoulder/RightArm/RightForeArm/RightHand/RightHandIndex1/RightHandIndex2
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/RightShoulder/RightArm/RightForeArm/RightHand/RightHandIndex1/RightHandIndex2/RightHandIndex3
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/RightShoulder/RightArm/RightForeArm/RightHand/RightHandMiddle1
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/RightShoulder/RightArm/RightForeArm/RightHand/RightHandMiddle1/RightHandMiddle2
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/RightShoulder/RightArm/RightForeArm/RightHand/RightHandMiddle1/RightHandMiddle2/RightHandMiddle3
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/RightShoulder/RightArm/RightForeArm/RightHand/RightHandPinky1
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/RightShoulder/RightArm/RightForeArm/RightHand/RightHandPinky1/RightHandPinky2
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/RightShoulder/RightArm/RightForeArm/RightHand/RightHandPinky1/RightHandPinky2/RightHandPinky3
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/RightShoulder/RightArm/RightForeArm/RightHand/RightHandRing1
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/RightShoulder/RightArm/RightForeArm/RightHand/RightHandRing1/RightHandRing2
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/RightShoulder/RightArm/RightForeArm/RightHand/RightHandRing1/RightHandRing2/RightHandRing3
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/RightShoulder/RightArm/RightForeArm/RightHand/RightHandThumb1
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/RightShoulder/RightArm/RightForeArm/RightHand/RightHandThumb1/RightHandThumb2
+        weight: 1
+      - path: Reference/Hips/Spine/Chest/RightShoulder/RightArm/RightForeArm/RightHand/RightHandThumb1/RightHandThumb2/RightHandThumb3
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -252,8 +454,6 @@ ModelImporter:
         min: {x: -40, y: -40, z: -40}
         max: {x: 40, y: 40, z: 40}
         value: {x: .0748810917, y: 0, z: .0374405459}
-        preQ: {x: -.455934644, y: -.540484607, z: .455934584, w: .540484607}
-        postQ: {x: -.455934674, y: -.540484607, z: .455934614, w: .540484607}
         length: .0936013609
         modified: 1
     - boneName: LeftUpLeg
@@ -262,8 +462,6 @@ ModelImporter:
         min: {x: -60.0000038, y: -60.0000038, z: -90}
         max: {x: 60.0000038, y: 60.0000038, z: 50}
         value: {x: .327766627, y: 0, z: .163883314}
-        preQ: {x: .599829614, y: -.356768787, z: .630710304, w: -.339300752}
-        postQ: {x: .491550505, y: -.507876515, z: .51685673, w: -.483009964}
         length: .409708261
         modified: 1
     - boneName: RightUpLeg
@@ -272,8 +470,6 @@ ModelImporter:
         min: {x: -60.0000038, y: -60.0000038, z: -90}
         max: {x: 60.0000038, y: 60.0000038, z: 50}
         value: {x: .327766389, y: 0, z: .163883194}
-        preQ: {x: .630710244, y: -.339300781, z: .599829614, w: -.356768698}
-        postQ: {x: .51685673, y: -.483010024, z: .491550565, w: -.507876456}
         length: .409707993
         modified: 1
     - boneName: LeftLeg
@@ -282,8 +478,6 @@ ModelImporter:
         min: {x: -90, y: 0, z: -80}
         max: {x: 90, y: 0, z: 80}
         value: {x: .338686109, y: 0, z: .169343054}
-        preQ: {x: -.0513364598, y: .709496737, z: -.0519650541, w: .700912714}
-        postQ: {x: -.489834547, y: .510132492, z: -.495833427, w: .50396049}
         length: .423357636
         modified: 1
     - boneName: RightLeg
@@ -292,8 +486,6 @@ ModelImporter:
         min: {x: -90, y: 0, z: -80}
         max: {x: 90, y: 0, z: 80}
         value: {x: .338686198, y: 0, z: .169343099}
-        preQ: {x: -.0519650467, y: .700912714, z: -.0513364263, w: .709496677}
-        postQ: {x: -.495833397, y: .50396055, z: -.489834607, w: .510132492}
         length: .423357755
         modified: 1
     - boneName: LeftFoot
@@ -302,8 +494,6 @@ ModelImporter:
         min: {x: 0, y: -30.0000019, z: -50}
         max: {x: 0, y: 30.0000019, z: 50}
         value: {x: .0686756596, y: 0, z: .0343378298}
-        preQ: {x: -.49999997, y: .49999997, z: -.49999997, w: .49999997}
-        postQ: {x: -.5, y: .5, z: -.5, w: .5}
         length: .0858445764
         modified: 1
     - boneName: RightFoot
@@ -312,8 +502,6 @@ ModelImporter:
         min: {x: 0, y: -30.0000019, z: -50}
         max: {x: 0, y: 30.0000019, z: 50}
         value: {x: .0686757565, y: 0, z: .0343378782}
-        preQ: {x: -.49999994, y: .49999994, z: -.5, w: .5}
-        postQ: {x: -.5, y: .5, z: -.5, w: .5}
         length: .0858446956
         modified: 1
     - boneName: Spine
@@ -322,8 +510,6 @@ ModelImporter:
         min: {x: -40, y: -40, z: -40}
         max: {x: 40, y: 40, z: 40}
         value: {x: .131201789, y: 0, z: .0656008944}
-        preQ: {x: -.465501308, y: -.532267392, z: .465501308, w: .532267332}
-        postQ: {x: -.465501279, y: -.532267392, z: .465501279, w: .532267332}
         length: .164002225
         modified: 1
     - boneName: Chest
@@ -332,8 +518,6 @@ ModelImporter:
         min: {x: -40, y: -40, z: -40}
         max: {x: 40, y: 40, z: 40}
         value: {x: .190353245, y: 0, z: .0951766223}
-        preQ: {x: -.532968938, y: -.464697897, z: .532968879, w: .464697897}
-        postQ: {x: -.532968938, y: -.464697927, z: .532968879, w: .464697927}
         length: .237941548
         modified: 1
     - boneName: Neck
@@ -342,8 +526,6 @@ ModelImporter:
         min: {x: -40, y: -40, z: -40}
         max: {x: 40, y: 40, z: 40}
         value: {x: .0855658725, y: 0, z: .0427829362}
-        preQ: {x: .47278446, y: .525808811, z: -.472784519, w: -.525808692}
-        postQ: {x: .47278443, y: .525808811, z: -.472784489, w: -.525808692}
         length: .106957339
         modified: 1
     - boneName: Head
@@ -352,8 +534,6 @@ ModelImporter:
         min: {x: -40, y: -40, z: -40}
         max: {x: 40, y: 40, z: 40}
         value: {x: .0855658725, y: 0, z: .0427829362}
-        preQ: {x: -.5, y: -.5, z: .5, w: .5}
-        postQ: {x: -.49999997, y: -.49999997, z: .49999997, w: .49999997}
         length: .106957339
         modified: 1
     - boneName: LeftShoulder
@@ -362,8 +542,6 @@ ModelImporter:
         min: {x: 0, y: -15.000001, z: -15.000001}
         max: {x: 0, y: 15.000001, z: 30.0000019}
         value: {x: .0728294179, y: 0, z: .0364147089}
-        preQ: {x: -.0610189289, y: -.00167949463, z: .997757316, w: -.0274624489}
-        postQ: {x: -.000680154888, y: -.003286805, z: .979286909, w: .202449784}
         length: .0910367742
         modified: 1
     - boneName: RightShoulder
@@ -372,8 +550,6 @@ ModelImporter:
         min: {x: 0, y: -15.000001, z: -15.000001}
         max: {x: 0, y: 15.000001, z: 30.0000019}
         value: {x: .0728300735, y: 0, z: .0364150368}
-        preQ: {x: .00167905772, y: .0610181987, z: -.0274556, w: .997757554}
-        postQ: {x: -.20243822, y: -.979289293, z: .00328628393, w: .000678736717}
         length: .0910375863
         modified: 1
     - boneName: LeftArm
@@ -382,8 +558,6 @@ ModelImporter:
         min: {x: -90, y: -100, z: -60.0000038}
         max: {x: 90, y: 100, z: 100}
         value: {x: .203239605, y: 0, z: .101619802}
-        preQ: {x: .270717204, y: -.0920680761, z: .950520277, w: -.121436171}
-        postQ: {x: 1.05210356e-08, y: -.00126160786, z: .999999225, w: 1.90684364e-06}
         length: .25404951
         modified: 1
     - boneName: RightArm
@@ -392,8 +566,6 @@ ModelImporter:
         min: {x: -90, y: -100, z: -60.0000038}
         max: {x: 90, y: 100, z: 100}
         value: {x: .203239486, y: 0, z: .101619743}
-        preQ: {x: .121451229, y: -.95051825, z: .0920624882, w: -.270719469}
-        postQ: {x: .00126095989, y: .0329115652, z: .0117981425, w: .99938786}
         length: .254049361
         modified: 1
     - boneName: LeftForeArm
@@ -402,8 +574,6 @@ ModelImporter:
         min: {x: -90, y: 0, z: -80}
         max: {x: 90, y: 0, z: 80}
         value: {x: .197111905, y: 0, z: .0985559523}
-        preQ: {x: .474397153, y: .532885075, z: .53009057, w: -.458240986}
-        postQ: {x: -6.83966334e-07, y: .705982029, z: .70822978, w: -5.90458455e-07}
         length: .246389881
         modified: 1
     - boneName: RightForeArm
@@ -412,8 +582,6 @@ ModelImporter:
         min: {x: -90, y: 0, z: -80}
         max: {x: 90, y: 0, z: 80}
         value: {x: .197110966, y: 0, z: .0985554829}
-        preQ: {x: .542016029, y: .46297133, z: .434161425, w: -.55079937}
-        postQ: {x: .705254376, y: .0390244424, z: -.0231777672, w: -.707499921}
         length: .246388704
         modified: 1
     - boneName: LeftHand
@@ -422,8 +590,6 @@ ModelImporter:
         min: {x: 0, y: -40, z: -80}
         max: {x: 0, y: 40, z: 80}
         value: {x: .0985559523, y: 0, z: .0492779762}
-        preQ: {x: -6.63567334e-08, y: -.00170306861, z: .999998569, w: -9.02241936e-07}
-        postQ: {x: 3.63925683e-05, y: -.00170266069, z: .999769211, w: -.021414414}
         length: .12319494
         modified: 1
     - boneName: RightHand
@@ -432,8 +598,6 @@ ModelImporter:
         min: {x: 0, y: -40, z: -80}
         max: {x: 0, y: 40, z: 80}
         value: {x: .0985554829, y: 0, z: .0492777415}
-        preQ: {x: .00170132238, y: -.0112002939, z: .0439848714, w: .998968005}
-        postQ: {x: .00146108889, y: -.0112341531, z: .0225831885, w: .999680817}
         length: .123194352
         modified: 1
     - boneName: LeftToes
@@ -442,8 +606,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -50}
         max: {x: 0, y: 0, z: 50}
         value: {x: .0651871487, y: 0, z: .0325935744}
-        preQ: {x: .707106829, y: -9.81306198e-18, z: .707106829, w: -4.80840911e-16}
-        postQ: {x: .707106769, y: 1.12850385e-16, z: .707106769, w: -1.12850464e-16}
         length: .0814839303
         modified: 1
     - boneName: RightToes
@@ -452,8 +614,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -50}
         max: {x: 0, y: 0, z: 50}
         value: {x: .065187268, y: 0, z: .032593634}
-        preQ: {x: .707106829, y: -5.14487897e-10, z: .707106829, w: -5.14488119e-10}
-        postQ: {x: .707106769, y: 1.28622016e-10, z: .707106769, w: -1.28622099e-10}
         length: .0814840794
         modified: 1
     - boneName: LeftEye
@@ -462,8 +622,6 @@ ModelImporter:
         min: {x: 0, y: -20, z: -10}
         max: {x: 0, y: 20, z: 15.000001}
         value: {x: .0800000057, y: 0, z: .0400000028}
-        preQ: {x: .707106769, y: 3.85865812e-10, z: .707106769, w: -3.85865756e-10}
-        postQ: {x: .707106829, y: 3.85865812e-10, z: .707106829, w: -3.85865756e-10}
         length: .100000001
         modified: 1
     - boneName: RightEye
@@ -472,8 +630,6 @@ ModelImporter:
         min: {x: 0, y: -20, z: -10}
         max: {x: 0, y: 20, z: 15.000001}
         value: {x: .0800000057, y: 0, z: .0400000028}
-        preQ: {x: .707106769, y: 3.85865812e-10, z: .707106769, w: -3.85865756e-10}
-        postQ: {x: .707106829, y: 3.85865812e-10, z: .707106829, w: -3.85865756e-10}
         length: .100000001
         modified: 1
     - boneName: Jaw
@@ -482,8 +638,6 @@ ModelImporter:
         min: {x: 0, y: -10, z: -10}
         max: {x: 0, y: 10, z: 10}
         value: {x: .0800000057, y: 0, z: .0400000028}
-        preQ: {x: .70426029, y: -.0633834228, z: .70426029, w: -.0633834228}
-        postQ: {x: .707106829, y: 3.85865673e-10, z: .707106829, w: -3.85865617e-10}
         length: .100000001
         modified: 1
     - boneName: LeftHandThumb1
@@ -492,8 +646,6 @@ ModelImporter:
         min: {x: 0, y: -25, z: -20}
         max: {x: 0, y: 25, z: 20}
         value: {x: .0232955106, y: 0, z: .0116477553}
-        preQ: {x: .259490252, y: .594897985, z: .545253694, w: -.530527651}
-        postQ: {x: .265811175, y: .599206388, z: .649698794, w: -.384951502}
         length: .0291193873
         modified: 1
     - boneName: LeftHandThumb2
@@ -502,8 +654,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -40}
         max: {x: 0, y: 0, z: 35}
         value: {x: .0270181485, y: 0, z: .0135090742}
-        preQ: {x: .104260162, y: .663075864, z: .702025712, w: -.237949863}
-        postQ: {x: .165261894, y: .623612702, z: .698593318, w: -.30945608}
         length: .0337726846
         modified: 1
     - boneName: LeftHandThumb3
@@ -512,8 +662,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -40}
         max: {x: 0, y: 0, z: 35}
         value: {x: .0202636104, y: 0, z: .0101318052}
-        preQ: {x: .0320428498, y: .664064646, z: .726717174, w: -.172839746}
-        postQ: {x: .165261954, y: .623612702, z: .698593318, w: -.30945608}
         length: .0253295135
         modified: 1
     - boneName: LeftHandIndex1
@@ -522,8 +670,6 @@ ModelImporter:
         min: {x: 0, y: -20, z: -50}
         max: {x: 0, y: 20, z: 50}
         value: {x: .0318521224, y: 0, z: .0159260612}
-        preQ: {x: .165821776, y: .0338009298, z: .938649297, w: -.300496519}
-        postQ: {x: .0148881283, y: -.00261929096, z: .999885499, w: .000671229151}
         length: .0398151502
         modified: 1
     - boneName: LeftHandIndex2
@@ -532,8 +678,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -45}
         max: {x: 0, y: 0, z: 45}
         value: {x: .0223748591, y: 0, z: .0111874295}
-        preQ: {x: .0135088703, y: .063234672, z: .935971081, w: -.34608826}
-        postQ: {x: -9.41567237e-07, y: .00568754179, z: .999983788, w: 1.31592981e-06}
         length: .0279685725
         modified: 1
     - boneName: LeftHandIndex3
@@ -542,8 +686,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -45}
         max: {x: 0, y: 0, z: 45}
         value: {x: .0167811438, y: 0, z: .00839057192}
-        preQ: {x: .00174507208, y: .0684534311, z: .949255109, w: -.306962341}
-        postQ: {x: -9.42120209e-07, y: .00568752317, z: .999983847, w: 1.30099954e-06}
         length: .0209764298
         modified: 1
     - boneName: LeftHandMiddle1
@@ -552,8 +694,6 @@ ModelImporter:
         min: {x: 0, y: -7.50000048, z: -50}
         max: {x: 0, y: 7.50000048, z: 50}
         value: {x: .0354254209, y: 0, z: .0177127104}
-        preQ: {x: .0648417771, y: .0119387629, z: .949491858, w: -.306787044}
-        postQ: {x: -.00480304798, y: -.00178710301, z: .999986947, w: 3.05713002e-05}
         length: .0442817733
         modified: 1
     - boneName: LeftHandMiddle2
@@ -562,8 +702,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -45}
         max: {x: 0, y: 0, z: 45}
         value: {x: .0271717049, y: 0, z: .0135858525}
-        preQ: {x: -.01848826, y: .0188415349, z: .936893463, w: -.348616868}
-        postQ: {x: 2.71142198e-07, y: -.000914075412, z: .999999523, w: -3.34927427e-06}
         length: .0339646302
         modified: 1
     - boneName: LeftHandMiddle3
@@ -572,8 +710,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -45}
         max: {x: 0, y: 0, z: 45}
         value: {x: .0203787778, y: 0, z: .0101893889}
-        preQ: {x: -.000286009395, y: .0115709957, z: .949638546, w: -.313133597}
-        postQ: {x: 3.06696165e-07, y: -.000914070755, z: .999999583, w: -3.3343922e-06}
         length: .0254734717
         modified: 1
     - boneName: LeftHandRing1
@@ -582,8 +718,6 @@ ModelImporter:
         min: {x: 0, y: -7.50000048, z: -50}
         max: {x: 0, y: 7.50000048, z: 50}
         value: {x: .0345549993, y: 0, z: .0172774997}
-        preQ: {x: -.052334141, y: -.00429042568, z: .948995113, w: -.310887396}
-        postQ: {x: -.0258840956, y: -.00169985043, z: .999663532, w: -.000272002973}
         length: .0431937464
         modified: 1
     - boneName: LeftHandRing2
@@ -592,8 +726,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -45}
         max: {x: 0, y: 0, z: 45}
         value: {x: .0246686395, y: 0, z: .0123343198}
-        preQ: {x: -.0220913365, y: .00243382715, z: .935715854, w: -.352053732}
-        postQ: {x: 2.08514393e-06, y: -.00243730168, z: .99999696, w: 7.22396862e-06}
         length: .0308357999
         modified: 1
     - boneName: LeftHandRing3
@@ -602,8 +734,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -45}
         max: {x: 0, y: 0, z: 45}
         value: {x: .018501481, y: 0, z: .00925074052}
-        preQ: {x: -.000761790376, y: -.00592712313, z: .949619234, w: -.31334886}
-        postQ: {x: 2.07393168e-06, y: -.00243730261, z: .999997079, w: 7.26121925e-06}
         length: .0231268499
         modified: 1
     - boneName: LeftHandPinky1
@@ -612,8 +742,6 @@ ModelImporter:
         min: {x: 0, y: -20, z: -50}
         max: {x: 0, y: 20, z: 50}
         value: {x: .0246712696, y: 0, z: .0123356348}
-        preQ: {x: -.0875755921, y: -.00506417919, z: .947629333, w: -.307088554}
-        postQ: {x: -.023483729, y: -.00235619256, z: .999721289, w: -.000585558824}
         length: .0308390856
         modified: 1
     - boneName: LeftHandPinky2
@@ -622,8 +750,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -45}
         max: {x: 0, y: 0, z: 45}
         value: {x: .0184512679, y: 0, z: .00922563393}
-        preQ: {x: -.00994612277, y: .00572137814, z: .951211929, w: -.308324814}
-        postQ: {x: -1.31165143e-06, y: -.00267043919, z: .999996364, w: -.000131544031}
         length: .0230640844
         modified: 1
     - boneName: LeftHandPinky3
@@ -632,8 +758,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -45}
         max: {x: 0, y: 0, z: 45}
         value: {x: .0138384504, y: 0, z: .00691922521}
-        preQ: {x: -.00083865854, y: .00252651703, z: .949597538, w: -.31346035}
-        postQ: {x: -1.28148895e-06, y: -.00267040171, z: .999996424, w: -.000131569177}
         length: .0172980633
         modified: 1
     - boneName: RightHandThumb1
@@ -642,8 +766,6 @@ ModelImporter:
         min: {x: 0, y: -25, z: -20}
         max: {x: 0, y: 25, z: 20}
         value: {x: .023295518, y: 0, z: .011647759}
-        preQ: {x: .577161014, y: .291702032, z: .512571275, w: -.564858973}
-        postQ: {x: -.599386334, y: -.265697658, z: -.3850393, w: .649527133}
         length: .0291193966
         modified: 1
     - boneName: RightHandThumb2
@@ -652,8 +774,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -40}
         max: {x: 0, y: 0, z: 35}
         value: {x: .0270180255, y: 0, z: .0135090128}
-        preQ: {x: .663241684, y: .104117788, z: .238058254, w: -.701853454}
-        postQ: {x: -.623821855, y: -.16517958, z: -.30948934, w: .698411286}
         length: .0337725319
         modified: 1
     - boneName: RightHandThumb3
@@ -662,8 +782,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -40}
         max: {x: 0, y: 0, z: 35}
         value: {x: .020263521, y: 0, z: .0101317605}
-        preQ: {x: .664254546, y: .0319186337, z: .17290774, w: -.726532876}
-        postQ: {x: -.623821855, y: -.16517967, z: -.30948931, w: .698411286}
         length: .0253293999
         modified: 1
     - boneName: RightHandIndex1
@@ -672,8 +790,6 @@ ModelImporter:
         min: {x: 0, y: -20, z: -50}
         max: {x: 0, y: 20, z: 50}
         value: {x: .0318515562, y: 0, z: .0159257781}
-        preQ: {x: .023549065, y: .177870452, z: .259326875, w: -.948976934}
-        postQ: {x: .00211038953, y: -.185805842, z: .00966484006, w: .982536733}
         length: .0398144424
         modified: 1
     - boneName: RightHandIndex2
@@ -682,8 +798,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -45}
         max: {x: 0, y: 0, z: 45}
         value: {x: .0223748293, y: 0, z: .0111874146}
-        preQ: {x: .00338977389, y: .17419526, z: .343788832, w: -.922742486}
-        postQ: {x: -.00603062334, y: -.201311797, z: -.0922988132, w: .975150347}
         length: .0279685371
         modified: 1
     - boneName: RightHandIndex3
@@ -692,8 +806,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -45}
         max: {x: 0, y: 0, z: 45}
         value: {x: .0167811215, y: 0, z: .00839056075}
-        preQ: {x: .00540079176, y: .187204376, z: .399683446, w: -.89731735}
-        postQ: {x: -.00603064429, y: -.201311737, z: -.0922988504, w: .975150347}
         length: .0209764019
         modified: 1
     - boneName: RightHandMiddle1
@@ -702,8 +814,6 @@ ModelImporter:
         min: {x: 0, y: -7.50000048, z: -50}
         max: {x: 0, y: 7.50000048, z: 50}
         value: {x: .0354262553, y: 0, z: .0177131277}
-        preQ: {x: .00608015666, y: .0761539936, z: .264839232, w: -.96126157}
-        postQ: {x: .00128631457, y: -.0730758384, z: .00229143631, w: .997322917}
         length: .0442828164
         modified: 1
     - boneName: RightHandMiddle2
@@ -712,8 +822,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -45}
         max: {x: 0, y: 0, z: 45}
         value: {x: .0271718055, y: 0, z: .0135859028}
-        preQ: {x: -.00787567534, y: .0546973087, z: .347030193, w: -.936224461}
-        postQ: {x: .000428615836, y: -.0250897482, z: -.111821696, w: .993411362}
         length: .0339647569
         modified: 1
     - boneName: RightHandMiddle3
@@ -722,8 +830,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -45}
         max: {x: 0, y: 0, z: 45}
         value: {x: .020378856, y: 0, z: .010189428}
-        preQ: {x: .00407755235, y: .0223025884, z: .417568773, w: -.908362389}
-        postQ: {x: .000428616127, y: -.0250897426, z: -.111821689, w: .993411422}
         length: .0254735686
         modified: 1
     - boneName: RightHandRing1
@@ -732,8 +838,6 @@ ModelImporter:
         min: {x: 0, y: -7.50000048, z: -50}
         max: {x: 0, y: 7.50000048, z: 50}
         value: {x: .0345550217, y: 0, z: .0172775108}
-        preQ: {x: -.00502611184, y: -.0416206047, z: .268825889, w: -.962275922}
-        postQ: {x: .00161602662, y: .0573281907, z: -.0160532109, w: .998225033}
         length: .0431937762
         modified: 1
     - boneName: RightHandRing2
@@ -742,8 +846,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -45}
         max: {x: 0, y: 0, z: 45}
         value: {x: .0246683862, y: 0, z: .0123341931}
-        preQ: {x: .0136145875, y: -.0514585637, z: .366483539, w: -.928900719}
-        postQ: {x: .00193531485, y: .0755281001, z: -.12627247, w: .989114285}
         length: .0308354814
         modified: 1
     - boneName: RightHandRing3
@@ -752,8 +854,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -45}
         max: {x: 0, y: 0, z: 45}
         value: {x: .0185012892, y: 0, z: .00925064459}
-        preQ: {x: .0182355791, y: -.0718712956, z: .430131704, w: -.8997159}
-        postQ: {x: .00193530892, y: .0755281076, z: -.12627244, w: .989114225}
         length: .0231266115
         modified: 1
     - boneName: RightHandPinky1
@@ -762,8 +862,6 @@ ModelImporter:
         min: {x: 0, y: -20, z: -50}
         max: {x: 0, y: 20, z: 50}
         value: {x: .0246718526, y: 0, z: .0123359263}
-        preQ: {x: -.00420920691, y: -.0768786967, z: .265069485, w: -.961150408}
-        postQ: {x: .00228498946, y: .192027345, z: -.023515448, w: .981105089}
         length: .0308398157
         modified: 1
     - boneName: RightHandPinky2
@@ -772,8 +870,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -45}
         max: {x: 0, y: 0, z: 45}
         value: {x: .0184512343, y: 0, z: .00922561716}
-        preQ: {x: .0579814836, y: -.170523778, z: .324367136, w: -.928625703}
-        postQ: {x: .00211261609, y: .187971935, z: -.0126426648, w: .982090771}
         length: .0230640434
         modified: 1
     - boneName: RightHandPinky3
@@ -782,8 +878,6 @@ ModelImporter:
         min: {x: 0, y: 0, z: -45}
         max: {x: 0, y: 0, z: 45}
         value: {x: .0138384253, y: 0, z: .00691921264}
-        preQ: {x: .0618677512, y: -.179229558, z: .318778425, w: -.928670883}
-        postQ: {x: .00211261492, y: .18797195, z: -.0126426453, w: .982090831}
         length: .0172980316
         modified: 1
     skeleton:
@@ -1182,7 +1276,6 @@ ModelImporter:
       rotation: {x: 4.66654946e-08, y: 4.66086156e-08, z: -1.76358963e-08, w: .99999994}
       scale: {x: .99999994, y: .999999821, z: .999999881}
       transformModified: 1
-    handles: []
     armTwist: .5
     foreArmTwist: .5
     upperLegTwist: .5
@@ -1192,6 +1285,5 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  additionalBone: 1
   animationType: 3
   userData: 

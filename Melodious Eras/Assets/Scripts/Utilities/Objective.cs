@@ -8,6 +8,7 @@ public class Objective
     protected string title, description;
     protected bool completed;
     public List<ObjectiveCondition> conditions;
+    [SerializeField] private Objective[] nextObjectives;
 
     public string Title { get { return title; } }
     public string Description { get { return description; } }

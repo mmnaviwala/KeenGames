@@ -24,14 +24,14 @@ public class EnemyStats : CharacterStats
 		this.currentSecArea = GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<SecurityArea>();
     }
 
-    public void Update()
+    /*public void Update()
     {
         if (isDead)
         {
             ((PlayerStats)(ai.currentEnemy))._closeQuarterEnemies.charactersInRange.Remove(this);
             Destroy(this.gameObject);
         }
-    }
+    }*/
 
     #region Damage taking and stat changes
     /// <summary>
@@ -54,7 +54,10 @@ public class EnemyStats : CharacterStats
         if (this.isVulnerable && this.health <= 0)
         {
             this.isDead = true;
-            Destroy(this.gameObject);
+			this.ai.Anim.SetBool(HashIDs.dead_bool, true);
+			this.ai.enabled = false;
+
+            //Destroy(this.gameObject);
         }
  
     }
@@ -65,8 +68,10 @@ public class EnemyStats : CharacterStats
     {
         if (this.isVulnerable)
         {
-            isDead = true;
-            Destroy(this.gameObject);
+			isDead = true;
+			this.ai.Anim.SetBool("Dead", true);
+			this.ai.enabled = false;
+            //Destroy(this.gameObject);
         }
     }
     /// <summary>
