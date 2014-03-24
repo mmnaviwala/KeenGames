@@ -3,12 +3,12 @@ using System.Collections;
 using System.Xml;
 using System.IO;
 
-public static class XMLUtilities 
+public static class XMLUtilities
 {
+    public static string currentDirectory;
     static string savePath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments); //Windows location
                           //Will need different defaults for each platform
                           //May be necessary to use PlayerPrefs for consoles
-    public static string currentDirectory;
 
     public static void SaveGame()
     {
@@ -32,7 +32,7 @@ public static class XMLUtilities
     {
  
     }
-
+    
     public static void Test()
     {
         currentDirectory = Directory.GetCurrentDirectory();

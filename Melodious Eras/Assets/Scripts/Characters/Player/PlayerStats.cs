@@ -129,6 +129,12 @@ public class PlayerStats : CharacterStats
             anim.SetBool(HashIDs.dead_bool, isDead);
         }
     }
+    protected override void Die()
+    {
+        this.isDead = true;
+        //wait for animation, then fade to black
+        //reload last checkpoint
+    }
 
     /// <summary>
     /// Calculates visibility based on lighting

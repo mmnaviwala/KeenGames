@@ -38,9 +38,11 @@ public class Keypad : CircuitSwitch
     {
         enteredCode = "";
 
-        connectedNodes.ForEach(delegate(CircuitNode node) { //probably not necessary anymore
+        foreach (CircuitNode node in connectedNodes)
             node.connectedSwitch = this;
-        });
+        /*connectedNodes.ForEach(delegate(CircuitNode node) { //probably not necessary anymore
+            node.connectedSwitch = this;
+        });*/
 
         //All GUI stuff below here
         int h = Screen.height / 10;
@@ -170,9 +172,11 @@ public class Keypad : CircuitSwitch
                 break;
             case "ENTER":
                 //emits a signal to all connected nodes saying whether the code was correct
-                connectedNodes.ForEach(delegate(CircuitNode node) {
+                foreach (CircuitNode node in connectedNodes)
                     node.PerformSwitchAction(enteredCode == correctCode);
-                });
+                /*connectedNodes.ForEach(delegate(CircuitNode node) {
+                    node.PerformSwitchAction(enteredCode == correctCode);
+                });*/
 
                 if (enteredCode == correctCode) //if correct
                 {

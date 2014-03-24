@@ -14,7 +14,9 @@ public class ElectricGrid : MonoBehaviour
         powerSources = new List<PowerSource>();
 
         //Registering all power sources first
-        connectedObjects.ForEach(delegate(CircuitNode node)
+
+        //connectedObjects.ForEach(delegate(CircuitNode node)
+        foreach(CircuitNode node in connectedObjects)
         {
             if (node is PowerSource)
             {
@@ -22,12 +24,13 @@ public class ElectricGrid : MonoBehaviour
                 if (node.activated)
                     this.hasPower = true;
             }
-        });
+        };
 
-        connectedObjects.ForEach(delegate(CircuitNode node)
-        {
+        foreach (CircuitNode node in connectedObjects)
             node.hasPower = this.hasPower;
-        });
+        /*connectedObjects.ForEach(delegate(CircuitNode node) {
+            node.hasPower = this.hasPower;
+        });*/
     }
 
     /// <summary>
@@ -41,11 +44,12 @@ public class ElectricGrid : MonoBehaviour
 
         if (hasPower != previousPowerState)
         {
-            connectedObjects.ForEach(delegate(CircuitNode node) 
+            //connectedObjects.ForEach(delegate(CircuitNode node) 
+            foreach(CircuitNode node in connectedObjects)
             { 
                 node.hasPower = this.hasPower; 
                 node.TurnOnOff(hasPower);
-            });
+            };
         }
     }
 }

@@ -9,8 +9,10 @@ public class NPCGroup : MonoBehaviour
 
 	public void AlertGroup(Vector3 sightingCoords)
 	{
-		NPCs.ForEach(delegate(EnemyAI member) {
+        foreach (EnemyAI member in NPCs)
+            member.lastPlayerSighting = sightingCoords;
+		/*NPCs.ForEach(delegate(EnemyAI member) {
 			member.lastPlayerSighting = sightingCoords;
-		});
+		});*/
 	}
 }

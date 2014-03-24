@@ -23,63 +23,22 @@ public class CharacterStats : MonoBehaviour
 	public Transform lookatTarget;
 
 	// Use this for initialization
-	void Start () {
-	
-	}
-	
+    void Start() { }
 	// Update is called once per frame
-	void Update () {
-	
-	}
+    void Update() { }
 
-    public virtual void TakeDamage(int damage)
-    {
- 
-    }
+    public virtual void TakeDamage(int damage) { }
+    public virtual void TakeDamage(int damage, CharacterStats source) { }
+    public virtual void TakeDamage(bool instantKill) { }
+    public virtual void TakeDamageThroughArmor(int damage) { }
+    public virtual void TakeDamageThroughArmor(int damage, CharacterStats source) { }
+    public virtual void TakeDamageThroughArmor(bool instantKill) { }
+    protected virtual void Die() { }
 
-    public virtual void TakeDamage(int damage, CharacterStats source)
-    {
- 
-    }
+    public virtual void Attack(CharacterStats target) { }
+    public virtual void Attack(CharacterStats target, CharacterStats attacker, float angle) { }
 
-    public virtual void TakeDamage(bool instantKill)
-    {
- 
-    }
-    public virtual void TakeDamageThroughArmor(int damage)
-    {
- 
-    }
-    public virtual void TakeDamageThroughArmor(int damage, CharacterStats source)
-    {
-
-    }
-
-    public virtual void TakeDamageThroughArmor(bool instantKill)
-    {
-
-    }
-    public virtual void Attack(CharacterStats target)
-    {
- 
-    }
-
-    public virtual void Attack(CharacterStats target, CharacterStats attacker, float angle)
-    {
-
-    }
-
-	public virtual void PickUp(Item item)
-	{
-
-	}
-
-	public virtual void SwitchWeapon(WeaponClass slot)
-	{
-
-	}
-	public virtual void HolsterWeapon()
-	{
-
-	}
+    public virtual void PickUp(Item item) { }
+    public virtual void SwitchWeapon(WeaponClass slot) { }
+    public virtual void HolsterWeapon() { }
 }

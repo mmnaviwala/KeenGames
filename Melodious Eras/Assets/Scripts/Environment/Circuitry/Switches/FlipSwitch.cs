@@ -17,9 +17,11 @@ public class FlipSwitch : CircuitSwitch
     {
         if (initializeSwitch)
         {
-            connectedNodes.ForEach(delegate(CircuitNode node) {
+            foreach (CircuitNode node in connectedNodes)
                 node.PerformSwitchAction(onOffStatus);
-            });
+            /*connectedNodes.ForEach(delegate(CircuitNode node) {
+                node.PerformSwitchAction(onOffStatus);
+            });*/
         }
 	}
     void Update()
@@ -30,9 +32,11 @@ public class FlipSwitch : CircuitSwitch
             {
                 onOffStatus = !onOffStatus;
 
-                connectedNodes.ForEach(delegate(CircuitNode node) {
+                foreach (CircuitNode node in connectedNodes)
                     node.PerformSwitchAction(onOffStatus);
-                });
+                /*connectedNodes.ForEach(delegate(CircuitNode node) {
+                    node.PerformSwitchAction(onOffStatus);
+                });*/
             }
         }
     }

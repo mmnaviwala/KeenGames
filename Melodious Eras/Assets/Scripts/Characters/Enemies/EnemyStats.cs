@@ -43,8 +43,7 @@ public class EnemyStats : CharacterStats
         this.health -= damage;
         if (this.isVulnerable && this.health <= 0)
         {
-            this.isDead = true;
-            Destroy(this.gameObject);
+            this.Die();
         }
     }
     public override void TakeDamage(int damage, CharacterStats source)
@@ -53,11 +52,7 @@ public class EnemyStats : CharacterStats
         this.health -= damage;
         if (this.isVulnerable && this.health <= 0)
         {
-            this.isDead = true;
-			this.ai.Anim.SetBool(HashIDs.dead_bool, true);
-			this.ai.enabled = false;
-
-            //Destroy(this.gameObject);
+            this.Die();
         }
  
     }
@@ -68,10 +63,7 @@ public class EnemyStats : CharacterStats
     {
         if (this.isVulnerable)
         {
-			isDead = true;
-			this.ai.Anim.SetBool("Dead", true);
-			this.ai.enabled = false;
-            //Destroy(this.gameObject);
+            this.Die();
         }
     }
     /// <summary>
@@ -83,8 +75,7 @@ public class EnemyStats : CharacterStats
         this.health -= damage;
         if (this.health <= 0)
         {
-            this.isDead = true;
-            Destroy(this.gameObject);
+            this.Die();
         }
     }
     /// <summary>
@@ -98,8 +89,7 @@ public class EnemyStats : CharacterStats
         this.health -= damage;
         if (this.health <= 0)
         {
-            this.isDead = true;
-            Destroy(this.gameObject);
+            this.Die();
         }
 
     }
@@ -108,8 +98,21 @@ public class EnemyStats : CharacterStats
     /// </summary>
     public override void TakeDamageThroughArmor(bool instantKill)
     {
+        this.Die();
+    }
+
+    /// <summary>
+    /// <para>Processes the enemy's death. For this type of enemy, it disables their AI, then shrinks and disables their sight's sphere collider.</para>
+    /// <para>Avoiding destroying any components, in case we want enemies to be capable of being revived at some point.</para>
+    /// </summary>
+    protected override void Die()
+    {
         isDead = true;
-        Destroy(this.gameObject);
+        this.ai.Anim.SetBool(HashIDs.dead_bool, true);
+        this.ai.enabled = false;
+        SphereCollider col = this.ai.sight.GetComponent<SphereCollider>();
+        col.radius = 0;
+        col.enabled = false;
     }
     #endregion
 }

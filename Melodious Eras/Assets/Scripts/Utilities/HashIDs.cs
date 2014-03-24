@@ -35,9 +35,9 @@ public static class HashIDs
 
     public static void Initialize()
     {
-		dying_state = Animator.StringToHash("Player Animator.Dying");
-		dead_bool = Animator.StringToHash("Player Animator.Dead");
-		locomotion_state = Animator.StringToHash("Player Animator.Locomotion");
+		dying_state = Animator.StringToHash("Dying");
+		dead_bool = Animator.StringToHash("Dead");
+		locomotion_state = Animator.StringToHash("Locomotion");
 		speed_float = Animator.StringToHash("Speed");
 		sneaking_bool = Animator.StringToHash("Sneaking");
 		playerInSight_bool = Animator.StringToHash("PlayerInSight");
