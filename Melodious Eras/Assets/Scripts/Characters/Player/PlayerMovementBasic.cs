@@ -426,7 +426,7 @@ public class PlayerMovementBasic : MonoBehaviour
                 while(this.anim.GetBool(HashIDs.vault_bool))
 		        {
 			        state = this.anim.GetCurrentAnimatorStateInfo(0);
-			        if(state.IsName("Player Animator.Vault") && state.normalizedTime > startTime)
+			        if(state.IsName("Vault") && state.normalizedTime > startTime)
 			        {
 				        this.rigidbody.isKinematic = true;
 				        this.anim.MatchTarget(matchTarget, new Quaternion(), AvatarTarget.LeftHand, new MatchTargetWeightMask(Vector3.one, 0), startTime, endTime);
@@ -442,7 +442,7 @@ public class PlayerMovementBasic : MonoBehaviour
                 {
                     this.rigidbody.isKinematic = true;
                     state = this.anim.GetCurrentAnimatorStateInfo(0);
-                    if (state.IsName("Player Animator.Jump to Ledge") && state.normalizedTime > startTime)
+                    if (state.IsName("Jump to Ledge") && state.normalizedTime > startTime)
                     {
                         this.anim.MatchTarget(matchTarget, new Quaternion(), AvatarTarget.RightHand, new MatchTargetWeightMask(Vector3.one, 0), startTime, endTime);
                     }

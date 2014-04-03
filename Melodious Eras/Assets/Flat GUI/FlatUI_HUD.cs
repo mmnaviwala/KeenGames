@@ -77,17 +77,17 @@ public class FlatUI_HUD : MonoBehaviour {
 		{
 		case BarType.Health:
 //			currentNumber = 100;
-			currentNumber = GameObject.Find("player_FreeCharacter").GetComponent<PlayerStats>().health;
+			currentNumber = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<PlayerStats>().health;
 			break;
 		case BarType.Armor:
 //			currentNumber = 50;
-			currentNumber = GameObject.Find("player_FreeCharacter").GetComponent<Suit>().armor;
+			currentNumber = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<Suit>().armor;
 			break;
 		case BarType.Ammo:
 			currentNumber = 20;
 			break;
 		case BarType.Battery:
-			currentNumber = GameObject.Find("player_FreeCharacter").GetComponent<Suit>().batteryLife;
+			currentNumber = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<Suit>().batteryLife;
 //			currentNumber = 80;
 			break;
 		}
