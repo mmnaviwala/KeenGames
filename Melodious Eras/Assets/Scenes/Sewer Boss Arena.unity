@@ -2645,7 +2645,7 @@ Renderer:
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
   - {fileID: 2100000, guid: 204c87ab6b9d61949b5eed84f3d8746a, type: 2}
-  - {fileID: 2100000, guid: f0d141bbdd1f66842870fab2d61fc6da, type: 2}
+  - {fileID: 2100000, guid: 25de38ce1212e1d4fbd4e54debd64148, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -11958,10 +11958,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 298050133}
   - 114: {fileID: 298050132}
-  - 114: {fileID: 298050131}
   - 65: {fileID: 298050130}
   - 114: {fileID: 298050129}
-  - 114: {fileID: 298050134}
+  - 114: {fileID: 298050131}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -12000,9 +11999,8 @@ BoxCollider:
 --- !u!114 &298050131
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400002, guid: 094d457bfcf3a0244b6ae9ec0b52fead,
-    type: 2}
-  m_PrefabInternal: {fileID: 1567326673}
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 298050128}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -12041,19 +12039,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
---- !u!114 &298050134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400006, guid: 094d457bfcf3a0244b6ae9ec0b52fead,
-    type: 2}
-  m_PrefabInternal: {fileID: 1567326673}
-  m_GameObject: {fileID: 298050128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f774b17931f673a44954ce36fb082548, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  emailFile: {fileID: 0}
 --- !u!1 &299040001
 GameObject:
   m_ObjectHideFlags: 0
@@ -50502,6 +50487,7 @@ Transform:
   - {fileID: 2115916850}
   - {fileID: 1303092133}
   - {fileID: 760526556}
+  - {fileID: 114818854}
   - {fileID: 160537937}
   - {fileID: 2082834018}
   - {fileID: 72386883}
@@ -50540,7 +50526,6 @@ Transform:
   - {fileID: 45223339}
   - {fileID: 1366235623}
   - {fileID: 492128756}
-  - {fileID: 114818854}
   m_Father: {fileID: 1925028865}
 --- !u!1 &1295981432
 GameObject:
@@ -60828,7 +60813,9 @@ Prefab:
       propertyPath: ambientLight.rgba
       value: 4283585106
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11400002, guid: 094d457bfcf3a0244b6ae9ec0b52fead, type: 2}
+    - {fileID: 11400006, guid: 094d457bfcf3a0244b6ae9ec0b52fead, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 094d457bfcf3a0244b6ae9ec0b52fead, type: 2}
   m_RootGameObject: {fileID: 298050128}
   m_IsPrefabParent: 0
@@ -68841,6 +68828,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 204c87ab6b9d61949b5eed84f3d8746a, type: 2}
+    - target: {fileID: 2300000, guid: 96d0e7cd7b54d214886a1e39a568fb83, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 25de38ce1212e1d4fbd4e54debd64148, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96d0e7cd7b54d214886a1e39a568fb83, type: 3}
   m_RootGameObject: {fileID: 1739920478}

@@ -4,8 +4,7 @@ using System.Collections;
 [AddComponentMenu("Scripts/Environment/Light Glow")]
 public class LightGlow : MonoBehaviour 
 {
-    public float intensity = 1
-        ;
+    public float intensity = 1;
     public float variation = 1;
     private float minIntensity;
 	// Use this for initialization

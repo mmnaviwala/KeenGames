@@ -64,6 +64,7 @@ public class EnemyAI : MonoBehaviour
 		rayUpper = new Ray();
 		rayLower = new Ray();
 		rayCenter = new Ray();
+        this.seesPlayer = false;
 	}
 	
 	// Update is called once per frame
@@ -71,11 +72,13 @@ public class EnemyAI : MonoBehaviour
 	{
 		if(!this.stats.isDead)
 		{
-			this.seesPlayer = false;
-			if (lastPlayerSighting != lpsResetPosition && currentEnemy.health > 0f)
-				Chasing();
-	        else if (patrolWaypoints != null && patrolWaypoints.Length > 0)
-	            Patrol();
+			//this.seesPlayer = false;
+            if (lastPlayerSighting != lpsResetPosition && currentEnemy.health > 0f)
+            {
+                Chasing();
+            }
+            else if (patrolWaypoints != null && patrolWaypoints.Length > 0)
+                Patrol();
 	        
 	        //detecting enemies; currently only detects player
 			if(sight.charactersInRange.Count > 0)
@@ -99,16 +102,20 @@ public class EnemyAI : MonoBehaviour
 	                                                    sightDistance;
 
 						//if any rays hit
-	                    if ((Physics.Raycast(rayUpper,  out hit, sightDistanceMultiplier, sightLayer) ||
-	                        Physics.Raycast(rayCenter,  out hit, sightDistanceMultiplier, sightLayer) ||
-	                        Physics.Raycast(rayLower,   out hit, sightDistanceMultiplier, sightLayer))
-						    && hit.collider.tag == Tags.PLAYER)
-	                    {
-							this.seesPlayer = this.awareOfPlayer = true;
-							this.lastPlayerSighting = ch.transform.position;
-							currentEnemy = ch;
-							break;
-						}
+                        if ((Physics.Raycast(rayUpper, out hit, sightDistanceMultiplier, sightLayer) ||
+                            Physics.Raycast(rayCenter, out hit, sightDistanceMultiplier, sightLayer) ||
+                            Physics.Raycast(rayLower, out hit, sightDistanceMultiplier, sightLayer))
+                            && hit.collider.tag == Tags.PLAYER)
+                        {
+                            this.seesPlayer = this.awareOfPlayer = true;
+                            this.lastPlayerSighting = ch.transform.position;
+                            currentEnemy = ch;
+                            break;
+                        }
+                        else
+                        {
+ 
+                        }
 					}
 				}
 			}
@@ -241,7 +248,11 @@ public class EnemyAI : MonoBehaviour
 
     void Attack(PlayerStats target)
     {
-		equippedWeapon.Fire(target);
-        //target.TakeDamage(10);
+        if (this.equippedWeapon != null)
+            equippedWeapon.Fire(target);
+        else
+        {
+            //perform melee attack
+        }
     }
 }
