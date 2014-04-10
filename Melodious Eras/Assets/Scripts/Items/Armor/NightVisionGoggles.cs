@@ -47,7 +47,7 @@ public class NightVisionGoggles : MonoBehaviour {
 			//bloom.enabled = activated;
 			fisheye.enabled = activated;
 			//dof.enabled = activated;
-			if(activated)
+			/*if(activated)
 			{
 				bloom.bloomIntensity = 15;
 				bloom.bloomThreshhold = .02f;
@@ -61,7 +61,8 @@ public class NightVisionGoggles : MonoBehaviour {
 				bloom.bloomBlurIterations = 2;
 				bloom.hollyStretchWidth = 2.5f;
 
-			}
+			}*/
+            bloom.enabled = this.activated;
 		}
 		if(activated)
 		{

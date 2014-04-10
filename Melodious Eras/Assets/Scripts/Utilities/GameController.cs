@@ -21,6 +21,7 @@ public class GameController : MonoBehaviour
     void Awake()
     {
         Screen.orientation = ScreenOrientation.LandscapeLeft;
+		RenderSettings.ambientLight = this.ambientLight;
         //Physics.gravity = new Vector3(0f, -49f, 0f);
         AudioListener.pause = false;
         Time.timeScale = 1;

@@ -13,6 +13,7 @@ GameObject:
   - 65: {fileID: 6500000}
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400006}
+  - 114: {fileID: 11400008}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -99,7 +100,88 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f774b17931f673a44954ce36fb082548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emailFile: {fileID: 0}
+  emailFile: {fileID: 4900000, guid: d551d81ef0f7b7c4e8b364e9dfbd19fa, type: 3}
+--- !u!114 &11400008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1252035d4bbb54dc7bbd232bccf8a980, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  background: {fileID: 2800000, guid: 9be206a50ec3f4fc2b80875d61a4766b, type: 3}
+  log: {fileID: 2800000, guid: 15e5e6515bfa64a84aa1c916e2d67b85, type: 3}
+  inventory: {fileID: 2800000, guid: 463f20af44e46423da4fe20a83a1b38e, type: 3}
+  settings: {fileID: 2800000, guid: a54d23c160eef4b09b0f8ff812d3c1c0, type: 3}
+  resume: {fileID: 2800000, guid: 218b4d62542414ac0943f446eaf14a24, type: 3}
+  exit: {fileID: 2800000, guid: 8fb4fa83850fe43d5a58ecb0451755f2, type: 3}
+  logo: {fileID: 2800000, guid: bbf43a08302cb4970a840f0ee4430716, type: 3}
+  contentSquarePurple: {fileID: 2800000, guid: 42f51e0b0f0f54cf58328d79b24e1941, type: 3}
+  contentSquareCyan: {fileID: 2800000, guid: 026ad5a87f7c44368a71292a48fad93b, type: 3}
+  contentSquareGreen: {fileID: 2800000, guid: 04e88b53a358a4da9961c74758f949da, type: 3}
+  gamePausedText: Game Paused
+  gamePausedStyle:
+    m_Name: 
+    m_Normal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: .274509817, g: .407843143, b: .792156875, a: 1}
+    m_Hover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Active:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Focused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnNormal:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnHover:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnActive:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_OnFocused:
+      m_Background: {fileID: 0}
+      m_TextColor: {r: 0, g: 0, b: 0, a: 1}
+    m_Border:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Margin:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Padding:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Overflow:
+      m_Left: 0
+      m_Right: 0
+      m_Top: 0
+      m_Bottom: 0
+    m_Font: {fileID: 12800000, guid: e49e2bf4cc1c14010a12edf940e072b8, type: 3}
+    m_FontSize: 0
+    m_FontStyle: 0
+    m_Alignment: 5
+    m_WordWrap: 0
+    m_RichText: 1
+    m_TextClipping: 0
+    m_ImagePosition: 0
+    m_ContentOffset: {x: 0, y: 0}
+    m_FixedWidth: 0
+    m_FixedHeight: 0
+    m_StretchWidth: 1
+    m_StretchHeight: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
