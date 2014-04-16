@@ -7,8 +7,9 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: tile_wireFence_mat
-  m_Shader: {fileID: 54, guid: 0000000000000000e000000000000000, type: 0}
+  m_Shader: {fileID: 54, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: []
+  m_CustomRenderQueue: -1
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
@@ -17,14 +18,14 @@ Material:
           name: _MainTex
         second:
           m_Texture: {fileID: 2800000, guid: d754009ae1044694b8f221e2318c7361, type: 3}
-          m_Scale: {x: 1, y: 1}
+          m_Scale: {x: 20, y: 20}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _BumpMap
         second:
           m_Texture: {fileID: 2800000, guid: 1bc1f4fc62508e14b990623c81c2e5a3, type: 3}
-          m_Scale: {x: 1, y: 1}
+          m_Scale: {x: 20, y: 20}
           m_Offset: {x: 0, y: 0}
       data:
         first:
