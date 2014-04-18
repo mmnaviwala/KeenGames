@@ -9,6 +9,9 @@ enum Acrobatics { Vault, Dive, ClimbLedge };
 public class PlayerMovementBasic : MonoBehaviour
 {
     #region variables
+	private const float RAY_LOW = 0.75f;
+	private const float RAY_HIGH = 1.5f;
+	private const float MAX_CLIMB_HEIGHT = 3.5f;
     public float speed = 0f;                //current speed of character
     public float snapDownThreshold = .25f;  //Length of downward raycasts for smooth descent of ramps
     public float soundwaveDistance;
@@ -328,18 +331,20 @@ public class PlayerMovementBasic : MonoBehaviour
             jumping = true;
 
 			//Determining action
-			Ray low = new Ray(this.transform.position + Vector3.up * .75f, this.transform.forward);
-			Ray high = new Ray(this.transform.position + Vector3.up * 1.5f, this.transform.forward);
+			Ray low = new Ray(this.transform.position + Vector3.up * RAY_LOW, this.transform.forward);
+			Ray high = new Ray(this.transform.position + Vector3.up * RAY_HIGH, this.transform.forward);
 			RaycastHit hitLowInfo, hitHighInfo;
 
 			float raycastDistance = Mathf.Max(1f, anim.GetFloat(HashIDs.speed_float));
 
 
 			//if high hit
-			if(Physics.Raycast (high, out hitHighInfo, raycastDistance, obstacleLayers))
+			if(Physics.Raycast (high, out hitHighInfo, raycastDistance, obstacleLayers) && 
+			   	(hitHighInfo.collider.GetComponent<MaterialPhysics>() == null || 
+				 hitHighInfo.collider.GetComponent<MaterialPhysics>().canClimb))
 			{
 
-				Ray climbHeight = new Ray(this.transform.position + Vector3.up * 2.5f, this.transform.forward);
+				Ray climbHeight = new Ray(this.transform.position + Vector3.up * MAX_CLIMB_HEIGHT, this.transform.forward);
 				if(!Physics.Raycast(climbHeight, raycastDistance, obstacleLayers))
 				{
 					//climb wall
@@ -353,7 +358,9 @@ public class PlayerMovementBasic : MonoBehaviour
 				else
 					jumping = false;
 			}
-			else if(Physics.Raycast(low, out hitLowInfo, raycastDistance, obstacleLayers))
+			else if(Physics.Raycast(low, out hitLowInfo, raycastDistance, obstacleLayers) && 
+			        (hitLowInfo.collider.GetComponent<MaterialPhysics>() == null || 
+			 		 hitLowInfo.collider.GetComponent<MaterialPhysics>().canClimb))
 			{
 				//vault
 				anim.SetBool(HashIDs.vault_bool, true);
