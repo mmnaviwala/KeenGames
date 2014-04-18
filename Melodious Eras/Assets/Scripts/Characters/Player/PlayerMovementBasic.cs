@@ -75,7 +75,7 @@ public class PlayerMovementBasic : MonoBehaviour
     void Start()
     {
 		diveTime = new WaitForSeconds(1.367f);
-		vaultTime = new WaitForSeconds(1.2f);
+		vaultTime = new WaitForSeconds(1.220f);
 		climbTime = new WaitForSeconds(3f);
 		endOfFrame = new WaitForEndOfFrame();
 
@@ -153,7 +153,7 @@ public class PlayerMovementBasic : MonoBehaviour
 		//AIM (and WALK) offset
 		//Walking is for PC only; speed is handled by analog sticks on consoles
 		//Listening for all 3 to avoid camera shifting issues
-		if (Input.GetButton(InputType.RUN) && isAiming == false && this.stats.stamina > 0)
+		if (Input.GetButton(InputType.RUN) && isAiming == false && this.stats.stamina > 0 && !this.stats.exhausted)
 		{
 			isWalking = false;
 			mainCam.SetOffset(CameraOffset.Default);

@@ -10,6 +10,7 @@ public class CharacterStats : MonoBehaviour
     public SecurityArea currentSecArea;
     public int health = 100, maxHealth = 100;
     public float stamina = 100, maxStamina = 100;
+    public bool exhausted = false;
     [SerializeField]
     protected float adrenalineMultiplier = 1;
     public bool isDead = false;
@@ -24,6 +25,8 @@ public class CharacterStats : MonoBehaviour
 	public Inventory inventory = new Inventory(15);
 	public Inventory tempInventory = new Inventory(); //for level-specific items like keys
 	public Transform lookatTarget;
+
+    private YieldInstruction eof = new WaitForEndOfFrame();
 
 	// Use this for initialization
     void Start() { }
@@ -48,6 +51,11 @@ public class CharacterStats : MonoBehaviour
     public virtual void ReduceStamina(float value)
     {
         this.stamina -= value / adrenalineMultiplier; //higher adrenaline = slower stamina reduction
+        if (this.stamina < 0)
+        {
+            this.stamina = 0;
+            
+        }
     }
     public virtual void ReduceStaminaAbsolute(float value)
     {
@@ -61,5 +69,19 @@ public class CharacterStats : MonoBehaviour
             if (this.stamina > 100)
                 this.stamina = 100;
         }
+    }
+
+    /// <summary>
+    /// Marks the character as Exhausted until their stamina >= recoveryNeeded amount
+    /// </summary>
+    /// <param name="recoveryNeeded"></param>
+    /// <returns></returns>
+    private IEnumerator BecomeExhausted(float recoveryNeeded)
+    {
+        this.exhausted = true;
+        while (this.stamina < recoveryNeeded)
+            yield return eof;
+
+        this.exhausted = false;
     }
 }
