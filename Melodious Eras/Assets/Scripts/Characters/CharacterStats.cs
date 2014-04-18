@@ -9,6 +9,9 @@ public class CharacterStats : MonoBehaviour
     public Faction faction;
     public SecurityArea currentSecArea;
     public int health = 100, maxHealth = 100;
+    public float stamina = 100, maxStamina = 100;
+    [SerializeField]
+    protected float adrenalineMultiplier = 1;
     public bool isDead = false;
     public int meleeDamage = 10; //damage modifier could be calculated by melee weapons
 
@@ -41,4 +44,22 @@ public class CharacterStats : MonoBehaviour
     public virtual void PickUp(Item item) { }
     public virtual void SwitchWeapon(WeaponClass slot) { }
     public virtual void HolsterWeapon() { }
+
+    public virtual void ReduceStamina(float value)
+    {
+        this.stamina -= value / adrenalineMultiplier; //higher adrenaline = slower stamina reduction
+    }
+    public virtual void ReduceStaminaAbsolute(float value)
+    {
+        this.stamina -= value;
+    }
+    public void RegainStamina(float value)
+    {
+        if (this.stamina < this.maxStamina)
+        {
+            this.stamina += value * adrenalineMultiplier; //higher adrenaline = faster stamina regeneration
+            if (this.stamina > 100)
+                this.stamina = 100;
+        }
+    }
 }

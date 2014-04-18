@@ -20,7 +20,7 @@ public class PlayerMovementBasic : MonoBehaviour
     public bool isShooting = false;
     public bool useDefaultMovement = true;
     public bool isAiming = false;
-	public bool isWalking = false;
+	public bool isWalking = true;
 	public bool isCrouching = false;
 	public PhysicMaterial zeroFriction, 
 						  fullFriction;
@@ -41,10 +41,10 @@ public class PlayerMovementBasic : MonoBehaviour
 
 	private YieldInstruction diveTime, vaultTime, climbTime, slideTime, endOfFrame;
     private float originalHeight;
-    private const float m_VaultMatchTargetStart = 0.40f;
-    private const float m_VaultMatchTargetStop = 0.51f;
-    private const float m_ClimbMatchTargetStart = .19f;
-    private const float m_ClimbMatchTargetStop = .3f;
+    private const float m_VaultMatchTargetStart =    0.40f;
+    private const float m_VaultMatchTargetStop =  0.51f;
+    private const float m_ClimbMatchTargetStart = 0.1f;  //.19f;
+    private const float m_ClimbMatchTargetStop =  .3f;
 	
 	[SerializeField] AdvancedSettings advancedSettings;                 // Container for the advanced settings class , thiss allows the advanced settings to be in a foldout in the inspector
 
@@ -75,7 +75,7 @@ public class PlayerMovementBasic : MonoBehaviour
     void Start()
     {
 		diveTime = new WaitForSeconds(1.367f);
-		vaultTime = new WaitForSeconds(1.4f);
+		vaultTime = new WaitForSeconds(1.2f);
 		climbTime = new WaitForSeconds(3f);
 		endOfFrame = new WaitForEndOfFrame();
 
@@ -114,16 +114,22 @@ public class PlayerMovementBasic : MonoBehaviour
 		{
 			if (Input.GetButtonDown(InputType.CROUCH))
 			{
-				if(!isCrouching)
-					isCrouching = true;
-				else
-				{
-					// prevent standing up in crouch-only areas (under desks, in vents, etc)
-					Ray crouchRay = new Ray (rigidbody.position + Vector3.up * capsule.radius * .5f, Vector3.up);
-					float crouchRayLength = originalHeight - capsule.radius * .5f;
-					if (!Physics.SphereCast (crouchRay, capsule.radius * .5f, crouchRayLength)) 
-						isCrouching = false;
-				}
+                if (!isCrouching)
+                {
+                    isCrouching = true;
+                    mainCam.SetOffset(CameraOffset.Crouch);
+                }
+                else
+                {
+                    // prevent standing up in crouch-only areas (under desks, in vents, etc)
+                    Ray crouchRay = new Ray(rigidbody.position + Vector3.up * capsule.height * .5f, Vector3.up);
+                    float crouchRayLength = originalHeight - capsule.radius * .5f;
+                    if (!Physics.SphereCast(crouchRay, capsule.radius * .5f, crouchRayLength))
+                    {
+                        isCrouching = false;
+                        mainCam.SetOffset(CameraOffset.Default);
+                    }
+                }
 				mainCam.SetOffset(isCrouching ? CameraOffset.Crouch : CameraOffset.Default);
 				this.anim.SetBool(HashIDs.sneaking_bool, isCrouching);
 			}
@@ -143,20 +149,20 @@ public class PlayerMovementBasic : MonoBehaviour
     /// </summary>
     void CombatInputs()
     {
-        //----------------------------------------------
         //Determining camera offset
 		//AIM (and WALK) offset
 		//Walking is for PC only; speed is handled by analog sticks on consoles
 		//Listening for all 3 to avoid camera shifting issues
-		if (Input.GetButtonDown(InputType.WALK))
+		if (Input.GetButton(InputType.RUN) && isAiming == false && this.stats.stamina > 0)
 		{
-			isWalking = true;
-			mainCam.SetOffset(CameraOffset.Aim);
+			isWalking = false;
+			mainCam.SetOffset(CameraOffset.Default);
 		}
-		else if (Input.GetButtonUp(InputType.WALK))
+		else
 		{
-			isWalking = isAiming; //Will still be walking if the player is aiming
-			mainCam.SetOffset(isCrouching ? CameraOffset.Crouch : CameraOffset.Default);
+			//isWalking = isAiming; //Will still be walking if the player is aiming
+            isWalking = true;
+			mainCam.SetOffset(isCrouching ? CameraOffset.Crouch : CameraOffset.Aim);
 		}
 
         //AIM input
@@ -203,8 +209,11 @@ public class PlayerMovementBasic : MonoBehaviour
         moving = !moveDirection.Equals(Vector2.zero);
 
         //Determining speed
-        speed = (isWalking || isAiming) ? 2 : 5.657f;
-        speed *= ((moveDirection.magnitude < 1) ? moveDirection.magnitude : 1);
+        if (moving)
+            speed = (isWalking || isAiming) ? 2 : 5.657f;
+        else
+            speed = 0;
+        //speed *= ((moveDirection.magnitude < 1) ? moveDirection.magnitude : 1); //used for analog input. Disabled for now, since stamina is being added
         this.anim.SetFloat(HashIDs.speed_float, speed);
 
         //Keeping track of the last leg to hit the ground. Only needed when falling
@@ -215,8 +224,10 @@ public class PlayerMovementBasic : MonoBehaviour
             anim.SetFloat("JumpLeg", jumpLeg);
         }
 
+        //if running
         if (speed > 4 && !isCrouching)
         {
+            this.stats.ReduceStamina(10 * Time.deltaTime); 
             if (!this.audio.isPlaying) //play footsteps
                 this.audio.Play();
             foreach(EnemyStats enemy in stats._nearbyEnemies.charactersInRange)
@@ -335,7 +346,7 @@ public class PlayerMovementBasic : MonoBehaviour
 			Ray high = new Ray(this.transform.position + Vector3.up * RAY_HIGH, this.transform.forward);
 			RaycastHit hitLowInfo, hitHighInfo;
 
-			float raycastDistance = Mathf.Max(1f, anim.GetFloat(HashIDs.speed_float));
+			float raycastDistance = Mathf.Max(2f, anim.GetFloat(HashIDs.speed_float));
 
 
 			//if high hit
@@ -391,24 +402,6 @@ public class PlayerMovementBasic : MonoBehaviour
         return Physics.Raycast(this.transform.position, Vector3.down, 0.25f);
     }
 
-	void ProcessMatchTarget()
-	{
-		if(this.anim.GetCurrentAnimatorStateInfo(0).IsName("Player Animator.Vault"))
-		{
-			//this.collider.enabled = false;
-			//this.rigidbody.useGravity = false;
-			this.anim.MatchTarget(m_target, new Quaternion(), AvatarTarget.LeftHand, new MatchTargetWeightMask(Vector3.one, 0), m_VaultMatchTargetStart, m_VaultMatchTargetStop);
-			//this.anim.MatchTarget(m_target, new Quaternion(), AvatarTarget.LeftHand, new MatchTargetWeightMask(Vector3.one, 0), m_VaultMatchTargetStart, m_VaultMatchTargetStop);
-		}
-        else if (this.anim.GetCurrentAnimatorStateInfo(0).IsName("Player Animator.Jump to Ledge"))
-        {
-        }
-        else
-        {
-            this.collider.enabled = true;
-            this.rigidbody.useGravity = true;
-        }
-	}
 	/// <summary>
 	/// Matching target for vaulting/climbing ledge. Currently only vaulting has been tested
 	/// </summary>

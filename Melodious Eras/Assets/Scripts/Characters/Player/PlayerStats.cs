@@ -55,6 +55,7 @@ public class PlayerStats : CharacterStats
     }
     void Update()
     {
+        this.RegainStamina(5 * Time.deltaTime);
         //These lists will never be too large, but should still be moved out of Update at some point
         _closeQuarterEnemies.charactersInRange.RemoveAll((CharacterStats enemy) => enemy == null); //Scans all nearby enemies each frame and removes those who have died, which wouldn't
         _nearbyEnemies.charactersInRange.RemoveAll((CharacterStats enemy) => enemy == null);       //trigger the OnTriggerExit function

@@ -14,7 +14,7 @@ public static class InputType
         MOUSE_X = "Look X",
         MOUSE_Y = "Look Y",
         MOUSE_SCROLL_WHEEL = "Mouse ScrollWheel",
-        WALK = "Walk",
+        RUN = "Walk",
         CROUCH = "Crouch",
         START = "Start",
         USE = "Use",

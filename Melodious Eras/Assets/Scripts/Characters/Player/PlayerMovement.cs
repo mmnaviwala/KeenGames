@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour {
     {
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
-        bool sneak = Input.GetButton(InputType.WALK);
+        bool sneak = Input.GetButton(InputType.RUN);
 
         MovementManagement(h, v, sneak);
     }

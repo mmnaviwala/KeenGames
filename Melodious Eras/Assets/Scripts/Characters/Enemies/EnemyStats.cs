@@ -107,6 +107,7 @@ public class EnemyStats : CharacterStats
     /// </summary>
     protected override void Die()
     {
+        Debug.Log(this.name + " Dying");
         isDead = true;
         this.ai.Anim.SetBool(HashIDs.dead_bool, true);
         this.ai.enabled = false;
