@@ -106,6 +106,7 @@ public class EnemyStats : CharacterStats
     /// <para>Processes the enemy's death. For this type of enemy, it disables their AI, then shrinks and disables their sight's sphere collider.</para>
     /// <para>Avoiding destroying any components, in case we want enemies to be capable of being revived at some point.</para>
     /// </summary>
+
     protected override void Die()
     {
         Debug.Log(this.name + " Dying");
