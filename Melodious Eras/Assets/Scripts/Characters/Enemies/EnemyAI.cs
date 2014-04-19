@@ -5,13 +5,16 @@ using System.Collections.Generic;
 [AddComponentMenu("Scripts/Characters/Enemy AI")]
 public class EnemyAI : MonoBehaviour
 {
-    public NPCGroup group;
+    public NPCGroup squad;
 	public Transform eyes;
     public Weapon equippedWeapon;
     public CharacterStats currentEnemy;
+
     public float hearingMultiplier = 1;     //0 = deaf, 1 = normal, >1 = dogs & security
-    public float awarenessMultiplier = 1;   //
-	public float fieldOfView = 110f;
+    [Range(0, 1)]
+    public float baseAwarenessMultiplier = .5f;
+    private float awarenessMultiplier;   //
+	public float fieldOfView = 160f;
 	private float fov, fovSqrt;
     public float shootingRange, meleeRange;
     private float lightDifferenceMultiplier; //optional feature. Enemies in high-light areas will find it harder to detect players in low-light areas.
@@ -22,7 +25,7 @@ public class EnemyAI : MonoBehaviour
     public Waypoint[] patrolWaypoints;
 
     public bool seesPlayer = false;
-	public bool awareOfPlayer = false;
+	public bool alerted = false;
 	public LayerMask sightLayer;
 	public float sightDistance = 20;
     public float desiredSpeed = 0;
@@ -58,11 +61,21 @@ public class EnemyAI : MonoBehaviour
 		this.anim = this.GetComponent<Animator>();
         sightDistance = sight.GetComponent<SphereCollider>().radius;
         lastPlayerSighting = lpsResetPosition;
+
+        this.awarenessMultiplier = baseAwarenessMultiplier;
+
+        //Adding to squad, if part of any
+        if (this.squad == null)
+        {
+            this.squad = this.transform.parent.GetComponent<NPCGroup>();
+            if (this.squad != null)
+                squad.NPCs.Add(this);
+        }
     }
 	// Use this for initialization
 	void Start () 
     {
-		fov = sight.fovAngle / 2 * awarenessMultiplier;
+        fov = sight.fovAngle * awarenessMultiplier / 2;
         fovSqrt = Mathf.Sqrt(fov);
 		//keeping rays permanent to avoid garbage collection
 		rayUpper = new Ray();
@@ -102,21 +115,30 @@ public class EnemyAI : MonoBehaviour
 
 	                    //reducing sight distance at wide angles, to simulate peripheral vision
                         //This determines whether or not the enemy can even detect the player
-	                    float sightDistanceMultiplier = (angle > 30) ?
+	                    float adjustedSightDistance = (angle > 30) ?
 	                                                    sightDistance * (Mathf.Sqrt(fov - angle) / fovSqrt) :
 	                                                    sightDistance;
 
 						//if any rays hit
-                        if ((Physics.Raycast(rayUpper, out hit, sightDistanceMultiplier, sightLayer) ||
-                            Physics.Raycast(rayCenter, out hit, sightDistanceMultiplier, sightLayer) ||
-                            Physics.Raycast(rayLower, out hit, sightDistanceMultiplier, sightLayer))
-                            && hit.collider.tag == Tags.PLAYER)
+                        if (Physics.Raycast(rayUpper, out hit, adjustedSightDistance, sightLayer) ||
+                            Physics.Raycast(rayCenter, out hit, adjustedSightDistance, sightLayer) ||
+                            Physics.Raycast(rayLower, out hit, adjustedSightDistance, sightLayer))
                         {
-                            this.awarenessOfPlayer += Time.deltaTime;
+                            if (hit.collider.tag == Tags.PLAYER)
+                            {
+                                this.awarenessOfPlayer += Time.deltaTime;
 
-                            this.seesPlayer = this.awareOfPlayer = true;
-                            this.lastPlayerSighting = ch.transform.position;
-                            currentEnemy = ch;
+                                this.seesPlayer = this.alerted = true;
+                                this.lastPlayerSighting = ch.transform.position;
+                                currentEnemy = ch;
+                                squad.AlertGroup(ch);
+                            }
+                            else if (hit.collider.tag == Tags.ENEMY && ch.isDead)
+                            {
+                                this.Alert(1f);
+                                squad.AlertGroup(1f);
+                            }
+                            
                             break;
                         }
                         else
@@ -213,7 +235,7 @@ public class EnemyAI : MonoBehaviour
     #region Enemy Senses
     public bool Listen(Vector3 source, float volume)
     {
-        if (CalculatePathLengthTo(source) < volume)
+        if (CalculatePathLengthTo(source) * awarenessMultiplier < volume)
         {
             //lastPlayerSighting = source;
             lastHostileDetection = source;
@@ -225,11 +247,30 @@ public class EnemyAI : MonoBehaviour
     {
  		if(Physics.Raycast(this.eyes.position, tran.position + Vector3.up, sightLayer))
 		{
-			this.seesPlayer = this.awareOfPlayer = true;
+			this.seesPlayer = this.alerted = true;
 			lastPlayerSighting = tran.position;
 			return true;
 		}
 		return false;
+    }
+    /// <summary>
+    /// Puts the NPC on alert and further multiplies their current awareness by _awarenessMultiplier
+    /// </summary>
+    /// <param name="_awarenessMultiplier"></param>
+    public void Alert(float _awarenessMultiplier)
+    {
+        this.alerted = true;
+        this.awarenessMultiplier = Mathf.Min(baseAwarenessMultiplier * _awarenessMultiplier, 1);
+        fov = sight.fovAngle * awarenessMultiplier / 2;
+        fovSqrt = Mathf.Sqrt(fov);
+    }
+    public void Alert(float _awarenessMultiplier, Vector3 source)
+    {
+        this.alerted = true;
+        this.awarenessMultiplier = Mathf.Min(baseAwarenessMultiplier * _awarenessMultiplier, 1);
+        fov = sight.fovAngle * awarenessMultiplier / 2;
+        fovSqrt = Mathf.Sqrt(fov);
+        //implement inspection of source
     }
     #endregion
     float CalculatePathLengthTo(Vector3 source)
