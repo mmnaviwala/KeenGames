@@ -449,6 +449,7 @@ public class PlayerMovementBasic : MonoBehaviour
                     }
                     yield return endOfFrame;
                 }
+                this.anim.SetFloat(HashIDs.speed_float, 0f);
                 break;
         }
 		this.rigidbody.isKinematic = false;
