@@ -10,6 +10,7 @@ public class EnemyStats : CharacterStats
     private bool attacking;
     public float meleeSpeed = .5f, shootSpeed = .5f;
     private float lastAttackTime;
+    
 
     private EnemyAI ai;
     public EnemyAI AI { 

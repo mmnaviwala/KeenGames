@@ -12,6 +12,7 @@ public class PlayerMovementBasic : MonoBehaviour
 	private const float RAY_LOW = 0.75f;
 	private const float RAY_HIGH = 1.5f;
 	private const float MAX_CLIMB_HEIGHT = 3.5f;
+    private const float CROUCH_HEIGHT_THRESHOLD = 1.225f;
     public float speed = 0f;                //current speed of character
     public float snapDownThreshold = .25f;  //Length of downward raycasts for smooth descent of ramps
     public float soundwaveDistance;
@@ -342,8 +343,8 @@ public class PlayerMovementBasic : MonoBehaviour
             jumping = true;
 
 			//Determining action
-			Ray low = new Ray(this.transform.position + Vector3.up * RAY_LOW, this.transform.forward);
-			Ray high = new Ray(this.transform.position + Vector3.up * RAY_HIGH, this.transform.forward);
+			Ray low = new Ray(this.transform.position + Vector3.up * RAY_LOW, mainCam.XZdirection/*this.transform.forward*/);
+            Ray high = new Ray(this.transform.position + Vector3.up * RAY_HIGH, mainCam.XZdirection/*this.transform.forward*/);
 			RaycastHit hitLowInfo, hitHighInfo;
 
 			float raycastDistance = Mathf.Max(2f, anim.GetFloat(HashIDs.speed_float));
@@ -355,7 +356,7 @@ public class PlayerMovementBasic : MonoBehaviour
 				 hitHighInfo.collider.GetComponent<MaterialPhysics>().canClimb))
 			{
 
-				Ray climbHeight = new Ray(this.transform.position + Vector3.up * MAX_CLIMB_HEIGHT, this.transform.forward);
+				Ray climbHeight = new Ray(this.transform.position + Vector3.up * MAX_CLIMB_HEIGHT, mainCam.XZdirection/*this.transform.forward*/);
 				if(!Physics.Raycast(climbHeight, raycastDistance, obstacleLayers))
 				{
 					//climb wall
@@ -458,14 +459,19 @@ public class PlayerMovementBasic : MonoBehaviour
 		// scale the capsule collider according to
 		// if crouching ...
 		if ( isCrouching && (capsule.height != originalHeight * advancedSettings.crouchHeightFactor)) {
-			capsule.height = Mathf.MoveTowards (capsule.height, originalHeight * advancedSettings.crouchHeightFactor, Time.deltaTime * 4);
-			capsule.center = Vector3.MoveTowards (capsule.center, Vector3.up * originalHeight * advancedSettings.crouchHeightFactor * .5f, Time.deltaTime * 2);
+
+            capsule.height = Mathf.Lerp(capsule.height, originalHeight * advancedSettings.crouchHeightFactor, Time.deltaTime * 4); 
+            capsule.center = Vector3.Lerp(capsule.center, Vector3.up * originalHeight * advancedSettings.crouchHeightFactor * .5f, Time.deltaTime * 4);
+			//capsule.height = Mathf.MoveTowards (capsule.height, originalHeight * advancedSettings.crouchHeightFactor, Time.deltaTime * 4);
+			//capsule.center = Vector3.MoveTowards (capsule.center, Vector3.up * originalHeight * advancedSettings.crouchHeightFactor * .5f, Time.deltaTime * 2);
 		}
 		// ... everything else 
-		else
-		if (capsule.height != originalHeight && capsule.center != Vector3.up * originalHeight * .5f) {
-			capsule.height = Mathf.MoveTowards (capsule.height, originalHeight, Time.deltaTime * 4);
-			capsule.center = Vector3.MoveTowards (capsule.center, Vector3.up * originalHeight * .5f, Time.deltaTime * 2);
+        else if (capsule.height != originalHeight && capsule.center != Vector3.up * originalHeight * .5f)
+        {
+            capsule.height = Mathf.Lerp(capsule.height, originalHeight, Time.deltaTime * 4);
+            capsule.center = Vector3.Lerp(capsule.center, Vector3.up * originalHeight * .5f, Time.deltaTime * 4);
+			//capsule.height = Mathf.MoveTowards (capsule.height, originalHeight, Time.deltaTime * 4);
+			//capsule.center = Vector3.MoveTowards (capsule.center, Vector3.up * originalHeight * .5f, Time.deltaTime * 2);
 		}
 	}
 }

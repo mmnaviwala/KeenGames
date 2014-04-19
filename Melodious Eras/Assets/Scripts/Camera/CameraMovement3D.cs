@@ -46,6 +46,22 @@ public class CameraMovement3D : CameraMovement
     private bool shaking;
     private YieldInstruction eof;
 
+
+    private Vector3 xz_direction = new Vector3(0, 0, 0); //using same vector to avoid garbage collection
+    /// <summary>
+    /// <para>Returns the X and Y components of the camera's facing direction.</para>
+    /// <para>Used primarily for player movement, but figured it belongs
+    /// in the camera class in case anything else needs it.</para>
+    /// </summary>
+    public Vector3 XZdirection
+    {
+        get {
+            xz_direction.x = this.transform.forward.x;
+            xz_direction.z = this.transform.forward.z;
+            return xz_direction;
+        }
+    }
+
     void Awake()
     {
         camRotationHelper = new GameObject();

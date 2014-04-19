@@ -51,10 +51,9 @@ public class CharacterStats : MonoBehaviour
     public virtual void ReduceStamina(float value)
     {
         this.stamina -= value / adrenalineMultiplier; //higher adrenaline = slower stamina reduction
-        if (this.stamina < 0)
+        if (!this.exhausted && this.stamina < 0)
         {
-            this.stamina = 0;
-            
+            this.BecomeExhausted(10);
         }
     }
     public virtual void ReduceStaminaAbsolute(float value)
@@ -78,6 +77,7 @@ public class CharacterStats : MonoBehaviour
     /// <returns></returns>
     private IEnumerator BecomeExhausted(float recoveryNeeded)
     {
+        this.stamina = 0;
         this.exhausted = true;
         while (this.stamina < recoveryNeeded)
             yield return eof;

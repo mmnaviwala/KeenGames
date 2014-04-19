@@ -1612,7 +1612,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100062}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
-  m_LocalPosition: {x: -2.07397962, y: .5, z: 0}
+  m_LocalPosition: {x: -21.1610298, y: .5, z: 16.2919064}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400092}
@@ -3367,7 +3367,7 @@ MonoBehaviour:
     stationaryTurnSpeed: 180
     movingTurnSpeed: 360
     headLookResponseSpeed: 2
-    crouchHeightFactor: .600000024
+    crouchHeightFactor: .5
     crouchChangeSpeed: 4
     autoTurnThresholdAngle: 100
     autoTurnSpeed: 2
@@ -3391,6 +3391,10 @@ MonoBehaviour:
   currentSecArea: {fileID: 0}
   health: 100
   maxHealth: 100
+  stamina: 100
+  maxStamina: 100
+  exhausted: 0
+  adrenalineMultiplier: 1
   isDead: 0
   meleeDamage: 10
   equippedWeapon: {fileID: 11400002}

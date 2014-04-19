@@ -32,6 +32,9 @@ public class EnemyAI : MonoBehaviour
     private Vector3 lastHostileDetection = new Vector3(999, 999, 999); //last position to hear a hostile character
     private static Vector3 resetPos = new Vector3(999, 999, 999);
 
+    private float awarenessOfPlayer = 0f;
+    //private Dictionary<Collider, CharacterStats> awarenessOfChar;     //for multi-faction AI. not implemented yet
+
     private NavMeshAgent nav;
     private EnemyStats stats;
 	private Animator anim;
@@ -49,6 +52,7 @@ public class EnemyAI : MonoBehaviour
 
     void Awake()
     {
+        //awarenessOfChar = new Dictionary<Collider, CharacterStats>();
         nav = this.GetComponent<NavMeshAgent>();
 		stats = this.GetComponent<EnemyStats>();
 		this.anim = this.GetComponent<Animator>();
@@ -97,6 +101,7 @@ public class EnemyAI : MonoBehaviour
 						rayCenter.direction = (ch.collider.bounds.min + Vector3.up*charHeight/2) - this.eyes.position;
 
 	                    //reducing sight distance at wide angles, to simulate peripheral vision
+                        //This determines whether or not the enemy can even detect the player
 	                    float sightDistanceMultiplier = (angle > 30) ?
 	                                                    sightDistance * (Mathf.Sqrt(fov - angle) / fovSqrt) :
 	                                                    sightDistance;
@@ -107,6 +112,8 @@ public class EnemyAI : MonoBehaviour
                             Physics.Raycast(rayLower, out hit, sightDistanceMultiplier, sightLayer))
                             && hit.collider.tag == Tags.PLAYER)
                         {
+                            this.awarenessOfPlayer += Time.deltaTime;
+
                             this.seesPlayer = this.awareOfPlayer = true;
                             this.lastPlayerSighting = ch.transform.position;
                             currentEnemy = ch;
