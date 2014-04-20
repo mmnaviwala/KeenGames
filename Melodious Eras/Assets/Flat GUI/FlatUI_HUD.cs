@@ -17,9 +17,15 @@ public class FlatUI_HUD : MonoBehaviour {
 	public Position positions;
 	public BarType bartype;
 
+    public CharacterStats playerStats;
+    public Suit playerSuit;
+    public Weapon playerWeapon;
 
 	void Start ()
 	{
+        this.playerStats = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<CharacterStats>();
+        this.playerSuit = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<Suit>();
+        this.playerWeapon = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<Weapon>();
 		xx = Screen.width / 10;
 		yy = Screen.height / 10;
 
@@ -76,19 +82,16 @@ public class FlatUI_HUD : MonoBehaviour {
 		switch(bartype)
 		{
 		case BarType.Health:
-//			currentNumber = 100;
-			currentNumber = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<PlayerStats>().health;
+			currentNumber = playerStats.health;
 			break;
 		case BarType.Armor:
-//			currentNumber = 50;
-			currentNumber = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<Suit>().armor;
+			currentNumber = playerSuit.armor;
 			break;
 		case BarType.Ammo:
-			currentNumber = 20;
+            currentNumber = playerWeapon.ammoInClip;
 			break;
 		case BarType.Battery:
-			currentNumber = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<Suit>().batteryLife;
-//			currentNumber = 80;
+			currentNumber = playerSuit.batteryLife;
 			break;
 		}
 	}
@@ -103,4 +106,12 @@ public class FlatUI_HUD : MonoBehaviour {
 		GUI.Label(numberLabelSize, string.Format("{0:f1}", currentNumber), bigFont);
 		GUI.Label(stringLabelSize, textToDisplay, smallFont);
 	}
+
+    /// <summary>
+    /// Common initializations
+    /// </summary>
+    protected void Initialize()
+    {
+        
+    }
 }

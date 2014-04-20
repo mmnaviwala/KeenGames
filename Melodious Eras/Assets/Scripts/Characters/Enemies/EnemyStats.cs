@@ -35,13 +35,13 @@ public class EnemyStats : CharacterStats
     }*/
 
     #region Damage taking and stat changes
-    /// <summary>
-    /// Deals damage to the enemy.
-    /// </summary>
-    /// <param name="damage"></param>
     public override void TakeDamage(int damage)
     {
-        this.health -= damage;
+        if (suit != null && suit.armor > 0)
+            suit.armor -= damage;
+        else
+            this._health -= damage;
+
         if (this.isVulnerable && this.health <= 0)
         {
             this.Die();
@@ -50,16 +50,16 @@ public class EnemyStats : CharacterStats
     public override void TakeDamage(int damage, CharacterStats source)
     {
         ai.currentEnemy = source;
-        this.health -= damage;
+        if (suit != null && suit.armor > 0)
+            suit.armor -= damage;
+        else
+            this._health -= damage;
+
         if (this.isVulnerable && this.health <= 0)
         {
             this.Die();
         }
- 
     }
-    /// <summary>
-    /// Instantly kills this enemy.
-    /// </summary>
     public override void TakeDamage(bool instantKill)
     {
         if (this.isVulnerable)
@@ -73,7 +73,7 @@ public class EnemyStats : CharacterStats
     /// <param name="damage"></param>
     public override void TakeDamageThroughArmor(int damage)
     {
-        this.health -= damage;
+        this._health -= damage;
         if (this.health <= 0)
         {
             this.Die();
@@ -87,17 +87,14 @@ public class EnemyStats : CharacterStats
     public override void TakeDamageThroughArmor(int damage, CharacterStats source)
     {
         ai.currentEnemy = source;
-        this.health -= damage;
+        this._health -= damage;
         if (this.health <= 0)
         {
             this.Die();
         }
 
     }
-    /// <summary>
-    /// Instantly kills this enemy, even if invulnerable.
-    /// </summary>
-    public override void TakeDamageThroughArmor(bool instantKill)
+    public override void Kill()
     {
         this.Die();
     }
@@ -110,7 +107,7 @@ public class EnemyStats : CharacterStats
     protected override void Die()
     {
         Debug.Log(this.name + " Dying");
-        isDead = true;
+        _isDead = true;
         this.ai.Anim.SetBool(HashIDs.dead_bool, true);
         this.ai.enabled = false;
         SphereCollider col = this.ai.sight.GetComponent<SphereCollider>();

@@ -338,7 +338,7 @@ public class PlayerMovementBasic : MonoBehaviour
         float impactVelocity = Vector3.Magnitude(collision.relativeVelocity);
         if (impactVelocity > 12.5f)
         {
-            stats.health -= 5 * (int)(impactVelocity - 12.5f);
+            stats.TakeDamageThroughArmor(5 * (int)(impactVelocity - 12.5f));
             anim.applyRootMotion = true;
             mainCam.Shake(.0625f, 8, 2);
             //emit noise
@@ -347,12 +347,6 @@ public class PlayerMovementBasic : MonoBehaviour
         {
             Debug.Log("collision has no rigidbody: " + collision.transform.name);
         }
-    }
-
-    void OnCollisionExit(Collision collision)
-    {
-        if (collision.collider.tag == Tags.SLIDE)
-            anim.SetBool("IsGrinding", false);
     }
 
     /// <summary>
@@ -514,16 +508,12 @@ public class PlayerMovementBasic : MonoBehaviour
 
             capsule.height = Mathf.Lerp(capsule.height, originalHeight * advancedSettings.crouchHeightFactor, Time.deltaTime * 4); 
             capsule.center = Vector3.Lerp(capsule.center, Vector3.up * originalHeight * advancedSettings.crouchHeightFactor * .5f, Time.deltaTime * 4);
-			//capsule.height = Mathf.MoveTowards (capsule.height, originalHeight * advancedSettings.crouchHeightFactor, Time.deltaTime * 4);
-			//capsule.center = Vector3.MoveTowards (capsule.center, Vector3.up * originalHeight * advancedSettings.crouchHeightFactor * .5f, Time.deltaTime * 2);
 		}
 		// ... everything else 
         else if (capsule.height != originalHeight && capsule.center != Vector3.up * originalHeight * .5f)
         {
             capsule.height = Mathf.Lerp(capsule.height, originalHeight, Time.deltaTime * 4);
             capsule.center = Vector3.Lerp(capsule.center, Vector3.up * originalHeight * .5f, Time.deltaTime * 4);
-			//capsule.height = Mathf.MoveTowards (capsule.height, originalHeight, Time.deltaTime * 4);
-			//capsule.center = Vector3.MoveTowards (capsule.center, Vector3.up * originalHeight * .5f, Time.deltaTime * 2);
 		}
 	}
 }

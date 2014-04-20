@@ -8,31 +8,45 @@ public class CharacterStats : MonoBehaviour
 {
     public Faction faction;
     public SecurityArea currentSecArea;
-    public int health = 100;
-    public int maxHealth = 100;
-    public float stamina = 100, maxStamina = 100;
-    [SerializeField]
-    protected float adrenalineMultiplier = 1;
-    public bool isDead = false;
-    public int meleeDamage = 10; //damage modifier could be calculated by melee weapons
-
+    public Suit suit;
     public Weapon equippedWeapon;
-	public Weapon sidearm;
-	public Weapon largeWeapon;
-	public Weapon thrown;
-	public Weapon explosive;
+    public Weapon sidearm;
+    public Weapon largeWeapon;
+    public Weapon thrown;
+    public Weapon explosive;
     public Transform leftHand, rightHand; //right hand holds gun; left hand could hold flashlight/energy shield/sword/secondary gun/etc
-	public Inventory inventory = new Inventory(15);
-	public Inventory tempInventory = new Inventory(); //for level-specific items like keys
-	public Transform lookatTarget;
+    public Inventory inventory = new Inventory(15);
+    public Inventory tempInventory = new Inventory(); //for level-specific items like keys
+    public Transform lookatTarget;
+
+    [SerializeField]
+    protected int _health = 100;
+    [SerializeField]
+    protected int _maxHealth = 100;
+    [SerializeField]
+    protected float _stamina = 100;
+    [SerializeField]
+    protected float _maxStamina = 100;
+    [SerializeField]
+    protected float _adrenalineMultiplier = 1;
+    protected bool _isDead = false;
+
+    [SerializeField]
+    protected int _meleeDamage = 10; //damage modifier could be calculated by melee weapons
+
 
     private YieldInstruction _eof = new WaitForEndOfFrame();
-    private bool _exhausted = false;
+    protected bool _exhausted = false;
     
 
 
     #region accessors & mutators
     public bool exhausted { get { return _exhausted; } }
+    public int health { get { return _health; } }
+    public int maxHealth { get { return _maxHealth; } }
+    public float stamina { get { return _stamina; } }
+    public float maxStamina { get { return _maxStamina; } }
+    public bool isDead { get { return _isDead; } }
     #endregion
 
     // Use this for initialization
@@ -40,12 +54,37 @@ public class CharacterStats : MonoBehaviour
 	// Update is called once per frame
     void Update() { }
 
+    /// <summary>
+    /// Deals damage to this character.
+    /// </summary>
+    /// <param name="damage"></param>
     public virtual void TakeDamage(int damage) { }
+    /// <summary>
+    /// Deals damage to this character, letting them know who hit them.
+    /// </summary>
+    /// <param name="damage"></param>
+    /// <param name="source"></param>
     public virtual void TakeDamage(int damage, CharacterStats source) { }
+    /// <summary>
+    /// Instantly kills this character.
+    /// </summary>
     public virtual void TakeDamage(bool instantKill) { }
+    /// <summary>
+    /// Deals damage to this character, ignoring any armor.
+    /// </summary>
+    /// <param name="damage"></param>
     public virtual void TakeDamageThroughArmor(int damage) { }
+    /// <summary>
+    /// Deals damage to this character, ignoring any armor and telling them who hit them.
+    /// </summary>
+    /// <param name="damage"></param>
+    /// <param name="source"></param>
     public virtual void TakeDamageThroughArmor(int damage, CharacterStats source) { }
-    public virtual void TakeDamageThroughArmor(bool instantKill) { }
+    /// <summary>
+    /// Instantly kills this character, ignoring any protections
+    /// </summary>
+    /// <param name="instantKill"></param>
+    public virtual void Kill() { this.Die(); }
     protected virtual void Die() { }
 
     public virtual void Attack(CharacterStats target) { }
@@ -58,7 +97,7 @@ public class CharacterStats : MonoBehaviour
 
     public virtual void ReduceStamina(float value)
     {
-        this.stamina -= value / adrenalineMultiplier; //higher adrenaline = slower stamina reduction
+        this._stamina -= value / _adrenalineMultiplier; //higher adrenaline = slower stamina reduction
         if (!this._exhausted && this.stamina < 0)
         {
             this.StartCoroutine(BecomeExhausted(10));
@@ -66,15 +105,15 @@ public class CharacterStats : MonoBehaviour
     }
     public virtual void ReduceStaminaAbsolute(float value)
     {
-        this.stamina -= value;
+        this._stamina -= value;
     }
     public void RegainStamina(float value)
     {
         if (this.stamina < this.maxStamina)
         {
-            this.stamina += value * adrenalineMultiplier; //higher adrenaline = faster stamina regeneration
-            if (this.stamina > 100)
-                this.stamina = 100;
+            this._stamina += value * _adrenalineMultiplier; //higher adrenaline = faster stamina regeneration
+            if (this._stamina > 100)
+                this._stamina = 100;
         }
     }
 
@@ -83,11 +122,11 @@ public class CharacterStats : MonoBehaviour
     /// </summary>
     /// <param name="recoveryNeeded"></param>
     /// <returns></returns>
-    private IEnumerator BecomeExhausted(float recoveryNeeded)
+    protected IEnumerator BecomeExhausted(float recoveryNeeded)
     {
-        this.stamina = 0;
+        this._stamina = 0;
         this._exhausted = true;
-        float adjustedMinimum = recoveryNeeded / adrenalineMultiplier;
+        float adjustedMinimum = recoveryNeeded / _adrenalineMultiplier;
         while (this.stamina < adjustedMinimum)
             yield return _eof;
 

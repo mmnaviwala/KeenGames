@@ -11,7 +11,6 @@ public class PlayerStats : CharacterStats
     public DetectionSphere _closeQuarterEnemies; //enemies within melee range
     public DetectionSphere _nearbyEnemies;       //enemies within hearing range
 
-    public Suit suit;
     public Flashlight flashlight;
 
     public AudioClip deathClip, meleeClip;
@@ -113,27 +112,32 @@ public class PlayerStats : CharacterStats
         else
         {
             this.audio.PlayOneShot(meleeClip);
-            targetP.TakeDamage(meleeDamage, this);
+            targetP.TakeDamage(_meleeDamage, this);
         }
     }
 
-    /// <summary>
-    /// Shared by all characters
-    /// </summary>
-    /// <param name="damage"></param>
     public override void TakeDamage(int damage)
     {
-        this.health -= (health > damage) ? damage : health;
+        this._health -= (health > damage) ? damage : health;
         if (health == 0)
         {
-            this.isDead = true;
-            anim.SetBool(HashIDs.dead_bool, isDead);
+            this.Die();
         }
+    }
+
+    public override void TakeDamage(bool instantKill)
+    {
+        this.Die();
+    }
+    public override void Kill()
+    {
+        this.Die();
     }
     protected override void Die()
     {
-        this.isDead = true;
-        //wait for animation, then fade to black
+        this._isDead = true;
+        anim.SetBool(HashIDs.dead_bool, isDead);
+        //fade to black
         //reload last checkpoint
     }
 
