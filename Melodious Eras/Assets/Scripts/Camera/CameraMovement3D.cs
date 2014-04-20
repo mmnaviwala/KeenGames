@@ -142,8 +142,7 @@ public class CameraMovement3D : CameraMovement
 
 			//moving flashlight
             Vector3 fOrigin = player.position + new Vector3(0, activeOffset.y, 0);
-
-			flashlight.rotation = this.transform.rotation;
+            flashlight.rotation = this.transform.rotation;
 			if(Physics.Raycast (fOrigin, this.transform.forward, out hit, 0.5f))
 				flashlight.position =  fOrigin + this.transform.forward / 8;
 			else 

@@ -57,7 +57,7 @@ public class HUD_Stealth : MonoBehaviour
 
     void OnGUI()
     {
-        if (player.isAiming)
+        if (player.IsAiming)
             GUI.Box(reticle, "", reticleStyle);
 
         GUI.Box(healthBarMax, stats.health.ToString(), healthMaxStyle);

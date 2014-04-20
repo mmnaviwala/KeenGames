@@ -8,26 +8,36 @@ enum Acrobatics { Vault, Dive, ClimbLedge };
 [AddComponentMenu("Scripts/Characters/Player Movement Basic")]
 public class PlayerMovementBasic : MonoBehaviour
 {
-    #region variables
+    #region Public variables
 	private const float RAY_LOW = 0.75f;
 	private const float RAY_HIGH = 1.5f;
 	private const float MAX_CLIMB_HEIGHT = 3.5f;
     private const float CROUCH_HEIGHT_THRESHOLD = 1.225f;
+
+    private const float m_VaultMatchTargetStart = 0.40f;
+    private const float m_VaultMatchTargetStop = 0.51f;
+    private const float m_ClimbMatchTargetStart = 0.1f;  //.19f;
+    private const float m_ClimbMatchTargetStop = .3f;
+
     public float speed = 0f;                //current speed of character
     public float snapDownThreshold = .25f;  //Length of downward raycasts for smooth descent of ramps
     public float soundwaveDistance;
-
-    public bool jumping = false;
-    public bool isShooting = false;
     public bool useDefaultMovement = true;
-    public bool isAiming = false;
-	public bool isWalking = true;
-	public bool isCrouching = false;
-	public PhysicMaterial zeroFriction, 
-						  fullFriction;
-	public LayerMask ignorePlayer;          //used to prevent LookAt IK function from bugging out when camera's pointed at player
-	public Vector3 targetPoint;             //center of camera. When aiming, this points the arm at the target
+    public PhysicMaterial zeroFriction,
+                          fullFriction;
+    public LayerMask ignorePlayer;          //used to prevent LookAt IK function from bugging out when camera's pointed at player
+    public Vector3 targetPoint;             //center of camera. When aiming, this points the arm at the target
     public LayerMask obstacleLayers;
+    #endregion
+
+    #region Private variables
+    private bool jumping = false;
+    private bool isShooting = false;
+    private bool isAiming = false;
+	private bool isWalking = true;
+	private bool isCrouching = false;
+    private bool onGround = true;
+    private bool falling = false;
 
 
     private Vector3 m_target;               //MatchTarget coords
@@ -42,10 +52,8 @@ public class PlayerMovementBasic : MonoBehaviour
 
 	private YieldInstruction diveTime, vaultTime, climbTime, slideTime, endOfFrame;
     private float originalHeight;
-    private const float m_VaultMatchTargetStart =    0.40f;
-    private const float m_VaultMatchTargetStop =  0.51f;
-    private const float m_ClimbMatchTargetStart = 0.1f;  //.19f;
-    private const float m_ClimbMatchTargetStop =  .3f;
+    private float fallStartHeight, fallEndHeight;
+    private float fallSpeed = 0f;
 	
 	[SerializeField] AdvancedSettings advancedSettings;                 // Container for the advanced settings class , thiss allows the advanced settings to be in a foldout in the inspector
 
@@ -67,10 +75,20 @@ public class PlayerMovementBasic : MonoBehaviour
 	}
     #endregion
 
+    #region Accessors & Mutators
+    public bool IsAiming    { get { return isAiming; } }
+    public bool IsWalking   { get { return isWalking; } }
+    public bool IsCrouching { get { return isCrouching; } }
+    #endregion
+
     void Awake()
     {
         HashIDs.Initialize();
         moveDirection = new Vector2();
+        stats = this.GetComponent<PlayerStats>();
+        anim = this.GetComponent<Animator>();
+        hud = this.GetComponent<HUD_Stealth>();
+        capsule = this.GetComponent<CapsuleCollider>();
     }
 
     void Start()
@@ -81,15 +99,12 @@ public class PlayerMovementBasic : MonoBehaviour
 		endOfFrame = new WaitForEndOfFrame();
 
         mainCam = Camera.main.GetComponent<CameraMovement3D>();
-        stats = this.GetComponent<PlayerStats>();
-        anim = this.GetComponent<Animator>();
-        hud = this.GetComponent<HUD_Stealth>();
-		capsule = this.GetComponent<CapsuleCollider>();
 		originalHeight = capsule.height;
 
         anim.SetFloat(HashIDs.speed_float, 0f); //initializes animator to idle stance
 		anim.SetBool(HashIDs.aiming_bool, isShooting);
 		anim.SetLayerWeight(1, 1f);             //Layer 0 = base, Layer 1 = aim layer. This makes sure aiming mask overrides default arm animations
+        this.anim.SetFloat(HashIDs.jumpLeg_float, -1f); //leaving at -1 for now. Leads to weird falling when set to 1
 		//anim.SetLayerWeight(2, 1f);           //optional gun grip, but too small to notice for now
     }
 
@@ -101,6 +116,7 @@ public class PlayerMovementBasic : MonoBehaviour
     {
         if (!jumping && useDefaultMovement)
         {
+            ProcessFalling();
             MovementInputs();
 
 			RaycastHit hit; //snapping character to ground for smooth slope descent 
@@ -218,12 +234,12 @@ public class PlayerMovementBasic : MonoBehaviour
         this.anim.SetFloat(HashIDs.speed_float, speed);
 
         //Keeping track of the last leg to hit the ground. Only needed when falling
-        float runCycle = Mathf.Repeat(anim.GetCurrentAnimatorStateInfo(0).normalizedTime + advancedSettings.runCycleLegOffset, 1);
-        float jumpLeg = (runCycle < .5f ? 1 : -1) /** forwardAmount*/;
-        if (!jumping)
+        /*float runCycle = Mathf.Repeat(anim.GetCurrentAnimatorStateInfo(0).normalizedTime + advancedSettings.runCycleLegOffset, 1);
+        float jumpLeg = (runCycle < .5f ? 1 : -1); // * forwardAmount
+        if (onGround && !jumping)
         {
-            anim.SetFloat("JumpLeg", jumpLeg);
-        }
+            anim.SetFloat(HashIDs.jumpLeg_float, jumpLeg);
+        }*/
 
         //if running
         if (speed > 4 && !isCrouching)
@@ -338,7 +354,7 @@ public class PlayerMovementBasic : MonoBehaviour
     /// <returns></returns>
     public IEnumerator Jump()
     {
-        if (!jumping || anim.GetBool(HashIDs.onGround_bool))
+        if (!jumping && anim.GetBool(HashIDs.onGround_bool))
         {
             jumping = true;
 
@@ -365,7 +381,7 @@ public class PlayerMovementBasic : MonoBehaviour
                     StartCoroutine(ProcessMatchTarget(hitHighInfo.collider, hitHighInfo.point, this.transform.position, Acrobatics.ClimbLedge));
 					yield return climbTime;
 					anim.SetBool(HashIDs.climbeLedge_bool, false);
-					anim.SetBool(HashIDs.onGround_bool, true);
+					//anim.SetBool(HashIDs.onGround_bool, true);
 				}
 				else
 					jumping = false;
@@ -381,7 +397,7 @@ public class PlayerMovementBasic : MonoBehaviour
 				StartCoroutine(ProcessMatchTarget(hitLowInfo.collider, hitLowInfo.point, this.transform.position, Acrobatics.Vault));
 				yield return vaultTime;
 				anim.SetBool(HashIDs.vault_bool, false);
-				anim.SetBool(HashIDs.onGround_bool, true);
+				//anim.SetBool(HashIDs.onGround_bool, true);
 			}
 			else
 			{
@@ -389,7 +405,7 @@ public class PlayerMovementBasic : MonoBehaviour
 				anim.SetBool(HashIDs.dive_bool, true);
 				yield return diveTime;
 				anim.SetBool(HashIDs.dive_bool, false);
-				anim.SetBool(HashIDs.onGround_bool, true);
+				//anim.SetBool(HashIDs.onGround_bool, true);
 			}
         }
     }
@@ -401,6 +417,31 @@ public class PlayerMovementBasic : MonoBehaviour
     public bool IsGrounded()
     {
         return Physics.Raycast(this.transform.position, Vector3.down, 0.25f);
+    }
+    public void ProcessFalling()
+    {
+        this.onGround = Physics.Raycast(this.transform.position + Vector3.up, Vector3.down, 1.5f, obstacleLayers);
+        this.anim.SetBool(HashIDs.onGround_bool, this.onGround);
+
+        if (!onGround)
+        {
+            this.anim.SetFloat(HashIDs.jump_float, this.rigidbody.velocity.y);
+        }
+
+        /*if (!onGround && !falling) //if fall just started
+        {
+            falling = true;
+            this.fallStartHeight = this.transform.position.y;
+        }
+        else if (onGround && falling) //if player just landed
+        {
+            falling = false;
+            this.fallEndHeight = this.transform.position.y;
+            if (fallStartHeight - fallEndHeight > 5)
+            {
+                this.stats.TakeDamageThroughArmor(
+            }
+        }*/
     }
 
 	/// <summary>
