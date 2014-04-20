@@ -54,6 +54,7 @@ public class PlayerMovementBasic : MonoBehaviour
     private float originalHeight;
     private float fallStartHeight, fallEndHeight;
     private float fallSpeed = 0f;
+    private Ray groundCheckRay = new Ray(Vector3.zero, Vector3.down); //cached to avoid garbage collection
 	
 	[SerializeField] AdvancedSettings advancedSettings;                 // Container for the advanced settings class , thiss allows the advanced settings to be in a foldout in the inspector
 
@@ -179,19 +180,24 @@ public class PlayerMovementBasic : MonoBehaviour
 		{
 			//isWalking = isAiming; //Will still be walking if the player is aiming
             isWalking = true;
-			mainCam.SetOffset(isCrouching ? CameraOffset.Crouch : CameraOffset.Aim);
+			mainCam.SetOffset(isCrouching ? CameraOffset.Crouch : CameraOffset.Default);
 		}
 
         //AIM input
-        if (Input.GetButtonDown(InputType.AIM)) //When AIM is pressed
+        if(Input.GetButton(InputType.AIM))
         {
             if (!isCrouching)
                 mainCam.SetOffset(CameraOffset.Aim);
             else
                 mainCam.SetOffset(CameraOffset.CrouchAim);
-            mainCam.followSpeed = (float)CameraFollowSpeed.Aiming;
-            isAiming = true;
-			anim.SetBool(HashIDs.aiming_bool, isAiming);
+
+            //May need to go outside of parent if-statement, depending on how Unity inputs work per-frame
+            if (Input.GetButtonDown(InputType.AIM)) //When AIM is pressed
+            {
+                mainCam.followSpeed = (float)CameraFollowSpeed.Aiming;
+                isAiming = true;
+                anim.SetBool(HashIDs.aiming_bool, isAiming);
+            }
         }
         else if (Input.GetButtonUp(InputType.AIM))//When AIM is released
         {
@@ -334,6 +340,7 @@ public class PlayerMovementBasic : MonoBehaviour
         {
             stats.health -= 5 * (int)(impactVelocity - 12.5f);
             anim.applyRootMotion = true;
+            mainCam.Shake(.0625f, 8, 2);
             //emit noise
         }
         if (jumping && !(collision.rigidbody && collision.rigidbody.isKinematic) && (Mathf.Abs(collision.contacts[0].normal.x) > .5f || Mathf.Abs(collision.contacts[0].normal.z) > .5f))
@@ -361,6 +368,7 @@ public class PlayerMovementBasic : MonoBehaviour
 			//Determining action
 			Ray low = new Ray(this.transform.position + Vector3.up * RAY_LOW, mainCam.XZdirection/*this.transform.forward*/);
             Ray high = new Ray(this.transform.position + Vector3.up * RAY_HIGH, mainCam.XZdirection/*this.transform.forward*/);
+            
 			RaycastHit hitLowInfo, hitHighInfo;
 
 			float raycastDistance = Mathf.Max(2f, anim.GetFloat(HashIDs.speed_float));
@@ -420,7 +428,9 @@ public class PlayerMovementBasic : MonoBehaviour
     }
     public void ProcessFalling()
     {
-        this.onGround = Physics.Raycast(this.transform.position + Vector3.up, Vector3.down, 1.5f, obstacleLayers);
+        //this.onGround = Physics.Raycast(this.transform.position + Vector3.up, Vector3.down, 1.5f, obstacleLayers);
+        groundCheckRay.origin = this.transform.position + Vector3.up;
+        this.onGround = Physics.SphereCast(groundCheckRay, 0.3f, 1.25f, obstacleLayers); 
         this.anim.SetBool(HashIDs.onGround_bool, this.onGround);
 
         if (!onGround)

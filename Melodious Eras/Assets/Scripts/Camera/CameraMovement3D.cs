@@ -35,6 +35,7 @@ public class CameraMovement3D : CameraMovement
 
     private int invertOffset = 1;               //-1 = inversion of x-offset
 	private float raycastDistance = 1;          //distance for raycast to avoid clipping through walls
+    [SerializeField] private LayerMask raycastLayers;
 
     private Vector3 targetLookPos;              //targetLookPos = position over player's shoulder to look at
     private Vector3 camTargetPos;
@@ -66,7 +67,6 @@ public class CameraMovement3D : CameraMovement
     {
         camRotationHelper = new GameObject();
         camRotationHelper.name = "camTarget";
- 
     }
 	// Use this for initialization
 	void Start () 
@@ -90,7 +90,7 @@ public class CameraMovement3D : CameraMovement
 		if (Input.GetButtonDown(InputType.SHIFT_VIEW))
 			InvertOffset();
         if (Input.GetKeyDown(KeyCode.K) && !shaking)
-            StartCoroutine(Shake(.125f, 8, 3));
+            StartCoroutine(shake(.125f, 8, 3));
 		
 		//Adjusting look rotation
 		float intensityX = Input.GetAxis(InputType.MOUSE_X);
@@ -115,7 +115,7 @@ public class CameraMovement3D : CameraMovement
 		Vector3 lookPosOffset = player.up * activeOffset.y + camRotationHelper.transform.right * activeOffset.x;
 		targetLookPos = player.position +  lookPosOffset/* + player.forward * .125f*/;
 		RaycastHit hit1;
-		if(Physics.Raycast (player.position + player.up * activeOffset.y, camRotationHelper.transform.right * activeOffset.x, out hit1, Mathf.Abs(activeOffset.x)))
+        if (Physics.Raycast(player.position + player.up * activeOffset.y, camRotationHelper.transform.right * activeOffset.x, out hit1, Mathf.Abs(activeOffset.x), raycastLayers))
 		{
 			InvertOffset();
 		}
@@ -133,7 +133,7 @@ public class CameraMovement3D : CameraMovement
 			RaycastHit hit;
 
 			Ray ray = new Ray(targetLookPos, offsetDirection);
-			if(Physics.Raycast (ray, out hit, raycastDistance) && hit.collider.tag != Tags.MAIN_CAMERA)
+			if(Physics.Raycast (ray, out hit, raycastDistance, raycastLayers) && hit.collider.tag != Tags.MAIN_CAMERA)
 			{
 				camTargetPos = hit.point - ray.direction;
 			}
@@ -196,7 +196,11 @@ public class CameraMovement3D : CameraMovement
         raycastDistance = activeOffset.magnitude;
     }
 
-    IEnumerator Shake(float intensity, float speed, float duration)
+    public void Shake(float intensity, float speed, float duration)
+    {
+        this.StartCoroutine(shake(intensity, speed, duration));
+    }
+    private IEnumerator shake(float intensity, float speed, float duration)
     {
         shaking = true;
         float endTime = Time.time + duration;

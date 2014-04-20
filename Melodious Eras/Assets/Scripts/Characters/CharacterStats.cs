@@ -8,9 +8,9 @@ public class CharacterStats : MonoBehaviour
 {
     public Faction faction;
     public SecurityArea currentSecArea;
-    public int health = 100, maxHealth = 100;
+    public int health = 100;
+    public int maxHealth = 100;
     public float stamina = 100, maxStamina = 100;
-    public bool exhausted = false;
     [SerializeField]
     protected float adrenalineMultiplier = 1;
     public bool isDead = false;
@@ -26,9 +26,16 @@ public class CharacterStats : MonoBehaviour
 	public Inventory tempInventory = new Inventory(); //for level-specific items like keys
 	public Transform lookatTarget;
 
-    private YieldInstruction eof = new WaitForEndOfFrame();
+    private YieldInstruction _eof = new WaitForEndOfFrame();
+    private bool _exhausted = false;
+    
 
-	// Use this for initialization
+
+    #region accessors & mutators
+    public bool exhausted { get { return _exhausted; } }
+    #endregion
+
+    // Use this for initialization
     void Start() { }
 	// Update is called once per frame
     void Update() { }
@@ -48,12 +55,13 @@ public class CharacterStats : MonoBehaviour
     public virtual void SwitchWeapon(WeaponClass slot) { }
     public virtual void HolsterWeapon() { }
 
+
     public virtual void ReduceStamina(float value)
     {
         this.stamina -= value / adrenalineMultiplier; //higher adrenaline = slower stamina reduction
-        if (!this.exhausted && this.stamina < 0)
+        if (!this._exhausted && this.stamina < 0)
         {
-            this.BecomeExhausted(10);
+            this.StartCoroutine(BecomeExhausted(10));
         }
     }
     public virtual void ReduceStaminaAbsolute(float value)
@@ -78,10 +86,11 @@ public class CharacterStats : MonoBehaviour
     private IEnumerator BecomeExhausted(float recoveryNeeded)
     {
         this.stamina = 0;
-        this.exhausted = true;
-        while (this.stamina < recoveryNeeded)
-            yield return eof;
+        this._exhausted = true;
+        float adjustedMinimum = recoveryNeeded / adrenalineMultiplier;
+        while (this.stamina < adjustedMinimum)
+            yield return _eof;
 
-        this.exhausted = false;
+        this._exhausted = false;
     }
 }
