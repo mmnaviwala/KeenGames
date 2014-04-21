@@ -8,6 +8,8 @@ using System.Collections;
 [AddComponentMenu("Scripts/Utilities/Hash IDs")]
 public static class HashIDs 
 {
+    private static bool initialized = false;
+
 	//states
 	public static int dying_state;
 	public static int locomotion_state;
@@ -35,24 +37,28 @@ public static class HashIDs
 
     public static void Initialize()
     {
-		dying_state = Animator.StringToHash("Dying");
-		dead_bool = Animator.StringToHash("Dead");
-		locomotion_state = Animator.StringToHash("Locomotion");
-		speed_float = Animator.StringToHash("Speed");
-		sneaking_bool = Animator.StringToHash("Sneaking");
-		playerInSight_bool = Animator.StringToHash("PlayerInSight");
-		aiming_bool = Animator.StringToHash("Aiming");
-		aimWeight_float = Animator.StringToHash("AimWeight");
-		angularSpeed_float = Animator.StringToHash("AngularSpeed");
-		open_bool = Animator.StringToHash("Open");
-		jump_float = Animator.StringToHash("Jump");
-		jumpLeg_float = Animator.StringToHash("JumpLeg");
-		onGround_bool = Animator.StringToHash("OnGround");
-		vault_bool = Animator.StringToHash("Vault");
-		dive_bool = Animator.StringToHash("Dive");
-		climbUp_bool = Animator.StringToHash("ClimbUp");
-		climbDown_bool = Animator.StringToHash("ClimbDown");
-		climbeLedge_bool = Animator.StringToHash("ClimbLedge");
-		slide_bool = Animator.StringToHash("Slide");
+        if (!initialized)
+        {
+            dying_state = Animator.StringToHash("Dying");
+            dead_bool = Animator.StringToHash("Dead");
+            locomotion_state = Animator.StringToHash("Locomotion");
+            speed_float = Animator.StringToHash("Speed");
+            sneaking_bool = Animator.StringToHash("Sneaking");
+            playerInSight_bool = Animator.StringToHash("PlayerInSight");
+            aiming_bool = Animator.StringToHash("Aiming");
+            aimWeight_float = Animator.StringToHash("AimWeight");
+            angularSpeed_float = Animator.StringToHash("AngularSpeed");
+            open_bool = Animator.StringToHash("Open");
+            jump_float = Animator.StringToHash("Jump");
+            jumpLeg_float = Animator.StringToHash("JumpLeg");
+            onGround_bool = Animator.StringToHash("OnGround");
+            vault_bool = Animator.StringToHash("Vault");
+            dive_bool = Animator.StringToHash("Dive");
+            climbUp_bool = Animator.StringToHash("ClimbUp");
+            climbDown_bool = Animator.StringToHash("ClimbDown");
+            climbeLedge_bool = Animator.StringToHash("ClimbLedge");
+            slide_bool = Animator.StringToHash("Slide");
+            initialized = true;
+        }
     }
 }

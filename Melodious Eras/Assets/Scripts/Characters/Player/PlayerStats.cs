@@ -115,21 +115,7 @@ public class PlayerStats : CharacterStats
             targetP.TakeDamage(_meleeDamage, this);
         }
     }
-
-    public override void TakeDamage(int damage)
-    {
-        this._health -= (health > damage) ? damage : health;
-        if (health == 0)
-        {
-            this.Die();
-        }
-    }
-
     public override void TakeDamage(bool instantKill)
-    {
-        this.Die();
-    }
-    public override void Kill()
     {
         this.Die();
     }

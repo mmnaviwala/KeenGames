@@ -14,7 +14,8 @@ public class FlatUI_HUD_Double : MonoBehaviour {
 	private string textToDisplay1, textToDisplay2;
 	public float currentNumber1 = 100;
 	public float currentNumber2 = 100;
-	public Material outterMat, innerMat;
+    private float maxNumber1 = 100;
+    private float maxNumber2 = 100;
 
 	public enum Position { Position1, Position3 }
 	public enum BarType { HealthArmor, Ammo }
@@ -23,13 +24,17 @@ public class FlatUI_HUD_Double : MonoBehaviour {
 
 	private PlayerStats stats;
 	private Gun weapon;
-	private Suit suit;
+    private Suit suit;
+    private Material outerMat, innerMat;
 	
 	void Start ()
 	{
 		stats = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<PlayerStats>();
 		suit = stats.GetComponent<Suit>();
 		weapon = stats.equippedWeapon as Gun;
+
+        outerMat = renderer.materials[0];
+        innerMat = renderer.materials[1];
 
 
 		xx = Screen.width / 10;
@@ -80,6 +85,8 @@ public class FlatUI_HUD_Double : MonoBehaviour {
 		case BarType.Ammo:
 			currentNumber1 = weapon.ammoInClip;
 			currentNumber2 = weapon.extraAmmo;
+            maxNumber1 = weapon.clipSize;
+            maxNumber2 = weapon.maxAmmo;
 			break;
 		case BarType.HealthArmor:
 			currentNumber1 = stats.health;
@@ -92,8 +99,8 @@ public class FlatUI_HUD_Double : MonoBehaviour {
 	{
 		GUI.DrawTexture(outerRect, bottomTexture);
 		
-		outterMat.SetFloat("_Cutoff", Mathf.InverseLerp(0, 100, stats.health));
-		Graphics.DrawTexture(outerRect, outerBarTexture, outterMat);
+		outerMat.SetFloat("_Cutoff", Mathf.InverseLerp(0, maxNumber1, currentNumber1));
+		Graphics.DrawTexture(outerRect, outerBarTexture, outerMat);
 		
 		GUI.DrawTexture(outerRect, topTexture);
 
@@ -101,7 +108,7 @@ public class FlatUI_HUD_Double : MonoBehaviour {
 
 		GUI.DrawTexture(innerRect, bottomTexture);
 		
-		innerMat.SetFloat("_Cutoff", Mathf.InverseLerp(0, Screen.width, currentHealth2));
+		innerMat.SetFloat("_Cutoff", Mathf.InverseLerp(0, maxNumber2, currentNumber2));
 		Graphics.DrawTexture(innerRect, innerBarTexture, innerMat);
 		
 		GUI.DrawTexture(innerRect, topTexture);

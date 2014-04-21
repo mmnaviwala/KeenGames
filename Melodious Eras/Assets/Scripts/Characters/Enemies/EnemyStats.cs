@@ -35,18 +35,6 @@ public class EnemyStats : CharacterStats
     }*/
 
     #region Damage taking and stat changes
-    public override void TakeDamage(int damage)
-    {
-        if (suit != null && suit.armor > 0)
-            suit.armor -= damage;
-        else
-            this._health -= damage;
-
-        if (this.isVulnerable && this.health <= 0)
-        {
-            this.Die();
-        }
-    }
     public override void TakeDamage(int damage, CharacterStats source)
     {
         ai.currentEnemy = source;
@@ -68,18 +56,6 @@ public class EnemyStats : CharacterStats
         }
     }
     /// <summary>
-    /// Deals damage to invulnerable enemy.
-    /// </summary>
-    /// <param name="damage"></param>
-    public override void TakeDamageThroughArmor(int damage)
-    {
-        this._health -= damage;
-        if (this.health <= 0)
-        {
-            this.Die();
-        }
-    }
-    /// <summary>
     /// Deals damage to invulnerable enemy. Use this to tell the enemy who just attacked it
     /// </summary>
     /// <param name="damage"></param>
@@ -94,16 +70,11 @@ public class EnemyStats : CharacterStats
         }
 
     }
-    public override void Kill()
-    {
-        this.Die();
-    }
 
     /// <summary>
     /// <para>Processes the enemy's death. For this type of enemy, it disables their AI, then shrinks and disables their sight's sphere collider.</para>
     /// <para>Avoiding destroying any components, in case we want enemies to be capable of being revived at some point.</para>
     /// </summary>
-
     protected override void Die()
     {
         Debug.Log(this.name + " Dying");

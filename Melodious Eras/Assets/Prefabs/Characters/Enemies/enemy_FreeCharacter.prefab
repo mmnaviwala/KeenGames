@@ -1138,7 +1138,7 @@ GameObject:
   - 135: {fileID: 13500002}
   - 54: {fileID: 5400002}
   - 114: {fileID: 11400010}
-  m_Layer: 2
+  m_Layer: 13
   m_Name: NPC_fov
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2237,10 +2237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   faction: 0
   currentSecArea: {fileID: 0}
-  health: 100
-  maxHealth: 100
-  isDead: 0
-  meleeDamage: 10
+  suit: {fileID: 0}
   equippedWeapon: {fileID: 11400008}
   sidearm: {fileID: 11400008}
   largeWeapon: {fileID: 0}
@@ -2249,6 +2246,12 @@ MonoBehaviour:
   leftHand: {fileID: 0}
   rightHand: {fileID: 0}
   lookatTarget: {fileID: 0}
+  _health: 100
+  _maxHealth: 100
+  _stamina: 100
+  _maxStamina: 100
+  _adrenalineMultiplier: 1
+  _meleeDamage: 10
   isVulnerable: 1
   meleeSpeed: .5
   shootSpeed: .5
@@ -2263,12 +2266,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53569be92d6d6bf41bb60b8e18780458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  group: {fileID: 0}
+  squad: {fileID: 0}
   eyes: {fileID: 400148}
   equippedWeapon: {fileID: 11400008}
   currentEnemy: {fileID: 0}
   hearingMultiplier: 1
-  awarenessMultiplier: 1
+  baseAwarenessMultiplier: .5
   fieldOfView: 160
   shootingRange: 0
   meleeRange: 0
@@ -2280,7 +2283,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   seesPlayer: 0
-  awareOfPlayer: 0
+  alerted: 0
   sightLayer:
     serializedVersion: 2
     m_Bits: 4294959097
@@ -2588,7 +2591,7 @@ NavMeshAgent:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100108}
   m_Enabled: 1
-  m_Radius: .5
+  m_Radius: .400000006
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50

@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
-  m_LocalPosition: {x: -4.73031235, y: 2.02636909, z: -.790394425}
+  m_LocalPosition: {x: -22.1684875, y: 2.17861271, z: 15.7169495}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -101,7 +101,7 @@ AudioSource:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   serializedVersion: 3
-  m_audioClip: {fileID: 8300000, guid: 2e03ea08721f4428bad8a4aca5b4d869, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 6fac66f7fbf507744835c40b6cbaa87e, type: 3}
   m_PlayOnAwake: 1
   m_Volume: .5
   m_Pitch: 1
@@ -238,6 +238,9 @@ MonoBehaviour:
   invertLook: 1
   target: {fileID: 0}
   atTargetPos: 0
+  raycastLayers:
+    serializedVersion: 2
+    m_Bits: 19201
   camRotationHelper: {fileID: 0}
 --- !u!114 &11400006
 MonoBehaviour:

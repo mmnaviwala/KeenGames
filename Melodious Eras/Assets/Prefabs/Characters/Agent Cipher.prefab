@@ -1612,7 +1612,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100062}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
-  m_LocalPosition: {x: -21.1610298, y: .5, z: 16.2919064}
+  m_LocalPosition: {x: -21.1610298, y: .25, z: 16.2919064}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400092}
@@ -3348,12 +3348,7 @@ MonoBehaviour:
   speed: 0
   snapDownThreshold: .25
   soundwaveDistance: 0
-  jumping: 0
-  isShooting: 0
   useDefaultMovement: 1
-  isAiming: 0
-  isWalking: 0
-  isCrouching: 0
   zeroFriction: {fileID: 13400000, guid: 40ffd4c9381f6d744b11b1f58839cd99, type: 2}
   fullFriction: {fileID: 13400000, guid: 505fe72ad171fa24d96bc176a4bebe01, type: 2}
   ignorePlayer:
@@ -3389,14 +3384,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   faction: 3
   currentSecArea: {fileID: 0}
-  health: 100
-  maxHealth: 100
-  stamina: 100
-  maxStamina: 100
-  exhausted: 0
-  adrenalineMultiplier: 1
-  isDead: 0
-  meleeDamage: 10
+  suit: {fileID: 11400012}
   equippedWeapon: {fileID: 11400002}
   sidearm: {fileID: 11400002}
   largeWeapon: {fileID: 0}
@@ -3405,9 +3393,14 @@ MonoBehaviour:
   leftHand: {fileID: 400082}
   rightHand: {fileID: 400014}
   lookatTarget: {fileID: 0}
+  _health: 100
+  _maxHealth: 100
+  _stamina: 100
+  _maxStamina: 100
+  _adrenalineMultiplier: 1
+  _meleeDamage: 10
   _closeQuarterEnemies: {fileID: 11400010}
   _nearbyEnemies: {fileID: 11400008}
-  suit: {fileID: 11400012}
   flashlight: {fileID: 11400006}
   deathClip: {fileID: 0}
   meleeClip: {fileID: 8300000, guid: 3ca121c001790493aac9f6aec90cfc06, type: 3}

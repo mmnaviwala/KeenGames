@@ -38,12 +38,11 @@ public class HUD_Stealth : MonoBehaviour
         armorBarMax = new Rect(healthBarMax.xMin, healthBarMax.xMin * 2.5f, width_max_armor, healthBarMax.height);
         armorBarCurrent = new Rect(healthBarMax.xMin, healthBarMax.xMin * 2.5f, width_max_armor * ((float)suit.armor / suit.maxArmor), healthBarMax.height);
         
-        weaponRect = new Rect(healthBarMax.xMin, Screen.height - 3 * healthBarMax.height, healthBarMax.width, healthBarMax.height);
+        weaponRect = new Rect(healthBarMax.xMin, Screen.height - 4 * healthBarMax.height, healthBarMax.width, healthBarMax.height);
 
         reticle = new Rect(Screen.width / 2 - Screen.width / 60, Screen.height / 2 - Screen.width / 60, Screen.width / 30, Screen.width / 30);
 		objectiveRect = new Rect(Screen.width * .85f, Screen.height * .05f, Screen.width / 10, Screen.width / 10);
 
-        temp = new Rect(10, Screen.height / 2, Screen.width, 50);
     }
 
     // Update is called once per frame
@@ -60,18 +59,18 @@ public class HUD_Stealth : MonoBehaviour
         if (player.IsAiming)
             GUI.Box(reticle, "", reticleStyle);
 
-        GUI.Box(healthBarMax, stats.health.ToString(), healthMaxStyle);
-        GUI.Box(armorBarMax, suit.armor.ToString(), armorMaxStyle);
-		GUI.Box (flashlightLife, suit.batteryLife.ToString(), flashlightLifeStyle);
+        //GUI.Box(healthBarMax, stats.health.ToString(), healthMaxStyle);
+        //GUI.Box(armorBarMax, suit.armor.ToString(), armorMaxStyle);
+		//GUI.Box (flashlightLife, suit.batteryLife.ToString(), flashlightLifeStyle);
 		GUI.Box (objectiveRect, "Objectives:\n" + objectiveSystem.CurrentObjective.Title, objectiveRectStyle);
         GUI.Label(weaponRect, weapon.HudString(), weapon.hudStyle);
 
         //GUI.Label(temp, XMLUtilities.currentDirectory);
 
-        GUI.color = new Color(1, 1, 1, .25f);
-        GUI.Box(healthBarCurrent, "", healthCurrentStyle);
-        GUI.Box(armorBarCurrent, "", armorCurrentStyle);
-		GUI.Box (flashlightLife, "", flashlightLifeStyle);
+        //GUI.color = new Color(1, 1, 1, .25f);
+        //GUI.Box(healthBarCurrent, "", healthCurrentStyle);
+        //GUI.Box(armorBarCurrent, "", armorCurrentStyle);
+		//GUI.Box (flashlightLife, "", flashlightLifeStyle);
     }
 
     public void Enable()

@@ -9,7 +9,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 108: {fileID: 10800000}
-  - 123: {fileID: 12300000}
   m_Layer: 0
   m_Name: Point light
   m_TagString: Untagged
@@ -292,7 +291,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100022}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.48212624, z: -20}
+  m_LocalPosition: {x: 20, y: 4.3499999, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400020}
@@ -314,7 +313,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: f0d141bbdd1f66842870fab2d61fc6da, type: 2}
+  - {fileID: 2100000, guid: 6a2d6ac62e4b8104c8314add185f1c4a, type: 2}
   - {fileID: 2100000, guid: c84208cf872aa524481a5efcac4e9e1d, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
@@ -349,7 +348,7 @@ Light:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -391,34 +390,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   durability: 1
   breakingSound: {fileID: 0}
-  hasPower: 1
+  hasPower: 0
   activated: 1
   isBroken: 0
   connectedSwitch: {fileID: 0}
   electricGrid: {fileID: 0}
   activateSound: {fileID: 0}
   lightbulb: {fileID: 10800000}
-  lensFlare: {fileID: 12300000}
+  lensFlare: {fileID: 0}
   flickering: 0
   frequency: .5
   flareDistance: 7.5
   flareBrightness: 5
   ambientLight: []
---- !u!123 &12300000
-LensFlare:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_Flare: {fileID: 12100000, guid: 491f42dc6a72d468784d9e40740471b2, type: 2}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Brightness: 1.5
-  m_FadeSpeed: 3
-  m_IgnoreLayers:
-    serializedVersion: 2
-    m_Bits: 1030
-  m_Directional: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

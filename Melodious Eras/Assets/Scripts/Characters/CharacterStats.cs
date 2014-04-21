@@ -58,7 +58,26 @@ public class CharacterStats : MonoBehaviour
     /// Deals damage to this character.
     /// </summary>
     /// <param name="damage"></param>
-    public virtual void TakeDamage(int damage) { }
+    public virtual void TakeDamage(int damage) 
+    {
+        if (this.suit == null || this.suit.armor == 0)
+        {
+            this._health -= (_health > damage) ? damage : _health;
+        }
+        else
+        {
+            this.suit.armor -= damage;
+            if (suit.armor < 0)
+            {
+                int leftoverDamage = Mathf.Abs(suit.armor);
+                this._health -= (_health > leftoverDamage) ? leftoverDamage : _health;
+                this.suit.armor = 0;
+            }
+        }
+
+        if (health == 0)
+            this.Die();
+    }
     /// <summary>
     /// Deals damage to this character, letting them know who hit them.
     /// </summary>
@@ -73,7 +92,12 @@ public class CharacterStats : MonoBehaviour
     /// Deals damage to this character, ignoring any armor.
     /// </summary>
     /// <param name="damage"></param>
-    public virtual void TakeDamageThroughArmor(int damage) { }
+    public virtual void TakeDamageThroughArmor(int damage)
+    {
+        this._health -= (_health > damage) ? damage : _health;
+        if (this._health == 0)
+            this.Die();
+    }
     /// <summary>
     /// Deals damage to this character, ignoring any armor and telling them who hit them.
     /// </summary>
@@ -84,7 +108,10 @@ public class CharacterStats : MonoBehaviour
     /// Instantly kills this character, ignoring any protections
     /// </summary>
     /// <param name="instantKill"></param>
-    public virtual void Kill() { this.Die(); }
+    public virtual void Kill() 
+    { 
+        this.Die(); 
+    }
     protected virtual void Die() { }
 
     public virtual void Attack(CharacterStats target) { }
