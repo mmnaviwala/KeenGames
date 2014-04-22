@@ -91,15 +91,16 @@ public class EnemyAI : MonoBehaviour
 		{
 			//this.seesPlayer = false;
             if (lastPlayerSighting != lpsResetPosition && currentEnemy.health > 0f)
-            {
-                Chasing();
+			{
+				if (this.seesPlayer && Vector3.Distance(this.transform.position, currentEnemy.transform.position) < 10)
+				{
+					Shooting();
+				}
+				else
+                	Chasing();
             }
             else if (patrolWaypoints != null && patrolWaypoints.Length > 0)
                 Patrol();
-            else if (this.seesPlayer)
-            {
-                Shooting();
-            }
 	        
 	        //detecting enemies; currently only detects player
 			if(sight.charactersInRange.Count > 0)
@@ -234,6 +235,11 @@ public class EnemyAI : MonoBehaviour
     void Shooting()
     {
         Debug.Log("Shooting");
+		//stop movement
+		//play animation, aimed at player
+
+		//at correct point in animation:
+		this.Attack(currentEnemy);
     }
 
     #region Enemy Senses
@@ -295,12 +301,11 @@ public class EnemyAI : MonoBehaviour
             pathLength += Vector3.Distance(allWaypoints[w], allWaypoints[w + 1]);
 
         return pathLength;
- 
     }
 
-    void Attack(PlayerStats target)
+    void Attack(CharacterStats target)
     {
-        if (this.equippedWeapon != null)
+        if (this.equippedWeapon != null && Vector3.Distance(this.transform.position, target.transform.position) > 5)
             equippedWeapon.Fire(target);
         else
         {

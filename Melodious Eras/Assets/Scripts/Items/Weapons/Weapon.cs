@@ -45,6 +45,7 @@ public class Weapon : Item
     {
         return false;
     }
+	public virtual bool Fire(Vector3 targetPos) {return false;}
 
     public virtual void Initialize()
     {
