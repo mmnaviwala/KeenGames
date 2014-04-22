@@ -1,0 +1,1659 @@
+fileFormatVersion: 2
+guid: b1d37928c1e1a6d4abf5d934dd3a26e1
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Humanoid1:Humanoid:Head
+    100004: Humanoid1:Humanoid:Hips
+    100006: Humanoid1:Humanoid:LeftArm
+    100008: Humanoid1:Humanoid:LeftArm_Dummy
+    100010: Humanoid1:Humanoid:LeftArmRoll
+    100012: Humanoid1:Humanoid:LeftFoot
+    100014: Humanoid1:Humanoid:LeftForeArm
+    100016: Humanoid1:Humanoid:LeftForeArmRoll
+    100018: Humanoid1:Humanoid:LeftHand
+    100020: Humanoid1:Humanoid:LeftHandIndex1
+    100022: Humanoid1:Humanoid:LeftHandIndex2
+    100024: Humanoid1:Humanoid:LeftHandIndex3
+    100026: Humanoid1:Humanoid:LeftHandMiddle1
+    100028: Humanoid1:Humanoid:LeftHandMiddle2
+    100030: Humanoid1:Humanoid:LeftHandMiddle3
+    100032: Humanoid1:Humanoid:LeftHandPinky1
+    100034: Humanoid1:Humanoid:LeftHandPinky2
+    100036: Humanoid1:Humanoid:LeftHandPinky3
+    100038: Humanoid1:Humanoid:LeftHandRing1
+    100040: Humanoid1:Humanoid:LeftHandRing2
+    100042: Humanoid1:Humanoid:LeftHandRing3
+    100044: Humanoid1:Humanoid:LeftHandThumb1
+    100046: Humanoid1:Humanoid:LeftHandThumb2
+    100048: Humanoid1:Humanoid:LeftHandThumb3
+    100050: Humanoid1:Humanoid:LeftHips_Dummy
+    100052: Humanoid1:Humanoid:LeftLeg
+    100054: Humanoid1:Humanoid:LeftLegRoll
+    100056: Humanoid1:Humanoid:LeftShoulder
+    100058: Humanoid1:Humanoid:LeftShoulder_Dummy
+    100060: Humanoid1:Humanoid:LeftToeBase
+    100062: Humanoid1:Humanoid:LeftUpLeg
+    100064: Humanoid1:Humanoid:LeftUpLegRoll
+    100066: Humanoid1:Humanoid:Mesh
+    100068: Humanoid1:Humanoid:Neck
+    100070: Humanoid1:Humanoid:Reference
+    100072: Humanoid1:Humanoid:RightArm
+    100074: Humanoid1:Humanoid:RightArm_Dummy
+    100076: Humanoid1:Humanoid:RightArmRoll
+    100078: Humanoid1:Humanoid:RightFoot
+    100080: Humanoid1:Humanoid:RightForeArm
+    100082: Humanoid1:Humanoid:RightForeArmRoll
+    100084: Humanoid1:Humanoid:RightHand
+    100086: Humanoid1:Humanoid:RightHandIndex1
+    100088: Humanoid1:Humanoid:RightHandIndex2
+    100090: Humanoid1:Humanoid:RightHandIndex3
+    100092: Humanoid1:Humanoid:RightHandMiddle1
+    100094: Humanoid1:Humanoid:RightHandMiddle2
+    100096: Humanoid1:Humanoid:RightHandMiddle3
+    100098: Humanoid1:Humanoid:RightHandPinky1
+    100100: Humanoid1:Humanoid:RightHandPinky2
+    100102: Humanoid1:Humanoid:RightHandPinky3
+    100104: Humanoid1:Humanoid:RightHandRing1
+    100106: Humanoid1:Humanoid:RightHandRing2
+    100108: Humanoid1:Humanoid:RightHandRing3
+    100110: Humanoid1:Humanoid:RightHandThumb1
+    100112: Humanoid1:Humanoid:RightHandThumb2
+    100114: Humanoid1:Humanoid:RightHandThumb3
+    100116: Humanoid1:Humanoid:RightHips_Dummy
+    100118: Humanoid1:Humanoid:RightLeg
+    100120: Humanoid1:Humanoid:RightLegRoll
+    100122: Humanoid1:Humanoid:RightShoulder
+    100124: Humanoid1:Humanoid:RightShoulder_Dummy
+    100126: Humanoid1:Humanoid:RightToeBase
+    100128: Humanoid1:Humanoid:RightUpLeg
+    100130: Humanoid1:Humanoid:RightUpLegRoll
+    100132: Humanoid1:Humanoid:Root
+    100134: Humanoid1:Humanoid:Spine
+    100136: Humanoid1:Humanoid:Spine1
+    100138: Humanoid1:Humanoid:Spine2
+    100140: Humanoid1:Humanoid:Spine_Dummy
+    100142: Humanoid1:HumanoidCharacter_Ctrl_ChestEndEffector
+    100144: Humanoid1:HumanoidCharacter_Ctrl_ChestOriginEffector
+    100146: Humanoid1:HumanoidCharacter_Ctrl_Head
+    100148: Humanoid1:HumanoidCharacter_Ctrl_HeadEffector
+    100150: Humanoid1:HumanoidCharacter_Ctrl_Hips
+    100152: Humanoid1:HumanoidCharacter_Ctrl_HipsEffector
+    100154: Humanoid1:HumanoidCharacter_Ctrl_LeftAnkleEffector
+    100156: Humanoid1:HumanoidCharacter_Ctrl_LeftArm
+    100158: Humanoid1:HumanoidCharacter_Ctrl_LeftArmRoll
+    100160: Humanoid1:HumanoidCharacter_Ctrl_LeftElbowEffector
+    100162: Humanoid1:HumanoidCharacter_Ctrl_LeftFoot
+    100164: Humanoid1:HumanoidCharacter_Ctrl_LeftFootEffector
+    100166: Humanoid1:HumanoidCharacter_Ctrl_LeftForeArm
+    100168: Humanoid1:HumanoidCharacter_Ctrl_LeftForeArmRoll
+    100170: Humanoid1:HumanoidCharacter_Ctrl_LeftHand
+    100172: Humanoid1:HumanoidCharacter_Ctrl_LeftHandIndex1
+    100174: Humanoid1:HumanoidCharacter_Ctrl_LeftHandIndex2
+    100176: Humanoid1:HumanoidCharacter_Ctrl_LeftHandIndex3
+    100178: Humanoid1:HumanoidCharacter_Ctrl_LeftHandIndex4
+    100180: Humanoid1:HumanoidCharacter_Ctrl_LeftHandIndexEffector
+    100182: Humanoid1:HumanoidCharacter_Ctrl_LeftHandMiddle1
+    100184: Humanoid1:HumanoidCharacter_Ctrl_LeftHandMiddle2
+    100186: Humanoid1:HumanoidCharacter_Ctrl_LeftHandMiddle3
+    100188: Humanoid1:HumanoidCharacter_Ctrl_LeftHandMiddle4
+    100190: Humanoid1:HumanoidCharacter_Ctrl_LeftHandMiddleEffector
+    100192: Humanoid1:HumanoidCharacter_Ctrl_LeftHandPinky1
+    100194: Humanoid1:HumanoidCharacter_Ctrl_LeftHandPinky2
+    100196: Humanoid1:HumanoidCharacter_Ctrl_LeftHandPinky3
+    100198: Humanoid1:HumanoidCharacter_Ctrl_LeftHandPinky4
+    100200: Humanoid1:HumanoidCharacter_Ctrl_LeftHandPinkyEffector
+    100202: Humanoid1:HumanoidCharacter_Ctrl_LeftHandRing1
+    100204: Humanoid1:HumanoidCharacter_Ctrl_LeftHandRing2
+    100206: Humanoid1:HumanoidCharacter_Ctrl_LeftHandRing3
+    100208: Humanoid1:HumanoidCharacter_Ctrl_LeftHandRing4
+    100210: Humanoid1:HumanoidCharacter_Ctrl_LeftHandRingEffector
+    100212: Humanoid1:HumanoidCharacter_Ctrl_LeftHandThumb1
+    100214: Humanoid1:HumanoidCharacter_Ctrl_LeftHandThumb2
+    100216: Humanoid1:HumanoidCharacter_Ctrl_LeftHandThumb3
+    100218: Humanoid1:HumanoidCharacter_Ctrl_LeftHandThumb4
+    100220: Humanoid1:HumanoidCharacter_Ctrl_LeftHandThumbEffector
+    100222: Humanoid1:HumanoidCharacter_Ctrl_LeftHipEffector
+    100224: Humanoid1:HumanoidCharacter_Ctrl_LeftKneeEffector
+    100226: Humanoid1:HumanoidCharacter_Ctrl_LeftLeg
+    100228: Humanoid1:HumanoidCharacter_Ctrl_LeftLegRoll
+    100230: Humanoid1:HumanoidCharacter_Ctrl_LeftShoulder
+    100232: Humanoid1:HumanoidCharacter_Ctrl_LeftShoulderEffector
+    100234: Humanoid1:HumanoidCharacter_Ctrl_LeftToeBase
+    100236: Humanoid1:HumanoidCharacter_Ctrl_LeftUpLeg
+    100238: Humanoid1:HumanoidCharacter_Ctrl_LeftUpLegRoll
+    100240: Humanoid1:HumanoidCharacter_Ctrl_LeftWristEffector
+    100242: Humanoid1:HumanoidCharacter_Ctrl_Neck
+    100244: Humanoid1:HumanoidCharacter_Ctrl_Reference
+    100246: Humanoid1:HumanoidCharacter_Ctrl_RightAnkleEffector
+    100248: Humanoid1:HumanoidCharacter_Ctrl_RightArm
+    100250: Humanoid1:HumanoidCharacter_Ctrl_RightArmRoll
+    100252: Humanoid1:HumanoidCharacter_Ctrl_RightElbowEffector
+    100254: Humanoid1:HumanoidCharacter_Ctrl_RightFoot
+    100256: Humanoid1:HumanoidCharacter_Ctrl_RightFootEffector
+    100258: Humanoid1:HumanoidCharacter_Ctrl_RightForeArm
+    100260: Humanoid1:HumanoidCharacter_Ctrl_RightForeArmRoll
+    100262: Humanoid1:HumanoidCharacter_Ctrl_RightHand
+    100264: Humanoid1:HumanoidCharacter_Ctrl_RightHandIndex1
+    100266: Humanoid1:HumanoidCharacter_Ctrl_RightHandIndex2
+    100268: Humanoid1:HumanoidCharacter_Ctrl_RightHandIndex3
+    100270: Humanoid1:HumanoidCharacter_Ctrl_RightHandIndex4
+    100272: Humanoid1:HumanoidCharacter_Ctrl_RightHandIndexEffector
+    100274: Humanoid1:HumanoidCharacter_Ctrl_RightHandMiddle1
+    100276: Humanoid1:HumanoidCharacter_Ctrl_RightHandMiddle2
+    100278: Humanoid1:HumanoidCharacter_Ctrl_RightHandMiddle3
+    100280: Humanoid1:HumanoidCharacter_Ctrl_RightHandMiddle4
+    100282: Humanoid1:HumanoidCharacter_Ctrl_RightHandMiddleEffector
+    100284: Humanoid1:HumanoidCharacter_Ctrl_RightHandPinky1
+    100286: Humanoid1:HumanoidCharacter_Ctrl_RightHandPinky2
+    100288: Humanoid1:HumanoidCharacter_Ctrl_RightHandPinky3
+    100290: Humanoid1:HumanoidCharacter_Ctrl_RightHandPinky4
+    100292: Humanoid1:HumanoidCharacter_Ctrl_RightHandPinkyEffector
+    100294: Humanoid1:HumanoidCharacter_Ctrl_RightHandRing1
+    100296: Humanoid1:HumanoidCharacter_Ctrl_RightHandRing2
+    100298: Humanoid1:HumanoidCharacter_Ctrl_RightHandRing3
+    100300: Humanoid1:HumanoidCharacter_Ctrl_RightHandRing4
+    100302: Humanoid1:HumanoidCharacter_Ctrl_RightHandRingEffector
+    100304: Humanoid1:HumanoidCharacter_Ctrl_RightHandThumb1
+    100306: Humanoid1:HumanoidCharacter_Ctrl_RightHandThumb2
+    100308: Humanoid1:HumanoidCharacter_Ctrl_RightHandThumb3
+    100310: Humanoid1:HumanoidCharacter_Ctrl_RightHandThumb4
+    100312: Humanoid1:HumanoidCharacter_Ctrl_RightHandThumbEffector
+    100314: Humanoid1:HumanoidCharacter_Ctrl_RightHipEffector
+    100316: Humanoid1:HumanoidCharacter_Ctrl_RightKneeEffector
+    100318: Humanoid1:HumanoidCharacter_Ctrl_RightLeg
+    100320: Humanoid1:HumanoidCharacter_Ctrl_RightLegRoll
+    100322: Humanoid1:HumanoidCharacter_Ctrl_RightShoulder
+    100324: Humanoid1:HumanoidCharacter_Ctrl_RightShoulderEffector
+    100326: Humanoid1:HumanoidCharacter_Ctrl_RightToeBase
+    100328: Humanoid1:HumanoidCharacter_Ctrl_RightUpLeg
+    100330: Humanoid1:HumanoidCharacter_Ctrl_RightUpLegRoll
+    100332: Humanoid1:HumanoidCharacter_Ctrl_RightWristEffector
+    100334: Humanoid1:HumanoidCharacter_Ctrl_Spine
+    100336: Humanoid1:HumanoidCharacter_Ctrl_Spine1
+    100338: Humanoid1:HumanoidCharacter_Ctrl_Spine2
+    400000: //RootNode
+    400002: Humanoid1:Humanoid:Head
+    400004: Humanoid1:Humanoid:Hips
+    400006: Humanoid1:Humanoid:LeftArm
+    400008: Humanoid1:Humanoid:LeftArm_Dummy
+    400010: Humanoid1:Humanoid:LeftArmRoll
+    400012: Humanoid1:Humanoid:LeftFoot
+    400014: Humanoid1:Humanoid:LeftForeArm
+    400016: Humanoid1:Humanoid:LeftForeArmRoll
+    400018: Humanoid1:Humanoid:LeftHand
+    400020: Humanoid1:Humanoid:LeftHandIndex1
+    400022: Humanoid1:Humanoid:LeftHandIndex2
+    400024: Humanoid1:Humanoid:LeftHandIndex3
+    400026: Humanoid1:Humanoid:LeftHandMiddle1
+    400028: Humanoid1:Humanoid:LeftHandMiddle2
+    400030: Humanoid1:Humanoid:LeftHandMiddle3
+    400032: Humanoid1:Humanoid:LeftHandPinky1
+    400034: Humanoid1:Humanoid:LeftHandPinky2
+    400036: Humanoid1:Humanoid:LeftHandPinky3
+    400038: Humanoid1:Humanoid:LeftHandRing1
+    400040: Humanoid1:Humanoid:LeftHandRing2
+    400042: Humanoid1:Humanoid:LeftHandRing3
+    400044: Humanoid1:Humanoid:LeftHandThumb1
+    400046: Humanoid1:Humanoid:LeftHandThumb2
+    400048: Humanoid1:Humanoid:LeftHandThumb3
+    400050: Humanoid1:Humanoid:LeftHips_Dummy
+    400052: Humanoid1:Humanoid:LeftLeg
+    400054: Humanoid1:Humanoid:LeftLegRoll
+    400056: Humanoid1:Humanoid:LeftShoulder
+    400058: Humanoid1:Humanoid:LeftShoulder_Dummy
+    400060: Humanoid1:Humanoid:LeftToeBase
+    400062: Humanoid1:Humanoid:LeftUpLeg
+    400064: Humanoid1:Humanoid:LeftUpLegRoll
+    400066: Humanoid1:Humanoid:Mesh
+    400068: Humanoid1:Humanoid:Neck
+    400070: Humanoid1:Humanoid:Reference
+    400072: Humanoid1:Humanoid:RightArm
+    400074: Humanoid1:Humanoid:RightArm_Dummy
+    400076: Humanoid1:Humanoid:RightArmRoll
+    400078: Humanoid1:Humanoid:RightFoot
+    400080: Humanoid1:Humanoid:RightForeArm
+    400082: Humanoid1:Humanoid:RightForeArmRoll
+    400084: Humanoid1:Humanoid:RightHand
+    400086: Humanoid1:Humanoid:RightHandIndex1
+    400088: Humanoid1:Humanoid:RightHandIndex2
+    400090: Humanoid1:Humanoid:RightHandIndex3
+    400092: Humanoid1:Humanoid:RightHandMiddle1
+    400094: Humanoid1:Humanoid:RightHandMiddle2
+    400096: Humanoid1:Humanoid:RightHandMiddle3
+    400098: Humanoid1:Humanoid:RightHandPinky1
+    400100: Humanoid1:Humanoid:RightHandPinky2
+    400102: Humanoid1:Humanoid:RightHandPinky3
+    400104: Humanoid1:Humanoid:RightHandRing1
+    400106: Humanoid1:Humanoid:RightHandRing2
+    400108: Humanoid1:Humanoid:RightHandRing3
+    400110: Humanoid1:Humanoid:RightHandThumb1
+    400112: Humanoid1:Humanoid:RightHandThumb2
+    400114: Humanoid1:Humanoid:RightHandThumb3
+    400116: Humanoid1:Humanoid:RightHips_Dummy
+    400118: Humanoid1:Humanoid:RightLeg
+    400120: Humanoid1:Humanoid:RightLegRoll
+    400122: Humanoid1:Humanoid:RightShoulder
+    400124: Humanoid1:Humanoid:RightShoulder_Dummy
+    400126: Humanoid1:Humanoid:RightToeBase
+    400128: Humanoid1:Humanoid:RightUpLeg
+    400130: Humanoid1:Humanoid:RightUpLegRoll
+    400132: Humanoid1:Humanoid:Root
+    400134: Humanoid1:Humanoid:Spine
+    400136: Humanoid1:Humanoid:Spine1
+    400138: Humanoid1:Humanoid:Spine2
+    400140: Humanoid1:Humanoid:Spine_Dummy
+    400142: Humanoid1:HumanoidCharacter_Ctrl_ChestEndEffector
+    400144: Humanoid1:HumanoidCharacter_Ctrl_ChestOriginEffector
+    400146: Humanoid1:HumanoidCharacter_Ctrl_Head
+    400148: Humanoid1:HumanoidCharacter_Ctrl_HeadEffector
+    400150: Humanoid1:HumanoidCharacter_Ctrl_Hips
+    400152: Humanoid1:HumanoidCharacter_Ctrl_HipsEffector
+    400154: Humanoid1:HumanoidCharacter_Ctrl_LeftAnkleEffector
+    400156: Humanoid1:HumanoidCharacter_Ctrl_LeftArm
+    400158: Humanoid1:HumanoidCharacter_Ctrl_LeftArmRoll
+    400160: Humanoid1:HumanoidCharacter_Ctrl_LeftElbowEffector
+    400162: Humanoid1:HumanoidCharacter_Ctrl_LeftFoot
+    400164: Humanoid1:HumanoidCharacter_Ctrl_LeftFootEffector
+    400166: Humanoid1:HumanoidCharacter_Ctrl_LeftForeArm
+    400168: Humanoid1:HumanoidCharacter_Ctrl_LeftForeArmRoll
+    400170: Humanoid1:HumanoidCharacter_Ctrl_LeftHand
+    400172: Humanoid1:HumanoidCharacter_Ctrl_LeftHandIndex1
+    400174: Humanoid1:HumanoidCharacter_Ctrl_LeftHandIndex2
+    400176: Humanoid1:HumanoidCharacter_Ctrl_LeftHandIndex3
+    400178: Humanoid1:HumanoidCharacter_Ctrl_LeftHandIndex4
+    400180: Humanoid1:HumanoidCharacter_Ctrl_LeftHandIndexEffector
+    400182: Humanoid1:HumanoidCharacter_Ctrl_LeftHandMiddle1
+    400184: Humanoid1:HumanoidCharacter_Ctrl_LeftHandMiddle2
+    400186: Humanoid1:HumanoidCharacter_Ctrl_LeftHandMiddle3
+    400188: Humanoid1:HumanoidCharacter_Ctrl_LeftHandMiddle4
+    400190: Humanoid1:HumanoidCharacter_Ctrl_LeftHandMiddleEffector
+    400192: Humanoid1:HumanoidCharacter_Ctrl_LeftHandPinky1
+    400194: Humanoid1:HumanoidCharacter_Ctrl_LeftHandPinky2
+    400196: Humanoid1:HumanoidCharacter_Ctrl_LeftHandPinky3
+    400198: Humanoid1:HumanoidCharacter_Ctrl_LeftHandPinky4
+    400200: Humanoid1:HumanoidCharacter_Ctrl_LeftHandPinkyEffector
+    400202: Humanoid1:HumanoidCharacter_Ctrl_LeftHandRing1
+    400204: Humanoid1:HumanoidCharacter_Ctrl_LeftHandRing2
+    400206: Humanoid1:HumanoidCharacter_Ctrl_LeftHandRing3
+    400208: Humanoid1:HumanoidCharacter_Ctrl_LeftHandRing4
+    400210: Humanoid1:HumanoidCharacter_Ctrl_LeftHandRingEffector
+    400212: Humanoid1:HumanoidCharacter_Ctrl_LeftHandThumb1
+    400214: Humanoid1:HumanoidCharacter_Ctrl_LeftHandThumb2
+    400216: Humanoid1:HumanoidCharacter_Ctrl_LeftHandThumb3
+    400218: Humanoid1:HumanoidCharacter_Ctrl_LeftHandThumb4
+    400220: Humanoid1:HumanoidCharacter_Ctrl_LeftHandThumbEffector
+    400222: Humanoid1:HumanoidCharacter_Ctrl_LeftHipEffector
+    400224: Humanoid1:HumanoidCharacter_Ctrl_LeftKneeEffector
+    400226: Humanoid1:HumanoidCharacter_Ctrl_LeftLeg
+    400228: Humanoid1:HumanoidCharacter_Ctrl_LeftLegRoll
+    400230: Humanoid1:HumanoidCharacter_Ctrl_LeftShoulder
+    400232: Humanoid1:HumanoidCharacter_Ctrl_LeftShoulderEffector
+    400234: Humanoid1:HumanoidCharacter_Ctrl_LeftToeBase
+    400236: Humanoid1:HumanoidCharacter_Ctrl_LeftUpLeg
+    400238: Humanoid1:HumanoidCharacter_Ctrl_LeftUpLegRoll
+    400240: Humanoid1:HumanoidCharacter_Ctrl_LeftWristEffector
+    400242: Humanoid1:HumanoidCharacter_Ctrl_Neck
+    400244: Humanoid1:HumanoidCharacter_Ctrl_Reference
+    400246: Humanoid1:HumanoidCharacter_Ctrl_RightAnkleEffector
+    400248: Humanoid1:HumanoidCharacter_Ctrl_RightArm
+    400250: Humanoid1:HumanoidCharacter_Ctrl_RightArmRoll
+    400252: Humanoid1:HumanoidCharacter_Ctrl_RightElbowEffector
+    400254: Humanoid1:HumanoidCharacter_Ctrl_RightFoot
+    400256: Humanoid1:HumanoidCharacter_Ctrl_RightFootEffector
+    400258: Humanoid1:HumanoidCharacter_Ctrl_RightForeArm
+    400260: Humanoid1:HumanoidCharacter_Ctrl_RightForeArmRoll
+    400262: Humanoid1:HumanoidCharacter_Ctrl_RightHand
+    400264: Humanoid1:HumanoidCharacter_Ctrl_RightHandIndex1
+    400266: Humanoid1:HumanoidCharacter_Ctrl_RightHandIndex2
+    400268: Humanoid1:HumanoidCharacter_Ctrl_RightHandIndex3
+    400270: Humanoid1:HumanoidCharacter_Ctrl_RightHandIndex4
+    400272: Humanoid1:HumanoidCharacter_Ctrl_RightHandIndexEffector
+    400274: Humanoid1:HumanoidCharacter_Ctrl_RightHandMiddle1
+    400276: Humanoid1:HumanoidCharacter_Ctrl_RightHandMiddle2
+    400278: Humanoid1:HumanoidCharacter_Ctrl_RightHandMiddle3
+    400280: Humanoid1:HumanoidCharacter_Ctrl_RightHandMiddle4
+    400282: Humanoid1:HumanoidCharacter_Ctrl_RightHandMiddleEffector
+    400284: Humanoid1:HumanoidCharacter_Ctrl_RightHandPinky1
+    400286: Humanoid1:HumanoidCharacter_Ctrl_RightHandPinky2
+    400288: Humanoid1:HumanoidCharacter_Ctrl_RightHandPinky3
+    400290: Humanoid1:HumanoidCharacter_Ctrl_RightHandPinky4
+    400292: Humanoid1:HumanoidCharacter_Ctrl_RightHandPinkyEffector
+    400294: Humanoid1:HumanoidCharacter_Ctrl_RightHandRing1
+    400296: Humanoid1:HumanoidCharacter_Ctrl_RightHandRing2
+    400298: Humanoid1:HumanoidCharacter_Ctrl_RightHandRing3
+    400300: Humanoid1:HumanoidCharacter_Ctrl_RightHandRing4
+    400302: Humanoid1:HumanoidCharacter_Ctrl_RightHandRingEffector
+    400304: Humanoid1:HumanoidCharacter_Ctrl_RightHandThumb1
+    400306: Humanoid1:HumanoidCharacter_Ctrl_RightHandThumb2
+    400308: Humanoid1:HumanoidCharacter_Ctrl_RightHandThumb3
+    400310: Humanoid1:HumanoidCharacter_Ctrl_RightHandThumb4
+    400312: Humanoid1:HumanoidCharacter_Ctrl_RightHandThumbEffector
+    400314: Humanoid1:HumanoidCharacter_Ctrl_RightHipEffector
+    400316: Humanoid1:HumanoidCharacter_Ctrl_RightKneeEffector
+    400318: Humanoid1:HumanoidCharacter_Ctrl_RightLeg
+    400320: Humanoid1:HumanoidCharacter_Ctrl_RightLegRoll
+    400322: Humanoid1:HumanoidCharacter_Ctrl_RightShoulder
+    400324: Humanoid1:HumanoidCharacter_Ctrl_RightShoulderEffector
+    400326: Humanoid1:HumanoidCharacter_Ctrl_RightToeBase
+    400328: Humanoid1:HumanoidCharacter_Ctrl_RightUpLeg
+    400330: Humanoid1:HumanoidCharacter_Ctrl_RightUpLegRoll
+    400332: Humanoid1:HumanoidCharacter_Ctrl_RightWristEffector
+    400334: Humanoid1:HumanoidCharacter_Ctrl_Spine
+    400336: Humanoid1:HumanoidCharacter_Ctrl_Spine1
+    400338: Humanoid1:HumanoidCharacter_Ctrl_Spine2
+    4300000: Humanoid1:Humanoid:Mesh
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Humanoid1:Humanoid:Mesh
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    animationCompression: 3
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human:
+    - boneName: Humanoid1:Humanoid:Hips
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:LeftUpLeg
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:RightUpLeg
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:LeftLeg
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:RightLeg
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:LeftFoot
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:RightFoot
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:Spine
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:Spine1
+      humanName: Chest
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:Neck
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:Head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:LeftShoulder
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:RightShoulder
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:LeftArm
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:RightArm
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:LeftForeArm
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:RightForeArm
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:LeftHand
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:RightHand
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:LeftToeBase
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:RightToeBase
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:LeftHandThumb1
+      humanName: Left Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:LeftHandThumb2
+      humanName: Left Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:LeftHandThumb3
+      humanName: Left Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:LeftHandIndex1
+      humanName: Left Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:LeftHandIndex2
+      humanName: Left Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:LeftHandIndex3
+      humanName: Left Index Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:LeftHandMiddle1
+      humanName: Left Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:LeftHandMiddle2
+      humanName: Left Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:LeftHandMiddle3
+      humanName: Left Middle Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:LeftHandRing1
+      humanName: Left Ring Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:LeftHandRing2
+      humanName: Left Ring Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:LeftHandRing3
+      humanName: Left Ring Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:LeftHandPinky1
+      humanName: Left Little Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:LeftHandPinky2
+      humanName: Left Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:LeftHandPinky3
+      humanName: Left Little Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:RightHandThumb1
+      humanName: Right Thumb Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:RightHandThumb2
+      humanName: Right Thumb Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:RightHandThumb3
+      humanName: Right Thumb Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:RightHandIndex1
+      humanName: Right Index Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:RightHandIndex2
+      humanName: Right Index Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:RightHandIndex3
+      humanName: Right Index Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:RightHandMiddle1
+      humanName: Right Middle Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:RightHandMiddle2
+      humanName: Right Middle Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:RightHandMiddle3
+      humanName: Right Middle Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:RightHandRing1
+      humanName: Right Ring Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:RightHandRing2
+      humanName: Right Ring Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:RightHandRing3
+      humanName: Right Ring Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:RightHandPinky1
+      humanName: Right Little Proximal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:RightHandPinky2
+      humanName: Right Little Intermediate
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: Humanoid1:Humanoid:RightHandPinky3
+      humanName: Right Little Distal
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: BackStab(Clone)
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:Root
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: -.707106829, y: 0, z: -0, w: .707106829}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:Mesh
+      position: {x: .00146875961, y: -.000747964717, z: -.00257094414}
+      rotation: {x: .707106531, y: -0, z: -0, w: .707107127}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:Reference
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 7.94662558e-09, y: -0, z: -0, w: 1}
+      scale: {x: .165000007, y: .165000007, z: .165000007}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:Hips
+      position: {x: .00891663693, y: .264581054, z: 5.55394697}
+      rotation: {x: 8.42936956e-08, y: 0, z: 0, w: 1}
+      scale: {x: 1.00000036, y: .99999994, z: 1}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:LeftHips_Dummy
+      position: {x: -.265470296, y: -.130079746, z: -.067585282}
+      rotation: {x: .003494106, y: -.706543446, z: -.00349859428, w: .70765239}
+      scale: {x: .999997497, y: .999997377, z: .999997377}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:LeftUpLeg
+      position: {x: 2.84594671e-06, y: 7.33471325e-07, z: .299999267}
+      rotation: {x: -5.87691147e-07, y: 1.35312735e-06, z: -1.94237757e-07, w: 1}
+      scale: {x: 1, y: .999999821, z: .999999702}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:LeftUpLegRoll
+      position: {x: -1.12510514, y: -9.06828319e-08, z: 1.44027581e-07}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1.00000012, z: .99999994}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:LeftLeg
+      position: {x: -1.29020965, y: -2.01564191e-07, z: 7.03719991e-07}
+      rotation: {x: -5.53480888e-08, y: 6.09467055e-09, z: -.041743461, w: .999128342}
+      scale: {x: 1.00000036, y: 1.0000006, z: 1.00000036}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:LeftLegRoll
+      position: {x: -1.83400643, y: -1.72862158e-07, z: -1.95947678e-07}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: .999999821, y: .999999821, z: .999999702}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:LeftFoot
+      position: {x: -.710662842, y: -7.90663606e-08, z: 3.97190014e-08}
+      rotation: {x: -.013248289, y: -.0322872363, z: -.463960499, w: -.885168195}
+      scale: {x: .999999702, y: .999999762, z: .999999881}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:LeftToeBase
+      position: {x: -.647396922, y: -2.87697155e-09, z: -7.99554627e-08}
+      rotation: {x: -3.61901229e-08, y: -2.11403215e-08, z: .304820746, w: .952409804}
+      scale: {x: .99999994, y: 1, z: 1.00000024}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:RightHips_Dummy
+      position: {x: .265470296, y: -.130079746, z: -.067585282}
+      rotation: {x: .707652271, y: .00349632907, z: -.706543565, w: -.00349599356}
+      scale: {x: 1, y: 1, z: .99999994}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:RightUpLeg
+      position: {x: 3.86165965e-07, y: 1.15270936e-07, z: -.299999148}
+      rotation: {x: 6.74560638e-08, y: 1.47562321e-06, z: -3.13230089e-07, w: 1}
+      scale: {x: 1, y: 1.00000012, z: .999999583}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:RightUpLegRoll
+      position: {x: 1.12510324, y: -3.85919776e-07, z: -2.55821703e-07}
+      rotation: {x: 2.34035014e-11, y: 2.34132713e-11, z: -2.99493124e-08, w: 1}
+      scale: {x: 1.00000012, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:RightLeg
+      position: {x: 1.29020584, y: 3.92184063e-07, z: -8.86546957e-07}
+      rotation: {x: 1.9750912e-08, y: 2.09860254e-08, z: -.0417435057, w: .999128401}
+      scale: {x: .99999994, y: .999999821, z: 1.00000012}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:RightLegRoll
+      position: {x: 1.83399904, y: -1.00918399e-07, z: 2.80243095e-09}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: .99999994, y: 1.00000012, z: 1.00000024}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:RightFoot
+      position: {x: .710661113, y: -2.7293197e-07, z: -1.72204906e-07}
+      rotation: {x: .0132482424, y: .0322872363, z: .463960499, w: .885168135}
+      scale: {x: 1, y: .99999994, z: .99999994}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:RightToeBase
+      position: {x: .647394776, y: 5.33816319e-07, z: -1.35348861e-08}
+      rotation: {x: -2.62645745e-08, y: -3.75601026e-08, z: .304820657, w: .952409744}
+      scale: {x: .999999881, y: 1.00000048, z: .99999994}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:Spine_Dummy
+      position: {x: -1.40787833e-07, y: -.136653721, z: .181444302}
+      rotation: {x: .707106829, y: -4.32978063e-17, z: -.707106829, w: -4.32978063e-17}
+      scale: {x: 1.00000024, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:Spine
+      position: {x: -.733961046, y: .00765761919, z: -2.98132022e-07}
+      rotation: {x: 2.21729279e-05, y: 2.64321876e-12, z: .00521636009, w: -.99998641}
+      scale: {x: 1.00000012, y: 1.00000012, z: .999999642}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:Spine1
+      position: {x: -.700015187, y: -2.0320239e-07, z: -3.89919741e-08}
+      rotation: {x: -3.87424916e-06, y: -2.02115373e-08, z: 5.96038348e-08, w: 1}
+      scale: {x: 1.00000012, y: .999999821, z: .999999762}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:Spine2
+      position: {x: -.71400243, y: 2.02946637e-08, z: -1.11007683e-08}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1.00000024, y: 1, z: 1.00000024}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:LeftShoulder_Dummy
+      position: {x: -.655896842, y: .025305232, z: .212796375}
+      rotation: {x: .0678138956, y: .6558429, z: .747010589, w: -.0851274505}
+      scale: {x: .999998629, y: .999998391, z: .999999702}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:LeftShoulder
+      position: {x: .368449509, y: 5.91766423e-07, z: -3.30984051e-07}
+      rotation: {x: -6.24058487e-07, y: -2.49765897e-08, z: 7.35969365e-08, w: -1}
+      scale: {x: 1, y: 1.00000024, z: 1.00000012}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:LeftArm_Dummy
+      position: {x: .0168131124, y: .629698038, z: -.00310574286}
+      rotation: {x: .371810973, y: .574627161, z: .639143109, w: .350793839}
+      scale: {x: 1.00000179, y: 1.00000048, z: 1.00000131}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:LeftArm
+      position: {x: .208430469, y: -.0170931015, z: .11313542}
+      rotation: {x: .352768093, y: .0110660335, z: -.935629904, w: -.0053727231}
+      scale: {x: .999998331, y: .999997735, z: .999999523}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:LeftArmRoll
+      position: {x: -.789508402, y: -5.60317908e-08, z: 2.75208731e-06}
+      rotation: {x: 1.73596945e-07, y: -2.2728311e-07, z: -8.33403462e-08, w: 1}
+      scale: {x: .999999523, y: 1.00000024, z: 1.00000024}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:LeftForeArm
+      position: {x: -.659790218, y: 6.04173351e-08, z: -3.03684305e-06}
+      rotation: {x: 3.99179747e-08, y: 3.40093607e-08, z: .0243255999, w: .999704123}
+      scale: {x: 1.00000036, y: 1.00000012, z: .999999464}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:LeftForeArmRoll
+      position: {x: -1.01404274, y: 3.82733759e-07, z: 2.7658722e-09}
+      rotation: {x: 8.37438279e-08, y: -9.56333457e-10, z: -3.05303338e-08, w: 1}
+      scale: {x: .999999642, y: 1.00000024, z: 1.00000012}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:LeftHand
+      position: {x: -.716919184, y: 2.46322685e-07, z: -1.83857747e-08}
+      rotation: {x: 9.68683397e-11, y: -1.5432061e-08, z: -1.56828168e-08, w: 1}
+      scale: {x: .999999881, y: .999999762, z: 1}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:LeftHandIndex1
+      position: {x: -.589211583, y: -.185732171, z: .0144734234}
+      rotation: {x: .715025008, y: -.0263504889, z: .0356891304, w: .69768995}
+      scale: {x: 1.00000143, y: 1.00000083, z: 1.00000131}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:LeftHandIndex2
+      position: {x: -.27947247, y: -7.66025607e-08, z: 3.65211974e-07}
+      rotation: {x: 8.44360173e-08, y: .00102383317, z: .000158305105, w: .999999464}
+      scale: {x: .999999821, y: 1.00000012, z: .99999994}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:LeftHandIndex3
+      position: {x: -.175568417, y: -3.37736606e-06, z: -5.22214307e-08}
+      rotation: {x: 1.34271586e-05, y: .00697513763, z: .00108348159, w: .999975085}
+      scale: {x: 1.00000012, y: .999999821, z: .999999881}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:LeftHandMiddle1
+      position: {x: -.578442693, y: -.0451547764, z: .0356955677}
+      rotation: {x: .694377124, y: -.0246293489, z: .0397947989, w: .718087852}
+      scale: {x: 1.00000179, y: 1.00000048, z: 1.00000119}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:LeftHandMiddle2
+      position: {x: -.323624402, y: 1.19488482e-06, z: 6.51187904e-09}
+      rotation: {x: -2.00301974e-06, y: -1.78174602e-07, z: 1.90329706e-06, w: 1}
+      scale: {x: .99999994, y: .99999994, z: 1}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:LeftHandMiddle3
+      position: {x: -.18401064, y: 4.89060653e-07, z: -5.3644203e-07}
+      rotation: {x: 1.07239259e-06, y: 2.50825963e-07, z: 8.33607555e-06, w: 1}
+      scale: {x: 1.00000024, y: 1.00000036, z: 1}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:LeftHandPinky1
+      position: {x: -.566209197, y: .202495679, z: -.0144995311}
+      rotation: {x: .651239336, y: -.0166258607, z: -.00301496289, w: .758684218}
+      scale: {x: 1.00000167, y: 1.00000024, z: 1.00000119}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:LeftHandPinky2
+      position: {x: -.198946565, y: 2.30568139e-06, z: 7.05465197e-07}
+      rotation: {x: 2.53406824e-07, y: -1.82293059e-06, z: 1.9271024e-06, w: 1}
+      scale: {x: .999999762, y: 1, z: 1.00000024}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:LeftHandPinky3
+      position: {x: -.129043728, y: 3.06207198e-06, z: -1.26498185e-06}
+      rotation: {x: -1.67432768e-06, y: 1.83351347e-06, z: -7.86008513e-06, w: 1}
+      scale: {x: .999999821, y: 1.00000012, z: .999999762}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:LeftHandRing1
+      position: {x: -.574400783, y: .0916891843, z: .029404819}
+      rotation: {x: .682150602, y: -.0262790341, z: .0386889912, w: .729714513}
+      scale: {x: 1.00000155, y: 1.00000024, z: 1.00000131}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:LeftHandRing2
+      position: {x: -.300686717, y: -9.03624709e-07, z: -9.98348924e-07}
+      rotation: {x: 1.23470883e-07, y: 2.18769443e-07, z: 3.76697858e-06, w: 1}
+      scale: {x: 1.00000012, y: 1, z: .99999994}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:LeftHandRing3
+      position: {x: -.152706444, y: -2.29659736e-06, z: 4.16659503e-07}
+      rotation: {x: -8.9983331e-07, y: 4.83846179e-07, z: 1.24303017e-06, w: 1}
+      scale: {x: .999999523, y: .999999881, z: 1.00000024}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:LeftHandThumb1
+      position: {x: -.292584538, y: -.226404294, z: -.0506888554}
+      rotation: {x: .3686198, y: .114107475, z: .392937601, w: .834684968}
+      scale: {x: .999998868, y: 1.00000274, z: 1.00000167}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:LeftHandThumb2
+      position: {x: -.22746034, y: -.00353454286, z: -.0011302192}
+      rotation: {x: -.0212280508, y: -.0156136006, z: -.0140438126, w: .999554098}
+      scale: {x: .999998391, y: 1.00000143, z: .99999994}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:LeftHandThumb3
+      position: {x: -.174960047, y: .00116124307, z: .000895973935}
+      rotation: {x: .00240117288, y: -.0554238856, z: -.00528053008, w: .998446047}
+      scale: {x: .999998689, y: 1.00000107, z: .999999642}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:Neck
+      position: {x: -1.21575797, y: 8.96421227e-07, z: -2.20261875e-09}
+      rotation: {x: 1.78737505e-08, y: -7.43369277e-09, z: -.0740817413, w: .997252226}
+      scale: {x: .999999762, y: .999999821, z: 1}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:Head
+      position: {x: -.678561509, y: -7.91184789e-07, z: -1.86634672e-08}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:RightShoulder_Dummy
+      position: {x: -.655896902, y: .0253273882, z: -.212792411}
+      rotation: {x: .655882001, y: -.0678181872, z: .0851239115, w: .746976256}
+      scale: {x: 1, y: 1, z: 1.00000012}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:RightShoulder
+      position: {x: -.368448108, y: -6.35494814e-07, z: -9.70889005e-08}
+      rotation: {x: 1.79000182e-07, y: -5.59572939e-08, z: -1.69021291e-07, w: 1}
+      scale: {x: .999999821, y: 1.00000012, z: .999999404}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:RightArm_Dummy
+      position: {x: -.0168130696, y: -.629696965, z: .00310572982}
+      rotation: {x: .371810973, y: .574627161, z: .639143109, w: .350793839}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:RightArm
+      position: {x: -.208431676, y: .0170935057, z: -.1131365}
+      rotation: {x: -.352768034, y: -.0110659609, z: .935629964, w: .00537281111}
+      scale: {x: 1.00000024, y: 1.00000048, z: .999999881}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:RightArmRoll
+      position: {x: .789506495, y: 3.91366427e-07, z: -2.7480437e-06}
+      rotation: {x: 2.17638089e-07, y: -3.14354224e-07, z: -6.78848977e-08, w: 1}
+      scale: {x: 1.00000012, y: .999999881, z: 1.00000012}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:RightForeArm
+      position: {x: .659790874, y: -7.61095123e-07, z: 3.54453095e-06}
+      rotation: {x: -3.816562e-08, y: -8.34757774e-09, z: .0243255384, w: .999704123}
+      scale: {x: .999999821, y: 1.00000036, z: .99999994}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:RightForeArmRoll
+      position: {x: 1.01404035, y: 2.67334258e-07, z: -2.60562183e-06}
+      rotation: {x: -2.28060168e-10, y: 1.8404176e-08, z: 4.52595863e-08, w: 1}
+      scale: {x: 1, y: .999999762, z: .99999994}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:RightHand
+      position: {x: .716919482, y: -1.32193441e-06, z: 1.17728803e-06}
+      rotation: {x: -1.15066168e-11, y: -2.50587053e-08, z: 1.43686618e-08, w: 1}
+      scale: {x: 1, y: 1.00000012, z: 1.00000012}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:RightHandIndex1
+      position: {x: .589213431, y: .185733289, z: -.0144721093}
+      rotation: {x: .715025008, y: -.0263470057, z: .0356873274, w: .697690189}
+      scale: {x: 1.00000024, y: .999999821, z: .999999702}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:RightHandIndex2
+      position: {x: .279471785, y: 2.13470753e-06, z: -6.68337123e-07}
+      rotation: {x: 1.33835542e-07, y: .00102381245, z: .000158389827, w: .999999523}
+      scale: {x: .999999702, y: .999999881, z: .999999881}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:RightHandIndex3
+      position: {x: .175571918, y: -4.47709544e-06, z: 8.2196317e-07}
+      rotation: {x: 1.34675847e-05, y: .0069750715, z: .00108343235, w: .999975145}
+      scale: {x: 1, y: 1.00000024, z: 1.00000024}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:RightHandMiddle1
+      position: {x: .578445733, y: .0451557711, z: -.0356960297}
+      rotation: {x: .694377184, y: -.0246296749, z: .0397952013, w: .718087852}
+      scale: {x: .999999762, y: .999999762, z: .999999821}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:RightHandMiddle2
+      position: {x: .323622733, y: -9.4244615e-07, z: 1.07288848e-07}
+      rotation: {x: -1.92236826e-06, y: -1.74803304e-07, z: 1.90295702e-06, w: 1}
+      scale: {x: 1.00000036, y: 1, z: .99999994}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:RightHandMiddle3
+      position: {x: .184010714, y: 2.19453241e-07, z: -1.03515504e-07}
+      rotation: {x: 1.15783064e-06, y: 2.86616995e-07, z: 8.35134688e-06, w: 1}
+      scale: {x: 1, y: 1.00000036, z: .99999994}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:RightHandPinky1
+      position: {x: .566213191, y: -.202495486, z: .014498313}
+      rotation: {x: .651239574, y: -.0166258607, z: -.00301502901, w: .758684158}
+      scale: {x: .999999702, y: 1, z: .999999881}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:RightHandPinky2
+      position: {x: .198946163, y: -3.92001448e-06, z: -2.89620687e-07}
+      rotation: {x: 2.03740669e-07, y: -1.86978457e-06, z: 1.9326294e-06, w: 1}
+      scale: {x: 1.00000024, y: .999999642, z: .999999523}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:RightHandPinky3
+      position: {x: .129043296, y: -1.32174307e-06, z: -6.56500561e-07}
+      rotation: {x: -1.64155438e-06, y: 1.91279059e-06, z: -7.83860469e-06, w: 1}
+      scale: {x: 1.00000036, y: 1.00000012, z: 1.00000024}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:RightHandRing1
+      position: {x: .5744012, y: -.0916868597, z: -.0294040833}
+      rotation: {x: .682150662, y: -.0262878407, z: .0386937968, w: .729713857}
+      scale: {x: .99999994, y: .999999821, z: .999999642}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:RightHandRing2
+      position: {x: .300689131, y: -4.58672912e-06, z: 5.83475696e-07}
+      rotation: {x: 9.16658038e-08, y: 2.4148045e-07, z: 3.78286495e-06, w: 1}
+      scale: {x: .999999762, y: 1.00000036, z: .99999994}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:RightHandRing3
+      position: {x: .152704924, y: 1.61140531e-06, z: 1.5134907e-06}
+      rotation: {x: -9.65779236e-07, y: 4.68467022e-07, z: 1.23077393e-06, w: 1}
+      scale: {x: 1.00000048, y: 1.00000024, z: 1.0000006}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:RightHandThumb1
+      position: {x: .292578399, y: .226404607, z: .050694447}
+      rotation: {x: .368620425, y: .114105873, z: .392938793, w: .834684372}
+      scale: {x: 1, y: 1.00000036, z: 1.00000024}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:RightHandThumb2
+      position: {x: .227460966, y: .00353482366, z: .0011295483}
+      rotation: {x: -.0212250464, y: -.0156126125, z: -.0140336026, w: .999554336}
+      scale: {x: .999999821, y: .999999523, z: .999999523}
+      transformModified: 1
+    - name: Humanoid1:Humanoid:RightHandThumb3
+      position: {x: .174965635, y: -.00116664509, z: -.000896416837}
+      rotation: {x: .00240121479, y: -.0554236993, z: -.00528071867, w: .998446047}
+      scale: {x: .99999994, y: 1.00000012, z: .999999881}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_Reference
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_ChestEndEffector
+      position: {x: .0224617645, y: 1.39380693, z: -.0428291783}
+      rotation: {x: .182565302, y: .050933104, z: -.0279903058, w: .981474578}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_ChestOriginEffector
+      position: {x: 9.82227866e-05, y: 1.01383448, z: -.159324065}
+      rotation: {x: .0579150952, y: .0452130996, z: -.0026255371, w: .997293711}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_HeadEffector
+      position: {x: .000221569033, y: 1.61467063, z: -.00531425932}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_Hips
+      position: {x: -0, y: .768575728, z: -.143238604}
+      rotation: {x: 8.61273225e-17, y: -5.55111512e-17, z: 5.55111512e-17, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftUpLeg
+      position: {x: -.0933024064, y: -.0110739134, z: .0214632247}
+      rotation: {x: -.423290819, y: .000703881611, z: -.00015613396, w: .905993581}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftUpLegRoll
+      position: {x: -.000291662203, y: -.185632631, z: -.00183583016}
+      rotation: {x: -1.91227834e-08, y: -8.58603417e-17, z: -1.67075555e-16, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftLeg
+      position: {x: -.000334548939, y: -.21287322, z: -.00210521929}
+      rotation: {x: .562512636, y: -.000822397007, z: 1.43770967e-05, w: .826788306}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftLegRoll
+      position: {x: -.000473356224, y: -.302466214, z: -.00931347068}
+      rotation: {x: 1.41415049e-08, y: -2.87974261e-16, z: 2.13370988e-16, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftFoot
+      position: {x: -.000183448792, y: -.117203325, z: -.00360891339}
+      rotation: {x: -.159660816, y: .000244866766, z: .000163893361, w: .987171888}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftToeBase
+      position: {x: -.00490013091, y: -.0692653134, z: .0811717957}
+      rotation: {x: 8.76915774e-33, y: -1.11022302e-16, z: -1.22464685e-16, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightUpLeg
+      position: {x: .0933024213, y: -.0110739134, z: .0214635152}
+      rotation: {x: -.142056674, y: -.000296753075, z: .000142243662, w: .989858508}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightUpLegRoll
+      position: {x: .000291652686, y: -.185632706, z: -.0018357205}
+      rotation: {x: 7.04604493e-14, y: -2.94767466e-19, z: 2.07694468e-32, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightLeg
+      position: {x: .000334548939, y: -.21287322, z: -.00210510241}
+      rotation: {x: .555811822, y: .000845884322, z: 9.99823078e-06, w: .831307709}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightLegRoll
+      position: {x: .000473508815, y: -.302466184, z: -.00931330677}
+      rotation: {x: 1.25701106e-07, y: 1.19309686e-16, z: 8.92298256e-17, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightFoot
+      position: {x: .00018350601, y: -.11720337, z: -.00360886077}
+      rotation: {x: -.432082206, y: -.000671093585, z: -.00017292035, w: .901833951}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightToeBase
+      position: {x: .00489964476, y: -.0692652687, z: .0811718702}
+      rotation: {x: 8.76915774e-33, y: -1.11022302e-16, z: -1.22464685e-16, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_Spine
+      position: {x: -2.3230216e-08, y: .151048347, z: .0225478671}
+      rotation: {x: .0579745844, y: 1.14958588e-07, z: 8.28816553e-08, w: .998318076}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_Spine1
+      position: {x: 2.2737367e-15, y: .115502238, z: -2.38418574e-09}
+      rotation: {x: .144066408, y: .00668474613, z: .000973242044, w: .989544988}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_Spine2
+      position: {x: -1.59161573e-14, y: .11781013, z: -2.38418574e-09}
+      rotation: {x: 9.23077863e-08, y: -5.50884529e-08, z: 2.63989932e-08, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftShoulder
+      position: {x: -.048059091, y: .167577058, z: .00185145612}
+      rotation: {x: -2.58796836e-34, y: -6.9388939e-18, z: -3.72965547e-17, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftArm
+      position: {x: -.13934736, y: -.0276446529, z: -.0176168494}
+      rotation: {x: .160123289, y: .0921014398, z: .489182889, w: .852395475}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftArmRoll
+      position: {x: -.130254552, y: -.00190521241, z: -4.52995295e-08}
+      rotation: {x: 4.2162673e-17, y: -1.41608926e-20, z: 2.10731642e-07, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftForeArm
+      position: {x: -.108854003, y: -.00159225462, z: -4.29153424e-08}
+      rotation: {x: -.000289158546, y: .463804185, z: -.000548273849, w: .885937572}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftForeArmRoll
+      position: {x: -.167296365, y: -.00261138915, z: 2.38418574e-09}
+      rotation: {x: .0799124613, y: .00124727178, z: -9.24680919e-08, w: .996801138}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftHand
+      position: {x: -.118277282, y: -.00184616086, z: 0}
+      rotation: {x: .119709045, y: .00186884915, z: -5.8313401e-07, w: .992807269}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftHandIndex1
+      position: {x: -.0972354114, y: .000251159654, z: .0306878183}
+      rotation: {x: 1.21430643e-16, y: 2.25514052e-17, z: -1.56260638e-17, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftHandIndex2
+      position: {x: -.0454972051, y: -.00746963499, z: -.000792067614}
+      rotation: {x: 2.16840434e-19, y: -1.73472348e-18, z: 3.00154595e-17, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftHandIndex3
+      position: {x: -.028580321, y: -.00470260624, z: -.00049787818}
+      rotation: {x: -1.08420217e-19, y: -2.16840434e-19, z: 9.11386275e-18, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftHandIndex4
+      position: {x: -.0211093891, y: -.00353393541, z: -7.16781578e-05}
+      rotation: {x: 5.42101086e-20, y: -2.16840434e-19, z: -4.76477209e-18, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftHandMiddle1
+      position: {x: -.095520854, y: .0042474363, z: .00756798266}
+      rotation: {x: -8.67361738e-19, y: 4.33680869e-18, z: -6.54180486e-17, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftHandMiddle2
+      position: {x: -.0523834229, y: -.0103355404, z: -.00069054839}
+      rotation: {x: 3.46511014e-16, y: 2.51534904e-17, z: 7.60635587e-17, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftHandMiddle3
+      position: {x: -.0297850799, y: -.00587676978, z: -.000392646791}
+      rotation: {x: 1.20563282e-16, y: 1.994932e-17, z: 1.85703503e-17, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftHandMiddle4
+      position: {x: -.0216032397, y: -.00426284783, z: -.000284776674}
+      rotation: {x: 8.67361738e-19, y: -3.46944695e-18, z: -1.07336015e-17, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftHandPinky1
+      position: {x: -.0933863819, y: -.00317596435, z: -.0334532447}
+      rotation: {x: 1.22460635e-16, y: 1.73472348e-18, z: -8.74307408e-18, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftHandPinky2
+      position: {x: -.0327925868, y: -.00119338988, z: -.000875005731}
+      rotation: {x: 1.22569056e-16, y: -1.43437751e-33, z: -1.17026072e-17, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftHandPinky3
+      position: {x: -.0212703701, y: -.000774383545, z: -.000567564974}
+      rotation: {x: 2.16840434e-19, y: -1.04083409e-17, z: 5.22958142e-18, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftHandPinky4
+      position: {x: -.017827224, y: -.000363311759, z: -.000619511586}
+      rotation: {x: 3.7947076e-19, y: -1.73472348e-17, z: 1.73472348e-18, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftHandRing1
+      position: {x: -.0948447362, y: .00367568969, z: -.0150276087}
+      rotation: {x: 1.44449889e-35, y: -4.33680869e-19, z: 3.33078766e-17, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftHandRing2
+      position: {x: -.0488991551, y: -.00838333089, z: -.000312914839}
+      rotation: {x: -4.33680869e-19, y: 2.60208521e-18, z: -2.92607532e-17, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftHandRing3
+      position: {x: -.0248337556, y: -.00425765989, z: -.000158920288}
+      rotation: {x: 2.25297211e-16, y: -4.33680869e-19, z: -1.92839756e-17, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftHandRing4
+      position: {x: -.0207261648, y: -.00355346664, z: -.000132617948}
+      rotation: {x: 2.25514052e-16, y: -1.30104261e-18, z: 8.46736486e-18, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftHandThumb1
+      position: {x: -.0481269062, y: -.00986969005, z: .0371802077}
+      rotation: {x: -1.94289029e-16, y: 1.94289029e-16, z: 1.11022302e-16, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftHandThumb2
+      position: {x: -.0225086976, y: -.0197726432, z: .0226132553}
+      rotation: {x: -1.80411242e-16, y: -1.50920942e-16, z: 8.32667268e-17, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftHandThumb3
+      position: {x: -.0259029381, y: -.0123104854, z: .00331001519}
+      rotation: {x: -1.63064007e-16, y: -7.06899816e-17, z: -1.15269916e-32, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftHandThumb4
+      position: {x: -.0270907581, y: -.0127613824, z: .000811974984}
+      rotation: {x: -2.72351586e-16, y: -7.02563008e-17, z: -5.55111512e-17, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_Neck
+      position: {x: 3.41060493e-14, y: .200600728, z: 0}
+      rotation: {x: -1.17896928e-16, y: 1.35525272e-19, z: 1.08420217e-18, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_Head
+      position: {x: .000221592272, y: .110733032, z: .0165431611}
+      rotation: {x: 8.61273225e-17, y: -5.55111512e-17, z: 5.55111512e-17, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightShoulder
+      position: {x: .0480586812, y: .167577058, z: .00185572146}
+      rotation: {x: 3.46944695e-18, y: -6.9388939e-18, z: 4.18502005e-17, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightArm
+      position: {x: .139290407, y: -.0279144272, z: -.0176419318}
+      rotation: {x: -2.49028659e-07, y: 1.20201179e-07, z: -.633027196, w: .774129629}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightArmRoll
+      position: {x: .130253673, y: -.00196548458, z: -3.57627847e-08}
+      rotation: {x: 1.07671838e-07, y: 2.93371674e-08, z: -2.28004126e-07, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightForeArm
+      position: {x: .108853243, y: -.00164260855, z: -4.29153424e-08}
+      rotation: {x: -.0503708608, y: -.546697736, z: .115613692, w: .827778876}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightForeArmRoll
+      position: {x: .167297125, y: -.00256393431, z: -1.43051144e-08}
+      rotation: {x: .073703751, y: -.00112962117, z: -1.43861868e-07, w: .997279584}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightHand
+      position: {x: .118277811, y: -.00181274407, z: -1.66893006e-08}
+      rotation: {x: .110430568, y: -.0016922761, z: 8.55274891e-08, w: .993882418}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightHandIndex1
+      position: {x: .0972425044, y: .000749664265, z: .0306570493}
+      rotation: {x: 2.16840434e-19, y: -2.60208521e-18, z: 6.99649214e-18, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightHandIndex2
+      position: {x: .0454991125, y: -.00746810902, z: -.000688245869}
+      rotation: {x: -8.67361738e-19, y: 6.52399365e-36, z: -7.52165257e-18, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightHandIndex3
+      position: {x: .0285816193, y: -.00470153801, z: -.000432499626}
+      rotation: {x: -3.02859691e-36, y: 2.16840434e-19, z: 1.3966938e-17, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightHandIndex4
+      position: {x: .0211103056, y: -.00352874747, z: -2.24989653e-05}
+      rotation: {x: -9.65133667e-39, y: 1.08420217e-19, z: 8.90178688e-20, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightHandMiddle1
+      position: {x: .0955214649, y: .00439010607, z: .007479019}
+      rotation: {x: -2.16840434e-19, y: -8.67361738e-19, z: 5.74288338e-19, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightHandMiddle2
+      position: {x: .0523861684, y: -.0103300475, z: -.000544407347}
+      rotation: {x: 6.50521303e-19, y: 1.73472348e-18, z: -2.36356074e-17, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightHandMiddle3
+      position: {x: .0297867581, y: -.0058737183, z: -.000309550756}
+      rotation: {x: -1.08420217e-18, y: 8.67361738e-19, z: 2.25419184e-16, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightHandMiddle4
+      position: {x: .0216043089, y: -.00426071137, z: -.000224497315}
+      rotation: {x: -6.50521303e-19, y: -8.67361738e-19, z: -1.05472543e-17, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightHandPinky1
+      position: {x: .0933794379, y: -.00366256712, z: -.0334229469}
+      rotation: {x: 2.33103467e-18, y: -3.46944695e-18, z: 7.89434707e-19, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightHandPinky2
+      position: {x: .0327927396, y: -.0011975097, z: -.000864434231}
+      rotation: {x: -2.38524478e-18, y: 5.20417043e-18, z: 2.15156533e-16, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightHandPinky3
+      position: {x: .0212704465, y: -.000776824949, z: -.000560708053}
+      rotation: {x: 2.16840434e-18, y: -3.46944695e-18, z: -4.3215621e-18, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightHandPinky4
+      position: {x: .0179537199, y: -.000655670126, z: -.00047326088}
+      rotation: {x: 5.42101086e-20, y: 1.73472348e-18, z: -7.80794971e-18, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightHandRing1
+      position: {x: .0948401615, y: .00347152702, z: -.0151049756}
+      rotation: {x: -6.96039592e-36, y: -8.67361738e-19, z: -8.02479014e-18, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightHandRing2
+      position: {x: .0489015169, y: -.0083732605, z: -.00019594669}
+      rotation: {x: -3.7947076e-19, y: -4.33680869e-19, z: 1.09563712e-17, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightHandRing3
+      position: {x: .0248349756, y: -.00425262423, z: -9.95111477e-05}
+      rotation: {x: -3.25260652e-19, y: 2.16840434e-19, z: -4.60785923e-18, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightHandRing4
+      position: {x: .0207270812, y: -.00354934693, z: -8.30411882e-05}
+      rotation: {x: 5.42101086e-20, y: 2.16840434e-19, z: -1.84871293e-17, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightHandThumb1
+      position: {x: .0481384285, y: -.0092843622, z: .0373157598}
+      rotation: {x: -2.22044605e-16, y: -1.94289029e-16, z: -2.77555756e-16, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightHandThumb2
+      position: {x: .0225196835, y: -.0194168091, z: .0229086671}
+      rotation: {x: 1.56125113e-16, y: -5.89805982e-17, z: -2.77555756e-17, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightHandThumb3
+      position: {x: .0259072874, y: -.0122508239, z: .00349237188}
+      rotation: {x: 1.12757026e-16, y: -1.60461922e-17, z: 2.77555756e-17, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightHandThumb4
+      position: {x: .0270946492, y: -.0127398679, z: .00100127934}
+      rotation: {x: 1.49186219e-16, y: -6.33174069e-17, z: 5.55111512e-17, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_HipsEffector
+      position: {x: 4.76837148e-09, y: .757501841, z: -.121775225}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftAnkleEffector
+      position: {x: -.094562307, y: .104578361, z: .0179303978}
+      rotation: {x: -2.98023224e-08, y: 0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftElbowEffector
+      position: {x: -.305207729, y: 1.0856185, z: -.137275979}
+      rotation: {x: -.0438559614, y: .446678728, z: .534005702, w: .716514349}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftFootEffector
+      position: {x: -.0994624421, y: .0353130475, z: .0991021916}
+      rotation: {x: -2.98023224e-08, y: 0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftHandIndexEffector
+      position: {x: -.904511034, y: 1.41985929, z: -.00829670578}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftHandMiddleEffector
+      position: {x: -.911381304, y: 1.41908658, z: -.031422887}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftHandPinkyEffector
+      position: {x: -.877365232, y: 1.42980731, z: -.0731382295}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftHandRingEffector
+      position: {x: -.901392519, y: 1.42279553, z: -.053254962}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftHandThumbEffector
+      position: {x: -.835717976, y: 1.38060009, z: .026292555}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftHipEffector
+      position: {x: -.0933024064, y: .757501841, z: -.140640318}
+      rotation: {x: -.423290819, y: .000703881611, z: -.00015613396, w: .905993581}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftKneeEffector
+      position: {x: -.0938094407, y: .498778403, z: .162484854}
+      rotation: {x: .159660771, y: -.000244866824, z: -.000163893405, w: .987171888}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftShoulderEffector
+      position: {x: -.187406689, y: 1.29218483, z: -.112009332}
+      rotation: {x: .209272504, y: .0635856017, z: .493699729, w: .841678381}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_LeftWristEffector
+      position: {x: -.31036967, y: .8763749, z: .0570501983}
+      rotation: {x: .0977075025, y: .546082795, z: .434483737, w: .709556699}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightAnkleEffector
+      position: {x: .0945366621, y: .121073537, z: -.367509216}
+      rotation: {x: 5.96046448e-08, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightElbowEffector
+      position: {x: .231288329, y: 1.06116807, z: -.180111542}
+      rotation: {x: -.23353903, y: -.295903921, z: -.504355967, w: .776868999}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightFootEffector
+      position: {x: .0994363129, y: .0518082567, z: -.286337346}
+      rotation: {x: 5.96046448e-08, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightHandIndexEffector
+      position: {x: .904464483, y: 1.420066, z: -.00812993757}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightHandMiddleEffector
+      position: {x: .911329627, y: 1.41894042, z: -.031243179}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightHandPinkyEffector
+      position: {x: .87742728, y: 1.42872214, z: -.072965093}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightHandRingEffector
+      position: {x: .901334643, y: 1.42231107, z: -.0531272143}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightHandThumbEffector
+      position: {x: .835690975, y: 1.38132286, z: .027074337}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightHipEffector
+      position: {x: .0933024213, y: .757501841, z: -.14064002}
+      rotation: {x: -.142056674, y: -.000296753075, z: .000142243662, w: .989858508}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightKneeEffector
+      position: {x: .0940097198, y: .373971581, z: -.032348752}
+      rotation: {x: .432082117, y: .00067109376, z: .000172920409, w: .901834011}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightShoulderEffector
+      position: {x: .187349156, y: 1.27719975, z: -.0874570981}
+      rotation: {x: .155753657, y: .127364397, z: -.62008208, w: .758299053}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    - name: Humanoid1:HumanoidCharacter_Ctrl_RightWristEffector
+      position: {x: .317533076, y: .875177741, z: .0187393948}
+      rotation: {x: -.0885304958, y: -.385558307, z: -.440880775, w: .805686831}
+      scale: {x: 1, y: 1, z: 1}
+      transformModified: 1
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 3
+  userData: 
