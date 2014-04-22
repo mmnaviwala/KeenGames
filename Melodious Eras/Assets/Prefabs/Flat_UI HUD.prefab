@@ -66,7 +66,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &100008
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,8 +525,6 @@ MonoBehaviour:
     m_StretchHeight: 0
   currentNumber1: 100
   currentNumber2: 100
-  outterMat: {fileID: 2100000, guid: 517bd3c12a8554377a42a4cdaa0bb1b5, type: 2}
-  innerMat: {fileID: 2100000, guid: 62918fc3944414dfca41ebe7baff0ae0, type: 2}
   positions: 0
   bartype: 0
 --- !u!114 &11400006
@@ -743,8 +741,6 @@ MonoBehaviour:
     m_StretchHeight: 0
   currentNumber1: 100
   currentNumber2: 100
-  outterMat: {fileID: 2100000, guid: 91f8e1fca70ed469785a30e59a20e352, type: 2}
-  innerMat: {fileID: 2100000, guid: aaa27bfa125034d31842f8e4480639f9, type: 2}
   positions: 1
   bartype: 1
 --- !u!1001 &100100000
