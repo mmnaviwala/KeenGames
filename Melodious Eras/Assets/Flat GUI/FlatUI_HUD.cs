@@ -63,7 +63,8 @@ public class FlatUI_HUD : MonoBehaviour {
     {
         this.playerStats = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<CharacterStats>();
         this.playerSuit = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<Suit>();
-        this.playerWeapon = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<Weapon>();
+		this.playerWeapon = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<PlayerStats>().equippedWeapon;
+
         xx = Screen.width / 10;
         yy = Screen.height / 10;
 

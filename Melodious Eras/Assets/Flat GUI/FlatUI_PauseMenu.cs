@@ -64,6 +64,10 @@ public class FlatUI_PauseMenu : MonoBehaviour {
 				Camera.main.GetComponent<CameraMovement3D>().enabled = true;
 				Camera.main.GetComponent<AudioSource>().mute = false;
 				GameObject.FindGameObjectWithTag(Tags.PLAYER).gameObject.GetComponent<HUD_Stealth>().enabled = true;
+				foreach(Transform child in GameObject.Find("Flat_UI HUD").gameObject.transform)
+				{
+					child.GetComponent<FlatUI_HUD>().enabled = true;
+				}
 				//GameObject.Find("player_flashlight").gameObject.GetComponent<Flashlight>().enabled = true;
 				//GameObject.Find("gui texture background").gameObject.GetComponent<GUITexture>().enabled = false;
 			}
@@ -100,6 +104,10 @@ public class FlatUI_PauseMenu : MonoBehaviour {
 				Camera.main.GetComponent<CameraMovement3D>().enabled = false;
 				Camera.main.gameObject.GetComponent<AudioSource>().mute = true;
 				GameObject.FindGameObjectWithTag(Tags.PLAYER).gameObject.GetComponent<HUD_Stealth>().enabled = false;
+				foreach(Transform child in GameObject.Find("Flat_UI HUD").gameObject.transform)
+				{
+					child.GetComponent<FlatUI_HUD>().enabled = false;
+				}
 				//GameObject.Find("player_flashlight").gameObject.GetComponent<Flashlight>().enabled = false;
 				//GameObject.Find("gui texture background").gameObject.GetComponent<GUITexture>().enabled = true;
 			}
@@ -113,6 +121,10 @@ public class FlatUI_PauseMenu : MonoBehaviour {
 				Camera.main.GetComponent<CameraMovement3D>().enabled = true;
 				Camera.main.GetComponent<AudioSource>().mute = false;
 				GameObject.FindGameObjectWithTag(Tags.PLAYER).gameObject.GetComponent<HUD_Stealth>().enabled = true;
+				foreach(Transform child in GameObject.Find("Flat_UI HUD").gameObject.transform)
+				{
+					child.GetComponent<FlatUI_HUD>().enabled = true;
+				}
 				//GameObject.Find("player_flashlight").gameObject.GetComponent<Flashlight>().enabled = true;
 				//GameObject.Find("gui texture background").gameObject.GetComponent<GUITexture>().enabled = false;
 			}

@@ -37,6 +37,11 @@ public class EndOfLevel : MonoBehaviour {
 
 				GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<PlayerMovementBasic>().enabled = false;
 				GameObject.FindGameObjectWithTag(Tags.MAIN_CAMERA).GetComponent<CameraMovement3D>().enabled = false;
+				GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<HUD_Stealth>().enabled = false;
+				foreach(Transform child in GameObject.Find("Flat_UI HUD").gameObject.transform)
+				{
+					child.GetComponent<FlatUI_HUD>().enabled = false;
+				}
 			}
 			else
 			{
