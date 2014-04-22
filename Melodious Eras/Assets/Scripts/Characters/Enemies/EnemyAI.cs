@@ -96,6 +96,10 @@ public class EnemyAI : MonoBehaviour
             }
             else if (patrolWaypoints != null && patrolWaypoints.Length > 0)
                 Patrol();
+            else if (this.seesPlayer)
+            {
+                Shooting();
+            }
 	        
 	        //detecting enemies; currently only detects player
 			if(sight.charactersInRange.Count > 0)
@@ -229,7 +233,7 @@ public class EnemyAI : MonoBehaviour
     /// </summary>
     void Shooting()
     {
- 
+        Debug.Log("Shooting");
     }
 
     #region Enemy Senses

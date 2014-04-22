@@ -34,38 +34,41 @@ public class EndOfLevel : MonoBehaviour {
 		stasticsToDisplayRect = new Rect(xx * 4.7f, yy * 3.0f, xx*4, xx);
 
 		stasticsToDisplay = "Accuracy: 100%\nTime Elapsed: 09:30\nEnemies Killed: 4\nEnemies Knocked Out: 1\nEnemies Avoided: 5\nSpotted: 0 Times";
+
+        //StartCoroutine(Wait());
 	}
 
-	void Update () 
-	{
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(2);
+        EndLevel();
+    }
 
-		if (levelEnded)
-		{
-			if (!alreadyGotPlayerPos)
-			{
-				playerPos = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<Transform>().position;
-				cameraPos = GameObject.FindGameObjectWithTag(Tags.MAIN_CAMERA).GetComponent<Transform>().position;
-				cameraRotation = GameObject.FindGameObjectWithTag(Tags.MAIN_CAMERA).GetComponent<Transform>().rotation.eulerAngles;
-				alreadyGotPlayerPos = true;
 
-				GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<PlayerMovementBasic>().enabled = false;
-				GameObject.FindGameObjectWithTag(Tags.MAIN_CAMERA).GetComponent<CameraMovement3D>().enabled = false;
-				GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<HUD_Stealth>().enabled = false;
-				foreach(Transform child in GameObject.Find("Flat_UI HUD").gameObject.transform)
-				{
-					child.GetComponent<FlatUI_HUD>().enabled = false;
-				}
-			}
-			else
-			{
-				if (!coroutineStarted)
-					StartCoroutine(moveCamera());
-			}
-		}
-	}
+    public void EndLevel()
+    {
+        var player = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<PlayerMovementBasic>();
+        var cam = GameObject.FindGameObjectWithTag(Tags.MAIN_CAMERA).GetComponent<CameraMovement3D>();
+        var hud = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<HUD_Stealth>();
+        player.enabled = false;
+        cam.enabled = false;
+        hud.enabled = false;
+
+        playerPos = player.transform.position;
+        cameraPos = cam.transform.position;
+        cameraRotation = cam.transform.rotation.eulerAngles;
+        alreadyGotPlayerPos = true;
+
+        foreach (Transform child in GameObject.Find("Flat_UI HUD").gameObject.transform)
+            child.GetComponent<FlatUI_HUD>().enabled = false;
+
+        StartCoroutine(moveCamera());
+    }
 
 	IEnumerator moveCamera()
 	{
+        Screen.showCursor = true;
+        Screen.lockCursor = false;
 		coroutineStarted = true;
 		Vector3 targetPosition = playerPos + offset;
 		Vector3 targetRotation = new Vector3(0, 270, 0);

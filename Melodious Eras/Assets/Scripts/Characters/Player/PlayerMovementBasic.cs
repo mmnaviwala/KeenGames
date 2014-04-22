@@ -466,8 +466,8 @@ public class PlayerMovementBasic : MonoBehaviour
         switch (stunt)
         {
             case Acrobatics.Vault:  //IK for vaulting
-		        startTime = m_VaultMatchTargetStart * (distance / 4); //trying to avoid clipping animation
-		        endTime = m_VaultMatchTargetStop * (distance / 4);
+		        startTime = m_VaultMatchTargetStart /** (distance / 4)*/; //trying to avoid clipping animation
+		        endTime = m_VaultMatchTargetStop /** (distance / 4)*/;
 
                 while(this.anim.GetBool(HashIDs.vault_bool))
 		        {
