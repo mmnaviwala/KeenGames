@@ -6,7 +6,7 @@ SubstanceImporter:
   - serializedVersion: 10
     name: metal_floor_003
     prototypeName: metal_floor_003
-    shaderName: Bumped Specular
+    shaderName: _DirtyBumpedSpecular
     inputs:
     - name: $normalformat
       value:
@@ -145,23 +145,53 @@ SubstanceImporter:
       texEnvs:
         data:
           first:
-            name: _MainTex
+            name: _BumpMap
           second:
             texture: {instanceID: 0}
             scale: {x: 25, y: 25}
             offset: {x: 0, y: 0}
         data:
           first:
-            name: _BumpMap
+            name: _DiffuseTexture
           second:
             texture: {instanceID: 0}
-            scale: {x: 25, y: 2}
+            scale: {x: 25, y: 25}
+            offset: {x: 0, y: 0}
+        data:
+          first:
+            name: _Dirt
+          second:
+            texture: {fileID: 2800000, guid: 4b24e0f43536f0440ae563d3a46b2afb, type: 3}
+            scale: {x: 25, y: 25}
+            offset: {x: 0, y: 0}
+        data:
+          first:
+            name: _DirtIntensity
+          second:
+            texture: {fileID: 2800000, guid: 2f0943832ea098b4da7133eb67d64d4d, type: 3}
+            scale: {x: 25, y: 25}
             offset: {x: 0, y: 0}
       floats:
         data:
           first:
             name: _Shininess
           second: .078125
+        data:
+          first:
+            name: _MakeDirty
+          second: 1
+        data:
+          first:
+            name: _DiffuseIntensity
+          second: 1
+        data:
+          first:
+            name: _SpecularIntensity
+          second: 2
+        data:
+          first:
+            name: _SpecularPower
+          second: .5
       colors:
         data:
           first:
@@ -171,6 +201,14 @@ SubstanceImporter:
           first:
             name: _SpecColor
           second: {r: .5, g: .5, b: .5, a: 1}
+        data:
+          first:
+            name: _SpecularColor
+          second: {r: 1, g: 1, b: 1, a: 1}
+        data:
+          first:
+            name: _DiffuseColor
+          second: {r: 1, g: 1, b: 1, a: 1}
     textureParameters:
     - name: metal_floor_003_Diffuse
       alphaSource: 5
