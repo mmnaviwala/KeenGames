@@ -31,11 +31,11 @@ public class CircuitSound : CircuitOutlet
 	}
 	void FixedUpdate()
 	{
-		if(triggerArea.playerInRange && !this.audio.isPlaying)
+		if(triggerArea && triggerArea.playerInRange && !this.audio.isPlaying)
 		{
 			StartCoroutine(FadeSound (true));
 		}
-		else if (!this.triggerArea.playerInRange && this.audio.isPlaying)
+		else if (triggerArea && !this.triggerArea.playerInRange && this.audio.isPlaying)
 		{
 			StartCoroutine(FadeSound (false));
 		}
