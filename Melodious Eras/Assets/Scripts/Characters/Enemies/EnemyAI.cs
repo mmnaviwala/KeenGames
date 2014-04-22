@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
+delegate void AI_Action();
+
 [AddComponentMenu("Scripts/Characters/Enemy AI")]
 public class EnemyAI : MonoBehaviour
 {
@@ -32,7 +34,7 @@ public class EnemyAI : MonoBehaviour
 
     public Vector3 lastPlayerSighting;
     private Vector3 lpsResetPosition = new Vector3(999, 999, 999);
-    private Vector3 lastHostileDetection = new Vector3(999, 999, 999); //last position to hear a hostile character
+    private Vector3 inspectingArea = new Vector3(999, 999, 999); //last position to hear a hostile character
     private static Vector3 resetPos = new Vector3(999, 999, 999);
 
     private float awarenessOfPlayer = 0f;
@@ -49,6 +51,7 @@ public class EnemyAI : MonoBehaviour
 
 	private Ray rayUpper, rayLower, rayCenter;  //will be used often; avoiding garbage collection
 	private RaycastHit hit;                     //
+	private AI_Action ai_action;
 
 
 	public Animator Anim {get {return anim; } set {anim = value;}}
@@ -75,6 +78,7 @@ public class EnemyAI : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
+		ai_action = Patrol;
         fov = sight.fovAngle * awarenessMultiplier / 2;
         fovSqrt = Mathf.Sqrt(fov);
 		//keeping rays permanent to avoid garbage collection
@@ -93,66 +97,15 @@ public class EnemyAI : MonoBehaviour
             if (lastPlayerSighting != lpsResetPosition && currentEnemy.health > 0f)
 			{
 				if (this.seesPlayer && Vector3.Distance(this.transform.position, currentEnemy.transform.position) < 10)
-				{
 					Shooting();
-				}
 				else
                 	Chasing();
             }
             else if (patrolWaypoints != null && patrolWaypoints.Length > 0)
                 Patrol();
-	        
 	        //detecting enemies; currently only detects player
 			if(sight.charactersInRange.Count > 0)
-			{
-				foreach(CharacterStats ch in sight.charactersInRange)
-				{
-					float angle = Vector3.Angle(ch.transform.position + Vector3.up - this.eyes.position, this.eyes.forward);
-					if ( angle < fov)
-					{
-						//calculating rays for 3 points on the character
-						float charHeight = ch.collider.bounds.max.y - ch.collider.bounds.min.y;
-						rayUpper.origin = rayCenter.origin = rayLower.origin = this.eyes.position + this.eyes.forward/4;
-
-						rayUpper.direction = (ch.collider.bounds.max - Vector3.up*charHeight/8) - this.eyes.position;
-						rayLower.direction = (ch.collider.bounds.min + Vector3.up*charHeight/8) - this.eyes.position;
-						rayCenter.direction = (ch.collider.bounds.min + Vector3.up*charHeight/2) - this.eyes.position;
-
-	                    //reducing sight distance at wide angles, to simulate peripheral vision
-                        //This determines whether or not the enemy can even detect the player
-	                    float adjustedSightDistance = (angle > 30) ?
-	                                                    sightDistance * (Mathf.Sqrt(fov - angle) / fovSqrt) :
-	                                                    sightDistance;
-
-						//if any rays hit
-                        if (Physics.Raycast(rayUpper, out hit, adjustedSightDistance, sightLayer) ||
-                            Physics.Raycast(rayCenter, out hit, adjustedSightDistance, sightLayer) ||
-                            Physics.Raycast(rayLower, out hit, adjustedSightDistance, sightLayer))
-                        {
-                            if (hit.collider.tag == Tags.PLAYER)
-                            {
-                                this.awarenessOfPlayer += Time.deltaTime;
-
-                                this.seesPlayer = this.alerted = true;
-                                this.lastPlayerSighting = ch.transform.position;
-                                currentEnemy = ch;
-                                squad.AlertGroup(ch);
-                            }
-                            else if (hit.collider.tag == Tags.ENEMY && ch.isDead)
-                            {
-                                this.Alert(1f);
-                                squad.AlertGroup(1f);
-                            }
-                            
-                            break;
-                        }
-                        else
-                        {
- 
-                        }
-					}
-				}
-			}
+				this.DetectNearbyCharacters();
 		}
 		else
 		{
@@ -188,7 +141,7 @@ public class EnemyAI : MonoBehaviour
     /// </summary>
     void Inspect()
     {
- 
+ 		
     }
 
     /// <summary>
@@ -220,7 +173,7 @@ public class EnemyAI : MonoBehaviour
             {
                 // ... reset last global sighting, the last personal sighting and the timer.
                 lastPlayerSighting = resetPos;
-                lastHostileDetection = resetPos;
+                inspectingArea = resetPos;
                 chaseTimer = 0f;
             }
         }
@@ -236,19 +189,68 @@ public class EnemyAI : MonoBehaviour
     {
         Debug.Log("Shooting");
 		//stop movement
-		//play animation, aimed at player
-
-		//at correct point in animation:
 		this.Attack(currentEnemy);
     }
 
     #region Enemy Senses
+	/// <summary>
+	/// Determines visibility of each character within range
+	/// </summary>
+	public void DetectNearbyCharacters()
+	{
+		foreach(CharacterStats ch in sight.charactersInRange)
+		{
+			float angle = Vector3.Angle(ch.transform.position + Vector3.up - this.eyes.position, this.eyes.forward);
+			if ( angle < fov)
+			{
+				//calculating rays for 3 points on the character
+				float charHeight = ch.collider.bounds.max.y - ch.collider.bounds.min.y;
+				rayUpper.origin = rayCenter.origin = rayLower.origin = this.eyes.position;
+				
+				rayUpper.direction =  (ch.collider.bounds.max - Vector3.up*charHeight/8) - this.eyes.position;
+				rayLower.direction =  (ch.collider.bounds.min + Vector3.up*charHeight/8) - this.eyes.position;
+				rayCenter.direction = (ch.collider.bounds.min + Vector3.up*charHeight/2) - this.eyes.position;
+				
+				//reducing sight distance at wide angles, to simulate peripheral vision
+				//This determines whether or not the enemy can even detect the player
+				float adjustedSightDistance = (angle > 30) ?
+					sightDistance * (Mathf.Sqrt(fov - angle) / fovSqrt) :
+						sightDistance;
+				
+				//if any rays hit
+				if (Physics.Raycast(rayUpper, out hit, adjustedSightDistance, sightLayer) ||
+				    Physics.Raycast(rayCenter, out hit, adjustedSightDistance, sightLayer) ||
+				    Physics.Raycast(rayLower, out hit, adjustedSightDistance, sightLayer))
+				{
+					if (hit.collider.tag == Tags.PLAYER)
+					{
+						this.awarenessOfPlayer += Time.deltaTime;
+						
+						this.seesPlayer = this.alerted = true;
+						this.lastPlayerSighting = ch.transform.position;
+						currentEnemy = ch;
+						squad.AlertGroup(ch);
+					}
+					else if (hit.collider.tag == Tags.ENEMY && ch.isDead)
+					{
+						this.Alert(2f);
+						squad.AlertGroup(2f);
+					}
+				}
+				else if (true /*if object has MaterialPhysics && isn't opaque*/)
+				{
+					//re-raycast from collision, if TOTAL raycast range doesn't exceed adjustedSightDistance * opacity
+				}
+			}
+		}
+	}
+
     public bool Listen(Vector3 source, float volume)
     {
         if (CalculatePathLengthTo(source) * awarenessMultiplier < volume)
         {
             //lastPlayerSighting = source;
-            lastHostileDetection = source;
+            inspectingArea = source;
 			return true;
         }
 		return false;
@@ -305,6 +307,10 @@ public class EnemyAI : MonoBehaviour
 
     void Attack(CharacterStats target)
     {
+		//play animation, aimed at player
+		
+		//at correct point in animation:
+
         if (this.equippedWeapon != null && Vector3.Distance(this.transform.position, target.transform.position) > 5)
             equippedWeapon.Fire(target);
         else
