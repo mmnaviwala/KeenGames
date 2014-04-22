@@ -6,21 +6,34 @@ public class EndOfLevel : MonoBehaviour {
 	public bool levelEnded = false;
 	public Vector3 offset = new Vector3(1.26f, 1.45f, 0.6f);
 	public float speed = 4;
-	public GUIStyle customGUIStyle;
+	public GUIStyle levelCompleteGuiStyle, stasticsTextGuiStyle, guiButtonStyle;
+	public string stasticsToDisplay;
 
 	private Vector3 playerPos, cameraPos, cameraRotation;
 	private bool alreadyGotPlayerPos = false, coroutineStarted = false, guiReadyToDisplay = false;
-	private Rect levelCompleteRect;
+	private Rect levelCompleteRect, stasticsToDisplayRect;
 	private string levelCompleteText = "Level Complete";
+	private float xx, yy;
 
 
 	void Start ()
 	{
-		float xx = Screen.width / 10;
-		float yy = Screen.height / 10;
-		customGUIStyle.fontSize = System.Convert.ToInt32(Screen.height * .18f);
-		customGUIStyle.alignment = TextAnchor.MiddleRight;
+		xx = Screen.width / 10;
+		yy = Screen.height / 10;
+
+		levelCompleteGuiStyle.fontSize = System.Convert.ToInt32(Screen.height * .18f);
+		levelCompleteGuiStyle.alignment = TextAnchor.MiddleRight;
+
+		stasticsTextGuiStyle.fontSize = System.Convert.ToInt32(Screen.height * .06f);
+		stasticsTextGuiStyle.alignment = TextAnchor.UpperLeft;
+		stasticsTextGuiStyle.normal.textColor = Color.white;
+
+		guiButtonStyle.fontSize = System.Convert.ToInt32(Screen.height * .06f);
+
 		levelCompleteRect  = new Rect(xx * 8.7f, yy * 0.4f, xx, xx);
+		stasticsToDisplayRect = new Rect(xx * 4.7f, yy * 3.0f, xx*4, xx);
+
+		stasticsToDisplay = "Accuracy: 100%\nTime Elapsed: 09:30\nEnemies Killed: 4\nEnemies Knocked Out: 1\nEnemies Avoided: 5\nSpotted: 0 Times";
 	}
 
 	void Update () 
@@ -83,7 +96,16 @@ public class EndOfLevel : MonoBehaviour {
 	{
 		if (guiReadyToDisplay)
 		{
-			GUI.Label(levelCompleteRect, levelCompleteText, customGUIStyle);
+			GUI.Label(levelCompleteRect, levelCompleteText, levelCompleteGuiStyle);
+			GUI.Label(stasticsToDisplayRect, stasticsToDisplay, stasticsTextGuiStyle);
+			if (GUI.Button (new Rect (xx * 3.2f, yy * 8.0f, xx * 7f, yy * 1.5f), "Go To Next Level", guiButtonStyle))
+			{
+				Debug.Log(Application.loadedLevel);
+				if (Application.loadedLevel + 1 <= Application.levelCount)
+					Application.LoadLevel(Application.loadedLevel + 1);
+				else
+					Application.LoadLevel(1);
+			}
 		}
 	}
 }
