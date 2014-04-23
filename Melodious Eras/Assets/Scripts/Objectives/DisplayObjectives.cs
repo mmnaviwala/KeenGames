@@ -30,6 +30,9 @@ public class DisplayObjectives : MonoBehaviour {
 	
 	void OnGUI ()
 	{
-		GUI.Label(currentObjectiveRect, ("Current Objective:\n" + currentObjective), textGuiStyle);
+		if (GameObject.Find("Objectives").GetComponent<TrackObjectives>().allObjectivesComplete)
+			GUI.Label(currentObjectiveRect, ("All Objectives Complete!"), textGuiStyle);
+		else
+			GUI.Label(currentObjectiveRect, ("Current Objective:\n" + currentObjective), textGuiStyle);
 	}
 }

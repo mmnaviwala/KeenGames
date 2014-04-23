@@ -17,7 +17,7 @@ public class TrackObjectives : MonoBehaviour {
 
 	public void SetNextObjective ()
 	{
-		if (linkedListCount <= allObjectivesList.Count)
+		if (linkedListCount < allObjectivesList.Count)
 		{
 			int i = 0;
 			foreach (Objective obj in allObjectivesList)
@@ -34,6 +34,7 @@ public class TrackObjectives : MonoBehaviour {
 		}
 		else
 		{
+			allObjectivesComplete = true;
 			currentObjectiveTitle = "All Objectives Complete";
 			currentObjectiveDescription = "";
 		}
