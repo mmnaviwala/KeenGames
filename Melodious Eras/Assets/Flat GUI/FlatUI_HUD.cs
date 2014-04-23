@@ -37,7 +37,7 @@ public class FlatUI_HUD : MonoBehaviour {
 			currentNumber = playerSuit.armor;
 			break;
 		case BarType.Ammo:
-            currentNumber = playerWeapon.ammoInClip;
+            currentNumber = playerWeapon.ammoInClip + playerWeapon.extraAmmo;
 			break;
 		case BarType.Battery:
 			currentNumber = playerSuit.batteryLife;

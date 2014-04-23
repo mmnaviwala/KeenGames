@@ -49,10 +49,10 @@ public class EndOfLevel : MonoBehaviour {
     {
         var player = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<PlayerMovementBasic>();
         var cam = GameObject.FindGameObjectWithTag(Tags.MAIN_CAMERA).GetComponent<CameraMovement3D>();
-        var hud = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<HUD_Stealth>();
+        //var hud = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<HUD_Stealth>();
         player.enabled = false;
         cam.enabled = false;
-        hud.enabled = false;
+        //hud.enabled = false;
 
         playerPos = player.transform.position;
         cameraPos = cam.transform.position;
@@ -60,7 +60,10 @@ public class EndOfLevel : MonoBehaviour {
         alreadyGotPlayerPos = true;
 
         foreach (Transform child in GameObject.Find("Flat_UI HUD").gameObject.transform)
-            child.GetComponent<FlatUI_HUD>().enabled = false;
+		{
+			if (child.GetComponent<FlatUI_HUD>() != null)
+            	child.GetComponent<FlatUI_HUD>().enabled = false;
+		}
 
         StartCoroutine(moveCamera());
     }
