@@ -8,26 +8,38 @@ using System.Collections.Generic;
 [AddComponentMenu("Scripts/Characters/Player Stats")]
 public class PlayerStats : CharacterStats
 {
+    #region variables
+    //visibility multipliers
+    private const float CROUCH_MULTIPLIER = .5f;    //crouching reduces visibility by 50%
+    public List<Light> affectingLights;             //will be used in calculating visibility
+    public Flashlight flashlight;
+    private float _visibility = 1;
+
+
     public DetectionSphere _closeQuarterEnemies; //enemies within melee range
     public DetectionSphere _nearbyEnemies;       //enemies within hearing range
 
-    public Flashlight flashlight;
 
     public AudioClip deathClip, meleeClip;
     private Animator anim;
-    private PlayerMovement playerMovement;
+    private PlayerMovementBasic playerMovement;
     private HUD_Stealth hud;
-    private CameraMovement3D mainCam;
 
-    public float attackSpeed = .25f, lastAttackTime = 0;
+    public float attackSpeed = .25f;
+    private float nextAttackTime = 0;
     private bool attacking;
+    #endregion
 
-    public List<Light> affectingLights;             //will be used in calculating visibility
-    public float visibility;                        //visibility multiplier; 1 = normal, 0 = invisible
+    public float visibility { get { return visibility; } }//visibility multiplier; 1 = normal, 0 = invisible
 
     void Awake()
     {
         affectingLights = new List<Light>();
+
+        playerMovement = this.GetComponent<PlayerMovementBasic>();
+        hud = this.GetComponent<HUD_Stealth>();
+        anim = this.GetComponent<Animator>();
+        this.currentSecArea = GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<SecurityArea>(); //base security area
 
         //registering an equipped weapon, if any
         if (equippedWeapon == null)
@@ -43,14 +55,9 @@ public class PlayerStats : CharacterStats
         }
 
         _closeQuarterEnemies.charactersInRange = new List<CharacterStats>();
-        lastAttackTime = Time.time;
     }
     void Start()
     {
-        hud = this.GetComponent<HUD_Stealth>();
-        anim = this.GetComponent<Animator>();
-        mainCam = Camera.main.GetComponent<CameraMovement3D>();
-        this.currentSecArea = GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<SecurityArea>(); //base security area
     }
     void Update()
     {
@@ -59,7 +66,7 @@ public class PlayerStats : CharacterStats
         _closeQuarterEnemies.charactersInRange.RemoveAll((CharacterStats enemy) => enemy == null); //Scans all nearby enemies each frame and removes those who have died, which wouldn't
         _nearbyEnemies.charactersInRange.RemoveAll((CharacterStats enemy) => enemy == null);       //trigger the OnTriggerExit function
 
-        if (_closeQuarterEnemies.charactersInRange.Count > 0 && Input.GetButtonDown(InputType.MELEE))
+        if (Input.GetButtonDown(InputType.MELEE) && Time.time > nextAttackTime && !this._isDead)
             PerformMelee();
     }
 
@@ -67,13 +74,11 @@ public class PlayerStats : CharacterStats
     {
         if (_closeQuarterEnemies.charactersInRange.Count > 0)
         {
-            //Determining which angle the player's character is facing (the one they want to attack)
+            //determining the enemy CLOSEST to the direction the player is facing
             CharacterStats nearestEnemy = _closeQuarterEnemies.charactersInRange[0];
             float lowestAngle = 180;
             foreach (EnemyStats enemy in _closeQuarterEnemies.charactersInRange)
             {
-                float distance = Vector3.Distance(this.transform.position, enemy.transform.position);
-
                 Vector3 relEnemyPos = enemy.transform.position - this.transform.position;
                 float angle = Vector3.Angle(relEnemyPos, this.transform.forward);
                 if (angle < lowestAngle)
@@ -87,10 +92,7 @@ public class PlayerStats : CharacterStats
             Vector3 relPlayerPos = this.transform.position - nearestEnemy.transform.position;
             float enemyAngle = Vector3.Angle(nearestEnemy.transform.forward, new Vector3(relPlayerPos.x, 0, relPlayerPos.z));
 
-            if (Time.time > lastAttackTime + attackSpeed)
-            {
-                this.Attack(nearestEnemy, this, enemyAngle);
-            }
+            this.Attack(nearestEnemy, this, enemyAngle);
         }
         else
         {
@@ -104,7 +106,7 @@ public class PlayerStats : CharacterStats
     /// <param name="attackerP"></param>
     public override void Attack(CharacterStats targetP, CharacterStats attackerP, float angle)
     {
-        lastAttackTime = Time.time;
+        nextAttackTime = Time.time + attackSpeed;
         if (angle > 140)
         {
             targetP.TakeDamage(true);
@@ -123,6 +125,7 @@ public class PlayerStats : CharacterStats
     {
         this._isDead = true;
         anim.SetBool(HashIDs.dead_bool, isDead);
+        playerMovement.enabled = false;
         //fade to black
         //reload last checkpoint
     }
@@ -142,6 +145,7 @@ public class PlayerStats : CharacterStats
                     return 1;
             }
             //calculate lighting visibility
+            //return light_modifier * CROUCH_MULTIPLIER
             return 1;
         }
         else

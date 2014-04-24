@@ -1,17 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(Item))]
 [AddComponentMenu("Scripts/Items/Pickup Object (Battery)")]
 public class Battery : PickupObject 
 {
 	public float capacity = 20;
 	private Suit playerSuit;
-	// Use this for initialization
-	void Start () {
-	
-	}
+
+    void Awake()
+    {
+        if (!detectionSphere)
+        {
+            detectionSphere = this.GetComponentInChildren<DetectionSpherePlayer>();
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () 
@@ -21,7 +24,7 @@ public class Battery : PickupObject
 	
 	protected override void CheckInput()
 	{
-		if(inRange)
+		if(detectionSphere.playerInRange)
 		{
 			Ray ray = new Ray(this.transform.position, character.transform.position + new Vector3(0, 1.75f, 0) - this.transform.position);
 			RaycastHit hit;

@@ -2,7 +2,6 @@
 using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(SphereCollider))]
 [RequireComponent(typeof(Item))]
 [AddComponentMenu("Scripts/Items/Pickup Object")]
 public class PickupObject : MonoBehaviour 
@@ -10,6 +9,7 @@ public class PickupObject : MonoBehaviour
 	public Item item;
 	protected CharacterStats character;
 	protected bool inRange = false;
+    [SerializeField] protected DetectionSpherePlayer detectionSphere;
 
 	void Awake()
 	{

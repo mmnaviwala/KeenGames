@@ -1612,7 +1612,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100062}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
-  m_LocalPosition: {x: -21.1610298, y: .25, z: 16.2919064}
+  m_LocalPosition: {x: -21.1610298, y: .5, z: 16.2919064}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400092}
@@ -2697,6 +2697,7 @@ MonoBehaviour:
   clipSize: 10
   ammoPerShot: 1
   damage: 35
+  fireRate: .100000001
   ignorePlayer:
     serializedVersion: 2
     m_Bits: 4294925291
@@ -2713,7 +2714,6 @@ MonoBehaviour:
   muzzleVelocity: 100
   durability: 100
   weight: 5
-  fireRate: .100000001
   accuracy: 0
   range: 45
   npcRange: 15
@@ -2916,7 +2916,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100062}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 208fe397a5b0c0d44b79e92426aecc8d, type: 3}
   m_Name: 
@@ -3398,16 +3398,14 @@ MonoBehaviour:
   _stamina: 100
   _maxStamina: 100
   _adrenalineMultiplier: 1
-  _meleeDamage: 10
+  _meleeDamage: 20
+  affectingLights: []
+  flashlight: {fileID: 11400006}
   _closeQuarterEnemies: {fileID: 11400010}
   _nearbyEnemies: {fileID: 11400008}
-  flashlight: {fileID: 11400006}
   deathClip: {fileID: 0}
   meleeClip: {fileID: 8300000, guid: 3ca121c001790493aac9f6aec90cfc06, type: 3}
   attackSpeed: .25
-  lastAttackTime: 0
-  affectingLights: []
-  visibility: 0
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -3476,7 +3474,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &13600000
 CapsuleCollider:

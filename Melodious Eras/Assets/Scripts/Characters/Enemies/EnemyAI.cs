@@ -244,10 +244,14 @@ public class EnemyAI : MonoBehaviour
 						squad.AlertGroup(ch);
                         ai_activity = Chasing;
 					}
-					else if (hit.collider.tag == Tags.ENEMY && ch.isDead)
+					else 
 					{
-						this.Alert(2f);
-						squad.AlertGroup(2f);
+                        this.seesPlayer = false;
+                        if (hit.collider.tag == Tags.ENEMY && ch.isDead)
+                        {
+                            this.Alert(2f);
+                            squad.AlertGroup(2f);
+                        }
 					}
 				}
 				else if (true /*if object has MaterialPhysics && isn't opaque*/)
