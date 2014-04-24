@@ -123,7 +123,6 @@ public class EnemyAI : MonoBehaviour
 
     void Idle()
     {
-        Debug.Log("Idle");
         nav.speed = 0;
     }
     /// <summary>

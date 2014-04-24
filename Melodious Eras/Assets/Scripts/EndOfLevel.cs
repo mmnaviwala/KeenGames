@@ -63,6 +63,8 @@ public class EndOfLevel : MonoBehaviour {
 		{
 			if (child.GetComponent<FlatUI_HUD>() != null)
             	child.GetComponent<FlatUI_HUD>().enabled = false;
+			if (child.GetComponent<DisplayObjectives>() != null)
+				child.GetComponent<DisplayObjectives>().enabled = false;
 		}
 
         StartCoroutine(moveCamera());

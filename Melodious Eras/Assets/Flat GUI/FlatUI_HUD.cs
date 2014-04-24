@@ -1,69 +1,61 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent (typeof (MeshRenderer))]
+[RequireComponent(typeof(MeshRenderer))]
 
-public class FlatUI_HUD : MonoBehaviour {
-	
-	public Texture bottomTexture, topTexture, barTexture;
-	private Rect rectSize, numberLabelSize, stringLabelSize;
-	private float xx, yy;
-	private GUIStyle smallFont;
-	public GUIStyle bigFont;
-	private string textToDisplay;
-	public float currentNumber = 100;
-    private float maxNumber = 100;
-	public enum Position { Position1, Position2, Position3, Position4 }
-	public enum BarType { Health, Armor, Ammo, Battery }
-	public Position positions;
-	public BarType bartype;
+public class FlatUI_HUD : MonoBehaviour
+{
+
+    public Texture bottomTexture, topTexture, barTexture;
+    private Rect rectSize, numberLabelSize, stringLabelSize;
+    private float xx, yy;
+    private GUIStyle smallFont;
+    public GUIStyle bigFont;
+    private string textToDisplay;
+    public float currentNumber = 100;
+    public enum Position { Position1, Position2, Position3, Position4 }
+    public enum BarType { Health, Armor, Ammo, Battery }
+    public Position positions;
+    public BarType bartype;
 
     public CharacterStats playerStats;
     public Suit playerSuit;
     public Weapon playerWeapon;
 
-	void Start ()
-	{
+    void Start()
+    {
         this.Initialize();
-	}
-	
-	void Update ()
-	{
-		switch(bartype)
-		{
-		case BarType.Health:
-			currentNumber = playerStats.health;
-            maxNumber = playerStats.maxHealth;
-			break;
-		case BarType.Armor:
-			currentNumber = playerSuit.armor;
-            maxNumber = playerSuit.maxArmor;
-			break;
-		case BarType.Ammo:
-            currentNumber = playerWeapon.ammoInClip + playerWeapon.extraAmmo;
-            maxNumber = playerWeapon.maxAmmo;
-            textToDisplay = playerWeapon.weaponName;
-			break;
-		case BarType.Battery:
-			currentNumber = playerSuit.batteryLife;
-            maxNumber = playerSuit.maxBatteryLife;
-			break;
-		}
-	}
-	
-	void OnGUI ()
-	{
-		GUI.DrawTexture(rectSize, bottomTexture);	
-		renderer.material.SetFloat("_Cutoff", Mathf.Clamp(Mathf.Lerp(maxNumber, 0f,  currentNumber), .01f, 1));
-		Graphics.DrawTexture(rectSize, barTexture, gameObject.renderer.material);
-		GUI.DrawTexture(rectSize, topTexture);
-		
-        if(bartype == BarType.Battery)
-		    GUI.Label(numberLabelSize, string.Format("{0:f1}", currentNumber), bigFont);
-        else
-            GUI.Label(numberLabelSize, string.Format("{0}", currentNumber), bigFont);
-		GUI.Label(stringLabelSize, textToDisplay, smallFont);
-	}
+    }
+
+    void Update()
+    {
+        switch (bartype)
+        {
+            case BarType.Health:
+                currentNumber = playerStats.health;
+                break;
+            case BarType.Armor:
+                currentNumber = playerSuit.armor;
+                break;
+            case BarType.Ammo:
+                currentNumber = playerWeapon.ammoInClip + playerWeapon.extraAmmo;
+                break;
+            case BarType.Battery:
+                currentNumber = playerSuit.batteryLife;
+                break;
+        }
+    }
+
+    void OnGUI()
+    {
+        GUI.DrawTexture(rectSize, bottomTexture);
+        renderer.material.SetFloat("_Cutoff", Mathf.Clamp(Mathf.InverseLerp(0f, 100, 100 - currentNumber), .01f, 1));
+        Graphics.DrawTexture(rectSize, barTexture, gameObject.renderer.material);
+        GUI.DrawTexture(rectSize, topTexture);
+
+        GUI.Label(numberLabelSize, string.Format("{0:f1}", currentNumber), bigFont);
+        GUI.Label(stringLabelSize, textToDisplay, smallFont);
+    }
 
     /// <summary>
     /// Common initializations
@@ -72,7 +64,7 @@ public class FlatUI_HUD : MonoBehaviour {
     {
         this.playerStats = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<CharacterStats>();
         this.playerSuit = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<Suit>();
-		this.playerWeapon = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<PlayerStats>().equippedWeapon;
+        this.playerWeapon = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<PlayerStats>().equippedWeapon;
 
         xx = Screen.width / 10;
         yy = Screen.height / 10;

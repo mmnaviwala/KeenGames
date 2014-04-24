@@ -2,11 +2,9 @@
 using System.Collections;
 
 [AddComponentMenu("Scripts/Environment/Document Script")]
-public class DocumentScript : MonoBehaviour 
+public class DocumentScript : MonoBehaviour
 {
-    
-    public string message;
-    public string keycode;
+    public string message, keycode;
     public GUIStyle docStyle;
     public bool reading = false;
     bool inTrigger = false;
@@ -15,8 +13,8 @@ public class DocumentScript : MonoBehaviour
     private HUD_Stealth playerHUD;
     private Rect documentRect, promptRect;
     public GUIStyle promptStyle;
-	// Use this for initialization
-	void Start () 
+    // Use this for initialization
+    void Start()
     {
         playerHUD = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<HUD_Stealth>();
 
@@ -32,15 +30,17 @@ public class DocumentScript : MonoBehaviour
         promptRect = new Rect(w - 100, Screen.height * .75f, 200, 50);
 
         docStyle.padding = new RectOffset(h / 4, h / 4, h / 2, h / 2);
-	}
-	
-	// Update is called once per frame
-	void Update () 
+    }
+
+    // Update is called once per frame
+    void Update()
     {
         if (inTrigger)
         {
             if (Input.GetButtonDown(InputType.USE))
             {
+                GameObject.FindWithTag(Tags.GAME_CONTROLLER).GetComponent<LogSystem>().NewLog(message);
+                GameObject.Find("Objectives").GetComponent<TrackObjectives>().SetNextObjective();
                 reading = true;
                 playerHUD.rigidbody.velocity = new Vector3(0, playerHUD.rigidbody.velocity.y, 0);
             }
@@ -48,8 +48,8 @@ public class DocumentScript : MonoBehaviour
             {
                 reading = false;
                 playerHUD.enabled = true;
-            } 
-        }        
+            }
+        }
     }
 
     public void OnTriggerEnter(Collider other)

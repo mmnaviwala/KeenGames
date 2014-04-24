@@ -62,8 +62,8 @@ public class HUD_Stealth : MonoBehaviour
         //GUI.Box(healthBarMax, stats.health.ToString(), healthMaxStyle);
         //GUI.Box(armorBarMax, suit.armor.ToString(), armorMaxStyle);
 		//GUI.Box (flashlightLife, suit.batteryLife.ToString(), flashlightLifeStyle);
-		GUI.Box (objectiveRect, "Objectives:\n" + objectiveSystem.CurrentObjective.Title, objectiveRectStyle);
-        GUI.Label(weaponRect, weapon.HudString(), weapon.hudStyle);
+		//GUI.Box (objectiveRect, "Objectives:\n" + objectiveSystem.CurrentObjective.Title, objectiveRectStyle);
+        //GUI.Label(weaponRect, weapon.HudString(), weapon.hudStyle);
 
         //GUI.Label(temp, XMLUtilities.currentDirectory);
 
