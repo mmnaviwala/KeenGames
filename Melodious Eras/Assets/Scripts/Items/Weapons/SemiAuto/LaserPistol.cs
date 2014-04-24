@@ -17,9 +17,7 @@ public class LaserPistol : SemiAutoWeapon
     }
 
     public override bool Fire()
-    {
-        Debug.Log("Firing");
-        
+    {        
         if (!reloading && Time.time > nextShotTime) //if capable of firing yet
         {
             if (ammoInClip > 0 || infiniteAmmo)

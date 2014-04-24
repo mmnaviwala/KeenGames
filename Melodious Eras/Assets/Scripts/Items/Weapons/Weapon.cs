@@ -40,12 +40,11 @@ public class Weapon : Item
     /// <returns></returns>
     public virtual bool Fire()
     {
-        Debug.Log("Base trigger");
         return false;
     }
 
     /// <summary>
-    /// Generally used by enemies. Attacks the target.
+    /// Meant for use by enemies. Attacks the target.
     /// </summary>
     /// <param name="target"></param>
     /// <returns></returns>
@@ -53,6 +52,11 @@ public class Weapon : Item
     {
         return false;
     }
+    /// <summary>
+    /// Also meant for enemies. Shoots at this position
+    /// </summary>
+    /// <param name="targetPos"></param>
+    /// <returns></returns>
 	public virtual bool Fire(Vector3 targetPos) {return false;}
 
 
@@ -61,7 +65,7 @@ public class Weapon : Item
     /// </summary>
     /// <param name="enemy"></param>
     /// <param name="damage"></param>
-    public virtual void Damage(EnemyStats enemy, int damage)
+    public virtual void Damage(CharacterStats enemy, int damage)
     {
         
     }

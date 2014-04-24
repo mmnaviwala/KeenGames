@@ -7,23 +7,25 @@ delegate void AI_Action();
 [AddComponentMenu("Scripts/Characters/Enemy AI")]
 public class EnemyAI : MonoBehaviour
 {
+    #region variables
     public NPCGroup squad;
 	public Transform eyes;
     public CharacterStats currentEnemy;
 
-    public float hearingMultiplier = 1;     //0 = deaf, 1 = normal, >1 = dogs & security
-    [Range(0, 1)]
-    public float baseAwarenessMultiplier = .5f;
-    private float awarenessMultiplier;   //
-	public float fieldOfView = 160f;
-	private float fov, fovSqrt;
-    public float shootingRange, meleeRange;
-    private float lightDifferenceMultiplier; //optional feature. Enemies in high-light areas will find it harder to detect players in low-light areas.
-    public float patrolSpeed = 2, 
-                 chaseSpeed = 5, 
-                 chaseWaitTime = 5, 
-                 patrolWaitTime = 2;
+    [SerializeField][Range(0, 2)]   private float hearingMultiplier = 1;     //0 = deaf, 1 = normal, >1 = dogs & security
+    [SerializeField][Range(0, 1)]   private float baseAwarenessMultiplier = .5f;
+    [SerializeField][Range(0, 2)]   private float fieldOfView = 160f;
+    [SerializeField]                private float shootingRange;
+    [SerializeField]                private float meleeRange;
+    [SerializeField]                private float shootSpeedMultiplier = 1;
+    [SerializeField]                private float patrolSpeed = 1.5f;
+    [SerializeField]                private float chaseSpeed = 5;
+    [SerializeField]                private float chaseWaitTime = 5;
+    [SerializeField]                private float patrolWaitTime = 2;
     public Waypoint[] patrolWaypoints;
+    private float awarenessMultiplier;   //
+    private float fov, fovSqrt;
+    private float lightDifferenceMultiplier; //optional feature. Enemies in high-light areas will find it harder to detect players in low-light areas.
 
     public bool seesPlayer = false;
 	public bool alerted = false;
@@ -47,13 +49,14 @@ public class EnemyAI : MonoBehaviour
     private float chaseTimer = 0;
     private float patrolTimer = 0;
     private int waypointIndex;
-
+    
 	private Ray rayUpper, rayLower, rayCenter;  //will be used often; avoiding garbage collection
 	private RaycastHit hit;                     //
 	private AI_Action ai_activity;
+    #endregion
 
 
-	public Animator Anim {get {return anim; } set {anim = value;}}
+    public Animator Anim {get {return anim; } set {anim = value;}}
 
     void Awake()
     {
@@ -188,6 +191,8 @@ public class EnemyAI : MonoBehaviour
     {
         Debug.Log("Shooting");
 		//stop movement
+        this.anim.SetFloat(HashIDs.speed_float, 0f);
+        this.anim.SetFloat(HashIDs.aimWeight_float, 1f);
 		this.Attack(currentEnemy);
     }
 
@@ -314,7 +319,6 @@ public class EnemyAI : MonoBehaviour
         if (stats.equippedWeapon != null && Vector3.Distance(this.transform.position, target.transform.position) > 5)
         {
             stats.equippedWeapon.Fire(target);
-            Debug.Log(this.name + " firing at " + target.name);
         }
         else
         {
