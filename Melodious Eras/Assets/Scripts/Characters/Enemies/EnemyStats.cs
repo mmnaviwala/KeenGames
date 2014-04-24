@@ -23,6 +23,9 @@ public class EnemyStats : CharacterStats
         ai = this.GetComponent<EnemyAI>();
         lastAttackTime = Time.time;
 		this.currentSecArea = GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<SecurityArea>();
+
+        if (this.equippedWeapon is Gun)
+            ((Gun)equippedWeapon).infiniteAmmo = true;
     }
 
     /*public void Update()

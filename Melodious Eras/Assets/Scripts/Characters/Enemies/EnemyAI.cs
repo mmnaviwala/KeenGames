@@ -9,7 +9,6 @@ public class EnemyAI : MonoBehaviour
 {
     public NPCGroup squad;
 	public Transform eyes;
-    public Weapon equippedWeapon;
     public CharacterStats currentEnemy;
 
     public float hearingMultiplier = 1;     //0 = deaf, 1 = normal, >1 = dogs & security
@@ -51,7 +50,7 @@ public class EnemyAI : MonoBehaviour
 
 	private Ray rayUpper, rayLower, rayCenter;  //will be used often; avoiding garbage collection
 	private RaycastHit hit;                     //
-	private AI_Action performAIaction;
+	private AI_Action ai_activity;
 
 
 	public Animator Anim {get {return anim; } set {anim = value;}}
@@ -78,7 +77,7 @@ public class EnemyAI : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
-		performAIaction = Patrol;
+		ai_activity = Patrolling;
         fov = sight.fovAngle * awarenessMultiplier / 2;
         fovSqrt = Mathf.Sqrt(fov);
 		//keeping rays permanent to avoid garbage collection
@@ -102,7 +101,7 @@ public class EnemyAI : MonoBehaviour
                 	Chasing();
             }
             else if (patrolWaypoints != null && patrolWaypoints.Length > 0)
-                Patrol();
+                Patrolling();
 	        //detecting enemies; currently only detects player
 			if(sight.charactersInRange.Count > 0)
 				this.DetectNearbyCharacters();
@@ -118,7 +117,7 @@ public class EnemyAI : MonoBehaviour
     /// <summary>
     /// This enemy's standard patrol route
     /// </summary>
-    void Patrol()
+    void Patrolling()
     {
         nav.speed = desiredSpeed = patrolSpeed;
         if (nav.remainingDistance < nav.stoppingDistance /*|| nav.destination == lastPlayerSighting*/)
@@ -230,6 +229,7 @@ public class EnemyAI : MonoBehaviour
 						this.lastPlayerSighting = ch.transform.position;
 						currentEnemy = ch;
 						squad.AlertGroup(ch);
+                        ai_activity = Chasing;
 					}
 					else if (hit.collider.tag == Tags.ENEMY && ch.isDead)
 					{
@@ -311,8 +311,11 @@ public class EnemyAI : MonoBehaviour
 		
 		//at correct point in animation:
 
-        if (this.equippedWeapon != null && Vector3.Distance(this.transform.position, target.transform.position) > 5)
-            equippedWeapon.Fire(target);
+        if (stats.equippedWeapon != null && Vector3.Distance(this.transform.position, target.transform.position) > 5)
+        {
+            stats.equippedWeapon.Fire(target);
+            Debug.Log(this.name + " firing at " + target.name);
+        }
         else
         {
             //perform melee attack

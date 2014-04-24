@@ -18,6 +18,8 @@ public class LaserPistol : SemiAutoWeapon
 
     public override bool Fire()
     {
+        Debug.Log("Firing");
+        
         if (!reloading && Time.time > nextShotTime) //if capable of firing yet
         {
             if (ammoInClip > 0 || infiniteAmmo)
@@ -31,7 +33,7 @@ public class LaserPistol : SemiAutoWeapon
                 if (Physics.Raycast(rayFromCam, out hit, range, ignorePlayer))
                 {
                     StartCoroutine(ShootLaser(barrelExit.position, hit.point));
-                    if (!hit.collider.isTrigger) //hopefully isn't necessary anymore, since all triggers should now be on the Ignore Raycast layer
+                    if (!hit.collider.isTrigger) //hopefully isn't necessary anymore, since all triggers should now be on ignored layers
                     {
                         if (hit.collider.tag == Tags.ENEMY)
                         {
@@ -72,6 +74,28 @@ public class LaserPistol : SemiAutoWeapon
         {
             return true;
         }
+    }
+
+    public override bool Fire(CharacterStats target)
+    {
+        if (!reloading && Time.time > nextShotTime) 
+        {
+            if (ammoInClip > 0 || infiniteAmmo)
+            {
+                shotFiredTime = Time.time;
+                nextShotTime = shotFiredTime + fireRate;
+
+                StartCoroutine(ShootLaser(this.barrelExit.position, target.transform.position + Vector3.up));
+                target.TakeDamage(this.damage);
+
+                if (!infiniteAmmo)
+                    ammoInClip -= ammoPerShot;
+
+                this.audio.PlayOneShot(shootingSound);
+                return true;
+            }
+        }
+        return false;
     }
 
     /// <summary>
