@@ -16,6 +16,7 @@ public class Weapon : Item
 	
 	public int ammoInClip, extraAmmo, maxAmmo, clipSize, ammoPerShot,
 	damage;
+    public float fireRate;
 
     void Start()
     {

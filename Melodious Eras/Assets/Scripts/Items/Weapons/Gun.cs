@@ -17,7 +17,7 @@ public class Gun : Weapon
 	public float muzzleVelocity;
 
     public int durability, weight;
-    public float fireRate, //Time between shots.
+    public float  //Time between shots.
                  accuracy, //0 = perfect accuracy for now.
 				 range,//Range projectile will travel, or range where reticle will turn red.
 				 npcRange; //range NPCs will use for this weapon

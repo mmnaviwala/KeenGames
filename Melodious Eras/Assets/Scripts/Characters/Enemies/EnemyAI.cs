@@ -17,7 +17,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField][Range(0, 2)]   private float fieldOfView = 160f;
     [SerializeField]                private float shootingRange;
     [SerializeField]                private float meleeRange;
-    [SerializeField]                private float shootSpeedMultiplier = 1;
+    [SerializeField][Range(0, 5)]   private float attackSpeed = 1f;
     [SerializeField]                private float patrolSpeed = 1.5f;
     [SerializeField]                private float chaseSpeed = 5;
     [SerializeField]                private float chaseWaitTime = 5;
@@ -26,6 +26,7 @@ public class EnemyAI : MonoBehaviour
     private float awarenessMultiplier;   //
     private float fov, fovSqrt;
     private float lightDifferenceMultiplier; //optional feature. Enemies in high-light areas will find it harder to detect players in low-light areas.
+    private float nextShotTime = 0;
 
     public bool seesPlayer = false;
 	public bool alerted = false;
@@ -97,14 +98,16 @@ public class EnemyAI : MonoBehaviour
 		{
 			//this.seesPlayer = false;
             if (lastPlayerSighting != lpsResetPosition && currentEnemy.health > 0f)
-			{
-				if (this.seesPlayer && Vector3.Distance(this.transform.position, currentEnemy.transform.position) < 10)
-					Shooting();
-				else
-                	Chasing();
+            {
+                if (this.seesPlayer && Vector3.Distance(this.transform.position, currentEnemy.transform.position) < 10)
+                    Shooting();
+                else
+                    Chasing();
             }
             else if (patrolWaypoints != null && patrolWaypoints.Length > 0)
                 Patrolling();
+            else
+                Idle();
 	        //detecting enemies; currently only detects player
 			if(sight.charactersInRange.Count > 0)
 				this.DetectNearbyCharacters();
@@ -117,6 +120,11 @@ public class EnemyAI : MonoBehaviour
 		}
 	}
 
+    void Idle()
+    {
+        Debug.Log("Idle");
+        nav.speed = 0;
+    }
     /// <summary>
     /// This enemy's standard patrol route
     /// </summary>
@@ -189,10 +197,10 @@ public class EnemyAI : MonoBehaviour
     /// </summary>
     void Shooting()
     {
-        Debug.Log("Shooting");
 		//stop movement
         this.anim.SetFloat(HashIDs.speed_float, 0f);
         this.anim.SetFloat(HashIDs.aimWeight_float, 1f);
+
 		this.Attack(currentEnemy);
     }
 
@@ -316,13 +324,18 @@ public class EnemyAI : MonoBehaviour
 		
 		//at correct point in animation:
 
-        if (stats.equippedWeapon != null && Vector3.Distance(this.transform.position, target.transform.position) > 5)
+        if (Time.time > nextShotTime)
         {
-            stats.equippedWeapon.Fire(target);
-        }
-        else
-        {
-            //perform melee attack
+            if (stats.equippedWeapon != null && Vector3.Distance(this.transform.position, target.transform.position) > 5)
+            {
+                stats.equippedWeapon.Fire(target);
+                //if Automatic weapon, burst-fire
+                nextShotTime = Time.time + (attackSpeed * GameController.difficulty_attackSpeedMultiplier);
+            }
+            else
+            {
+                //perform melee attack
+            }
         }
     }
 }

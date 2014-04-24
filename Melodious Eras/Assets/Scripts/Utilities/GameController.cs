@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public enum Difficulty { Easy = 0, Medium = 1, Hard = 2 }
+public enum Difficulty { Easy = 0, Medium = 1, Hard = 2 , Realistic = 3}
 public enum QualityLevel_5FS { VeryFast, Fast, Simple, Good, High, VeryHigh, Ultra};
 [AddComponentMenu("Scripts/Utilities/Game Controller")]
 public class GameController : MonoBehaviour
@@ -16,6 +16,14 @@ public class GameController : MonoBehaviour
     public float shadowDistance = -1;
     private static float defaultShadowDistance = 100;
 	public float farClipDistance = -1;
+
+    private static float _difficulty_attackSpeedMultiplier;
+    private static float _difficulty_playerDamageMultiplier;
+    private static float _difficulty_enemyDamageMultiplier;
+
+    public static float difficulty_attackSpeedMultiplier  { get { return _difficulty_attackSpeedMultiplier;  } }
+    public static float difficulty_playerDamageMultiplier { get { return _difficulty_playerDamageMultiplier; } }
+    public static float difficulty_enemyDamageMultiplier  { get { return _difficulty_enemyDamageMultiplier;  } }
 
     // Use this for initialization
     void Awake()
@@ -32,6 +40,8 @@ public class GameController : MonoBehaviour
         InitializeEnvironment();
         XMLUtilities.Test();
 		HashIDs.Initialize();
+
+        AdjustDifficultSettings(difficulty);
     }
 
     // Update is called once per frame
@@ -56,6 +66,38 @@ public class GameController : MonoBehaviour
     {
         Screen.showCursor = show;
         Screen.lockCursor = !show;
+    }
+
+    public void AdjustDifficultSettings(Difficulty _difficulty)
+    {
+        switch (_difficulty)
+        {
+            case Difficulty.Easy:
+                _difficulty_attackSpeedMultiplier =  1.50f;
+                _difficulty_enemyDamageMultiplier =  1.75f;
+
+                _difficulty_playerDamageMultiplier = 1.50f;
+                break;
+            case Difficulty.Medium:
+                _difficulty_attackSpeedMultiplier =  1.00f;
+                _difficulty_enemyDamageMultiplier =  1.75f;
+
+                _difficulty_playerDamageMultiplier = 1.00f;
+                break;
+            case Difficulty.Hard:
+                _difficulty_attackSpeedMultiplier =  0.75f;
+                _difficulty_enemyDamageMultiplier =  1.50f;
+
+                _difficulty_playerDamageMultiplier = 0.75f;
+                break;
+            case Difficulty.Realistic:
+                _difficulty_attackSpeedMultiplier =  0.50f;
+                _difficulty_enemyDamageMultiplier =  2.00f;
+
+                _difficulty_playerDamageMultiplier = 1.50f;
+                break;
+        }
+ 
     }
 
     /// <summary>
