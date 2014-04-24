@@ -51,4 +51,10 @@ public class GameController : MonoBehaviour
 	{
 		RenderSettings.ambientLight = this.ambientLight;
 	}
+
+    public static void ShowCursor(bool show)
+    {
+        Screen.showCursor = show;
+        Screen.lockCursor = !show;
+    }
 }

@@ -26,6 +26,14 @@ public class Weapon : Item
 
     }
 
+
+    public virtual void Initialize()
+    {
+        //soundSphere = this.GetComponent<SphereCollider>();
+        //soundSphere.enabled = false;
+        sound = this.GetComponent<Sound>();
+    }
+
     /// <summary>
     /// Used by the player. Fires where the crosshair is centered.
     /// </summary>
@@ -47,12 +55,6 @@ public class Weapon : Item
     }
 	public virtual bool Fire(Vector3 targetPos) {return false;}
 
-    public virtual void Initialize()
-    {
-        //soundSphere = this.GetComponent<SphereCollider>();
-        //soundSphere.enabled = false;
-        sound = this.GetComponent<Sound>();
-    }
 
     /// <summary>
     /// For melee and instantaneous projectiles
@@ -70,6 +72,11 @@ public class Weapon : Item
 		this.transform.localPosition = wieldPosition;
 		this.transform.localEulerAngles = wieldRotation;
 	}
+
+    public virtual IEnumerator Reload()
+    {
+        return null;
+    }
 
     /// <summary>
     /// String used in HUD.

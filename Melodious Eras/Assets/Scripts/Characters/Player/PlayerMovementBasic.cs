@@ -128,7 +128,7 @@ public class PlayerMovementBasic : MonoBehaviour
 
 	void Update()
 	{
-		if(!jumping && useDefaultMovement) //if default movement controls aren't being overridden
+		if(useDefaultMovement) //if default movement controls aren't being overridden
 		{
 			if (Input.GetButtonDown(InputType.CROUCH))
 			{
@@ -218,9 +218,9 @@ public class PlayerMovementBasic : MonoBehaviour
         }
 
         //RELOAD input
-        if (Input.GetButtonDown(InputType.RELOAD) && stats.equippedWeapon is Gun)
+        if (Input.GetButtonDown(InputType.RELOAD))
         {
-            StartCoroutine(((Gun)stats.equippedWeapon).Reload());
+            StartCoroutine(stats.equippedWeapon.Reload());
         }
     }
 

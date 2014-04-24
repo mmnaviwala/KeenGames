@@ -67,6 +67,8 @@ public class CameraMovement3D : CameraMovement
     {
         camRotationHelper = new GameObject();
         camRotationHelper.name = "camTarget";
+
+        GameController.ShowCursor(false);
     }
 	// Use this for initialization
 	void Start () 

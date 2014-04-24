@@ -51,7 +51,7 @@ public class EnemyAI : MonoBehaviour
 
 	private Ray rayUpper, rayLower, rayCenter;  //will be used often; avoiding garbage collection
 	private RaycastHit hit;                     //
-	private AI_Action ai_action;
+	private AI_Action performAIaction;
 
 
 	public Animator Anim {get {return anim; } set {anim = value;}}
@@ -78,7 +78,7 @@ public class EnemyAI : MonoBehaviour
 	// Use this for initialization
 	void Start () 
     {
-		ai_action = Patrol;
+		performAIaction = Patrol;
         fov = sight.fovAngle * awarenessMultiplier / 2;
         fovSqrt = Mathf.Sqrt(fov);
 		//keeping rays permanent to avoid garbage collection

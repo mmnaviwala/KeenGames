@@ -107,7 +107,7 @@ public class Gun : Weapon
 
     }
 
-    public virtual IEnumerator Reload()
+    public override IEnumerator Reload()
     {
         if (extraAmmo > 0 && this.ammoInClip < clipSize)
         {
@@ -128,6 +128,7 @@ public class Gun : Weapon
 
     public override string HudString()
     {
-        return weaponName + ": " + ammoInClip + " - " + extraAmmo;
+        return weaponName;
+        //return weaponName + ": " + ammoInClip + " - " + extraAmmo;
     }
 }
