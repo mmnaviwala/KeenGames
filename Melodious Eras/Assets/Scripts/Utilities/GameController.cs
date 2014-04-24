@@ -57,4 +57,15 @@ public class GameController : MonoBehaviour
         Screen.showCursor = show;
         Screen.lockCursor = !show;
     }
+
+    /// <summary>
+    /// Modular calculation that takes negative numbers into consideration (-1 % 10 = 9)
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="m"></param>
+    /// <returns></returns>
+    public static int Mod(int x, int m)
+    {
+        return x < 0 ? x + m : x % m;
+    }
 }

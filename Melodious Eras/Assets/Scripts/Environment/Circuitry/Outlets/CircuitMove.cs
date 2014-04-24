@@ -4,12 +4,12 @@ using System.Collections;
 [AddComponentMenu("Scripts/Environment/Circuitry/Circuit Move")]
 public class CircuitMove : CircuitOutlet
 {
-    public Vector3 moveDirection;
     public Vector3[] destinations; //should always have at least 2 (original + 1 or more destinations)
     protected Vector3[] directions;
 
     protected int destIndex = 0;
     public float movementSpeed = .5f;
+    protected float startTime = 0f;
 
     void Awake()
     {
@@ -45,24 +45,29 @@ public class CircuitMove : CircuitOutlet
         base.PerformSwitchAction(signal);
 
         if (activated)
-            destIndex = (destIndex > 0) ? destIndex - 1 : destinations.Length - 1;//destIndex = (destIndex - 1) % destinations.Length;    //will reverse movement if already in action once it receives a new signal
+            destIndex = (destIndex > 0) ? destIndex - 1 : destinations.Length - 1; //will reverse movement if already in action once it receives a new signal
         else
             destIndex = (destIndex + 1) % destinations.Length;
 
+        startTime = Time.time;
+
         activated = true;
-        Move();
         return false; 
     }
 
     protected virtual void Move()
     {
-        if (Vector3.Distance(this.transform.position, destinations[destIndex]) > .15f)
-            this.transform.position += directions[destIndex] * movementSpeed * Time.deltaTime;
+        if (Vector3.Distance(this.transform.localPosition, destinations[destIndex]) > .1f)
+        {
+            this.transform.localPosition += directions[destIndex] * movementSpeed * Time.deltaTime;
+            /*this.transform.localPosition = Vector3.Lerp(destinations[GameController.Mod(destIndex - 1, destinations.Length)],
+                                                        destinations[destIndex],
+                                                        (Time.time - startTime) * movementSpeed);*/
+        }
         else
         {
-            this.transform.position = destinations[destIndex];
+            this.transform.localPosition = destinations[destIndex];
             activated = false;
-
         }
     }
 }
