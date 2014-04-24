@@ -38,6 +38,7 @@ public class EnemyAI : MonoBehaviour
     private Vector3 lpsResetPosition = new Vector3(999, 999, 999);
     private Vector3 inspectingArea = new Vector3(999, 999, 999); //last position to hear a hostile character
     private static Vector3 resetPos = new Vector3(999, 999, 999);
+    private float lastPlayerSightingTime = 0;
 
     private float awarenessOfPlayer = 0f;
     //private Dictionary<Collider, CharacterStats> awarenessOfChar;     //for multi-faction AI. not implemented yet
@@ -159,6 +160,7 @@ public class EnemyAI : MonoBehaviour
     /// </summary>
     void Chasing()
     {
+        
         // Create a vector from the enemy to the last sighting of the player.
         Vector3 sightingDeltaPos = lastPlayerSighting - transform.position;
 
@@ -198,7 +200,8 @@ public class EnemyAI : MonoBehaviour
     void Shooting()
     {
 		//stop movement
-        this.anim.SetFloat(HashIDs.speed_float, 0f);
+        nav.speed = 0;
+        //this.anim.SetFloat(HashIDs.speed_float, 0f);
         this.anim.SetFloat(HashIDs.aimWeight_float, 1f);
 
 		this.Attack(currentEnemy);
@@ -246,7 +249,7 @@ public class EnemyAI : MonoBehaviour
 					}
 					else 
 					{
-                        this.seesPlayer = false;
+                        //this.seesPlayer = false;
                         if (hit.collider.tag == Tags.ENEMY && ch.isDead)
                         {
                             this.Alert(2f);

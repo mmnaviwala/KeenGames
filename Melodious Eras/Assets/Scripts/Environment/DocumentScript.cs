@@ -4,7 +4,9 @@ using System.Collections;
 [AddComponentMenu("Scripts/Environment/Document Script")]
 public class DocumentScript : MonoBehaviour 
 {
-    public string message, keycode;
+    
+    public string message;
+    public string keycode;
     public GUIStyle docStyle;
     public bool reading = false;
     bool inTrigger = false;

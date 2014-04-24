@@ -1698,13 +1698,13 @@ MonoBehaviour:
   faction: 0
   currentSecArea: {fileID: 0}
   suit: {fileID: 0}
-  equippedWeapon: {fileID: 0}
-  sidearm: {fileID: 0}
+  equippedWeapon: {fileID: 11400010}
+  sidearm: {fileID: 11400010}
   largeWeapon: {fileID: 0}
   thrown: {fileID: 0}
   explosive: {fileID: 0}
-  leftHand: {fileID: 0}
-  rightHand: {fileID: 0}
+  leftHand: {fileID: 400060}
+  rightHand: {fileID: 400042}
   lookatTarget: {fileID: 0}
   _health: 100
   _maxHealth: 100
@@ -1728,13 +1728,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   squad: {fileID: 0}
   eyes: {fileID: 400070}
-  equippedWeapon: {fileID: 0}
   currentEnemy: {fileID: 0}
   hearingMultiplier: 1
   baseAwarenessMultiplier: .5
   fieldOfView: 160
   shootingRange: 0
   meleeRange: 0
+  attackSpeed: 1
   patrolSpeed: 1.5
   chaseSpeed: 5
   chaseWaitTime: 5
@@ -1869,6 +1869,7 @@ MonoBehaviour:
   clipSize: 10
   ammoPerShot: 1
   damage: 35
+  fireRate: .100000001
   ignorePlayer:
     serializedVersion: 2
     m_Bits: 4294966267
@@ -1885,7 +1886,6 @@ MonoBehaviour:
   muzzleVelocity: 100
   durability: 100
   weight: 5
-  fireRate: .100000001
   accuracy: 0
   range: 45
   npcRange: 15

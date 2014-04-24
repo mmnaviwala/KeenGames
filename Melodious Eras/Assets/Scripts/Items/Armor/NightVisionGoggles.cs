@@ -3,7 +3,7 @@ using System.Collections;
 
 public class NightVisionGoggles : MonoBehaviour {
 	public Suit playerSuit;
-	public float efficiency = 5;
+	public float drainRate = 5;
 
 	private NightVisionTestCS nightvision;
 	private Bloom bloom;
@@ -82,7 +82,7 @@ public class NightVisionGoggles : MonoBehaviour {
 			}
 			else
 			{
-				float drain = Time.deltaTime / efficiency;
+				float drain = Time.deltaTime * drainRate;
 				playerSuit.batteryLife = (playerSuit.batteryLife > drain) ? playerSuit.batteryLife - drain : 0;
 			}
 		}
