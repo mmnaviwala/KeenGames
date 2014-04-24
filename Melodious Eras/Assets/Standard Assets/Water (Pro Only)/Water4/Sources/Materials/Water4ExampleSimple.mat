@@ -43,16 +43,16 @@ Material:
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _ShoreTex
+          name: _WavesTex
         second:
-          m_Texture: {fileID: 2800000, guid: 36dd0b22da8874ed38075789055ca664, type: 3}
+          m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
-          name: _WavesTex
+          name: _ShoreTex
         second:
-          m_Texture: {fileID: 0}
+          m_Texture: {fileID: 2800000, guid: 36dd0b22da8874ed38075789055ca664, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -112,7 +112,7 @@ Material:
       data:
         first:
           name: _SpecularColor
-        second: {r: .822131038, g: .807142794, b: .773422658, a: 1}
+        second: {r: .822141349, g: .807153881, b: .773435533, a: 1}
       data:
         first:
           name: _DistortParams
@@ -140,11 +140,11 @@ Material:
       data:
         first:
           name: _BaseColor
-        second: {r: .175431252, g: .226915687, b: .249160364, a: .505882382}
+        second: {r: .175453573, g: .226939335, b: .249184504, a: .505882382}
       data:
         first:
           name: _ReflectionColor
-        second: {r: .478601307, g: .608835936, b: .666285038, a: .470588237}
+        second: {r: .478624463, g: .608855546, b: .666302502, a: .470588237}
       data:
         first:
           name: _WorldLightDir
