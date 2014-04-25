@@ -93,13 +93,13 @@ public class EnemyAI : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () 
-	{
-        anim.SetLayerWeight(1, 0);
+	void Update ()
+    {
+        this.anim.SetBool(HashIDs.playerInSight_bool, false);
 		if(!this.stats.isDead)
 		{
 			//this.seesPlayer = false;
-            if (lastPlayerSighting != lpsResetPosition && currentEnemy.health > 0f)
+            if (lastPlayerSighting != lpsResetPosition && !currentEnemy.isDead)
             {
                 if (this.seesPlayer && Vector3.Distance(this.transform.position, currentEnemy.transform.position) < 10)
                     Shooting();
@@ -201,8 +201,7 @@ public class EnemyAI : MonoBehaviour
     {
 		//stop movement
         nav.speed = 0;
-        //this.anim.SetFloat(HashIDs.speed_float, 0f);
-        this.anim.SetLayerWeight(1, 1);
+        this.anim.SetFloat(HashIDs.speed_float, 0f);
         this.anim.SetBool(HashIDs.playerInSight_bool, true);
 
 		this.Attack(currentEnemy);
