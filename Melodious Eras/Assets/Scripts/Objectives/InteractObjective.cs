@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class InteractObjective : MonoBehaviour {
+public class InteractObjective : Objective2 {
 
 	// Use this for initialization
 	void Start () {

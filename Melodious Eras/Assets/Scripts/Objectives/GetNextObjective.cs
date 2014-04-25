@@ -5,7 +5,7 @@ public class GetNextObjective : MonoBehaviour {
 
 	void OnTriggerEnter(Collider col)
 	{
-		if (col.gameObject.tag == Tags.PLAYER)
+		if (col is CapsuleCollider && col.gameObject.tag == Tags.PLAYER)
 		{
 			GameObject.Find("Objectives").GetComponent<TrackObjectives>().SetNextObjective();
 		}

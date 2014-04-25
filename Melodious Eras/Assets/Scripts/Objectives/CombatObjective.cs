@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CombatObjective : MonoBehaviour {
+public class CombatObjective : Objective2 {
 
 	// Use this for initialization
 	void Start () {

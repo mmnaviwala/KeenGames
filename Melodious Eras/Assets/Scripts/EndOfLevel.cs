@@ -10,10 +10,13 @@ public class EndOfLevel : MonoBehaviour {
 	public string stasticsToDisplay;
 
 	private Vector3 playerPos, cameraPos, cameraRotation;
-	private bool alreadyGotPlayerPos = false, coroutineStarted = false, guiReadyToDisplay = false;
+	private bool guiReadyToDisplay = false;
 	private Rect levelCompleteRect, stasticsToDisplayRect;
+    private Rect nextLevelRect, replayRect;
 	private string levelCompleteText = "Level Complete";
 	private float xx, yy;
+
+    private YieldInstruction eof = new WaitForEndOfFrame();
 
 
 	void Start ()
@@ -32,20 +35,22 @@ public class EndOfLevel : MonoBehaviour {
 
 		levelCompleteRect  = new Rect(xx * 8.7f, yy * 0.4f, xx, xx);
 		stasticsToDisplayRect = new Rect(xx * 4.7f, yy * 3.0f, xx*4, xx);
+        //nextLevelRect = new Rect(xx * 3.2f, yy * 8.0f, xx * 7f, yy * 1.5f);
+        nextLevelRect = new Rect(xx * 6.2f, yy * 8.0f, xx * 3.5f, yy * 1.5f);
+        replayRect = new Rect(xx * 3, yy * 8, xx * 3, yy * 1.5f);
 
 		stasticsToDisplay = "Accuracy: 100%\nTime Elapsed: 09:30\nEnemies Killed: 4\nEnemies Knocked Out: 1\nEnemies Avoided: 5\nSpotted: 0 Times";
-
-        //StartCoroutine(Wait());
+        
 	}
 
-    IEnumerator Wait()
+    IEnumerator test()
     {
         yield return new WaitForSeconds(2);
-        EndLevel();
+        EndLevel(false);
     }
 
 
-    public void EndLevel()
+    public void EndLevel(bool didPlayerDie)
     {
         var player = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<PlayerMovementBasic>();
         var cam = GameObject.FindGameObjectWithTag(Tags.MAIN_CAMERA).GetComponent<CameraMovement3D>();
@@ -56,10 +61,10 @@ public class EndOfLevel : MonoBehaviour {
 
         playerPos = player.transform.position;
         cameraPos = cam.transform.position;
-        cameraRotation = cam.transform.rotation.eulerAngles;
-        alreadyGotPlayerPos = true;
+        cameraRotation = cam.transform.eulerAngles;
 
-        foreach (Transform child in GameObject.Find("Flat_UI HUD").gameObject.transform)
+        Transform hud = GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).transform.FindChild("Flat_UI HUD");
+        foreach (Transform child in hud)
 		{
 			if (child.GetComponent<FlatUI_HUD>() != null)
             	child.GetComponent<FlatUI_HUD>().enabled = false;
@@ -67,33 +72,27 @@ public class EndOfLevel : MonoBehaviour {
 				child.GetComponent<DisplayObjectives>().enabled = false;
 		}
 
-        StartCoroutine(moveCamera());
+        StartCoroutine(moveCamera(player, cam, didPlayerDie));
     }
 
-	IEnumerator moveCamera()
+	IEnumerator moveCamera(PlayerMovementBasic player, CameraMovement3D cam, bool didPlayerDie)
 	{
         Screen.showCursor = true;
         Screen.lockCursor = false;
-		coroutineStarted = true;
-		Vector3 targetPosition = playerPos + offset;
-		Vector3 targetRotation = new Vector3(0, 270, 0);
-		GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<Transform>().rotation = Quaternion.Euler(0,90,0);
-//		GameObject.FindGameObjectWithTag(Tags.MAIN_CAMERA).GetComponent<Transform>().rotation = Quaternion.Euler(0, 270, 0);
 
-		while (cameraPos != targetPosition)
+		Vector3 targetPosition = playerPos + player.transform.forward * 2 + Vector3.up * 1.5f;
+
+        Vector3 _offset = didPlayerDie ? 
+            -player.transform.right : //looks down at player if he's dead
+            Vector3.up * 1.5f - player.transform.right; //looks up at player
+
+
+		while ((cameraPos - targetPosition).sqrMagnitude > .1f)
 		{
-			cameraPos = Vector3.MoveTowards(cameraPos, targetPosition, speed*Time.deltaTime);
-
-			GameObject.FindGameObjectWithTag(Tags.MAIN_CAMERA).GetComponent<Transform>().position = cameraPos;
-			yield return new WaitForSeconds(0.01f);
-		}
-
-		while (cameraRotation != targetRotation)
-		{
-			cameraRotation = Vector3.MoveTowards(cameraRotation, targetRotation, speed*Time.deltaTime*200);
-			
-			GameObject.FindGameObjectWithTag(Tags.MAIN_CAMERA).GetComponent<Transform>().rotation = Quaternion.Euler(cameraRotation);
-			yield return new WaitForSeconds(0.01f);
+			cameraPos = Vector3.Lerp(cameraPos, targetPosition, speed * Time.deltaTime);
+            cam.transform.position = cameraPos;
+            cam.transform.LookAt(player.transform.position + _offset);
+			yield return eof;
 		}
 
 		guiReadyToDisplay = true;
@@ -106,14 +105,18 @@ public class EndOfLevel : MonoBehaviour {
 		{
 			GUI.Label(levelCompleteRect, levelCompleteText, levelCompleteGuiStyle);
 			GUI.Label(stasticsToDisplayRect, stasticsToDisplay, stasticsTextGuiStyle);
-			if (GUI.Button (new Rect (xx * 3.2f, yy * 8.0f, xx * 7f, yy * 1.5f), "Go To Next Level", guiButtonStyle))
+
+            if (GUI.Button(nextLevelRect, "Go To Next Level", guiButtonStyle))
 			{
-				Debug.Log(Application.loadedLevel);
 				if (Application.loadedLevel + 1 <= Application.levelCount)
 					Application.LoadLevel(Application.loadedLevel + 1);
 				else
 					Application.LoadLevel(1);
 			}
+            if (GUI.Button(replayRect, "Replay", guiButtonStyle))
+            {
+                Application.LoadLevel(Application.loadedLevel);
+            }
 		}
 	}
 }

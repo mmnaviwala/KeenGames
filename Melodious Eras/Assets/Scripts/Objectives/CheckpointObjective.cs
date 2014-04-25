@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CheckpointObjective : MonoBehaviour {
+public class CheckpointObjective : Objective2 {
 
 	// Use this for initialization
 	void Start () {

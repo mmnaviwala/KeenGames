@@ -109,6 +109,12 @@ public class PlayerMovementBasic : MonoBehaviour
 		//anim.SetLayerWeight(2, 1f);           //optional gun grip, but too small to notice for now
     }
 
+    void OnDisable()
+    {
+        anim.SetFloat(HashIDs.speed_float, 0f);
+        anim.SetBool(HashIDs.sneaking_bool, false);
+    }
+
     /// <summary>
     /// Movement is handled under FixedUpdate() to avoid jittering. 
     /// Everything else is handled under Update() for correct input detection

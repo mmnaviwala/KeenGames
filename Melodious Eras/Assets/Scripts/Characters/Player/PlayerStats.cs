@@ -126,7 +126,7 @@ public class PlayerStats : CharacterStats
         this._isDead = true;
         anim.SetBool(HashIDs.dead_bool, isDead);
         playerMovement.enabled = false;
-        GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<EndOfLevel>().EndLevel();
+        GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<EndOfLevel>().EndLevel(true);
         //fade to black
         //reload last checkpoint
     }

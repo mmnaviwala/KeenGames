@@ -91,8 +91,6 @@ public class CameraMovement3D : CameraMovement
     {		
 		if (Input.GetButtonDown(InputType.SHIFT_VIEW))
 			InvertOffset();
-        if (Input.GetKeyDown(KeyCode.K) && !shaking)
-            StartCoroutine(shake(.125f, 8, 3));
 		
 		//Adjusting look rotation
 		float intensityX = Input.GetAxis(InputType.MOUSE_X);
@@ -105,7 +103,8 @@ public class CameraMovement3D : CameraMovement
 		if (intensityY != 0)
 		{
 			float angle = camRotationHelper.transform.eulerAngles.x - intensityY * y_sensitivity;
-			if (angle > 180) angle -= 360;
+			if (angle > 180) 
+                angle -= 360;
 			angle = Mathf.Clamp(angle, -80, 80);
 			camRotationHelper.transform.rotation = Quaternion.Euler(angle, camRotationHelper.transform.eulerAngles.y, camRotationHelper.transform.eulerAngles.z);
 		}
@@ -115,13 +114,11 @@ public class CameraMovement3D : CameraMovement
 		Vector3 lookTemp = targetLookPos;
 
 		Vector3 lookPosOffset = player.up * activeOffset.y + camRotationHelper.transform.right * activeOffset.x;
-		targetLookPos = player.position +  lookPosOffset/* + player.forward * .125f*/;
-		RaycastHit hit1;
-        if (Physics.Raycast(player.position + player.up * activeOffset.y, camRotationHelper.transform.right * activeOffset.x, out hit1, Mathf.Abs(activeOffset.x), raycastLayers))
-		{
+		targetLookPos = player.position +  lookPosOffset;
+		//RaycastHit hit1;
+        if (Physics.Raycast(player.position + player.up * activeOffset.y, camRotationHelper.transform.right * activeOffset.x, Mathf.Abs(activeOffset.x), raycastLayers))
 			InvertOffset();
-		}
-
+		
 		if (lookTemp != targetLookPos)
 			atTargetPos = false;
 
@@ -136,9 +133,7 @@ public class CameraMovement3D : CameraMovement
 
 			Ray ray = new Ray(targetLookPos, offsetDirection);
 			if(Physics.Raycast (ray, out hit, raycastDistance, raycastLayers) && hit.collider.tag != Tags.MAIN_CAMERA)
-			{
 				camTargetPos = hit.point - ray.direction;
-			}
 			else
 				camTargetPos = targetLookPos + offsetDirection;
 
