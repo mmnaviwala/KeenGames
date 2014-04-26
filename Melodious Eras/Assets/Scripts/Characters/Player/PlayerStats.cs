@@ -22,7 +22,7 @@ public class PlayerStats : CharacterStats
 
     public AudioClip deathClip, meleeClip;
     private Animator anim;
-    private PlayerMovementBasic playerMovement;
+    private PlayerMovementBasic _playerMovement;
     private HUD_Stealth hud;
 
     public float attackSpeed = .25f;
@@ -32,13 +32,14 @@ public class PlayerStats : CharacterStats
 
     #endregion
 
-    public float visibility { get { return visibility; } }//visibility multiplier; 1 = normal, 0 = invisible
+    public float visibility { get { return _visibility; } }//visibility multiplier; 1 = normal, 0 = invisible
+    public PlayerMovementBasic playerMovement { get { return _playerMovement; } }
 
     void Awake()
     {
         affectingLights = new List<Light>();
 
-        playerMovement = this.GetComponent<PlayerMovementBasic>();
+        _playerMovement = this.GetComponent<PlayerMovementBasic>();
         hud = this.GetComponent<HUD_Stealth>();
         anim = this.GetComponent<Animator>();
         this.currentSecArea = GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<SecurityArea>(); //base security area
@@ -142,7 +143,7 @@ public class PlayerStats : CharacterStats
     {
         this._isDead = true;
         anim.SetBool(HashIDs.dead_bool, isDead);
-        playerMovement.enabled = false;
+        _playerMovement.enabled = false;
         GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<EndOfLevel>().EndLevel(true);
         //fade to black
         //reload last checkpoint

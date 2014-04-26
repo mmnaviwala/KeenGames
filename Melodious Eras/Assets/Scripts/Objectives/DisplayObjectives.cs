@@ -12,7 +12,7 @@ public class DisplayObjectives : MonoBehaviour {
 
 	void Start () 
 	{
-        objectives = GameObject.Find("Objectives").GetComponent<TrackObjectives>();
+        objectives = GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<TrackObjectives>();
 		xx = Screen.width / 10;
 		yy = Screen.height / 10;
 

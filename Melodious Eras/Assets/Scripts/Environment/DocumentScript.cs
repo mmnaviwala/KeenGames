@@ -39,9 +39,11 @@ public class DocumentScript : MonoBehaviour
         {
             if (Input.GetButtonDown(InputType.USE))
             {
-                GameObject.FindWithTag(Tags.GAME_CONTROLLER).GetComponent<LogSystem>().NewLog(message);
-                GameObject.Find("Objectives").GetComponent<TrackObjectives>().SetNextObjective();
+                GameObject gameController = GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER);
+                gameController.GetComponent<LogSystem>().NewLog(message);
+                gameController.GetComponent<TrackObjectives>().SetNextObjective();
                 reading = true;
+                
                 playerHUD.rigidbody.velocity = new Vector3(0, playerHUD.rigidbody.velocity.y, 0);
             }
             if (Input.GetButtonDown(InputType.START))
