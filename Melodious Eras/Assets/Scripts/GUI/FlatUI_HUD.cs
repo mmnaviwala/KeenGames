@@ -58,6 +58,7 @@ public class FlatUI_HUD : MonoBehaviour
         renderer.material.SetFloat("_Cutoff", Mathf.Clamp(Mathf.InverseLerp(0f, maxNumber, maxNumber - currentNumber), .01f, 1));
         //renderer.material.color = Color.Lerp(Color.clear, Color.white, currentNumber / maxNumber);
         Graphics.DrawTexture(rectSize, barTexture, gameObject.renderer.material);
+
         GUI.DrawTexture(rectSize, topTexture);
 
         if(bartype == BarType.Battery)

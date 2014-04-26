@@ -20,32 +20,39 @@ public class HUD : MonoBehaviour {
     private GUIStyle defaultSmallFont;
 
 
-    private PlayerStats playerStats;
-    private PlayerMovementBasic player;
-    private Suit playerSuit;
-    private Weapon playerWeapon;
+    public GUIStyle objectiveTextStyle;
+    TrackObjectives objectives;
+    public string currentObjective;
+    private Rect currentObjectiveRect;
+
+
+    private PlayerStats player;
 
     void Awake()
     {
         Screen.showCursor = false;
         Screen.lockCursor = true;
+
+        float xx = Screen.width / 10;
+        float yy = Screen.height / 10;
+        currentObjectiveRect = new Rect(xx * 7f, yy * 0.3f, xx * 3, xx);
     }
 	// Use this for initialization
 	void Start () {
-        
-        playerStats = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<PlayerStats>();
-        player = playerStats.playerMovement;
-        playerSuit = playerStats.suit;
-        playerWeapon = playerStats.equippedWeapon;
 
-        health.Initialize();
-        armor.Initialize();
-        ammo.Initialize();
-        battery.Initialize();
+        player = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<PlayerStats>();
+        objectives = GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<TrackObjectives>();
+
+        health.Initialize(player);
+        armor.Initialize(player);
+        ammo.Initialize(player);
+        battery.Initialize(player);
 	}
 	
 	// Update is called once per frame
-	void Update () {
+    void Update()
+    {
+        currentObjective = objectives.currentObjectiveTitle;
 	
 	}
 
@@ -55,5 +62,10 @@ public class HUD : MonoBehaviour {
         armor.Display();
         ammo.Display();
         battery.Display();
+
+        if (objectives.allObjectivesComplete)
+            GUI.Label(currentObjectiveRect, ("All Objectives Complete!"), objectiveTextStyle);
+        else
+            GUI.Label(currentObjectiveRect, ("Current Objective:\n" + currentObjective), objectiveTextStyle);
     }
 }
