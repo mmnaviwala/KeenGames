@@ -4,6 +4,7 @@ using System.Collections;
 public class DisplayObjectives : MonoBehaviour {
 	
 	public GUIStyle textGuiStyle;
+    TrackObjectives objectives;
 	public string currentObjective;
 
 	private float xx, yy;
@@ -11,6 +12,7 @@ public class DisplayObjectives : MonoBehaviour {
 
 	void Start () 
 	{
+        objectives = GameObject.Find("Objectives").GetComponent<TrackObjectives>();
 		xx = Screen.width / 10;
 		yy = Screen.height / 10;
 
@@ -25,12 +27,12 @@ public class DisplayObjectives : MonoBehaviour {
 
 	void Update()
 	{
-		currentObjective = GameObject.Find("Objectives").GetComponent<TrackObjectives>().currentObjectiveTitle;
+		currentObjective = objectives.currentObjectiveTitle;
 	}
 	
 	void OnGUI ()
 	{
-		if (GameObject.Find("Objectives").GetComponent<TrackObjectives>().allObjectivesComplete)
+		if (objectives.allObjectivesComplete)
 			GUI.Label(currentObjectiveRect, ("All Objectives Complete!"), textGuiStyle);
 		else
 			GUI.Label(currentObjectiveRect, ("Current Objective:\n" + currentObjective), textGuiStyle);

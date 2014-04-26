@@ -18,8 +18,12 @@ public class PlayerMovementBasic : MonoBehaviour
     private const float m_VaultMatchTargetStop = 0.51f;
     private const float m_ClimbMatchTargetStart = 0.1f;  //.19f;
     private const float m_ClimbMatchTargetStop = .3f;
+    
 
     public float speed = 0f;                //current speed of character
+    public float acceleration = 3f;         //rate that player speeds up, multiplied by adrenaline
+    public float deceleration = 5f;         //rate that player slows down, divided by adrenaline
+
     public float snapDownThreshold = .25f;  //Length of downward raycasts for smooth descent of ramps
     public float soundwaveDistance;
     public bool useDefaultMovement = true;
@@ -239,9 +243,14 @@ public class PlayerMovementBasic : MonoBehaviour
 
         //Determining speed
         if (moving)
-            speed = (isWalking || isAiming) ? 2 : 5.657f;
+        {
+            float targetSpeed = (isWalking || isAiming) ? 2 : 5.657f;
+            speed = Mathf.Lerp(speed, targetSpeed, acceleration * stats.adrenalineMultiplier * Time.deltaTime);
+        }
         else
-            speed = 0;
+        {
+            speed = Mathf.Lerp(speed, 0          , deceleration / stats.adrenalineMultiplier * Time.deltaTime);
+        }
         //speed *= ((moveDirection.magnitude < 1) ? moveDirection.magnitude : 1); //used for analog input. Disabled for now, since stamina is being added
         this.anim.SetFloat(HashIDs.speed_float, speed);
 
@@ -329,6 +338,59 @@ public class PlayerMovementBasic : MonoBehaviour
 			}
 		}
 	}
+
+    /// <summary>
+    /// Matching target for vaulting/climbing ledge. Currently only vaulting has been tested
+    /// </summary>
+    /// <returns>The match target.</returns>
+    /// <param name="hitCol">Hit col.</param>
+    /// <param name="hitPoint">Hit point.</param>
+    /// <param name="startPos">Start position.</param>
+    IEnumerator ProcessMatchTarget(Collider hitCol, Vector3 hitPoint, Vector3 startPos, Acrobatics stunt)
+    {
+        Vector3 matchTarget = hitPoint;
+        matchTarget.y = hitCol.bounds.max.y;
+        float distance = Vector3.Distance(hitPoint, startPos);
+        float startTime = 0, endTime = 0;
+        AnimatorStateInfo state;
+        
+
+        switch (stunt)
+        {
+            case Acrobatics.Vault:  //IK for vaulting
+                startTime = m_VaultMatchTargetStart /** (distance / 4)*/; //trying to avoid clipping animation
+                endTime = m_VaultMatchTargetStop /** (distance / 4)*/;
+
+                while (this.anim.GetBool(HashIDs.vault_bool))
+                {
+                    state = this.anim.GetCurrentAnimatorStateInfo(0);
+                    if (state.IsName("Vault") && state.normalizedTime > startTime)
+                    {
+                        this.rigidbody.isKinematic = true;
+                        this.anim.MatchTarget(matchTarget, new Quaternion(), AvatarTarget.LeftHand, new MatchTargetWeightMask(Vector3.one, 0), startTime, endTime);
+                    }
+                    yield return endOfFrame;
+                }
+                break;
+
+            case Acrobatics.ClimbLedge: //IK for climbing ledge. Not tested yet
+                startTime = m_ClimbMatchTargetStart;
+                endTime = m_ClimbMatchTargetStop;
+                while (this.anim.GetBool(HashIDs.climbeLedge_bool))
+                {
+                    this.rigidbody.isKinematic = true;
+                    state = this.anim.GetCurrentAnimatorStateInfo(0);
+                    if (state.IsName("Jump to Ledge") && state.normalizedTime > startTime)
+                    {
+                        this.anim.MatchTarget(matchTarget, new Quaternion(), AvatarTarget.RightHand, new MatchTargetWeightMask(Vector3.one, 0), startTime, endTime);
+                    }
+                    yield return endOfFrame;
+                }
+                this.anim.SetFloat(HashIDs.speed_float, 0f);
+                break;
+        }
+        this.rigidbody.isKinematic = false;
+    }
 	#endregion
 
     void OnCollisionEnter(Collision collision)
@@ -454,57 +516,6 @@ public class PlayerMovementBasic : MonoBehaviour
         }*/
     }
 
-	/// <summary>
-	/// Matching target for vaulting/climbing ledge. Currently only vaulting has been tested
-	/// </summary>
-	/// <returns>The match target.</returns>
-	/// <param name="hitCol">Hit col.</param>
-	/// <param name="hitPoint">Hit point.</param>
-	/// <param name="startPos">Start position.</param>
-	IEnumerator ProcessMatchTarget(Collider hitCol, Vector3 hitPoint, Vector3 startPos, Acrobatics stunt)
-    {
-        Vector3 matchTarget = hitPoint;
-        matchTarget.y = hitCol.bounds.max.y;
-        float distance = Vector3.Distance(hitPoint, startPos);
-        float startTime = 0, endTime = 0;
-        AnimatorStateInfo state;
-
-        switch (stunt)
-        {
-            case Acrobatics.Vault:  //IK for vaulting
-		        startTime = m_VaultMatchTargetStart /** (distance / 4)*/; //trying to avoid clipping animation
-		        endTime = m_VaultMatchTargetStop /** (distance / 4)*/;
-
-                while(this.anim.GetBool(HashIDs.vault_bool))
-		        {
-			        state = this.anim.GetCurrentAnimatorStateInfo(0);
-			        if(state.IsName("Vault") && state.normalizedTime > startTime)
-			        {
-				        this.rigidbody.isKinematic = true;
-				        this.anim.MatchTarget(matchTarget, new Quaternion(), AvatarTarget.LeftHand, new MatchTargetWeightMask(Vector3.one, 0), startTime, endTime);
-			        }
-                    yield return endOfFrame;
-		        }
-                break;
-
-            case Acrobatics.ClimbLedge: //IK for climbing ledge. Not tested yet
-                startTime = m_ClimbMatchTargetStart;
-                endTime = m_ClimbMatchTargetStop;
-                while (this.anim.GetBool(HashIDs.climbeLedge_bool))
-                {
-                    this.rigidbody.isKinematic = true;
-                    state = this.anim.GetCurrentAnimatorStateInfo(0);
-                    if (state.IsName("Jump to Ledge") && state.normalizedTime > startTime)
-                    {
-                        this.anim.MatchTarget(matchTarget, new Quaternion(), AvatarTarget.RightHand, new MatchTargetWeightMask(Vector3.one, 0), startTime, endTime);
-                    }
-                    yield return endOfFrame;
-                }
-                this.anim.SetFloat(HashIDs.speed_float, 0f);
-                break;
-        }
-		this.rigidbody.isKinematic = false;
-	}
 	
 	void ScaleCapsuleForCrouching ()
 	{

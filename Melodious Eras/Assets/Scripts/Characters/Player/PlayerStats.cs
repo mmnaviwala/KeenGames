@@ -28,6 +28,8 @@ public class PlayerStats : CharacterStats
     public float attackSpeed = .25f;
     private float nextAttackTime = 0;
     private bool attacking;
+    private const float BACKSTAB_STRIKE_TIME = 1.0f;
+
     #endregion
 
     public float visibility { get { return visibility; } }//visibility multiplier; 1 = normal, 0 = invisible
@@ -115,7 +117,7 @@ public class PlayerStats : CharacterStats
         nextAttackTime = Time.time + attackSpeed;
         if (angle > 140)
         {
-            targetP.TakeDamage(true);
+            this.StartCoroutine(PerformBackstab(targetP));
         }
         else
         {
@@ -126,6 +128,15 @@ public class PlayerStats : CharacterStats
     public override void TakeDamage(bool instantKill)
     {
         this.Die();
+    }
+
+    IEnumerator PerformBackstab(CharacterStats targetP)
+    {
+        anim.SetBool(HashIDs.backstab_bool, true);
+        yield return new WaitForSeconds(BACKSTAB_STRIKE_TIME);
+        targetP.TakeDamage(true);
+
+        anim.SetBool(HashIDs.backstab_bool, false);
     }
     protected override void Die()
     {

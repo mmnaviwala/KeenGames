@@ -47,6 +47,7 @@ public class CharacterStats : MonoBehaviour
     public float stamina    { get { return _stamina;    } }
     public float maxStamina { get { return _maxStamina; } }
     public bool isDead      { get { return _isDead;     } }
+    public float adrenalineMultiplier { get { return _adrenalineMultiplier; } set { _adrenalineMultiplier = value; } }
     #endregion
 
     // Use this for initialization

@@ -27,6 +27,7 @@ public static class HashIDs
 	public static int climbUp_bool;
 	public static int climbDown_bool;
 	public static int climbeLedge_bool;
+    public static int backstab_bool;
 
 	//floats
 	public static int speed_float;
@@ -58,6 +59,7 @@ public static class HashIDs
             climbDown_bool = Animator.StringToHash("ClimbDown");
             climbeLedge_bool = Animator.StringToHash("ClimbLedge");
             slide_bool = Animator.StringToHash("Slide");
+            backstab_bool = Animator.StringToHash("Backstab");
             initialized = true;
         }
     }
