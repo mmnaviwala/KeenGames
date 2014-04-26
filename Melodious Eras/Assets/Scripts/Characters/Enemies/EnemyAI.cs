@@ -8,6 +8,8 @@ delegate void AI_Action();
 public class EnemyAI : MonoBehaviour
 {
     #region variables
+    private const float CHASE_DISTANCE = 15;
+
     public NPCGroup squad;
 	public Transform eyes;
     public CharacterStats currentEnemy;
@@ -152,7 +154,8 @@ public class EnemyAI : MonoBehaviour
     /// </summary>
     void Inspect()
     {
- 		
+        nav.stoppingDistance = 3;
+        nav.destination = inspectingArea;
     }
 
     /// <summary>
@@ -245,6 +248,7 @@ public class EnemyAI : MonoBehaviour
 						this.lastPlayerSighting = ch.transform.position;
 						currentEnemy = ch;
 						squad.AlertGroup(ch);
+
                         ai_activity = Chasing;
 					}
 					else 
@@ -254,6 +258,9 @@ public class EnemyAI : MonoBehaviour
                         {
                             this.Alert(2f);
                             squad.AlertGroup(2f);
+
+                            ai_activity = Inspect;
+                            nav.destination = ch.transform.position;
                         }
 					}
 				}
@@ -267,9 +274,10 @@ public class EnemyAI : MonoBehaviour
 
     public bool Listen(Vector3 source, float volume)
     {
-        if (CalculatePathLengthTo(source) * awarenessMultiplier < volume)
+        if (CalculatePathLengthTo(source) / awarenessMultiplier < volume)
         {
             //lastPlayerSighting = source;
+            ai_activity = Inspect;
             inspectingArea = source;
 			return true;
         }

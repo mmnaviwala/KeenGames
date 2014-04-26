@@ -52,6 +52,8 @@ public class EndOfLevel : MonoBehaviour {
 
     public void EndLevel(bool didPlayerDie)
     {
+        Screen.showCursor = true;
+        Screen.lockCursor = false;
         var player = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<PlayerMovementBasic>();
         var cam = GameObject.FindGameObjectWithTag(Tags.MAIN_CAMERA).GetComponent<CameraMovement3D>();
         //var hud = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<HUD_Stealth>();
@@ -80,7 +82,9 @@ public class EndOfLevel : MonoBehaviour {
         Screen.showCursor = true;
         Screen.lockCursor = false;
 
-		Vector3 targetPosition = playerPos + player.transform.forward * 2 + Vector3.up * 1.5f;
+		Vector3 targetPosition = playerPos + 
+                                 player.transform.forward * 2 + 
+                                 Vector3.up * 1.5f;
 
         Vector3 _offset = didPlayerDie ? 
             -player.transform.right : //looks down at player if he's dead

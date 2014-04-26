@@ -7,18 +7,20 @@ public class FlatUI_HUD : MonoBehaviour
 {
 
     public Texture bottomTexture, topTexture, barTexture;
-    private Rect rectSize, numberLabelSize, stringLabelSize;
-    private float xx, yy;
+    private Rect rectSize, numberLabelSize, stringLabelSize, reticle;
+    [SerializeField] private GUIStyle reticleStyle;
     private GUIStyle smallFont;
     public GUIStyle bigFont;
     private string textToDisplay;
-    public float currentNumber = 100;
+    public float maxNumber = 100;
+    private float currentNumber = 100;
     public enum Position { Position1, Position2, Position3, Position4 }
     public enum BarType { Health, Armor, Ammo, Battery }
     public Position positions;
     public BarType bartype;
 
-    public CharacterStats playerStats;
+    public PlayerStats playerStats;
+    private PlayerMovementBasic player;
     public Suit playerSuit;
     public Weapon playerWeapon;
 
@@ -32,15 +34,19 @@ public class FlatUI_HUD : MonoBehaviour
         switch (bartype)
         {
             case BarType.Health:
+                maxNumber = playerStats.maxHealth;
                 currentNumber = playerStats.health;
                 break;
             case BarType.Armor:
+                maxNumber = playerSuit.maxArmor;
                 currentNumber = playerSuit.armor;
                 break;
             case BarType.Ammo:
+                maxNumber = playerWeapon.maxAmmo;
                 currentNumber = playerWeapon.ammoInClip + playerWeapon.extraAmmo;
                 break;
             case BarType.Battery:
+                maxNumber = playerSuit.maxBatteryLife;
                 currentNumber = playerSuit.batteryLife;
                 break;
         }
@@ -49,12 +55,21 @@ public class FlatUI_HUD : MonoBehaviour
     void OnGUI()
     {
         GUI.DrawTexture(rectSize, bottomTexture);
-        renderer.material.SetFloat("_Cutoff", Mathf.Clamp(Mathf.InverseLerp(0f, 100, 100 - currentNumber), .01f, 1));
+        renderer.material.SetFloat("_Cutoff", Mathf.Clamp(Mathf.InverseLerp(0f, maxNumber, maxNumber - currentNumber), .01f, 1));
+        //renderer.material.color = Color.Lerp(Color.clear, Color.white, currentNumber / maxNumber);
         Graphics.DrawTexture(rectSize, barTexture, gameObject.renderer.material);
         GUI.DrawTexture(rectSize, topTexture);
 
-        GUI.Label(numberLabelSize, string.Format("{0:f1}", currentNumber), bigFont);
+        if(bartype == BarType.Battery)
+            GUI.Label(numberLabelSize, string.Format("{0:f1}", currentNumber), bigFont);
+        else
+            GUI.Label(numberLabelSize, string.Format("{0}", currentNumber), bigFont);
+
         GUI.Label(stringLabelSize, textToDisplay, smallFont);
+
+
+        if (player.IsAiming && bartype == BarType.Ammo)
+            GUI.Box(reticle, "", reticleStyle);
     }
 
     /// <summary>
@@ -62,12 +77,17 @@ public class FlatUI_HUD : MonoBehaviour
     /// </summary>
     protected void Initialize()
     {
-        this.playerStats = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<CharacterStats>();
-        this.playerSuit = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<Suit>();
-        this.playerWeapon = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<PlayerStats>().equippedWeapon;
+        Screen.showCursor = false;
+        Screen.lockCursor = true;
+        this.player = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<PlayerMovementBasic>();
+        this.playerStats = player.GetComponent<PlayerStats>();
+        this.playerSuit = playerStats.suit;
+        this.playerWeapon = playerStats.equippedWeapon;
 
-        xx = Screen.width / 10;
-        yy = Screen.height / 10;
+        float xx = Screen.width / 10;
+        float yy = Screen.height / 10;
+
+        reticle = new Rect(Screen.width / 2 - Screen.width / 60, Screen.height / 2 - Screen.width / 60, Screen.width / 30, Screen.width / 30);
 
         switch (positions)
         {
@@ -102,7 +122,7 @@ public class FlatUI_HUD : MonoBehaviour
                 textToDisplay = "Armor";
                 break;
             case BarType.Ammo:
-                textToDisplay = "Ammo";
+                textToDisplay = playerWeapon.weaponName;
                 break;
             case BarType.Battery:
                 textToDisplay = "Battery";

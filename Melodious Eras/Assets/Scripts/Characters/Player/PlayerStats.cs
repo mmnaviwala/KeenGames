@@ -79,20 +79,26 @@ public class PlayerStats : CharacterStats
             float lowestAngle = 180;
             foreach (EnemyStats enemy in _closeQuarterEnemies.charactersInRange)
             {
-                Vector3 relEnemyPos = enemy.transform.position - this.transform.position;
-                float angle = Vector3.Angle(relEnemyPos, this.transform.forward);
-                if (angle < lowestAngle)
+                if (!enemy.isDead)
                 {
-                    lowestAngle = angle;
-                    nearestEnemy = enemy;
+                    Vector3 relEnemyPos = enemy.transform.position - this.transform.position;
+                    float angle = Vector3.Angle(relEnemyPos, this.transform.forward);
+                    if (angle < lowestAngle)
+                    {
+                        lowestAngle = angle;
+                        nearestEnemy = enemy;
+                    }
                 }
             }
 
-            //If the player is behind the target (60-degree area)
-            Vector3 relPlayerPos = this.transform.position - nearestEnemy.transform.position;
-            float enemyAngle = Vector3.Angle(nearestEnemy.transform.forward, new Vector3(relPlayerPos.x, 0, relPlayerPos.z));
+            if (lowestAngle != 180)
+            {
+                //If the player is behind the target (60-degree area)
+                Vector3 relPlayerPos = this.transform.position - nearestEnemy.transform.position;
+                float enemyAngle = Vector3.Angle(nearestEnemy.transform.forward, new Vector3(relPlayerPos.x, 0, relPlayerPos.z));
 
-            this.Attack(nearestEnemy, this, enemyAngle);
+                this.Attack(nearestEnemy, this, enemyAngle);
+            }
         }
         else
         {

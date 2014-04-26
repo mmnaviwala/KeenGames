@@ -256,7 +256,7 @@ public class PlayerMovementBasic : MonoBehaviour
         //if running
         if (speed > 4 && !isCrouching)
         {
-            this.stats.ReduceStamina(10 * Time.deltaTime); 
+            this.stats.ReduceStamina(15 * Time.deltaTime); 
             if (!this.audio.isPlaying) //play footsteps
                 this.audio.Play();
             foreach(EnemyStats enemy in stats._nearbyEnemies.charactersInRange)

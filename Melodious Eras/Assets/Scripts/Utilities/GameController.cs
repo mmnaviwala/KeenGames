@@ -17,9 +17,9 @@ public class GameController : MonoBehaviour
     private static float defaultShadowDistance = 100;
 	public float farClipDistance = -1;
 
-    private static float _difficulty_attackSpeedMultiplier;
-    private static float _difficulty_playerDamageMultiplier;
-    private static float _difficulty_enemyDamageMultiplier;
+    private static float _difficulty_attackSpeedMultiplier; //lower = harder
+    private static float _difficulty_playerDamageMultiplier;//lower = harder
+    private static float _difficulty_enemyDamageMultiplier; //higher = harder
 
     public static float difficulty_attackSpeedMultiplier  { get { return _difficulty_attackSpeedMultiplier;  } }
     public static float difficulty_playerDamageMultiplier { get { return _difficulty_playerDamageMultiplier; } }
@@ -29,7 +29,7 @@ public class GameController : MonoBehaviour
     void Awake()
     {
         Screen.orientation = ScreenOrientation.LandscapeLeft;
-		RenderSettings.ambientLight = this.ambientLight;
+		this.ambientLight = RenderSettings.ambientLight;
         //Physics.gravity = new Vector3(0f, -49f, 0f);
         AudioListener.pause = false;
         Time.timeScale = 1;
@@ -44,23 +44,12 @@ public class GameController : MonoBehaviour
         AdjustDifficultSettings(difficulty);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     void InitializeEnvironment()
     {
         Environment.SetWind(this.wind, this.turbulence);
         StartCoroutine(Environment.BlowWind());
     }
-
-	[ContextMenu("Bake Settings")]
-	public void BakeSettings()
-	{
-		RenderSettings.ambientLight = this.ambientLight;
-	}
 
     public static void ShowCursor(bool show)
     {
@@ -74,13 +63,13 @@ public class GameController : MonoBehaviour
         {
             case Difficulty.Easy:
                 _difficulty_attackSpeedMultiplier =  1.50f;
-                _difficulty_enemyDamageMultiplier =  1.75f;
+                _difficulty_enemyDamageMultiplier =  0.75f;
 
                 _difficulty_playerDamageMultiplier = 1.50f;
                 break;
             case Difficulty.Medium:
                 _difficulty_attackSpeedMultiplier =  1.00f;
-                _difficulty_enemyDamageMultiplier =  1.75f;
+                _difficulty_enemyDamageMultiplier =  1.00f;
 
                 _difficulty_playerDamageMultiplier = 1.00f;
                 break;

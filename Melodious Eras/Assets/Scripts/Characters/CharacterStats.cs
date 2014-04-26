@@ -41,12 +41,12 @@ public class CharacterStats : MonoBehaviour
 
 
     #region accessors & mutators
-    public bool exhausted { get { return _exhausted; } }
-    public int health { get { return _health; } }
-    public int maxHealth { get { return _maxHealth; } }
-    public float stamina { get { return _stamina; } }
+    public bool exhausted   { get { return _exhausted;  } }
+    public int health       { get { return _health;     } }
+    public int maxHealth    { get { return _maxHealth;  } }
+    public float stamina    { get { return _stamina;    } }
     public float maxStamina { get { return _maxStamina; } }
-    public bool isDead { get { return _isDead; } }
+    public bool isDead      { get { return _isDead;     } }
     #endregion
 
     // Use this for initialization

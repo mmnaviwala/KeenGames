@@ -39,7 +39,7 @@ public class CircuitMove : CircuitOutlet
 
     public override bool PerformSwitchAction(bool signal)
     {
-        if (isBroken || !hasPower)
+        if (!signal || isBroken || !hasPower)
             return false;
 
         base.PerformSwitchAction(signal);
