@@ -36,6 +36,7 @@ public class HUD : MonoBehaviour {
         float xx = Screen.width / 10;
         float yy = Screen.height / 10;
         currentObjectiveRect = new Rect(xx * 7f, yy * 0.3f, xx * 3, xx);
+        reticle = new Rect(Screen.width / 2 - Screen.width / 60, Screen.height / 2 - Screen.width / 60, Screen.width / 30, Screen.width / 30);
     }
 	// Use this for initialization
 	void Start () {
@@ -62,6 +63,10 @@ public class HUD : MonoBehaviour {
         armor.Display();
         ammo.Display();
         battery.Display();
+
+        if (player.playerMovement.IsAiming)
+            GUI.Box(reticle, "", reticleStyle);
+
 
         if (objectives.allObjectivesComplete)
             GUI.Label(currentObjectiveRect, ("All Objectives Complete!"), objectiveTextStyle);

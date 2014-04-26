@@ -19,6 +19,7 @@ public class ComputerTerminal : CircuitSwitch
     public Transform[] monitors;
 
     HUD_Stealth playerHUD;
+    HUD hud;
     PlayerMovementBasic playerMovement;
     CameraMovement3D cam3d;
 
@@ -41,6 +42,7 @@ public class ComputerTerminal : CircuitSwitch
 	void Start () 
     {
         cam3d = Camera.main.GetComponent<CameraMovement3D>();
+        hud = GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponentInChildren<HUD>();
 
         for (int m = 0; m < monitors.Length; m++)
         {
@@ -71,6 +73,7 @@ public class ComputerTerminal : CircuitSwitch
             //Turning computer on/off if USE button is held down
             if (!alreadyActivated && Input.GetButton(InputType.USE))
             {
+                Debug.Log("Using computer");
                 pressTime += Time.deltaTime;
                 if (pressTime > .75f)
                 {
@@ -180,6 +183,7 @@ public class ComputerTerminal : CircuitSwitch
 
         cam3d.enabled =     !usingTerminalP;
         playerHUD.enabled = !usingTerminalP;
+        hud.enabled = !usingTerminalP;
         playerMovement.enabled = !usingTerminal;
 
         Screen.showCursor =  usingTerminalP;
