@@ -344,7 +344,7 @@ ModelImporter:
     400336: Humanoid1:HumanoidCharacter_Ctrl_Spine1
     400338: Humanoid1:HumanoidCharacter_Ctrl_Spine2
     4300000: Humanoid1:Humanoid:Mesh
-    7400000: Take 001
+    7400000: Backstab
     9500000: //RootNode
     13700000: Humanoid1:Humanoid:Mesh
   materials:
@@ -361,7 +361,373 @@ ModelImporter:
     animationScaleError: .5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Backstab
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 48
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Humanoid1:Humanoid:Root
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Mesh
+        weight: 0
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:LeftHips_Dummy
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:LeftHips_Dummy/Humanoid1:Humanoid:LeftUpLeg
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:LeftHips_Dummy/Humanoid1:Humanoid:LeftUpLeg/Humanoid1:Humanoid:LeftUpLegRoll
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:LeftHips_Dummy/Humanoid1:Humanoid:LeftUpLeg/Humanoid1:Humanoid:LeftUpLegRoll/Humanoid1:Humanoid:LeftLeg
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:LeftHips_Dummy/Humanoid1:Humanoid:LeftUpLeg/Humanoid1:Humanoid:LeftUpLegRoll/Humanoid1:Humanoid:LeftLeg/Humanoid1:Humanoid:LeftLegRoll
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:LeftHips_Dummy/Humanoid1:Humanoid:LeftUpLeg/Humanoid1:Humanoid:LeftUpLegRoll/Humanoid1:Humanoid:LeftLeg/Humanoid1:Humanoid:LeftLegRoll/Humanoid1:Humanoid:LeftFoot
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:LeftHips_Dummy/Humanoid1:Humanoid:LeftUpLeg/Humanoid1:Humanoid:LeftUpLegRoll/Humanoid1:Humanoid:LeftLeg/Humanoid1:Humanoid:LeftLegRoll/Humanoid1:Humanoid:LeftFoot/Humanoid1:Humanoid:LeftToeBase
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:RightHips_Dummy
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:RightHips_Dummy/Humanoid1:Humanoid:RightUpLeg
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:RightHips_Dummy/Humanoid1:Humanoid:RightUpLeg/Humanoid1:Humanoid:RightUpLegRoll
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:RightHips_Dummy/Humanoid1:Humanoid:RightUpLeg/Humanoid1:Humanoid:RightUpLegRoll/Humanoid1:Humanoid:RightLeg
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:RightHips_Dummy/Humanoid1:Humanoid:RightUpLeg/Humanoid1:Humanoid:RightUpLegRoll/Humanoid1:Humanoid:RightLeg/Humanoid1:Humanoid:RightLegRoll
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:RightHips_Dummy/Humanoid1:Humanoid:RightUpLeg/Humanoid1:Humanoid:RightUpLegRoll/Humanoid1:Humanoid:RightLeg/Humanoid1:Humanoid:RightLegRoll/Humanoid1:Humanoid:RightFoot
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:RightHips_Dummy/Humanoid1:Humanoid:RightUpLeg/Humanoid1:Humanoid:RightUpLegRoll/Humanoid1:Humanoid:RightLeg/Humanoid1:Humanoid:RightLegRoll/Humanoid1:Humanoid:RightFoot/Humanoid1:Humanoid:RightToeBase
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:LeftShoulder_Dummy
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:LeftShoulder_Dummy/Humanoid1:Humanoid:LeftShoulder
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:LeftShoulder_Dummy/Humanoid1:Humanoid:LeftShoulder/Humanoid1:Humanoid:LeftArm_Dummy
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:LeftShoulder_Dummy/Humanoid1:Humanoid:LeftShoulder/Humanoid1:Humanoid:LeftArm_Dummy/Humanoid1:Humanoid:LeftArm
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:LeftShoulder_Dummy/Humanoid1:Humanoid:LeftShoulder/Humanoid1:Humanoid:LeftArm_Dummy/Humanoid1:Humanoid:LeftArm/Humanoid1:Humanoid:LeftArmRoll
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:LeftShoulder_Dummy/Humanoid1:Humanoid:LeftShoulder/Humanoid1:Humanoid:LeftArm_Dummy/Humanoid1:Humanoid:LeftArm/Humanoid1:Humanoid:LeftArmRoll/Humanoid1:Humanoid:LeftForeArm
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:LeftShoulder_Dummy/Humanoid1:Humanoid:LeftShoulder/Humanoid1:Humanoid:LeftArm_Dummy/Humanoid1:Humanoid:LeftArm/Humanoid1:Humanoid:LeftArmRoll/Humanoid1:Humanoid:LeftForeArm/Humanoid1:Humanoid:LeftForeArmRoll
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:LeftShoulder_Dummy/Humanoid1:Humanoid:LeftShoulder/Humanoid1:Humanoid:LeftArm_Dummy/Humanoid1:Humanoid:LeftArm/Humanoid1:Humanoid:LeftArmRoll/Humanoid1:Humanoid:LeftForeArm/Humanoid1:Humanoid:LeftForeArmRoll/Humanoid1:Humanoid:LeftHand
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:LeftShoulder_Dummy/Humanoid1:Humanoid:LeftShoulder/Humanoid1:Humanoid:LeftArm_Dummy/Humanoid1:Humanoid:LeftArm/Humanoid1:Humanoid:LeftArmRoll/Humanoid1:Humanoid:LeftForeArm/Humanoid1:Humanoid:LeftForeArmRoll/Humanoid1:Humanoid:LeftHand/Humanoid1:Humanoid:LeftHandIndex1
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:LeftShoulder_Dummy/Humanoid1:Humanoid:LeftShoulder/Humanoid1:Humanoid:LeftArm_Dummy/Humanoid1:Humanoid:LeftArm/Humanoid1:Humanoid:LeftArmRoll/Humanoid1:Humanoid:LeftForeArm/Humanoid1:Humanoid:LeftForeArmRoll/Humanoid1:Humanoid:LeftHand/Humanoid1:Humanoid:LeftHandIndex1/Humanoid1:Humanoid:LeftHandIndex2
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:LeftShoulder_Dummy/Humanoid1:Humanoid:LeftShoulder/Humanoid1:Humanoid:LeftArm_Dummy/Humanoid1:Humanoid:LeftArm/Humanoid1:Humanoid:LeftArmRoll/Humanoid1:Humanoid:LeftForeArm/Humanoid1:Humanoid:LeftForeArmRoll/Humanoid1:Humanoid:LeftHand/Humanoid1:Humanoid:LeftHandIndex1/Humanoid1:Humanoid:LeftHandIndex2/Humanoid1:Humanoid:LeftHandIndex3
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:LeftShoulder_Dummy/Humanoid1:Humanoid:LeftShoulder/Humanoid1:Humanoid:LeftArm_Dummy/Humanoid1:Humanoid:LeftArm/Humanoid1:Humanoid:LeftArmRoll/Humanoid1:Humanoid:LeftForeArm/Humanoid1:Humanoid:LeftForeArmRoll/Humanoid1:Humanoid:LeftHand/Humanoid1:Humanoid:LeftHandMiddle1
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:LeftShoulder_Dummy/Humanoid1:Humanoid:LeftShoulder/Humanoid1:Humanoid:LeftArm_Dummy/Humanoid1:Humanoid:LeftArm/Humanoid1:Humanoid:LeftArmRoll/Humanoid1:Humanoid:LeftForeArm/Humanoid1:Humanoid:LeftForeArmRoll/Humanoid1:Humanoid:LeftHand/Humanoid1:Humanoid:LeftHandMiddle1/Humanoid1:Humanoid:LeftHandMiddle2
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:LeftShoulder_Dummy/Humanoid1:Humanoid:LeftShoulder/Humanoid1:Humanoid:LeftArm_Dummy/Humanoid1:Humanoid:LeftArm/Humanoid1:Humanoid:LeftArmRoll/Humanoid1:Humanoid:LeftForeArm/Humanoid1:Humanoid:LeftForeArmRoll/Humanoid1:Humanoid:LeftHand/Humanoid1:Humanoid:LeftHandMiddle1/Humanoid1:Humanoid:LeftHandMiddle2/Humanoid1:Humanoid:LeftHandMiddle3
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:LeftShoulder_Dummy/Humanoid1:Humanoid:LeftShoulder/Humanoid1:Humanoid:LeftArm_Dummy/Humanoid1:Humanoid:LeftArm/Humanoid1:Humanoid:LeftArmRoll/Humanoid1:Humanoid:LeftForeArm/Humanoid1:Humanoid:LeftForeArmRoll/Humanoid1:Humanoid:LeftHand/Humanoid1:Humanoid:LeftHandPinky1
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:LeftShoulder_Dummy/Humanoid1:Humanoid:LeftShoulder/Humanoid1:Humanoid:LeftArm_Dummy/Humanoid1:Humanoid:LeftArm/Humanoid1:Humanoid:LeftArmRoll/Humanoid1:Humanoid:LeftForeArm/Humanoid1:Humanoid:LeftForeArmRoll/Humanoid1:Humanoid:LeftHand/Humanoid1:Humanoid:LeftHandPinky1/Humanoid1:Humanoid:LeftHandPinky2
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:LeftShoulder_Dummy/Humanoid1:Humanoid:LeftShoulder/Humanoid1:Humanoid:LeftArm_Dummy/Humanoid1:Humanoid:LeftArm/Humanoid1:Humanoid:LeftArmRoll/Humanoid1:Humanoid:LeftForeArm/Humanoid1:Humanoid:LeftForeArmRoll/Humanoid1:Humanoid:LeftHand/Humanoid1:Humanoid:LeftHandPinky1/Humanoid1:Humanoid:LeftHandPinky2/Humanoid1:Humanoid:LeftHandPinky3
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:LeftShoulder_Dummy/Humanoid1:Humanoid:LeftShoulder/Humanoid1:Humanoid:LeftArm_Dummy/Humanoid1:Humanoid:LeftArm/Humanoid1:Humanoid:LeftArmRoll/Humanoid1:Humanoid:LeftForeArm/Humanoid1:Humanoid:LeftForeArmRoll/Humanoid1:Humanoid:LeftHand/Humanoid1:Humanoid:LeftHandRing1
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:LeftShoulder_Dummy/Humanoid1:Humanoid:LeftShoulder/Humanoid1:Humanoid:LeftArm_Dummy/Humanoid1:Humanoid:LeftArm/Humanoid1:Humanoid:LeftArmRoll/Humanoid1:Humanoid:LeftForeArm/Humanoid1:Humanoid:LeftForeArmRoll/Humanoid1:Humanoid:LeftHand/Humanoid1:Humanoid:LeftHandRing1/Humanoid1:Humanoid:LeftHandRing2
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:LeftShoulder_Dummy/Humanoid1:Humanoid:LeftShoulder/Humanoid1:Humanoid:LeftArm_Dummy/Humanoid1:Humanoid:LeftArm/Humanoid1:Humanoid:LeftArmRoll/Humanoid1:Humanoid:LeftForeArm/Humanoid1:Humanoid:LeftForeArmRoll/Humanoid1:Humanoid:LeftHand/Humanoid1:Humanoid:LeftHandRing1/Humanoid1:Humanoid:LeftHandRing2/Humanoid1:Humanoid:LeftHandRing3
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:LeftShoulder_Dummy/Humanoid1:Humanoid:LeftShoulder/Humanoid1:Humanoid:LeftArm_Dummy/Humanoid1:Humanoid:LeftArm/Humanoid1:Humanoid:LeftArmRoll/Humanoid1:Humanoid:LeftForeArm/Humanoid1:Humanoid:LeftForeArmRoll/Humanoid1:Humanoid:LeftHand/Humanoid1:Humanoid:LeftHandThumb1
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:LeftShoulder_Dummy/Humanoid1:Humanoid:LeftShoulder/Humanoid1:Humanoid:LeftArm_Dummy/Humanoid1:Humanoid:LeftArm/Humanoid1:Humanoid:LeftArmRoll/Humanoid1:Humanoid:LeftForeArm/Humanoid1:Humanoid:LeftForeArmRoll/Humanoid1:Humanoid:LeftHand/Humanoid1:Humanoid:LeftHandThumb1/Humanoid1:Humanoid:LeftHandThumb2
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:LeftShoulder_Dummy/Humanoid1:Humanoid:LeftShoulder/Humanoid1:Humanoid:LeftArm_Dummy/Humanoid1:Humanoid:LeftArm/Humanoid1:Humanoid:LeftArmRoll/Humanoid1:Humanoid:LeftForeArm/Humanoid1:Humanoid:LeftForeArmRoll/Humanoid1:Humanoid:LeftHand/Humanoid1:Humanoid:LeftHandThumb1/Humanoid1:Humanoid:LeftHandThumb2/Humanoid1:Humanoid:LeftHandThumb3
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:Neck
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:Neck/Humanoid1:Humanoid:Head
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:RightShoulder_Dummy
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:RightShoulder_Dummy/Humanoid1:Humanoid:RightShoulder
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:RightShoulder_Dummy/Humanoid1:Humanoid:RightShoulder/Humanoid1:Humanoid:RightArm_Dummy
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:RightShoulder_Dummy/Humanoid1:Humanoid:RightShoulder/Humanoid1:Humanoid:RightArm_Dummy/Humanoid1:Humanoid:RightArm
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:RightShoulder_Dummy/Humanoid1:Humanoid:RightShoulder/Humanoid1:Humanoid:RightArm_Dummy/Humanoid1:Humanoid:RightArm/Humanoid1:Humanoid:RightArmRoll
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:RightShoulder_Dummy/Humanoid1:Humanoid:RightShoulder/Humanoid1:Humanoid:RightArm_Dummy/Humanoid1:Humanoid:RightArm/Humanoid1:Humanoid:RightArmRoll/Humanoid1:Humanoid:RightForeArm
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:RightShoulder_Dummy/Humanoid1:Humanoid:RightShoulder/Humanoid1:Humanoid:RightArm_Dummy/Humanoid1:Humanoid:RightArm/Humanoid1:Humanoid:RightArmRoll/Humanoid1:Humanoid:RightForeArm/Humanoid1:Humanoid:RightForeArmRoll
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:RightShoulder_Dummy/Humanoid1:Humanoid:RightShoulder/Humanoid1:Humanoid:RightArm_Dummy/Humanoid1:Humanoid:RightArm/Humanoid1:Humanoid:RightArmRoll/Humanoid1:Humanoid:RightForeArm/Humanoid1:Humanoid:RightForeArmRoll/Humanoid1:Humanoid:RightHand
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:RightShoulder_Dummy/Humanoid1:Humanoid:RightShoulder/Humanoid1:Humanoid:RightArm_Dummy/Humanoid1:Humanoid:RightArm/Humanoid1:Humanoid:RightArmRoll/Humanoid1:Humanoid:RightForeArm/Humanoid1:Humanoid:RightForeArmRoll/Humanoid1:Humanoid:RightHand/Humanoid1:Humanoid:RightHandIndex1
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:RightShoulder_Dummy/Humanoid1:Humanoid:RightShoulder/Humanoid1:Humanoid:RightArm_Dummy/Humanoid1:Humanoid:RightArm/Humanoid1:Humanoid:RightArmRoll/Humanoid1:Humanoid:RightForeArm/Humanoid1:Humanoid:RightForeArmRoll/Humanoid1:Humanoid:RightHand/Humanoid1:Humanoid:RightHandIndex1/Humanoid1:Humanoid:RightHandIndex2
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:RightShoulder_Dummy/Humanoid1:Humanoid:RightShoulder/Humanoid1:Humanoid:RightArm_Dummy/Humanoid1:Humanoid:RightArm/Humanoid1:Humanoid:RightArmRoll/Humanoid1:Humanoid:RightForeArm/Humanoid1:Humanoid:RightForeArmRoll/Humanoid1:Humanoid:RightHand/Humanoid1:Humanoid:RightHandIndex1/Humanoid1:Humanoid:RightHandIndex2/Humanoid1:Humanoid:RightHandIndex3
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:RightShoulder_Dummy/Humanoid1:Humanoid:RightShoulder/Humanoid1:Humanoid:RightArm_Dummy/Humanoid1:Humanoid:RightArm/Humanoid1:Humanoid:RightArmRoll/Humanoid1:Humanoid:RightForeArm/Humanoid1:Humanoid:RightForeArmRoll/Humanoid1:Humanoid:RightHand/Humanoid1:Humanoid:RightHandMiddle1
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:RightShoulder_Dummy/Humanoid1:Humanoid:RightShoulder/Humanoid1:Humanoid:RightArm_Dummy/Humanoid1:Humanoid:RightArm/Humanoid1:Humanoid:RightArmRoll/Humanoid1:Humanoid:RightForeArm/Humanoid1:Humanoid:RightForeArmRoll/Humanoid1:Humanoid:RightHand/Humanoid1:Humanoid:RightHandMiddle1/Humanoid1:Humanoid:RightHandMiddle2
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:RightShoulder_Dummy/Humanoid1:Humanoid:RightShoulder/Humanoid1:Humanoid:RightArm_Dummy/Humanoid1:Humanoid:RightArm/Humanoid1:Humanoid:RightArmRoll/Humanoid1:Humanoid:RightForeArm/Humanoid1:Humanoid:RightForeArmRoll/Humanoid1:Humanoid:RightHand/Humanoid1:Humanoid:RightHandMiddle1/Humanoid1:Humanoid:RightHandMiddle2/Humanoid1:Humanoid:RightHandMiddle3
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:RightShoulder_Dummy/Humanoid1:Humanoid:RightShoulder/Humanoid1:Humanoid:RightArm_Dummy/Humanoid1:Humanoid:RightArm/Humanoid1:Humanoid:RightArmRoll/Humanoid1:Humanoid:RightForeArm/Humanoid1:Humanoid:RightForeArmRoll/Humanoid1:Humanoid:RightHand/Humanoid1:Humanoid:RightHandPinky1
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:RightShoulder_Dummy/Humanoid1:Humanoid:RightShoulder/Humanoid1:Humanoid:RightArm_Dummy/Humanoid1:Humanoid:RightArm/Humanoid1:Humanoid:RightArmRoll/Humanoid1:Humanoid:RightForeArm/Humanoid1:Humanoid:RightForeArmRoll/Humanoid1:Humanoid:RightHand/Humanoid1:Humanoid:RightHandPinky1/Humanoid1:Humanoid:RightHandPinky2
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:RightShoulder_Dummy/Humanoid1:Humanoid:RightShoulder/Humanoid1:Humanoid:RightArm_Dummy/Humanoid1:Humanoid:RightArm/Humanoid1:Humanoid:RightArmRoll/Humanoid1:Humanoid:RightForeArm/Humanoid1:Humanoid:RightForeArmRoll/Humanoid1:Humanoid:RightHand/Humanoid1:Humanoid:RightHandPinky1/Humanoid1:Humanoid:RightHandPinky2/Humanoid1:Humanoid:RightHandPinky3
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:RightShoulder_Dummy/Humanoid1:Humanoid:RightShoulder/Humanoid1:Humanoid:RightArm_Dummy/Humanoid1:Humanoid:RightArm/Humanoid1:Humanoid:RightArmRoll/Humanoid1:Humanoid:RightForeArm/Humanoid1:Humanoid:RightForeArmRoll/Humanoid1:Humanoid:RightHand/Humanoid1:Humanoid:RightHandRing1
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:RightShoulder_Dummy/Humanoid1:Humanoid:RightShoulder/Humanoid1:Humanoid:RightArm_Dummy/Humanoid1:Humanoid:RightArm/Humanoid1:Humanoid:RightArmRoll/Humanoid1:Humanoid:RightForeArm/Humanoid1:Humanoid:RightForeArmRoll/Humanoid1:Humanoid:RightHand/Humanoid1:Humanoid:RightHandRing1/Humanoid1:Humanoid:RightHandRing2
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:RightShoulder_Dummy/Humanoid1:Humanoid:RightShoulder/Humanoid1:Humanoid:RightArm_Dummy/Humanoid1:Humanoid:RightArm/Humanoid1:Humanoid:RightArmRoll/Humanoid1:Humanoid:RightForeArm/Humanoid1:Humanoid:RightForeArmRoll/Humanoid1:Humanoid:RightHand/Humanoid1:Humanoid:RightHandRing1/Humanoid1:Humanoid:RightHandRing2/Humanoid1:Humanoid:RightHandRing3
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:RightShoulder_Dummy/Humanoid1:Humanoid:RightShoulder/Humanoid1:Humanoid:RightArm_Dummy/Humanoid1:Humanoid:RightArm/Humanoid1:Humanoid:RightArmRoll/Humanoid1:Humanoid:RightForeArm/Humanoid1:Humanoid:RightForeArmRoll/Humanoid1:Humanoid:RightHand/Humanoid1:Humanoid:RightHandThumb1
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:RightShoulder_Dummy/Humanoid1:Humanoid:RightShoulder/Humanoid1:Humanoid:RightArm_Dummy/Humanoid1:Humanoid:RightArm/Humanoid1:Humanoid:RightArmRoll/Humanoid1:Humanoid:RightForeArm/Humanoid1:Humanoid:RightForeArmRoll/Humanoid1:Humanoid:RightHand/Humanoid1:Humanoid:RightHandThumb1/Humanoid1:Humanoid:RightHandThumb2
+        weight: 1
+      - path: Humanoid1:Humanoid:Root/Humanoid1:Humanoid:Reference/Humanoid1:Humanoid:Hips/Humanoid1:Humanoid:Spine_Dummy/Humanoid1:Humanoid:Spine/Humanoid1:Humanoid:Spine1/Humanoid1:Humanoid:Spine2/Humanoid1:Humanoid:RightShoulder_Dummy/Humanoid1:Humanoid:RightShoulder/Humanoid1:Humanoid:RightArm_Dummy/Humanoid1:Humanoid:RightArm/Humanoid1:Humanoid:RightArmRoll/Humanoid1:Humanoid:RightForeArm/Humanoid1:Humanoid:RightForeArmRoll/Humanoid1:Humanoid:RightHand/Humanoid1:Humanoid:RightHandThumb1/Humanoid1:Humanoid:RightHandThumb2/Humanoid1:Humanoid:RightHandThumb3
+        weight: 1
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_ChestEndEffector
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_ChestOriginEffector
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_HeadEffector
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_LeftUpLeg
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_LeftUpLeg/Humanoid1:HumanoidCharacter_Ctrl_LeftUpLegRoll
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_LeftUpLeg/Humanoid1:HumanoidCharacter_Ctrl_LeftUpLegRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftLeg
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_LeftUpLeg/Humanoid1:HumanoidCharacter_Ctrl_LeftUpLegRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftLeg/Humanoid1:HumanoidCharacter_Ctrl_LeftLegRoll
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_LeftUpLeg/Humanoid1:HumanoidCharacter_Ctrl_LeftUpLegRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftLeg/Humanoid1:HumanoidCharacter_Ctrl_LeftLegRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftFoot
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_LeftUpLeg/Humanoid1:HumanoidCharacter_Ctrl_LeftUpLegRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftLeg/Humanoid1:HumanoidCharacter_Ctrl_LeftLegRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftFoot/Humanoid1:HumanoidCharacter_Ctrl_LeftToeBase
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_RightUpLeg
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_RightUpLeg/Humanoid1:HumanoidCharacter_Ctrl_RightUpLegRoll
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_RightUpLeg/Humanoid1:HumanoidCharacter_Ctrl_RightUpLegRoll/Humanoid1:HumanoidCharacter_Ctrl_RightLeg
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_RightUpLeg/Humanoid1:HumanoidCharacter_Ctrl_RightUpLegRoll/Humanoid1:HumanoidCharacter_Ctrl_RightLeg/Humanoid1:HumanoidCharacter_Ctrl_RightLegRoll
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_RightUpLeg/Humanoid1:HumanoidCharacter_Ctrl_RightUpLegRoll/Humanoid1:HumanoidCharacter_Ctrl_RightLeg/Humanoid1:HumanoidCharacter_Ctrl_RightLegRoll/Humanoid1:HumanoidCharacter_Ctrl_RightFoot
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_RightUpLeg/Humanoid1:HumanoidCharacter_Ctrl_RightUpLegRoll/Humanoid1:HumanoidCharacter_Ctrl_RightLeg/Humanoid1:HumanoidCharacter_Ctrl_RightLegRoll/Humanoid1:HumanoidCharacter_Ctrl_RightFoot/Humanoid1:HumanoidCharacter_Ctrl_RightToeBase
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_LeftShoulder
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_LeftShoulder/Humanoid1:HumanoidCharacter_Ctrl_LeftArm
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_LeftShoulder/Humanoid1:HumanoidCharacter_Ctrl_LeftArm/Humanoid1:HumanoidCharacter_Ctrl_LeftArmRoll
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_LeftShoulder/Humanoid1:HumanoidCharacter_Ctrl_LeftArm/Humanoid1:HumanoidCharacter_Ctrl_LeftArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArm
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_LeftShoulder/Humanoid1:HumanoidCharacter_Ctrl_LeftArm/Humanoid1:HumanoidCharacter_Ctrl_LeftArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArm/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArmRoll
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_LeftShoulder/Humanoid1:HumanoidCharacter_Ctrl_LeftArm/Humanoid1:HumanoidCharacter_Ctrl_LeftArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArm/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftHand
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_LeftShoulder/Humanoid1:HumanoidCharacter_Ctrl_LeftArm/Humanoid1:HumanoidCharacter_Ctrl_LeftArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArm/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftHand/Humanoid1:HumanoidCharacter_Ctrl_LeftHandIndex1
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_LeftShoulder/Humanoid1:HumanoidCharacter_Ctrl_LeftArm/Humanoid1:HumanoidCharacter_Ctrl_LeftArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArm/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftHand/Humanoid1:HumanoidCharacter_Ctrl_LeftHandIndex1/Humanoid1:HumanoidCharacter_Ctrl_LeftHandIndex2
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_LeftShoulder/Humanoid1:HumanoidCharacter_Ctrl_LeftArm/Humanoid1:HumanoidCharacter_Ctrl_LeftArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArm/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftHand/Humanoid1:HumanoidCharacter_Ctrl_LeftHandIndex1/Humanoid1:HumanoidCharacter_Ctrl_LeftHandIndex2/Humanoid1:HumanoidCharacter_Ctrl_LeftHandIndex3
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_LeftShoulder/Humanoid1:HumanoidCharacter_Ctrl_LeftArm/Humanoid1:HumanoidCharacter_Ctrl_LeftArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArm/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftHand/Humanoid1:HumanoidCharacter_Ctrl_LeftHandIndex1/Humanoid1:HumanoidCharacter_Ctrl_LeftHandIndex2/Humanoid1:HumanoidCharacter_Ctrl_LeftHandIndex3/Humanoid1:HumanoidCharacter_Ctrl_LeftHandIndex4
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_LeftShoulder/Humanoid1:HumanoidCharacter_Ctrl_LeftArm/Humanoid1:HumanoidCharacter_Ctrl_LeftArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArm/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftHand/Humanoid1:HumanoidCharacter_Ctrl_LeftHandMiddle1
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_LeftShoulder/Humanoid1:HumanoidCharacter_Ctrl_LeftArm/Humanoid1:HumanoidCharacter_Ctrl_LeftArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArm/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftHand/Humanoid1:HumanoidCharacter_Ctrl_LeftHandMiddle1/Humanoid1:HumanoidCharacter_Ctrl_LeftHandMiddle2
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_LeftShoulder/Humanoid1:HumanoidCharacter_Ctrl_LeftArm/Humanoid1:HumanoidCharacter_Ctrl_LeftArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArm/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftHand/Humanoid1:HumanoidCharacter_Ctrl_LeftHandMiddle1/Humanoid1:HumanoidCharacter_Ctrl_LeftHandMiddle2/Humanoid1:HumanoidCharacter_Ctrl_LeftHandMiddle3
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_LeftShoulder/Humanoid1:HumanoidCharacter_Ctrl_LeftArm/Humanoid1:HumanoidCharacter_Ctrl_LeftArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArm/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftHand/Humanoid1:HumanoidCharacter_Ctrl_LeftHandMiddle1/Humanoid1:HumanoidCharacter_Ctrl_LeftHandMiddle2/Humanoid1:HumanoidCharacter_Ctrl_LeftHandMiddle3/Humanoid1:HumanoidCharacter_Ctrl_LeftHandMiddle4
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_LeftShoulder/Humanoid1:HumanoidCharacter_Ctrl_LeftArm/Humanoid1:HumanoidCharacter_Ctrl_LeftArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArm/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftHand/Humanoid1:HumanoidCharacter_Ctrl_LeftHandPinky1
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_LeftShoulder/Humanoid1:HumanoidCharacter_Ctrl_LeftArm/Humanoid1:HumanoidCharacter_Ctrl_LeftArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArm/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftHand/Humanoid1:HumanoidCharacter_Ctrl_LeftHandPinky1/Humanoid1:HumanoidCharacter_Ctrl_LeftHandPinky2
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_LeftShoulder/Humanoid1:HumanoidCharacter_Ctrl_LeftArm/Humanoid1:HumanoidCharacter_Ctrl_LeftArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArm/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftHand/Humanoid1:HumanoidCharacter_Ctrl_LeftHandPinky1/Humanoid1:HumanoidCharacter_Ctrl_LeftHandPinky2/Humanoid1:HumanoidCharacter_Ctrl_LeftHandPinky3
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_LeftShoulder/Humanoid1:HumanoidCharacter_Ctrl_LeftArm/Humanoid1:HumanoidCharacter_Ctrl_LeftArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArm/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftHand/Humanoid1:HumanoidCharacter_Ctrl_LeftHandPinky1/Humanoid1:HumanoidCharacter_Ctrl_LeftHandPinky2/Humanoid1:HumanoidCharacter_Ctrl_LeftHandPinky3/Humanoid1:HumanoidCharacter_Ctrl_LeftHandPinky4
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_LeftShoulder/Humanoid1:HumanoidCharacter_Ctrl_LeftArm/Humanoid1:HumanoidCharacter_Ctrl_LeftArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArm/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftHand/Humanoid1:HumanoidCharacter_Ctrl_LeftHandRing1
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_LeftShoulder/Humanoid1:HumanoidCharacter_Ctrl_LeftArm/Humanoid1:HumanoidCharacter_Ctrl_LeftArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArm/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftHand/Humanoid1:HumanoidCharacter_Ctrl_LeftHandRing1/Humanoid1:HumanoidCharacter_Ctrl_LeftHandRing2
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_LeftShoulder/Humanoid1:HumanoidCharacter_Ctrl_LeftArm/Humanoid1:HumanoidCharacter_Ctrl_LeftArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArm/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftHand/Humanoid1:HumanoidCharacter_Ctrl_LeftHandRing1/Humanoid1:HumanoidCharacter_Ctrl_LeftHandRing2/Humanoid1:HumanoidCharacter_Ctrl_LeftHandRing3
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_LeftShoulder/Humanoid1:HumanoidCharacter_Ctrl_LeftArm/Humanoid1:HumanoidCharacter_Ctrl_LeftArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArm/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftHand/Humanoid1:HumanoidCharacter_Ctrl_LeftHandRing1/Humanoid1:HumanoidCharacter_Ctrl_LeftHandRing2/Humanoid1:HumanoidCharacter_Ctrl_LeftHandRing3/Humanoid1:HumanoidCharacter_Ctrl_LeftHandRing4
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_LeftShoulder/Humanoid1:HumanoidCharacter_Ctrl_LeftArm/Humanoid1:HumanoidCharacter_Ctrl_LeftArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArm/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftHand/Humanoid1:HumanoidCharacter_Ctrl_LeftHandThumb1
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_LeftShoulder/Humanoid1:HumanoidCharacter_Ctrl_LeftArm/Humanoid1:HumanoidCharacter_Ctrl_LeftArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArm/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftHand/Humanoid1:HumanoidCharacter_Ctrl_LeftHandThumb1/Humanoid1:HumanoidCharacter_Ctrl_LeftHandThumb2
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_LeftShoulder/Humanoid1:HumanoidCharacter_Ctrl_LeftArm/Humanoid1:HumanoidCharacter_Ctrl_LeftArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArm/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftHand/Humanoid1:HumanoidCharacter_Ctrl_LeftHandThumb1/Humanoid1:HumanoidCharacter_Ctrl_LeftHandThumb2/Humanoid1:HumanoidCharacter_Ctrl_LeftHandThumb3
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_LeftShoulder/Humanoid1:HumanoidCharacter_Ctrl_LeftArm/Humanoid1:HumanoidCharacter_Ctrl_LeftArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArm/Humanoid1:HumanoidCharacter_Ctrl_LeftForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_LeftHand/Humanoid1:HumanoidCharacter_Ctrl_LeftHandThumb1/Humanoid1:HumanoidCharacter_Ctrl_LeftHandThumb2/Humanoid1:HumanoidCharacter_Ctrl_LeftHandThumb3/Humanoid1:HumanoidCharacter_Ctrl_LeftHandThumb4
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_Neck
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_Neck/Humanoid1:HumanoidCharacter_Ctrl_Head
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_RightShoulder
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_RightShoulder/Humanoid1:HumanoidCharacter_Ctrl_RightArm
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_RightShoulder/Humanoid1:HumanoidCharacter_Ctrl_RightArm/Humanoid1:HumanoidCharacter_Ctrl_RightArmRoll
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_RightShoulder/Humanoid1:HumanoidCharacter_Ctrl_RightArm/Humanoid1:HumanoidCharacter_Ctrl_RightArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightForeArm
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_RightShoulder/Humanoid1:HumanoidCharacter_Ctrl_RightArm/Humanoid1:HumanoidCharacter_Ctrl_RightArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightForeArm/Humanoid1:HumanoidCharacter_Ctrl_RightForeArmRoll
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_RightShoulder/Humanoid1:HumanoidCharacter_Ctrl_RightArm/Humanoid1:HumanoidCharacter_Ctrl_RightArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightForeArm/Humanoid1:HumanoidCharacter_Ctrl_RightForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightHand
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_RightShoulder/Humanoid1:HumanoidCharacter_Ctrl_RightArm/Humanoid1:HumanoidCharacter_Ctrl_RightArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightForeArm/Humanoid1:HumanoidCharacter_Ctrl_RightForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightHand/Humanoid1:HumanoidCharacter_Ctrl_RightHandIndex1
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_RightShoulder/Humanoid1:HumanoidCharacter_Ctrl_RightArm/Humanoid1:HumanoidCharacter_Ctrl_RightArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightForeArm/Humanoid1:HumanoidCharacter_Ctrl_RightForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightHand/Humanoid1:HumanoidCharacter_Ctrl_RightHandIndex1/Humanoid1:HumanoidCharacter_Ctrl_RightHandIndex2
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_RightShoulder/Humanoid1:HumanoidCharacter_Ctrl_RightArm/Humanoid1:HumanoidCharacter_Ctrl_RightArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightForeArm/Humanoid1:HumanoidCharacter_Ctrl_RightForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightHand/Humanoid1:HumanoidCharacter_Ctrl_RightHandIndex1/Humanoid1:HumanoidCharacter_Ctrl_RightHandIndex2/Humanoid1:HumanoidCharacter_Ctrl_RightHandIndex3
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_RightShoulder/Humanoid1:HumanoidCharacter_Ctrl_RightArm/Humanoid1:HumanoidCharacter_Ctrl_RightArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightForeArm/Humanoid1:HumanoidCharacter_Ctrl_RightForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightHand/Humanoid1:HumanoidCharacter_Ctrl_RightHandIndex1/Humanoid1:HumanoidCharacter_Ctrl_RightHandIndex2/Humanoid1:HumanoidCharacter_Ctrl_RightHandIndex3/Humanoid1:HumanoidCharacter_Ctrl_RightHandIndex4
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_RightShoulder/Humanoid1:HumanoidCharacter_Ctrl_RightArm/Humanoid1:HumanoidCharacter_Ctrl_RightArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightForeArm/Humanoid1:HumanoidCharacter_Ctrl_RightForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightHand/Humanoid1:HumanoidCharacter_Ctrl_RightHandMiddle1
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_RightShoulder/Humanoid1:HumanoidCharacter_Ctrl_RightArm/Humanoid1:HumanoidCharacter_Ctrl_RightArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightForeArm/Humanoid1:HumanoidCharacter_Ctrl_RightForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightHand/Humanoid1:HumanoidCharacter_Ctrl_RightHandMiddle1/Humanoid1:HumanoidCharacter_Ctrl_RightHandMiddle2
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_RightShoulder/Humanoid1:HumanoidCharacter_Ctrl_RightArm/Humanoid1:HumanoidCharacter_Ctrl_RightArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightForeArm/Humanoid1:HumanoidCharacter_Ctrl_RightForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightHand/Humanoid1:HumanoidCharacter_Ctrl_RightHandMiddle1/Humanoid1:HumanoidCharacter_Ctrl_RightHandMiddle2/Humanoid1:HumanoidCharacter_Ctrl_RightHandMiddle3
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_RightShoulder/Humanoid1:HumanoidCharacter_Ctrl_RightArm/Humanoid1:HumanoidCharacter_Ctrl_RightArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightForeArm/Humanoid1:HumanoidCharacter_Ctrl_RightForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightHand/Humanoid1:HumanoidCharacter_Ctrl_RightHandMiddle1/Humanoid1:HumanoidCharacter_Ctrl_RightHandMiddle2/Humanoid1:HumanoidCharacter_Ctrl_RightHandMiddle3/Humanoid1:HumanoidCharacter_Ctrl_RightHandMiddle4
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_RightShoulder/Humanoid1:HumanoidCharacter_Ctrl_RightArm/Humanoid1:HumanoidCharacter_Ctrl_RightArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightForeArm/Humanoid1:HumanoidCharacter_Ctrl_RightForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightHand/Humanoid1:HumanoidCharacter_Ctrl_RightHandPinky1
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_RightShoulder/Humanoid1:HumanoidCharacter_Ctrl_RightArm/Humanoid1:HumanoidCharacter_Ctrl_RightArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightForeArm/Humanoid1:HumanoidCharacter_Ctrl_RightForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightHand/Humanoid1:HumanoidCharacter_Ctrl_RightHandPinky1/Humanoid1:HumanoidCharacter_Ctrl_RightHandPinky2
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_RightShoulder/Humanoid1:HumanoidCharacter_Ctrl_RightArm/Humanoid1:HumanoidCharacter_Ctrl_RightArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightForeArm/Humanoid1:HumanoidCharacter_Ctrl_RightForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightHand/Humanoid1:HumanoidCharacter_Ctrl_RightHandPinky1/Humanoid1:HumanoidCharacter_Ctrl_RightHandPinky2/Humanoid1:HumanoidCharacter_Ctrl_RightHandPinky3
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_RightShoulder/Humanoid1:HumanoidCharacter_Ctrl_RightArm/Humanoid1:HumanoidCharacter_Ctrl_RightArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightForeArm/Humanoid1:HumanoidCharacter_Ctrl_RightForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightHand/Humanoid1:HumanoidCharacter_Ctrl_RightHandPinky1/Humanoid1:HumanoidCharacter_Ctrl_RightHandPinky2/Humanoid1:HumanoidCharacter_Ctrl_RightHandPinky3/Humanoid1:HumanoidCharacter_Ctrl_RightHandPinky4
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_RightShoulder/Humanoid1:HumanoidCharacter_Ctrl_RightArm/Humanoid1:HumanoidCharacter_Ctrl_RightArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightForeArm/Humanoid1:HumanoidCharacter_Ctrl_RightForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightHand/Humanoid1:HumanoidCharacter_Ctrl_RightHandRing1
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_RightShoulder/Humanoid1:HumanoidCharacter_Ctrl_RightArm/Humanoid1:HumanoidCharacter_Ctrl_RightArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightForeArm/Humanoid1:HumanoidCharacter_Ctrl_RightForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightHand/Humanoid1:HumanoidCharacter_Ctrl_RightHandRing1/Humanoid1:HumanoidCharacter_Ctrl_RightHandRing2
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_RightShoulder/Humanoid1:HumanoidCharacter_Ctrl_RightArm/Humanoid1:HumanoidCharacter_Ctrl_RightArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightForeArm/Humanoid1:HumanoidCharacter_Ctrl_RightForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightHand/Humanoid1:HumanoidCharacter_Ctrl_RightHandRing1/Humanoid1:HumanoidCharacter_Ctrl_RightHandRing2/Humanoid1:HumanoidCharacter_Ctrl_RightHandRing3
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_RightShoulder/Humanoid1:HumanoidCharacter_Ctrl_RightArm/Humanoid1:HumanoidCharacter_Ctrl_RightArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightForeArm/Humanoid1:HumanoidCharacter_Ctrl_RightForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightHand/Humanoid1:HumanoidCharacter_Ctrl_RightHandRing1/Humanoid1:HumanoidCharacter_Ctrl_RightHandRing2/Humanoid1:HumanoidCharacter_Ctrl_RightHandRing3/Humanoid1:HumanoidCharacter_Ctrl_RightHandRing4
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_RightShoulder/Humanoid1:HumanoidCharacter_Ctrl_RightArm/Humanoid1:HumanoidCharacter_Ctrl_RightArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightForeArm/Humanoid1:HumanoidCharacter_Ctrl_RightForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightHand/Humanoid1:HumanoidCharacter_Ctrl_RightHandThumb1
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_RightShoulder/Humanoid1:HumanoidCharacter_Ctrl_RightArm/Humanoid1:HumanoidCharacter_Ctrl_RightArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightForeArm/Humanoid1:HumanoidCharacter_Ctrl_RightForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightHand/Humanoid1:HumanoidCharacter_Ctrl_RightHandThumb1/Humanoid1:HumanoidCharacter_Ctrl_RightHandThumb2
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_RightShoulder/Humanoid1:HumanoidCharacter_Ctrl_RightArm/Humanoid1:HumanoidCharacter_Ctrl_RightArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightForeArm/Humanoid1:HumanoidCharacter_Ctrl_RightForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightHand/Humanoid1:HumanoidCharacter_Ctrl_RightHandThumb1/Humanoid1:HumanoidCharacter_Ctrl_RightHandThumb2/Humanoid1:HumanoidCharacter_Ctrl_RightHandThumb3
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_Hips/Humanoid1:HumanoidCharacter_Ctrl_Spine/Humanoid1:HumanoidCharacter_Ctrl_Spine1/Humanoid1:HumanoidCharacter_Ctrl_Spine2/Humanoid1:HumanoidCharacter_Ctrl_RightShoulder/Humanoid1:HumanoidCharacter_Ctrl_RightArm/Humanoid1:HumanoidCharacter_Ctrl_RightArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightForeArm/Humanoid1:HumanoidCharacter_Ctrl_RightForeArmRoll/Humanoid1:HumanoidCharacter_Ctrl_RightHand/Humanoid1:HumanoidCharacter_Ctrl_RightHandThumb1/Humanoid1:HumanoidCharacter_Ctrl_RightHandThumb2/Humanoid1:HumanoidCharacter_Ctrl_RightHandThumb3/Humanoid1:HumanoidCharacter_Ctrl_RightHandThumb4
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_HipsEffector
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_LeftAnkleEffector
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_LeftElbowEffector
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_LeftFootEffector
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_LeftHandIndexEffector
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_LeftHandMiddleEffector
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_LeftHandPinkyEffector
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_LeftHandRingEffector
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_LeftHandThumbEffector
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_LeftHipEffector
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_LeftKneeEffector
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_LeftShoulderEffector
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_LeftWristEffector
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_RightAnkleEffector
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_RightElbowEffector
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_RightFootEffector
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_RightHandIndexEffector
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_RightHandMiddleEffector
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_RightHandPinkyEffector
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_RightHandRingEffector
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_RightHandThumbEffector
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_RightHipEffector
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_RightKneeEffector
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_RightShoulderEffector
+        weight: 0
+      - path: Humanoid1:HumanoidCharacter_Ctrl_Reference/Humanoid1:HumanoidCharacter_Ctrl_RightWristEffector
+        weight: 0
+      maskType: 0
+      maskSource: {instanceID: 0}
     isReadable: 1
   meshes:
     lODScreenPercentages: []
