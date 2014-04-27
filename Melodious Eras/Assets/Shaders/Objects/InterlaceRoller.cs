@@ -14,6 +14,7 @@ public class InterlaceRoller : MonoBehaviour
 	void Start()
 	{
         initialColor = this.renderer.materials[screenMatIndex].GetColor("_TintColor");
+
         if (_Light == null && this.light != null)
             _Light = this.light;
 	}

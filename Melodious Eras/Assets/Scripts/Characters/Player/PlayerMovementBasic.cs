@@ -376,6 +376,7 @@ public class PlayerMovementBasic : MonoBehaviour
             case Acrobatics.ClimbLedge: //IK for climbing ledge. Not tested yet
                 startTime = m_ClimbMatchTargetStart;
                 endTime = m_ClimbMatchTargetStop;
+                this.speed = 0f;
                 while (this.anim.GetBool(HashIDs.climbeLedge_bool))
                 {
                     this.rigidbody.isKinematic = true;
@@ -383,10 +384,10 @@ public class PlayerMovementBasic : MonoBehaviour
                     if (state.IsName("Jump to Ledge") && state.normalizedTime > startTime)
                     {
                         this.anim.MatchTarget(matchTarget, new Quaternion(), AvatarTarget.RightHand, new MatchTargetWeightMask(Vector3.one, 0), startTime, endTime);
+                        this.anim.SetFloat(HashIDs.speed_float, 0f);
                     }
                     yield return endOfFrame;
                 }
-                this.anim.SetFloat(HashIDs.speed_float, 0f);
                 break;
         }
         this.rigidbody.isKinematic = false;
