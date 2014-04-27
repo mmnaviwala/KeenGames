@@ -18,6 +18,8 @@ public class PlayerMovementBasic : MonoBehaviour
     private const float m_VaultMatchTargetStop = 0.51f;
     private const float m_ClimbMatchTargetStart = 0.1f;  //.19f;
     private const float m_ClimbMatchTargetStop = .3f;
+
+    private const int AIM_LAYER = 2;
     
 
     public float speed = 0f;                //current speed of character
@@ -108,7 +110,7 @@ public class PlayerMovementBasic : MonoBehaviour
 
         anim.SetFloat(HashIDs.speed_float, 0f); //initializes animator to idle stance
 		anim.SetBool(HashIDs.aiming_bool, isShooting);
-		anim.SetLayerWeight(1, 1f);             //Layer 0 = base, Layer 1 = aim layer. This makes sure aiming mask overrides default arm animations
+        anim.SetLayerWeight(AIM_LAYER, 1f);             //This makes sure aiming mask overrides default arm animations
         this.anim.SetFloat(HashIDs.jumpLeg_float, -1f); //leaving at -1 for now. Leads to weird falling when set to 1
 		//anim.SetLayerWeight(2, 1f);           //optional gun grip, but too small to notice for now
     }

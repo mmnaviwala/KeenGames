@@ -97,7 +97,7 @@ public class EnemyAI : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        this.anim.SetBool(HashIDs.playerInSight_bool, false);
+        this.anim.SetBool(HashIDs.aiming_bool, false);
 		if(!this.stats.isDead)
 		{
 			//this.seesPlayer = false;
@@ -205,7 +205,7 @@ public class EnemyAI : MonoBehaviour
 		//stop movement
         nav.speed = 0;
         this.anim.SetFloat(HashIDs.speed_float, 0f);
-        this.anim.SetBool(HashIDs.playerInSight_bool, true);
+        this.anim.SetBool(HashIDs.aiming_bool, true);
 
 		this.Attack(currentEnemy);
     }

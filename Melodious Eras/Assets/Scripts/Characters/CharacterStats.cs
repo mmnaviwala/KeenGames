@@ -4,8 +4,10 @@ using System.Collections;
 public enum Faction { Enemy1, Enemy2, Neutral, Player }
 
 [AddComponentMenu("Scripts/Characters/Character Stats")]
-public class CharacterStats : MonoBehaviour 
+public class CharacterStats : MonoBehaviour
 {
+    protected int baseLayer, woundedLayer, aimLayer;
+
     public Faction faction;
     public SecurityArea currentSecArea;
     public Suit suit;
@@ -18,6 +20,7 @@ public class CharacterStats : MonoBehaviour
     public Inventory inventory = new Inventory(15);
     public Inventory tempInventory = new Inventory(); //for level-specific items like keys
     public Transform lookatTarget;
+    protected Animator anim;
 
     [SerializeField]
     protected int _health = 100;
@@ -29,7 +32,11 @@ public class CharacterStats : MonoBehaviour
     protected float _maxStamina = 100;
     [SerializeField]
     protected float _adrenalineMultiplier = 1;
+    [SerializeField][Range(0,1)]
+    protected float _resilience = 0f; //multiplier for Wounded Layer blending. 0 = no Wounded animation at all
     protected bool _isDead = false;
+    protected float lastHitTakenTime = 0;
+    
 
     [SerializeField]
     protected int _meleeDamage = 10; //damage modifier could be calculated by melee weapons
@@ -51,7 +58,9 @@ public class CharacterStats : MonoBehaviour
     #endregion
 
     // Use this for initialization
-    void Start() { }
+    void Start() {
+        anim = this.GetComponent<Animator>();
+    }
 	// Update is called once per frame
     void Update() { }
 
@@ -61,6 +70,7 @@ public class CharacterStats : MonoBehaviour
     /// <param name="damage"></param>
     public virtual void TakeDamage(int damage) 
     {
+        lastHitTakenTime = Time.time;
         if (this.suit == null || this.suit.armor == 0)
         {
             this._health -= (_health > damage) ? damage : _health;
@@ -95,6 +105,7 @@ public class CharacterStats : MonoBehaviour
     /// <param name="damage"></param>
     public virtual void TakeDamageThroughArmor(int damage)
     {
+        lastHitTakenTime = Time.time;
         this._health -= (_health > damage) ? damage : _health;
         if (this._health == 0)
             this.Die();
@@ -121,7 +132,6 @@ public class CharacterStats : MonoBehaviour
     public virtual void PickUp(Item item) { }
     public virtual void SwitchWeapon(WeaponClass slot) { }
     public virtual void HolsterWeapon() { }
-
 
     public virtual void ReduceStamina(float value)
     {
@@ -159,5 +169,19 @@ public class CharacterStats : MonoBehaviour
             yield return _eof;
 
         this._exhausted = false;
+    }
+
+    public virtual int FindAnimLayer(string name)
+    {
+        for (int a = 0; a < anim.layerCount; a++)
+            if (anim.GetLayerName(a) == name)
+                return a;
+        return -1;
+    }
+    protected virtual void SetAnimLayers()
+    {
+        this.baseLayer = FindAnimLayer("Base Layer");
+        this.woundedLayer = FindAnimLayer("Wounded");
+        this.aimLayer = FindAnimLayer("Shooting");
     }
 }

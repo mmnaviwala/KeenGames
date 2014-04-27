@@ -17,7 +17,6 @@ public static class HashIDs
 	//booleans
 	public static int dead_bool;
 	public static int sneaking_bool;
-	public static int playerInSight_bool;
 	public static int aiming_bool;
 	public static int open_bool;
 	public static int onGround_bool;
@@ -44,7 +43,6 @@ public static class HashIDs
             locomotion_state = Animator.StringToHash("Locomotion");
             speed_float = Animator.StringToHash("Speed");
             sneaking_bool = Animator.StringToHash("Sneaking");
-            playerInSight_bool = Animator.StringToHash("PlayerInSight");
             aiming_bool = Animator.StringToHash("Aiming");
             aimWeight_float = Animator.StringToHash("AimWeight");
             angularSpeed_float = Animator.StringToHash("AngularSpeed");

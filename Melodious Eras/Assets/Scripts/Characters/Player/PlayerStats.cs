@@ -11,6 +11,7 @@ public class PlayerStats : CharacterStats
     #region variables
     //visibility multipliers
     private const float CROUCH_MULTIPLIER = .5f;    //crouching reduces visibility by 50%
+
     public List<Light> affectingLights;             //will be used in calculating visibility
     public Flashlight flashlight;
     private float _visibility = 1;
@@ -21,7 +22,6 @@ public class PlayerStats : CharacterStats
 
 
     public AudioClip deathClip, meleeClip;
-    private Animator anim;
     private PlayerMovementBasic _playerMovement;
     private HUD_Stealth hud;
 
@@ -42,6 +42,8 @@ public class PlayerStats : CharacterStats
         _playerMovement = this.GetComponent<PlayerMovementBasic>();
         hud = this.GetComponent<HUD_Stealth>();
         anim = this.GetComponent<Animator>();
+        this.SetAnimLayers();
+
         this.currentSecArea = GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<SecurityArea>(); //base security area
 
         //registering an equipped weapon, if any
@@ -126,11 +128,6 @@ public class PlayerStats : CharacterStats
             targetP.TakeDamage(_meleeDamage, this);
         }
     }
-    public override void TakeDamage(bool instantKill)
-    {
-        this.Die();
-    }
-
     IEnumerator PerformBackstab(CharacterStats targetP)
     {
         anim.SetBool(HashIDs.backstab_bool, true);
@@ -139,14 +136,26 @@ public class PlayerStats : CharacterStats
 
         anim.SetBool(HashIDs.backstab_bool, false);
     }
+
+    public override void TakeDamage(bool instantKill)
+    {
+        lastHitTakenTime = Time.time;
+        this.Die();
+    }
     protected override void Die()
     {
         this._isDead = true;
         anim.SetBool(HashIDs.dead_bool, isDead);
+        this.anim.SetBool(HashIDs.aiming_bool, false);
         _playerMovement.enabled = false;
         GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<EndOfLevel>().EndLevel(true);
         //fade to black
         //reload last checkpoint
+    }
+
+    private void RegenHealth()
+    {
+        
     }
 
     /// <summary>

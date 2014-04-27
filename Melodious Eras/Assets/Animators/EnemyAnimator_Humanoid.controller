@@ -32,12 +32,6 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: PlayerInSight
-    m_Type: 4
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
   - m_Name: Shot 0
     m_Type: 1
     m_DefaultFloat: 0
@@ -342,7 +336,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: PlayerInSight
+    m_ConditionEvent: Aiming
     m_EventTreshold: 0
     m_ExitTime: .899999976
   m_Atomic: 1
@@ -360,7 +354,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: PlayerInSight
+    m_ConditionEvent: Aiming
     m_EventTreshold: 0
     m_ExitTime: .817073226
   m_Atomic: 1
@@ -626,10 +620,6 @@ StateMachine:
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
     data:
-      first: {fileID: 110260934}
-      second:
-      - {fileID: 110185914}
-    data:
       first: {fileID: 0}
       second: []
     data:
@@ -644,6 +634,10 @@ StateMachine:
     data:
       first: {fileID: 110245903}
       second: []
+    data:
+      first: {fileID: 110260934}
+      second:
+      - {fileID: 110185914}
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: -204, y: 48, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
