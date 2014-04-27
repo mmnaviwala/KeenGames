@@ -74,6 +74,7 @@ public class HudBar
 
 
         GUI.Label(stringLabelSize, textToDisplay, smallFont);
+        GUI.Label(numberLabelSize, string.Format("{0:f1}", currentNumber), bigFont);
     }
 }
 
@@ -91,7 +92,6 @@ public class HealthBar : HudBar
         this.currentNumber = player.health;
 
         base.Display();
-        GUI.Label(numberLabelSize, string.Format("{0}", currentNumber), bigFont);
     }
 }
 
@@ -110,7 +110,6 @@ public class ArmorBar : HudBar
         this.currentNumber = player.suit.armor;
 
         base.Display();
-        GUI.Label(numberLabelSize, string.Format("{0}", currentNumber), bigFont);
     }
 }
 
@@ -124,7 +123,6 @@ public class AmmoBar : HudBar
         textToDisplay = player.equippedWeapon.weaponName; //needs to be in each update, for when player switches weapons
 
         base.Display();
-        GUI.Label(numberLabelSize, string.Format("{0}", currentNumber), bigFont);
     }
 }
 [System.Serializable]
@@ -141,6 +139,5 @@ public class BatteryBar : HudBar
         this.currentNumber = player.suit.batteryLife;
 
         base.Display();
-        GUI.Label(numberLabelSize, string.Format("{0:f1}", currentNumber), bigFont);
     }
 }

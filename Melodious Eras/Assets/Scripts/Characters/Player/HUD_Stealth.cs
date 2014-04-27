@@ -30,10 +30,10 @@ public class HUD_Stealth : MonoBehaviour
 
         //GUI stuff
         width_max_health = Screen.width / 3;
-        width_max_armor = width_max_health * ((float)suit.maxArmor / stats.maxHealth);
+        width_max_armor = width_max_health * (suit.maxArmor / stats.maxHealth);
 
         healthBarMax = new Rect(Screen.height / 20, Screen.height / 20, width_max_health, width_max_health / 10);
-        healthBarCurrent = new Rect(healthBarMax.xMin, healthBarMax.yMin, width_max_health * ((float)stats.health / stats.maxHealth), healthBarMax.height);
+        healthBarCurrent = new Rect(healthBarMax.xMin, healthBarMax.yMin, width_max_health * (stats.health / stats.maxHealth), healthBarMax.height);
 
         armorBarMax = new Rect(healthBarMax.xMin, healthBarMax.xMin * 2.5f, width_max_armor, healthBarMax.height);
         armorBarCurrent = new Rect(healthBarMax.xMin, healthBarMax.xMin * 2.5f, width_max_armor * ((float)suit.armor / suit.maxArmor), healthBarMax.height);

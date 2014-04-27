@@ -3355,7 +3355,7 @@ MonoBehaviour:
   fullFriction: {fileID: 13400000, guid: 505fe72ad171fa24d96bc176a4bebe01, type: 2}
   ignorePlayer:
     serializedVersion: 2
-    m_Bits: 4294966267
+    m_Bits: 4294904825
   targetPoint: {x: 0, y: 0, z: 0}
   obstacleLayers:
     serializedVersion: 2
@@ -3400,6 +3400,7 @@ MonoBehaviour:
   _stamina: 100
   _maxStamina: 100
   _adrenalineMultiplier: 1
+  _resilience: 1
   _meleeDamage: 20
   affectingLights: []
   flashlight: {fileID: 11400006}

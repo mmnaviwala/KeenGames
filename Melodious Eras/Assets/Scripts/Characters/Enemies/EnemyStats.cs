@@ -33,35 +33,33 @@ public class EnemyStats : CharacterStats
             ((Gun)equippedWeapon).infiniteAmmo = true;
     }
 
-    /*public void Update()
+    public void Update()
     {
-        if (isDead)
-        {
-            ((PlayerStats)(ai.currentEnemy))._closeQuarterEnemies.charactersInRange.Remove(this);
-            Destroy(this.gameObject);
-        }
-    }*/
+        this.RegenerateHealth();
+    }
 
     #region Damage taking and stat changes
     public override void TakeDamage(int damage, CharacterStats source)
     {
-        ai.currentEnemy = source;
+        if(ai.currentEnemy == null)
+            ai.currentEnemy = source;
+
         if (suit != null && suit.armor > 0)
             suit.armor -= damage;
         else
             this._health -= damage;
 
         if (this.isVulnerable && this.health <= 0)
-        {
             this.Die();
+        else
+        {
+            regenWaitModifier = (health > 50) ? 1 : Mathf.Sqrt(health / 50);
         }
     }
     public override void TakeDamage(bool instantKill)
     {
         if (this.isVulnerable)
-        {
             this.Die();
-        }
     }
     /// <summary>
     /// Deals damage to invulnerable enemy. Use this to tell the enemy who just attacked it
@@ -70,13 +68,25 @@ public class EnemyStats : CharacterStats
     /// <param name="source"></param>
     public override void TakeDamageThroughArmor(int damage, CharacterStats source)
     {
-        ai.currentEnemy = source;
-        this._health -= damage;
-        if (this.health <= 0)
-        {
-            this.Die();
-        }
+        if(ai.currentEnemy == null)
+            ai.currentEnemy = source;
 
+        this._health -= damage;
+
+        if (this.health <= 0)
+            this.Die();
+        else
+            regenWaitModifier = Mathf.Max(1, Mathf.Lerp(0, 50, this.health)); //going with constant 50, rather than half of max health
+    }
+
+    protected override void RegenerateHealth()
+    {
+        if (this._health < maxHealth && Time.time > lastHitTakenTime + Difficulty.enemyRegenWait / regenWaitModifier)
+        {
+            _health += Difficulty.enemyRegenSpeed * Time.deltaTime;
+            if (_health > maxHealth)
+                _health = maxHealth;
+        }
     }
 
 

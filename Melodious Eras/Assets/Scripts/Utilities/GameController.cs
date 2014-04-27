@@ -2,12 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public enum Difficulty { Easy = 0, Medium = 1, Hard = 2 , Realistic = 3}
+public enum DifficultyLevel { Easy = 0, Medium = 1, Hard = 2 , Realistic = 3}
 public enum QualityLevel_5FS { VeryFast, Fast, Simple, Good, High, VeryHigh, Ultra};
 [AddComponentMenu("Scripts/Utilities/Game Controller")]
 public class GameController : MonoBehaviour
 {
-    public Difficulty difficulty = Difficulty.Medium;
+    public DifficultyLevel difficulty = DifficultyLevel.Medium;
 
 	//Level settings; consider putting in seperate class
     public Vector3 wind;
@@ -17,13 +17,7 @@ public class GameController : MonoBehaviour
     private static float defaultShadowDistance = 100;
 	public float farClipDistance = -1;
 
-    private static float _difficulty_attackSpeedMultiplier; //lower = harder
-    private static float _difficulty_playerDamageMultiplier;//lower = harder
-    private static float _difficulty_enemyDamageMultiplier; //higher = harder
 
-    public static float difficulty_attackSpeedMultiplier  { get { return _difficulty_attackSpeedMultiplier;  } }
-    public static float difficulty_playerDamageMultiplier { get { return _difficulty_playerDamageMultiplier; } }
-    public static float difficulty_enemyDamageMultiplier  { get { return _difficulty_enemyDamageMultiplier;  } }
 
     // Use this for initialization
     void Awake()
@@ -41,7 +35,7 @@ public class GameController : MonoBehaviour
         XMLUtilities.Test();
 		HashIDs.Initialize();
 
-        AdjustDifficultSettings(difficulty);
+        Difficulty.AdjustDifficultSettings(difficulty);
     }
 
 
@@ -57,37 +51,7 @@ public class GameController : MonoBehaviour
         Screen.lockCursor = !show;
     }
 
-    public void AdjustDifficultSettings(Difficulty _difficulty)
-    {
-        switch (_difficulty)
-        {
-            case Difficulty.Easy:
-                _difficulty_attackSpeedMultiplier =  1.50f;
-                _difficulty_enemyDamageMultiplier =  0.75f;
-
-                _difficulty_playerDamageMultiplier = 1.50f;
-                break;
-            case Difficulty.Medium:
-                _difficulty_attackSpeedMultiplier =  1.00f;
-                _difficulty_enemyDamageMultiplier =  1.00f;
-
-                _difficulty_playerDamageMultiplier = 1.00f;
-                break;
-            case Difficulty.Hard:
-                _difficulty_attackSpeedMultiplier =  0.75f;
-                _difficulty_enemyDamageMultiplier =  1.50f;
-
-                _difficulty_playerDamageMultiplier = 0.75f;
-                break;
-            case Difficulty.Realistic:
-                _difficulty_attackSpeedMultiplier =  0.50f;
-                _difficulty_enemyDamageMultiplier =  2.00f;
-
-                _difficulty_playerDamageMultiplier = 1.50f;
-                break;
-        }
- 
-    }
+    
 
     /// <summary>
     /// Modular calculation that takes negative numbers into consideration (-1 % 10 = 9)
@@ -98,5 +62,80 @@ public class GameController : MonoBehaviour
     public static int Mod(int x, int m)
     {
         return x < 0 ? x + m : x % m;
+    }
+}
+
+public static class Difficulty
+{
+    private static float _attackSpeedMultiplier; //enemies only; lower = harder
+    private static float _playerDamageMultiplier,   _enemyDamageMultiplier;
+    private static float _playerRegenWait,          _enemyRegenWait;
+    private static float _playerRegenSpeed,         _enemyRegenSpeed;
+
+    public static float attackSpeedMultiplier { get { return _attackSpeedMultiplier; } }
+
+    public static float playerDamageMultiplier { get { return _playerDamageMultiplier; } }
+    public static float enemyDamageMultiplier { get { return _enemyDamageMultiplier; } }
+
+    public static float playerRegenWait { get { return _playerRegenWait; } }
+    public static float enemyRegenWait { get { return _enemyRegenWait; } }
+
+    public static float playerRegenSpeed { get { return _playerRegenSpeed; } }
+    public static float enemyRegenSpeed { get { return _enemyRegenSpeed; } }
+
+    public static void AdjustDifficultSettings(DifficultyLevel _difficulty)
+    {
+        switch (_difficulty)
+        {
+            case DifficultyLevel.Easy:
+                _attackSpeedMultiplier = 1.50f;
+
+                _enemyDamageMultiplier = 0.75f;
+                _playerDamageMultiplier = 1.50f;
+
+                _playerRegenWait = 5f;
+                _enemyRegenWait = 15f;
+
+                _playerRegenSpeed = 10f;
+                _enemyRegenSpeed = 5f;
+                break;
+            case DifficultyLevel.Medium:
+                _attackSpeedMultiplier = 1.00f;
+
+                _enemyDamageMultiplier = 1.00f;
+                _playerDamageMultiplier = 1.00f;
+
+                _playerRegenWait = 10f;
+                _enemyRegenWait = 10f;
+
+                _playerRegenSpeed = 7.5f;
+                _enemyRegenSpeed = 7.5f;
+                break;
+            case DifficultyLevel.Hard:
+                _attackSpeedMultiplier = 0.75f;
+
+                _enemyDamageMultiplier = 1.50f;
+                _playerDamageMultiplier = 0.75f;
+
+                _playerRegenWait = 12.5f;
+                _enemyRegenWait = 7.5f;
+
+                _playerRegenSpeed = 5f;
+                _enemyRegenSpeed = 10f;
+                break;
+            case DifficultyLevel.Realistic:
+                _attackSpeedMultiplier = 0.50f;
+
+                _enemyDamageMultiplier = 2.00f;
+                _playerDamageMultiplier = 1.50f;
+
+                _playerRegenWait = 20f;
+                _enemyRegenWait = 20f;
+
+                _playerRegenSpeed = 2.5f;
+                _enemyRegenSpeed = 7.5f;
+                break;
+        }
+
     }
 }

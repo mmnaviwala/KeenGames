@@ -36,4 +36,9 @@ public class EnemySight : MonoBehaviour {
             this.charactersInRange.Remove(other.GetComponent<CharacterStats>());
         }
     }
+
+    public void DetectNearbyEnemies()
+    {
+ 
+    }
 }

@@ -15,8 +15,8 @@ public class EnemyAI : MonoBehaviour
     public CharacterStats currentEnemy;
 
     [SerializeField][Range(0, 2)]   private float hearingMultiplier = 1;     //0 = deaf, 1 = normal, >1 = dogs & security
-    [SerializeField][Range(0, 1)]   private float baseAwarenessMultiplier = .5f;
-    [SerializeField][Range(0, 2)]   private float fieldOfView = 160f;
+    [SerializeField][Range(0, 2)]   private float baseAwarenessMultiplier = 1f;
+    [SerializeField][Range(0, 360)]   private float fieldOfView = 160f;
     [SerializeField]                private float shootingRange;
     [SerializeField]                private float meleeRange;
     [SerializeField][Range(0, 5)]   private float attackSpeed = 1f;
@@ -26,7 +26,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField]                private float patrolWaitTime = 2;
     public Waypoint[] patrolWaypoints;
     private float awarenessMultiplier;   //
-    private float fov, fovSqrt;
+    private float fov;
     private float lightDifferenceMultiplier; //optional feature. Enemies in high-light areas will find it harder to detect players in low-light areas.
     private float nextShotTime = 0;
 
@@ -85,8 +85,7 @@ public class EnemyAI : MonoBehaviour
 	void Start () 
     {
 		ai_activity = Patrolling;
-        fov = sight.fovAngle * awarenessMultiplier / 2;
-        fovSqrt = Mathf.Sqrt(fov);
+        fov = sight.fovAngle * awarenessMultiplier;
 		//keeping rays permanent to avoid garbage collection
 		rayUpper = new Ray();
 		rayLower = new Ray();
@@ -229,10 +228,11 @@ public class EnemyAI : MonoBehaviour
 				rayLower.direction =  (ch.collider.bounds.min + Vector3.up*charHeight/8) - this.eyes.position;
 				rayCenter.direction = (ch.collider.bounds.min + Vector3.up*charHeight/2) - this.eyes.position;
 				
+                //TODO: ADJUST FIELD OF VIEW
 				//reducing sight distance at wide angles, to simulate peripheral vision
 				//This determines whether or not the enemy can even detect the player
 				float adjustedSightDistance = (angle > 30) ?
-					sightDistance * (Mathf.Sqrt(fov - angle) / fovSqrt) :
+					    sightDistance * (Mathf.Sqrt((fov - angle)/fov/8)) :
 						sightDistance;
 				
 				//if any rays hit
@@ -301,15 +301,13 @@ public class EnemyAI : MonoBehaviour
     {
         this.alerted = true;
         this.awarenessMultiplier = Mathf.Min(baseAwarenessMultiplier * _awarenessMultiplier, 1);
-        fov = sight.fovAngle * awarenessMultiplier / 2;
-        fovSqrt = Mathf.Sqrt(fov);
+        fov = Mathf.Clamp(sight.fovAngle * awarenessMultiplier,  0,  80);
     }
     public void Alert(float _awarenessMultiplier, Vector3 source)
     {
         this.alerted = true;
         this.awarenessMultiplier = Mathf.Min(baseAwarenessMultiplier * _awarenessMultiplier, 1);
-        fov = sight.fovAngle * awarenessMultiplier / 2;
-        fovSqrt = Mathf.Sqrt(fov);
+        fov = Mathf.Clamp(sight.fovAngle * awarenessMultiplier, 0, 80);
         //implement inspection of source
     }
     #endregion
@@ -335,19 +333,20 @@ public class EnemyAI : MonoBehaviour
 
     void Attack(CharacterStats target)
     {
-		//play animation, aimed at player
-		
 		//at correct point in animation:
-
         if (Time.time > nextShotTime)
         {
-            if (stats.equippedWeapon != null && Vector3.Distance(this.transform.position, target.transform.position) > 5)
+            if (stats.equippedWeapon != null/* && Vector3.Distance(this.transform.position, target.transform.position) > 5*/)
             {
-                stats.equippedWeapon.Fire(target);
-                //if Automatic weapon, burst-fire
-                nextShotTime = Time.time + (attackSpeed * GameController.difficulty_attackSpeedMultiplier);
+                if(stats.equippedWeapon is MeleeWeapon || stats.equippedWeapon is SemiAutoWeapon)
+                    stats.equippedWeapon.Fire(target);
+                else if (stats.equippedWeapon is AutoWeapon)
+                {
+                    //if Automatic weapon, burst-fire
+                }
+                nextShotTime = Time.time + (attackSpeed * Difficulty.attackSpeedMultiplier);
             }
-            else
+            else //once melee is working
             {
                 //perform melee attack
             }

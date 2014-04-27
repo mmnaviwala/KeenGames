@@ -35,14 +35,14 @@ public class LaserPistol : SemiAutoWeapon
                     {
                         if (hit.collider.tag == Tags.ENEMY)
                         {
-                            hit.collider.transform.GetComponent<EnemyStats>().TakeDamage((int)(damage * GameController.difficulty_playerDamageMultiplier));
+                            hit.collider.transform.GetComponent<EnemyStats>().TakeDamage((int)(damage * Difficulty.playerDamageMultiplier));
                         }
                         else if (hit.collider.tag == Tags.BREAKABLE)
                         {
                             //Deals damage to the object. Some objects (light lamps) have multiple breakable components (such as CircuitLight & FlipSwitch)
                             BreakableObject[] components = hit.collider.transform.GetComponents<BreakableObject>();
                             for (int i = 0; i < components.Length; i++)
-                                components[i].TakeDamage((int)(damage * GameController.difficulty_playerDamageMultiplier));
+                                components[i].TakeDamage((int)(damage * Difficulty.playerDamageMultiplier));
 
                             if (hit.rigidbody && !hit.rigidbody.isKinematic) //applies force, if able
                                 hit.rigidbody.AddForce(rayFromCam.direction * 10);
@@ -84,7 +84,7 @@ public class LaserPistol : SemiAutoWeapon
                 nextShotTime = shotFiredTime + fireRate;
 
                 StartCoroutine(ShootLaser(this.barrelExit.position, target.transform.position + Vector3.up));
-                target.TakeDamage((int)(damage * GameController.difficulty_enemyDamageMultiplier));
+                target.TakeDamage((int)(damage * Difficulty.enemyDamageMultiplier));
 
                 if (!infiniteAmmo)
                     ammoInClip -= ammoPerShot;

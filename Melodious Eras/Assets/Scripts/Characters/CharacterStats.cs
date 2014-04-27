@@ -23,9 +23,9 @@ public class CharacterStats : MonoBehaviour
     protected Animator anim;
 
     [SerializeField]
-    protected int _health = 100;
+    protected float _health = 100;
     [SerializeField]
-    protected int _maxHealth = 100;
+    protected float _maxHealth = 100;
     [SerializeField]
     protected float _stamina = 100;
     [SerializeField]
@@ -33,9 +33,11 @@ public class CharacterStats : MonoBehaviour
     [SerializeField]
     protected float _adrenalineMultiplier = 1;
     [SerializeField][Range(0,1)]
-    protected float _resilience = 0f; //multiplier for Wounded Layer blending. 0 = no Wounded animation at all
+    protected float _resilience = 1; //multiplier for Wounded Layer blending. 0 = no Wounded animation at all
     protected bool _isDead = false;
+
     protected float lastHitTakenTime = 0;
+    protected float regenWaitModifier = 1; //the lower this character's health, the longer it takes before they start regenerating
     
 
     [SerializeField]
@@ -49,8 +51,8 @@ public class CharacterStats : MonoBehaviour
 
     #region accessors & mutators
     public bool exhausted   { get { return _exhausted;  } }
-    public int health       { get { return _health;     } }
-    public int maxHealth    { get { return _maxHealth;  } }
+    public float health     { get { return _health; } }
+    public float maxHealth  { get { return _maxHealth; } }
     public float stamina    { get { return _stamina;    } }
     public float maxStamina { get { return _maxStamina; } }
     public bool isDead      { get { return _isDead;     } }
@@ -88,6 +90,11 @@ public class CharacterStats : MonoBehaviour
 
         if (health == 0)
             this.Die();
+        else
+        {
+            regenWaitModifier = (health > 50) ? 1 : Mathf.Sqrt(health / 50); //going with constant 50, rather than half of max health
+        }
+        Debug.Log(regenWaitModifier);
     }
     /// <summary>
     /// Deals damage to this character, letting them know who hit them.
@@ -109,6 +116,10 @@ public class CharacterStats : MonoBehaviour
         this._health -= (_health > damage) ? damage : _health;
         if (this._health == 0)
             this.Die();
+        else
+        {
+            regenWaitModifier = (health > 50) ? 1 : Mathf.Sqrt(health / 50);
+        }
     }
     /// <summary>
     /// Deals damage to this character, ignoring any armor and telling them who hit them.
@@ -153,6 +164,32 @@ public class CharacterStats : MonoBehaviour
             if (this._stamina > 100)
                 this._stamina = 100;
         }
+    }
+    /// <summary>
+    /// Regenerates health at rate per second.
+    /// </summary>
+    /// <param name="rate"></param>
+    public virtual void RegenerateHealth(float rate)
+    {
+ 
+    }
+    /// <summary>
+    /// Regenerates health each frame under certain conditions. Higher difficulty increases rate for enemies, reduces rate for player.
+    /// </summary>
+    protected virtual void RegenerateHealth()
+    {
+        
+    }
+    
+
+    /// <summary>
+    /// <para>Formula to blend Base Layer with Wounded Layer based on current health and resilience.</para>
+    /// <para>Single statement, should be inlined by compiler</para>
+    /// <para>Blending won't go higher than 75%</para>
+    /// </summary>
+    protected void BlendWoundLayer()
+    {
+        anim.SetLayerWeight(woundedLayer, (Mathf.Min(0.5f, 1.0f - ((float)health / maxHealth)) * _resilience));
     }
 
     /// <summary>

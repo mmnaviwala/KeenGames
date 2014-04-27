@@ -319,7 +319,7 @@ public class PlayerMovementBasic : MonoBehaviour
 		RaycastHit hit;
 		
 		
-		anim.SetLookAtWeight(1, .25f, 2);
+		anim.SetLookAtWeight(1, .125f, 2);
 		if(stats.lookatTarget != null)
 		{
 			//playerAnim.SetLookAtWeight(1, .5f, 1, 1, 1);
