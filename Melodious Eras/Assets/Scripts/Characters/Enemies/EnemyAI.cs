@@ -42,7 +42,7 @@ public class EnemyAI : MonoBehaviour
     private static Vector3 resetPos = new Vector3(999, 999, 999);
     private float lastPlayerSightingTime = 0;
 
-    private float awarenessOfPlayer = 0f;
+    private float awarenessOfPlayer = 0f; //0 to 1. When reaching 1, enemy notices player and attacks
     //private Dictionary<Collider, CharacterStats> awarenessOfChar;     //for multi-faction AI. not implemented yet
 
     private NavMeshAgent nav;
@@ -217,7 +217,7 @@ public class EnemyAI : MonoBehaviour
 	{
 		foreach(CharacterStats ch in sight.charactersInRange)
 		{
-			float angle = Vector3.Angle(ch.transform.position + Vector3.up - this.eyes.position, this.eyes.forward);
+			float angle = Vector3.Angle(ch.transform.position + 2*Vector3.up - this.eyes.position, this.eyes.forward);
 			if ( angle < fov)
 			{
 				//calculating rays for 3 points on the character
@@ -232,7 +232,7 @@ public class EnemyAI : MonoBehaviour
 				//reducing sight distance at wide angles, to simulate peripheral vision
 				//This determines whether or not the enemy can even detect the player
 				float adjustedSightDistance = (angle > 30) ?
-					    sightDistance * (Mathf.Sqrt((fov - angle)/fov/8)) :
+					    Mathf.Pow(angle - fov, 2)/fov:
 						sightDistance;
 				
 				//if any rays hit

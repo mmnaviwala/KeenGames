@@ -280,8 +280,14 @@ public class PlayerMovementBasic : MonoBehaviour
 
         // Facing and running the desired direction. If-condition is there because Vector2.Angle only returns positive 0-180
         float angle = Vector2.Angle(Vector2.up, moveDirection);
+        mainCam.followSpeed = (angle <= 90 || speed < 3) ? (float)CameraFollowSpeed.Default : (float)CameraFollowSpeed.Aiming * 2;
+
+
         if (moveDirection.x < 0)
+        {
             angle = -angle;
+        }
+
 
         //Rotates character to face desired direction, if not aiming
         if (!isAiming && moving && !jumping)
@@ -319,7 +325,7 @@ public class PlayerMovementBasic : MonoBehaviour
 		RaycastHit hit;
 		
 		
-		anim.SetLookAtWeight(1, .125f, 2);
+		anim.SetLookAtWeight(1f, .125f, .75f);
 		if(stats.lookatTarget != null)
 		{
 			//playerAnim.SetLookAtWeight(1, .5f, 1, 1, 1);
