@@ -11,13 +11,15 @@ public class CircuitLight : CircuitNode
 
 	private Transform cam;                                  //position used when calculating flare intensity
 	public float flareDistance = 10, flareBrightness = 1;   //optional flare stats
-	public Light[] ambientLight;                            //Optional (faked) ambient lighting for this light
+    public Light[] ambientLight;                            //Optional (faked) ambient lighting for this light; functionally identical to the lightbulb
+    private LightShafts[] lightbulbShafts;
 
 	// Use this for initialization
 
     void Awake()
     {
 		cam = Camera.main.transform;
+
         if (this.electricGrid != null) //Plugging this node into the electric grid
             this.PlugIn(electricGrid);
 
@@ -27,6 +29,7 @@ public class CircuitLight : CircuitNode
 			if(lightbulb == null)
 				lightbulb = this.transform.GetComponentInChildren<Light>();
 		}
+        lightbulbShafts = this.GetComponentsInChildren<LightShafts>();
 
 		if(lensFlare == null)
 			lensFlare = this.GetComponent<LensFlare>();
@@ -34,13 +37,14 @@ public class CircuitLight : CircuitNode
     }
 	void Start () 
     {
-        if(this.lightbulb != null)
+        /*if(this.lightbulb != null)
             lightbulb.enabled = this.hasPower && this.activated && !this.isBroken;
         if (this.lightbulb != null && this.hasPower && !isBroken && this.activated && flickering)
-            StartCoroutine(Flicker());
+            StartCoroutine(Flicker());*/
+        for (int a = 0; a < ambientLight.Length; a++)
+            ambientLight[a].color = this.lightbulb.color;
+        this.PerformSwitchAction(this.activated); //initializing
 
-		for(int a = 0; a < ambientLight.Length; a++)
-			ambientLight[a].color = this.lightbulb.color;
 	}
 
 	void Update()
@@ -61,6 +65,7 @@ public class CircuitLight : CircuitNode
 			lensFlare.enabled = false;
 	}
 
+    //Triggers will be used for detecting light levels on player
 	void OnTriggerEnter(Collider col)
 	{
 
@@ -107,6 +112,8 @@ public class CircuitLight : CircuitNode
 
 		for(int a = 0; a < ambientLight.Length; a++)
 			ambientLight[a].enabled = this.lightbulb.enabled;
+        for (int s = 0; s < lightbulbShafts.Length; s++)
+            lightbulbShafts[s].enabled = this.lightbulb.enabled;
 
         if (lightbulb.enabled && flickering)
         {
@@ -127,10 +134,13 @@ public class CircuitLight : CircuitNode
             durability -= damage;
             if (durability <= 0)
             {
+                //TODO: play breaking sound
                 this.lightbulb.enabled = false;
                 this.isBroken = true;
 				for(int a = 0; a < ambientLight.Length; a++)
-					ambientLight[a].enabled = false;
+                    ambientLight[a].enabled = false;
+                for (int s = 0; s < lightbulbShafts.Length; s++)
+                    lightbulbShafts[s].enabled = false;
             }
         }
     }
@@ -145,11 +155,11 @@ public class CircuitLight : CircuitNode
 		this.lightbulb.enabled = onOff && hasPower && activated && !isBroken;
 		
 		for(int a = 0; a < ambientLight.Length; a++)
-			ambientLight[a].enabled = this.lightbulb.enabled;
+            ambientLight[a].enabled = this.lightbulb.enabled;
+        for (int s = 0; s < lightbulbShafts.Length; s++)
+            lightbulbShafts[s].enabled = this.lightbulb.enabled;
 		
 		if (lightbulb.enabled && flickering)
-		{
 			StartCoroutine(Flicker());
-		}
 	}
 }

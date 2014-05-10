@@ -13,7 +13,12 @@ public class Flashlight : MonoBehaviour
     public GUIStyle lightGuiStyle, backGuiStyle;
 
     private Rect batteryMaxLifeRect, batteryLifeRect;
+	private LightShafts lightShafts;
 
+	void Awake()
+	{
+		lightShafts = this.GetComponent<LightShafts>();
+	}
 	// Use this for initialization
 	void Start ()
     {
@@ -30,6 +35,8 @@ public class Flashlight : MonoBehaviour
         
         batteryMaxLifeRect = new Rect(startX, Screen.height - 2 * barHeight, barWidth, barHeight);
         batteryLifeRect = batteryMaxLifeRect;
+		if(lightShafts)
+			lightShafts.enabled = light.enabled;
 	}
 	
 	// Update is called once per frame
@@ -40,6 +47,8 @@ public class Flashlight : MonoBehaviour
             if (Input.GetButtonDown(InputType.TOGGLE_FLASHLIGHT))
             {
                 light.enabled = !light.enabled;
+				if(lightShafts)
+					lightShafts.enabled = light.enabled;
             }
             if (!infiniteBattery && light.enabled)
             {
