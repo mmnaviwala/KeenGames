@@ -13,6 +13,7 @@ public class CircuitLight : CircuitNode
 	public float flareDistance = 10, flareBrightness = 1;   //optional flare stats
     public Light[] ambientLight;                            //Optional (faked) ambient lighting for this light; functionally identical to the lightbulb
     private LightShafts[] lightbulbShafts;
+    public bool overrideDustLevels = false;
 
 	// Use this for initialization
 
@@ -30,8 +31,9 @@ public class CircuitLight : CircuitNode
 				lightbulb = this.transform.GetComponentInChildren<Light>();
 		}
         lightbulbShafts = this.GetComponentsInChildren<LightShafts>();
-        for (int s = 0; s < lightbulbShafts.Length; s++)
-            lightbulbShafts[s].m_Brightness = Environment.globalDustLevel;
+        if(!overrideDustLevels)
+            for (int s = 0; s < lightbulbShafts.Length; s++)
+                lightbulbShafts[s].m_Brightness = Environment.globalDustLevel;
 
 		if(lensFlare == null)
 			lensFlare = this.GetComponent<LensFlare>();

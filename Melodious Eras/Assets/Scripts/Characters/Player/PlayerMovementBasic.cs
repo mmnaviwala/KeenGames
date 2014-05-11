@@ -102,7 +102,7 @@ public class PlayerMovementBasic : MonoBehaviour
     {
 		diveTime = new WaitForSeconds(1.367f);
 		vaultTime = new WaitForSeconds(1.220f);
-		climbTime = new WaitForSeconds(3f);
+		climbTime = new WaitForSeconds(2.367f);
 		endOfFrame = new WaitForEndOfFrame();
 
         mainCam = Camera.main.GetComponent<CameraMovement3D>();
@@ -117,6 +117,7 @@ public class PlayerMovementBasic : MonoBehaviour
 
     void OnDisable()
     {
+        this.rigidbody.velocity = Vector3.zero;
         anim.SetFloat(HashIDs.speed_float, 0f);
         anim.SetBool(HashIDs.sneaking_bool, false);
     }
@@ -372,6 +373,7 @@ public class PlayerMovementBasic : MonoBehaviour
                 while (this.anim.GetBool(HashIDs.vault_bool))
                 {
                     state = this.anim.GetCurrentAnimatorStateInfo(0);
+                    
                     if (state.IsName("Vault") && state.normalizedTime > startTime)
                     {
                         this.rigidbody.isKinematic = true;
@@ -385,7 +387,7 @@ public class PlayerMovementBasic : MonoBehaviour
                 startTime = m_ClimbMatchTargetStart;
                 endTime = m_ClimbMatchTargetStop;
                 this.speed = 0f;
-                while (this.anim.GetBool(HashIDs.climbeLedge_bool))
+                while (this.anim.GetBool(HashIDs.climbLedge_bool))
                 {
                     this.rigidbody.isKinematic = true;
                     state = this.anim.GetCurrentAnimatorStateInfo(0);
@@ -456,10 +458,10 @@ public class PlayerMovementBasic : MonoBehaviour
 				{
 					//climb wall
 					//need to match hand placement with top of wall
-					anim.SetBool(HashIDs.climbeLedge_bool, true);
+					anim.SetBool(HashIDs.climbLedge_bool, true);
                     StartCoroutine(ProcessMatchTarget(hitHighInfo.collider, hitHighInfo.point, this.transform.position, Acrobatics.ClimbLedge));
 					yield return climbTime;
-					anim.SetBool(HashIDs.climbeLedge_bool, false);
+					anim.SetBool(HashIDs.climbLedge_bool, false);
 					//anim.SetBool(HashIDs.onGround_bool, true);
 				}
 				else

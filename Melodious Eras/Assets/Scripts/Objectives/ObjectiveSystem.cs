@@ -39,9 +39,7 @@ public class ObjectiveSystem : MonoBehaviour
             {
                 currentObjective = newObjective;
                 currentObjectiveNode = objectives.Last;
-                Debug.Log("Current objective: " + currentObjective.ToString());
             }
-            Debug.Log(objectives.Last.Value);
         }
     }
 

@@ -35,8 +35,7 @@ public class NightVisionTestCS : ImageEffectBase
 
 	void OnEnable()
 	{
-		Debug.Log("Night vision enabled");
-		StartCoroutine(TurnOnGoggles());
+		this.StartCoroutine(this.TurnOnGoggles());
 	}
 	void OnDisable()
 	{
@@ -49,12 +48,15 @@ public class NightVisionTestCS : ImageEffectBase
 
 	IEnumerator TurnOnGoggles()
 	{
-		while(RenderSettings.ambientLight.r  < NV_ambientLight.r - .01f)
-		{
-			RenderSettings.ambientLight = Color.Lerp(RenderSettings.ambientLight, NV_ambientLight, 2 * Time.deltaTime);
-			yield return waitforframe;
-		}
-		Debug.Log("Goggles on");
-		RenderSettings.ambientLight = NV_ambientLight;
+        if (!gameController)
+            gameController = GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<GameController>();
+        Color targetColor = gameController.ambientLight + NV_ambientLight;
+        while (RenderSettings.ambientLight.r < targetColor.r - .01f)
+        {
+            RenderSettings.ambientLight = Color.Lerp(RenderSettings.ambientLight, targetColor, 2 * Time.deltaTime);
+            yield return waitforframe;
+        }
+        Debug.Log("Goggles on");
+        RenderSettings.ambientLight = targetColor;
 	}
 }

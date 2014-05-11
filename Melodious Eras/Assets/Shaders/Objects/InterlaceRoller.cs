@@ -7,13 +7,15 @@ public class InterlaceRoller : MonoBehaviour
     public Light _Light;
     public int screenMatIndex = 0;
 	public bool flickering = false;
+    public Material screenMat;
 
 	private Color initialColor;
 	private float flicker = 0.0f;
 	
 	void Start()
 	{
-        initialColor = this.renderer.materials[screenMatIndex].GetColor("_TintColor");
+        //initialColor = this.renderer.materials[screenMatIndex].GetColor("_TintColor");
+        initialColor = screenMat.GetColor("_TintColor");
 
         if (_Light == null && this.light != null)
             _Light = this.light;

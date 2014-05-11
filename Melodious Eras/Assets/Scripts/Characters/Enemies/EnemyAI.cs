@@ -8,15 +8,15 @@ delegate void AI_Action();
 public class EnemyAI : MonoBehaviour
 {
     #region variables
-    private const float CHASE_DISTANCE = 15;
+    private const float CHASE_DISTANCE = 25;
 
     public NPCGroup squad;
-	public Transform eyes;
+	[SerializeField]                private Transform eyes;
     public CharacterStats currentEnemy;
 
     [SerializeField][Range(0, 2)]   private float hearingMultiplier = 1;     //0 = deaf, 1 = normal, >1 = dogs & security
     [SerializeField][Range(0, 2)]   private float baseAwarenessMultiplier = 1f;
-    [SerializeField][Range(0, 360)]   private float fieldOfView = 160f;
+    [SerializeField][Range(0, 360)] private float fieldOfView = 160f;
     [SerializeField]                private float shootingRange;
     [SerializeField]                private float meleeRange;
     [SerializeField][Range(0, 5)]   private float attackSpeed = 1f;
@@ -30,11 +30,11 @@ public class EnemyAI : MonoBehaviour
     private float lightDifferenceMultiplier; //optional feature. Enemies in high-light areas will find it harder to detect players in low-light areas.
     private float nextShotTime = 0;
 
-    public bool seesPlayer = false;
-	public bool alerted = false;
+    private bool _seesPlayer = false;
+    private bool _alerted = false;
+    private float sightDistance = 20;
 	public LayerMask sightLayer;
-	public float sightDistance = 20;
-    public float desiredSpeed = 0;
+    private float _desiredSpeed = 0;
 
     public Vector3 lastPlayerSighting;
     private Vector3 lpsResetPosition = new Vector3(999, 999, 999);
@@ -60,7 +60,9 @@ public class EnemyAI : MonoBehaviour
     #endregion
 
 
-    public Animator Anim {get {return anim; } set {anim = value;}}
+    public Animator Anim { get {return anim; } set {anim = value;} }
+    public bool seesPlayer { get { return _seesPlayer; } }
+    public float desiredSpeed { get { return _desiredSpeed; } }
 
     void Awake()
     {
@@ -90,7 +92,7 @@ public class EnemyAI : MonoBehaviour
 		rayUpper = new Ray();
 		rayLower = new Ray();
 		rayCenter = new Ray();
-        this.seesPlayer = false;
+        this._seesPlayer = false;
 	}
 	
 	// Update is called once per frame
@@ -102,7 +104,7 @@ public class EnemyAI : MonoBehaviour
 			//this.seesPlayer = false;
             if (lastPlayerSighting != lpsResetPosition && !currentEnemy.isDead)
             {
-                if (this.seesPlayer && Vector3.Distance(this.transform.position, currentEnemy.transform.position) < 10)
+                if (this._seesPlayer && Vector3.Distance(this.transform.position, currentEnemy.transform.position) < 10)
                     Shooting();
                 else
                     Chasing();
@@ -111,7 +113,7 @@ public class EnemyAI : MonoBehaviour
                 Patrolling();
             else
                 Idle();
-	        //detecting enemies; currently only detects player
+	        //detecting enemies; currently only attacks player
 			if(sight.charactersInRange.Count > 0)
 				this.DetectNearbyCharacters();
 		}
@@ -132,7 +134,7 @@ public class EnemyAI : MonoBehaviour
     /// </summary>
     void Patrolling()
     {
-        nav.speed = desiredSpeed = patrolSpeed;
+        nav.speed = _desiredSpeed = patrolSpeed;
         if (nav.remainingDistance < nav.stoppingDistance /*|| nav.destination == lastPlayerSighting*/)
         {
             patrolTimer += Time.deltaTime;
@@ -174,7 +176,7 @@ public class EnemyAI : MonoBehaviour
 		}
 
         // Set the appropriate speed for the NavMeshAgent.
-        nav.speed = desiredSpeed = chaseSpeed;
+        nav.speed = _desiredSpeed = chaseSpeed;
 
         // If near the last personal sighting...
         if (nav.remainingDistance < nav.stoppingDistance)
@@ -244,7 +246,7 @@ public class EnemyAI : MonoBehaviour
 					{
 						this.awarenessOfPlayer += Time.deltaTime;
 						
-						this.seesPlayer = this.alerted = true;
+						this._seesPlayer = this._alerted = true;
 						this.lastPlayerSighting = ch.transform.position;
 						currentEnemy = ch;
 						squad.AlertGroup(ch);
@@ -287,7 +289,7 @@ public class EnemyAI : MonoBehaviour
     {
  		if(Physics.Raycast(this.eyes.position, tran.position + Vector3.up, sightLayer))
 		{
-			this.seesPlayer = this.alerted = true;
+			this._seesPlayer = this._alerted = true;
 			lastPlayerSighting = tran.position;
 			return true;
 		}
@@ -299,13 +301,13 @@ public class EnemyAI : MonoBehaviour
     /// <param name="_awarenessMultiplier"></param>
     public void Alert(float _awarenessMultiplier)
     {
-        this.alerted = true;
+        this._alerted = true;
         this.awarenessMultiplier = Mathf.Min(baseAwarenessMultiplier * _awarenessMultiplier, 1);
         fov = Mathf.Clamp(sight.fovAngle * awarenessMultiplier,  0,  80);
     }
     public void Alert(float _awarenessMultiplier, Vector3 source)
     {
-        this.alerted = true;
+        this._alerted = true;
         this.awarenessMultiplier = Mathf.Min(baseAwarenessMultiplier * _awarenessMultiplier, 1);
         fov = Mathf.Clamp(sight.fovAngle * awarenessMultiplier, 0, 80);
         //implement inspection of source
