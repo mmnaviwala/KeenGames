@@ -30,6 +30,8 @@ public class CircuitLight : CircuitNode
 				lightbulb = this.transform.GetComponentInChildren<Light>();
 		}
         lightbulbShafts = this.GetComponentsInChildren<LightShafts>();
+        for (int s = 0; s < lightbulbShafts.Length; s++)
+            lightbulbShafts[s].m_Brightness = Environment.globalDustLevel;
 
 		if(lensFlare == null)
 			lensFlare = this.GetComponent<LensFlare>();

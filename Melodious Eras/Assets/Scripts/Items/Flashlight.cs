@@ -13,7 +13,8 @@ public class Flashlight : MonoBehaviour
     public GUIStyle lightGuiStyle, backGuiStyle;
 
     private Rect batteryMaxLifeRect, batteryLifeRect;
-	private LightShafts lightShafts;
+    private LightShafts lightShafts;
+    
 
 	void Awake()
 	{
@@ -35,8 +36,11 @@ public class Flashlight : MonoBehaviour
         
         batteryMaxLifeRect = new Rect(startX, Screen.height - 2 * barHeight, barWidth, barHeight);
         batteryLifeRect = batteryMaxLifeRect;
-		if(lightShafts)
-			lightShafts.enabled = light.enabled;
+        if (lightShafts)
+        {
+            lightShafts.enabled = light.enabled;
+            lightShafts.m_Brightness = Environment.globalDustLevel;
+        }
 	}
 	
 	// Update is called once per frame

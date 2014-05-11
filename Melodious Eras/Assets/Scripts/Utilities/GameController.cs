@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour
     public float shadowDistance = -1;
     private static float defaultShadowDistance = 100;
 	public float farClipDistance = -1;
+    [Range(0, 1)] public float dustLevel = 0f;
 
 
 
@@ -42,6 +43,7 @@ public class GameController : MonoBehaviour
     void InitializeEnvironment()
     {
         Environment.SetWind(this.wind, this.turbulence);
+        Environment.globalDustLevel = this.dustLevel;
         StartCoroutine(Environment.BlowWind());
     }
 

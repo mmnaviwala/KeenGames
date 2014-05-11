@@ -8,6 +8,7 @@ public static class Environment
     private static float turbulence; //variation in wind speed
 
     private static float magX, magY, magZ; //for wind.
+    public static float globalDustLevel = 0f;
 
     public static void SetWind(Vector3 windDirection)
     {
