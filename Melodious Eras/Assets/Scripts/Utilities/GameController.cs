@@ -74,6 +74,8 @@ public static class Difficulty
     private static float _playerRegenWait,          _enemyRegenWait;
     private static float _playerRegenSpeed,         _enemyRegenSpeed;
 
+
+
     public static float attackSpeedMultiplier { get { return _attackSpeedMultiplier; } }
 
     public static float playerDamageMultiplier { get { return _playerDamageMultiplier; } }
@@ -92,7 +94,7 @@ public static class Difficulty
             case DifficultyLevel.Easy:
                 _attackSpeedMultiplier = 1.50f;
 
-                _enemyDamageMultiplier = 0.75f;
+                _enemyDamageMultiplier = 0.5f;
                 _playerDamageMultiplier = 1.50f;
 
                 _playerRegenWait = 5f;
@@ -104,7 +106,7 @@ public static class Difficulty
             case DifficultyLevel.Medium:
                 _attackSpeedMultiplier = 1.00f;
 
-                _enemyDamageMultiplier = 1.00f;
+                _enemyDamageMultiplier = 0.75f;
                 _playerDamageMultiplier = 1.00f;
 
                 _playerRegenWait = 10f;
@@ -126,18 +128,17 @@ public static class Difficulty
                 _enemyRegenSpeed = 10f;
                 break;
             case DifficultyLevel.Realistic:
-                _attackSpeedMultiplier = 0.50f;
+                _attackSpeedMultiplier = 0.5f;
 
-                _enemyDamageMultiplier = 2.00f;
+                _enemyDamageMultiplier = 1.75f;
                 _playerDamageMultiplier = 1.50f;
 
                 _playerRegenWait = 20f;
                 _enemyRegenWait = 20f;
 
                 _playerRegenSpeed = 2.5f;
-                _enemyRegenSpeed = 7.5f;
+                _enemyRegenSpeed = 2.5f;
                 break;
         }
-
     }
 }

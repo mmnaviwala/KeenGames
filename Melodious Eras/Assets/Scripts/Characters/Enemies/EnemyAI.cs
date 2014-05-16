@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public enum PatrolPattern { Loop, PingPong }
 
-delegate void AI_Action();
+public delegate void AI_Action();
 
 [AddComponentMenu("Scripts/Characters/Enemy AI")]
 public class EnemyAI : MonoBehaviour
@@ -31,14 +31,14 @@ public class EnemyAI : MonoBehaviour
     private int waypointIterator = 1;
     public Waypoint[] patrolWaypoints;
 
-    private float awarenessMultiplier;   //
+    private float _awarenessMultiplier;   //
     private float fov;
     private float lightDifferenceMultiplier; //optional feature. Enemies in high-light areas will find it harder to detect players in low-light areas.
     private float nextShotTime = 0;
 
     private bool _seesPlayer = false;
     private bool _alerted = false;
-    private float sightDistance = 20;
+    private float _sightDistance;
 	public LayerMask sightLayer;
     private float _desiredSpeed = 0;
 
@@ -65,10 +65,17 @@ public class EnemyAI : MonoBehaviour
 	private AI_Action ai_activity;
     #endregion
 
-
-    public Animator Anim { get {return anim; } set {anim = value;} }
-    public bool seesPlayer { get { return _seesPlayer; } }
-    public float desiredSpeed { get { return _desiredSpeed; } }
+    public float desiredSpeed       { get { return _desiredSpeed; } }
+    public float awarenessMultiplier{ get { return _awarenessMultiplier; } }
+    public float sightDistance      { get { return _sightDistance; } }
+    public bool seesPlayer          { get { return _seesPlayer; } 
+                                      set { _seesPlayer = value; } }
+    public bool alerted             { get { return _alerted; } 
+                                      set { _alerted = value; } }
+    public AI_Action activity       { get { return ai_activity; } 
+                                      set { ai_activity = value; } }
+    public Vector3 destination      { get { return nav.destination; } 
+                                      set { nav.destination = value; } }
 
     void Awake()
     {
@@ -76,10 +83,10 @@ public class EnemyAI : MonoBehaviour
         nav = this.GetComponent<NavMeshAgent>();
 		stats = this.GetComponent<EnemyStats>();
 		this.anim = this.GetComponent<Animator>();
-        sightDistance = sight.GetComponent<SphereCollider>().radius;
+        _sightDistance = sight.GetComponent<SphereCollider>().radius;
         lastPlayerSighting = lpsResetPosition;
 
-        this.awarenessMultiplier = baseAwarenessMultiplier;
+        this._awarenessMultiplier = baseAwarenessMultiplier;
 
         //Adding to squad, if part of any
         if (this.squad == null)
@@ -93,7 +100,7 @@ public class EnemyAI : MonoBehaviour
 	void Start () 
     {
 		ai_activity = Patrolling;
-        fov = sight.fovAngle * awarenessMultiplier;
+        fov = sight.fovAngle * _awarenessMultiplier;
 		//keeping rays permanent to avoid garbage collection
 		rayUpper = new Ray();
 		rayLower = new Ray();
@@ -120,8 +127,8 @@ public class EnemyAI : MonoBehaviour
             else
                 Idle();
 	        //detecting enemies; currently only attacks player
-			if(sight.charactersInRange.Count > 0)
-				this.DetectNearbyCharacters();
+			//if(sight.charactersInRange.Count > 0)
+			//	this.DetectNearbyCharacters();
 		}
 		else
 		{
@@ -131,14 +138,14 @@ public class EnemyAI : MonoBehaviour
 		}
 	}
 
-    void Idle()
+    public void Idle()
     {
         nav.speed = 0;
     }
     /// <summary>
     /// This enemy's standard patrol route
     /// </summary>
-    void Patrolling()
+    public void Patrolling()
     {
         nav.speed = _desiredSpeed = patrolSpeed;
         if (nav.remainingDistance < nav.stoppingDistance /*|| nav.destination == lastPlayerSighting*/)
@@ -166,7 +173,7 @@ public class EnemyAI : MonoBehaviour
     /// <summary>
     /// Inspecting some anomaly, such as a sound or open door (that shouldn't be open)
     /// </summary>
-    void Inspect()
+    public void Inspect()
     {
         nav.stoppingDistance = 3;
         nav.destination = inspectingArea;
@@ -175,7 +182,7 @@ public class EnemyAI : MonoBehaviour
     /// <summary>
     /// Chasing the player
     /// </summary>
-    void Chasing()
+    public void Chasing()
     {
         
         // Create a vector from the enemy to the last sighting of the player.
@@ -214,7 +221,7 @@ public class EnemyAI : MonoBehaviour
     /// <summary>
     /// Shooting at the player
     /// </summary>
-    void Shooting()
+    public void Shooting()
     {
 		//stop movement
         nav.speed = 0;
@@ -230,44 +237,44 @@ public class EnemyAI : MonoBehaviour
 	/// </summary>
 	public void DetectNearbyCharacters()
 	{
-		foreach(CharacterStats ch in sight.charactersInRange)
-		{
-			float angle = Vector3.Angle(ch.transform.position + 2*Vector3.up - this.eyes.position, this.eyes.forward);
-			if ( angle < fov)
-			{
-				//calculating rays for 3 points on the character
-				float charHeight = ch.collider.bounds.max.y - ch.collider.bounds.min.y;
-				rayUpper.origin = rayCenter.origin = rayLower.origin = this.eyes.position;
+        foreach(CharacterStats ch in sight.charactersInRange)
+        {
+            float angle = Vector3.Angle(ch.transform.position + 2*Vector3.up - this.eyes.position, this.eyes.forward);
+            if ( angle < fov)
+            {
+                //calculating rays for 3 points on the character
+                float charHeight = ch.collider.bounds.max.y - ch.collider.bounds.min.y;
+                rayUpper.origin = rayCenter.origin = rayLower.origin = this.eyes.position;
 				
-				rayUpper.direction =  (ch.collider.bounds.max - Vector3.up*charHeight/8) - this.eyes.position;
-				rayLower.direction =  (ch.collider.bounds.min + Vector3.up*charHeight/8) - this.eyes.position;
-				rayCenter.direction = (ch.collider.bounds.min + Vector3.up*charHeight/2) - this.eyes.position;
+                rayUpper.direction =  (ch.collider.bounds.max - Vector3.up*charHeight/8) - this.eyes.position;
+                rayLower.direction =  (ch.collider.bounds.min + Vector3.up*charHeight/8) - this.eyes.position;
+                rayCenter.direction = (ch.collider.bounds.min + Vector3.up*charHeight/2) - this.eyes.position;
 				
                 //TODO: ADJUST FIELD OF VIEW
-				//reducing sight distance at wide angles, to simulate peripheral vision
-				//This determines whether or not the enemy can even detect the player
-				float adjustedSightDistance = (angle > 30) ?
-					    Mathf.Pow(angle - fov, 2)/fov :
-						sightDistance;
+                //reducing sight distance at wide angles, to simulate peripheral vision
+                //This determines whether or not the enemy can even detect the player
+                float adjustedSightDistance = (angle > 30) ?
+                        Mathf.Pow(angle - fov, 2)/fov :
+                        sightDistance;
 				
-				//if any rays hit
-				if (Physics.Raycast(rayUpper, out hit, adjustedSightDistance, sightLayer) ||
-				    Physics.Raycast(rayCenter, out hit, adjustedSightDistance, sightLayer) ||
-				    Physics.Raycast(rayLower, out hit, adjustedSightDistance, sightLayer))
-				{
-					if (hit.collider.tag == Tags.PLAYER)
-					{
-						this.awarenessOfPlayer += Time.deltaTime;
+                //if any rays hit
+                if (Physics.Raycast(rayUpper, out hit, adjustedSightDistance, sightLayer) ||
+                    Physics.Raycast(rayCenter, out hit, adjustedSightDistance, sightLayer) ||
+                    Physics.Raycast(rayLower, out hit, adjustedSightDistance, sightLayer))
+                {
+                    if (hit.collider.tag == Tags.PLAYER)
+                    {
+                        this.awarenessOfPlayer += Time.deltaTime;
 						
-						this._seesPlayer = this._alerted = true;
-						this.lastPlayerSighting = ch.transform.position;
-						currentEnemy = ch;
-						squad.AlertGroup(ch);
+                        this._seesPlayer = this._alerted = true;
+                        this.lastPlayerSighting = ch.transform.position;
+                        currentEnemy = ch;
+                        squad.AlertGroup(ch);
 
                         ai_activity = Chasing;
-					}
-					else 
-					{
+                    }
+                    else 
+                    {
                         //this.seesPlayer = false;
                         if (hit.collider.tag == Tags.ENEMY && ch.isDead)
                         {
@@ -277,19 +284,19 @@ public class EnemyAI : MonoBehaviour
                             ai_activity = Inspect;
                             nav.destination = ch.transform.position;
                         }
-					}
-				}
-				else if (true /*if object has MaterialPhysics && isn't opaque*/)
-				{
-					//re-raycast from collision, if TOTAL raycast range doesn't exceed adjustedSightDistance * opacity
-				}
-			}
-		}
-	}
+                    }
+                }
+                else if (true) //if object has MaterialPhysics && isn't opaque
+                {
+                    //re-raycast from collision, if TOTAL raycast range doesn't exceed adjustedSightDistance * opacity
+                }
+            }
+        }
+    }
 
     public bool Listen(Vector3 source, float volume)
     {
-        if (CalculatePathLengthTo(source) / awarenessMultiplier < volume)
+        if (CalculatePathLengthTo(source) / _awarenessMultiplier < volume)
         {
             //lastPlayerSighting = source;
             ai_activity = Inspect;
@@ -315,14 +322,14 @@ public class EnemyAI : MonoBehaviour
     public void Alert(float _awarenessMultiplier)
     {
         this._alerted = true;
-        this.awarenessMultiplier = Mathf.Min(baseAwarenessMultiplier * _awarenessMultiplier, 1);
-        fov = Mathf.Clamp(sight.fovAngle * awarenessMultiplier,  0,  80);
+        this._awarenessMultiplier = Mathf.Min(baseAwarenessMultiplier * _awarenessMultiplier, 1);
+        fov = Mathf.Clamp(sight.fovAngle * _awarenessMultiplier,  0,  80);
     }
     public void Alert(float _awarenessMultiplier, Vector3 source)
     {
         this._alerted = true;
-        this.awarenessMultiplier = Mathf.Min(baseAwarenessMultiplier * _awarenessMultiplier, 1);
-        fov = Mathf.Clamp(sight.fovAngle * awarenessMultiplier, 0, 80);
+        this._awarenessMultiplier = Mathf.Min(baseAwarenessMultiplier * _awarenessMultiplier, 1);
+        fov = Mathf.Clamp(sight.fovAngle * _awarenessMultiplier, 0, 80);
         //implement inspection of source
     }
     #endregion

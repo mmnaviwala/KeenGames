@@ -13,10 +13,11 @@ public class EnemyStats : CharacterStats
     
 
     private EnemyAI ai;
-    public EnemyAI AI { 
-        get { return ai; }
-        set { ai = value; }
-    }
+    private EnemySight _sight;
+    public EnemyAI AI       { get { return ai; }
+                              set { ai = value; } }
+    public EnemySight sight { get { return _sight; }
+                              set { _sight = value; } }
 
     void Awake()
     {
