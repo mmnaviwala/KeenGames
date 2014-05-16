@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 
+public enum PatrolPattern { Loop, PingPong }
+
 delegate void AI_Action();
 
 [AddComponentMenu("Scripts/Characters/Enemy AI")]
@@ -24,7 +26,11 @@ public class EnemyAI : MonoBehaviour
     [SerializeField]                private float chaseSpeed = 5;
     [SerializeField]                private float chaseWaitTime = 5;
     [SerializeField]                private float patrolWaitTime = 2;
+
+    [SerializeField]private PatrolPattern patrolPattern = PatrolPattern.Loop;
+    private int waypointIterator = 1;
     public Waypoint[] patrolWaypoints;
+
     private float awarenessMultiplier;   //
     private float fov;
     private float lightDifferenceMultiplier; //optional feature. Enemies in high-light areas will find it harder to detect players in low-light areas.
@@ -140,7 +146,14 @@ public class EnemyAI : MonoBehaviour
             patrolTimer += Time.deltaTime;
             if (patrolTimer >= patrolWaypoints[waypointIndex].waitTime)
             {
-                waypointIndex = (waypointIndex + 1) % patrolWaypoints.Length;
+                //reverses iterator if it reaches the end of the array
+                if (patrolPattern == PatrolPattern.PingPong &&
+                   ((waypointIterator == -1 && waypointIndex == 0) ||
+                    (waypointIterator == 1 && waypointIndex == patrolWaypoints.Length - 1)))
+                {
+                    waypointIterator = -waypointIterator;
+                }
+                waypointIndex = (waypointIndex + waypointIterator) % patrolWaypoints.Length; // % takes care of Loop patrols
                 patrolTimer = 0;
             }
         }
@@ -234,7 +247,7 @@ public class EnemyAI : MonoBehaviour
 				//reducing sight distance at wide angles, to simulate peripheral vision
 				//This determines whether or not the enemy can even detect the player
 				float adjustedSightDistance = (angle > 30) ?
-					    Mathf.Pow(angle - fov, 2)/fov:
+					    Mathf.Pow(angle - fov, 2)/fov :
 						sightDistance;
 				
 				//if any rays hit
