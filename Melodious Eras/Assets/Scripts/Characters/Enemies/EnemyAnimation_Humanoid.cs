@@ -35,8 +35,12 @@ public class EnemyAnimation_Humanoid : MonoBehaviour
 
 	void OnAnimatorMove()
 	{
-		nav.velocity = anim.deltaPosition / Time.deltaTime;
-		this.transform.rotation = this.anim.rootRotation;
+        float dt = Time.deltaTime;
+        if (dt != 0)
+        {
+            nav.velocity = anim.deltaPosition / dt;
+            this.transform.rotation = this.anim.rootRotation;
+        }
 	}
 
 	private void NavAnimSetup () 

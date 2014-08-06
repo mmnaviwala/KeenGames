@@ -2,7 +2,33 @@ fileFormatVersion: 2
 guid: 33ed1434475a54b10a4da1074d12d676
 ModelImporter:
   serializedVersion: 16
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    100000: group1
+    100002: group2
+    100004: group3
+    100006: pCube1
+    100008: pCylinder15
+    100010: polySurface2
+    100012: //RootNode
+    100014: sunDirection
+    100016: transform2
+    400000: group1
+    400002: group2
+    400004: group3
+    400006: pCube1
+    400008: pCylinder15
+    400010: polySurface2
+    400012: //RootNode
+    400014: sunDirection
+    400016: transform2
+    2300000: pCylinder15
+    2300002: polySurface2
+    3300000: pCylinder15
+    3300002: polySurface2
+    4300000: pCylinder15
+    4300002: polySurface2
+    7400000: Take 001
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -11,6 +37,7 @@ ModelImporter:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     optimizeGameObjects: 0
+    motionNodeName: 
     animationCompression: 1
     animationRotationError: .5
     animationPositionError: .5
