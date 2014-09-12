@@ -66,7 +66,7 @@ public class PlayerStats : CharacterStats
     {
         this.BlendWoundLayer();
         this.RegainStamina(5 * Time.deltaTime);
-        this.RegenerateHealth();
+        this.RegenerateHealth(Difficulty.playerRegenWait, Difficulty.playerRegenSpeed);
         //These lists will never be too large, but should still be moved out of Update at some point
         _closeQuarterEnemies.charactersInRange.RemoveAll((CharacterStats enemy) => enemy == null); //Scans all nearby enemies each frame and removes those who have died, which wouldn't
         _nearbyEnemies.charactersInRange.RemoveAll((CharacterStats enemy) => enemy == null);       //trigger the OnTriggerExit function
@@ -144,21 +144,9 @@ public class PlayerStats : CharacterStats
     }
     protected override void Die()
     {
-        this._isDead = true;
-        anim.SetBool(HashIDs.dead_bool, isDead);
-        this.anim.SetBool(HashIDs.aiming_bool, false);
+		base.Die();
         _playerMovement.enabled = false;
         GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<EndOfLevel>().EndLevel(true);
-    }
-
-    protected override void RegenerateHealth()
-    {
-        if (this._health < maxHealth && Time.time > lastHitTakenTime + Difficulty.playerRegenWait / regenWaitModifier)
-        {
-            _health += Difficulty.playerRegenSpeed * Time.deltaTime;
-            if (_health > maxHealth)
-                _health = maxHealth;
-        }
     }
 
     /// <summary>

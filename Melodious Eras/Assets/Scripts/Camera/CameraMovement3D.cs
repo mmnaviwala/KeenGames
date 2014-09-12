@@ -30,7 +30,6 @@ public class CameraMovement3D : CameraMovement
     public float x_sensitivity = 5;             //mouse X sensitivity
     public float y_sensitivity = 2;             //mouse Y sensitivity
 	public int invertLook = 1;                  //1 = not inverted, -1 = inverted (for mouse look)
-	public Transform target = null;             //for following target other than player
 	public bool atTargetPos = false;            //if atTargetPos = true, saves calculations
 
     private int invertOffset = 1;               //-1 = inversion of x-offset
@@ -168,7 +167,6 @@ public class CameraMovement3D : CameraMovement
     public void SetOffset(CameraOffset newOffset, Transform targetP)
     {
         SetOffset(newOffset);
-        target = targetP;
     }
 
     /// <summary>

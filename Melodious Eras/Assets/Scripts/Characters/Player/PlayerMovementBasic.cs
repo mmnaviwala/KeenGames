@@ -19,7 +19,7 @@ public class PlayerMovementBasic : MonoBehaviour
     private const float m_ClimbMatchTargetStart = 0.1f;  //.19f;
     private const float m_ClimbMatchTargetStop = .3f;
 
-    private const int AIM_LAYER = 2;
+    private const int AIM_LAYER = 2;		//animator aiming layer
     
 
     public float speed = 0f;                //current speed of character
@@ -99,13 +99,14 @@ public class PlayerMovementBasic : MonoBehaviour
     }
 
     void Start()
-    {
+	{
+		mainCam = Camera.main.GetComponent<CameraMovement3D>();
+
 		diveTime = new WaitForSeconds(1.367f);
 		vaultTime = new WaitForSeconds(1.220f);
 		climbTime = new WaitForSeconds(2.367f);
 		endOfFrame = new WaitForEndOfFrame();
 
-        mainCam = Camera.main.GetComponent<CameraMovement3D>();
 		originalHeight = capsule.height;
 
         anim.SetFloat(HashIDs.speed_float, 0f); //initializes animator to idle stance
@@ -266,7 +267,7 @@ public class PlayerMovementBasic : MonoBehaviour
         }*/
 
         //if running
-        if (speed > 4 && !isCrouching)
+        if (speed > 4f && !isCrouching)
         {
             this.stats.ReduceStamina(15 * Time.deltaTime); 
             if (!this.audio.isPlaying) //play footsteps

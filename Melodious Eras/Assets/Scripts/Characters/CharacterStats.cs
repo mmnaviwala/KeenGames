@@ -81,20 +81,17 @@ public class CharacterStats : MonoBehaviour
         {
             this.suit.armor -= damage;
             if (suit.armor < 0)
-            {
+			{
+				this.suit.armor = 0;
                 int leftoverDamage = Mathf.Abs(suit.armor);
                 this._health -= (_health > leftoverDamage) ? leftoverDamage : _health;
-                this.suit.armor = 0;
             }
         }
 
         if (health == 0)
             this.Die();
         else
-        {
             regenWaitModifier = (health > 50) ? 1 : Mathf.Sqrt(health / 50); //going with constant 50, rather than half of max health
-        }
-        Debug.Log(regenWaitModifier);
     }
     /// <summary>
     /// Deals damage to this character, letting them know who hit them.
@@ -117,9 +114,7 @@ public class CharacterStats : MonoBehaviour
         if (this._health == 0)
             this.Die();
         else
-        {
             regenWaitModifier = (health > 50) ? 1 : Mathf.Sqrt(health / 50);
-        }
     }
     /// <summary>
     /// Deals damage to this character, ignoring any armor and telling them who hit them.
@@ -135,9 +130,14 @@ public class CharacterStats : MonoBehaviour
     { 
         this.Die(); 
     }
-    protected virtual void Die() { }
-
-    public virtual void Attack(CharacterStats target) { }
+    protected virtual void Die() 
+	{
+		_isDead = true;
+		this.anim.SetBool(HashIDs.dead_bool, true);
+		this.anim.SetBool(HashIDs.aiming_bool, false);
+	}
+	
+	public virtual void Attack(CharacterStats target) { }
     public virtual void Attack(CharacterStats target, CharacterStats attacker, float angle) { }
 
     public virtual void PickUp(Item item) { }
@@ -176,14 +176,19 @@ public class CharacterStats : MonoBehaviour
     /// <summary>
     /// Regenerates health each frame under certain conditions. Higher difficulty increases rate for enemies, reduces rate for player.
     /// </summary>
-    protected virtual void RegenerateHealth()
-    {
-        
-    }
-    
-
-    /// <summary>
-    /// <para>Formula to blend Base Layer with Wounded Layer based on current health and resilience.</para>
+	protected void RegenerateHealth( float regen_wait, float regen_speed)
+	{
+		if (this._health < maxHealth && Time.time > lastHitTakenTime + regen_wait / regenWaitModifier)
+		{
+			_health += regen_speed * Time.deltaTime;
+			if (_health > maxHealth)
+				_health = maxHealth;
+		}
+	}
+	
+	
+	/// <summary>
+	/// <para>Formula to blend Base Layer with Wounded Layer based on current health and resilience.</para>
     /// <para>Single statement, should be inlined by compiler</para>
     /// <para>Blending won't go higher than 75%</para>
     /// </summary>

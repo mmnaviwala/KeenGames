@@ -36,7 +36,7 @@ public class EnemyStats : CharacterStats
 
     public void Update()
     {
-        this.RegenerateHealth();
+		this.RegenerateHealth(Difficulty.enemyRegenWait, Difficulty.enemyRegenSpeed);
     }
 
     #region Damage taking and stat changes
@@ -53,9 +53,7 @@ public class EnemyStats : CharacterStats
         if (this.isVulnerable && this.health <= 0)
             this.Die();
         else
-        {
             regenWaitModifier = (health > 50) ? 1 : Mathf.Sqrt(health / 50);
-        }
     }
     public override void TakeDamage(bool instantKill)
     {
@@ -80,15 +78,7 @@ public class EnemyStats : CharacterStats
             regenWaitModifier = Mathf.Max(1, Mathf.Lerp(0, 50, this.health)); //going with constant 50, rather than half of max health
     }
 
-    protected override void RegenerateHealth()
-    {
-        if (this._health < maxHealth && Time.time > lastHitTakenTime + Difficulty.enemyRegenWait / regenWaitModifier)
-        {
-            _health += Difficulty.enemyRegenSpeed * Time.deltaTime;
-            if (_health > maxHealth)
-                _health = maxHealth;
-        }
-    }
+    
 
 
     /// <summary>
@@ -97,9 +87,7 @@ public class EnemyStats : CharacterStats
     /// </summary>
     protected override void Die()
     {
-        _isDead = true;
-        this.anim.SetBool(HashIDs.dead_bool, true);
-        this.anim.SetBool(HashIDs.aiming_bool, false);
+		base.Die();
         this.ai.enabled = false;
         SphereCollider col = this.ai.sight.GetComponent<SphereCollider>();
         col.radius = 0;
