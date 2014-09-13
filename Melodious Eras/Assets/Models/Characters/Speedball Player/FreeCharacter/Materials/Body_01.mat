@@ -39,6 +39,10 @@ Material:
         first:
           name: _Shininess
         second: .180363819
+      data:
+        first:
+          name: _Outline
+        second: .00285714283
     m_Colors:
       data:
         first:
@@ -52,6 +56,10 @@ Material:
         first:
           name: _ReflectColor
         second: {r: .495711714, g: .498802036, b: .514925361, a: .215686277}
+      data:
+        first:
+          name: _OutlineColor
+        second: {r: 0, g: .99999994, b: .99999994, a: 1}
 --- !u!1002 &2100001
 EditorExtensionImpl:
   serializedVersion: 6

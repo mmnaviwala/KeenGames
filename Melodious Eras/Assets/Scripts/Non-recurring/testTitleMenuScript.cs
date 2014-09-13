@@ -6,8 +6,7 @@ public class testTitleMenuScript : MonoBehaviour
 {
 
     Rect startButton, exitButton, titleBar;
-    bool scrollingDown = true,
-         musicSwitch = false;
+    bool musicSwitch = false;
     AudioSource[] music;
     public float yPosBackground = 0,
                  scrollSpeed = .004f;

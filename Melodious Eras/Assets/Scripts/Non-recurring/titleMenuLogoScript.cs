@@ -11,7 +11,6 @@ public class titleMenuLogoScript : MonoBehaviour {
     AudioSource[] music;
 	
 	private bool textBlinking = true;
-	private int blinked = 1;
 	
 	void Awake()
     {

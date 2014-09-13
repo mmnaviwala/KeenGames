@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class NightVisionGoggles : MonoBehaviour {
 	public Suit playerSuit;
@@ -14,8 +15,22 @@ public class NightVisionGoggles : MonoBehaviour {
 
 	private YieldInstruction endOfFrame = new WaitForEndOfFrame();
 
+    private Shader outlineShader;
+    private Dictionary<CharacterStats, Shader> charactersInRange = new Dictionary<CharacterStats, Shader>();
+
+
+    private SphereCollider xraySphere;
+    public LayerMask xrayLayer;
+
+    private void Awake()
+    {
+        xraySphere = this.GetComponent<SphereCollider>();
+        xraySphere.enabled = false;
+    }
+
 	// Use this for initialization
-	void Start () {
+	void Start () 
+    {
 		if(playerSuit == null)
 		{
 			Transform temp_transform = this.transform;
@@ -33,6 +48,10 @@ public class NightVisionGoggles : MonoBehaviour {
 		bloom = cam.GetComponent<Bloom>();
 		fisheye = cam.GetComponent<Fisheye>();
 		dof = cam.GetComponent<DepthOfFieldScatter>();
+        outlineShader = Shader.Find("Outlined/Silhouetted Bumped Diffuse");
+
+
+        
 	}
 	
 	// Update is called once per frame
@@ -47,6 +66,7 @@ public class NightVisionGoggles : MonoBehaviour {
 			//bloom.enabled = activated;
 			fisheye.enabled = activated;
 			//dof.enabled = activated;
+
 			/*if(activated)
 			{
 				bloom.bloomIntensity = 15;
@@ -62,7 +82,6 @@ public class NightVisionGoggles : MonoBehaviour {
 				bloom.hollyStretchWidth = 2.5f;
 
 			}*/
-            bloom.enabled = this.activated;
 		}
 		if(activated)
 		{
@@ -88,10 +107,50 @@ public class NightVisionGoggles : MonoBehaviour {
 		}
 	}
 
+    /// <summary> When entering the sphere collider, a character will become outlined </summary>
+    void OnTriggerEnter(Collider other)
+    {
+        CharacterStats character = other.GetComponent<CharacterStats>();
+        if (character)
+        {
+            Material mat = character.GetComponentInChildren<SkinnedMeshRenderer>().material;
+            charactersInRange.Add(character, mat.shader); //Storing default shader for when the effect wears off
+            OutlineCharacter(character, mat);
+        }
+    }
+
+    /// <summary>  When exiting the sphere collider, a character's outline will disappear </summary>
+    void OnTriggerExit(Collider other)
+    {
+        CharacterStats character = other.GetComponent<CharacterStats>();
+        if (character && charactersInRange[character])
+        {
+            DeOutlineCharacter(character);
+            charactersInRange.Remove(character);
+        }
+    }
+
+    /// <summary> Sets the character's renderer to the outline renderer and stores their default renderer for when the effect wears off </summary>
+    private void OutlineCharacter(CharacterStats character, Material mat)
+    {
+        mat.shader = Shader.Find("Outlined/Silhouetted Bumped Diffuse");
+        mat.SetVector("_OutlineColor", new Vector4(0, 1, 1, 1)); //Cyan outline
+        mat.SetFloat("_Outline", 0.0015f);
+    }
+
+    /// <summary> Sets the character's renderer to the outline renderer and stores their default renderer for when the effect wears off </summary>
+    private void DeOutlineCharacter(CharacterStats character)
+    {
+        Shader default_shader = charactersInRange[character];
+        Renderer current_renderer = character.GetComponentInChildren<SkinnedMeshRenderer>();
+        current_renderer.material.shader = default_shader; // = default_shader;
+    }
+
 	IEnumerator Toggle()
 	{
 		if(activated)
-		{
+        {
+            xraySphere.enabled = true;
 			while(this.light.intensity < .09f)
 			{
 				this.light.intensity = Mathf.Lerp (this.light.intensity, .1f, 2 * Time.deltaTime);
@@ -100,6 +159,11 @@ public class NightVisionGoggles : MonoBehaviour {
 		}
 		else
 		{
+            xraySphere.enabled = false;
+            foreach (CharacterStats c in charactersInRange.Keys)
+                DeOutlineCharacter(c);
+            charactersInRange.Clear();
+
 			this.light.intensity = 0;
 		}
 	}

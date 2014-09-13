@@ -5,8 +5,7 @@ using System.Collections;
 public class titleMenu : MonoBehaviour 
 {
     Rect startButton, exitButton, titleBar;
-    bool firstUpdate = true,
-         musicSwitch = false;
+    bool musicSwitch = false;
     AudioSource[] music;
 	public Texture2D btnTexture;
 	public Font btnFont;

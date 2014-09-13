@@ -10,6 +10,7 @@ public class EnemyAnimation_Humanoid : MonoBehaviour
 	private EnemyAI AI;
 	private Animator anim;
 	private AnimatorSetup animSetup;
+    private Material mat;
 
 	// Use this for initialization
 	void Awake () {
@@ -25,6 +26,7 @@ public class EnemyAnimation_Humanoid : MonoBehaviour
 		anim.SetLayerWeight(2, 1f);
 
 		deadZone *= Mathf.Deg2Rad;
+
 	}
 
 	// Update is called once per frame
