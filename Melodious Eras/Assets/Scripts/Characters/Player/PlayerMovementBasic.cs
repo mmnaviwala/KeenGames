@@ -440,8 +440,8 @@ public class PlayerMovementBasic : MonoBehaviour
             jumping = true;
 
 			//Determining action
-			Ray low = new Ray(this.transform.position + Vector3.up * RAY_LOW, mainCam.XZdirection/*this.transform.forward*/);
-            Ray high = new Ray(this.transform.position + Vector3.up * RAY_HIGH, mainCam.XZdirection/*this.transform.forward*/);
+			Ray low = new Ray(this.transform.position + Vector3.up * RAY_LOW, /*mainCam.XZdirection*/this.transform.forward);
+            Ray high = new Ray(this.transform.position + Vector3.up * RAY_HIGH, /*mainCam.XZdirection*/this.transform.forward);
             
 			RaycastHit hitLowInfo, hitHighInfo;
 

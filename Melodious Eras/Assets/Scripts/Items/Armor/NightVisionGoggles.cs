@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class NightVisionGoggles : MonoBehaviour {
 	public Suit playerSuit;
+
 	public float drainRate = 5;
 
 	private NightVisionTestCS nightvision;
@@ -32,14 +33,7 @@ public class NightVisionGoggles : MonoBehaviour {
 	void Start () 
     {
 		if(playerSuit == null)
-		{
-			Transform temp_transform = this.transform;
-			while(temp_transform.tag != Tags.PLAYER)
-			{
-				temp_transform = temp_transform.parent;
-			}
-			playerSuit = temp_transform.GetComponent<Suit>();
-		}
+			playerSuit = this.GetComponentInParent(typeof(Suit)) as Suit;
 
 		if(cam == null) 
 			cam = Camera.main;
@@ -119,7 +113,7 @@ public class NightVisionGoggles : MonoBehaviour {
         }
     }
 
-    /// <summary>  When exiting the sphere collider, a character's outline will disappear </summary>
+    /// <summary> When exiting the sphere collider, a character's outline will disappear </summary>
     void OnTriggerExit(Collider other)
     {
         CharacterStats character = other.GetComponent<CharacterStats>();
@@ -150,7 +144,8 @@ public class NightVisionGoggles : MonoBehaviour {
 	{
 		if(activated)
         {
-            xraySphere.enabled = true;
+			xraySphere.enabled = true;
+			OnTriggerEnter(playerSuit.collider);
 			while(this.light.intensity < .09f)
 			{
 				this.light.intensity = Mathf.Lerp (this.light.intensity, .1f, 2 * Time.deltaTime);
@@ -159,10 +154,11 @@ public class NightVisionGoggles : MonoBehaviour {
 		}
 		else
 		{
-            xraySphere.enabled = false;
+			xraySphere.enabled = false;
             foreach (CharacterStats c in charactersInRange.Keys)
                 DeOutlineCharacter(c);
-            charactersInRange.Clear();
+			DeOutlineCharacter(playerSuit.wielder);
+			charactersInRange.Clear();
 
 			this.light.intensity = 0;
 		}

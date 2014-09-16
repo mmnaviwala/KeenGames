@@ -7,6 +7,7 @@ public class Weapon : Item
 {
 	public Vector3 wieldPosition;
 	public Vector3 wieldRotation;
+	public CharacterStats wielder;
 
     protected SphereCollider soundSphere;
     protected Sound sound;
