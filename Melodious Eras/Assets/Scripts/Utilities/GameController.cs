@@ -49,7 +49,7 @@ public class GameController : MonoBehaviour
 
     public static void ShowCursor(bool show)
     {
-        Screen.showCursor = show;
+        Cursor.visible = show;
         Screen.lockCursor = !show;
     }
 

@@ -25,7 +25,7 @@ public class HealthBarScript : MonoBehaviour {
 
 	void Awake () 
 	{
-		healthBar = gameObject.guiTexture;
+		healthBar = gameObject.GetComponent<GUITexture>();
 		healthScale = healthBar.transform.localScale;
 	}
 	

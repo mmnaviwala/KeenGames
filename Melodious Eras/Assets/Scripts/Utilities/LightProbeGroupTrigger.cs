@@ -19,8 +19,8 @@ public class LightProbeGroupTrigger : MonoBehaviour
 		public void TriggerLightProbes(bool onOff)
 		{
 			triggered = onOff;
-			if(go.renderer != null)
-				go.renderer.useLightProbes = onOff;
+			if(go.GetComponent<Renderer>() != null)
+				go.GetComponent<Renderer>().useLightProbes = onOff;
 			else
 			{
 				Renderer[] renderers = go.GetComponentsInChildren<Renderer>();

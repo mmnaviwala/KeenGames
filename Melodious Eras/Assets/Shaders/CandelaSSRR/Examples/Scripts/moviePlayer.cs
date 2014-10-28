@@ -13,7 +13,7 @@ public class moviePlayer : MonoBehaviour {
 	
 		if(PlayOnStart)
 		{
-		MovieTexture movie = renderer.material.mainTexture as MovieTexture;
+		MovieTexture movie = GetComponent<Renderer>().material.mainTexture as MovieTexture;
 		//audio.clip = movie.audioClip;
 		movie.loop = LoopMovie;
 		//audio.loop = LoopMovie;

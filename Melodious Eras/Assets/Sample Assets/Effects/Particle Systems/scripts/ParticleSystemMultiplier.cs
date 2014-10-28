@@ -11,7 +11,7 @@ public class ParticleSystemMultiplier : MonoBehaviour {
 	{
 		Debug.Log("multiplier");
 		var systems = GetComponentsInChildren<ParticleSystem>();
-		this.audio.Play();
+		this.GetComponent<AudioSource>().Play();
 		foreach (ParticleSystem system in systems) {
 			system.startSize *= multiplier;
 			system.startSpeed *= multiplier;

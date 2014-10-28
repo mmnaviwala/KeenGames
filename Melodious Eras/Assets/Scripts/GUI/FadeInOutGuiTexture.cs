@@ -11,9 +11,9 @@ public class FadeInOutGuiTexture : MonoBehaviour {
 
 	private void Start () 
 	{
-		guiTexture.color = new Color(guiTexture.color.r, 
-		                             guiTexture.color.g, 
-		                             guiTexture.color.b, 0);
+		GetComponent<GUITexture>().color = new Color(GetComponent<GUITexture>().color.r, 
+		                             GetComponent<GUITexture>().color.g, 
+		                             GetComponent<GUITexture>().color.b, 0);
 		StartCoroutine(StartFading());
 	}
 
@@ -41,9 +41,9 @@ public class FadeInOutGuiTexture : MonoBehaviour {
 		for (float t = 0.0f; t < 1.0; t += Time.deltaTime*speed) 	
 		{ 	
 			float a = Mathf.Lerp(startLevel, endLevel, t);
-			guiTexture.color = new Color(guiTexture.color.r, 
-			                             guiTexture.color.g, 
-			                             guiTexture.color.b, a);
+			GetComponent<GUITexture>().color = new Color(GetComponent<GUITexture>().color.r, 
+			                             GetComponent<GUITexture>().color.g, 
+			                             GetComponent<GUITexture>().color.b, a);
 			yield return 0;
 			
 		}

@@ -118,7 +118,7 @@ public class PlayerMovementBasic : MonoBehaviour
 
     void OnDisable()
     {
-        this.rigidbody.velocity = Vector3.zero;
+        this.GetComponent<Rigidbody>().velocity = Vector3.zero;
         anim.SetFloat(HashIDs.speed_float, 0f);
         anim.SetBool(HashIDs.sneaking_bool, false);
     }
@@ -154,7 +154,7 @@ public class PlayerMovementBasic : MonoBehaviour
                 else
                 {
                     // prevent standing up in crouch-only areas (under desks, in vents, etc)
-                    Ray crouchRay = new Ray(rigidbody.position + Vector3.up * capsule.height * .5f, Vector3.up);
+                    Ray crouchRay = new Ray(GetComponent<Rigidbody>().position + Vector3.up * capsule.height * .5f, Vector3.up);
                     float crouchRayLength = originalHeight - capsule.radius * .5f;
                     if (!Physics.SphereCast(crouchRay, capsule.radius * .5f, crouchRayLength))
                     {
@@ -270,15 +270,15 @@ public class PlayerMovementBasic : MonoBehaviour
         if (speed > 4f && !isCrouching)
         {
             this.stats.ReduceStamina(15 * Time.deltaTime); 
-            if (!this.audio.isPlaying) //play footsteps
-                this.audio.Play();
+            if (!this.GetComponent<AudioSource>().isPlaying) //play footsteps
+                this.GetComponent<AudioSource>().Play();
             foreach(EnemyStats enemy in stats._nearbyEnemies.charactersInRange)
             {
                 enemy.AI.Listen(this.transform.position, 10);
             }
         }
-        else if (this.audio.isPlaying)
-            this.audio.Stop();
+        else if (this.GetComponent<AudioSource>().isPlaying)
+            this.GetComponent<AudioSource>().Stop();
 
         // Facing and running the desired direction. If-condition is there because Vector2.Angle only returns positive 0-180
         float angle = Vector2.Angle(Vector2.up, moveDirection);
@@ -302,7 +302,7 @@ public class PlayerMovementBasic : MonoBehaviour
             this.transform.eulerAngles = new Vector3(this.transform.eulerAngles.x, mainCam.transform.eulerAngles.y, this.transform.eulerAngles.z);
 
             this.anim.applyRootMotion = false;
-            this.rigidbody.velocity = (this.transform.right * moveDirection.x + this.transform.forward * moveDirection.y) * speed + new Vector3(0, this.rigidbody.velocity.y, 0);
+            this.GetComponent<Rigidbody>().velocity = (this.transform.right * moveDirection.x + this.transform.forward * moveDirection.y) * speed + new Vector3(0, this.GetComponent<Rigidbody>().velocity.y, 0);
         }
 	}
 	#endregion
@@ -323,7 +323,7 @@ public class PlayerMovementBasic : MonoBehaviour
 	
 	void TurnPlayerHead()
 	{
-		Ray rayFromCam = mainCam.camera.ViewportPointToRay(new Vector3(.5f, .5f, 0));
+		Ray rayFromCam = mainCam.GetComponent<Camera>().ViewportPointToRay(new Vector3(.5f, .5f, 0));
 		RaycastHit hit;
 		
 		
@@ -377,7 +377,7 @@ public class PlayerMovementBasic : MonoBehaviour
                     
                     if (state.IsName("Vault") && state.normalizedTime > startTime)
                     {
-                        this.rigidbody.isKinematic = true;
+                        this.GetComponent<Rigidbody>().isKinematic = true;
                         this.anim.MatchTarget(matchTarget, new Quaternion(), AvatarTarget.LeftHand, new MatchTargetWeightMask(Vector3.one, 0), startTime, endTime);
                     }
                     yield return endOfFrame;
@@ -390,7 +390,7 @@ public class PlayerMovementBasic : MonoBehaviour
                 this.speed = 0f;
                 while (this.anim.GetBool(HashIDs.climbLedge_bool))
                 {
-                    this.rigidbody.isKinematic = true;
+                    this.GetComponent<Rigidbody>().isKinematic = true;
                     state = this.anim.GetCurrentAnimatorStateInfo(0);
                     if (state.IsName("Jump to Ledge") && state.normalizedTime > startTime)
                     {
@@ -401,7 +401,7 @@ public class PlayerMovementBasic : MonoBehaviour
                 }
                 break;
         }
-        this.rigidbody.isKinematic = false;
+        this.GetComponent<Rigidbody>().isKinematic = false;
     }
 	#endregion
 
@@ -509,7 +509,7 @@ public class PlayerMovementBasic : MonoBehaviour
 
         if (!onGround)
         {
-            this.anim.SetFloat(HashIDs.jump_float, this.rigidbody.velocity.y);
+            this.anim.SetFloat(HashIDs.jump_float, this.GetComponent<Rigidbody>().velocity.y);
         }
 
         /*if (!onGround && !falling) //if fall just started

@@ -40,8 +40,8 @@ public class TurnTableGUI : MonoBehaviour {
 	void Start ()
 	{
 		candelassrr = MainCamera.GetComponentInChildren<CandelaSSRR>();
-		BaseObject.renderer.material = mat1;
-		tablecolor = BaseObject.renderer.material.color;
+		BaseObject.GetComponent<Renderer>().material = mat1;
+		tablecolor = BaseObject.GetComponent<Renderer>().material.color;
 		currentMatID = 0;
 		currentObjID = 0;
 		lastVisibleObject = obj1;
@@ -80,28 +80,28 @@ public class TurnTableGUI : MonoBehaviour {
 			switch (currentMatID)
 			{
 			case 0:
-				BaseObject.renderer.material = mat1;
-				tablecolor = BaseObject.renderer.material.color;
+				BaseObject.GetComponent<Renderer>().material = mat1;
+				tablecolor = BaseObject.GetComponent<Renderer>().material.color;
 				materialDescription = matinfo1;
 				break;
 			case 1:
-				BaseObject.renderer.material = mat2;
-				tablecolor = BaseObject.renderer.material.color;
+				BaseObject.GetComponent<Renderer>().material = mat2;
+				tablecolor = BaseObject.GetComponent<Renderer>().material.color;
 				materialDescription = matinfo2;
 				break;
 			case 2:
-				BaseObject.renderer.material = mat3;
-				tablecolor = BaseObject.renderer.material.color;
+				BaseObject.GetComponent<Renderer>().material = mat3;
+				tablecolor = BaseObject.GetComponent<Renderer>().material.color;
 				materialDescription = matinfo2;
 				break;
 			case 3://NORMAL MAP
-				BaseObject.renderer.material = mat4;
-				tablecolor = BaseObject.renderer.material.color;
+				BaseObject.GetComponent<Renderer>().material = mat4;
+				tablecolor = BaseObject.GetComponent<Renderer>().material.color;
 				materialDescription = matinfo3;
 				break;
 			case 4://CUBEMAP MAP
-				BaseObject.renderer.material = mat5;
-				tablecolor = BaseObject.renderer.material.color;
+				BaseObject.GetComponent<Renderer>().material = mat5;
+				tablecolor = BaseObject.GetComponent<Renderer>().material.color;
 				materialDescription = matinfo4;
 				break;
 			}
@@ -148,8 +148,8 @@ public class TurnTableGUI : MonoBehaviour {
 
 		if(GUI.changed)
 		{
-			BaseObject.renderer.material.SetFloat("_Shininess", SliderRoughness);
-			BaseObject.renderer.material.color = new Color(tablecolor.r,tablecolor.g,tablecolor.b,SliderReflectivity);
+			BaseObject.GetComponent<Renderer>().material.SetFloat("_Shininess", SliderRoughness);
+			BaseObject.GetComponent<Renderer>().material.color = new Color(tablecolor.r,tablecolor.g,tablecolor.b,SliderReflectivity);
 			candelassrr.GlobalBlurRadius = SliderGlobalBlur;
 			if(physicallyAccurateMix)
 			{

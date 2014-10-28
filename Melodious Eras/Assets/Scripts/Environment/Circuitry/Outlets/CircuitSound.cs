@@ -20,22 +20,22 @@ public class CircuitSound : CircuitOutlet
 		//this.audio.clip = soundClip;
 		if(useTrigger)
 		{
-			this.audio.Stop();
-			this.audio.volume = minVolume;
+			this.GetComponent<AudioSource>().Stop();
+			this.GetComponent<AudioSource>().volume = minVolume;
 		}
 		else
 		{
-			this.audio.Play();
-			this.audio.volume = maxVolume;
+			this.GetComponent<AudioSource>().Play();
+			this.GetComponent<AudioSource>().volume = maxVolume;
 		}
 	}
 	void FixedUpdate()
 	{
-		if(triggerArea && triggerArea.playerInRange && !this.audio.isPlaying)
+		if(triggerArea && triggerArea.playerInRange && !this.GetComponent<AudioSource>().isPlaying)
 		{
 			StartCoroutine(FadeSound (true));
 		}
-		else if (triggerArea && !this.triggerArea.playerInRange && this.audio.isPlaying)
+		else if (triggerArea && !this.triggerArea.playerInRange && this.GetComponent<AudioSource>().isPlaying)
 		{
 			StartCoroutine(FadeSound (false));
 		}
@@ -52,23 +52,23 @@ public class CircuitSound : CircuitOutlet
 
 		if(upDown)
 		{
-			this.audio.Play();
-			while(this.audio.volume < goal)
+			this.GetComponent<AudioSource>().Play();
+			while(this.GetComponent<AudioSource>().volume < goal)
 			{
-				this.audio.volume = Mathf.Lerp(this.audio.volume, maxVolume, soundFadeSpeed * Time.deltaTime);
+				this.GetComponent<AudioSource>().volume = Mathf.Lerp(this.GetComponent<AudioSource>().volume, maxVolume, soundFadeSpeed * Time.deltaTime);
 				yield return endOfFrame;
 			}
-			this.audio.volume = maxVolume;
+			this.GetComponent<AudioSource>().volume = maxVolume;
 		}
 		else
 		{
-			while(this.audio.volume > goal)
+			while(this.GetComponent<AudioSource>().volume > goal)
 			{
-				this.audio.volume = Mathf.Lerp (this.audio.volume, minVolume, soundFadeSpeed * Time.deltaTime);
+				this.GetComponent<AudioSource>().volume = Mathf.Lerp (this.GetComponent<AudioSource>().volume, minVolume, soundFadeSpeed * Time.deltaTime);
 				yield return endOfFrame;
 			}
-			this.audio.volume = minVolume;
-			this.audio.Stop ();
+			this.GetComponent<AudioSource>().volume = minVolume;
+			this.GetComponent<AudioSource>().Stop ();
 		}
 	}
 }

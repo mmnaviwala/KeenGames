@@ -52,7 +52,7 @@ public class EndOfLevel : MonoBehaviour {
 
     public void EndLevel(bool didPlayerDie)
     {
-        Screen.showCursor = true;
+        Cursor.visible = true;
         Screen.lockCursor = false;
         var player = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<PlayerMovementBasic>();
         var cam = GameObject.FindGameObjectWithTag(Tags.MAIN_CAMERA).GetComponent<CameraMovement3D>();
@@ -79,7 +79,7 @@ public class EndOfLevel : MonoBehaviour {
 
 	IEnumerator moveCamera(PlayerMovementBasic player, CameraMovement3D cam, bool didPlayerDie)
 	{
-        Screen.showCursor = true;
+        Cursor.visible = true;
         Screen.lockCursor = false;
 
 		Vector3 targetPosition = playerPos + 

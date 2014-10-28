@@ -23,7 +23,7 @@ public class titleMenu3D : MonoBehaviour
             selections[counter].transform.parent = this.transform;
 
             selections[counter].AddComponent<Rigidbody>();
-            selections[counter].rigidbody.isKinematic = true;
+            selections[counter].GetComponent<Rigidbody>().isKinematic = true;
 
             selections[counter].AddComponent<TitleMenuDisk>();
             selections[counter].GetComponent<TitleMenuDisk>().fragmentNum = counter;
@@ -37,7 +37,7 @@ public class titleMenu3D : MonoBehaviour
             //                                                             radius * Mathf.Cos(angle * Mathf.Deg2Rad),
             //                                                             0);
             selections[counter].transform.localScale = new Vector3(2, 1, .1f);
-            selections[counter].renderer.material.color = new Color((angle + 45) / 360f, (angle + 45) / 360f, (angle + 45) / 360f);
+            selections[counter].GetComponent<Renderer>().material.color = new Color((angle + 45) / 360f, (angle + 45) / 360f, (angle + 45) / 360f);
             selections[counter].name = "Cube" + (angle / 45);
             //selections[counter].transform.Rotate(this.transform.forward, 90 - angle);
             selections[counter].transform.localEulerAngles = new Vector3(0, 0, 90 - angle);

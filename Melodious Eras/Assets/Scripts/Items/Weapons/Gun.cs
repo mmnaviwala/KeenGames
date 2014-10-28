@@ -85,13 +85,13 @@ public class Gun : Weapon
                 proj.GetComponent<Projectile>().Shoot(direction, damage, muzzleVelocity);
                 ammoInClip -= ammoPerShot;
 
-                this.audio.PlayOneShot(shootingSound);
+                this.GetComponent<AudioSource>().PlayOneShot(shootingSound);
 
                 return true;
             }
             else
             {
-                this.audio.PlayOneShot(emptySound);
+                this.GetComponent<AudioSource>().PlayOneShot(emptySound);
                 StartCoroutine(this.Reload());
                 return false;
             }
@@ -113,7 +113,7 @@ public class Gun : Weapon
         {
             //Play animation, do this stuff once the animation is finished
             reloading = true;
-            this.audio.PlayOneShot(reloadSound);
+            this.GetComponent<AudioSource>().PlayOneShot(reloadSound);
 
             yield return new WaitForSeconds(reloadSound.length); //until animation callback is implemented
             int roundsNeeded = clipSize - ammoInClip;

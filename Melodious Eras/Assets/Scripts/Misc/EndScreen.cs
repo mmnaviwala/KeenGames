@@ -16,7 +16,7 @@ public class EndScreen : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        music = Camera.main.audio;
+        music = Camera.main.GetComponent<AudioSource>();
         playerHUD = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<HUD_Stealth>();
         playerStats = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<PlayerStats>();
     }

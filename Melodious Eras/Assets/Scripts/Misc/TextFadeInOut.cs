@@ -39,11 +39,11 @@ public class TextFadeInOut : MonoBehaviour
 			
 			float a = Mathf.Lerp(startLevel, endLevel, t);
 			
-			guiText.font.material.color = new Color(guiText.font.material.color.r, 
+			GetComponent<GUIText>().font.material.color = new Color(GetComponent<GUIText>().font.material.color.r, 
 			                                        
-			                                        guiText.font.material.color.g, 
+			                                        GetComponent<GUIText>().font.material.color.g, 
 			                                        
-			                                        guiText.font.material.color.b, a);
+			                                        GetComponent<GUIText>().font.material.color.b, a);
 			
 			yield return 0;
 			

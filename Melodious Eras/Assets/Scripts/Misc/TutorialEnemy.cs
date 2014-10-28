@@ -17,7 +17,7 @@ public class TutorialEnemy : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        music = Camera.main.audio;
+        music = Camera.main.GetComponent<AudioSource>();
         playerHUD = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<HUD_Stealth>();
         pictures = new Texture2D[3];
         pictures[0] = Resources.Load("picture_seen") as Texture2D;

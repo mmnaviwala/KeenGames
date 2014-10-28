@@ -30,7 +30,7 @@ public class HUD : MonoBehaviour {
 
     void Awake()
     {
-        Screen.showCursor = false;
+        Cursor.visible = false;
         Screen.lockCursor = true;
 
         float xx = Screen.width / 10;

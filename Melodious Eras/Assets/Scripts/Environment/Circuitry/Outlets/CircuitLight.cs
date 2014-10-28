@@ -26,7 +26,7 @@ public class CircuitLight : CircuitNode
 
         if (lightbulb == null) 
 		{
-            lightbulb = this.light;
+            lightbulb = this.GetComponent<Light>();
 			if(lightbulb == null)
 				lightbulb = this.transform.GetComponentInChildren<Light>();
 		}

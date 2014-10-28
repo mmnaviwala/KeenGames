@@ -51,13 +51,13 @@ public class LightningGun : Gun
                 }
                 ammoInClip -= ammoPerShot;
 
-                this.audio.PlayOneShot(shootingSound);
+                this.GetComponent<AudioSource>().PlayOneShot(shootingSound);
 
                 return true;
             }
             else
             {
-                this.audio.PlayOneShot(emptySound);
+                this.GetComponent<AudioSource>().PlayOneShot(emptySound);
                 if (this.extraAmmo > 0)
                     StartCoroutine(this.Reload());
                 return false;

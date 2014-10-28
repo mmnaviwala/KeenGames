@@ -83,15 +83,15 @@ public class CandelaSSRR : MonoBehaviour
 	
 	void OnEnable () 
 	{
-		camera.depthTextureMode |= DepthTextureMode.DepthNormals;
+		GetComponent<Camera>().depthTextureMode |= DepthTextureMode.DepthNormals;
 		
 		if(!RTcustom_CAMERA)
 		{
 		//Render Cam
 		GameObject go = new GameObject ("RenderCamPos", typeof(Camera));
     	go.hideFlags  = HideFlags.HideAndDontSave;
-   		RTcustom_CAMERA      = go.camera;
-		RTcustom_CAMERA.CopyFrom(this.camera);
+   		RTcustom_CAMERA      = go.GetComponent<Camera>();
+		RTcustom_CAMERA.CopyFrom(this.GetComponent<Camera>());
 	   	RTcustom_CAMERA.clearFlags = CameraClearFlags.Color;
 		RTcustom_CAMERA.renderingPath = RenderingPath.Forward;
 		RTcustom_CAMERA.backgroundColor = new Color(0,0,0,0);
@@ -121,11 +121,11 @@ public class CandelaSSRR : MonoBehaviour
 	{
 		if(RTcustom_CAMERA)
 		{
-		RTcustom_CAMERA.CopyFrom(this.camera);
+		RTcustom_CAMERA.CopyFrom(this.GetComponent<Camera>());
 		RTcustom_CAMERA.renderingPath = RenderingPath.Forward;
 		RTcustom_CAMERA.clearFlags = CameraClearFlags.Color;
 		
-		if(UseCustomDepth || (this.camera.renderingPath == RenderingPath.Forward))
+		if(UseCustomDepth || (this.GetComponent<Camera>().renderingPath == RenderingPath.Forward))
 		{
 		RTcustom_CAMERA.backgroundColor = new Color(1,1,1,1);
 		RenderTexture camRT = RenderTexture.GetTemporary(Screen.width,Screen.height, 24, RenderTextureFormat.RFloat);
@@ -137,7 +137,7 @@ public class CandelaSSRR : MonoBehaviour
 		}
 			
 		//---------------------------------------
-		if(camera.renderingPath == RenderingPath.Forward)
+		if(GetComponent<Camera>().renderingPath == RenderingPath.Forward)
 		{
 		RTcustom_CAMERA.backgroundColor = new Color(0,0,0,0);
 		RenderTexture camRT2 = RenderTexture.GetTemporary(Screen.width,Screen.height, 24, RenderTextureFormat.ARGBFloat);
@@ -178,7 +178,7 @@ public class CandelaSSRR : MonoBehaviour
         SSRR_MATERIAL.SetFloat("_fadePower", (float) this.fadePower);
         
 		
-		Matrix4x4 P  = this.camera.projectionMatrix;
+		Matrix4x4 P  = this.GetComponent<Camera>().projectionMatrix;
 	    bool d3d = SystemInfo.graphicsDeviceVersion.IndexOf("Direct3D") > -1;
         if (d3d) {
               for (int i = 0; i < 4; i++) {
@@ -186,7 +186,7 @@ public class CandelaSSRR : MonoBehaviour
             }
         }
 		
-		Matrix4x4 viewProjInverse = (P * this.camera.worldToCameraMatrix).inverse;
+		Matrix4x4 viewProjInverse = (P * this.GetComponent<Camera>().worldToCameraMatrix).inverse;
         Shader.SetGlobalMatrix("_ViewProjectInverse", viewProjInverse);
 		Shader.SetGlobalFloat("_DistanceBlurRadius", DistanceBlurRadius);
 		Shader.SetGlobalFloat("_GrazeBlurPower", 	 GrazeBlurPower);
@@ -196,7 +196,7 @@ public class CandelaSSRR : MonoBehaviour
 		
 		SSRR_MATERIAL.SetMatrix("_ProjMatrix", P);
 		SSRR_MATERIAL.SetMatrix("_ProjectionInv", P.inverse);
-	   	SSRR_MATERIAL.SetMatrix("_ViewMatrix",this.camera.worldToCameraMatrix.inverse.transpose);
+	   	SSRR_MATERIAL.SetMatrix("_ViewMatrix",this.GetComponent<Camera>().worldToCameraMatrix.inverse.transpose);
 		//SIMPLE BLUR PARAMETERS
 		BLUR_MATERIALX.SetFloat ("_BlurRadius", GlobalBlurRadius);
 		BLUR_MATERIALY.SetFloat ("_BlurRadius", GlobalBlurRadius);
@@ -213,7 +213,7 @@ public class CandelaSSRR : MonoBehaviour
 		POST_COMPOSE_MATERIAL.SetFloat("_reflectionMultiply", this.reflectionMultiply);
 
 		float renderPathForward = 0.0f;
-		if(this.camera.renderingPath == RenderingPath.Forward) renderPathForward = 1.0f;
+		if(this.GetComponent<Camera>().renderingPath == RenderingPath.Forward) renderPathForward = 1.0f;
 		POST_COMPOSE_MATERIAL.SetFloat("_IsInForwardRender", renderPathForward);
 
 		//DO SSRR RENDERING
@@ -233,7 +233,7 @@ public class CandelaSSRR : MonoBehaviour
 		RenderTexture reflectionTexture = RenderTexture.GetTemporary(sWidth,sHeight, 0, tmpFormat);
 		RenderTexture bluredTexture  	= RenderTexture.GetTemporary(sWidth,sHeight, 0, tmpFormat);
 		
-		if(UseCustomDepth || (this.camera.renderingPath == RenderingPath.Forward))
+		if(UseCustomDepth || (this.GetComponent<Camera>().renderingPath == RenderingPath.Forward))
 		Graphics.Blit(source, reflectionTexture, SSRR_MATERIAL,0);
 		else
 		Graphics.Blit(source, reflectionTexture, SSRR_MATERIAL,1);

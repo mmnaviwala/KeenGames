@@ -7,9 +7,9 @@ public class LightningBolt : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{		
-		Material newMat = renderer.material;
+		Material newMat = GetComponent<Renderer>().material;
 		newMat.SetFloat("_StartSeed",Random.value*1000);
-		renderer.material = newMat;
+		GetComponent<Renderer>().material = newMat;
 		
 	}
 	

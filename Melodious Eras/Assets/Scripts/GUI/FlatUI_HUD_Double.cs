@@ -33,8 +33,8 @@ public class FlatUI_HUD_Double : MonoBehaviour {
 		suit = stats.GetComponent<Suit>();
 		weapon = stats.equippedWeapon as Gun;
 
-        outerMat = renderer.materials[0];
-        innerMat = renderer.materials[1];
+        outerMat = GetComponent<Renderer>().materials[0];
+        innerMat = GetComponent<Renderer>().materials[1];
 
 
 		xx = Screen.width / 10;

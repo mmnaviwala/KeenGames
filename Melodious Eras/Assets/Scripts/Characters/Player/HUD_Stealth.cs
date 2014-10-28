@@ -20,7 +20,7 @@ public class HUD_Stealth : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Screen.showCursor = false;
+        Cursor.visible = false;
 
         stats = this.GetComponent<PlayerStats>();
         player = this.GetComponent<PlayerMovementBasic>();
@@ -77,13 +77,13 @@ public class HUD_Stealth : MonoBehaviour
     {
         this.enabled = true;
         Screen.lockCursor = true;
-        Screen.showCursor = false;
+        Cursor.visible = false;
     }
 
     public void Disable()
     {
         this.enabled = false;
         Screen.lockCursor = false;
-        Screen.showCursor = true; 
+        Cursor.visible = true; 
     }
 }

@@ -46,8 +46,8 @@ public class ComputerTerminal : CircuitSwitch
 
         for (int m = 0; m < monitors.Length; m++)
         {
-            monitors[m].GetChild(0).light.enabled = activated;
-            monitors[m].renderer.material = activated ? onScreen : offScreen;
+            monitors[m].GetChild(0).GetComponent<Light>().enabled = activated;
+            monitors[m].GetComponent<Renderer>().material = activated ? onScreen : offScreen;
         }
 
         //GUI stuff
@@ -83,8 +83,8 @@ public class ComputerTerminal : CircuitSwitch
 
                     for (int m = 0; m < monitors.Length; m++)
                     {
-                        monitors[m].renderer.material = activated ? onScreen : offScreen;
-                        monitors[m].GetChild(0).light.enabled = activated;
+                        monitors[m].GetComponent<Renderer>().material = activated ? onScreen : offScreen;
+                        monitors[m].GetChild(0).GetComponent<Light>().enabled = activated;
                     }
                 }
             }
@@ -186,7 +186,7 @@ public class ComputerTerminal : CircuitSwitch
         hud.enabled = !usingTerminalP;
         playerMovement.enabled = !usingTerminal;
 
-        Screen.showCursor =  usingTerminalP;
+        Cursor.visible =  usingTerminalP;
         Screen.lockCursor = !usingTerminalP;
         
     }

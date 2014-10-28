@@ -23,7 +23,7 @@ public class LightFlicker : MonoBehaviour
     {
         while (true)
         {
-            this.light.enabled = !this.light.enabled;
+            this.GetComponent<Light>().enabled = !this.GetComponent<Light>().enabled;
             yield return new WaitForSeconds(Random.Range(0f, frequency));
         }
     }

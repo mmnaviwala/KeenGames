@@ -49,7 +49,7 @@ public class LinearArrayEditor : Editor {
 	{
 		//Ссылка на компонент
 		LinearArray arrLine = target as LinearArray;
-		if(arrLine.renderer == null && arrLine.collider == null)
+		if(arrLine.GetComponent<Renderer>() == null && arrLine.GetComponent<Collider>() == null)
 			arrLine.RelaOffset = false;
 		//Отрисовка инспектора по умолчанию
 		DrawDefaultInspector();
@@ -118,9 +118,9 @@ public class LinearArrayEditor : Editor {
 			EditorGUILayout.EndToggleGroup();
 			arrLine.RelaScaleVect = RelaScale1;
 		}
-		if(arrLine.collider == null && arrLine.RelaOffset)
+		if(arrLine.GetComponent<Collider>() == null && arrLine.RelaOffset)
 			arrLine.RelaObj = 1;
-		else if(arrLine.renderer == null && arrLine.RelaOffset)
+		else if(arrLine.GetComponent<Renderer>() == null && arrLine.RelaOffset)
 			arrLine.RelaObj = 0;
 		if(arrLine.transform.parent == null && arrLine.RelaRot)
 			arrLine.RelaRotObj = 0;
@@ -194,9 +194,9 @@ public class LinearArrayEditor : Editor {
 				#region Смещение
 				if(arrLine.RelaOffset){
 					if(arrLine.RelaObj == 0)
-						sizeVect = arrLine.gameObject.collider.bounds.size;
+						sizeVect = arrLine.gameObject.GetComponent<Collider>().bounds.size;
 					if(arrLine.RelaObj == 1)
-						sizeVect = arrLine.gameObject.renderer.bounds.size;
+						sizeVect = arrLine.gameObject.GetComponent<Renderer>().bounds.size;
 				}
 				
 				Vector3 Vect1 = arrLine.ConstVect;

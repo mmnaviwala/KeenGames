@@ -57,7 +57,7 @@ public class SecurityArea : MonoBehaviour
                 case SecurityLevel.High: Gizmos.color = new Color32(255, 165, 0, 38); break;
                 case SecurityLevel.ShootOnSight: Gizmos.color = new Color32(255, 0, 0, 38); break;
             }
-            Gizmos.DrawCube(collider.bounds.center, collider.bounds.size);
+            Gizmos.DrawCube(GetComponent<Collider>().bounds.center, GetComponent<Collider>().bounds.size);
         }
     }
     void OnDrawGizmosSelected()
@@ -70,7 +70,7 @@ public class SecurityArea : MonoBehaviour
             case SecurityLevel.High: Gizmos.color = new Color32(255, 165, 0, 128); break;
             case SecurityLevel.ShootOnSight: Gizmos.color = new Color32(255, 0, 0, 128); break;
         }
-        Gizmos.DrawCube(collider.bounds.center, collider.bounds.size);
+        Gizmos.DrawCube(GetComponent<Collider>().bounds.center, GetComponent<Collider>().bounds.size);
     }
     public bool Equals(SecurityArea sec)
     {

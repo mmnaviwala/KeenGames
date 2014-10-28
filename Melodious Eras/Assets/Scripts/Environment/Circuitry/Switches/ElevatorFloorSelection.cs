@@ -102,7 +102,7 @@ public class ElevatorFloorSelection : CircuitSwitch
         inUse = usingButtons;
         playerHUD.enabled = !usingButtons;
         cam3d.enabled = !usingButtons;
-        Screen.showCursor = usingButtons;
+        Cursor.visible = usingButtons;
         Screen.lockCursor = !usingButtons;
     }
 }

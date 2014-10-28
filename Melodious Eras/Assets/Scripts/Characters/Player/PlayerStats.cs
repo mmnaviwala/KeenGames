@@ -124,7 +124,7 @@ public class PlayerStats : CharacterStats
         }
         else
         {
-            this.audio.PlayOneShot(meleeClip);
+            this.GetComponent<AudioSource>().PlayOneShot(meleeClip);
             targetP.TakeDamage(_meleeDamage, this);
         }
     }

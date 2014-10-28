@@ -1,3 +1,5 @@
+#warning Upgrade NOTE: unity_Scale shader variable was removed; replaced 'unity_Scale.w' with '1.0'
+
 // CANDELA-SSRR SCREEN SPACE RAYTRACED REFLECTIONS
 // Copyright 2014 Livenda
 
@@ -48,9 +50,9 @@
 			
      		
             TANGENT_SPACE_ROTATION;
-              o.TtoW0 = mul(rotation, _Object2World[0].xyz * unity_Scale.w);
-              o.TtoW1 = mul(rotation, _Object2World[1].xyz * unity_Scale.w);
-              o.TtoW2 = mul(rotation, _Object2World[2].xyz * unity_Scale.w);
+              o.TtoW0 = mul(rotation, _Object2World[0].xyz * 1.0);
+              o.TtoW1 = mul(rotation, _Object2World[1].xyz * 1.0);
+              o.TtoW2 = mul(rotation, _Object2World[2].xyz * 1.0);
      
             return o;
           }

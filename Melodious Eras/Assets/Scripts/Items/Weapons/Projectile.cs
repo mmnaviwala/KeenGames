@@ -29,7 +29,7 @@ public class Projectile : MonoBehaviour
     {
         if (ammoType != AmmoType.Laser)
         {
-            this.rigidbody.velocity = direction * velocity;
+            this.GetComponent<Rigidbody>().velocity = direction * velocity;
             this.baseDamage = damage;
         }
         else //Lasers are instantaneous

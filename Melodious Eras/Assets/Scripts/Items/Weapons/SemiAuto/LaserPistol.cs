@@ -57,12 +57,12 @@ public class LaserPistol : SemiAutoWeapon
                 if(!infiniteAmmo)
                     ammoInClip -= ammoPerShot;
 
-                this.audio.PlayOneShot(shootingSound);
+                this.GetComponent<AudioSource>().PlayOneShot(shootingSound);
                 return true;
             }
             else //if no ammo in the clip
             {
-                this.audio.PlayOneShot(emptySound);
+                this.GetComponent<AudioSource>().PlayOneShot(emptySound);
                 if (this.extraAmmo > 0)
                     StartCoroutine(this.Reload());
                 return false;
@@ -89,7 +89,7 @@ public class LaserPistol : SemiAutoWeapon
                 if (!infiniteAmmo)
                     ammoInClip -= ammoPerShot;
 
-                this.audio.PlayOneShot(shootingSound);
+                this.GetComponent<AudioSource>().PlayOneShot(shootingSound);
                 return true;
             }
         }
@@ -117,10 +117,10 @@ public class LaserPistol : SemiAutoWeapon
     /// <returns></returns>
 	IEnumerator Flash()
 	{
-		barrelExit.light.intensity = 1;
-		while(barrelExit.light.intensity > .01f)
+		barrelExit.GetComponent<Light>().intensity = 1;
+		while(barrelExit.GetComponent<Light>().intensity > .01f)
 		{
-			barrelExit.light.intensity = Mathf.Lerp (barrelExit.light.intensity, 0f, 10 * Time.deltaTime);
+			barrelExit.GetComponent<Light>().intensity = Mathf.Lerp (barrelExit.GetComponent<Light>().intensity, 0f, 10 * Time.deltaTime);
 			yield return endOfFrame;
 		}
 	}

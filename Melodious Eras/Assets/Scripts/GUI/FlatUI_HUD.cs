@@ -55,9 +55,9 @@ public class FlatUI_HUD : MonoBehaviour
     void OnGUI()
     {
         GUI.DrawTexture(rectSize, bottomTexture);
-        renderer.material.SetFloat("_Cutoff", Mathf.Clamp(Mathf.InverseLerp(0f, maxNumber, maxNumber - currentNumber), .01f, 1));
+        GetComponent<Renderer>().material.SetFloat("_Cutoff", Mathf.Clamp(Mathf.InverseLerp(0f, maxNumber, maxNumber - currentNumber), .01f, 1));
         //renderer.material.color = Color.Lerp(Color.clear, Color.white, currentNumber / maxNumber);
-        Graphics.DrawTexture(rectSize, barTexture, gameObject.renderer.material);
+        Graphics.DrawTexture(rectSize, barTexture, gameObject.GetComponent<Renderer>().material);
 
         GUI.DrawTexture(rectSize, topTexture);
 
@@ -78,7 +78,7 @@ public class FlatUI_HUD : MonoBehaviour
     /// </summary>
     protected void Initialize()
     {
-        Screen.showCursor = false;
+        Cursor.visible = false;
         Screen.lockCursor = true;
         this.player = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<PlayerMovementBasic>();
         this.playerStats = player.GetComponent<PlayerStats>();

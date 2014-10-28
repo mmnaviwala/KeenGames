@@ -68,12 +68,12 @@ public class EnemySight : MonoBehaviour
             if (angle < fovAngle * ai.awarenessMultiplier)
             {
                 //calculating rays for 3 points on the character
-                float charHeight = ch.collider.bounds.max.y - ch.collider.bounds.min.y;
+                float charHeight = ch.GetComponent<Collider>().bounds.max.y - ch.GetComponent<Collider>().bounds.min.y;
                 rayUpper.origin = rayCenter.origin = rayLower.origin = this.eyes.position;
 
-                rayUpper.direction = (ch.collider.bounds.max - Vector3.up * charHeight / 8) - this.eyes.position;
-                rayLower.direction = (ch.collider.bounds.min + Vector3.up * charHeight / 8) - this.eyes.position;
-                rayCenter.direction = (ch.collider.bounds.min + Vector3.up * charHeight / 2) - this.eyes.position;
+                rayUpper.direction = (ch.GetComponent<Collider>().bounds.max - Vector3.up * charHeight / 8) - this.eyes.position;
+                rayLower.direction = (ch.GetComponent<Collider>().bounds.min + Vector3.up * charHeight / 8) - this.eyes.position;
+                rayCenter.direction = (ch.GetComponent<Collider>().bounds.min + Vector3.up * charHeight / 2) - this.eyes.position;
 
                 //TODO: ADJUST FIELD OF VIEW
                 //reducing sight distance at wide angles, to simulate peripheral vision

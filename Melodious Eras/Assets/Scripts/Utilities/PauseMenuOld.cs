@@ -336,7 +336,7 @@ public class PauseMenuOld : MonoBehaviour
             Application.Quit();
         if (GUILayout.Button("Restart Level"))
         {
-            GameObject.FindGameObjectWithTag("MainCamera").audio.Stop();
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().Stop();
             Application.LoadLevel(Application.loadedLevelName);
 
         }

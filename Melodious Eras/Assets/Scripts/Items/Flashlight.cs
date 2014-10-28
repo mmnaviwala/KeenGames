@@ -38,7 +38,7 @@ public class Flashlight : MonoBehaviour
         batteryLifeRect = batteryMaxLifeRect;
         if (lightShafts)
         {
-            lightShafts.enabled = light.enabled;
+            lightShafts.enabled = GetComponent<Light>().enabled;
             lightShafts.m_Brightness = Environment.globalDustLevel;
         }
 	}
@@ -50,11 +50,11 @@ public class Flashlight : MonoBehaviour
         {
             if (Input.GetButtonDown(InputType.TOGGLE_FLASHLIGHT))
             {
-                light.enabled = !light.enabled;
+                GetComponent<Light>().enabled = !GetComponent<Light>().enabled;
 				if(lightShafts)
-					lightShafts.enabled = light.enabled;
+					lightShafts.enabled = GetComponent<Light>().enabled;
             }
-            if (!infiniteBattery && light.enabled)
+            if (!infiniteBattery && GetComponent<Light>().enabled)
             {
 				playerSuit.batteryLife -= Time.deltaTime / efficiency;
 				batteryLifeRect.width = batteryMaxLifeRect.width * playerSuit.batteryLife / playerSuit.maxBatteryLife;
@@ -71,7 +71,7 @@ public class Flashlight : MonoBehaviour
 
     public void Toggle()
     {
-        light.enabled = !light.enabled;
+        GetComponent<Light>().enabled = !GetComponent<Light>().enabled;
     }
 
     /// <summary>

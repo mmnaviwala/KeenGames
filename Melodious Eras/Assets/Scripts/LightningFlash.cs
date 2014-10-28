@@ -7,7 +7,7 @@ public class LightningFlash : MonoBehaviour {
 	{
 		while (true)
 		{
-			light.enabled = !(light.enabled); //toggle on/off the enabled property
+			GetComponent<Light>().enabled = !(GetComponent<Light>().enabled); //toggle on/off the enabled property
 			yield return new WaitForSeconds(Random.Range(0.05f, 0.5f));
 		}
 	}

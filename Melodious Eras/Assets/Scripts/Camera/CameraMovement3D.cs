@@ -193,7 +193,8 @@ public class CameraMovement3D : CameraMovement
 
     public void Shake(float intensity, float speed, float duration)
     {
-        this.StartCoroutine(shake(intensity, speed, duration));
+		if(!shaking)
+        	this.StartCoroutine(shake(intensity, speed, duration));
     }
     private IEnumerator shake(float intensity, float speed, float duration)
     {

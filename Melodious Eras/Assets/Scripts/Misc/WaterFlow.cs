@@ -13,13 +13,13 @@ public class WaterFlow : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-		if(renderer.material.shader.isSupported)
+		if(GetComponent<Renderer>().material.shader.isSupported)
 			Camera.main.depthTextureMode |= DepthTextureMode.Depth;
 
 		float offset = Time.time * flowSpeed;
-		renderer.material.SetTextureOffset ("_Normalmap", flowDirectionXZ * offset);
+		GetComponent<Renderer>().material.SetTextureOffset ("_Normalmap", flowDirectionXZ * offset);
 		
-		renderer.material.SetTextureOffset ("_MainTex", flowDirectionXZ * offset);
+		GetComponent<Renderer>().material.SetTextureOffset ("_MainTex", flowDirectionXZ * offset);
 	}
 }
 /*

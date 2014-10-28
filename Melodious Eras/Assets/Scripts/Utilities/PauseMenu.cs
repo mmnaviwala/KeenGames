@@ -16,7 +16,7 @@ public class PauseMenu : MonoBehaviour {
 	void Start()
 	{
 		// Loading all the resources in the start() method
-		music = Camera.main.audio;
+		music = Camera.main.GetComponent<AudioSource>();
 		pictures = new Texture2D[2];
         //pictures[0] = Resources.Load("canon_clef_doodle") as Texture2D;
 		//btnTexture = Resources.Load("white_dot") as Texture2D;
@@ -49,7 +49,7 @@ public class PauseMenu : MonoBehaviour {
 			{
 	            gamePaused = false;
 				playerHUD.enabled = true;
-				guiTexture.enabled = false;
+				GetComponent<GUITexture>().enabled = false;
 				music.Play();
 	            Time.timeScale = 1.0f;
 	        } 
@@ -80,7 +80,7 @@ public class PauseMenu : MonoBehaviour {
         if (gamePaused)
 		{			
             Time.timeScale = 0.0f;
-			guiTexture.enabled = true;
+			GetComponent<GUITexture>().enabled = true;
 			
 			float buttonWidth = Screen.width*0.2F;
 			float buttonHeight = Screen.height*0.1F;
@@ -91,7 +91,7 @@ public class PauseMenu : MonoBehaviour {
 			{
             	Debug.Log("Clicked the resume button");
 				gamePaused = false;
-				guiTexture.enabled = false;
+				GetComponent<GUITexture>().enabled = false;
 				music.Play();
 				playerHUD.enabled = true;
 	            Time.timeScale = 1.0f;

@@ -31,17 +31,17 @@ public class MaterialPhysics : MonoBehaviour
             case MaterialType.Carpet:       soundAmplification = .3f;   break;
             case MaterialType.Wood:         
                 soundAmplification = 1f;
-                this.collider.material = new PhysicMaterial("Wood");
+                this.GetComponent<Collider>().material = new PhysicMaterial("Wood");
                 break;
             case MaterialType.Concrete:     soundAmplification = .9f;   break;
             case MaterialType.Stone:        soundAmplification = 1f;    break;
             case MaterialType.Marble:       soundAmplification = 1.05f; break;
             case MaterialType.LightMetal: soundAmplification = 1.5f;
-                this.collider.material = new PhysicMaterial("Metal"); 
+                this.GetComponent<Collider>().material = new PhysicMaterial("Metal"); 
                 break;
 
             case MaterialType.HeavyMetal: soundAmplification = 1.15f;
-                this.collider.material = new PhysicMaterial("Metal");
+                this.GetComponent<Collider>().material = new PhysicMaterial("Metal");
                 break;
             case MaterialType.Glass:        soundAmplification = 1f;    break;
             case MaterialType.BrokenGlass:  soundAmplification = 2f;    break;

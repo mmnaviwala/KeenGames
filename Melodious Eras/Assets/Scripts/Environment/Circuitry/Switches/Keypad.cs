@@ -192,7 +192,7 @@ public class Keypad : CircuitSwitch
                 else //if incorrect
                 {
                     enteredCode = "INCORRECT";
-                    this.audio.PlayOneShot(accessDeniedClip);
+                    this.GetComponent<AudioSource>().PlayOneShot(accessDeniedClip);
                     yield return new WaitForSeconds(.5f);
                     enteredCode = "";
                 }
@@ -243,7 +243,7 @@ public class Keypad : CircuitSwitch
         this.usingKeypad = usingKeypad;
         playerHUD.enabled = !usingKeypad;
         Screen.lockCursor = !usingKeypad;
-        Screen.showCursor = usingKeypad;
+        Cursor.visible = usingKeypad;
         cam3d.enabled = !usingKeypad;
     }
 }

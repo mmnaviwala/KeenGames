@@ -11,7 +11,7 @@ public class ColorCycle : MonoBehaviour {
 
 	void Start () 
 	{
-		currentColor = renderer.material.color;
+		currentColor = GetComponent<Renderer>().material.color;
 		newColor     = new Color( Random.value, Random.value, Random.value, 1.0f );
 	}
 	
@@ -22,10 +22,10 @@ public class ColorCycle : MonoBehaviour {
 		if (timer >= 1.0f)//change the float value here to change how long it takes to switch.
 		{
 			// pick a random color
-			currentColor = renderer.material.color;
+			currentColor = GetComponent<Renderer>().material.color;
 			newColor = new Color( Random.value, Random.value, Random.value, 1.0f );
 			timer = 0;
 		}
-		renderer.material.color = Color.Lerp(currentColor, newColor, timer);
+		GetComponent<Renderer>().material.color = Color.Lerp(currentColor, newColor, timer);
 	}
 }

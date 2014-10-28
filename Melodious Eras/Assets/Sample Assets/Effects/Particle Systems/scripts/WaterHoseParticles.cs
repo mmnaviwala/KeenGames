@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 public class WaterHoseParticles : MonoBehaviour {
-	
+	/*
     ParticleSystem.CollisionEvent[] collisionEvents = new ParticleSystem.CollisionEvent[16];
 	
 	public static float lastSoundTime;
@@ -9,7 +9,7 @@ public class WaterHoseParticles : MonoBehaviour {
 	
     void OnParticleCollision(GameObject other) {
 		
-        int safeLength = particleSystem.safeCollisionEventSize;
+        /*int safeLength = particleSystem.safeCollisionEventSize;
 
         if (collisionEvents.Length < safeLength) 
 		{
@@ -39,5 +39,6 @@ public class WaterHoseParticles : MonoBehaviour {
 
             i++;
         }
-    }
+
+    }*/
 }

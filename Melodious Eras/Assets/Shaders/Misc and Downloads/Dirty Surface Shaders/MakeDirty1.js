@@ -3,7 +3,7 @@
 var dirty : float = 1.5;
 
 function Start () {
-    renderer.material.shader = Shader.Find("_DirtyBumpedSpecular");
+    GetComponent.<Renderer>().material.shader = Shader.Find("_DirtyBumpedSpecular");
 }
 
 function OnGUI () {
@@ -11,5 +11,5 @@ function OnGUI () {
 }
 
 function Update () {
-    renderer.material.SetFloat( "_MakeDirty", dirty);
+    GetComponent.<Renderer>().material.SetFloat( "_MakeDirty", dirty);
 }

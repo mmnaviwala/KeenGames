@@ -44,7 +44,7 @@ public class DocumentScript : MonoBehaviour
                 gameController.GetComponent<TrackObjectives>().SetNextObjective();
                 reading = true;
                 
-                playerHUD.rigidbody.velocity = new Vector3(0, playerHUD.rigidbody.velocity.y, 0);
+                playerHUD.GetComponent<Rigidbody>().velocity = new Vector3(0, playerHUD.GetComponent<Rigidbody>().velocity.y, 0);
             }
             if (Input.GetButtonDown(InputType.START))
             {

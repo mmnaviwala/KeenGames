@@ -33,7 +33,7 @@ public class CircuitAlarm : CircuitNode
             this.transform.GetChild(0).GetComponent<TextMesh>().text = (alarmCounter - numTries).ToString();
             if (numTries == alarmCounter)
             {
-                this.light.enabled = true;
+                this.GetComponent<Light>().enabled = true;
             }
         }
         return false;

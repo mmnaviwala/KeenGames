@@ -166,7 +166,7 @@ public class AmbientLightTrigger : MonoBehaviour
         if (transform.parent)
         {
             Gizmos.color = new Color(0.5f, 0.5f, 0.5f, 0.15f);
-            Gizmos.DrawCube(collider.bounds.center, collider.bounds.size);
+            Gizmos.DrawCube(GetComponent<Collider>().bounds.center, GetComponent<Collider>().bounds.size);
         }
     }
 
@@ -175,7 +175,7 @@ public class AmbientLightTrigger : MonoBehaviour
         if (transform.parent)
         {
             Gizmos.color = new Color(0.5f, 0.5f, .5f, 0.5f);
-            Gizmos.DrawCube(collider.bounds.center, collider.bounds.size);
+            Gizmos.DrawCube(GetComponent<Collider>().bounds.center, GetComponent<Collider>().bounds.size);
         }
     }
     #endregion

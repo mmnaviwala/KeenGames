@@ -16,6 +16,6 @@ public class LightGlow : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-        this.light.intensity = Mathf.PerlinNoise(Time.time / 2, 0) * variation + minIntensity;
+        this.GetComponent<Light>().intensity = Mathf.PerlinNoise(Time.time / 2, 0) * variation + minIntensity;
 	}
 }

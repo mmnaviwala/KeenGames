@@ -89,7 +89,7 @@ QualitySettings:
     shadowResolution: 2
     shadowProjection: 1
     shadowCascades: 2
-    shadowDistance: 70
+    shadowDistance: 50
     blendWeights: 4
     textureQuality: 0
     anisotropicTextures: 2
@@ -154,11 +154,4 @@ QualitySettings:
     - BlackBerry
     - Windows Store Apps
     - WP8
-  m_PerPlatformDefaultQuality:
-    Android: 0
-    BlackBerry: 0
-    Standalone: 0
-    WP8: 0
-    Web: 0
-    Windows Store Apps: 0
-    iPhone: 0
+  m_PerPlatformDefaultQuality: {}

@@ -20,7 +20,7 @@ public class WindScript : MonoBehaviour
     {
         while (true)
         {
-            this.rigidbody.AddForce(Environment.wind);
+            this.GetComponent<Rigidbody>().AddForce(Environment.wind);
             float yieldTime = Random.Range(0, 2f);
             yield return new WaitForSeconds(yieldTime * yieldTime);
         }

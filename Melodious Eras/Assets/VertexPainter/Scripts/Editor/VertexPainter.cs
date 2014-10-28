@@ -17,15 +17,15 @@ public enum ColorPaintMode
     Hue
 }
 
-/// <author>Patrick Neumüller</author>
+/// <author>Patrick Neumï¿½ller</author>
 /// <Date>13.04.2012</Date>
 /// <summary>
-/// Fügt ein Editorfenster hinzu, mit dem man durch einen Pinsel Vertex Colors auf das ausgewählte Objekt zeichnen kann.
+/// Fï¿½gt ein Editorfenster hinzu, mit dem man durch einen Pinsel Vertex Colors auf das ausgewï¿½hlte Objekt zeichnen kann.
 /// </summary>
 /// <remarks>
-///     15.04.2012      Patrick Neumüller        Funktion um auf Explozite Channel zu malen implementiert
+///     15.04.2012      Patrick Neumï¿½ller        Funktion um auf Explozite Channel zu malen implementiert
 /// </remarks>
-/// <Todo> Shader Spezifische Namen?  - Patrick Neumüller </Todo>
+/// <Todo> Shader Spezifische Namen?  - Patrick Neumï¿½ller </Todo>
 public static class VertexShaders
 {
     static private Material vertexMaterial;
@@ -370,15 +370,15 @@ public class VertexPainter : EditorWindow
         {
             if (oldMaterial == null)
             {
-                oldMaterial = currentSelection.renderer.sharedMaterial;
-                currentSelection.renderer.sharedMaterial = VertexShaders.ShowVertexColor;
+                oldMaterial = currentSelection.GetComponent<Renderer>().sharedMaterial;
+                currentSelection.GetComponent<Renderer>().sharedMaterial = VertexShaders.ShowVertexColor;
             }
         }
         else
         {
             if (oldMaterial != null)
             {
-                currentSelection.renderer.sharedMaterial = oldMaterial;
+                currentSelection.GetComponent<Renderer>().sharedMaterial = oldMaterial;
                 oldMaterial = null;
             }
 
@@ -518,7 +518,7 @@ public class VertexPainter : EditorWindow
         newMesh.tangents = currentSelectionMesh.tangents;
         newMesh.normals = currentSelectionMesh.normals;
         newMesh.uv = currentSelectionMesh.uv;
-        newMesh.uv1 = currentSelectionMesh.uv1;
+        newMesh.uv2 = currentSelectionMesh.uv2;
         newMesh.uv2 = currentSelectionMesh.uv2;
 
         newMesh.RecalculateBounds();
@@ -540,7 +540,7 @@ public class VertexPainter : EditorWindow
         if (toDelete != "")
             AssetDatabase.DeleteAsset(toDelete);
 
-        EditorUtility.SetSelectedWireframeHidden(currentSelection.renderer, false);
+        EditorUtility.SetSelectedWireframeHidden(currentSelection.GetComponent<Renderer>(), false);
         EditorUtility.SetDirty(currentSelection);
         AssetDatabase.Refresh();
     }
@@ -552,10 +552,10 @@ public class VertexPainter : EditorWindow
         if (oldMaterial != null)
         {
             if (currentSelection != null)
-                if (currentSelection.renderer != null)
+                if (currentSelection.GetComponent<Renderer>() != null)
                 {
-                    EditorUtility.SetSelectedWireframeHidden(currentSelection.renderer, true);
-                    currentSelection.renderer.sharedMaterial = oldMaterial;
+                    EditorUtility.SetSelectedWireframeHidden(currentSelection.GetComponent<Renderer>(), true);
+                    currentSelection.GetComponent<Renderer>().sharedMaterial = oldMaterial;
                 }
         }
         oldMaterial = null;
@@ -669,7 +669,7 @@ public class VertexPainter : EditorWindow
                             GotCollider = (currentSelection.GetComponentInChildren<MeshCollider>() != null);
                             if (!GotCollider)
                                 currentSelection.AddComponent<MeshCollider>();
-                            EditorUtility.SetSelectedWireframeHidden(currentSelection.renderer, true);
+                            EditorUtility.SetSelectedWireframeHidden(currentSelection.GetComponent<Renderer>(), true);
                             currentMode = Mode.Painting;
                         }
                         break;

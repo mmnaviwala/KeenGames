@@ -69,7 +69,7 @@ public class FlatUI_PauseMenu : MonoBehaviour
             if (GUI.Button(resumeRect, resume))
             {
                 Screen.lockCursor = true;
-                Screen.showCursor = false;
+                Cursor.visible = false;
                 isGamePaused = false;
                 Time.timeScale = 1;
 
@@ -111,13 +111,13 @@ public class FlatUI_PauseMenu : MonoBehaviour
 
     void Update()
     {
-        Screen.showCursor = true;
+        Cursor.visible = true;
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (Time.timeScale == 1)
             {
                 Screen.lockCursor = false;
-                Screen.showCursor = true;
+                Cursor.visible = true;
                 isGamePaused = true;
                 Time.timeScale = 0;
 
@@ -144,7 +144,7 @@ public class FlatUI_PauseMenu : MonoBehaviour
             else
             {
                 Screen.lockCursor = true;
-                Screen.showCursor = false;
+                Cursor.visible = false;
                 isGamePaused = false;
                 Time.timeScale = 1;
 

@@ -44,8 +44,8 @@ public class FlatUI_HUD_Old : MonoBehaviour {
 		GUI.DrawTexture(rectSize, bottomTexture);
 
 		if(currentHealth < Screen.height*1.8)
-			gameObject.renderer.material.SetFloat("_Cutoff", Mathf.InverseLerp(0, Screen.width, currentHealth));
-		Graphics.DrawTexture(rectSize, barTexture, gameObject.renderer.material);
+			gameObject.GetComponent<Renderer>().material.SetFloat("_Cutoff", Mathf.InverseLerp(0, Screen.width, currentHealth));
+		Graphics.DrawTexture(rectSize, barTexture, gameObject.GetComponent<Renderer>().material);
 
 		GUI.DrawTexture(rectSize, topTexture);
 		

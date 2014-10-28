@@ -40,8 +40,8 @@ public class CircuitNode : BreakableObject
     /// <returns></returns>
     public virtual bool PerformSwitchAction(bool signal)
     {
-        if (activateSound != null && audio != null)
-            this.audio.PlayOneShot(activateSound);
+        if (activateSound != null && GetComponent<AudioSource>() != null)
+            this.GetComponent<AudioSource>().PlayOneShot(activateSound);
         return false;
     }
 

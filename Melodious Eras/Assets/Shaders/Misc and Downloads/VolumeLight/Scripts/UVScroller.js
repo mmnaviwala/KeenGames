@@ -12,10 +12,10 @@ function Update ()
 {
     var offset = Time.time * scrollSpeed;
     if(UseCustomTex){
-	renderer.sharedMaterial.SetTextureOffset (CustomTexName, Vector2(MainoffsetX*offset, MainoffsetY*offset));
+	GetComponent.<Renderer>().sharedMaterial.SetTextureOffset (CustomTexName, Vector2(MainoffsetX*offset, MainoffsetY*offset));
     }
     else{
-    renderer.sharedMaterial.SetTextureOffset ("_MainTex", Vector2(MainoffsetX*offset, MainoffsetY*offset));
+    GetComponent.<Renderer>().sharedMaterial.SetTextureOffset ("_MainTex", Vector2(MainoffsetX*offset, MainoffsetY*offset));
     
     }
 }

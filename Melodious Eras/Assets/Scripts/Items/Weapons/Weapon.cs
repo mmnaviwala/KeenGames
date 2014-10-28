@@ -3,11 +3,10 @@ using System.Collections;
 
 public enum WeaponClass {SmallArms, LargeArms, Melee, Thrown};
 [AddComponentMenu("Scripts/Items/Weapons/Weapon")]
-public class Weapon : Item
+public class Weapon : Equipment
 {
 	public Vector3 wieldPosition;
 	public Vector3 wieldRotation;
-	public CharacterStats wielder;
 
     protected SphereCollider soundSphere;
     protected Sound sound;

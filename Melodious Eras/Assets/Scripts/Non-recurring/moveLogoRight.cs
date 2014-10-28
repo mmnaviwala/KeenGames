@@ -13,7 +13,7 @@ public class moveLogoRight : MonoBehaviour {
 	void Start()
 	{
 		xTransform = transform.localPosition.x;
-		guiTexture.enabled = true;
+		GetComponent<GUITexture>().enabled = true;
 		music = Camera.main.GetComponents<AudioSource>();
 	}
 

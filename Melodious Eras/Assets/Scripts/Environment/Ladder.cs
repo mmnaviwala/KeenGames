@@ -19,8 +19,8 @@ public class Ladder : MonoBehaviour
         top = bottom + this.transform.localScale.y; //temporary (for cubes)
         cam = Camera.main.GetComponent<CameraMovement3D>();
 
-        bottom = this.renderer.bounds.min.y;
-        top = this.renderer.bounds.max.y;
+        bottom = this.GetComponent<Renderer>().bounds.min.y;
+        top = this.GetComponent<Renderer>().bounds.max.y;
 	}
 	
 	// Update is called once per frame
@@ -32,7 +32,7 @@ public class Ladder : MonoBehaviour
             {
                 climbing = true;
                 player.GetComponent<PlayerMovementBasic>().useDefaultMovement = false;
-                player.rigidbody.useGravity = false;
+                player.GetComponent<Rigidbody>().useGravity = false;
             }
         }
         if (climbing)
@@ -53,14 +53,14 @@ public class Ladder : MonoBehaviour
                     StartCoroutine(FreezeControls());
                     climbing = false;
                     player.GetComponent<PlayerMovementBasic>().useDefaultMovement = true;
-                    player.rigidbody.useGravity = true;
+                    player.GetComponent<Rigidbody>().useGravity = true;
                 }
             }
             if (Input.GetButtonDown(InputType.JUMP))
             {
                 climbing = false;
                 player.GetComponent<PlayerMovementBasic>().useDefaultMovement = true;
-                player.rigidbody.useGravity = true;
+                player.GetComponent<Rigidbody>().useGravity = true;
             }
         }
 	}
@@ -86,7 +86,7 @@ public class Ladder : MonoBehaviour
             canClimb = false;
             climbing = false;
             player.GetComponent<PlayerMovementBasic>().useDefaultMovement = true;
-            player.rigidbody.useGravity = true;
+            player.GetComponent<Rigidbody>().useGravity = true;
             Debug.Log("Player leaving ladder");
         }
     }

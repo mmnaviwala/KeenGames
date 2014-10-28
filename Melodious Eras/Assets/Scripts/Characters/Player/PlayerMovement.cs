@@ -64,8 +64,8 @@ public class PlayerMovement : MonoBehaviour {
         //sets up rotation to new direction, rotating around the y-axis (Vector3.up)
         Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
         //performs a smooth rotation from current direction to target direction
-        Quaternion newRotation = Quaternion.Lerp(rigidbody.rotation, targetRotation, turnSmoothing * Time.deltaTime);
-        rigidbody.MoveRotation(newRotation);
+        Quaternion newRotation = Quaternion.Lerp(GetComponent<Rigidbody>().rotation, targetRotation, turnSmoothing * Time.deltaTime);
+        GetComponent<Rigidbody>().MoveRotation(newRotation);
     }
 
 }

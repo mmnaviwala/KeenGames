@@ -20,7 +20,7 @@ public class CameraShake : MonoBehaviour
         player = GameObject.FindGameObjectWithTag(Tags.PLAYER).transform;
         cam3d = this.GetComponent<CameraMovement3D>();
         cameraOffset = this.transform.position - player.position - new Vector3(0f, 0f, 0f);
-        this.audio.Play();
+        this.GetComponent<AudioSource>().Play();
         eof = new WaitForEndOfFrame();
     }
 

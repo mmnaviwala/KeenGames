@@ -145,10 +145,10 @@ public class NightVisionGoggles : MonoBehaviour {
 		if(activated)
         {
 			xraySphere.enabled = true;
-			OnTriggerEnter(playerSuit.collider);
-			while(this.light.intensity < .09f)
+			OnTriggerEnter(playerSuit.GetComponent<Collider>());
+			while(this.GetComponent<Light>().intensity < .09f)
 			{
-				this.light.intensity = Mathf.Lerp (this.light.intensity, .1f, 2 * Time.deltaTime);
+				this.GetComponent<Light>().intensity = Mathf.Lerp (this.GetComponent<Light>().intensity, .1f, 2 * Time.deltaTime);
 				yield return endOfFrame;
 			}
 		}
@@ -160,7 +160,7 @@ public class NightVisionGoggles : MonoBehaviour {
 			DeOutlineCharacter(playerSuit.wielder);
 			charactersInRange.Clear();
 
-			this.light.intensity = 0;
+			this.GetComponent<Light>().intensity = 0;
 		}
 	}
 }
