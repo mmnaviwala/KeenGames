@@ -7,11 +7,12 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Body_Diffuse_03
-  m_Shader: {fileID: 2, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords:
   - _LIGHTMAPPING_DYNAMIC_LIGHTMAPS
   - _NORMALMAP
   - _UVSEC_UV1
+  - _DETAIL_MULX2
   m_CustomRenderQueue: -1
   m_SavedProperties:
     serializedVersion: 2
@@ -34,7 +35,7 @@ Material:
         first:
           name: _DetailNormalMap
         second:
-          m_Texture: {fileID: 0}
+          m_Texture: {fileID: 2800000, guid: 96beb763d7d956747a779c7c000b0aaa, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -47,6 +48,13 @@ Material:
       data:
         first:
           name: _ParallaxMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Cube
         second:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
@@ -97,7 +105,7 @@ Material:
         first:
           name: _DetailAlbedoMap
         second:
-          m_Texture: {fileID: 0}
+          m_Texture: {fileID: 2800000, guid: f0426871ceefa834cb980a4806bca18e, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -135,14 +143,6 @@ Material:
         second: 1
       data:
         first:
-          name: _SpecularIntensity
-        second: .5
-      data:
-        first:
-          name: _SpecularPower
-        second: .5
-      data:
-        first:
           name: _ZWrite
         second: 1
       data:
@@ -173,6 +173,14 @@ Material:
         first:
           name: _EmissionScaleUI
         second: 1
+      data:
+        first:
+          name: _SpecularIntensity
+        second: .5
+      data:
+        first:
+          name: _SpecularPower
+        second: .5
     m_Colors:
       data:
         first:
@@ -185,7 +193,7 @@ Material:
       data:
         first:
           name: _SpecColor
-        second: {r: .5, g: .5, b: .5, a: 1}
+        second: {r: 1, g: 1, b: 1, a: 1}
       data:
         first:
           name: _SpecularColor
@@ -198,3 +206,7 @@ Material:
         first:
           name: _EmissionColorWithMapUI
         second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _ReflectColor
+        second: {r: 1, g: 1, b: 1, a: .5}

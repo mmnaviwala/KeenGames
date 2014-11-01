@@ -113,20 +113,16 @@ Material:
         second: .0199999996
       data:
         first:
-          name: _Outline
-        second: .00285714283
-      data:
-        first:
           name: _ZWrite
         second: 1
       data:
         first:
           name: _Glossiness
-        second: 1
+        second: .890999973
       data:
         first:
           name: _BumpScale
-        second: 1
+        second: 3.5
       data:
         first:
           name: _OcclusionStrength
@@ -147,6 +143,10 @@ Material:
         first:
           name: _EmissionScaleUI
         second: 1
+      data:
+        first:
+          name: _Outline
+        second: .00285714283
     m_Colors:
       data:
         first:
@@ -162,14 +162,6 @@ Material:
         second: {r: .390955657, g: .488739997, b: .873134315, a: 1}
       data:
         first:
-          name: _ReflectColor
-        second: {r: .495711714, g: .498802036, b: .514925361, a: .215686277}
-      data:
-        first:
-          name: _OutlineColor
-        second: {r: 0, g: .99999994, b: .99999994, a: 1}
-      data:
-        first:
           name: _SpecularColor
         second: {r: .595588207, g: .595588207, b: .595588207, a: 1}
       data:
@@ -180,6 +172,14 @@ Material:
         first:
           name: _EmissionColorWithMapUI
         second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _ReflectColor
+        second: {r: .495711714, g: .498802036, b: .514925361, a: .215686277}
+      data:
+        first:
+          name: _OutlineColor
+        second: {r: 0, g: .99999994, b: .99999994, a: 1}
 --- !u!1002 &2100001
 EditorExtensionImpl:
   serializedVersion: 6

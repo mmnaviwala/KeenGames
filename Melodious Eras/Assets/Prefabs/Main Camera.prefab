@@ -24,8 +24,6 @@ GameObject:
   - 114: {fileID: 11400018}
   - 114: {fileID: 11400014}
   - 114: {fileID: 11400006}
-  - 114: {fileID: 11400020}
-  - 114: {fileID: 11400022}
   m_Layer: 2
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -39,11 +37,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
-  m_LocalPosition: {x: -22.5752373, y: 1.91025186, z: 15.7929983}
+  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106709}
+  m_LocalPosition: {x: 0, y: 1.53999996, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!20 &2000000
 Camera:
   m_ObjectHideFlags: 1
@@ -69,10 +68,13 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RenderingPath: 2
+  m_RenderingPath: 3
   m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
   m_HDR: 1
   m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: .0219999999
 --- !u!54 &5400000
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -102,7 +104,8 @@ AudioSource:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 6fac66f7fbf507744835c40b6cbaa87e, type: 3}
   m_PlayOnAwake: 1
   m_Volume: .5
@@ -238,7 +241,6 @@ MonoBehaviour:
   x_sensitivity: 5
   y_sensitivity: 2
   invertLook: 1
-  target: {fileID: 0}
   atTargetPos: 0
   raycastLayers:
     serializedVersion: 2
@@ -489,54 +491,6 @@ MonoBehaviour:
   strengthX: .0500000007
   strengthY: .5
   fishEyeShader: {fileID: 4800000, guid: 874ceab4425f64bccb1d14032f4452b1, type: 3}
---- !u!114 &11400020
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8df08eb37707be45af52291ca686adc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalScale: 10
-  maxGlobalStep: 16
-  maxFineStep: 40
-  bias: 9.99999975e-05
-  fadePower: 1
-  maxDepthCull: .150000006
-  reflectionMultiply: 1
-  GlobalBlurRadius: 2
-  DistanceBlurRadius: 0
-  DistanceBlurStart: 3
-  GrazeBlurPower: 0
-  BlurQualityHigh: 1
-  HQ_BlurIterations: 2
-  HQ_DepthSensetivity: .419999987
-  HQ_NormalsSensetivity: 1
-  ResolutionOptimized: 0
-  DebugScreenFade: 0
-  ScreenFadePower: 1
-  ScreenFadeSpread: .699999988
-  ScreenFadeEdge: 2.20000005
-  UseEdgeTexture: 0
-  EdgeFadeTexture: {fileID: 0}
-  SSRRcomposeMode: 1
-  HDRreflections: 1
-  UseCustomDepth: 1
-  InvertRoughness: 0
---- !u!114 &11400022
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba14c4d18c6ba8342b19fcfd540e3de1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1
@@ -555,4 +509,3 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
-  m_IsExploded: 1
