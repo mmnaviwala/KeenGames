@@ -71,8 +71,9 @@ public class Weapon : Equipment
         
     }
 
-	public virtual void Equip(Transform rightHand)
+	public virtual void Equip(CharacterStats wielder, Transform rightHand)
 	{
+        this.wielder = wielder;
 		this.transform.parent = rightHand;
 		this.transform.localPosition = wieldPosition;
 		this.transform.localEulerAngles = wieldRotation;

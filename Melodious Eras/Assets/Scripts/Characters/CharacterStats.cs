@@ -62,6 +62,8 @@ public class CharacterStats : MonoBehaviour
     // Use this for initialization
     void Start() {
         anim = this.GetComponent<Animator>();
+        if (equippedWeapon)
+            equippedWeapon.Equip(this, rightHand);
     }
 	// Update is called once per frame
     void Update() { }
@@ -69,7 +71,6 @@ public class CharacterStats : MonoBehaviour
     /// <summary>
     /// Deals damage to this character.
     /// </summary>
-    /// <param name="damage"></param>
     public virtual void TakeDamage(int damage) 
     {
         lastHitTakenTime = Time.time;
@@ -96,9 +97,10 @@ public class CharacterStats : MonoBehaviour
     /// <summary>
     /// Deals damage to this character, letting them know who hit them.
     /// </summary>
-    /// <param name="damage"></param>
-    /// <param name="source"></param>
-    public virtual void TakeDamage(int damage, CharacterStats source) { }
+    public virtual void TakeDamage(int damage, CharacterStats source) 
+    {
+        TakeDamage(damage);
+    }
     /// <summary>
     /// Instantly kills this character.
     /// </summary>
@@ -106,7 +108,6 @@ public class CharacterStats : MonoBehaviour
     /// <summary>
     /// Deals damage to this character, ignoring any armor.
     /// </summary>
-    /// <param name="damage"></param>
     public virtual void TakeDamageThroughArmor(int damage)
     {
         lastHitTakenTime = Time.time;
@@ -119,13 +120,10 @@ public class CharacterStats : MonoBehaviour
     /// <summary>
     /// Deals damage to this character, ignoring any armor and telling them who hit them.
     /// </summary>
-    /// <param name="damage"></param>
-    /// <param name="source"></param>
     public virtual void TakeDamageThroughArmor(int damage, CharacterStats source) { }
     /// <summary>
     /// Instantly kills this character, ignoring any protections
     /// </summary>
-    /// <param name="instantKill"></param>
     public virtual void Kill() 
     { 
         this.Die(); 
@@ -168,7 +166,6 @@ public class CharacterStats : MonoBehaviour
     /// <summary>
     /// Regenerates health at rate per second.
     /// </summary>
-    /// <param name="rate"></param>
     public virtual void RegenerateHealth(float rate)
     {
  
@@ -200,8 +197,6 @@ public class CharacterStats : MonoBehaviour
     /// <summary>
     /// Marks the character as Exhausted until their stamina >= recoveryNeeded amount
     /// </summary>
-    /// <param name="recoveryNeeded"></param>
-    /// <returns></returns>
     protected IEnumerator BecomeExhausted(float recoveryNeeded)
     {
         this._stamina = 0;

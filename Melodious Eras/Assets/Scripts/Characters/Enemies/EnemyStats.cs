@@ -14,10 +14,7 @@ public class EnemyStats : CharacterStats
 
     private EnemyAI ai;
     private EnemySight _sight;
-    public EnemyAI AI       { get { return ai; }
-                              set { ai = value; } }
-    public EnemySight sight { get { return _sight; }
-                              set { _sight = value; } }
+    public EnemyAI AI       { get { return ai; } }
 
     void Awake()
     {
@@ -42,8 +39,10 @@ public class EnemyStats : CharacterStats
     #region Damage taking and stat changes
     public override void TakeDamage(int damage, CharacterStats source)
     {
-        if(ai.currentEnemy == null)
-            ai.currentEnemy = source;
+        if (ai.currentEnemy == null)
+            ai.Notice(source);
+
+        Debug.Log("Enemy: " + ai.currentEnemy.name);
 
         if (suit != null && suit.armor > 0)
             suit.armor -= damage;
@@ -63,12 +62,10 @@ public class EnemyStats : CharacterStats
     /// <summary>
     /// Deals damage to invulnerable enemy. Use this to tell the enemy who just attacked it
     /// </summary>
-    /// <param name="damage"></param>
-    /// <param name="source"></param>
     public override void TakeDamageThroughArmor(int damage, CharacterStats source)
     {
         if(ai.currentEnemy == null)
-            ai.currentEnemy = source;
+            ai.Notice(source);
 
         this._health -= damage;
 

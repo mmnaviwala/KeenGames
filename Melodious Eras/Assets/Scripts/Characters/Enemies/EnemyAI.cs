@@ -264,14 +264,8 @@ public class EnemyAI : MonoBehaviour
                 {
                     if (hit.collider.tag == Tags.PLAYER)
                     {
-                        this.awarenessOfPlayer += Time.deltaTime;
-						
-                        this._seesPlayer = this._alerted = true;
-                        this.lastPlayerSighting = ch.transform.position;
-                        currentEnemy = ch;
-                        squad.AlertGroup(ch);
-
-                        ai_activity = Chasing;
+                        float awareness = adjustedSightDistance / sightDistance / 10;
+                        this.Notice(ch, awareness * Time.deltaTime);
                     }
                     else 
                     {
@@ -291,6 +285,21 @@ public class EnemyAI : MonoBehaviour
                     //re-raycast from collision, if TOTAL raycast range doesn't exceed adjustedSightDistance * opacity
                 }
             }
+        }
+    }
+
+    public void Notice(CharacterStats character, float noticeability = 100f)
+    {
+        this.awarenessOfPlayer += noticeability;
+
+        if(awarenessOfPlayer > 1f)
+        {
+            this._seesPlayer = this._alerted = true;
+            this.lastPlayerSighting = character.transform.position;
+            currentEnemy = character;
+            squad.AlertGroup(character);
+
+            ai_activity = Chasing;
         }
     }
 
