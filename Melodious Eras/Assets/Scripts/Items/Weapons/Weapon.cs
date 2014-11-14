@@ -17,6 +17,7 @@ public class Weapon : Equipment
 	public int ammoInClip, extraAmmo, maxAmmo, clipSize, ammoPerShot,
 	damage;
     public float fireRate;
+    public bool ignoresArmor = false;
 
     void Start()
     {

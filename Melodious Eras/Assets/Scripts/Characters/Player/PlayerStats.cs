@@ -121,7 +121,7 @@ public class PlayerStats : CharacterStats
         else
         {
             this.GetComponent<AudioSource>().PlayOneShot(meleeClip);
-            targetP.TakeDamage(_meleeDamage, this);
+            targetP.TakeDamage(_meleeDamage, this, false);
         }
     }
     IEnumerator PerformBackstab(CharacterStats targetP)
@@ -133,24 +133,14 @@ public class PlayerStats : CharacterStats
         anim.SetBool(HashIDs.backstab_bool, false);
     }
 
-    public override void TakeDamage(int damage)
+    public override void TakeDamage(int damage, bool ignoreArmor = false)
     {
         base.TakeDamage(damage);
         ShakeCamera(damage);
     }
-    public override void TakeDamage(int damage, CharacterStats source)
+    public override void TakeDamage(int damage, CharacterStats source, bool ignoreArmor = false)
     {
-        base.TakeDamage(damage, source);
-        ShakeCamera(damage);
-    }
-    public override void TakeDamageThroughArmor(int damage)
-    {
-        base.TakeDamageThroughArmor(damage);
-        ShakeCamera(damage);
-    }
-    public override void TakeDamageThroughArmor(int damage, CharacterStats source)
-    {
-        base.TakeDamageThroughArmor(damage, source);
+        base.TakeDamage(damage, source, ignoreArmor);
         ShakeCamera(damage);
     }
     public override void TakeDamage(bool instantKill)

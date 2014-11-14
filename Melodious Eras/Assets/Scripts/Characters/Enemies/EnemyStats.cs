@@ -37,45 +37,18 @@ public class EnemyStats : CharacterStats
     }
 
     #region Damage taking and stat changes
-    public override void TakeDamage(int damage, CharacterStats source)
+    public override void TakeDamage(int damage, CharacterStats source, bool ignoreArmor = false)
     {
         if (ai.currentEnemy == null)
             ai.Notice(source);
 
-        Debug.Log("Enemy: " + ai.currentEnemy.name);
-
-        if (suit != null && suit.armor > 0)
-            suit.armor -= damage;
-        else
-            this._health -= damage;
-
-        if (this.isVulnerable && this.health <= 0)
-            this.Die();
-        else
-            regenWaitModifier = (health > 50) ? 1 : Mathf.Sqrt(health / 50);
+        base.TakeDamage(damage, source, ignoreArmor);
     }
     public override void TakeDamage(bool instantKill)
     {
         if (this.isVulnerable)
             this.Die();
-    }
-    /// <summary>
-    /// Deals damage to invulnerable enemy. Use this to tell the enemy who just attacked it
-    /// </summary>
-    public override void TakeDamageThroughArmor(int damage, CharacterStats source)
-    {
-        if(ai.currentEnemy == null)
-            ai.Notice(source);
-
-        this._health -= damage;
-
-        if (this.health <= 0)
-            this.Die();
-        else
-            regenWaitModifier = Mathf.Max(1, Mathf.Lerp(0, 50, this.health)); //going with constant 50, rather than half of max health
-    }
-
-    
+    }    
 
 
     /// <summary>

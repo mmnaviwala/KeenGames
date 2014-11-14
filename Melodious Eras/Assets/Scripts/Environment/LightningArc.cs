@@ -16,6 +16,6 @@ public class LightningArc : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
         if (!other.isTrigger && (other.tag == Tags.ENEMY || other.tag == Tags.PLAYER) && other is CapsuleCollider)
-            other.GetComponent<CharacterStats>().TakeDamageThroughArmor(1000);
+            other.GetComponent<CharacterStats>().TakeDamage(1000, true);
     }
 }

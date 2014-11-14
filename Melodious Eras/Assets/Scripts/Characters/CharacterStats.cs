@@ -81,10 +81,10 @@ public class CharacterStats : MonoBehaviour
     /// <summary>
     /// Deals damage to this character.
     /// </summary>
-    public virtual void TakeDamage(int damage) 
+    public virtual void TakeDamage(int damage, bool ignoreArmor = false) 
     {
         lastHitTakenTime = Time.time;
-        if (this.suit == null || this.suit.armor == 0)
+        if (ignoreArmor || this.suit == null || this.suit.armor == 0)
         {
             this._health -= (_health > damage) ? damage : _health;
         }
@@ -107,30 +107,14 @@ public class CharacterStats : MonoBehaviour
     /// <summary>
     /// Deals damage to this character, letting them know who hit them.
     /// </summary>
-    public virtual void TakeDamage(int damage, CharacterStats source) 
+    public virtual void TakeDamage(int damage, CharacterStats source, bool ignoreArmor = false) 
     {
-        TakeDamage(damage);
+        TakeDamage(damage, ignoreArmor);
     }
     /// <summary>
     /// Instantly kills this character.
     /// </summary>
     public virtual void TakeDamage(bool instantKill) { }
-    /// <summary>
-    /// Deals damage to this character, ignoring any armor.
-    /// </summary>
-    public virtual void TakeDamageThroughArmor(int damage)
-    {
-        lastHitTakenTime = Time.time;
-        this._health -= (_health > damage) ? damage : _health;
-        if (this._health == 0)
-            this.Die();
-        else
-            regenWaitModifier = (health > 50) ? 1 : Mathf.Sqrt(health / 50);
-    }
-    /// <summary>
-    /// Deals damage to this character, ignoring any armor and telling them who hit them.
-    /// </summary>
-    public virtual void TakeDamageThroughArmor(int damage, CharacterStats source) { }
     /// <summary>
     /// Instantly kills this character, ignoring any protections
     /// </summary>

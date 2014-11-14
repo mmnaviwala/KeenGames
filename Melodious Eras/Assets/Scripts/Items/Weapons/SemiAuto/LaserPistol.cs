@@ -35,7 +35,7 @@ public class LaserPistol : SemiAutoWeapon
                     {
                         if (hit.collider.tag == Tags.ENEMY)
                         {
-                            hit.collider.transform.GetComponent<EnemyStats>().TakeDamage((int)(damage * Difficulty.playerDamageMultiplier), this.wielder);
+                            hit.collider.transform.GetComponent<EnemyStats>().TakeDamage((int)(damage * Difficulty.playerDamageMultiplier), this.wielder, false);
                         }
                         else if (hit.collider.tag == Tags.BREAKABLE)
                         {

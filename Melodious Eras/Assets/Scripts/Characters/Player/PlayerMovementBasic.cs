@@ -410,7 +410,7 @@ public class PlayerMovementBasic : MonoBehaviour
         float impactVelocity = Vector3.Magnitude(collision.relativeVelocity);
         if (impactVelocity > 12.5f)
         {
-            stats.TakeDamageThroughArmor(5 * (int)(impactVelocity - 12.5f));
+            stats.TakeDamage(5 * (int)(impactVelocity - 12.5f), true);
             anim.applyRootMotion = true;
             //emit noise
         }

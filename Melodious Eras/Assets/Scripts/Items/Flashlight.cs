@@ -2,8 +2,11 @@
 using System.Collections;
 
 [AddComponentMenu("Scripts/Items/Flashlight")]
-public class Flashlight : MonoBehaviour 
+public class Flashlight : MonoBehaviour
 {
+    delegate void FlashlightState();
+
+
     public bool infiniteBattery = true;
     //public float maxBatteryLife = 100;  //time in seconds
     //public float batteryLife = 100;    
@@ -14,11 +17,19 @@ public class Flashlight : MonoBehaviour
 
     private Rect batteryMaxLifeRect, batteryLifeRect;
     private LightShafts lightShafts;
-    
+
+    Light mainLight;
+    Light ambientLight;
+    FlashlightState[] flashlight_state;
+    int state_index = 0;
 
 	void Awake()
 	{
 		lightShafts = this.GetComponent<LightShafts>();
+        mainLight = this.GetComponent<Light>();
+        ambientLight = gameObject.GetComponentInChildrenOnly<Light>();
+
+        flashlight_state = new FlashlightState[]{FlashlightOff, FlashlightOn};
 	}
 	// Use this for initialization
 	void Start ()
@@ -38,7 +49,7 @@ public class Flashlight : MonoBehaviour
         batteryLifeRect = batteryMaxLifeRect;
         if (lightShafts)
         {
-            lightShafts.enabled = GetComponent<Light>().enabled;
+            lightShafts.enabled = mainLight.enabled;
             lightShafts.m_Brightness = Environment.globalDustLevel;
         }
 	}
@@ -46,32 +57,36 @@ public class Flashlight : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-        if (infiniteBattery || playerSuit.batteryLife > 0)
-        {
-            if (Input.GetButtonDown(InputType.TOGGLE_FLASHLIGHT))
-            {
-                GetComponent<Light>().enabled = !GetComponent<Light>().enabled;
-				if(lightShafts)
-					lightShafts.enabled = GetComponent<Light>().enabled;
-            }
-            if (!infiniteBattery && GetComponent<Light>().enabled)
-            {
-				playerSuit.batteryLife -= Time.deltaTime / efficiency;
-				batteryLifeRect.width = batteryMaxLifeRect.width * playerSuit.batteryLife / playerSuit.maxBatteryLife;
-            }
-        }
+        if (Input.GetButtonDown(InputType.TOGGLE_FLASHLIGHT))
+            Toggle();
+        flashlight_state[state_index]();
 	}
 
-//    void OnGUI()
-//    {
-//		  GUI.Box(batteryMaxLifeRect, string.Format("Battery Life: {0:f1}", playerSuit.batteryLife), backGuiStyle);
-//        GUI.color = new Color(1, 1, 1, .25f);
-//        GUI.Box(batteryLifeRect, "", lightGuiStyle);
-//    }
+    void FlashlightOff()
+    {
+
+    }
+
+    void FlashlightOn()
+    {
+        if(!infiniteBattery)
+        {
+            playerSuit.batteryLife -= Time.deltaTime / efficiency;
+            batteryLifeRect.width = batteryMaxLifeRect.width * playerSuit.batteryLife / playerSuit.maxBatteryLife;
+
+            if (playerSuit.batteryLife <= 0) //turn flashlight back off
+                Toggle();
+        }
+    }
 
     public void Toggle()
     {
-        GetComponent<Light>().enabled = !GetComponent<Light>().enabled;
+        mainLight.enabled = !mainLight.enabled;
+        ambientLight.enabled = !ambientLight.enabled;
+        if (lightShafts)
+            lightShafts.enabled = mainLight.enabled;
+
+        state_index = (state_index + 1) % 2;
     }
 
     /// <summary>
