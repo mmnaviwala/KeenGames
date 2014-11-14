@@ -258,14 +258,6 @@ public class PlayerMovementBasic : MonoBehaviour
         //speed *= ((moveDirection.magnitude < 1) ? moveDirection.magnitude : 1); //used for analog input. Disabled for now, since stamina is being added
         this.anim.SetFloat(HashIDs.speed_float, speed);
 
-        //Keeping track of the last leg to hit the ground. Only needed when falling
-        /*float runCycle = Mathf.Repeat(anim.GetCurrentAnimatorStateInfo(0).normalizedTime + advancedSettings.runCycleLegOffset, 1);
-        float jumpLeg = (runCycle < .5f ? 1 : -1); // * forwardAmount
-        if (onGround && !jumping)
-        {
-            anim.SetFloat(HashIDs.jumpLeg_float, jumpLeg);
-        }*/
-
         //if running
         if (speed > 4f && !isCrouching)
         {

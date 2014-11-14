@@ -10,10 +10,8 @@ public class PlayerStats : CharacterStats
 {
     #region variables
     //visibility multipliers
-    private const float CROUCH_MULTIPLIER = .5f;    //crouching reduces visibility by 50%
 
     public Flashlight flashlight;
-    private float _visibility = 1;
 
 
     public DetectionSphere _closeQuarterEnemies; //enemies within melee range
@@ -33,13 +31,10 @@ public class PlayerStats : CharacterStats
 
     #endregion
 
-    public float visibility { get { return _visibility; } }//visibility multiplier; 1 = normal, 0 = invisible
     public PlayerMovementBasic playerMovement { get { return _playerMovement; } }
 
     void Awake()
     {
-        affectingLights = new List<Light>();
-
         _playerMovement = this.GetComponent<PlayerMovementBasic>();
         hud = this.GetComponent<HUD_Stealth>();
         anim = this.GetComponent<Animator>();
@@ -169,10 +164,9 @@ public class PlayerStats : CharacterStats
         _playerMovement.enabled = false;
         GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<EndOfLevel>().EndLevel(true);
     }
-    #endregion
-
     private void ShakeCamera(int damage)
     {
         cam.Shake(damage / 100f, 5f, 3f);
     }
+    #endregion
 }

@@ -3,10 +3,11 @@ guid: 036bc13753e6f3d46b2072367e431230
 SubstanceImporter:
   serializedVersion: 5
   materialInstances:
-  - serializedVersion: 10
+  - serializedVersion: 14
     name: metal_floor_003
     prototypeName: metal_floor_003
-    shaderName: _DirtyBumpedSpecular
+    shader: {fileID: 45, guid: 0000000000000000f000000000000000, type: 0}
+    shaderKeywords: _LIGHTMAPPING_REALTIME _NORMALMAP _PARALLAXMAP _SPECGLOSSMAP _UVSEC_UV1
     inputs:
     - name: $normalformat
       value:
@@ -24,14 +25,14 @@ SubstanceImporter:
         texture: {instanceID: 0}
     - name: $randomseed
       value:
-        scalar[0]: 0
+        scalar[0]: 176
         scalar[1]: 0
         scalar[2]: 0
         scalar[3]: 0
         texture: {instanceID: 0}
     - name: Age
       value:
-        scalar[0]: 0
+        scalar[0]: 1
         scalar[1]: 0
         scalar[2]: 0
         scalar[3]: 0
@@ -73,7 +74,7 @@ SubstanceImporter:
         texture: {instanceID: 0}
     - name: Rust_leaks
       value:
-        scalar[0]: .5
+        scalar[0]: 1
         scalar[1]: 0
         scalar[2]: 0
         scalar[3]: 0
@@ -137,7 +138,8 @@ SubstanceImporter:
     materialInformation:
       serializedVersion: 5
       offset: {x: 0, y: 0}
-      scale: {x: 25, y: 25}
+      scale: {x: 20, y: 20}
+      generateMipmaps: 1
       generateAllOutputs: 1
       animationUpdateRate: 42
     materialProperties:
@@ -145,28 +147,63 @@ SubstanceImporter:
       texEnvs:
         data:
           first:
+            name: _MainTex
+          second:
+            texture: {instanceID: 0}
+            scale: {x: 20, y: 20}
+            offset: {x: 0, y: 0}
+        data:
+          first:
             name: _BumpMap
           second:
             texture: {instanceID: 0}
-            scale: {x: 25, y: 25}
+            scale: {x: 20, y: 20}
             offset: {x: 0, y: 0}
         data:
           first:
-            name: _DiffuseTexture
-          second:
-            texture: {instanceID: 0}
-            scale: {x: 25, y: 25}
-            offset: {x: 0, y: 0}
-        data:
-          first:
-            name: _Dirt
+            name: _DetailNormalMap
           second:
             texture: {instanceID: 0}
             scale: {x: 1, y: 1}
             offset: {x: 0, y: 0}
         data:
           first:
-            name: _DirtIntensity
+            name: _EmissionMap
+          second:
+            texture: {instanceID: 0}
+            scale: {x: 1, y: 1}
+            offset: {x: 0, y: 0}
+        data:
+          first:
+            name: _ParallaxMap
+          second:
+            texture: {instanceID: 0}
+            scale: {x: 20, y: 20}
+            offset: {x: 0, y: 0}
+        data:
+          first:
+            name: _Occlusion
+          second:
+            texture: {instanceID: 0}
+            scale: {x: 1, y: 1}
+            offset: {x: 0, y: 0}
+        data:
+          first:
+            name: _SpecGlossMap
+          second:
+            texture: {instanceID: 0}
+            scale: {x: 1, y: 1}
+            offset: {x: 0, y: 0}
+        data:
+          first:
+            name: _DetailMask
+          second:
+            texture: {instanceID: 0}
+            scale: {x: 1, y: 1}
+            offset: {x: 0, y: 0}
+        data:
+          first:
+            name: _DetailAlbedoMap
           second:
             texture: {instanceID: 0}
             scale: {x: 1, y: 1}
@@ -176,6 +213,58 @@ SubstanceImporter:
           first:
             name: _Shininess
           second: .078125
+        data:
+          first:
+            name: _AlphaTestRef
+          second: .5
+        data:
+          first:
+            name: _Lightmapping
+          second: 1
+        data:
+          first:
+            name: _SrcBlend
+          second: 1
+        data:
+          first:
+            name: _DstBlend
+          second: 0
+        data:
+          first:
+            name: _Parallax
+          second: .0199999996
+        data:
+          first:
+            name: _ZWrite
+          second: 1
+        data:
+          first:
+            name: _Glossiness
+          second: 0
+        data:
+          first:
+            name: _BumpScale
+          second: 1
+        data:
+          first:
+            name: _OcclusionStrength
+          second: 1
+        data:
+          first:
+            name: _DetailNormalMapScale
+          second: 1
+        data:
+          first:
+            name: _UVSec
+          second: 0
+        data:
+          first:
+            name: _Mode
+          second: 0
+        data:
+          first:
+            name: _EmissionScaleUI
+          second: 1
         data:
           first:
             name: _MakeDirty
@@ -195,6 +284,10 @@ SubstanceImporter:
       colors:
         data:
           first:
+            name: _EmissionColor
+          second: {r: 0, g: 0, b: 0, a: 1}
+        data:
+          first:
             name: _Color
           second: {r: 1, g: 1, b: 1, a: 1}
         data:
@@ -204,6 +297,14 @@ SubstanceImporter:
         data:
           first:
             name: _SpecularColor
+          second: {r: 1, g: 1, b: 1, a: 1}
+        data:
+          first:
+            name: _EmissionColorUI
+          second: {r: 0, g: 0, b: 0, a: 1}
+        data:
+          first:
+            name: _EmissionColorWithMapUI
           second: {r: 1, g: 1, b: 1, a: 1}
         data:
           first:
@@ -245,6 +346,23 @@ SubstanceImporter:
       filterMode: 1
       aniso: 1
       wrapMode: 0
+    textureAssignments:
+    - shaderProp:
+        name: _MainTex
+      material: {instanceID: 0}
+      baseUID: 3080295327
+    - shaderProp:
+        name: _BumpMap
+      material: {instanceID: 0}
+      baseUID: 3080292799
+    - shaderProp:
+        name: _ParallaxMap
+      material: {instanceID: 0}
+      baseUID: 3080292423
+    - shaderProp:
+        name: _SpecGlossMap
+      material: {instanceID: 0}
+      baseUID: 3080294215
     buildTargetSettings:
     - serializedVersion: 2
       buildTarget: 
@@ -254,3 +372,4 @@ SubstanceImporter:
       loadingBehavior: 1
   deletedPrototypes: []
   userData: 
+  assetBundleName: 
