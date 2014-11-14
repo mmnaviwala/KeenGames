@@ -6,7 +6,7 @@ public enum CameraOffset { Default, Aim, Crouch, PDA , Fighting, ClimbUp, ClimbD
 public enum CameraFollowSpeed { Default = 4, Aiming = 10 };
 
 [AddComponentMenu("Scripts/Camera/Camera Movement 3D")]
-public class CameraMovement3D : CameraMovement 
+public class CameraMovement3D : MonoBehaviour 
 {
     [System.Serializable]
     public class Offsets
@@ -43,7 +43,6 @@ public class CameraMovement3D : CameraMovement
     Transform flashlight;
     public GameObject camRotationHelper;        //helping with camera rotation
 
-    private bool shaking;
     private YieldInstruction eof;
 
 
@@ -62,8 +61,6 @@ public class CameraMovement3D : CameraMovement
         }
     }
 
-    public Transform playerTransform { get { return player; } }
-
     void Awake()
     {
         camRotationHelper = new GameObject();
@@ -81,7 +78,6 @@ public class CameraMovement3D : CameraMovement
         camTargetPos = player.transform.position;
 
         SetOffset(CameraOffset.Default);
-		
 		
         camRotationHelper.transform.position = player.position + new Vector3(0, activeOffset.y, 0);
         camRotationHelper.transform.rotation = player.rotation;
@@ -179,15 +175,15 @@ public class CameraMovement3D : CameraMovement
     {
         switch (newOffset)
         {
-            case CameraOffset.Default:  activeOffset = offsets.defaultOffset;   break;
-            case CameraOffset.Aim: activeOffset = offsets.aim; break;
-            case CameraOffset.Crouch: activeOffset = offsets.crouch; break;
-            case CameraOffset.PDA: activeOffset = offsets.PDA; break;
-            case CameraOffset.Fighting: activeOffset = offsets.fightingt; break;
-            case CameraOffset.ClimbUp: activeOffset = offsets.climbUp; break;
-            case CameraOffset.ClimbDown: activeOffset = offsets.climbDown; break;
-            case CameraOffset.Hacking: activeOffset = offsets.Hacking; break;
-            case CameraOffset.CrouchAim: activeOffset = offsets.crouchAim; break;
+            case CameraOffset.Default:  activeOffset =  offsets.defaultOffset;  break;
+            case CameraOffset.Aim: activeOffset =       offsets.aim;            break;
+            case CameraOffset.Crouch: activeOffset =    offsets.crouch;         break;
+            case CameraOffset.PDA: activeOffset =       offsets.PDA;            break;
+            case CameraOffset.Fighting: activeOffset =  offsets.fightingt;      break;
+            case CameraOffset.ClimbUp: activeOffset =   offsets.climbUp;        break;
+            case CameraOffset.ClimbDown: activeOffset = offsets.climbDown;      break;
+            case CameraOffset.Hacking: activeOffset =   offsets.Hacking;        break;
+            case CameraOffset.CrouchAim: activeOffset = offsets.crouchAim;      break;
         }
         activeOffset.x *= invertOffset;
         raycastDistance = activeOffset.magnitude;
@@ -195,27 +191,27 @@ public class CameraMovement3D : CameraMovement
 
     public void Shake(float intensity, float speed, float duration)
     {
-		if(!shaking)
-        	this.StartCoroutine(shake(intensity, speed, duration));
+        IEnumerator _shake = shake(intensity, speed, duration);
+        StopCoroutine(_shake);
+        StartCoroutine(_shake);
     }
+
     private IEnumerator shake(float intensity, float speed, float duration)
     {
-        shaking = true;
         float endTime = Time.time + duration;
         float shakeOffsetX, shakeOffsetY;
+
         while (Time.time < endTime)
         {
             this.atTargetPos = false;
 
             float _intensity = intensity * (endTime - Time.time);
-            //shakeOffsetX = Mathf.PerlinNoise(Time.time * speed, Time.time * speed) * _intensity - _intensity / 2f;
             shakeOffsetY = (Mathf.PerlinNoise((Time.time + 1) * speed / 4, (Time.time + 1) * speed / 4) * _intensity - _intensity / 2f) * 2;
             shakeOffsetX = Mathf.Cos(Time.time * speed) * _intensity;
-            //shakeOffsetY = Mathf.Sin(Time.time * speed * 2) * _intensity / 2;
 
-            this.transform.position = camTargetPos + transform.right * shakeOffsetX + transform.up * shakeOffsetY;
+            Vector3 shakePos = camTargetPos + transform.right * shakeOffsetX + transform.up * shakeOffsetY;
+            this.transform.position = Vector3.MoveTowards(transform.position, shakePos, 0.1f);
             yield return eof;
         }
-        shaking = false;
     }
 }

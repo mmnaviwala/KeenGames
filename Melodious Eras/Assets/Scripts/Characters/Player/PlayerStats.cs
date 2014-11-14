@@ -24,11 +24,13 @@ public class PlayerStats : CharacterStats
     public AudioClip deathClip, meleeClip;
     private PlayerMovementBasic _playerMovement;
     private HUD_Stealth hud;
+    private CameraMovement3D cam;
 
     public float attackSpeed = .25f;
     private float nextAttackTime = 0;
     private bool attacking;
     private const float BACKSTAB_STRIKE_TIME = 1.0f;
+
 
     #endregion
 
@@ -49,17 +51,16 @@ public class PlayerStats : CharacterStats
         //registering an equipped weapon, if any
         if (equippedWeapon == null)
         {
-            for (int c = 0; c < rightHand.childCount; c++)
-            {
-                if (rightHand.GetChild(c).tag == Tags.WEAPON)
-                {
-                    equippedWeapon = rightHand.GetChild(c).GetComponent<Weapon>();
-                    break;
-                }
-            }
+            equippedWeapon = rightHand.GetComponentInChildren<Weapon>();
         }
+        equippedWeapon.Equip(this, rightHand);
 
         _closeQuarterEnemies.charactersInRange = new List<CharacterStats>();
+    }
+
+    void Start()
+    {
+        cam = Camera.main.GetComponent<CameraMovement3D>();
     }
 
     void Update()
@@ -75,6 +76,7 @@ public class PlayerStats : CharacterStats
             PerformMelee();
     }
 
+    #region Combat
     public void PerformMelee()
     {
         if (_closeQuarterEnemies.charactersInRange.Count > 0)
@@ -137,6 +139,26 @@ public class PlayerStats : CharacterStats
         anim.SetBool(HashIDs.backstab_bool, false);
     }
 
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+        ShakeCamera(damage);
+    }
+    public override void TakeDamage(int damage, CharacterStats source)
+    {
+        base.TakeDamage(damage, source);
+        ShakeCamera(damage);
+    }
+    public override void TakeDamageThroughArmor(int damage)
+    {
+        base.TakeDamageThroughArmor(damage);
+        ShakeCamera(damage);
+    }
+    public override void TakeDamageThroughArmor(int damage, CharacterStats source)
+    {
+        base.TakeDamageThroughArmor(damage, source);
+        ShakeCamera(damage);
+    }
     public override void TakeDamage(bool instantKill)
     {
         lastHitTakenTime = Time.time;
@@ -148,7 +170,12 @@ public class PlayerStats : CharacterStats
         _playerMovement.enabled = false;
         GameObject.FindGameObjectWithTag(Tags.GAME_CONTROLLER).GetComponent<EndOfLevel>().EndLevel(true);
     }
+    #endregion
 
+    private void ShakeCamera(int damage)
+    {
+        cam.Shake(damage / 100f, 5f, 3f);
+    }
     /// <summary>
     /// Calculates visibility based on lighting
     /// </summary>

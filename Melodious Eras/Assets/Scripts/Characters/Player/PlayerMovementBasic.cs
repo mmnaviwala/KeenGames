@@ -420,7 +420,6 @@ public class PlayerMovementBasic : MonoBehaviour
         {
             stats.TakeDamageThroughArmor(5 * (int)(impactVelocity - 12.5f));
             anim.applyRootMotion = true;
-            mainCam.Shake(.0625f, 8, 2);
             //emit noise
         }
         if (jumping && !(collision.rigidbody && collision.rigidbody.isKinematic) && (Mathf.Abs(collision.contacts[0].normal.x) > .5f || Mathf.Abs(collision.contacts[0].normal.z) > .5f))

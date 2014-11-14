@@ -24,9 +24,9 @@ public class GrayscaleFadeCS : ImageEffectBase {
         else
             effectAmount = 0f;
 
-		material.SetTexture("_RampTex", textureRamp);
-		material.SetFloat("_RampOffset", rampOffset);
-		material.SetFloat("_EffectAmount", effectAmount);
-		Graphics.Blit (source, destination, material);
+        material.SetTexture("_RampTex", textureRamp);
+        material.SetFloat("_RampOffset", rampOffset);
+        material.SetFloat("_EffectAmount", effectAmount);
+        Graphics.Blit(source, destination, material);
 	}
 }
