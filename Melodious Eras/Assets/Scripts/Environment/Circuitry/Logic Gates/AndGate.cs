@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
-public class AndGate : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-	
-	}
+public class AndGate : LogicGate {
 	
 	// Update is called once per frame
 	void Update () {
-	
+        Forward();
 	}
+
+    public override void Forward()
+    {
+        output.hasPower = inputs.All(input => input.hasPower);
+    }
 }

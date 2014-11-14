@@ -1,3 +1,6 @@
+// Upgrade NOTE: commented out 'sampler2D unity_Lightmap', a built-in variable
+// Upgrade NOTE: replaced tex2D unity_Lightmap with UNITY_SAMPLE_TEX2D
+
 
 // cutout shader that falls back to cheap non alpha testing shader on low end platforms
 
@@ -52,7 +55,7 @@ SubShader {
 		#include "AngryInclude.cginc"
 		
 		float4 unity_LightmapST;
-		sampler2D unity_Lightmap;	
+		// sampler2D unity_Lightmap;	
 		float4 _MainTex_ST;
 				
 		v2f_full vert (appdata_full v) 
@@ -90,7 +93,7 @@ SubShader {
 			tex.rgb += reflection.rgb * tex.a;
 												
 			#ifdef LIGHTMAP_ON
-				fixed3 lm =  DecodeLightmap (tex2D(unity_Lightmap, i.uv.zw));
+				fixed3 lm =  DecodeLightmap (UNITY_SAMPLE_TEX2D(unity_Lightmap, i.uv.zw));
 				tex.rgb *= lm;
 			#else
 				tex.rgb *= 0.5;

@@ -1,3 +1,6 @@
+// Upgrade NOTE: commented out 'sampler2D unity_Lightmap', a built-in variable
+// Upgrade NOTE: replaced tex2D unity_Lightmap with UNITY_SAMPLE_TEX2D
+
 /* 
 
 same as ReflectiveBackgroundArbitraryGeometry but .a channel defines
@@ -61,7 +64,7 @@ SubShader {
 		CGPROGRAM
 		
 		float4 unity_LightmapST;
-		sampler2D unity_Lightmap;	
+		// sampler2D unity_Lightmap;	
 		float4 _MainTex_ST;
 				
 		v2f_full vert (appdata_full v) 
@@ -99,7 +102,7 @@ SubShader {
 			tex += refl * saturate(tex.g - _OneMinusReflectivity);			
 			
 			#ifdef LIGHTMAP_ON
-				fixed3 lm = ( DecodeLightmap (tex2D(unity_Lightmap, i.uvLM.xy)));
+				fixed3 lm = ( DecodeLightmap (UNITY_SAMPLE_TEX2D(unity_Lightmap, i.uvLM.xy)));
 				tex.rgb *= lm;
 			#endif	
 			
@@ -128,7 +131,7 @@ SubShader {
 		CGPROGRAM
 		
 		float4 unity_LightmapST;
-		sampler2D unity_Lightmap;
+		// sampler2D unity_Lightmap;
 		float4 _MainTex_ST;		
 		
 		v2f vert (appdata_full v) 
@@ -149,7 +152,7 @@ SubShader {
 			fixed4 tex = tex2D (_MainTex, i.uv);
 			
 			#ifdef LIGHTMAP_ON
-				fixed3 lm = ( DecodeLightmap (tex2D(unity_Lightmap, i.uvLM)));
+				fixed3 lm = ( DecodeLightmap (UNITY_SAMPLE_TEX2D(unity_Lightmap, i.uvLM)));
 				tex.rgb *= lm + tex.aaa;
 			#else
 				tex.rgb += tex.aaa;			

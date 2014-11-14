@@ -1,9 +1,10 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Objectives\ObjectiveSystem.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Environment\Circuitry\Logic Gates\AndGate.cs">
     <Files>
-      <File FileName="Assets\Scripts\Environment\MaterialPhysics.cs" Line="27" Column="6" />
-      <File FileName="Assets\Scripts\Camera\CameraMovement3D.cs" Line="11" Column="26" />
+      <File FileName="Assets\Scripts\Environment\Circuitry\Logic Gates\AndGate.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Environment\MaterialPhysics.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Camera\CameraMovement3D.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Utilities\PauseMenuOld.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Objectives\ObjectiveSystem.cs" Line="1" Column="1" />
     </Files>
@@ -13,10 +14,14 @@
           <Node name="Assembly-CSharp" expanded="True">
             <Node name="Scripts" expanded="True">
               <Node name="Camera" expanded="True" />
-              <Node name="Environment" expanded="True" />
-              <Node name="Objectives" expanded="True">
-                <Node name="ObjectiveSystem.cs" selected="True" />
+              <Node name="Environment" expanded="True">
+                <Node name="Circuitry" expanded="True">
+                  <Node name="Logic Gates" expanded="True">
+                    <Node name="AndGate.cs" selected="True" />
+                  </Node>
+                </Node>
               </Node>
+              <Node name="Objectives" expanded="True" />
             </Node>
           </Node>
           <Node name="Assembly-CSharp-Editor" expanded="True" />
