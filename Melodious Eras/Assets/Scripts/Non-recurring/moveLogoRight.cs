@@ -29,7 +29,7 @@ public class moveLogoRight : MonoBehaviour {
 		if(delayComplete && !musicPlayed)
 		{
 			// Hide gui texture
-			GameObject.Find("5thFloorStudiosTexture").GetComponent<GUITexture>().enabled = false;
+			//GameObject.Find("5thFloorStudiosTexture").GetComponent<GUITexture>().enabled = false;
 			music[2].Play();
 			musicPlayed = true;
 		}

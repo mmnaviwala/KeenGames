@@ -13596,55 +13596,11 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: .707106829
       objectReference: {fileID: 0}
-    - target: {fileID: 11400020, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
-      propertyPath: BlurQualityHigh
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400010, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2000000, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
-      propertyPath: m_OcclusionCulling
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400014, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 11400014, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
-      propertyPath: effectAmount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400006, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400008, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400016, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400016, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
-      propertyPath: m_SampleCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 11400020, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
-    - {fileID: 11400022, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
-    - {fileID: 11400006, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
-    - {fileID: 11400000, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0d0474e129c08df4d93c36bf0fa26106, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &253100164

@@ -232,62 +232,6 @@ public class EnemyAI : MonoBehaviour
     }
 
     #region Enemy Senses
-	/// <summary>
-	/// Determines visibility of each character within range
-	/// </summary>
-	public void DetectNearbyCharacters()
-	{
-        foreach(CharacterStats ch in sight.charactersInRange)
-        {
-            float angle = Vector3.Angle(ch.transform.position + 2*Vector3.up - this.eyes.position, this.eyes.forward);
-            if ( angle < fov)
-            {
-                //calculating rays for 3 points on the character
-                float charHeight = ch.GetComponent<Collider>().bounds.max.y - ch.GetComponent<Collider>().bounds.min.y;
-                rayUpper.origin = rayCenter.origin = rayLower.origin = this.eyes.position;
-				
-                rayUpper.direction =  (ch.GetComponent<Collider>().bounds.max - Vector3.up*charHeight/8) - this.eyes.position;
-                rayLower.direction =  (ch.GetComponent<Collider>().bounds.min + Vector3.up*charHeight/8) - this.eyes.position;
-                rayCenter.direction = (ch.GetComponent<Collider>().bounds.min + Vector3.up*charHeight/2) - this.eyes.position;
-				
-                //TODO: ADJUST FIELD OF VIEW
-                //reducing sight distance at wide angles, to simulate peripheral vision
-                //This determines whether or not the enemy can even detect the player
-                float adjustedSightDistance = (angle > 30) ?
-                        Mathf.Pow(angle - fov, 2)/fov :
-                        sightDistance;
-				
-                //if any rays hit
-                if (Physics.Raycast(rayUpper, out hit, adjustedSightDistance, sightLayer) ||
-                    Physics.Raycast(rayCenter, out hit, adjustedSightDistance, sightLayer) ||
-                    Physics.Raycast(rayLower, out hit, adjustedSightDistance, sightLayer))
-                {
-                    if (hit.collider.tag == Tags.PLAYER)
-                    {
-                        float awareness = adjustedSightDistance / sightDistance / 10;
-                        this.Notice(ch, awareness * Time.deltaTime);
-                    }
-                    else 
-                    {
-                        //this.seesPlayer = false;
-                        if (hit.collider.tag == Tags.ENEMY && ch.isDead)
-                        {
-                            this.Alert(2f);
-                            squad.AlertGroup(2f);
-
-                            ai_activity = Inspect;
-                            nav.destination = ch.transform.position;
-                        }
-                    }
-                }
-                else if (true) //if object has MaterialPhysics && isn't opaque
-                {
-                    //re-raycast from collision, if TOTAL raycast range doesn't exceed adjustedSightDistance * opacity
-                }
-            }
-        }
-    }
-
     public void Notice(CharacterStats character, float noticeability = 100f)
     {
         this.awarenessOfPlayer += noticeability;
@@ -314,16 +258,7 @@ public class EnemyAI : MonoBehaviour
         }
 		return false;
     }
-    public bool See(Transform tran)
-    {
- 		if(Physics.Raycast(this.eyes.position, tran.position + Vector3.up, sightLayer))
-		{
-			this._seesPlayer = this._alerted = true;
-			lastPlayerSighting = tran.position;
-			return true;
-		}
-		return false;
-    }
+
     /// <summary>
     /// Puts the NPC on alert and further multiplies their current awareness by _awarenessMultiplier
     /// </summary>
@@ -342,6 +277,7 @@ public class EnemyAI : MonoBehaviour
         //implement inspection of source
     }
     #endregion
+
     float CalculatePathLengthTo(Vector3 source)
     {
         NavMeshPath path = new NavMeshPath();

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public enum Faction { Enemy1, Enemy2, Neutral, Player }
 
@@ -21,6 +22,7 @@ public class CharacterStats : MonoBehaviour
     public Inventory tempInventory = new Inventory(); //for level-specific items like keys
     public Transform lookatTarget;
     protected Animator anim;
+    public List<Light> affectingLights;             //will be used in calculating visibility
 
     [SerializeField]
     protected float _health = 100;
@@ -60,7 +62,9 @@ public class CharacterStats : MonoBehaviour
     #endregion
 
     // Use this for initialization
-    void Start() {
+    void Start()
+    {
+        affectingLights = new List<Light>();
         anim = this.GetComponent<Animator>();
         if (equippedWeapon)
             equippedWeapon.Equip(this, rightHand);
@@ -220,5 +224,27 @@ public class CharacterStats : MonoBehaviour
         this.baseLayer = FindAnimLayer("Base Layer");
         this.woundedLayer = FindAnimLayer("Wounded");
         this.aimLayer = FindAnimLayer("Shooting");
+    }
+
+    /// <summary>
+    /// Calculates visibility based on lighting
+    /// </summary>
+    /// <returns></returns>
+    public float VisibilityMultiplier()
+    {
+        if (affectingLights.Count > 0)
+        {
+            foreach (Light _light in affectingLights)
+            {
+                float relativeDistance = Vector3.Distance(_light.transform.position, this.transform.position);
+                if (_light.intensity * relativeDistance * relativeDistance > .5f)
+                    return 1;
+            }
+            //calculate lighting visibility
+            //return light_modifier * CROUCH_MULTIPLIER
+            return 1;
+        }
+        else
+            return 0; //complete darkness = invisible
     }
 }

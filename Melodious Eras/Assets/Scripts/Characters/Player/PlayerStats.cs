@@ -12,7 +12,6 @@ public class PlayerStats : CharacterStats
     //visibility multipliers
     private const float CROUCH_MULTIPLIER = .5f;    //crouching reduces visibility by 50%
 
-    public List<Light> affectingLights;             //will be used in calculating visibility
     public Flashlight flashlight;
     private float _visibility = 1;
 
@@ -175,26 +174,5 @@ public class PlayerStats : CharacterStats
     private void ShakeCamera(int damage)
     {
         cam.Shake(damage / 100f, 5f, 3f);
-    }
-    /// <summary>
-    /// Calculates visibility based on lighting
-    /// </summary>
-    /// <returns></returns>
-    public float VisibilityMultiplier()
-    {
-        if (affectingLights.Count > 0)
-        {
-            foreach (Light _light in affectingLights)
-            {
-                float relativeDistance = Vector3.Distance(_light.transform.position, this.transform.position);
-                if (_light.intensity * relativeDistance * relativeDistance > .5f)
-                    return 1;
-            }
-            //calculate lighting visibility
-            //return light_modifier * CROUCH_MULTIPLIER
-            return 1;
-        }
-        else
-            return 0; //complete darkness = invisible
     }
 }

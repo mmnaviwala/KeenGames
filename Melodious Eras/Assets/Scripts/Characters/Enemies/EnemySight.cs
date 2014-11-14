@@ -81,7 +81,10 @@ public class EnemySight : MonoBehaviour
                 float adjustedSightDistance = (angle > 30) ?
                         Mathf.Pow(angle - fovAngle * ai.awarenessMultiplier, 2) / fovAngle * ai.awarenessMultiplier :
                         ai.sightDistance;
-
+                /*
+                float adjustedSightDistance = (angle > 30) ?
+                        Mathf.Pow(angle - fov, 2)/fov :
+                        sightDistance;*/
                 //if any rays hit
                 if (Physics.Raycast(rayUpper, out hit, adjustedSightDistance, sightLayer) ||
                     Physics.Raycast(rayCenter, out hit, adjustedSightDistance, sightLayer) ||

@@ -107,7 +107,7 @@ public class LaserPistol : SemiAutoWeapon
         laser.SetPosition(0, start);
         laser.SetPosition(1, end);
         laser.enabled = true;
-		StartCoroutine(Flash ());
+		StartCoroutine(Flash());
         yield return waitp1;
         laser.enabled = false;
     }
@@ -120,7 +120,7 @@ public class LaserPistol : SemiAutoWeapon
 		barrelExit.GetComponent<Light>().intensity = 1;
 		while(barrelExit.GetComponent<Light>().intensity > .01f)
 		{
-			barrelExit.GetComponent<Light>().intensity = Mathf.Lerp (barrelExit.GetComponent<Light>().intensity, 0f, 10 * Time.deltaTime);
+			barrelExit.GetComponent<Light>().intensity = Mathf.Lerp(barrelExit.GetComponent<Light>().intensity, 0f, 10 * Time.deltaTime);
 			yield return endOfFrame;
 		}
 	}
