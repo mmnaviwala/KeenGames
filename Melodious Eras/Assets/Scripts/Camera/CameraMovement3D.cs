@@ -62,6 +62,8 @@ public class CameraMovement3D : CameraMovement
         }
     }
 
+    public Transform playerTransform { get { return player; } }
+
     void Awake()
     {
         camRotationHelper = new GameObject();
