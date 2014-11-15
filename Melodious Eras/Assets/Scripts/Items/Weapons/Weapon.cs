@@ -19,16 +19,6 @@ public class Weapon : Equipment
     public float fireRate;
     public bool ignoresArmor = false;
 
-    void Start()
-    {
-    }
-
-    void Update()
-    {
-
-    }
-
-
     public virtual void Initialize()
     {
         //soundSphere = this.GetComponent<SphereCollider>();
@@ -83,14 +73,5 @@ public class Weapon : Equipment
     public virtual IEnumerator Reload()
     {
         return null;
-    }
-
-    /// <summary>
-    /// String used in HUD.
-    /// </summary>
-    /// <returns></returns>
-    public virtual string HudString()
-    {
-        return weaponName;
     }
 }

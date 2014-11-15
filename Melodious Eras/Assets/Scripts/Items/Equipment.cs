@@ -14,4 +14,6 @@ public class Equipment : Item
 	void Update () {
 	
 	}
+
+    public virtual void Equip(CharacterStats wielder) { }
 }

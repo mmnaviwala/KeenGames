@@ -31,7 +31,7 @@ public class HUD : MonoBehaviour {
     void Awake()
     {
         Cursor.visible = false;
-        Screen.lockCursor = true;
+        Cursor.lockState = CursorLockMode.Locked;
 
         float xx = Screen.width / 10;
         float yy = Screen.height / 10;

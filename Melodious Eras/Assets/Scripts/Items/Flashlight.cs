@@ -11,9 +11,7 @@ public class Flashlight : MonoBehaviour
     //public float maxBatteryLife = 100;  //time in seconds
     //public float batteryLife = 100;    
 	public int efficiency = 10;
-    public Suit playerSuit;
-    public Color32 c_battery;
-    public GUIStyle lightGuiStyle, backGuiStyle;
+    Suit playerSuit;
 
     private Rect batteryMaxLifeRect, batteryLifeRect;
     private LightShafts lightShafts;
@@ -34,13 +32,7 @@ public class Flashlight : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-		if(playerSuit == null)
-		{
-			Transform temp = this.transform;
-			while(temp.tag != Tags.PLAYER)
-				temp = temp.parent;
-			playerSuit = temp.GetComponent<Suit>();
-		}
+        playerSuit = GetComponentInParent<Suit>();
         float startX = Screen.height / 20;
         float barWidth = Screen.width / 3;
         float barHeight = barWidth / 10;

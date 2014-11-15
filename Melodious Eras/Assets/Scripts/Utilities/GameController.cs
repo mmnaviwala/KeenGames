@@ -24,7 +24,8 @@ public class GameController : MonoBehaviour
     void Awake()
     {
         Screen.orientation = ScreenOrientation.LandscapeLeft;
-		this.ambientLight = RenderSettings.ambientLight;
+		//this.ambientLight = RenderSettings.ambientLight;
+        RenderSettings.ambientLight = this.ambientLight;
         //Physics.gravity = new Vector3(0f, -49f, 0f);
         AudioListener.pause = false;
         Time.timeScale = 1;
@@ -53,7 +54,6 @@ public class GameController : MonoBehaviour
         Screen.lockCursor = !show;
     }
 
-    
 
     /// <summary>
     /// Modular calculation that takes negative numbers into consideration (-1 % 10 = 9)

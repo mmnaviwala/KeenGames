@@ -50,8 +50,6 @@ public class CharacterIllumination : MonoBehaviour
         var character = other.GetComponent<CharacterStats>();
         if(character)
         {
-            if (character.name.Equals("Agent Cipher"))
-                Debug.Log("player entering light");
             affectedCharacters.Add(character);
             Illuminate(character);
         }

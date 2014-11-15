@@ -17,7 +17,7 @@ public class Gun : Weapon
 	public float muzzleVelocity;
 
     public int durability, weight;
-    public float  //Time between shots.
+    public float
                  accuracy, //0 = perfect accuracy for now.
 				 range,//Range projectile will travel, or range where reticle will turn red.
 				 npcRange; //range NPCs will use for this weapon
@@ -124,11 +124,5 @@ public class Gun : Weapon
             ammoInClip += roundsToReload;
             reloading = false;
         }
-    }
-
-    public override string HudString()
-    {
-        return weaponName;
-        //return weaponName + ": " + ammoInClip + " - " + extraAmmo;
     }
 }
