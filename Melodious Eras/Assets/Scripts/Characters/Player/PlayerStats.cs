@@ -20,7 +20,6 @@ public class PlayerStats : CharacterStats
 
     public AudioClip deathClip, meleeClip;
     private PlayerMovementBasic _playerMovement;
-    private HUD_Stealth hud;
     private CameraMovement3D cam;
 
     public float attackSpeed = .25f;
@@ -36,7 +35,6 @@ public class PlayerStats : CharacterStats
     void Awake()
     {
         _playerMovement = this.GetComponent<PlayerMovementBasic>();
-        hud = this.GetComponent<HUD_Stealth>();
         anim = this.GetComponent<Animator>();
         this.SetAnimLayers();
 

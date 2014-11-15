@@ -6,7 +6,6 @@ using System.Collections.Generic;
 public class Keypad : CircuitSwitch 
 {
     public Door door;                   //optional: door for the keypad to unlock
-	private HUD_Stealth playerHUD;      //used to disable default HUD when using keypad
     private CameraMovement3D cam3d;     //used to disable camera movement when using keypad
     public AudioClip accessDeniedClip; 
 
@@ -118,10 +117,9 @@ public class Keypad : CircuitSwitch
         if (other is CapsuleCollider && other.tag == Tags.PLAYER)
         {
 			detectionSphere.playerInRange = true;
-            if (playerHUD == null || cam3d == null)
+            if (cam3d == null)
             {
                 //caching HUD and camera script once the player enters the trigger the first time
-                playerHUD = other.GetComponent<HUD_Stealth>();
                 cam3d = Camera.main.GetComponent<CameraMovement3D>();
             }
         }
@@ -241,8 +239,7 @@ public class Keypad : CircuitSwitch
     void UseKeypad(bool usingKeypad)
     {
         this.usingKeypad = usingKeypad;
-        playerHUD.enabled = !usingKeypad;
-        Screen.lockCursor = !usingKeypad;
+        Cursor.lockState = usingKeypad ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = usingKeypad;
         cam3d.enabled = !usingKeypad;
     }

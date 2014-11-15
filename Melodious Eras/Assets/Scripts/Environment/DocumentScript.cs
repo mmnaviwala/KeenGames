@@ -10,14 +10,11 @@ public class DocumentScript : MonoBehaviour
     bool inTrigger = false;
     public Keypad keypadReference;
 
-    private HUD_Stealth playerHUD;
     private Rect documentRect, promptRect;
     public GUIStyle promptStyle;
     // Use this for initialization
     void Start()
     {
-        playerHUD = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<HUD_Stealth>();
-
         if (keypadReference != null)
         {
             keycode = keypadReference.correctCode;
@@ -43,13 +40,10 @@ public class DocumentScript : MonoBehaviour
                 gameController.GetComponent<LogSystem>().NewLog(message);
                 gameController.GetComponent<TrackObjectives>().SetNextObjective();
                 reading = true;
-                
-                playerHUD.GetComponent<Rigidbody>().velocity = new Vector3(0, playerHUD.GetComponent<Rigidbody>().velocity.y, 0);
             }
             if (Input.GetButtonDown(InputType.START))
             {
                 reading = false;
-                playerHUD.enabled = true;
             }
         }
     }
@@ -68,7 +62,6 @@ public class DocumentScript : MonoBehaviour
         {
             inTrigger = false;
             reading = false;
-            playerHUD.enabled = true;
         }
     }
 
@@ -78,7 +71,6 @@ public class DocumentScript : MonoBehaviour
             GUI.Box(promptRect, "Press [USE] to read.", promptStyle);
         if (reading)
         {
-            playerHUD.enabled = false;
             GUI.color = new Color(1, 1, 1, .75f);
             GUI.Box(documentRect, message, docStyle);
         }

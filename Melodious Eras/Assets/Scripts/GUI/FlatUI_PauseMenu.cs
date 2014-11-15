@@ -68,14 +68,13 @@ public class FlatUI_PauseMenu : MonoBehaviour
             }
             if (GUI.Button(resumeRect, resume))
             {
-                Screen.lockCursor = true;
+                Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
                 isGamePaused = false;
                 Time.timeScale = 1;
 
                 Camera.main.GetComponent<CameraMovement3D>().enabled = true;
                 Camera.main.GetComponent<AudioSource>().mute = false;
-                GameObject.FindGameObjectWithTag(Tags.PLAYER).gameObject.GetComponent<HUD_Stealth>().enabled = true;
                 foreach (Transform child in GameObject.Find("Flat_UI HUD").gameObject.transform)
                 {
                     if (child.GetComponent<FlatUI_HUD>() != null)

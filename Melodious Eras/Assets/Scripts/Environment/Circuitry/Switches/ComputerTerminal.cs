@@ -18,7 +18,6 @@ public class ComputerTerminal : CircuitSwitch
     public Material onScreen, offScreen;
     public Transform[] monitors;
 
-    HUD_Stealth playerHUD;
     HUD hud;
     PlayerMovementBasic playerMovement;
     CameraMovement3D cam3d;
@@ -149,7 +148,6 @@ public class ComputerTerminal : CircuitSwitch
         if (other is CapsuleCollider && other.tag == Tags.PLAYER)
         {
             playerNearby = true;
-            playerHUD = other.GetComponent<HUD_Stealth>();
             playerMovement = other.GetComponent<PlayerMovementBasic>();
         }
     }
@@ -182,7 +180,6 @@ public class ComputerTerminal : CircuitSwitch
         usingTerminal =      usingTerminalP;
 
         cam3d.enabled =     !usingTerminalP;
-        playerHUD.enabled = !usingTerminalP;
         hud.enabled = !usingTerminalP;
         playerMovement.enabled = !usingTerminal;
 

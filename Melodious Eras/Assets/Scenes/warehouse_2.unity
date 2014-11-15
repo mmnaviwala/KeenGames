@@ -33384,12 +33384,8 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400062, guid: 46e377905f8e6d7448c87ccda584d8c2, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 18
       objectReference: {fileID: 0}
-    - target: {fileID: 11400020, guid: 46e377905f8e6d7448c87ccda584d8c2, type: 2}
-      propertyPath: m_Cameras.Array.data[0]
-      value: 
-      objectReference: {fileID: 1566368793}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 46e377905f8e6d7448c87ccda584d8c2, type: 2}
   m_IsPrefabParent: 0
@@ -63094,7 +63090,7 @@ Transform:
   - {fileID: 1531620081}
   - {fileID: 528924177}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 24
 --- !u!114 &1615041941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76487,7 +76483,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 25
 --- !u!1 &1954660798
 GameObject:
   m_PrefabParentObject: {fileID: 100002, guid: 780923c3a9c2cbe4080c8c96b77cde73, type: 2}

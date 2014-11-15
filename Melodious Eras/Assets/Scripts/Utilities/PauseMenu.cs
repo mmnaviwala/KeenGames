@@ -12,7 +12,7 @@ public class PauseMenu : MonoBehaviour {
     private bool gamePaused = false;
     private bool firstTime = true;
     private AudioSource music;
-    private HUD_Stealth playerHUD;
+
 	void Start()
 	{
 		// Loading all the resources in the start() method
@@ -20,7 +20,6 @@ public class PauseMenu : MonoBehaviour {
 		pictures = new Texture2D[2];
         //pictures[0] = Resources.Load("canon_clef_doodle") as Texture2D;
 		//btnTexture = Resources.Load("white_dot") as Texture2D;
-        playerHUD = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<HUD_Stealth>();
 		
 		//Color headingColor = new Color(0.5F, 0.34F, 0.31F);	// light brown
 		Color headingColor = new Color(0.35F, 0.24F, 0.22F);		// a little dark brown
@@ -48,7 +47,6 @@ public class PauseMenu : MonoBehaviour {
 	        if(gamePaused)
 			{
 	            gamePaused = false;
-				playerHUD.enabled = true;
 				GetComponent<GUITexture>().enabled = false;
 				music.Play();
 	            Time.timeScale = 1.0f;
@@ -56,7 +54,6 @@ public class PauseMenu : MonoBehaviour {
 			else 
 			{
 	            gamePaused = true;
-				playerHUD.enabled = false;
 				music.Pause();
 	            Time.timeScale = 0.0f;
 			}
@@ -93,7 +90,6 @@ public class PauseMenu : MonoBehaviour {
 				gamePaused = false;
 				GetComponent<GUITexture>().enabled = false;
 				music.Play();
-				playerHUD.enabled = true;
 	            Time.timeScale = 1.0f;
 			}
 			

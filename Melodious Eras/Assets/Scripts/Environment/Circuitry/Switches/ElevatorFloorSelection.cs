@@ -11,7 +11,6 @@ public class ElevatorFloorSelection : CircuitSwitch
     private Rect[] buttons;
     public GUIStyle promptStyle;
 
-    private HUD_Stealth playerHUD;
     private CameraMovement3D cam3d;
     private Elevator elevator;
 
@@ -24,7 +23,6 @@ public class ElevatorFloorSelection : CircuitSwitch
 	// Use this for initialization
 	void Start () 
     {
-        playerHUD = GameObject.FindGameObjectWithTag(Tags.PLAYER).GetComponent<HUD_Stealth>();
         cam3d = Camera.main.GetComponent<CameraMovement3D>();
         elevator = this.transform.parent.GetComponent<Elevator>();
         int h = Screen.height / 10;
@@ -85,7 +83,6 @@ public class ElevatorFloorSelection : CircuitSwitch
         if (other is CapsuleCollider && other.tag == Tags.PLAYER)
         {
             Debug.Log(other.name + " entered elevator");
-            playerHUD = other.GetComponent<HUD_Stealth>();
             cam3d = Camera.main.GetComponent<CameraMovement3D>();
         }
     }
@@ -100,7 +97,6 @@ public class ElevatorFloorSelection : CircuitSwitch
     private void UseButtons(bool usingButtons)
     {
         inUse = usingButtons;
-        playerHUD.enabled = !usingButtons;
         cam3d.enabled = !usingButtons;
         Cursor.visible = usingButtons;
         Screen.lockCursor = !usingButtons;

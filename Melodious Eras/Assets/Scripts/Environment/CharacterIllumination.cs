@@ -71,10 +71,11 @@ public class CharacterIllumination : MonoBehaviour
 
         Vector3 charPosCenter = charCollider.bounds.center;
         Vector3 charPosUpper = charCollider.bounds.max + Vector3.down * 0.2f;
+        /*
         if(character.name.Equals("Agent Cipher"))
         {
             Debug.Log(charPosCenter + "\n" + charPosUpper);
-        }
+        }*/
 
         if (myLight.shadows == LightShadows.None ||
             Physics.Linecast(transform.position, charPosCenter, lightLayers) ||
@@ -85,8 +86,10 @@ public class CharacterIllumination : MonoBehaviour
             float illumination = myLight.intensity * relativeDistance * relativeDistance;
             if (illumination > character.visibility)
                 character.visibility = illumination;
+            /*
             if (character.name.Equals("Agent Cipher"))
                 Debug.Log(string.Format("Illumination on {0}: {1}", character.name, illumination));
+             * */
         }
     }
 

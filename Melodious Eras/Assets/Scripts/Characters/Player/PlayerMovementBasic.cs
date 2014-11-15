@@ -52,7 +52,6 @@ public class PlayerMovementBasic : MonoBehaviour
 
     private CameraMovement3D mainCam;
     private PlayerStats stats;
-    private HUD_Stealth hud;
     private Animator anim;
 	private CapsuleCollider capsule;
 
@@ -94,7 +93,6 @@ public class PlayerMovementBasic : MonoBehaviour
         moveDirection = new Vector2();
         stats = this.GetComponent<PlayerStats>();
         anim = this.GetComponent<Animator>();
-        hud = this.GetComponent<HUD_Stealth>();
         capsule = this.GetComponent<CapsuleCollider>();
     }
 

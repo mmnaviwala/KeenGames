@@ -10,7 +10,7 @@ public class moviePlayer : MonoBehaviour {
 	public bool PlayOnStart = true;
 	
 	void Start () {
-	
+	/*
 		if(PlayOnStart)
 		{
 		MovieTexture movie = GetComponent<Renderer>().material.mainTexture as MovieTexture;
@@ -20,7 +20,7 @@ public class moviePlayer : MonoBehaviour {
 		//audio.Play();
 		movie.Play();
 		}
-		
+		*/
 		
 	}
 	
