@@ -115,7 +115,7 @@ public class FlatUI_PauseMenu : MonoBehaviour
         {
             if (Time.timeScale == 1)
             {
-                Screen.lockCursor = false;
+                Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
                 isGamePaused = true;
                 Time.timeScale = 0;
@@ -125,8 +125,8 @@ public class FlatUI_PauseMenu : MonoBehaviour
                 //GameObject.FindGameObjectWithTag(Tags.PLAYER).gameObject.GetComponent<HUD_Stealth>().enabled = false;
                 foreach (Transform child in GameObject.Find("Flat_UI HUD").gameObject.transform)
                 {
-                    if (child.GetComponent<FlatUI_HUD>() != null)
-                        child.GetComponent<FlatUI_HUD>().enabled = false;
+                    if (child.GetComponent<HUD>() != null)
+                        child.GetComponent<HUD>().enabled = false;
                     if (child.GetComponent<DisplayObjectives>() != null)
                         child.GetComponent<DisplayObjectives>().enabled = false;
                 }
@@ -142,7 +142,7 @@ public class FlatUI_PauseMenu : MonoBehaviour
             }
             else
             {
-                Screen.lockCursor = true;
+                Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
                 isGamePaused = false;
                 Time.timeScale = 1;
@@ -152,8 +152,8 @@ public class FlatUI_PauseMenu : MonoBehaviour
                 //GameObject.FindGameObjectWithTag(Tags.PLAYER).gameObject.GetComponent<HUD_Stealth>().enabled = true;
                 foreach (Transform child in GameObject.Find("Flat_UI HUD").gameObject.transform)
                 {
-                    if (child.GetComponent<FlatUI_HUD>() != null)
-                        child.GetComponent<FlatUI_HUD>().enabled = true;
+                    if (child.GetComponent<HUD>() != null)
+                        child.GetComponent<HUD>().enabled = true;
                     if (child.GetComponent<DisplayObjectives>() != null)
                         child.GetComponent<DisplayObjectives>().enabled = true;
                 }

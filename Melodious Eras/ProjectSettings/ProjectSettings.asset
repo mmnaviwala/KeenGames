@@ -108,6 +108,10 @@ PlayerSettings:
   iPadHighResPortraitSplashScreen: {fileID: 0}
   iPadLandscapeSplashScreen: {fileID: 0}
   iPadHighResLandscapeSplashScreen: {fileID: 0}
+  iOSLaunchScreenImage: {fileID: 0}
+  iOSLaunchScreenBackgroundColor:
+    serializedVersion: 2
+    rgba: 0
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
   AndroidKeystoreName: 
@@ -179,6 +183,7 @@ PlayerSettings:
   ps4Category: 0
   ps4MasterVersion: 01.00
   ps4AppVersion: 01.00
+  ps4AppType: 0
   ps4ParamSfxPath: 
   ps4VideoOutPixelFormat: 0
   ps4VideoOutResolution: 4
@@ -188,6 +193,7 @@ PlayerSettings:
   ps4StartupImagePath: 
   ps4BGMPath: 
   ps4NPtitleDatPath: 
+  ps4RemotePlayKeyAssignment: -1
   ps4EnterButtonAssignment: 1
   ps4ApplicationParam1: 0
   ps4ApplicationParam2: 0

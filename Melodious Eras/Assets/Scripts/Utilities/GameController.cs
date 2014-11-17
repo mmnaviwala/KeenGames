@@ -142,3 +142,17 @@ public static class Difficulty
         }
     }
 }
+
+public class EventManager : MonoBehaviour
+{
+    public delegate void PauseAction();
+    public PauseAction pauseAction;
+
+    void Update()
+    {
+        if(Input.GetButtonDown(InputType.START))
+        {
+            pauseAction();
+        }
+    }
+}
