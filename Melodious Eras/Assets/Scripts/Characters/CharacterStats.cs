@@ -27,7 +27,7 @@ public class CharacterStats : MonoBehaviour
     protected float _visibility = 0;
     public float visibility 
     { 
-        get { return _visibility; } 
+        get { return suit && suit.IsCloaked ? 0f : _visibility; } 
         set { _visibility = value < 1f ? value : 1f; } 
     }
 

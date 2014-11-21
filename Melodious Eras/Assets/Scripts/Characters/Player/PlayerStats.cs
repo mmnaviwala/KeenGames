@@ -28,6 +28,7 @@ public class PlayerStats : CharacterStats
     private const float BACKSTAB_STRIKE_TIME = 1.0f;
 
 
+
     #endregion
 
     public PlayerMovementBasic playerMovement { get { return _playerMovement; } }
@@ -53,6 +54,7 @@ public class PlayerStats : CharacterStats
     void Start()
     {
         cam = Camera.main.GetComponent<CameraMovement3D>();
+        _visibility = 1;
     }
 
     void Update()
@@ -60,12 +62,15 @@ public class PlayerStats : CharacterStats
         this.BlendWoundLayer();
         this.RegainStamina(5 * Time.deltaTime);
         this.RegenerateHealth(Difficulty.playerRegenWait, Difficulty.playerRegenSpeed);
-        //These lists will never be too large, but should still be moved out of Update at some point
+
         _closeQuarterEnemies.charactersInRange.RemoveAll((CharacterStats enemy) => enemy == null); //Scans all nearby enemies each frame and removes those who have died, which wouldn't
         _nearbyEnemies.charactersInRange.RemoveAll((CharacterStats enemy) => enemy == null);       //trigger the OnTriggerExit function
 
         if (Input.GetButtonDown(InputType.MELEE) && Time.time > nextAttackTime && !this._isDead)
             PerformMelee();
+
+        if (Input.GetKeyDown(KeyCode.M))
+            suit.Cloak();
     }
 
     #region Combat
@@ -104,6 +109,7 @@ public class PlayerStats : CharacterStats
             //Possibly just attack the air, once we get an animation
         }
     }
+
 
     /// <summary>
     /// Melee attack. Instantly kills the target if attacking from behind.

@@ -13,17 +13,21 @@ public struct CharacterTracker
     {
         character = characterP;
         detection = 0;
+        angleFromEyes = 0f;
+        adjAngleFromEyes = 0f;
     }
     public CharacterStats character;
     /// <summary>
     /// Once detection reaches 1, enemy should detect the character.
     /// </summary>
     public float detection;
+    public float angleFromEyes, adjAngleFromEyes;
 }
 
 [RequireComponent(typeof(SphereCollider))]
-public class EnemySight : MonoBehaviour 
+public class EnemySight : MonoBehaviour
 {
+    public Dictionary<CharacterStats, CharacterTracker> characterTracker = new Dictionary<CharacterStats, CharacterTracker>();
     public List<CharacterTracker> characterTrackingList;
     public List<CharacterStats> charactersInRange;
     public EnemyAI ai;
@@ -70,7 +74,7 @@ public class EnemySight : MonoBehaviour
             {
                 if (hit.collider.tag == Tags.PLAYER)
                 {
-                    awarenessOfPlayer += Time.deltaTime * ai.awarenessMultiplier;
+                    awarenessOfPlayer += Time.deltaTime * ai.awarenessMultiplier * ch.visibility;
 
                     ai.seesPlayer = ai.alerted = true;
                     ai.lastPlayerSighting = ch.transform.position;
@@ -97,26 +101,71 @@ public class EnemySight : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (!other.isTrigger && (other.tag == Tags.ENEMY || other.tag == Tags.PLAYER) && other.transform != ai.transform) //last check prevents this character from seeing itself
+        if (belongsToOtherCharacter(other)) //last check prevents this character from seeing itself
         {
-            this.charactersInRange.Add(other.GetComponent<CharacterStats>());
-            characterTrackingList.Add(new CharacterTracker(other.GetComponent<CharacterStats>()));
+            var character = other.GetComponent<CharacterStats>();
+
+            charactersInRange.Add(character);
+            characterTrackingList.Add(new CharacterTracker(character));
+
+            try
+            {
+                characterTracker.Add(character, new CharacterTracker(character));
+            }
+            catch(System.Exception e)
+            {
+
+            }
         }
     }
+
     void OnTriggerExit(Collider other)
     {
-        if (!other.isTrigger && (other.tag == Tags.ENEMY || other.tag == Tags.PLAYER) && other.transform != ai.transform)
+        if (belongsToOtherCharacter(other))
         {
-            this.charactersInRange.Remove(other.GetComponent<CharacterStats>());
-            this.characterTrackingList.RemoveAll((CharacterTracker ct) => {
-                return ct.character == other.GetComponent<CharacterStats>();
-            });
+            var character = other.GetComponent<CharacterStats>();
+            charactersInRange.Remove(character);
+            characterTrackingList.RemoveAll(tracker => tracker.character == character);
+
+            try
+            {
+                characterTracker.Remove(character);
+            }
+            catch(System.ArgumentException)
+            {
+
+            }
         }
+    }
+
+    bool belongsToOtherCharacter(Collider col)
+    {
+        return !col.isTrigger &&
+                col is CapsuleCollider &&
+                (col.tag == Tags.ENEMY || col.tag == Tags.PLAYER) &&
+                col.transform != ai.transform;
+    }
+
+    public void GainAwarenessOf(CharacterStats character)
+    {
+
+    }
+
+    public float AngleFromEyes(Vector3 loc)
+    {
+        return Vector3.Angle(loc - this.eyes.position, this.eyes.forward);
+    }
+
+    public float AdjustedSightDistance(float angle)
+    {
+        return (angle > 30) ? Mathf.Pow(angle - fovAngle * ai.awarenessMultiplier, 2) / fovAngle * ai.awarenessMultiplier : ai.sightDistance;
+        /* return (angle > 30) ? Mathf.Pow(angle - fov, 2)/fov : sightDistance; */
     }
 
     public bool SeesCharacter(CharacterStats ch)
     {
-        float angle = Vector3.Angle(ch.transform.position + 2 * Vector3.up - this.eyes.position, this.eyes.forward);
+        float angle = AngleFromEyes(ch.transform.position + 2 * Vector3.up);
+
         if (angle > fovAngle * ai.awarenessMultiplier) //if player is outside cone of vision
             return false;
 
@@ -126,26 +175,28 @@ public class EnemySight : MonoBehaviour
         }
 
         //calculating rays for 3 points on the character
-        float charHeight = ch.GetComponent<Collider>().bounds.max.y - ch.GetComponent<Collider>().bounds.min.y;
+        var charCapsule = ch.GetComponent<CapsuleCollider>();
+
+        float charHeight = charCapsule.bounds.max.y - charCapsule.bounds.min.y;
         rayUpper.origin = rayCenter.origin = rayLower.origin = this.eyes.position;
 
-        rayUpper.direction = (ch.GetComponent<Collider>().bounds.max - Vector3.up * charHeight / 8) - this.eyes.position;
-        rayLower.direction = (ch.GetComponent<Collider>().bounds.min + Vector3.up * charHeight / 8) - this.eyes.position;
-        rayCenter.direction = (ch.GetComponent<Collider>().bounds.min + Vector3.up * charHeight / 2) - this.eyes.position;
+        rayUpper.direction =  (charCapsule.bounds.max - Vector3.up * charHeight / 8) - this.eyes.position;
+        rayLower.direction =  (charCapsule.bounds.min + Vector3.up * charHeight / 8) - this.eyes.position;
+        rayCenter.direction = (charCapsule.bounds.min + Vector3.up * charHeight / 2) - this.eyes.position;
 
         //TODO: ADJUST FIELD OF VIEW
         //reducing sight distance at wide angles, to simulate peripheral vision
         //This determines whether or not the enemy can even detect the player
-        float adjustedSightDistance = (angle > 30) ?
-                Mathf.Pow(angle - fovAngle * ai.awarenessMultiplier, 2) / fovAngle * ai.awarenessMultiplier :
-                ai.sightDistance;
-        /*
-        float adjustedSightDistance = (angle > 30) ?
-                Mathf.Pow(angle - fov, 2)/fov :
-                sightDistance;*/
-        return Physics.SphereCast(rayLower, 0.1f, out hit, adjustedSightDistance, sightLayer) ||
+        float adjustedSightDistance = AdjustedSightDistance(angle);
+
+        return Physics.SphereCast(rayLower,  0.1f, out hit, adjustedSightDistance, sightLayer) ||
                Physics.SphereCast(rayCenter, 0.1f, out hit, adjustedSightDistance, sightLayer) ||
-               Physics.SphereCast(rayUpper, 0.1f, out hit, adjustedSightDistance, sightLayer);
+               Physics.SphereCast(rayUpper,  0.1f, out hit, adjustedSightDistance, sightLayer);
+    }
+
+    void CheckAwareness()
+    {
+
     }
 
     public void DetectNearbyEnemies()
