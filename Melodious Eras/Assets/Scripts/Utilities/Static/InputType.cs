@@ -25,5 +25,6 @@ public static class InputType
         MENU = "Menu",
         AIM = "Aim",
         SHOOT = "Shoot",
-        RELOAD = "Reload";
+        RELOAD = "Reload",
+        CLOAK = "Cloak";
 }

@@ -20,29 +20,27 @@ public class InterlaceRoller : MonoBehaviour
 	void Start()
 	{
         //initialColor = this.renderer.materials[screenMatIndex].GetColor("_TintColor");
-        initialColor = screenMat.GetColor("_TintColor");
         _renderer = GetComponent<Renderer>();
         _audio = GetComponent<AudioSource>();
+        screenMat = _renderer.materials[screenMatIndex];
+        initialColor = screenMat.GetColor("_TintColor");
 
         if (_Light == null && this.GetComponent<Light>() != null)
             _Light = this.GetComponent<Light>();
-
-
 	}
 	
 	void Update()
 	{
 		float offset = Time.time * scrollSpeed;
-
-        _renderer.materials[screenMatIndex].SetTextureOffset("_Interlace", new Vector2(0.0f, offset));
+        screenMat.SetTextureOffset("_Interlace", new Vector2(0.0f, offset));
 
 		float scaleY = Mathf.Sin(Time.time) * 0.2f;
-        _renderer.materials[screenMatIndex].SetTextureScale("_Interlace", new Vector2(2.0f, scaleY + 1.6f));
+        screenMat.SetTextureScale("_Interlace", new Vector2(2.0f, scaleY + 1.6f));
 
 		if(flickering && Random.value >= .7f)
 		{
 			flicker = Random.value + 0.2f;
-            _renderer.materials[screenMatIndex].SetColor("_TintColor", new Color(initialColor.r * flicker, initialColor.g * flicker, initialColor.b * flicker));
+            screenMat.SetColor("_TintColor", new Color(initialColor.r * flicker, initialColor.g * flicker, initialColor.b * flicker));
             if(_Light != null)
                 _Light.intensity = flicker;
 		}

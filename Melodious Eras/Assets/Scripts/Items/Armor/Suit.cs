@@ -27,7 +27,8 @@ public class Suit : Equipment
 
     public void Cloak()
     {
-        this.StopCoroutine("cloak");
+        IEnumerator c = cloak(0f);
+        this.StopCoroutine(c);
         if (isCloaked)
             StartCoroutine(cloak(0f));
         else

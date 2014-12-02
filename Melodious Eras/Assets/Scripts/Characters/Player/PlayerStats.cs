@@ -69,7 +69,7 @@ public class PlayerStats : CharacterStats
         if (Input.GetButtonDown(InputType.MELEE) && Time.time > nextAttackTime && !this._isDead)
             PerformMelee();
 
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetButtonDown(InputType.CLOAK))
             suit.Cloak();
     }
 
@@ -79,9 +79,9 @@ public class PlayerStats : CharacterStats
         if (_closeQuarterEnemies.charactersInRange.Count > 0)
         {
             //determining the enemy CLOSEST to the direction the player is facing
-            CharacterStats nearestEnemy = _closeQuarterEnemies.charactersInRange[0];
+            var nearestEnemy = _closeQuarterEnemies.charactersInRange[0];
             float lowestAngle = 180;
-            foreach (EnemyStats enemy in _closeQuarterEnemies.charactersInRange)
+            foreach (var enemy in _closeQuarterEnemies.charactersInRange)
             {
                 if (!enemy.isDead)
                 {
